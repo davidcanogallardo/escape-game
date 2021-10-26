@@ -1,0 +1,108 @@
+@font-face {
+    font-family: "CustomFont";
+    src: url("./AsapCondensed-Regular.ttf");
+}
+
+@font-face {
+    font-family: "bebe";
+    src: url("./BebasNeue-Regular.ttf");
+}
+
+.container div {
+    margin: 10px auto;
+    
+}
+
+.container {
+    text-align: center;
+}
+
+* {
+    font-family: CustomFont;
+}
+
+body {
+    color: #68492E;
+    font-size: 26px;
+}
+
+h1 {
+    font-family: bebe;
+    font-size: 172px;
+    margin: 0;
+    color: #68492E;
+}
+
+.selected {
+    width: 603px;
+    height: 72px;
+    background-color: rgba(196, 196, 196, 0.56);
+    font-size: 53px;
+    text-align: center;
+    border-radius: 10px;
+    border: 2px solid #68492E;
+    /*! margin: 10px; */
+    color: #68492E;
+    /*! font-size: 62px; */
+    /*! line-height: 48px; */
+    line-height: 72px;
+}
+
+.selected i {
+    color: #68492E;
+    /*! height: 44px; */
+    /*! width: 89px; */
+
+}
+
+.mando span {
+    color: #EFDEC3;
+}
+
+.mando {
+    background: #68492E;
+    width: 603px;
+    height: 72px;
+    font-size: 53px;
+    text-align: center;
+    border-radius: 10px;
+    border: 2px solid #68492E;
+    margin: 10px;
+    color: #EFDEC3;
+    line-height: 72px;
+}
+
+.mando i {
+    color: #EFDEC3;
+    /*! height: 44px; */
+    /*! width: 89px; */
+}
+
+body {
+    /*! text-align: center; */
+    background: #EFDEC3;
+    /*! display: flex; */
+    /*! justify-content: center; */
+    width: 100%;
+}
+
+.volver {
+    background: #EF4F4F;
+    width: 283px;
+    /*! height: 78px; */
+    border-radius: 10px;
+    color: #EFDEC3;
+    padding: 10px;
+    text-align: center;
+    font-size: 52px;
+    font-family: bebe;
+    margin: 0 auto;
+    /*! line-height: 52px; */
+}
+
+.volver:hover {
+    background: #EFDEC3;
+    color: #EF4F4F;
+    outline: 3px solid #EF4F4F;
+
+}
