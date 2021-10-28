@@ -99,7 +99,7 @@ h1 {
     background: #EFDEC3;
     color: #EF4F4F;
     outline: 3px solid #EF4F4F;
-
+    cursor: pointer;
 }
 
 .blue-button {
