@@ -193,21 +193,10 @@ input[type=text]{
     background: rgba(172, 171, 171, 0.33);
     border: 2px solid #68492E;
     border-radius: 10px;
-<<<<<<< HEAD
     font-size: 25px;
     color: #68492E;
     padding-left: 10px;
     margin-bottom: 10px;
-=======
-    font-size: 42px;
-    color: #EFDEC3;
-}
-
-td{ 
-    font-size: 24px;
-    background-color: #c4c4c486;
-    border: 1px solid #562800;
->>>>>>> 3ae4a8fa05db08b0be921dadf094cbec698269ff
 }
 
 input[type=submit]{
