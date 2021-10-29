@@ -82,7 +82,17 @@ h1 {
     /*! height: 44px; */
     /*! width: 89px; */
 }
+.icon{
+    background-color: #FAA942;
+    border-radius: 300px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
 
+.icon i{ 
+    color: #EFDEC3;
+}
 .volver {
     background: #EF4F4F;
     width: 283px;
