@@ -94,41 +94,6 @@ h1 {
 .icon i{ 
     color: #EFDEC3;
 }
-.volver {
-    background: #EF4F4F;
-    width: 283px;
-    border-radius: 10px;
-    color: #EFDEC3;
-    padding: 10px;
-    text-align: center;
-    font-size: 52px;
-    font-family: Bebas;
-    margin: 0 auto;
-    cursor: pointer;
-    border: none;
-}
-
-.volver:hover {
-    background: #EFDEC3;
-    color: #EF4F4F;
-    outline: 3px solid #EF4F4F;
-}
-
-.blue-button {
-    background: #14448D;
-    color: #EFDEC3;  /* Color del texto*/
-    border-radius: 16px;
-    padding: 15px;
-    text-align: center;
-    cursor: pointer;
-    border: none;
-}
-
-.blue-button:hover {
-    background: #EFDEC3;
-    color: #14448D;  /* Color del texto*/
-    outline: 3px solid #14448D;
-}
 
 .cancel-button {
     text-align:center;
@@ -139,7 +104,6 @@ h1 {
     text-align:center;
     background: #49EE63;
 }
-
 
 /* Menu de configuracion*/
 .settings_menu{
@@ -182,6 +146,38 @@ h1 {
  
 }
 
+.blue:hover{
+    background: #EFDEC3;
+    color: #14448D;
+    outline: 3px solid #14448D;
+}
+
+/*Boton Rojo*/
+.red{
+    padding: 0 1em;
+    background: #EF4F4F;
+    color: #EFDEC3;
+}
+
+.red:hover{
+    background: #EFDEC3;
+    color: #EF4F4F;
+    outline: 3px solid #EF4F4F;
+}
+/*
+index.html
+*/
+
+.pages {
+    display: none;
+}
+
+.settings-btn {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
 input[type=text]{
     width: 614px;
     height: 89px;
@@ -210,37 +206,4 @@ input[type=submit]{
     border: none;
 }
 
-.blue:hover{
-    background: #EFDEC3;
-    color: #14448D;
-    outline: 3px solid #14448D;
-}
-
-/*Boton Rojo*/
-.red{
-    padding: 0 1em;
-    background: #EF4F4F;
-    color: #EFDEC3;
-}
-
-.red:hover{
-    background: #EFDEC3;
-    color: #EF4F4F;
-    outline: 3px solid #EF4F4F;
-}
-/*
-index.html
-*/
-
-.pages {
-    display: none;
-}
-
-
-
-.settings-btn {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-}
 
