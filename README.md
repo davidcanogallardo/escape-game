@@ -1,4 +1,4 @@
-# ScapeGame
+# EscapeGame
 
 [Guía de estilo](https://docs.google.com/document/d/1r1NLxsEbXBEwKymeI8dt6CRX5RarcYR7oNKzLVRLGTY/edit)
 
