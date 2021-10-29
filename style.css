@@ -33,9 +33,10 @@ body {
 
 h1 {
     font-family: Bebas;
-    font-size: 172px;
+    font-size: 6em;
     margin: 0;
     color: #68492E;
+    letter-spacing: 3px;
 }
 
 .selected {
@@ -82,7 +83,17 @@ h1 {
     /*! height: 44px; */
     /*! width: 89px; */
 }
+.icon{
+    background-color: #FAA942;
+    border-radius: 300px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
 
+.icon i{ 
+    color: #EFDEC3;
+}
 .volver {
     background: #EF4F4F;
     width: 283px;
@@ -105,8 +116,8 @@ h1 {
 
 .blue-button {
     background: #14448D;
-    border-radius: 16px;
     color: #EFDEC3;  /* Color del texto*/
+    border-radius: 16px;
     padding: 15px;
     text-align: center;
     cursor: pointer;
@@ -129,6 +140,8 @@ h1 {
     background: #49EE63;
 }
 
+
+/* Menu de configuracion*/
 .settings_menu{
     height: 100%;
     display: flex;
@@ -136,22 +149,37 @@ h1 {
     align-items: center;
 }
 
-.settings_menu .blue-button{
-    font-size: 3em;
-    font-family: Bebas;
-    /* width: 13em; */
-    margin-bottom: 20px;
-}
-
+/*Conjunto de botones*/
 .botones{
-    margin: 100px 0 200px 0;
     display: flex;
     flex-direction: column;
-    /* flex: 1; */
+    flex: 1;
 }
 
-.settings_menu .volver{
-    margin-bottom: 1%;
+/* Boton por defecto*/
+.btn{
+    border: none;
+    padding: 0 2.9em;
+    border-radius: 16px;
+    margin: 8px;
+    display: inline-block;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    font-family: Bebas;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+}
+
+/*Boton azul*/
+.blue{
+    background: #14448D;
+    color: #EFDEC3;
+ 
 }
 
 #create{
@@ -165,10 +193,21 @@ input[type=text]{
     background: rgba(172, 171, 171, 0.33);
     border: 2px solid #68492E;
     border-radius: 10px;
+<<<<<<< HEAD
     font-size: 25px;
     color: #68492E;
     padding-left: 10px;
     margin-bottom: 10px;
+=======
+    font-size: 42px;
+    color: #EFDEC3;
+}
+
+td{ 
+    font-size: 24px;
+    background-color: #c4c4c486;
+    border: 1px solid #562800;
+>>>>>>> 3ae4a8fa05db08b0be921dadf094cbec698269ff
 }
 
 input[type=submit]{
@@ -187,8 +226,24 @@ input[type=submit]{
     text-align: center;
 }
 
+.blue:hover{
+    background: #EFDEC3;
+    color: #14448D;
+    outline: 3px solid #14448D;
+}
 
+/*Boton Rojo*/
+.red{
+    padding: 0 1em;
+    background: #EF4F4F;
+    color: #EFDEC3;
+}
 
+.red:hover{
+    background: #EFDEC3;
+    color: #EF4F4F;
+    outline: 3px solid #EF4F4F;
+}
 /*
 index.html
 */
@@ -196,3 +251,12 @@ index.html
 .pages {
     display: none;
 }
+
+
+
+.settings-btn {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
