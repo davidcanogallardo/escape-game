@@ -154,26 +154,37 @@ h1 {
     margin-bottom: 1%;
 }
 
+#create{
+    width:600px;
+    text-align: left;
+}
+
 input[type=text]{
-    width: 614px;
-    height: 89px;
+    width: 500px;
+    height: 38px;
     background: rgba(172, 171, 171, 0.33);
     border: 2px solid #68492E;
     border-radius: 10px;
-    font-size: 42px;
-    color: #EFDEC3; 
+    font-size: 25px;
+    color: #68492E;
+    padding-left: 10px;
+    margin-bottom: 10px;
 }
 
 input[type=submit]{
-    width: 481px;
-    height: 107px;
+    width: 361px;
+    height: 73px;
     background: #14448D;
     border-radius: 16px;
-    color: #EFDEC3;  /* Color del texto*/
-    padding: 15px;
+    color: #EFDEC3;
     text-align: center;
     cursor: pointer;
-    border: none;
+    font-family: Bebas;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 77px;
+    text-align: center;
 }
 
 
