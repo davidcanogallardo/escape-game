@@ -269,3 +269,9 @@ index.html
 .center{
     text-align: center;
 }
+
+td{
+    background-color: #c4c4c485;
+    border: 1px solid #68492E;
+    font-size: 24px;
+}
