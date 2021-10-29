@@ -19,6 +19,10 @@
     width: 100%;
 }
 
+#forms-container{
+    display: flex;
+}
+
 .container div {
     margin: 10px auto;
     
@@ -39,6 +43,13 @@ h1 {
     letter-spacing: 3px;
 }
 
+h2{
+    font-family: Bebas;
+    font-size: 4em;
+    margin: 0;
+    color: #68492E;
+    letter-spacing: 3px;
+}
 .selected {
     width: 603px;
     height: 72px;
@@ -86,48 +97,40 @@ h1 {
 .icon{
     background-color: #FAA942;
     border-radius: 300px;
+    text-align: center;
     align-items: center;
     display: flex;
     justify-content: center;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.50);
 }
 
-.icon i{ 
+.icon i{
     color: #EFDEC3;
+    text-shadow: 0px 5px 15px rgb(0, 0, 0,0.50);
 }
-.volver {
-    background: #EF4F4F;
-    width: 283px;
-    border-radius: 10px;
-    color: #EFDEC3;
-    padding: 10px;
-    text-align: center;
-    font-size: 52px;
-    font-family: Bebas;
-    margin: 0 auto;
+
+.icon-small{
+    width: 75px;
+    height: 75px;
     cursor: pointer;
-    border: none;
+}
+.icon-small i{
+    font-size: 38px;
 }
 
-.volver:hover {
-    background: #EFDEC3;
-    color: #EF4F4F;
-    outline: 3px solid #EF4F4F;
+.icon-profile{
+    width: 250px; 
+    height: 250px; 
 }
 
-.blue-button {
-    background: #14448D;
-    color: #EFDEC3;  /* Color del texto*/
-    border-radius: 16px;
-    padding: 15px;
-    text-align: center;
-    cursor: pointer;
-    border: none;
+.i-profile{
+    font-size: 170px;
 }
 
-.blue-button:hover {
-    background: #EFDEC3;
-    color: #14448D;  /* Color del texto*/
-    outline: 3px solid #14448D;
+.i-s-absolute{
+    position: absolute;
+    margin-left: 1%;
+    margin-top: 1%;
 }
 
 .cancel-button {
@@ -140,8 +143,9 @@ h1 {
     background: #49EE63;
 }
 
-
-/* Menu de configuracion*/
+/* 
+Menu de configuracion
+*/
 .settings_menu{
     height: 100%;
     display: flex;
@@ -173,6 +177,7 @@ h1 {
     text-align: center;
     text-decoration: none;
     position: relative;
+    cursor: pointer;
 }
 
 /*Boton azul*/
@@ -180,6 +185,65 @@ h1 {
     background: #14448D;
     color: #EFDEC3;
  
+}
+
+.blue:hover{
+    background: #EFDEC3;
+    color: #14448D;
+    outline: 3px solid #14448D;
+}
+
+/*Boton Rojo*/
+.red{
+    padding: 0 1em;
+    background: #aa0000;
+    color: #EFDEC3;
+}
+
+.red:hover{
+    background: #EFDEC3;
+    color: #aa0000;
+    outline: 3px solid #aa0000;
+}
+
+/*
+Ajustes de sonido
+*/
+
+.sound_settings{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ajuste{
+    border: 1px solid #68492E;
+    border-radius: 13px;
+    background-color: #c4c4c485;
+    padding: 0 2.9em;
+}
+
+.ajuste > *{
+    display: inline-block;
+}
+
+.ajuste select{
+    background-color: #FBF1E3;
+}
+
+
+/*
+index.html
+*/
+
+.pages {
+    display: none;
+}
+
+.settings-btn {
+    position: absolute;
+    top: 30px;
+    left: 30px;
 }
 
 input[type=text]{
@@ -210,30 +274,54 @@ input[type=submit]{
     border: none;
 }
 
-.blue:hover{
+
+#create{
+    text-align: left;
+}
+
+input[type=text]{
+    width: 500px;
+    height: 48px;
+    background: rgba(172, 171, 171, 0.33);
+    border: 2px solid #68492E;
+    border-radius: 10px;
+    font-size: 25px;
+    color: #68492E;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+input[type=submit]{
+    width: 361px;
+    height: 73px;
+    background: #14448D;
+    border: 0px black;
+    border-radius: 16px;
+    color: #EFDEC3;
+    text-align: center;
+    cursor: pointer;
+    font-family: Bebas;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 77px;
+    text-align: center;
+    
+}
+
+input[type=submit]:hover{
     background: #EFDEC3;
-    color: #14448D;
+    color: #14448D;  /* Color del texto*/
     outline: 3px solid #14448D;
 }
 
-/*Boton Rojo*/
-.red{
-    padding: 0 1em;
-    background: #EF4F4F;
-    color: #EFDEC3;
+#login{
+    text-align: left;
 }
-
-.red:hover{
-    background: #EFDEC3;
-    color: #EF4F4F;
-    outline: 3px solid #EF4F4F;
-}
-/*
-index.html
-*/
-
-.pages {
-    display: none;
+.profile{
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
 }
 
 .main-settings {
