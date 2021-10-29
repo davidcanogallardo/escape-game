@@ -235,3 +235,12 @@ index.html
 .pages {
     display: none;
 }
+
+
+
+.settings-btn {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
