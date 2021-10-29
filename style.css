@@ -154,5 +154,14 @@ h1 {
     margin-bottom: 1%;
 }
 
-
+.icon{
+    background-color: #FAA942; 
+    border-radius: 300px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.icon i{
+    color: #EFDEC3; 
+}
 
