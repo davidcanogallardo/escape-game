@@ -270,6 +270,12 @@ index.html
     text-align: center;
 }
 
+.table-profile{
+    width: 25%;
+    border-collapse: separate;  
+    border-spacing: 5px 10px;
+}
+
 td{
     background-color: #c4c4c485;
     border: 1px solid #68492E;
