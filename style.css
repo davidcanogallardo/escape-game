@@ -19,6 +19,10 @@
     width: 100%;
 }
 
+#forms-container{
+    display: flex;
+}
+
 .container div {
     margin: 10px auto;
     
@@ -39,6 +43,13 @@ h1 {
     letter-spacing: 3px;
 }
 
+h2{
+    font-family: Bebas;
+    font-size: 4em;
+    margin: 0;
+    color: #68492E;
+    letter-spacing: 3px;
+}
 .selected {
     width: 603px;
     height: 72px;
@@ -183,13 +194,12 @@ h1 {
 }
 
 #create{
-    width:600px;
     text-align: left;
 }
 
 input[type=text]{
     width: 500px;
-    height: 38px;
+    height: 48px;
     background: rgba(172, 171, 171, 0.33);
     border: 2px solid #68492E;
     border-radius: 10px;
@@ -203,6 +213,7 @@ input[type=submit]{
     width: 361px;
     height: 73px;
     background: #14448D;
+    border: 0px black;
     border-radius: 16px;
     color: #EFDEC3;
     text-align: center;
@@ -213,6 +224,17 @@ input[type=submit]{
     font-size: 40px;
     line-height: 77px;
     text-align: center;
+    
+}
+
+input[type=submit]:hover{
+    background: #EFDEC3;
+    color: #14448D;  /* Color del texto*/
+    outline: 3px solid #14448D;
+}
+
+#login{
+    text-align: left;
 }
 
 .blue:hover{
