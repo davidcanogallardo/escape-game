@@ -165,3 +165,9 @@ h1 {
     color: #EFDEC3; 
 }
 
+
+td{ 
+    font-size: 24px;
+    background-color: #c4c4c486;
+    border: 1px solid #562800;
+}
