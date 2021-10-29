@@ -36,7 +36,7 @@ h1 {
     font-size: 6em;
     margin: 0;
     color: #68492E;
-    letter-spacing: 5px;
+    letter-spacing: 3px;
 }
 
 .selected {
@@ -155,14 +155,14 @@ h1 {
 /*Boton Rojo*/
 .red{
     padding: 0 1em;
-    background: #EF4F4F;
+    background: #aa0000;
     color: #EFDEC3;
 }
 
 .red:hover{
     background: #EFDEC3;
-    color: #EF4F4F;
-    outline: 3px solid #EF4F4F;
+    color: #aa0000;
+    outline: 3px solid #aa0000;
 }
 /*
 index.html
@@ -204,6 +204,40 @@ input[type=submit]{
     text-align: center;
     cursor: pointer;
     border: none;
+}
+
+
+#create{
+    width:600px;
+    text-align: left;
+}
+
+input[type=text]{
+    width: 500px;
+    height: 38px;
+    background: rgba(172, 171, 171, 0.33);
+    border: 2px solid #68492E;
+    border-radius: 10px;
+    font-size: 25px;
+    color: #68492E;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+input[type=submit]{
+    width: 361px;
+    height: 73px;
+    background: #14448D;
+    border-radius: 16px;
+    color: #EFDEC3;
+    text-align: center;
+    cursor: pointer;
+    font-family: Bebas;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 77px;
+    text-align: center;
 }
 
 
