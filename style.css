@@ -139,7 +139,7 @@ h1 {
 .settings_menu .blue-button{
     font-size: 3em;
     font-family: Bebas;
-    width: 13em;
+    /* width: 13em; */
     margin-bottom: 20px;
 }
 
@@ -147,7 +147,7 @@ h1 {
     margin: 100px 0 200px 0;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    /* flex: 1; */
 }
 
 .settings_menu .volver{
@@ -178,4 +178,10 @@ input[type=submit]{
 
 
 
+/*
+index.html
+*/
 
+.pages {
+    display: none;
+}
