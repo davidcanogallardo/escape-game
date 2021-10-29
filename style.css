@@ -173,6 +173,7 @@ h1 {
     text-align: center;
     text-decoration: none;
     position: relative;
+    cursor: pointer;
 }
 
 /*Boton azul*/
@@ -244,3 +245,22 @@ index.html
     left: 30px;
 }
 
+.icon-profile{
+    width: 250px; 
+    height: 250px; 
+    text-align: center;
+}
+
+.i-profile{
+    font-size: 170px;
+}
+
+.i-table{
+    color: #FAA942;
+    /*Borde iconos de las tablas*/
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+    padding-left: 5px;
+}
+.center{
+    text-align: center;
+}
