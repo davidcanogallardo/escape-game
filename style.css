@@ -86,13 +86,34 @@ h1 {
 .icon{
     background-color: #FAA942;
     border-radius: 300px;
+    text-align: center;
     align-items: center;
     display: flex;
     justify-content: center;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.50);
 }
 
-.icon i{ 
+.icon i{
     color: #EFDEC3;
+    text-shadow: 0px 5px 15px rgb(0, 0, 0,0.50);
+}
+
+.icon-small{
+    width: 75px;
+    height: 75px;
+    cursor: pointer;
+}
+.icon-small i{
+    font-size: 38px;
+}
+
+.icon-profile{
+    width: 250px; 
+    height: 250px; 
+}
+
+.i-profile{
+    font-size: 170px;
 }
 
 .cancel-button {
@@ -269,16 +290,10 @@ input[type=submit]{
     line-height: 77px;
     text-align: center;
 }
-
-
-.icon-profile{
-    width: 250px; 
-    height: 250px; 
-    text-align: center;
-}
-
-.i-profile{
-    font-size: 170px;
+.profile{
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
 }
 
 .i-table{
@@ -289,6 +304,12 @@ input[type=submit]{
 }
 .center{
     text-align: center;
+}
+
+.table-profile{
+    width: 25%;
+    border-collapse: separate;  
+    border-spacing: 5px 10px;
 }
 
 td{
