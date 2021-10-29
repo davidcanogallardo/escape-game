@@ -116,6 +116,12 @@ h1 {
     font-size: 170px;
 }
 
+.i-s-absolute{
+    position: absolute;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
 .cancel-button {
     text-align:center;
     background: #EF4646;
