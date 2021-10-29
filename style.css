@@ -82,7 +82,17 @@ h1 {
     /*! height: 44px; */
     /*! width: 89px; */
 }
+.icon{
+    background-color: #FAA942;
+    border-radius: 300px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
 
+.icon i{ 
+    color: #EFDEC3;
+}
 .volver {
     background: #EF4F4F;
     width: 283px;
@@ -162,6 +172,12 @@ input[type=text]{
     border-radius: 10px;
     font-size: 42px;
     color: #EFDEC3; 
+}
+
+td{ 
+    font-size: 24px;
+    background-color: #c4c4c486;
+    border: 1px solid #562800;
 }
 
 input[type=submit]{
