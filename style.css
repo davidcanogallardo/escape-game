@@ -105,7 +105,9 @@ h1 {
     background: #49EE63;
 }
 
-/* Menu de configuracion*/
+/* 
+Menu de configuracion
+*/
 .settings_menu{
     height: 100%;
     display: flex;
@@ -165,6 +167,33 @@ h1 {
     color: #aa0000;
     outline: 3px solid #aa0000;
 }
+
+/*
+Ajustes de sonido
+*/
+
+.sound_settings{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ajuste{
+    border: 1px solid #68492E;
+    border-radius: 13px;
+    background-color: #c4c4c485;
+    padding: 0 2.9em;
+}
+
+.ajuste > *{
+    display: inline-block;
+}
+
+.ajuste select{
+    background-color: #FBF1E3;
+}
+
+
 /*
 index.html
 */
