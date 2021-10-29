@@ -97,48 +97,40 @@ h2{
 .icon{
     background-color: #FAA942;
     border-radius: 300px;
+    text-align: center;
     align-items: center;
     display: flex;
     justify-content: center;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.50);
 }
 
-.icon i{ 
+.icon i{
     color: #EFDEC3;
+    text-shadow: 0px 5px 15px rgb(0, 0, 0,0.50);
 }
-.volver {
-    background: #EF4F4F;
-    width: 283px;
-    border-radius: 10px;
-    color: #EFDEC3;
-    padding: 10px;
-    text-align: center;
-    font-size: 52px;
-    font-family: Bebas;
-    margin: 0 auto;
+
+.icon-small{
+    width: 75px;
+    height: 75px;
     cursor: pointer;
-    border: none;
+}
+.icon-small i{
+    font-size: 38px;
 }
 
-.volver:hover {
-    background: #EFDEC3;
-    color: #EF4F4F;
-    outline: 3px solid #EF4F4F;
+.icon-profile{
+    width: 250px; 
+    height: 250px; 
 }
 
-.blue-button {
-    background: #14448D;
-    color: #EFDEC3;  /* Color del texto*/
-    border-radius: 16px;
-    padding: 15px;
-    text-align: center;
-    cursor: pointer;
-    border: none;
+.i-profile{
+    font-size: 170px;
 }
 
-.blue-button:hover {
-    background: #EFDEC3;
-    color: #14448D;  /* Color del texto*/
-    outline: 3px solid #14448D;
+.i-s-absolute{
+    position: absolute;
+    margin-left: 1%;
+    margin-top: 1%;
 }
 
 .cancel-button {
@@ -151,8 +143,9 @@ h2{
     background: #49EE63;
 }
 
-
-/* Menu de configuracion*/
+/* 
+Menu de configuracion
+*/
 .settings_menu{
     height: 100%;
     display: flex;
@@ -184,6 +177,7 @@ h2{
     text-align: center;
     text-decoration: none;
     position: relative;
+    cursor: pointer;
 }
 
 /*Boton azul*/
@@ -192,6 +186,94 @@ h2{
     color: #EFDEC3;
  
 }
+
+.blue:hover{
+    background: #EFDEC3;
+    color: #14448D;
+    outline: 3px solid #14448D;
+}
+
+/*Boton Rojo*/
+.red{
+    padding: 0 1em;
+    background: #aa0000;
+    color: #EFDEC3;
+}
+
+.red:hover{
+    background: #EFDEC3;
+    color: #aa0000;
+    outline: 3px solid #aa0000;
+}
+
+/*
+Ajustes de sonido
+*/
+
+.sound_settings{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ajuste{
+    border: 1px solid #68492E;
+    border-radius: 13px;
+    background-color: #c4c4c485;
+    padding: 0 2.9em;
+}
+
+.ajuste > *{
+    display: inline-block;
+}
+
+.ajuste select{
+    background-color: #FBF1E3;
+}
+
+
+/*
+index.html
+*/
+
+.pages {
+    display: none;
+}
+
+.settings-btn {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+input[type=text]{
+    width: 614px;
+    height: 89px;
+    background: rgba(172, 171, 171, 0.33);
+    border: 2px solid #68492E;
+    border-radius: 10px;
+    font-size: 42px;
+    color: #EFDEC3;
+}
+
+td{ 
+    font-size: 24px;
+    background-color: #c4c4c486;
+    border: 1px solid #562800;
+}
+
+input[type=submit]{
+    width: 481px;
+    height: 107px;
+    background: #14448D;
+    border-radius: 16px;
+    color: #EFDEC3;  /* Color del texto*/
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+
 
 #create{
     text-align: left;
@@ -236,38 +318,30 @@ input[type=submit]:hover{
 #login{
     text-align: left;
 }
-
-.blue:hover{
-    background: #EFDEC3;
-    color: #14448D;
-    outline: 3px solid #14448D;
+.profile{
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
 }
 
-/*Boton Rojo*/
-.red{
-    padding: 0 1em;
-    background: #EF4F4F;
-    color: #EFDEC3;
+.i-table{
+    color: #FAA942;
+    /*Borde iconos de las tablas*/
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+    padding-left: 5px;
+}
+.center{
+    text-align: center;
 }
 
-.red:hover{
-    background: #EFDEC3;
-    color: #EF4F4F;
-    outline: 3px solid #EF4F4F;
-}
-/*
-index.html
-*/
-
-.pages {
-    display: none;
+.table-profile{
+    width: 25%;
+    border-collapse: separate;  
+    border-spacing: 5px 10px;
 }
 
-
-
-.settings-btn {
-    position: absolute;
-    top: 30px;
-    left: 30px;
+td{
+    background-color: #c4c4c485;
+    border: 1px solid #68492E;
+    font-size: 24px;
 }
-
