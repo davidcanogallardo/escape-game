@@ -407,6 +407,7 @@ index
     border-bottom-left-radius: 1vw;
     border-top-left-radius: 1vw;
     resize: none;
+    transition: 1s;
 }
 
 .fr-list-container > div {
@@ -418,6 +419,7 @@ index
     display: flex;
     gap: 1vw;
     justify-content: center;
+    overflow: hidden;
 }
 
 .fr-list {
@@ -425,6 +427,14 @@ index
     background: #EFDEC3;
     border-radius: 1vw;
     padding-top: 10px;
+    overflow: scroll;
+    display: flex;
+    flex-flow: column;
+    gap: 0.3vw;
+    overflow-x: hidden;
+    scrollbar-color:#EFDEC3 #EFDEC3;
+    scrollbar-width: thin;
+    width: 90%;
 }
 
 .fr-item {
@@ -434,11 +444,37 @@ index
     padding: 0.3vw;
     width: 85%;
     border-radius: 1vw;
-    height: 11%;
+    min-height: 11%;
     font-size: 1.7vw;
     justify-content: center;
     align-items: center;
     transition: 0s;
+    margin-top: 0.3vw;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1vw 0vw;
+}
+
+.fr-item div {
+    width: 2.5vw;
+    height: 2.5vw;
+    padding: 0vw;
+    box-shadow: none;
+    font-size: 1.5vw;
+
+}
+.fr-item .pr-btn {
+    margin-left: 0.1vw;
+    margin-right: 0.5vw;
+}
+
+.fr-item .add-btn {
+    margin-right: 0.2vw;
+    font-size: 1vw;
+}
+
+.fr-item div i {
+    text-shadow: none;
 }
 
 .form-fr-request * {
@@ -474,6 +510,29 @@ index
     margin: 0;
 }
 
+.notification-container {
+    height: 100%;
+    width: 20%;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    background: #FAA942;
+    border-bottom-left-radius: 1vw;
+    border-top-left-radius: 1vw;
+    resize: none;
+    transition: 1s;
+}
+
+.slide-menu {
+    width: fit-content;
+    transition: 1s;
+}
+
+.right-menuu {
+    display: none;
+}
 
 
 /*

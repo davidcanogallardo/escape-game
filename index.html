@@ -19,6 +19,8 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+
+    <script src="./app.js"></script>
 </head>
 <body>
     <div class="container">
@@ -46,10 +48,10 @@
             <div class="btn main-icon main-btn">
                 <i class="fas fa-user"></i>
             </div>
-            <div class="btn main-icon main-btn">
+            <div class="btn main-icon main-btn" onclick="rightMenu('fr-list-container')">
                 <i class="fas fa-user-friends"></i>
             </div>
-            <div class="btn main-icon main-btn">
+            <div class="btn main-icon main-btn" onclick="rightMenu('notification-container')">
                 <i class="fas fa-bell"></i>
             </div>
             <div class="btn main-icon main-btn">
@@ -58,34 +60,12 @@
             
         </div>
 
-        <div class="fr-list-container">
-            <div class="fr-header">
-                <i class="fas fa-user-friends" aria-hidden="true"></i>
-                Lista de amigos
-                <i class="fas fa-times" aria-hidden="true"></i>
-            </div>
-            <div class="fr-list">
-                <div class="fr-item" style="/*! background: #D4D4D4; */">
-                    <div class="btn main-icon main-btn" style="width: 2.5vw;height: 2.5vw;margin-left: 0.1vw;padding: 0vw;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);margin-right: 0.5vw;">
-                        <i class="fas fa-user" aria-hidden="true" style="font-size: 1.5vw; text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);"></i>
-                    </div>Nombre<div class="btn main-icon main-btn" style="margin-right: 0.2vw;width: 2.5vw;height: 2.5vw;padding: 0;font-size: 1vw;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);">
-                        <i class="fas fa-user-plus" aria-hidden="true" style="font-size: 1.4vw; text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="form-fr-request">
-                Enviar solicitud a:
-                <input type="text" id="user" >
-                <button id="send" class="btn blue"> Enviar</button>
-            </div>
+        <div class="slide-menu">
+
         </div>
 
 
     </div>
-
-
-
-
 
     <div class="pages">
         <div class="page settings">
@@ -110,6 +90,231 @@
 
         </div>
         
+    </div>
+
+    <div class="right-menuu">
+        <div class="fr-list-container">
+            <div class="fr-header">
+                <i class="fas fa-user-friends" aria-hidden="true"></i>
+                Lista de amigos
+                <i class="fas fa-times" aria-hidden="true" onclick="rightMenu('fr-list-container');"></i>
+            </div>
+
+            <div class="fr-list">
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span>Nombre</span>
+                    <div class="btn main-icon main-btn add-btn">
+                        <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-fr-request">
+                Enviar solicitud a:
+                <input type="text" id="user" >
+                <button id="send" class="btn blue"> Enviar</button>
+            </div>
+        </div>
+
+        <div class="notification-container">
+            <div class="fr-header">
+                <i class="fas fa-bell" aria-hidden="true"></i>
+                Notificaciones
+                <i class="fas fa-times" aria-hidden="true" onclick="rightMenu('notification-container');"></i>
+            </div>
+
+            <div class="fr-list">
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn" style="flex: 0 0 17%;">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span style="flex: 0 0 70%;">Nombre</span>
+                    <div class="btn blue" style="flex: 0 0 30%;">
+                        <i class="fas fa-check" aria-hidden="true"></i>
+                    </div>
+                    <div class="btn red" style="flex: 0 0 30%;">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </div>
+                </div>    
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn" style="flex: 0 0 17%;">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span style="flex: 0 0 70%;">Nombre</span>
+                    <div class="btn blue" style="flex: 0 0 30%;">
+                        <i class="fas fa-check" aria-hidden="true"></i>
+                    </div>
+                    <div class="btn red" style="flex: 0 0 30%;">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </div>
+                </div>    
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn" style="flex: 0 0 17%;">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span style="flex: 0 0 70%;">Nombre</span>
+                    <div class="btn blue" style="flex: 0 0 30%;">
+                        <i class="fas fa-check" aria-hidden="true"></i>
+                    </div>
+                    <div class="btn red" style="flex: 0 0 30%;">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </div>
+                </div>    
+                <div class="fr-item">
+                    <div class="btn main-icon main-btn pr-btn" style="flex: 0 0 17%;">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <span style="flex: 0 0 70%;">Nombre</span>
+                    <div class="btn blue" style="flex: 0 0 30%;">
+                        <i class="fas fa-check" aria-hidden="true"></i>
+                    </div>
+                    <div class="btn red" style="flex: 0 0 30%;">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </div>
+                </div>    
+    
+                
+            </div>
+        </div>
     </div>
 </body>
 </html>
