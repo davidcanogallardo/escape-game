@@ -12,6 +12,4 @@ function rightMenu(params) {
     } else {
         $('.slide-menu > *').animate({width:"0%"}, 10).remove()
     }
-
-
 }
