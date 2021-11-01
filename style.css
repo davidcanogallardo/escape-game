@@ -51,6 +51,14 @@ h2{
     color: #68492E;
     letter-spacing: 3px;
 }
+
+h3{
+    font-family: Bebas;
+    font-size: 2em;
+    margin: 20px;
+    color: #68492E;
+    letter-spacing: 3px;
+}
 .selected {
     width: 603px;
     height: 72px;
@@ -574,6 +582,12 @@ lista de amigos
     color: #EFDEC3;
 }
 
+.green:hover {
+    background: #EFDEC3;
+    color: #49EE63;
+    outline: 3px solid #49EE63;
+}
+
 
 
 
@@ -586,7 +600,35 @@ lista de amigos
     display: none;
 }
 
+#overlay {
+    position: fixed;
+    overflow-y: scroll;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 15;
+    background:  rgba(40,40,40, .75);
+}
 
+.overlay-content {
+	width: 787px;
+    height: 348px;
+	padding: 7px;
+	min-height: 200px;
+	background: #FAA942;
+    border: 7px solid #68492E;
+	border-radius: 9px;
+	padding-left: 15px;
+    position: absolute;
+    top: 25%; left: 0; bottom: 0; right: 0;
+}
+
+.cancel_confirm{
+    display: flex;
+    justify-content: center;
+}
+
+.hidden{
+    display:none;
+}
 /*
 index
 */

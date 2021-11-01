@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://kit.fontawesome.com/b0d71d7fba.js" crossorigin="anonymous"></script>
+    <script>
+        function a(){
+            document.getElementById("overlay").classList.add("hidden");
+        }
+    </script>
+    <title>Invitation</title>
+</head>
+<body>
+    <div class="container">
+        <div id="overlay">
+            <div class="overlay-content" >
+                <h3><b>Usuario</b></h3>
+                <p>te ha invitado a su partida</p>
+                <div class="cancel_confirm">
+                    <div id="confirm" class="btn green confirm" onclick="a()">
+                        <i class="fas fa-check" aria-hidden="true"></i>
+                    </div>
+                    <div id="cancel" class="btn red confirm" onclick="a()">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
