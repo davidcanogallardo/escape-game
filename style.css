@@ -275,6 +275,10 @@ input[type=submit]{
     border: none;
 }
 
+#recover{
+    text-align: left;
+    width: 500px;
+}
 
 #create{
     text-align: left;
@@ -305,7 +309,6 @@ input[type=submit]{
     font-style: normal;
     font-weight: normal;
     font-size: 40px;
-    line-height: 77px;
     text-align: center;
     
 }
