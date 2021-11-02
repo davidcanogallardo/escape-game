@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $(".settings-btn-container2").click(function (event) { 
+    $(".settings-btn-container").click(function (event) { 
         changePage("settings");
     });
     
@@ -40,14 +40,10 @@ function changePage(pageName) {
     console.log("aaaaaaaaaaa");
     if (currentPage !=pageName) {
         currentPage == pageName
-        var oldClone = $('.container .page').clone()
+        var oldClone = $('.container .page').clone(true).appendTo(".pages");
         $('.container .page').remove()
-        $(oldClone).appendTo(".pages");
 
-
-        var page = $(".pages ."+ pageName).clone()
+        var page = $(".pages ."+ pageName).clone(true).appendTo('.container');
         $(".pages ."+ pageName).remove()
-        
-        $(page).appendTo('.container');
     }
 }
