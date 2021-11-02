@@ -1,3 +1,25 @@
+$(document).ready(function () {
+    $(".settings-btn-container!!").click(function (event) { 
+        changePage("settings");
+    });
+    
+    $(".volver!!").click(function (event) { 
+        console.log("main");
+        changePage("main");
+    });
+
+    $('.friends-list').click(function (e) { 
+        rightMenu('slide-list-container')
+    });
+
+    $('.notificacion-list').click(function (e) { 
+        rightMenu('notification-container')
+    });
+});
+
+let currentPage = ""
+
+
 function rightMenu(params) {
     var list = $(".slide-menu >"+ params)
 
@@ -11,5 +33,20 @@ function rightMenu(params) {
         $('.slide-menu > .'+ params).animate({width:"20%"}, 10)
     } else {
         $('.slide-menu > *').animate({width:"0%"}, 10).remove()
+    }
+}
+
+function changePage(pageName) {
+    if (currentPage !=pageName) {
+        currentPage == pageName
+        var oldClone = $('.container .page').clone()
+        $('.container .page').remove()
+        $(oldClone).appendTo(".pages");
+
+
+        var page = $(".pages ."+ pageName).clone()
+        $(".pages ."+ pageName).remove()
+        
+        $(page).appendTo('.container');
     }
 }

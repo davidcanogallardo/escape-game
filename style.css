@@ -428,6 +428,9 @@ titulo
 #game canvas {
     border-radius: 10px;
 }
+#game canvas:hover {
+    border: 3px solid black
+}
 /*
 lista de amigos
 */

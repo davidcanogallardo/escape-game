@@ -6,11 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escape Game</title>
     <link rel="stylesheet" href="style.css">
-    <script
-			  src="https://code.jquery.com/jquery-3.6.0.js"
-			  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-			  crossorigin="anonymous">
-    </script>
+    <script src="./jquery-3.6.0.js"></script>
     <script src="https://kit.fontawesome.com/b0d71d7fba.js" crossorigin="anonymous"></script>
     <script> 
         $(function(){
@@ -27,93 +23,94 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
-
     <script src="./app.js"></script>
+
 </head>
-<body>
+<body onload="changePage('main')">
     <div class="container">
-        <div class="icon-container settings-btn-container main-icon">
-            <i class="fas fa-cog"></i>
-        </div>
-
-        <div id="title">
-            <span class="red-title">
-                Escape
-            </span>
-            <span class="blue-title">
-                Game
-            </span>
-        </div>
-
-        <div id="game">
-
-        </div>
-
-        <div class="btn red">
-            Jugar
-        </div>
         
-        <div class="right-menu">
-            <div class="icon-container main-icon">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="icon-container main-icon" onclick="rightMenu('slide-list-container')">
-                <i class="fas fa-user-friends"></i>
-            </div>
-            <div class="icon-container main-icon" onclick="rightMenu('notification-container')">
-                <i class="fas fa-bell"></i>
-            </div>
-            <div class="icon-container main-icon">
-                <i class="fas fa-list-ol"></i>
-            </div>
-            
-        </div>
-
-        <div class="slide-menu"></div>
     </div>
 
     <div class="pages">
+        <div class="page main">
+            <div class="icon-container settings-btn-container main-icon" onclick="changePage('settings');">
+                <i class="fas fa-cog"></i>
+            </div>
+            
+            <div id="title">
+                <span class="red-title">
+                    Escape
+                </span>
+                <span class="blue-title">
+                    Game
+                </span>
+            </div>
+            
+            <div id="game" onload="">
+                
+            </div>
+            
+            
+            <div class="btn red">
+                Jugar
+            </div>
+            
+            <div class="right-menu">
+                <div class="icon-container main-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="icon-container main-icon friends-list">
+                    <i class="fas fa-user-friends"></i>
+                </div>
+                <div class="icon-container main-icon notificacion-list">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="icon-container main-icon">
+                    <i class="fas fa-list-ol"></i>
+                </div>
+                
+            </div>
+            
+            <div class="slide-menu"></div>
+        </div>
         <div class="page settings">
-
+            
         </div> 
         <div class="page login">
-
+            
         </div>
         <div class="page recover">
-
+            
         </div>
         <div class="page connect-controller">
-
+            
         </div>
-
+        
         <div class="page controller-settings">
-
+            
         </div>
 
         <div class="page sound-settings">
-
+            
         </div>
-
-        <div class="page main">
-
-        </div>
+        
         <div class="page profile">
-
+            
         </div>
         <div class="page friend-profile">
-
+            
         </div>
         
     </div>
-
+    
     <div class="menus">
         <div class="slide-list-container">
             <div class="slide-header">
                 <i class="fas fa-user-friends" aria-hidden="true"></i>
                 Lista de amigos
-                <i class="fas fa-times" aria-hidden="true" onclick="rightMenu('slide-list-container');"></i>
+                <i class="fas fa-times friends-list" aria-hidden="true"></i>
             </div>
-
+            
             <div class="slide-list">
                 <div class="list-item">
                     <div class="icon-container pr-btn">
@@ -259,23 +256,23 @@
                         <i class="fas fa-user-plus" aria-hidden="true"></i>
                     </div>
                 </div>
-
+                
             </div>
-
+            
             <div class="form-fr-request">
                 Enviar solicitud a:
                 <input type="text" id="user" >
                 <button id="send" class="btn blue"> Enviar</button>
             </div>
         </div>
-
+        
         <div class="notification-container">
             <div class="slide-header">
                 <i class="fas fa-bell" aria-hidden="true"></i>
                 Notificaciones
-                <i class="fas fa-times" aria-hidden="true" onclick="rightMenu('notification-container');"></i>
+                <i class="fas fa-times notificacion-list" aria-hidden="true"></i>
             </div>
-
+            
             <div class="slide-list">
                 <div class="list-item">
                     <div class="icon-container pr-btn" >
@@ -318,8 +315,10 @@
     </div>
 </body>
 </html>
+<script src="./jquery-3.6.0.js"></script>
+<!--
 <script>
-    var config = {
+    $(document).ready(function() {  var config = {
         type: Phaser.AUTO,
         width: 800,
         height: 600,
@@ -335,9 +334,9 @@
             create: create
         }
     };
-
+    
     var game = new Phaser.Game(config);
-
+    console.log("AAAaa");
     function preload ()
     {
         this.load.setBaseURL('http://labs.phaser.io');
@@ -346,25 +345,27 @@
         this.load.image('logo', 'assets/sprites/phaser3-logo.png');
         this.load.image('red', 'assets/particles/red.png');
     }
-
+    
     function create ()
     {
         this.add.image(400, 300, 'sky');
-
+        
         var particles = this.add.particles('red');
-
+        
         var emitter = particles.createEmitter({
             speed: 100,
             scale: { start: 1, end: 0 },
             blendMode: 'ADD'
         });
-
+        
         var logo = this.physics.add.image(400, 100, 'logo');
-
+        
         logo.setVelocity(100, 200);
         logo.setBounce(1, 1);
         logo.setCollideWorldBounds(true);
-
+        
         emitter.startFollow(logo);
-    }
+    } });
+    
 </script>
+-->
