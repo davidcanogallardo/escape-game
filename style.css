@@ -644,6 +644,50 @@ lista de amigos
 .center{
     text-align: center;
 }
+
+/*Clases Trophys.html*/
+.trophys{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.niveles{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.nivel{
+    border: 2px solid #68492E;
+    background-color: #c4c4c486;
+    border-radius: 9px;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+.nivel img{
+    border-radius: 5px;
+    width: 20%;
+}
+.trophys-container i{
+    margin-right: 10px;
+}
+
+.white{
+    color: white;
+}
+.bronze{
+    color: #99401A;
+}
+.silver{
+    color: #A9A6A6;
+}
+.gold{
+    color: #FFB800;
+}
+
 /*
 index
 */
