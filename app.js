@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    $(".settings-btn-container!!").click(function (event) { 
+    $(".settings-btn-container2").click(function (event) { 
         changePage("settings");
     });
     
-    $(".volver!!").click(function (event) { 
+    $(".volver2").click(function (event) { 
         console.log("main");
         changePage("main");
     });
@@ -37,6 +37,7 @@ function rightMenu(params) {
 }
 
 function changePage(pageName) {
+    console.log("aaaaaaaaaaa");
     if (currentPage !=pageName) {
         currentPage == pageName
         var oldClone = $('.container .page').clone()
