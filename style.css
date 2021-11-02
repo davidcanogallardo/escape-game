@@ -265,7 +265,7 @@ input[type=text]{
     color: #EFDEC3;
 }
 
-td{ 
+td,th{ 
     font-size: 24px;
     background-color: #c4c4c486;
     border: 1px solid #562800;
@@ -672,6 +672,7 @@ lista de amigos
     width: 20%;
 }
 .trophys-container i{
+    font-size: 32px;
     margin-right: 10px;
 }
 
@@ -688,6 +689,32 @@ lista de amigos
     color: #FFB800;
 }
 
+/*Clases ranking.html*/
+.level{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.slide{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.level img{
+    width: 30%;
+}
+
+.level table{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 50%;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 12px 7px;
+}
 /*
 index
 */
