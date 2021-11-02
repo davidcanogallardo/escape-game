@@ -632,6 +632,18 @@ lista de amigos
 .hidden{
     display:none;
 }
+.table-profile{
+    width: 25%;
+    border-collapse: separate;
+    border-spacing: 5px 10px;
+}
+.i-table{
+    margin-left: 5px;
+    color: #FAA942;
+}
+.center{
+    text-align: center;
+}
 /*
 index
 */
