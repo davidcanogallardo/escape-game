@@ -1,11 +1,11 @@
 @font-face {
     font-family: "Asap";
-    src: url("./AsapCondensed-Regular.ttf");
+    src: url("./src/fonts/AsapCondensed-Regular.ttf");
 }
 
 @font-face {
     font-family: "Bebas";
-    src: url("./BebasNeue-Regular.ttf");
+    src: url("./src/fonts/BebasNeue-Regular.ttf");
 }
 
 * {
@@ -31,7 +31,7 @@
 
 body {
     font-size: 26px;
-    background-image: url("./bg.png");
+    background-image: url("./src/images/bg.png");
     overflow: hidden;
     
 }
