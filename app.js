@@ -1,20 +1,24 @@
 $(document).ready(function () {
-    $(".settings-btn-container").click(function (event) { 
+    $('.container').on('click','.settings-btn-container', function () {
         changePage("settings");
     });
-    
-    $(".volver2").click(function (event) { 
-        console.log("main");
+    $('.container').on('click','.volver', function () {
         changePage("main");
     });
-
-    $('.friends-list').click(function (e) { 
+    $('.container').on('click','.friends-list', function () {
         rightMenu('slide-list-container')
     });
-
-    $('.notificacion-list').click(function (e) { 
+    $('.container').on('click','.notificacion-list', function () {
         rightMenu('notification-container')
     });
+    $('.container').on('click','.own-profile', function () {
+        changePage('profilee')
+    });
+    
+    $('.container').on('click','.ranking-link', function () {
+        changePage('ranking-page')
+    });
+
 });
 
 let currentPage = ""
@@ -40,10 +44,10 @@ function changePage(pageName) {
     console.log("aaaaaaaaaaa");
     if (currentPage !=pageName) {
         currentPage == pageName
-        var oldClone = $('.container .page').clone(true).appendTo(".pages");
-        $('.container .page').remove()
+        $('.container .page').clone(true).appendTo(".pages");
+        $('.container > *').remove()
 
-        var page = $(".pages ."+ pageName).clone(true).appendTo('.container');
+        $(".pages ."+ pageName).clone(true).appendTo('.container');
         $(".pages ."+ pageName).remove()
     }
 }
