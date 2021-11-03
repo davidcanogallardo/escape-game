@@ -18,6 +18,18 @@ $(document).ready(function () {
     $('.container').on('click','.ranking-link', function () {
         changePage('ranking-page')
     });
+    $('.container').on('click','.sound-link', function () {
+        changePage('sound-settings')
+    });
+    $('.container').on('click','.connect-controller-link', function () {
+        changePage('connect-controller')
+    });
+    $('.container').on('click','.controller-settings-link', function () {
+        changePage('controller-settings')
+    });
+    $('.container').on('click','.friend-profile-link', function () {
+        changePage('friend-profile')
+    });
 
 });
 
