@@ -1,11 +1,11 @@
 @font-face {
     font-family: "Asap";
-    src: url("./AsapCondensed-Regular.ttf");
+    src: url("./src/fonts/AsapCondensed-Regular.ttf");
 }
 
 @font-face {
     font-family: "Bebas";
-    src: url("./BebasNeue-Regular.ttf");
+    src: url("./src/fonts/BebasNeue-Regular.ttf");
 }
 
 * {
@@ -31,7 +31,7 @@
 
 body {
     font-size: 26px;
-    background-image: url("./bg.png");
+    background-image: url("./src/images/bg.png");
     overflow: hidden;
     
 }
@@ -215,6 +215,18 @@ Menu de configuracion
     outline: 3px solid #aa0000;
 }
 
+.red2{
+    padding: 10 2em;
+    background: #aa0000;
+    color: #EFDEC3;
+}
+
+.red2:hover {
+    background: #EFDEC3;
+    color: #aa0000;
+    outline: 3px solid #aa0000;
+}
+
 /*
 Ajustes de sonido
 */
@@ -265,7 +277,7 @@ input[type=text]{
     color: #EFDEC3;
 }
 
-td{ 
+td,th{ 
     font-size: 24px;
     background-color: #c4c4c486;
     border: 1px solid #562800;
@@ -591,6 +603,17 @@ lista de amigos
     outline: 3px solid #49EE63;
 }
 
+.green2{
+    padding: 10 2em;
+    background: #49EE63;
+    color: #EFDEC3;
+}
+
+.green2:hover {
+    background: #EFDEC3;
+    color: #49EE63;
+    outline: 3px solid #49EE63;
+}
 
 
 
@@ -618,7 +641,7 @@ lista de amigos
 	min-height: 200px;
 	background: #FAA942;
     border: 7px solid #68492E;
-	border-radius: 9px;
+	border-radius: 25px;
 	padding-left: 15px;
     position: absolute;
     top: 25%; left: 0; bottom: 0; right: 0;
@@ -643,6 +666,77 @@ lista de amigos
 }
 .center{
     text-align: center;
+}
+
+/*Clases Trophys.html*/
+.trophys{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.niveles{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.nivel{
+    border: 2px solid #68492E;
+    background-color: #c4c4c486;
+    border-radius: 9px;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+.nivel img{
+    border-radius: 5px;
+    width: 20%;
+}
+.trophys-container i{
+    font-size: 32px;
+    margin-right: 10px;
+}
+
+.white{
+    color: white;
+}
+.bronze{
+    color: #99401A;
+}
+.silver{
+    color: #A9A6A6;
+}
+.gold{
+    color: #FFB800;
+}
+
+/*Clases ranking.html*/
+.level{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.slide{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.level img{
+    width: 30%;
+}
+
+.level table{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 50%;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 12px 7px;
 }
 /*
 index
