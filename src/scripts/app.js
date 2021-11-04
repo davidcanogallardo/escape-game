@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    localStorage.setItem('isLogged', "false")
+    localStorage.setItem('isLogged', "true")
     $('.container').on('click','.settings-link', function () {
         changePage("settings-page");
     });
@@ -54,9 +54,8 @@ $(document).ready(function () {
         alert("a")
         if (event.currentTarget.classList.contains("confirm")) {
             addFriend()
-        } else {
-
         }
+        event.currentTarget.parentElement.remove()
     });
 
     $('.container').on('click','.friends-list', function () {
