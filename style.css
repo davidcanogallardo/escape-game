@@ -127,6 +127,18 @@ h3{
     font-size: 3vw;
 }
 /*Clases  perfil*/
+.profile{
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+}
+
+.container-profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .icon-profile{
     width: 20vw; 
     height: 40vh;
@@ -156,6 +168,41 @@ h3{
 .center{
     text-align: center;
 }
+
+@media (max-height: 600px) {
+    .container-profile{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .icon-profile{
+      float: left;
+    }
+
+    .icon-small{
+        width: 5.5vw;
+        height: 12vh;
+    }
+    
+    .icon-profile{
+        width: 18vw; 
+        height: 40vh;
+        box-shadow: 0px 8px 8px rgb(0 0 0 / 25%);
+    }
+
+    .table-profile{
+        padding-left: 20px;
+        width: 35vw;
+        height: 25vh;
+        border-collapse: separate;
+        border-spacing: 5px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 .cancel-button {
     text-align:center;
     background: #EF4646;
@@ -476,12 +523,6 @@ input[type=text]{
 
 #login{
     text-align: left;
-}
-
-.profile{
-    display: flex; 
-    flex-direction: column; 
-    align-items: center;
 }
 
 /*
@@ -904,4 +945,19 @@ index
     background: #EFDEC3;
     color: #14448D;  /* Color del texto*/
     outline: 3px solid #14448D;
+}
+/*Boton play*/
+.play:hover{
+    color: #EFDEC3;
+    background-color: #aa0000;
+    border: 10px solid #700000;
+    text-shadow: 0px 0px 0px rgb(0 0 0 / 50%);
+    box-shadow: 0px 0px 0px rgb(0 0 0 / 25%);
+}
+.play{
+    color: #EFDEC3;
+    background-color: #14448d;
+    border: 10px solid #002966;
+    text-shadow: 0px 3px 1px rgb(0 0 0 / 50%);
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 }
