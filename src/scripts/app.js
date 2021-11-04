@@ -90,7 +90,7 @@ function addFriendRequest(name) {
 
 function login(event) {
     localStorage.setItem('isLogged', "true")
-    localStorage.setItem('username', event.currentTarget.parentElement[0].value)
+    localStorage.setItem('username', event.currentTarget.parentElement.parentElement[0].value)
     console.log("logged");
     changeUsername()
     changePage("main");

@@ -461,29 +461,6 @@ input[type=text]{
     margin-bottom: 10px;
 }
 
-input[type=submit]{
-    width: 361px;
-    height: 73px;
-    background: #14448D;
-    border: 0px black;
-    border-radius: 16px;
-    color: #EFDEC3;
-    text-align: center;
-    cursor: pointer;
-    font-family: Bebas;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 40px;
-    text-align: center;
-    
-}
-
-input[type=submit]:hover{
-    background: #EFDEC3;
-    color: #14448D;  /* Color del texto*/
-    outline: 3px solid #14448D;
-}
-
 #login{
     text-align: left;
 }
@@ -888,7 +865,7 @@ lista de amigos
 index
 */
 
-#login .btn{
+#forms-container .btn{
     background: #14448D;
     border: 0px black;
     border-radius: 16px;
@@ -900,4 +877,30 @@ index
     font-weight: normal;
     font-size: 40px;
     padding: 10px 100px 10px 100px;
+}
+
+#forms-container .btn:hover{
+    background: #EFDEC3;
+    color: #14448D;  /* Color del texto*/
+    outline: 3px solid #14448D;
+}
+
+#recover .btn.blue{
+    background: #14448D;
+    border: 0px black;
+    border-radius: 16px;
+    color: #EFDEC3;
+    text-align: center;
+    cursor: pointer;
+    font-family: Bebas;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 60px;
+    padding: 10px 140px 10px 140px;
+}
+
+#recover .btn.blue:hover{
+    background: #EFDEC3;
+    color: #14448D;  /* Color del texto*/
+    outline: 3px solid #14448D;
 }
