@@ -111,6 +111,7 @@ h3{
     display: flex;
     justify-content: center;
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    cursor: pointer;
 }
 
 .icon i{
@@ -119,23 +120,22 @@ h3{
 }
 
 .icon-small{
-    width: 75px;
-    height: 75px;
-    cursor: pointer;
+    width: 6vw;
+    height: 12vh;
 }
 .icon-small i{
-    font-size: 38px;
+    font-size: 3vw;
 }
-/*Clases icono perfil*/
+/*Clases  perfil*/
 .icon-profile{
-    width: 250px; 
-    height: 250px;
+    width: 20vw; 
+    height: 40vh;
     box-shadow: 0px 8px 8px rgb(0 0 0 / 25%);
 }
 
 .i-profile{
     text-shadow: 0px 6px 2px rgb(0 0 0 / 50%);
-    font-size: 170px;
+    font-size: 12vw;
 }
 
 .i-s-absolute{
@@ -144,6 +144,18 @@ h3{
     margin-top: 1%;
 }
 
+.table-profile{
+    width: 35vw;
+    border-collapse: separate;
+    border-spacing: 5px 10px;
+}
+.i-table{
+    margin-left: 5px;
+    color: #FAA942;
+}
+.center{
+    text-align: center;
+}
 .cancel-button {
     text-align:center;
     background: #EF4646;
@@ -777,18 +789,6 @@ lista de amigos
 
 .hidden{
     display:none;
-}
-.table-profile{
-    width: 25%;
-    border-collapse: separate;
-    border-spacing: 5px 10px;
-}
-.i-table{
-    margin-left: 5px;
-    color: #FAA942;
-}
-.center{
-    text-align: center;
 }
 
 /*Clases Trophys.html*/
