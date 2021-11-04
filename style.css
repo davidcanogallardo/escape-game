@@ -38,7 +38,7 @@ body {
 
 h1 {
     font-family: Bebas;
-    font-size: 6em;
+    font-size: 10vw;
     margin: 0;
     color: #68492E;
     letter-spacing: 3px;
@@ -110,36 +110,97 @@ h3{
     align-items: center;
     display: flex;
     justify-content: center;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.50);
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    cursor: pointer;
 }
 
 .icon i{
     color: #EFDEC3;
-    text-shadow: 0px 5px 15px rgb(0, 0, 0,0.50);
+    text-shadow: 0px 3px 1px rgb(0 0 0 / 50%);
 }
 
 .icon-small{
-    width: 75px;
-    height: 75px;
-    cursor: pointer;
+    width: 6vw;
+    height: 12vh;
 }
 .icon-small i{
-    font-size: 38px;
+    font-size: 3vw;
+}
+/*Clases  perfil*/
+.profile{
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
 }
 
+.container-profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .icon-profile{
-    width: 250px; 
-    height: 250px; 
+    width: 20vw; 
+    height: 40vh;
+    box-shadow: 0px 8px 8px rgb(0 0 0 / 25%);
 }
 
 .i-profile{
-    font-size: 170px;
+    text-shadow: 0px 6px 2px rgb(0 0 0 / 50%);
+    font-size: 12vw;
 }
 
 .i-s-absolute{
     position: absolute;
     margin-left: 1%;
     margin-top: 1%;
+}
+
+.table-profile{
+    width: 35vw;
+    border-collapse: separate;
+    border-spacing: 5px 10px;
+}
+.i-table{
+    margin-left: 5px;
+    color: #FAA942;
+}
+.center{
+    text-align: center;
+}
+
+@media (max-height: 600px) {
+    .container-profile{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .icon-profile{
+      float: left;
+    }
+
+    .icon-small{
+        width: 5.5vw;
+        height: 12vh;
+    }
+    
+    .icon-profile{
+        width: 18vw; 
+        height: 40vh;
+        box-shadow: 0px 8px 8px rgb(0 0 0 / 25%);
+    }
+
+    .table-profile{
+        padding-left: 20px;
+        width: 35vw;
+        height: 25vh;
+        border-collapse: separate;
+        border-spacing: 5px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .cancel-button {
@@ -172,7 +233,7 @@ Menu de configuracion
 /* Boton por defecto*/
 .btn{
     border: none;
-    padding: 0 2.9em;
+    padding: 0 7vw;
     border-radius: 16px;
     margin: 8px;
     display: inline-block;
@@ -181,7 +242,7 @@ Menu de configuracion
     -o-transition: 0.3s;
     transition: 0.3s;
     font-family: Bebas;
-    font-size: 2.5em;
+    font-size: 4.5vw;
     text-transform: uppercase;
     text-align: center;
     text-decoration: none;
@@ -435,19 +496,6 @@ td,th{
     background-color: #c4c4c486;
     border: 1px solid #562800;
 }
-
-input[type=submit]{
-    width: 481px;
-    height: 107px;
-    background: #14448D;
-    border-radius: 16px;
-    color: #EFDEC3;  /* Color del texto*/
-    padding: 15px;
-    text-align: center;
-    cursor: pointer;
-    border: none;
-}
-
 #recover{
     text-align: left;
     width: 500px;
@@ -469,37 +517,8 @@ input[type=text]{
     margin-bottom: 10px;
 }
 
-input[type=submit]{
-    width: 361px;
-    height: 73px;
-    background: #14448D;
-    border: 0px black;
-    border-radius: 16px;
-    color: #EFDEC3;
-    text-align: center;
-    cursor: pointer;
-    font-family: Bebas;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 40px;
-    text-align: center;
-    
-}
-
-input[type=submit]:hover{
-    background: #EFDEC3;
-    color: #14448D;  /* Color del texto*/
-    outline: 3px solid #14448D;
-}
-
 #login{
     text-align: left;
-}
-
-.profile{
-    display: flex; 
-    flex-direction: column; 
-    align-items: center;
 }
 
 /*
@@ -805,18 +824,6 @@ lista de amigos
 .hidden{
     display:none;
 }
-.table-profile{
-    width: 25%;
-    border-collapse: separate;
-    border-spacing: 5px 10px;
-}
-.i-table{
-    margin-left: 5px;
-    color: #FAA942;
-}
-.center{
-    text-align: center;
-}
 
 /*Clases Trophys.html*/
 .trophys{
@@ -888,6 +895,97 @@ lista de amigos
     border-collapse: separate;
     border-spacing: 12px 7px;
 }
+
 /*
 index
 */
+
+#forms-container .btn{
+    background: #14448D;
+    border: 0px black;
+    border-radius: 16px;
+    color: #EFDEC3;
+    text-align: center;
+    cursor: pointer;
+    font-family: Bebas;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    padding: 10px 100px 10px 100px;
+}
+
+#forms-container .btn:hover{
+    background: #EFDEC3;
+    color: #14448D;  /* Color del texto*/
+    outline: 3px solid #14448D;
+}
+
+#recover .btn.blue{
+    background: #14448D;
+    border: 0px black;
+    border-radius: 16px;
+    color: #EFDEC3;
+    text-align: center;
+    cursor: pointer;
+    font-family: Bebas;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 60px;
+    padding: 10px 140px 10px 140px;
+}
+
+#recover .btn.blue:hover{
+    background: #EFDEC3;
+    color: #14448D;  /* Color del texto*/
+    outline: 3px solid #14448D;
+}
+/*Boton play*/
+.play:hover{
+    color: #EFDEC3;
+    background-color: #aa0000;
+    border: 10px solid #700000;
+    text-shadow: 0px 0px 0px rgb(0 0 0 / 50%);
+    box-shadow: 0px 0px 0px rgb(0 0 0 / 25%);
+}
+
+.play{
+    color: #EFDEC3;
+    background-color: #14448d;
+    border: 10px solid #002966;
+    text-shadow: 0px 3px 1px rgb(0 0 0 / 50%);
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+}
+
+/*
+Aviso de login
+*/
+
+.login_warning{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.login_warning p{
+    width: auto;
+}
+
+.botones_warning{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+
+.botones_warning .btn{
+    width: 30vw;
+}
+
+.login_warning .cruz{
+    font-size: 3.2vw;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
