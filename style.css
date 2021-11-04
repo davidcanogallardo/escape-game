@@ -905,3 +905,37 @@ index
     color: #14448D;  /* Color del texto*/
     outline: 3px solid #14448D;
 }
+
+/*
+Aviso de login
+*/
+
+.login_warning{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.login_warning p{
+    width: auto;
+}
+
+.botones_warning{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+
+.botones_warning .btn{
+    width: 30vw;
+}
+
+.login_warning .cruz{
+    font-size: 3.2vw;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
