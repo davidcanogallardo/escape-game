@@ -410,11 +410,6 @@ Probar Mando
     flex-grow: 1;
 }
 
-
-/*
-index.html
-*/
-
 .pages {
     display: none;
 }
@@ -597,9 +592,6 @@ titulo
 
 #game canvas {
     border-radius: 10px;
-}
-#game canvas:hover {
-    border: 3px solid black
 }
 /*
 lista de amigos
