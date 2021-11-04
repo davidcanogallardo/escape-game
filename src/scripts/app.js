@@ -46,6 +46,19 @@ $(document).ready(function () {
         $(".pages .invitation-page").remove()
     });
 
+    $('.container').on('click','.send-friend-request', function (event) {
+        addFriendRequest(this.parentElement.children[0].value)
+    });
+
+    $('.container').on('click','.list-item .btn', function (event) {
+        alert("a")
+        if (event.currentTarget.classList.contains("confirm")) {
+            addFriend()
+        } else {
+
+        }
+    });
+
     $('.container').on('click','.friends-list', function () {
         rightMenu('slide-list-container')
     });
@@ -55,6 +68,25 @@ $(document).ready(function () {
     });
         
 });
+
+function addFriendRequest(name) {  
+    newRequest = `                
+    <div class="list-item">
+        <div class="icon-container pr-btn" >
+            <i class="fas fa-user" aria-hidden="true"></i>
+        </div>
+        <span >`+name+`</span>
+        <div class="btn green confirm">
+            <i class="fas fa-check" aria-hidden="true"></i>
+        </div>
+        <div class="btn red confirm">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </div>
+    </div> 
+    `
+    $(".notification-container .slide-list").append(newRequest)
+
+}
 
 function login(event) {
     localStorage.setItem('isLogged', "true")
