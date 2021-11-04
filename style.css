@@ -110,12 +110,12 @@ h3{
     align-items: center;
     display: flex;
     justify-content: center;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.50);
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 }
 
 .icon i{
     color: #EFDEC3;
-    text-shadow: 0px 5px 15px rgb(0, 0, 0,0.50);
+    text-shadow: 0px 3px 1px rgb(0 0 0 / 50%);
 }
 
 .icon-small{
@@ -126,13 +126,15 @@ h3{
 .icon-small i{
     font-size: 38px;
 }
-
+/*Clases icono perfil*/
 .icon-profile{
     width: 250px; 
-    height: 250px; 
+    height: 250px;
+    box-shadow: 0px 8px 8px rgb(0 0 0 / 25%);
 }
 
 .i-profile{
+    text-shadow: 0px 6px 2px rgb(0 0 0 / 50%);
     font-size: 170px;
 }
 
@@ -936,3 +938,20 @@ Aviso de login
     right: 20px;
 }
 
+
+
+/*Boton play*/
+.play:hover{
+    color: #EFDEC3;
+    background-color: #aa0000;
+    border: 10px solid #700000;
+    text-shadow: 0px 0px 0px rgb(0 0 0 / 50%);
+    box-shadow: 0px 0px 0px rgb(0 0 0 / 25%);
+}
+.play{
+    color: #EFDEC3;
+    background-color: #14448d;
+    border: 10px solid #002966;
+    text-shadow: 0px 3px 1px rgb(0 0 0 / 50%);
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+}
