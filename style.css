@@ -38,7 +38,7 @@ body {
 
 h1 {
     font-family: Bebas;
-    font-size: 6em;
+    font-size: 10vw;
     margin: 0;
     color: #68492E;
     letter-spacing: 3px;
@@ -172,7 +172,7 @@ Menu de configuracion
 /* Boton por defecto*/
 .btn{
     border: none;
-    padding: 0 2.9em;
+    padding: 0 7vw;
     border-radius: 16px;
     margin: 8px;
     display: inline-block;
@@ -181,7 +181,7 @@ Menu de configuracion
     -o-transition: 0.3s;
     transition: 0.3s;
     font-family: Bebas;
-    font-size: 2.5em;
+    font-size: 4.5vw;
     text-transform: uppercase;
     text-align: center;
     text-decoration: none;
@@ -409,7 +409,6 @@ Probar Mando
     font-size: 200px;
     flex-grow: 1;
 }
-
 
 /*
 index.html
@@ -901,3 +900,39 @@ index
     font-size: 40px;
     padding: 10px 100px 10px 100px;
 }
+
+
+/*
+Aviso de login
+*/
+
+.login_warning{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.login_warning p{
+    width: auto;
+}
+
+.botones_warning{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+
+.botones_warning .btn{
+    width: 30vw;
+}
+
+.login_warning .cruz{
+    font-size: 3.2vw;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
