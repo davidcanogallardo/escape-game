@@ -1,27 +1,5 @@
 $(document).ready(function () {
-    localStorage.setItem('isLogged', "false")
-    
-    if (localStorage.getItem("friendsList") == null) {
-        var arr = ["Jorge", "Carlos", "Miguel", "Lucas", "Diego", "Mario"]
-        localStorage.setItem("friendsList", JSON.stringify(arr))
-    }
-    if (localStorage.getItem("notificationList") == null) {
-        var arr = ["Andrés", "Gerard", "Hugo", "Lucas", "Nora", "Sara"]
-        localStorage.setItem("notificationList", JSON.stringify(arr))
-    }
-    if (localStorage.getItem("currentPage") == null) {
-        localStorage.setItem("currentPage", "")
-    }
-
-    var array = JSON.parse(localStorage.getItem("friendsList"))
-    array.forEach(name => {
-        addFriend(name)
-    });
-
-    array = JSON.parse(localStorage.getItem("notificationList"))
-    array.forEach(name => {
-        addFriendRequest(name)
-    });
+    checkLocalStorage()
 
     $('.container').on('click','.settings-link', function () {
         changePage("settings-page");
@@ -100,7 +78,6 @@ $(document).ready(function () {
     $('.container').on('click','.notificacion-list', function () {
         rightMenu('.notification-container')
     });
-        
 });
 
 function addFriend(friendName) {
@@ -156,13 +133,40 @@ function login(name) {
     changePage("main");
 }
 
+function checkLocalStorage() {
+    //Para cerrar sesión descomenta la línea de abajo, refresca la página y luego coméntalo
+    //localStorage.setItem('isLogged', "false")
+    
+    if (localStorage.getItem("friendsList") == null) {
+        var arr = ["Jorge", "Carlos", "Miguel", "Lucas", "Diego", "Mario"]
+        localStorage.setItem("friendsList", JSON.stringify(arr))
+    }
+    if (localStorage.getItem("notificationList") == null) {
+        var arr = ["Andrés", "Gerard", "Hugo", "Lucas", "Nora", "Sara"]
+        localStorage.setItem("notificationList", JSON.stringify(arr))
+    }
+    if (localStorage.getItem("currentPage") == null) {
+        localStorage.setItem("currentPage", "")
+    }
+
+    var array = JSON.parse(localStorage.getItem("friendsList"))
+    array.forEach(name => {
+        addFriend(name)
+    });
+
+    array = JSON.parse(localStorage.getItem("notificationList"))
+    array.forEach(name => {
+        addFriendRequest(name)
+    });
+}
+
 function changeUsername() {
     $(".overlay-content h3 b")[0].innerHTML = localStorage.getItem('username')
     $(".profile h1")[0].innerHTML = localStorage.getItem('username')
 }
 
 function rightMenu(params) {
-    if (localStorage.getItem('isLogged') != "true") {
+    if (JSON.parse(localStorage.getItem('isLogged'))) {
         alert("Inicia sesión man")
         currentPage == "login-page"
         $('.container .page').clone(true).appendTo(".pages");
@@ -174,11 +178,9 @@ function rightMenu(params) {
         if ($.trim($('.slide-menu').html()) === "") {
             var menu = $(".menus > "+ params)
             var menuClone = menu.clone()
-            var xd = $.trim(`<div style="width: 100%;height: 100%;background: #e1e1e14a;position: absolute;top: 0;left: 0; z-index:5;" onclick="rightMenu('`+params+`')"></div>`)
+            var xd = $.trim(`<div class="menu-close" onclick="rightMenu('`+params+`')"></div>`)
             //pensar un nombre para la variable uwu
             $('.slide-menu').append(menuClone).append(xd);
-            //$('.slide-menu > .'+ params).css("left","")
-            //$('.slide-list-container').animate({ "right": "-=540px" }, "slow")
             $('.slide-menu > '+ params).animate({"right":"0vw"})
         } else {
             $(params).animate({ "right": "-=400vw" }, "slow" ,function() { $('.slide-menu > *').remove();});
@@ -190,7 +192,8 @@ function rightMenu(params) {
 }
 
 function changePage(pageName) {
-    if (localStorage.getItem('isLogged') != "true" && pageName != "main" && pageName != "recover-page" && pageName != "login-page") {
+    var isLogged = JSON.parse(localStorage.getItem('isLogged'))
+    if (!isLogged && pageName != "main" && pageName != "recover-page" && pageName != "login-page") {
         $('.container .page').clone(true).appendTo(".pages");
         $('.container > *').remove()
 

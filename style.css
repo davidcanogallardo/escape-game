@@ -77,7 +77,7 @@ sinconizar Mando
 .nuevos_dispositivos{
     overflow-y: scroll ;
     overflow-x: hidden;
-    height: 165px;
+    height: 20vw;
 }
 
 /* .mando span {
@@ -86,8 +86,8 @@ sinconizar Mando
 
 .mando {
     background: #68492E;
-    width: 50vw;
-    height: 10vh;
+    width: 30vw;
+    height: 5vh;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -659,7 +659,6 @@ lista de amigos
     height: 100%;
     width: 35%;
     position: absolute;
-    right: 0px;
     top: 0px;
     display: flex;
     flex-direction: column;
@@ -670,6 +669,7 @@ lista de amigos
     transition: 1s;
     z-index: 10;
     align-items: center;
+    right: -540px;
 }
 
 .slide-list-container > div {
@@ -719,10 +719,14 @@ lista de amigos
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1vw 0vw;
+    margin: 0 auto;
 }
 
 .slide-list-container .list-item {
     cursor: pointer;
+}
+.slide-list-container .list-item span {
+    margin: 0 auto;
 }
 
 .list-item div {
@@ -742,6 +746,11 @@ lista de amigos
 
 .add-btn {
     margin-right: 0.2vw !important;
+    width: 4vw !important;
+    height: 4vw !important;
+}
+.add-btn i {
+    font-size: 2vw;
 }
 
 .form-fr-request * {
@@ -781,7 +790,7 @@ lista de amigos
     height: 100%;
     width: 35%;
     position: absolute;
-    right: 0px;
+    right: -540px;
     top: 0px;
     display: flex;
     flex-direction: column;
@@ -1173,17 +1182,51 @@ Aviso de login
 
 @media only screen and (orientation:portrait) {
     body {
-        transform: rotate(90deg);
-            transform-origin:bottom left;
-            
-            position:absolute;
-            top:-100vw;
-            
-            height:100vw;
-            width:100vh;
-            
+        /* Rotate the content container */
+        transform: rotate(-90deg);
+        transform-origin: left top;
+        /* Set content width to viewport height */
+        width: 100vh;
+        /* Set content height to viewport width */
+        height: 100vw;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        position: absolute;
+        top: 100%;
+        left: 0;
     }
-  }
+}
+
 .form-button{
     font-size: 3vw;
+}
+
+.friend-request {
+    bottom: -10vw;
+    position: absolute;
+    left: 41vw;
+    width: 20vw;
+    min-height: 8vw;
+    z-index: 10;
+    border-radius: 1vw;
+    text-align: center;
+    padding: 0.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    opacity: 1;
+    color: rgb(255, 255, 255);
+    font-size: 2vw;
+    background: #49EE63;
+}
+
+.menu-close {
+    width: 100%;
+    height: 100%;
+    background: #e1e1e14a;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
 }
