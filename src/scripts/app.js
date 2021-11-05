@@ -134,10 +134,10 @@ function addFriendRequest(name) {
             <i class="fas fa-user" aria-hidden="true"></i>
         </div>
         <span >`+name+`</span>
-        <div class="btn green confirm">
+        <div class="btn accept">
             <i class="fas fa-check" aria-hidden="true"></i>
         </div>
-        <div class="btn red confirm">
+        <div class="btn cancel">
             <i class="fas fa-times" aria-hidden="true"></i>
         </div>
     </div> 
