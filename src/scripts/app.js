@@ -72,7 +72,7 @@ $(document).ready(function () {
     $('.container').on('click','.send-friend-request', function (event) {
         var friendName = $("#user-request").val()
         if (friendName != "") {
-            $(".friend-request").fadeTo(250, 1).delay(200).fadeTo(250, 0)
+            $(".friend-request").animate({"bottom":"5vw"}).delay(250).fadeTo(450, 0)
             addFriendRequest(friendName)
         }
     });
@@ -134,10 +134,10 @@ function addFriendRequest(name) {
             <i class="fas fa-user" aria-hidden="true"></i>
         </div>
         <span >`+name+`</span>
-        <div class="btn green confirm">
+        <div class="btn accept">
             <i class="fas fa-check" aria-hidden="true"></i>
         </div>
-        <div class="btn red confirm">
+        <div class="btn cancel">
             <i class="fas fa-times" aria-hidden="true"></i>
         </div>
     </div> 
@@ -179,7 +179,7 @@ function rightMenu(params) {
             //$('.slide-list-container').animate({ "right": "-=540px" }, "slow")
             $('.slide-menu > .'+ params).animate({"right":"0vw"})
         } else {
-            $('.'+ params).animate({ "right": "-=400vw" }, "slow" ,function() { $('.slide-menu > *').remove();});
+            $(params).animate({ "right": "-=400vw" }, "slow" ,function() { $('.slide-menu > *').remove();});
             $('.menus > .'+ params).animate({ "right": "-40vw" });
             
         }

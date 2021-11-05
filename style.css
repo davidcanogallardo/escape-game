@@ -23,12 +23,6 @@
     display: flex;
 }
 
-.container div {
-    margin: 0 auto;
-    
-}
-
-
 body {
     font-size: 26px;
     background-image: url("./src/images/bg.png");
@@ -307,9 +301,15 @@ Ajustes de sonido
     align-items: center;
 }
 
-/* .sound_settings h1{
-    font-size: 2em;
-} */
+.sound_settings .all_settings{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+}
 
 .ajuste_sonido{
     width: 80%;
@@ -475,8 +475,8 @@ Probar Mando
     height: 100%;
 }
 
-.fa-redo-alt{
-    font-size: 200px;
+.gesto{
+    font-size: 15vw;
     flex-grow: 1;
 }
 
@@ -770,6 +770,50 @@ lista de amigos
     flex: 0 0 70%;
 }
 
+.list-item > .btn {
+    width: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accept{
+    background-color: #00FF04;
+    color: #000000;
+}
+
+.accept > i{
+    color: #000000;
+}
+
+.accept:hover{
+    background-color: #EBDFCB;
+    outline: 2px solid #68492E;
+}
+
+.accept:hover > i{
+    color: #68492E;
+}
+
+.cancel{
+    background-color: #FF6161;
+}
+
+.cancel > i{
+    color: #000000;
+}
+
+.cancel:hover{
+    background-color: #EBDFCB;
+    outline: 2px solid #68492E;
+}
+
+.cancel:hover > i{
+    color: #68492E;
+}
+
+
+
 .confirm {
     flex: 0 0 30%;
     align-items: center;
@@ -783,9 +827,9 @@ lista de amigos
 
 
 
-.green {
-    background: rgb(73, 238, 99);
-}
+/* .green {
+    background: ;
+} */
 .green i{
     color: #EFDEC3;
 }
@@ -862,16 +906,17 @@ lista de amigos
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: scroll;
+    width: 50vw;
+    height: 55vh;
+    overflow-y: scroll;
     overflow-x: hidden;
     gap: 0.3vw;
-    height: inherit;
 }
 .nivel{
     border: 2px solid #68492E;
     background-color: #c4c4c486;
     border-radius: 9px;
-    width: 50%;
+    width: 95%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -900,8 +945,12 @@ lista de amigos
     color: #FFB800;
 }
 @media (max-height: 600px) {
+    .niveles{
+        width: 70vw;
+        height: 45vh;
+    }
     .nivel {
-      width: 70vw;
+      width: 95%;
     }
   }
 /*Clases ranking.html*/
@@ -923,16 +972,25 @@ lista de amigos
 }
 
 .level table{
-    margin-top: 20px;
-    margin-bottom: 20vh;
-    width: 50%;
     text-align: center;
     border-collapse: separate;
     border-spacing: 12px 7px;
 }
+.level .table{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 50vw;
+    height: 45vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 @media (max-height: 600px) {
-    .level table{
-        margin-bottom: 1vh;
+    .level .table{
+        width: 60vw;
+        height: 35vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
   }
 /*
@@ -1037,3 +1095,23 @@ canvas {
 
 }
 
+/*Scrollbar*/
+.scrollbar::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.scrollbar::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.scrollbar::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #68492E;
+}
