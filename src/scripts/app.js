@@ -175,10 +175,12 @@ function rightMenu(params) {
             var xd = $.trim(`<div style="width: 100%;height: 100%;background: #e1e1e14a;position: absolute;top: 0;left: 0; z-index:5;" onclick="rightMenu('.`+params+`')"></div>`)
             //pensar un nombre para la variable uwu
             $('.slide-menu').append(menuClone).append(xd);
-            $('.slide-menu > .'+ params).css("width","0%")
-            $('.slide-menu > .'+ params).animate({width:"35%"}, 10)
+            //$('.slide-menu > .'+ params).css("left","")
+            //$('.slide-list-container').animate({ "right": "-=540px" }, "slow")
+            $('.slide-menu > .'+ params).animate({"right":"0vw"})
         } else {
-            $('.slide-list-container').animate({ "left": "+=5000px" }, "slow" ,function() { $('.slide-menu > *').remove();});
+            $('.'+ params).animate({ "right": "-=400vw" }, "slow" ,function() { $('.slide-menu > *').remove();});
+            $('.menus > .'+ params).animate({ "right": "-40vw" });
             
         }
     }
@@ -201,7 +203,7 @@ function changePage(pageName) {
             localStorage.setItem("currentPage", pageName)
             $('.container .page').clone(true).appendTo(".pages");
             $('.container > *').remove()
-    
+        
             $(".pages ."+ pageName).clone(true).appendTo('.container');
             $(".pages ."+ pageName).remove()
         
