@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    localStorage.setItem('isLogged', "true")
+    localStorage.setItem('isLogged', "false")
     
     if (localStorage.getItem("friendsList") == null) {
         var arr = ["Jorge", "Carlos", "Miguel", "Lucas", "Diego", "Mario"]
@@ -92,11 +92,11 @@ $(document).ready(function () {
     });
 
     $('.container').on('click','.friends-list', function () {
-        rightMenu('slide-list-container')
+        rightMenu('.slide-list-container')
     });
 
     $('.container').on('click','.notificacion-list', function () {
-        rightMenu('notification-container')
+        rightMenu('.notification-container')
     });
         
 });
@@ -170,17 +170,17 @@ function rightMenu(params) {
         $(".pages .login-page").remove()
     } else {
         if ($.trim($('.slide-menu').html()) === "") {
-            var menu = $(".menus > ."+ params)
+            var menu = $(".menus > "+ params)
             var menuClone = menu.clone()
-            var xd = $.trim(`<div style="width: 100%;height: 100%;background: #e1e1e14a;position: absolute;top: 0;left: 0; z-index:5;" onclick="rightMenu('.`+params+`')"></div>`)
+            var xd = $.trim(`<div style="width: 100%;height: 100%;background: #e1e1e14a;position: absolute;top: 0;left: 0; z-index:5;" onclick="rightMenu('`+params+`')"></div>`)
             //pensar un nombre para la variable uwu
             $('.slide-menu').append(menuClone).append(xd);
             //$('.slide-menu > .'+ params).css("left","")
             //$('.slide-list-container').animate({ "right": "-=540px" }, "slow")
-            $('.slide-menu > .'+ params).animate({"right":"0vw"})
+            $('.slide-menu > '+ params).animate({"right":"0vw"})
         } else {
             $(params).animate({ "right": "-=400vw" }, "slow" ,function() { $('.slide-menu > *').remove();});
-            $('.menus > .'+ params).animate({ "right": "-40vw" });
+            $('.menus > '+ params).animate({ "right": "-40vw" });
             
         }
     }
@@ -188,24 +188,22 @@ function rightMenu(params) {
 }
 
 function changePage(pageName) {
-    console.log("aaaaaaaaaaa");
-
-    if (localStorage.getItem('isLogged') != "true" && pageName != "main" && pageName != "recover-page") {
-        alert("Inicia sesión man")
-        localStorage.setItem("currentPage", "login-page")
+    if (localStorage.getItem('isLogged') != "true" && pageName != "main" && pageName != "recover-page" && pageName != "login-page") {
         $('.container .page').clone(true).appendTo(".pages");
         $('.container > *').remove()
 
-        $(".pages .login-page").clone(true).appendTo('.container');
-        $(".pages .login-page").remove()
+        $(".pages .login-warning").clone(true).appendTo('.container');
+        $(".pages .login-warning").remove()
     } else {
-        
-            localStorage.setItem("currentPage", pageName)
-            $('.container .page').clone(true).appendTo(".pages");
-            $('.container > *').remove()
-        
-            $(".pages ."+ pageName).clone(true).appendTo('.container');
-            $(".pages ."+ pageName).remove()
-        
+        localStorage.setItem("currentPage", pageName)
+        $('.container .page').clone(true).appendTo(".pages");
+        $('.container > *').remove()
+    
+        $(".pages ."+ pageName).clone(true).appendTo('.container');
+        $(".pages ."+ pageName).remove()
+
+        $('.container > *').fadeOut(1);
+        $('.container > *').fadeIn(500);
+            
     }
 }
