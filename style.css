@@ -1172,6 +1172,19 @@ Aviso de login
 	background-color: #68492E;
 }
 
+@media only screen and (orientation:portrait) {
+    body {
+        transform: rotate(90deg);
+            transform-origin:bottom left;
+            
+            position:absolute;
+            top:-100vw;
+            
+            height:100vw;
+            width:100vh;
+            
+    }
+  }
 .form-button{
     font-size: 3vw;
     text-align: center;
