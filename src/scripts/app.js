@@ -202,6 +202,9 @@ function changePage(pageName) {
     
         $(".pages ."+ pageName).clone(true).appendTo('.container');
         $(".pages ."+ pageName).remove()
-        
+
+        $('.container > *').fadeOut(1);
+        $('.container > *').fadeIn(500);
+            
     }
 }

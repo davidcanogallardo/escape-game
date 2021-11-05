@@ -23,12 +23,6 @@
     display: flex;
 }
 
-.container div {
-    margin: 0 auto;
-    
-}
-
-
 body {
     font-size: 26px;
     background-image: url("./src/images/bg.png");
@@ -307,9 +301,15 @@ Ajustes de sonido
     align-items: center;
 }
 
-/* .sound_settings h1{
-    font-size: 2em;
-} */
+.sound_settings .all_settings{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+}
 
 .ajuste_sonido{
     width: 80%;
@@ -475,8 +475,8 @@ Probar Mando
     height: 100%;
 }
 
-.fa-redo-alt{
-    font-size: 200px;
+.gesto{
+    font-size: 15vw;
     flex-grow: 1;
 }
 
