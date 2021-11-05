@@ -67,6 +67,8 @@ $(document).ready(function () {
         console.log($(this.parentNode)[0].childNodes[3].innerText);
         $(".pages .invitation-page").clone(true).appendTo('.container');
         $(".pages .invitation-page").remove()
+        $('.container > *').fadeOut(1);
+        $('.container > *').fadeIn(500);
     });
 
     $('.container').on('click','.send-friend-request', function (event) {
