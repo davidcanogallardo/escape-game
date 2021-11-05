@@ -992,6 +992,7 @@ lista de amigos
         overflow-y: scroll;
         overflow-x: hidden;
     }
+    
   }
 /*
 index
@@ -1046,6 +1047,9 @@ index
 }
 
 .play{
+    position: absolute;
+    right: 38vw;
+    bottom: 10px;
     color: #EFDEC3;
     background-color: #14448d;
     border: 10px solid #002966;
@@ -1087,12 +1091,18 @@ Aviso de login
     right: 20px;
 }
 
-@media only screen and (max-width: 700px) {
-canvas {
-    width: 350px;
-    height: 230px;
-}
+@media only screen and (max-height: 600px) {
+    canvas {
+        width: 350px;
+        height: 230px;
+        
+    }
 
+    .play{
+        position: absolute;
+        bottom: 10px ;
+        right: 10vw !important;
+    }
 }
 
 /*Scrollbar*/
