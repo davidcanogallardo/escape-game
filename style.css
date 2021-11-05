@@ -28,10 +28,10 @@ h2{
 
 h3{
     font-family: Bebas;
-    font-size: 2em;
-    margin: 20px;
+    font-size: 3vw;
+    margin: 1vw;
     color: #68492E;
-    letter-spacing: 3px;
+    letter-spacing: 0.3vw;
 }
 
 /*Contenedor de plantilla de las páginas*/
@@ -69,7 +69,7 @@ h3{
 }
 
 body {
-    font-size: 26px;
+    font-size: 1vw;
     background-image: url("./src/images/bg.png");
     overflow: hidden;
     
@@ -271,9 +271,9 @@ body {
 /* Boton por defecto*/
 .btn{
     border: none;
-    padding: 0 7vw;
+    padding: 0 5vw;
     border-radius: 2vw;
-    margin: 8px;
+    margin: 0.4vw;
     display: inline-block;
     -webkit-transition: 0.3s;
     -moz-transition: 0.3s;
@@ -897,14 +897,13 @@ input[type=text]{
 }
 
 .overlay-content {
-	width: 787px;
-    height: 348px;
-	padding: 7px;
-	min-height: 200px;
-	background: #FAA942;
-    border: 7px solid #68492E;
-	border-radius: 25px;
-	padding-left: 15px;
+    width: 30vw;
+    height: 15vw;
+    padding: 0.1vw;
+    min-height: 16vw;
+    background: #FAA942;
+    border: 0.3vw solid #68492E;
+    border-radius: 1vw;
     position: absolute;
 }
 
