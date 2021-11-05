@@ -72,7 +72,7 @@ $(document).ready(function () {
     $('.container').on('click','.send-friend-request', function (event) {
         var friendName = $("#user-request").val()
         if (friendName != "") {
-            $(".friend-request").fadeTo(250, 1).delay(200).fadeTo(250, 0)
+            $(".friend-request").animate({"bottom":"5vw"}).delay(250).fadeTo(450, 0)
             addFriendRequest(friendName)
         }
     });
@@ -179,7 +179,7 @@ function rightMenu(params) {
             //$('.slide-list-container').animate({ "right": "-=540px" }, "slow")
             $('.slide-menu > .'+ params).animate({"right":"0vw"})
         } else {
-            $('.'+ params).animate({ "right": "-=400vw" }, "slow" ,function() { $('.slide-menu > *').remove();});
+            $(params).animate({ "right": "-=400vw" }, "slow" ,function() { $('.slide-menu > *').remove();});
             $('.menus > .'+ params).animate({ "right": "-40vw" });
             
         }
