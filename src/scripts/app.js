@@ -135,7 +135,7 @@ function login(name) {
 
 function checkLocalStorage() {
     //Para cerrar sesión descomenta la línea de abajo, refresca la página y luego coméntalo
-    //localStorage.setItem('isLogged', "false")
+    localStorage.setItem('isLogged', "false")
     
     if (localStorage.getItem("friendsList") == null) {
         var arr = ["Jorge", "Carlos", "Miguel", "Lucas", "Diego", "Mario"]
@@ -166,14 +166,16 @@ function changeUsername() {
 }
 
 function rightMenu(params) {
-    if (JSON.parse(localStorage.getItem('isLogged'))) {
-        alert("Inicia sesión man")
-        currentPage == "login-page"
+    var isLogged = JSON.parse(localStorage.getItem('isLogged'))
+    if (!isLogged) {
         $('.container .page').clone(true).appendTo(".pages");
         $('.container > *').remove()
 
-        $(".pages .login-page").clone(true).appendTo('.container');
-        $(".pages .login-page").remove()
+        $(".pages .login-warning").clone(true).appendTo('.container');
+        $(".pages .login-warning").remove()
+
+        $('.container .login-warning').fadeOut(1);
+        $('.container .login-warning').fadeIn(500);
     } else {
         if ($.trim($('.slide-menu').html()) === "") {
             var menu = $(".menus > "+ params)
@@ -199,6 +201,9 @@ function changePage(pageName) {
 
         $(".pages .login-warning").clone(true).appendTo('.container');
         $(".pages .login-warning").remove()
+
+        $('.container > *').fadeOut(1);
+        $('.container > *').fadeIn(500);
     } else {
         localStorage.setItem("currentPage", pageName)
         $('.container .page').clone(true).appendTo(".pages");
