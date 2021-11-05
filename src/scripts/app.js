@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    localStorage.setItem('isLogged', "true")
+    localStorage.setItem('isLogged', "false")
     
     if (localStorage.getItem("friendsList") == null) {
         var arr = ["Jorge", "Carlos", "Miguel", "Lucas", "Diego", "Mario"]
@@ -188,8 +188,7 @@ function rightMenu(params) {
 }
 
 function changePage(pageName) {
-    if (localStorage.getItem('isLogged') != "true" && pageName != "main" && pageName != "recover-page") {
-        localStorage.setItem("currentPage", "login-page")
+    if (localStorage.getItem('isLogged') != "true" && pageName != "main" && pageName != "recover-page" && pageName != "login-page") {
         $('.container .page').clone(true).appendTo(".pages");
         $('.container > *').remove()
 
