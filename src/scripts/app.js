@@ -199,13 +199,15 @@ function changePage(pageName) {
         $(".pages .login-page").clone(true).appendTo('.container');
         $(".pages .login-page").remove()
     } else {
-        
-            localStorage.setItem("currentPage", pageName)
-            $('.container .page').clone(true).appendTo(".pages");
-            $('.container > *').remove()
-        
-            $(".pages ."+ pageName).clone(true).appendTo('.container');
-            $(".pages ."+ pageName).remove()
-        
+        localStorage.setItem("currentPage", pageName)
+        $('.container .page').clone(true).appendTo(".pages");
+        $('.container > *').remove()
+    
+        $(".pages ."+ pageName).clone(true).appendTo('.container');
+        $(".pages ."+ pageName).remove()
+
+        $('.container > *').fadeOut(1);
+        $('.container > *').fadeIn(500);
+            
     }
 }
