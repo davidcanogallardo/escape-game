@@ -537,10 +537,6 @@ td,th{
     background-color: #c4c4c486;
     border: 1px solid #562800;
 }
-#recover{
-    text-align: left;
-    width: 500px;
-}
 
 #create{
     text-align: left;
@@ -1052,6 +1048,11 @@ index
     outline: 3px solid #14448D;
 }
 
+#recover-form{
+    display: flex;
+    justify-content: center;
+}
+
 #recover .btn.blue{
     background: #14448D;
     border: 0px black;
@@ -1172,5 +1173,12 @@ Aviso de login
 }
 
 .form-button{
+    font-size: 3vw;
+    text-align: center;
+    border-radius: 2vw;
+    font-family: Bebas;
+}
+
+label{
     font-size: 3vw;
 }
