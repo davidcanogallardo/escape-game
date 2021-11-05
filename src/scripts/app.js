@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     localStorage.setItem('isLogged', "true")
     if (localStorage.getItem("friendsList") == null) {
         var arr = ["Jorge", "Carlos", "Miguel", "Lucas", "Diego", "Mario"]
@@ -73,6 +72,7 @@ $(document).ready(function () {
     $('.container').on('click','.send-friend-request', function (event) {
         var friendName = $("#user-request").val()
         if (friendName != "") {
+            $(".friend-request").fadeTo(250, 1).delay(200).fadeTo(250, 0)
             addFriendRequest(friendName)
         }
     });
@@ -87,7 +87,8 @@ $(document).ready(function () {
             arr.splice(arr.indexOf(friendName),1)
             localStorage.setItem("notificationList", JSON.stringify(arr))
         }
-        event.currentTarget.parentElement.remove()
+        
+        $(event.currentTarget.parentElement).fadeOut(500, function (event) {$(this).remove  })
     });
 
     $('.container').on('click','.friends-list', function () {

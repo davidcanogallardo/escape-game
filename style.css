@@ -234,7 +234,7 @@ Menu de configuracion
 .btn{
     border: none;
     padding: 0 7vw;
-    border-radius: 16px;
+    border-radius: 2vw;
     margin: 8px;
     display: inline-block;
     -webkit-transition: 0.3s;
@@ -269,6 +269,15 @@ Menu de configuracion
     background: #aa0000;
     color: #EFDEC3;
 }
+
+.red i{
+    color: #EFDEC3;
+}
+
+.red:hover i{
+    color: #68492E;
+}
+
 
 .red:hover {
     background: #EFDEC3;
@@ -680,6 +689,10 @@ lista de amigos
     gap: 1vw 0vw;
 }
 
+.slide-list-container .list-item {
+    cursor: pointer;
+}
+
 .list-item div {
     width: 5vw;
     height: 5vw;
@@ -757,24 +770,33 @@ lista de amigos
     flex: 0 0 70%;
 }
 
-.notification-container .confirm {
+.confirm {
     flex: 0 0 30%;
     align-items: center;
     display: flex;
     justify-content: center;
+    transition: 0.5s;
+}
+.confirm i {
+    transition: 0.5s;
 }
 
 
 
 .green {
-    background: #49EE63;
+    background: rgb(73, 238, 99);
+}
+.green i{
     color: #EFDEC3;
 }
 
 .green:hover {
     background: #EFDEC3;
-    color: #49EE63;
+    color: #68492E;
     outline: 3px solid #49EE63;
+}
+.green:hover i{
+    color: #68492E;
 }
 
 .green2{
@@ -1014,3 +1036,4 @@ canvas {
 }
 
 }
+

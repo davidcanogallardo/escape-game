@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escape Game</title>
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
     <script src="./src/scripts/jquery-3.6.0.js"></script>
     <script src="https://kit.fontawesome.com/b0d71d7fba.js" crossorigin="anonymous"></script>
@@ -30,7 +31,7 @@
     <script src="./src/scripts/app.js"></script>
 
 </head>
-<body onload="changePage('main')">
+<body id="container" onload="changePage('main')">
     <div class="container"></div>
 
     <div class="pages">
@@ -127,6 +128,10 @@
             
             <div class="slide-list"></div>
         </div>
+    </div>
+
+    <div class="notifications">
+        <div class="friend-request" style="position: absolute; left: 41vw; bottom: 2vw; background: rgb(144, 255, 103) none repeat scroll 0% 0%; width: 20vw; min-height: 8vw; z-index: 10; border-radius: 1vw; text-align: center; padding: 0.5vw; display: flex; justify-content: center; align-items: center; font-weight: bold; opacity: 0; color: rgb(255, 255, 255);font-size: 2vw;background: #49EE63;">Solicitud enviada</div>
     </div>
 </body>
 </html>
