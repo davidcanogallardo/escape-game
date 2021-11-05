@@ -770,6 +770,50 @@ lista de amigos
     flex: 0 0 70%;
 }
 
+.list-item > .btn {
+    width: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accept{
+    background-color: #00FF04;
+    color: #000000;
+}
+
+.accept > i{
+    color: #000000;
+}
+
+.accept:hover{
+    background-color: #EBDFCB;
+    outline: 2px solid #68492E;
+}
+
+.accept:hover > i{
+    color: #68492E;
+}
+
+.cancel{
+    background-color: #FF6161;
+}
+
+.cancel > i{
+    color: #000000;
+}
+
+.cancel:hover{
+    background-color: #EBDFCB;
+    outline: 2px solid #68492E;
+}
+
+.cancel:hover > i{
+    color: #68492E;
+}
+
+
+
 .confirm {
     flex: 0 0 30%;
     align-items: center;
@@ -783,9 +827,9 @@ lista de amigos
 
 
 
-.green {
-    background: rgb(73, 238, 99);
-}
+/* .green {
+    background: ;
+} */
 .green i{
     color: #EFDEC3;
 }
