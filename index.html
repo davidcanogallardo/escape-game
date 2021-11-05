@@ -23,6 +23,7 @@
             $(".pages .ranking-page").load("./pages/ranking.html"); 
             $(".pages .invitation-page").load("./pages/invitation.html"); 
             $(".pages .login-warning").load("./pages/login_warning.html"); 
+            $(".pages .trophy-page").load("./pages/trophys.html"); 
         });
     </script>
 
@@ -94,7 +95,11 @@
         <div class="page ranking-page"></div>
 
         <div class="page invitation-page"></div>
+
         <div class="page login-warning"></div>
+        
+        <div class="page trophy-page"></div>
+
         
     </div>
     
@@ -140,8 +145,8 @@
 <script>
     $(document).ready(function() {  var config = {
         type: Phaser.AUTO,
-        width: 800,
-        height: 600,
+        width: 750,
+        height: 500,
         parent: 'game',
         physics: {
             default: 'arcade',

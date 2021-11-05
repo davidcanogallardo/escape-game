@@ -135,7 +135,7 @@ function login(name) {
 
 function checkLocalStorage() {
     //Para cerrar sesión descomenta la línea de abajo, refresca la página y luego coméntalo
-    localStorage.setItem('isLogged', "false")
+    //localStorage.setItem('isLogged', "false")
     
     if (localStorage.getItem("friendsList") == null) {
         var arr = ["Jorge", "Carlos", "Miguel", "Lucas", "Diego", "Mario"]
