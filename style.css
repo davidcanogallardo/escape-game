@@ -53,20 +53,6 @@ h3{
     color: #68492E;
     letter-spacing: 3px;
 }
-.selected {
-    width: 603px;
-    height: 72px;
-    background-color: rgba(196, 196, 196, 0.56);
-    font-size: 53px;
-    text-align: center;
-    border-radius: 10px;
-    border: 2px solid #68492E;
-    /*! margin: 10px; */
-    color: #68492E;
-    /*! font-size: 62px; */
-    /*! line-height: 48px; */
-    line-height: 72px;
-}
 
 .selected i {
     color: #68492E;
@@ -75,28 +61,67 @@ h3{
 
 }
 
-.mando span {
-    color: #EFDEC3;
+/*
+sinconizar Mando
+*/
+
+.sincronizar_mando{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.nuevos_dispositivos{
+    overflow-y: scroll ;
+    overflow-x: hidden;
+    height: 165px;
+}
+
+/* .mando span {
+    color: #EFDEC3;
+} */
 
 .mando {
     background: #68492E;
-    width: 603px;
-    height: 72px;
-    font-size: 53px;
+    width: 50vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 2vw;
     text-align: center;
     border-radius: 10px;
     border: 2px solid #68492E;
     margin: 10px;
     color: #EFDEC3;
-    line-height: 72px;
 }
 
-.mando i {
+.mando > *{
     color: #EFDEC3;
-    /*! height: 44px; */
-    /*! width: 89px; */
 }
+
+.mando > i{
+    margin-right: 20px;
+}
+
+.selected{
+    background-color: rgba(196, 196, 196, 0.56);
+    border: 2px solid #68492E;
+    color: #68492E;
+}
+
+.selected fa-gamepad{
+    color: #68492E;
+}
+
+.selected > * {
+    color: #68492E;
+}
+
+/* .mando i {
+    color: #EFDEC3;
+} */
 .icon{
     background-color: #FAA942;
     border-radius: 300px;
@@ -195,6 +220,15 @@ h3{
         align-items: center;
         justify-content: center;
     }
+
+    .sinc_mand_cont{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .mando{
+        width: 40vw;
+    }
 }
 
 .cancel-button {
@@ -242,6 +276,11 @@ Menu de configuracion
     text-decoration: none;
     position: relative;
     cursor: pointer;
+}
+
+.volver{
+    position: absolute;
+    bottom: 10px;
 }
 
 /*Boton azul*/
@@ -301,19 +340,15 @@ Ajustes de sonido
     align-items: center;
 }
 
-.sound_settings .all_settings{
-    overflow-y: scroll;
-    overflow-x: hidden;
+.all_settings{
     display: flex;
     flex-direction: column;
+    width: 100vw;
     align-items: center;
-    width: 100%;
-    height: 200px;
 }
 
 .ajuste_sonido{
     width: 80%;
-    margin: 2%;
 }
 
 .ajuste{
@@ -343,7 +378,7 @@ Ajustes de sonido
 }
 
 .mic_config > .ajuste{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .mic_config select{
@@ -1088,11 +1123,23 @@ Aviso de login
 }
 
 @media only screen and (max-width: 700px) {
-canvas {
-    width: 350px;
-    height: 230px;
+    canvas {
+        width: 350px;
+        height: 230px;
+    }
 }
 
+@media screen and (max-height: 600px) {
+    
+    .sound_settings .all_settings{
+        overflow-y: scroll;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 200px;
+    }
 }
 
 /*Scrollbar*/
