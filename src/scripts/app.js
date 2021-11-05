@@ -177,7 +177,8 @@ function rightMenu(params) {
             $('.slide-menu > .'+ params).css("width","0%")
             $('.slide-menu > .'+ params).animate({width:"35%"}, 10)
         } else {
-            $('.slide-menu > *').animate({width:"0%"}, 10).remove()
+            $('.slide-menu > *').animate({ "left": "+=5000px" }, "slow" ,function() { $('.slide-menu > *').remove();});
+            
         }
     }
     
