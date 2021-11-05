@@ -278,6 +278,10 @@ Menu de configuracion
     cursor: pointer;
 }
 
+.botones .btn {
+    width: 35vw;
+}
+
 .volver{
     position: absolute;
     bottom: 10px;
