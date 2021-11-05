@@ -1,5 +1,29 @@
 $(document).ready(function () {
+
+
     localStorage.setItem('isLogged', "true")
+    if (localStorage.getItem("friendsList") == null) {
+        var arr = ["Jorge", "Carlos", "Miguel", "Lucas", "Diego", "Mario"]
+        localStorage.setItem("friendsList", JSON.stringify(arr))
+    }
+    if (localStorage.getItem("notificationList") == null) {
+        var arr = ["Andrés", "Gerard", "Hugo", "Lucas", "Nora", "Sara"]
+        localStorage.setItem("notificationList", JSON.stringify(arr))
+    }
+    if (localStorage.getItem("currentPage") == null) {
+        localStorage.setItem("currentPage", "")
+    }
+
+    var array = JSON.parse(localStorage.getItem("friendsList"))
+    array.forEach(name => {
+        addFriend(name)
+    });
+
+    array = JSON.parse(localStorage.getItem("notificationList"))
+    array.forEach(name => {
+        addFriendRequest(name)
+    });
+
     $('.container').on('click','.settings-link', function () {
         changePage("settings-page");
     });
@@ -33,7 +57,7 @@ $(document).ready(function () {
     });
 
     $('.container').on('click','.login-link', function (event) {
-        login(event)
+        login($("#login-name").val())
     });
 
     $('.container').on('click','.recover-link', function () {
@@ -47,13 +71,21 @@ $(document).ready(function () {
     });
 
     $('.container').on('click','.send-friend-request', function (event) {
-        addFriendRequest(this.parentElement.children[0].value)
+        var friendName = $("#user-request").val()
+        if (friendName != "") {
+            addFriendRequest(friendName)
+        }
     });
 
     $('.container').on('click','.list-item .btn', function (event) {
-        alert("a")
-        if (event.currentTarget.classList.contains("confirm")) {
-            addFriend()
+        var friendName = event.currentTarget.parentElement.childNodes[3].innerHTML
+        if (event.currentTarget.classList.contains("green")) {
+            addFriend(friendName)
+        }
+        var arr = JSON.parse(localStorage.getItem("notificationList"))
+        if (arr.includes(friendName)) {
+            arr.splice(arr.indexOf(friendName),1)
+            localStorage.setItem("notificationList", JSON.stringify(arr))
         }
         event.currentTarget.parentElement.remove()
     });
@@ -68,8 +100,34 @@ $(document).ready(function () {
         
 });
 
-function addFriendRequest(name) {  
-    newRequest = `                
+function addFriend(friendName) {
+    var array = JSON.parse(localStorage.getItem("friendsList"))
+    if (!array.includes(friendName)) {
+        array[array.length] = friendName
+        localStorage.setItem("friendsList", JSON.stringify(array))
+    }
+    let newFriend = `
+        <div class="list-item">
+            <div class="icon-container pr-btn friend-profile-link">
+                <i class="fas fa-user" aria-hidden="true"></i>
+            </div>
+            <span>`+friendName+`</span>
+            <div class="icon-container add-btn send-invitation">
+                <i class="fas fa-user-plus" aria-hidden="true"></i>
+            </div>
+        </div>
+    `
+    $(".slide-list-container .slide-list").append(newFriend)
+
+}
+
+function addFriendRequest(name) { 
+    var array = JSON.parse(localStorage.getItem("notificationList"))
+    if (!array.includes(name)) {
+        array[array.length] = name
+        localStorage.setItem("notificationList", JSON.stringify(array))
+    } 
+    let newRequest = `                
     <div class="list-item">
         <div class="icon-container pr-btn" >
             <i class="fas fa-user" aria-hidden="true"></i>
@@ -87,9 +145,9 @@ function addFriendRequest(name) {
 
 }
 
-function login(event) {
+function login(name) {
     localStorage.setItem('isLogged', "true")
-    localStorage.setItem('username', event.currentTarget.parentElement.parentElement[0].value)
+    localStorage.setItem('username', name)
     console.log("logged");
     changeUsername()
     changePage("main");
@@ -99,8 +157,6 @@ function changeUsername() {
     $(".overlay-content h3 b")[0].innerHTML = localStorage.getItem('username')
     $(".profile h1")[0].innerHTML = localStorage.getItem('username')
 }
-
-let currentPage = ""
 
 function rightMenu(params) {
     if (localStorage.getItem('isLogged') != "true") {
@@ -119,7 +175,7 @@ function rightMenu(params) {
             //pensar un nombre para la variable uwu
             $('.slide-menu').append(menuClone).append(xd);
             $('.slide-menu > .'+ params).css("width","0%")
-            $('.slide-menu > .'+ params).animate({width:"20%"}, 10)
+            $('.slide-menu > .'+ params).animate({width:"35%"}, 10)
         } else {
             $('.slide-menu > *').animate({width:"0%"}, 10).remove()
         }
@@ -129,24 +185,23 @@ function rightMenu(params) {
 
 function changePage(pageName) {
     console.log("aaaaaaaaaaa");
-    var data = window.localStorage;
 
-    if (data.getItem('isLogged') != "true" && pageName != "main" && pageName != "recover-page") {
+    if (localStorage.getItem('isLogged') != "true" && pageName != "main" && pageName != "recover-page") {
         alert("Inicia sesión man")
-        currentPage == "login-page"
+        localStorage.setItem("currentPage", "login-page")
         $('.container .page').clone(true).appendTo(".pages");
         $('.container > *').remove()
 
         $(".pages .login-page").clone(true).appendTo('.container');
         $(".pages .login-page").remove()
     } else {
-        if (currentPage !=pageName) {
-            currentPage == pageName
+        
+            localStorage.setItem("currentPage", pageName)
             $('.container .page').clone(true).appendTo(".pages");
             $('.container > *').remove()
     
             $(".pages ."+ pageName).clone(true).appendTo('.container');
             $(".pages ."+ pageName).remove()
-        }
+        
     }
 }

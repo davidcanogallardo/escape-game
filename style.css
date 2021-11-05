@@ -530,14 +530,15 @@ BOTONES
 */
 .settings-btn-container {
     position: absolute;
-    top: 20px;
-    left: 25px;
-    height: 50px; /*nuevo estilo*/
-    width: 50px; /*nuevo estilo*/
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-size: 46px;
-    padding: 20px;
+	top: 3vw;
+	left: 3vw;
+    height: 3vw;
+    width: 3vw;
+    box-shadow: 0px 0.5vw 0.5vw rgba(0, 0, 0, 0.25);
+    font-size: 3.5vw;
+    padding: 1.5vw;
 }
+
 
 .icon-container {
     background-color: #FAA942;
@@ -552,8 +553,8 @@ BOTONES
     color: #EFDEC3;
 }
 
-.main-icon i{
-    text-shadow: 0px 3px 1px rgb(0, 0, 0,0.50);
+.main-icon i {
+    text-shadow: 0px 0.2vw 0.1vw rgba(0, 0, 0, 0.5);
 }
 
 .main-icon:hover i {
@@ -565,22 +566,20 @@ BOTONES
     position: absolute;
     display: flex;
     flex-direction: column;
-    gap: 30px 0px;
-    right: 35px;
+    gap: 3vw 0px;
+    right: 3vw;
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-    
 }
 
 
 .right-menu > div {
-    height: 50px; /*nuevo estilo*/
-    width: 50px; /*nuevo estilo*/
+    height: 3vw;
+    width: 3vw;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-size: 46px;
-    padding: 20px;
-    
+    font-size: 3.5vw;
+    padding: 1.5vw;
 }
 
 /*
@@ -588,7 +587,7 @@ titulo
 */
 
 #title {
-    font-size: 111px;
+    font-size: 8.5vw;
     font-family: "Bebas";
 }
 
@@ -599,25 +598,25 @@ titulo
 
 #title .blue-title {
     color: #14448D;
-    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-width: 0.2vw;
     -webkit-text-stroke-color: #FFFFFF;
 }
 #title .red-title {
     color: #EF4F4F;
-    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-width: 0.2vw;
     -webkit-text-stroke-color: #960101;
 }
 
-
 #game canvas {
     border-radius: 10px;
+
 }
 /*
 lista de amigos
 */
 .slide-list-container {
     height: 100%;
-    width: 20%;
+    width: 35%;
     position: absolute;
     right: 0px;
     top: 0px;
@@ -629,6 +628,7 @@ lista de amigos
     resize: none;
     transition: 1s;
     z-index: 10;
+    align-items: center;
 }
 
 .slide-list-container > div {
@@ -638,10 +638,12 @@ lista de amigos
 .slide-header {
     font-size: 2vw;
     display: flex;
-    gap: 1vw;
-    justify-content: center;
+    gap: 7.8vw;
+    justify-content: right;
     overflow: hidden;
-    height: 5%;
+    min-height: 5%;
+    margin-bottom: 1vw !important;
+    width: 90%;
 }
 
 .slide-list {
@@ -658,6 +660,7 @@ lista de amigos
     scrollbar-color:#EFDEC3 #EFDEC3;
     scrollbar-width: thin;
     width: 90%;
+    margin-top: 0 !important;
 }
 
 .list-item {
@@ -667,7 +670,6 @@ lista de amigos
     padding: 0.3vw;
     width: 85%;
     border-radius: 1vw;
-    min-height: 11%;
     font-size: 1.7vw;
     justify-content: center;
     align-items: center;
@@ -679,11 +681,13 @@ lista de amigos
 }
 
 .list-item div {
-    width: 2.9vw;
-    height: 2.9vw;
+    width: 5vw;
+    height: 5vw;
     padding: 0vw;
     font-size: 1.5vw;
-
+}
+.list-item div i{
+    font-size: 2.5vw;
 }
 
 .pr-btn {
@@ -704,7 +708,7 @@ lista de amigos
     margin-top: 0px !important;
 }
 
-.form-fr-request #user {
+#user-request {
     width: 80%;
     padding: 0px;
     font-size: 2.1vw;
@@ -730,7 +734,7 @@ lista de amigos
 
 .notification-container {
     height: 100%;
-    width: 20%;
+    width: 35%;
     position: absolute;
     right: 0px;
     top: 0px;
@@ -742,6 +746,7 @@ lista de amigos
     resize: none;
     transition: 1s;
     z-index: 10;
+    align-items: center;
 }
 
 .notification-container > div {
@@ -988,4 +993,12 @@ Aviso de login
     position: absolute;
     top: 10px;
     right: 20px;
+}
+
+@media only screen and (max-width: 700px) {
+canvas {
+    width: 350px;
+    height: 230px;
+}
+
 }
