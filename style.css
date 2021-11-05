@@ -840,6 +840,10 @@ lista de amigos
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: scroll;
+    overflow-x: hidden;
+    gap: 0.3vw;
+    height: inherit;
 }
 .nivel{
     border: 2px solid #68492E;
@@ -873,7 +877,11 @@ lista de amigos
 .gold{
     color: #FFB800;
 }
-
+@media (max-height: 600px) {
+    .nivel {
+      width: 70vw;
+    }
+  }
 /*Clases ranking.html*/
 .level{
     display: flex;
@@ -894,13 +902,17 @@ lista de amigos
 
 .level table{
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 20vh;
     width: 50%;
     text-align: center;
     border-collapse: separate;
     border-spacing: 12px 7px;
 }
-
+@media (max-height: 600px) {
+    .level table{
+        margin-bottom: 1vh;
+    }
+  }
 /*
 index
 */
