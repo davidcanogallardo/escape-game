@@ -1,6 +1,6 @@
 $(document).ready(function () {
-
     localStorage.setItem('isLogged', "true")
+    
     if (localStorage.getItem("friendsList") == null) {
         var arr = ["Jorge", "Carlos", "Miguel", "Lucas", "Diego", "Mario"]
         localStorage.setItem("friendsList", JSON.stringify(arr))
@@ -108,12 +108,12 @@ function addFriend(friendName) {
         localStorage.setItem("friendsList", JSON.stringify(array))
     }
     let newFriend = `
-        <div class="list-item">
+        <div title="Ver perfil" class="list-item">
             <div class="icon-container pr-btn friend-profile-link">
                 <i class="fas fa-user" aria-hidden="true"></i>
             </div>
             <span>`+friendName+`</span>
-            <div class="icon-container add-btn send-invitation">
+            <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation">
                 <i class="fas fa-user-plus" aria-hidden="true"></i>
             </div>
         </div>
