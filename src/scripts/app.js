@@ -1,4 +1,31 @@
 $(document).ready(function () {
+    //Prueba ajax
+
+    //La url tiene que ser desde la raiz
+    var _url = "./petitions.php";
+
+    $.ajax({
+        // En data puedes utilizar un objeto JSON, un array o un query string
+        data: {"petition" : "login", "params" : {"user":"1","password":"2"}},
+        //Cambiar a type: POST si necesario
+        type: "POST",
+        // Formato de datos que se espera en la respuesta
+        dataType: "json",
+        // URL a la que se enviará la solicitud Ajax
+        url: _url,
+    })
+    .done(function( data, textStatus, jqXHR ) {
+     if ( console && console.log ) {
+         console.log( "La solicitud se ha completado correctamente." );
+         console.log( data );
+     }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+        }
+    });
+
     checkLocalStorage()
 
     $('.container').on('click','.link', function (event) {
