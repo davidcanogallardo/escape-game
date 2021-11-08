@@ -1170,14 +1170,14 @@ label{
 /**************************************************************************************************************************************/
 /*Media query para girar en horizontal la página al abrirla en mvil*/
 @media only screen and (orientation:portrait) {
-    body {
+    .container {
         /* Rotate the content container */
         transform: rotate(-90deg);
         transform-origin: left top;
         /* Set content width to viewport height */
-        width: 100vh;
+        width: 100vmax;
         /* Set content height to viewport width */
-        height:110vw;
+        height:100vmin;
         overflow-x: hidden;
         overflow-y: hidden;
         position: absolute;
