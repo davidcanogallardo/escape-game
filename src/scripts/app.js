@@ -1,37 +1,11 @@
 $(document).ready(function () {
     checkLocalStorage()
 
-    $('.container').on('click','.settings-link', function () {
-        changePage("settings-page");
-    });
+    $('.container').on('click','.link', function (event) {
+        changePage(event.currentTarget.attributes["page"].value)
+    })
 
-    $('.container').on('click','.volver', function () {
-        changePage("main");
-    });
-    
-    $('.container').on('click','.own-profile-link', function () {
-        changePage('profile-page')
-    });
-    
-    $('.container').on('click','.ranking-link', function () {
-        changePage('ranking-page')
-    });
-    
-    $('.container').on('click','.sound-link', function () {
-        changePage('sound-settings-page')
-    });
-    
-    $('.container').on('click','.connect-controller-link', function () {
-        changePage('connect-controller-page')
-    });
-    
-    $('.container').on('click','.controller-settings-link', function () {
-        changePage('controller-settings-page')
-    });
-    
-    $('.container').on('click','.friend-profile-link', function () {
-        changePage('friend-profile-page')
-    });
+
 
     $('.container').on('click','.login-link', function (event) {
         login($("#login-name").val())
@@ -135,7 +109,7 @@ function login(name) {
 
 function checkLocalStorage() {
     //Para cerrar sesión descomenta la línea de abajo, refresca la página y luego coméntalo
-    //localStorage.setItem('isLogged', "false")
+    localStorage.setItem('isLogged', "true")
     
     if (localStorage.getItem("friendsList") == null) {
         var arr = ["Jorge", "Carlos", "Miguel", "Lucas", "Diego", "Mario"]
@@ -187,10 +161,8 @@ function rightMenu(params) {
         } else {
             $(params).animate({ "right": "-=400vw" }, "slow" ,function() { $('.slide-menu > *').remove();});
             $('.menus > '+ params).animate({ "right": "-40vw" });
-            
         }
     }
-    
 }
 
 function changePage(pageName) {
