@@ -4,17 +4,17 @@ $(document).ready(function () {
     $('.container').on('click','.link', function (event) {
         changePage(event.currentTarget.attributes["page"].value)
     })
+    $('.container').on('click','.slide', function (event) {
+        rightMenu(event.currentTarget.attributes.page.value)
+    })
 
-
+    //*******************************************************************************************//
 
     $('.container').on('click','.login-link', function (event) {
         login($("#login-name").val())
     });
-
-    $('.container').on('click','.recover-link', function () {
-        changePage('recover-page')
-    });
     
+    //Enviar/recibir invitación
     $('.container').on('click','.send-invitation', function (event) {
         console.log($(this.parentNode)[0].childNodes[3].innerText);
         $(".pages .invitation-page").clone(true).appendTo('.container');
@@ -23,6 +23,7 @@ $(document).ready(function () {
         $('.container > *').fadeIn(500);
     });
 
+    //Enviar solicitud de amistad
     $('.container').on('click','.send-friend-request', function (event) {
         var friendName = $("#user-request").val()
         if (friendName != "") {
@@ -31,6 +32,7 @@ $(document).ready(function () {
         }
     });
 
+    //Borrar una notificación
     $('.container').on('click','.list-item .btn', function (event) {
         var friendName = event.currentTarget.parentElement.childNodes[3].innerHTML
         if (event.currentTarget.classList.contains("green")) {
@@ -43,14 +45,6 @@ $(document).ready(function () {
         }
         
         $(event.currentTarget.parentElement).fadeOut(500, function (event) {$(this).remove  })
-    });
-
-    $('.container').on('click','.friends-list', function () {
-        rightMenu('.slide-list-container')
-    });
-
-    $('.container').on('click','.notificacion-list', function () {
-        rightMenu('.notification-container')
     });
 });
 
