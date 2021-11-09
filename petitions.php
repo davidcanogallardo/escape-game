@@ -1,6 +1,4 @@
 <?php 
-
-
 if(isset($_REQUEST['petition'])){
     if($_REQUEST['petition']=="login"){
         if(isset($_REQUEST['params'])){
@@ -16,8 +14,8 @@ if(isset($_REQUEST['petition'])){
 }
 
 function loginResponse($nombre){
-    $data = [];
     if (in_array($nombre, ["david", "alex", "adnan", "oscar", ])) {
+        $data = [];
         $data['success'] = true;
         $data['message'] = 'Hola! El valor recibido es correcto.';
         $data['userData'] =  [
@@ -49,8 +47,11 @@ function loginResponse($nombre){
     
         return $data;
     } else {
+        $data = [];
         $data['success'] = false;
         $data['message'] = 'El usuario no existe';
+
+        return $data;
     }
 }
 

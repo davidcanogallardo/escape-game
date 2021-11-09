@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 
 
-    checkLocalStorage()
+    //checkLocalStorage()
 
     $('.container').on('click','.link', function (event) {
         changePage(event.currentTarget.attributes["page"].value)
@@ -18,9 +18,16 @@ $(document).ready(function () {
     //*******************************************************************************************//
 
     $('.container').on('click','.login-link', function (event) {
+        var form_data = $("#login").serializeArray()
         $.ajax({
             // En data puedes utilizar un objeto JSON, un array o un query string
-            data: {"petition" : "login", "params" : {"user":"Alex","password":"1234"}},
+            data: {
+                "petition" : "login", 
+                "params" : {
+                    "user": form_data[0].value,
+                    "password":form_data[1].value
+                }
+            },
             //Cambiar a type: POST si necesario
             type: "POST",
             // Formato de datos que se espera en la respuesta
@@ -33,9 +40,14 @@ $(document).ready(function () {
              console.log( "La solicitud se ha completado correctamente." );
              console.log( data );
              if(data.success){
-    
+                console.log(data.message);
+                setLoginInStorage(data.userData.usuario)
+                changeUsername(data.userData.usuario)
+                createFriendsList(data.userData.friendList)
+                changePage("main");
              } else {
-    
+                console.log(data.message);
+                //TODO: función que muestre mensaje de error al usuario
              }
          }
         })
@@ -44,7 +56,6 @@ $(document).ready(function () {
                 console.log( "La solicitud a fallado: " +  textStatus);
             }
         });
-        login($("#login-name").val())
     });
     
     //Enviar/recibir invitación
@@ -81,25 +92,26 @@ $(document).ready(function () {
     });
 });
 
-function addFriend(friendName) {
-    var array = JSON.parse(localStorage.getItem("friendsList"))
-    if (!array.includes(friendName)) {
-        array[array.length] = friendName
-        localStorage.setItem("friendsList", JSON.stringify(array))
-    }
-    let newFriend = `
+function createFriendsList(friendsList) {
+    //var array = JSON.parse(localStorage.getItem("friendsList"))
+    //if (!array.includes(friendName)) {
+    //    array[array.length] = friendName
+    //    localStorage.setItem("friendsList", JSON.stringify(array))
+    //}
+    friendsList.forEach(name => {
+        let newFriend = `
         <div title="Ver perfil" class="list-item">
             <div class="icon-container pr-btn friend-profile-link">
                 <i class="fas fa-user" aria-hidden="true"></i>
             </div>
-            <span>`+friendName+`</span>
+            <span>`+name+`</span>
             <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation">
                 <i class="fas fa-user-plus" aria-hidden="true"></i>
             </div>
         </div>
-    `
-    $(".slide-list-container .slide-list").append(newFriend)
-
+        `
+        $(".slide-list-container .slide-list").append(newFriend)
+    });
 }
 
 function addFriendRequest(name) { 
@@ -126,12 +138,10 @@ function addFriendRequest(name) {
 
 }
 
-function login(name) {
+function setLoginInStorage(name) {
     localStorage.setItem('isLogged', "true")
     localStorage.setItem('username', name)
-    console.log("logged");
-    changeUsername()
-    changePage("main");
+    console.log("user logged");
 }
 
 function checkLocalStorage() {
@@ -161,9 +171,9 @@ function checkLocalStorage() {
     });
 }
 
-function changeUsername() {
-    $(".overlay-content h3 b")[0].innerHTML = localStorage.getItem('username')
-    $(".profile h1")[0].innerHTML = localStorage.getItem('username')
+function changeUsername(name) {
+    $("#profile-name").text(name)
+    $("#invite-name").text(name)
 }
 
 function rightMenu(params) {
