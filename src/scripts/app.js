@@ -4,32 +4,7 @@ $(document).ready(function () {
     //La url tiene que ser desde la raiz
     var _url = "./petitions.php";
 
-    $.ajax({
-        // En data puedes utilizar un objeto JSON, un array o un query string
-        data: {"petition" : "login", "params" : {"user":"Alex","password":"1234"}},
-        //Cambiar a type: POST si necesario
-        type: "POST",
-        // Formato de datos que se espera en la respuesta
-        dataType: "json",
-        // URL a la que se enviará la solicitud Ajax
-        url: _url,
-    })
-    .done(function( data, textStatus, jqXHR ) {
-     if ( console && console.log ) {
-         console.log( "La solicitud se ha completado correctamente." );
-         console.log( data );
-         if(data.success){
 
-         } else {
-
-         }
-     }
-    })
-    .fail(function( jqXHR, textStatus, errorThrown ) {
-        if ( console && console.log ) {
-            console.log( "La solicitud a fallado: " +  textStatus);
-        }
-    });
 
     //PETICON REGISTER
     $.ajax({
@@ -130,6 +105,32 @@ $(document).ready(function () {
     //*******************************************************************************************//
 
     $('.container').on('click','.login-link', function (event) {
+        $.ajax({
+            // En data puedes utilizar un objeto JSON, un array o un query string
+            data: {"petition" : "login", "params" : {"user":"Alex","password":"1234"}},
+            //Cambiar a type: POST si necesario
+            type: "POST",
+            // Formato de datos que se espera en la respuesta
+            dataType: "json",
+            // URL a la que se enviará la solicitud Ajax
+            url: _url,
+        })
+        .done(function( data, textStatus, jqXHR ) {
+         if ( console && console.log ) {
+             console.log( "La solicitud se ha completado correctamente." );
+             console.log( data );
+             if(data.success){
+    
+             } else {
+    
+             }
+         }
+        })
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+            }
+        });
         login($("#login-name").val())
     });
     
@@ -222,7 +223,7 @@ function login(name) {
 
 function checkLocalStorage() {
     //Para cerrar sesión descomenta la línea de abajo, refresca la página y luego coméntalo
-    localStorage.setItem('isLogged', "true")
+    localStorage.setItem('isLogged', "false")
     
     if (localStorage.getItem("friendsList") == null) {
         var arr = ["Jorge", "Carlos", "Miguel", "Lucas", "Diego", "Mario"]
