@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     $.ajax({
         // En data puedes utilizar un objeto JSON, un array o un query string
-        data: {"petition" : "login", "params" : {"user":"1","password":"2"}},
+        data: {"petition" : "login", "params" : {"user":"Alex","password":"1234"}},
         //Cambiar a type: POST si necesario
         type: "POST",
         // Formato de datos que se espera en la respuesta
@@ -18,6 +18,11 @@ $(document).ready(function () {
      if ( console && console.log ) {
          console.log( "La solicitud se ha completado correctamente." );
          console.log( data );
+         if(data.success){
+
+         } else {
+
+         }
      }
     })
     .fail(function( jqXHR, textStatus, errorThrown ) {
