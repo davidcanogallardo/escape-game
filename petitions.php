@@ -46,7 +46,6 @@ if(isset($_REQUEST['petition'])){
 
 function loginResponse($name){
     $data = [];
-<<<<<<< HEAD
     $data['success'] = true;
     $data['message'] = 'Hola! El valor recibido es correcto.';
     $data['userData'] =  [
@@ -77,12 +76,11 @@ function loginResponse($name){
     ];
 
     return $data;
-=======
-    if (in_array($nombre, ["david", "alex", "adnan", "oscar", ])) {
+    if (in_array($name, ["david", "alex", "adnan", "oscar", ])) {
         $data['success'] = true;
         $data['message'] = 'Hola! El valor recibido es correcto.';
         $data['userData'] =  [
-            'usuario' => $nombre,
+            'usuario' => $name,
             'numCopas' => 5,
             'favMap' => 'pisosPicados',
             'completeLevels' => [
@@ -113,7 +111,6 @@ function loginResponse($name){
         $data['success'] = false;
         $data['message'] = 'El usuario no existe';
     }
->>>>>>> 6e8ccf781134be951413f326824d4aec31b8f89a
 }
 
 function registerResponse(){
