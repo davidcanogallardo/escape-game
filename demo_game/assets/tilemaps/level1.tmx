@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="14" height="7" tilewidth="64" tileheight="64" infinite="0" nextlayerid="3" nextobjectid="13">
+ <tileset firstgid="1" name="kenny_simple_platformer" tilewidth="64" tileheight="64" tilecount="540" columns="27">
+  <image source="../tilesets/Topdown/Tilesheet/tilesheet_complete.png" width="1728" height="1280"/>
+ </tileset>
+ <layer id="1" name="lvl1" width="14" height="7">
+  <data encoding="base64">
+   fQAAAMsAAADLAAAAXQAAAMsAAADLAAAAfgAAAH0AAADLAAAAywAAAF0AAADLAAAAywAAAH4AAACwAAAAXQAAAF0AAABdAAAAXQAAAF0AAACxAAAAsAAAAF0AAABdAAAAXQAAAF0AAABdAAAAsQAAALAAAABdAAAAXQAAAF0AAABdAAAAXQAAALEAAACwAAAAXQAAAF0AAABdAAAAXQAAAF0AAACxAAAAsAAAAF0AAABdAAAAXQAAAF0AAABdAAAAsQAAALAAAABdAAAAXQAAAF0AAABdAAAAXQAAALEAAACwAAAAXQAAAF0AAABdAAAAXQAAAF0AAACxAAAAsAAAAF0AAABdAAAAXQAAAF0AAABdAAAAsQAAALAAAABdAAAAXQAAAF0AAABdAAAAXQAAALEAAACwAAAAXQAAAF0AAABdAAAAXQAAAF0AAACxAAAAmAAAAMwAAADMAAAAzAAAAMwAAADMAAAAmQAAAJgAAADMAAAAzAAAAMwAAADMAAAAzAAAAJkAAAA=
+  </data>
+ </layer>
+ <objectgroup id="2" name="lvl1_objects">
+  <object id="5" gid="526" x="640" y="41.25" width="64" height="64"/>
+  <object id="6" gid="526" x="192" y="40.75" width="64" height="64"/>
+  <object id="9" gid="483" x="800" y="154.667" width="64" height="64"/>
+  <object id="11" gid="511" x="72" y="77.3333" width="64" height="64"/>
+  <object id="12" gid="511" x="73.3333" y="74.6667" width="64" height="64"/>
+ </objectgroup>
+</map>

@@ -6,20 +6,49 @@ if(isset($_REQUEST['petition'])){
 
             //Aunque el content-type no sea un problema en la mayoría de casos, es recomendable especificarlo
             header('Content-type: application/json; charset=utf-8');
-            // echo json_encode($data);
             echo json_encode($data);
             exit();
         }
+    } else if($_REQUEST['petition']=='register'){
+        if(isset($_REQUEST['params'])){
+            $data = registerResponse();
+
+            header('Content-type: application/json; charset=utf-8');
+            echo json_encode($data);
+            exit();
+        }
+    } else if($_REQUEST['petition']=='recover'){
+        if(isset($_REQUEST['params'])){
+            $data = recoverPassword($_REQUEST['params']['user']);
+
+            header('Content-type: application/json; charset=utf-8');
+            echo json_encode($data);
+            exit();
+        }
+    } else if($_REQUEST['petition']=='friendData'){
+        if(isset($_REQUEST['params'])){
+            $data = friendData($_REQUEST['params']['friendUser']);
+            
+            header('Content-type: application/json; charset=utf-8');
+            echo json_encode($data);
+            exit();
+        }
+    } else if($_REQUEST['petition']=='ranking'){
+        $data = ranking();
+
+        header('Content-type: application/json; charset=utf-8');
+        echo json_encode($data);
+        exit();
     }
 }
 
-function loginResponse($nombre){
-    if (in_array($nombre, ["david", "alex", "adnan", "oscar", ])) {
+function loginResponse($name){
+    if (in_array($name, ["david", "alex", "adnan", "oscar", ])) {
         $data = [];
         $data['success'] = true;
         $data['message'] = 'Hola! El valor recibido es correcto.';
         $data['userData'] =  [
-            'usuario' => $nombre,
+            'usuario' => $name,
             'numCopas' => 5,
             'favMap' => 'pisosPicados',
             'completeLevels' => [
@@ -55,10 +84,46 @@ function loginResponse($nombre){
     }
 }
 
-// if($_REQUEST['petition']=="login") {
-    
+function registerResponse(){
+    $data = [];
+    $data['success'] = true;
+    $data['message'] = 'Usuario Creado Correctamente';
 
-// } elseif ($_REQUEST['petition']=="loquesea") {
-//     //tiene que devolver un json o trasciende
-// }
+    return $data;
+}
+
+function recoverPassword(){
+    $data = [];
+    $data['success'] = true;
+    $data['message'] = 'Todo ha ido bien.';
+
+    return $data;
+}
+
+function friendData($user){
+    $data = [];
+    $data['success'] = true;
+    $data['userData'] = [
+        'usuario' => $user,
+        'trohpys' => 6,
+        'favMap' => 'PisosPicados'
+    ];
+
+    return $data;
+}
+
+function ranking(){
+    $data = [];
+    $data['levels'] = [
+        'pisosPicados' => [
+            'Alex' => '01:00:02',
+            'David' => '02:36:21',
+            'Oscar' => '03:01:56',
+            'Adnan' => '03:10:03'
+        ]
+    ];
+
+    return $data;
+}
+
 ?>
