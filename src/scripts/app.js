@@ -31,6 +31,93 @@ $(document).ready(function () {
         }
     });
 
+    //PETICON REGISTER
+    $.ajax({
+        // En data puedes utilizar un objeto JSON, un array o un query string
+        data: {"petition" : "register", "params" : {"email":"pruebaemail@gmail.com", "user":"oscar","password":"1234"}},
+        //Cambiar a type: POST si necesario
+        type: "POST",
+        // Formato de datos que se espera en la respuesta
+        dataType: "json",
+        // URL a la que se enviará la solicitud Ajax
+        url: _url,
+    })
+    .done(function(data) {
+        console.log(data);
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+        }
+    });
+    
+    $.ajax({
+        // En data puedes utilizar un objeto JSON, un array o un query string
+        data: {"petition" : "recover", "params" : {"user":"pruebaemail@gmail.com"}},
+        //Cambiar a type: POST si necesario
+        type: "POST",
+        // Formato de datos que se espera en la respuesta
+        dataType: "json",
+        // URL a la que se enviará la solicitud Ajax
+        url: _url,
+    })
+    .done(function(data) {
+        console.log(data);
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+        }
+    });
+
+    $.ajax({
+        // En data puedes utilizar un objeto JSON, un array o un query string
+        data: {"petition" : "friendData", "params" : {"friendUser":"Alex"}},
+        //Cambiar a type: POST si necesario
+        type: "POST",
+        // Formato de datos que se espera en la respuesta
+        dataType: "json",
+        // URL a la que se enviará la solicitud Ajax
+        url: _url,
+    })
+    .done(function(data) {
+        console.log(data);
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+        }
+    });
+
+    $.ajax({
+        // En data puedes utilizar un objeto JSON, un array o un query string
+        data: {"petition" : "ranking"},
+        //Cambiar a type: POST si necesario
+        type: "POST",
+        // Formato de datos que se espera en la respuesta
+        dataType: "json",
+        // URL a la que se enviará la solicitud Ajax
+        url: _url,
+    })
+    .done(function(data) {
+        console.log(data);
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
     checkLocalStorage()
 
     $('.container').on('click','.link', function (event) {
