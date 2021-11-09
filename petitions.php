@@ -17,36 +17,41 @@ if(isset($_REQUEST['petition'])){
 
 function loginResponse($nombre){
     $data = [];
-    $data['success'] = true;
-    $data['message'] = 'Hola! El valor recibido es correcto.';
-    $data['userData'] =  [
-        'usuario' => $nombre,
-        'numCopas' => 5,
-        'favMap' => 'pisosPicados',
-        'completeLevels' => [
-            'pisosPicodos' => [
-                'time' => '1:00:20', 
-                'trohpys' => [
-                    'bronze' => true,
-                    'silver' => true,
-                    'gold' => true
+    if (in_array($nombre, ["david", "alex", "adnan", "oscar", ])) {
+        $data['success'] = true;
+        $data['message'] = 'Hola! El valor recibido es correcto.';
+        $data['userData'] =  [
+            'usuario' => $nombre,
+            'numCopas' => 5,
+            'favMap' => 'pisosPicados',
+            'completeLevels' => [
+                'pisosPicodos' => [
+                    'time' => '1:00:20', 
+                    'trohpys' => [
+                        'bronze' => true,
+                        'silver' => true,
+                        'gold' => true
+                    ]
+                ],
+    
+                'summonerRift' => [
+                    'time' => '3:34:05',
+                    'trophys' => [
+                        'bronze' => true,
+                        'silver' => true,
+                        'gold' => false
+                    ]
                 ]
             ],
-
-            'summonerRift' => [
-                'time' => '3:34:05',
-                'trophys' => [
-                    'bronze' => true,
-                    'silver' => true,
-                    'gold' => false
-                ]
-            ]
-        ],
-        'friendList' => ['David', 'Oscar', 'Adnan'],
-        'friendsRequest' => ['Luis', 'Jose']         
-    ];
-
-    return $data;
+            'friendList' => ['David', 'Oscar', 'Adnan'],
+            'friendsRequest' => ['Luis', 'Jose']         
+        ];
+    
+        return $data;
+    } else {
+        $data['success'] = false;
+        $data['message'] = 'El usuario no existe';
+    }
 }
 
 // if($_REQUEST['petition']=="login") {
