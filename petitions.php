@@ -134,7 +134,7 @@ function friendData($user){
     $data['success'] = true;
     $data['userData'] = [
         'usuario' => $user,
-        'thrphys' => 6,
+        'trohpys' => 6,
         'favMap' => 'PisosPicados'
     ];
 
