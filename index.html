@@ -9,26 +9,36 @@
     <script src="./src/scripts/jquery-3.6.0.js"></script>
     <script src="https://kit.fontawesome.com/b0d71d7fba.js" crossorigin="anonymous"></script>
     <script> 
-        $(function(){
-            $(".pages .settings-page").load("./pages/settings_pages/menu_ajustes.html"); 
-            $(".pages .login-page").load("./pages/login_signup.html"); 
-            $(".pages .recover-page").load("./pages/password_recover.html"); 
-            $(".pages .connect-controller-page").load("./pages/settings_pages/sincronizar_mando.html"); 
-            $(".pages .controller-settings-page").load("./pages/settings_pages/probar_mando.html"); 
-            $(".pages .sound-settings-page").load("./pages/settings_pages/ajustes_sonido.html"); 
-            $(".pages .main").load("./pages/main.html"); 
-            $(".pages .profile-page").load("./pages/profile.html"); 
-            $(".pages .friend-profile-page").load("./pages/profile_friend.html"); 
-            $(".pages .ranking-page").load("./pages/ranking.html"); 
-            $(".pages .invitation-page").load("./pages/invitation.html"); 
-            $(".pages .login-warning").load("./pages/login_warning.html"); 
-            $(".pages .trophy-page").load("./pages/trophys.html"); 
+            $(".pages .settings-page").load("./pages/settings_pages/menu_ajustes.html")
+            $(".pages .login-page").load("./pages/login_signup.html")
+            $(".pages .recover-page").load("./pages/password_recover.html")
+            $(".pages .connect-controller-page").load("./pages/settings_pages/sincronizar_mando.html")
+            $(".pages .controller-settings-page").load("./pages/settings_pages/probar_mando.html")
+            $(".pages .sound-settings-page").load("./pages/settings_pages/ajustes_sonido.html")
+            $(".pages .main").load("./pages/main.html")
+            $(".pages .profile-page").load("./pages/profile.html"),
+            $(".pages .friend-profile-page").load("./pages/profile_friend.html")
+            $(".pages .ranking-page").load("./pages/ranking.html")
+            $(".pages .invitation-page").load("./pages/invitation.html")
+            $(".pages .login-warning").load("./pages/login_warning.html")
+            $(".pages .trophy-page").load("./pages/trophys.html")
+            
             changePage('main')
-        });
+            if (sessionStorage.getItem("session") != null) {
+                console.log("session");
+                var data = JSON.parse(sessionStorage.getItem("session"))
+                setLoginInStorage(data.usuario)
+                changeProfile(data)
+                console.log(data.friendList);
+                createFriendsList(data.friendList)
+                createRequestList(data.friendsRequest)
+            }
+  
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
     <script src="./src/scripts/app.js"></script>
+    <script src="./src/scripts/petitions.js"></script>
 
 </head>
 <body id="container">

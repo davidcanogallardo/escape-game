@@ -1,5 +1,5 @@
 <?php 
-if(isset($_REQUEST['petition'])){
+if(isset($_REQUEST['petition'])) {
     if($_REQUEST['petition']=="login"){
         if(isset($_REQUEST['params'])){
             $data = loginResponse($_REQUEST['params']['user']);
@@ -9,7 +9,7 @@ if(isset($_REQUEST['petition'])){
             echo json_encode($data);
             exit();
         }
-    } else if($_REQUEST['petition']=='register'){
+    } else if($_REQUEST['petition']=='register') {
         if(isset($_REQUEST['params'])){
             $data = registerResponse();
 
@@ -17,7 +17,7 @@ if(isset($_REQUEST['petition'])){
             echo json_encode($data);
             exit();
         }
-    } else if($_REQUEST['petition']=='recover'){
+    } else if($_REQUEST['petition']=='recover') {
         if(isset($_REQUEST['params'])){
             $data = recoverPassword($_REQUEST['params']['user']);
 
@@ -25,7 +25,7 @@ if(isset($_REQUEST['petition'])){
             echo json_encode($data);
             exit();
         }
-    } else if($_REQUEST['petition']=='friendData'){
+    } else if($_REQUEST['petition']=='friendData') {
         if(isset($_REQUEST['params'])){
             $data = friendData($_REQUEST['params']['friendUser']);
             
@@ -54,7 +54,7 @@ function loginResponse($name){
             'completeLevels' => [
                 'pisosPicodos' => [
                     'time' => '1:00:20', 
-                    'trohpys' => [
+                    'trophies' => [
                         'bronze' => true,
                         'silver' => true,
                         'gold' => true
@@ -63,7 +63,7 @@ function loginResponse($name){
     
                 'summonerRift' => [
                     'time' => '3:34:05',
-                    'trophys' => [
+                    'trophies' => [
                         'bronze' => true,
                         'silver' => true,
                         'gold' => false
