@@ -8,43 +8,111 @@
     <link rel="stylesheet" href="style.css">
     <script src="./src/scripts/jquery-3.6.0.js"></script>
     <script src="https://kit.fontawesome.com/b0d71d7fba.js" crossorigin="anonymous"></script>
-    <script type="text/javascript"> 
-        $( () => {
-            $(".pages .main").load("./pages/main.html", () => {
-                $(".pages .profile-page").load("./pages/profile.html", () => {
-                    $(".pages .trophy-page").load("./pages/trophys.html", () => {
-                        if (sessionStorage.getItem("session") != null) {
-                            console.log("session");
-                            var data = JSON.parse(sessionStorage.getItem("session"))
-                            setLoginInStorage(data.usuario)
-                            changeProfile(data)
-                            console.log(data.friendList);
-                            createFriendsList(data.friendList)
-                            createRequestList(data.friendsRequest)
-                        } else {
-                            console.log("object");
-                        }
-                    });
-                });
-            });
-            $(".pages .settings-page").load("./pages/settings_pages/menu_ajustes.html")
-            $(".pages .login-page").load("./pages/login_signup.html")
-            $(".pages .recover-page").load("./pages/password_recover.html")
-            $(".pages .connect-controller-page").load("./pages/settings_pages/sincronizar_mando.html")
-            $(".pages .controller-settings-page").load("./pages/settings_pages/probar_mando.html")
-            $(".pages .sound-settings-page").load("./pages/settings_pages/ajustes_sonido.html")
-            $(".pages .friend-profile-page").load("./pages/profile_friend.html")
-            $(".pages .ranking-page").load("./pages/ranking.html")
-            $(".pages .invitation-page").load("./pages/invitation.html")
-            $(".pages .login-warning").load("./pages/login_warning.html")
-        })
 
-  
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
     <script src="./src/scripts/app.js"></script>
     <script src="./src/scripts/petitions.js"></script>
+    <script type="text/javascript"> 
+    $( document ).ready(function() {
+        //se llama cuando todo esta cargado.
+    });
+        $( () => {
+
+            var load_pages = [
+                {
+                    path: "./pages/main.html",
+                    selector: ".pages .main",
+                    done: false
+                },
+                {
+                    path: "./pages/profile.html",
+                    selector: ".pages .profile-page",
+                    done: false
+                },
+                {
+                    path: "./pages/trophys.html",
+                    selector: ".pages .trophy-page",
+                    done: false
+                },
+                {
+                    path: "./pages/settings_pages/menu_ajustes.html",
+                    selector: ".pages .settings-page",
+                    done: false
+                },
+                {
+                    path: "./pages/login_signup.html",
+                    selector: ".pages .login-page",
+                    done: false
+                },
+                {
+                    path: "./pages/password_recover.html",
+                    selector: ".pages .recover-page",
+                    done: false
+                },
+                {
+                    path: "./pages/login_warning.html",
+                    selector: ".pages .login-warning",
+                    done: false
+                }
+            ];
+
+
+            load_page("")
+
+            function load_page(page_name) {
+                console.log(page_name);
+                load_pages.forEach(page => {
+                    if(page.path == page_name) page.done = true;
+                });
+
+                //foreach page in pages
+                //if page is false
+                    //load
+                    //break
+                //endif
+                //ninguno para procesar  => puedo llamar a la funcion init.
+
+var count = 0;
+                load_pages.forEach(page => {
+                    if (!page.done) {
+                        $(page.selector).load(page.path, load_page(page.path))
+                        return
+                    }else{
+                        count++;
+                    }
+                    console.log(page.done+count);
+                    
+                });
+                
+                if(count == load_pages.length){
+                    console.log("session");
+                    var data = JSON.parse(sessionStorage.getItem("session"))
+                    if (data) {
+                        console.log(data);
+                        setLoginInStorage(data.usuario)
+                        changeProfile(data)
+                        createFriendsList(data.friendList)
+                        createRequestList(data.friendsRequest)
+                    }
+
+                }
+            }
+
+            //$(".pages .settings-page").load("./pages/settings_pages/menu_ajustes.html")
+            //$(".pages .login-page").load("./pages/login_signup.html")
+            //$(".pages .recover-page").load("./pages/password_recover.html")
+            //$(".pages .connect-controller-page").load("./pages/settings_pages/sincronizar_mando.html")
+            //$(".pages .controller-settings-page").load("./pages/settings_pages/probar_mando.html")
+            //$(".pages .sound-settings-page").load("./pages/settings_pages/ajustes_sonido.html")
+            //$(".pages .friend-profile-page").load("./pages/profile_friend.html")
+            //$(".pages .ranking-page").load("./pages/ranking.html")
+            //$(".pages .invitation-page").load("./pages/invitation.html")
+            //$(".pages .login-warning").load("./pages/login_warning.html")
+        })
+
+  
+    </script>
 
 </head>
 <body id="container">
@@ -145,10 +213,10 @@
     </div>
 </body>
 </html>
-<script src="./jquery-3.6.0.js"></script>
 
 <script>
-    $(document).ready(function() {  var config = {
+    $(document).ready(function() {  
+    var config = {
         type: Phaser.AUTO,
         width: 750,
         height: 500,

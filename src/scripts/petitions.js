@@ -89,25 +89,25 @@ $(document).ready(function () {
             url: _url,
         })
         .done(function( data, textStatus, jqXHR ) {
-         if ( console && console.log ) {
-             console.log( "La solicitud se ha completado correctamente." );
-             console.log( data );
-             if(data.success){
-                sessionStorage.setItem("session",JSON.stringify(data.userData))
+            if ( console && console.log ) {
+                console.log( "La solicitud se ha completado correctamente." );
+                console.log( data );
+                if(data.success){
+                    sessionStorage.setItem("session",JSON.stringify(data.userData))
 
-                console.log(data.message);
-                setLoginInStorage(data.userData.usuario)
-                changeProfile(data.userData)
-                console.log(data.userData.friendList);
-                createFriendsList(data.userData.friendList)
-                createRequestList(data.userData.friendsRequest)
-                changePage("main");
-             } else {
-                console.log(data.message);
-                $("#login").append("<p>El usuario no existe</p>")
-                //TODO: función que muestre mensaje de error al usuario
-             }
-         }
+                    console.log(data.message);
+                    setLoginInStorage(data.userData.usuario)
+                    changeProfile(data.userData)
+                    console.log(data.userData.friendList);
+                    createFriendsList(data.userData.friendList)
+                    createRequestList(data.userData.friendsRequest)
+                    changePage("main");
+                } else {
+                    console.log(data.message);
+                    $("#login").append("<p>El usuario no existe</p>")
+                    //TODO: función que muestre mensaje de error al usuario
+                }
+            }
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             if ( console && console.log ) {
@@ -200,7 +200,7 @@ function createRequestList(requestList) {
 function setLoginInStorage(name) {
     localStorage.setItem('isLogged', "true")
     localStorage.setItem('username', name)
-    console.log("user logged");
+    //console.log("user logged");
 }
 
 function checkLocalStorage() {

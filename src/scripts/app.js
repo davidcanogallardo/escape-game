@@ -46,6 +46,10 @@ $(document).ready(function () {
     });
 });
 
+function click() {
+    
+}
+
 function rightMenu(params) {
     var isLogged = JSON.parse(localStorage.getItem('isLogged'))
     if (!isLogged) {
