@@ -6,24 +6,7 @@ $(document).ready(function () {
 
     //PETICION REGISTER
     function a(param) {  
-        $.ajax({
-            // En data puedes utilizar un objeto JSON, un array o un query string
-            data: {"petition" : "register", "params" : {"email":"pruebaemail@gmail.com", "user":"oscar","password":"1234"}},
-            //Cambiar a type: POST si necesario
-            type: "POST",
-            // Formato de datos que se espera en la respuesta
-            dataType: "json",
-            // URL a la que se enviará la solicitud Ajax
-            url: _url,
-        })
-        .done(function(data) {
-            console.log(data);
-        })
-        .fail(function(textStatus) {
-            if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
-            }
-        });
+
         
         //RECUPERAR PASS
         $.ajax({
@@ -132,6 +115,35 @@ $(document).ready(function () {
             }
         });
     });
+
+    $(".container").on("click",".signup-link", () => {
+        var form_data = $("#signup").serializeArray()
+        $.ajax({
+            // En data puedes utilizar un objeto JSON, un array o un query string
+            data: {
+                "petition" : "register", 
+                "params" : {
+                    "email":form_data[0].value, 
+                    "user":form_data[1].value,
+                    "password":form_data[2].value
+                }
+            },
+            //Cambiar a type: POST si necesario
+            type: "POST",
+            // Formato de datos que se espera en la respuesta
+            dataType: "json",
+            // URL a la que se enviará la solicitud Ajax
+            url: _url,
+        })
+        .done(function(data) {
+            console.log(data);
+        })
+        .fail(function(textStatus) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+            }
+        });
+    })
 
 
 

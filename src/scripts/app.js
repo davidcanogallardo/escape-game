@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     /**************************************************************************************** */
-
+    changePage('main')
 
     $('.container').on('click','.link', function (event) {
         changePage(event.currentTarget.attributes["page"].value)
