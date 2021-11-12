@@ -3,7 +3,7 @@
     <div style="width:43vw;">
         <h2>CREAR CUENTA</h2>
         </div>
-        <form id="signup" method="post">  
+        <form id="signup" method="put">  
             <label for="email" required="">Email</label><br>
             <input type="email" id="register_email" name="mail" required=""><br>
             <label for="uname">Nombre de usuario</label><br>
@@ -12,12 +12,11 @@
             <input type="password" id="register_password" name="password" required=""><br>
             <label for="confirm">Repetir contraseña</label><br>
             <input type="password" id="confirm" name="password_confirm" required=""><br>
-            <!-- NO DEBERIA SER SUBMIT -->
-            <button class="btn blue signup-link">CREAR CUENTA</button>
-            <!-- <input type="submit" class="btn blue signup-link" value="CREAR CUENTA"> -->
-            <!-- <div style="width:37vw;">
+
+            <!-- <button class="btn blue signup-link">CREAR CUENTA</button> -->
+            <div style="width:37vw;">
                 <div class=" form-button blue signup-link">CREAR CUENTA</div>
-            </div> -->
+            </div>
             <!--TODO: login requirements-->
         </form>
     </div>
@@ -35,11 +34,11 @@
                 <a class="recover-link link" page="recover-page"><b>He olvidado mi contraseña</b></a>
             </div><br>
             <!-- NO DEBERIA SER SUBMIT -->
-            <button class="btn blue signup-link">INICIAR SESIÓN</button>
+            <!-- <button class="btn blue signup-link">INICIAR SESIÓN</button> -->
 
-            <!-- <div style="width:37vw">
+            <div style="width:37vw">
                 <div class=" form-button blue login-link">INICIAR SESIÓN</div>
-            </div> -->
+            </div>
         </form>
     </div>
 </div>

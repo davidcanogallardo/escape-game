@@ -39,6 +39,7 @@ $(document).ready(function () {
     // signup
     $(".container").on("click",".signup-link", () => {
         var form_data = $("#signup").serializeArray()
+        console.log(form_data);
         $.ajax({
             data: {
                 "petition" : "register", 
@@ -48,16 +49,19 @@ $(document).ready(function () {
                     "password":form_data[2].value
                 }
             },
-            type: "POST",
+            type: "PUT",
             dataType: "json",
+            contentType: "application/json",
             url: _url,
         })
         .done(function(data) {
             console.log(data);
         })
-        .fail(function(textStatus) {
+        .fail(function(XMLHttpRequest, textStatus, errorThrown) {
             if ( console && console.log ) {
                 console.log( "La solicitud a fallado: " +  textStatus);
+                console.log(XMLHttpRequest);
+                console.log(errorThrown);
             }
         });
     })
