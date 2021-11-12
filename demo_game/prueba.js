@@ -11,17 +11,23 @@ var config = {
 
 var game = new Phaser.Game(config);
 
-function preload() {
-    //this.load.image("tiles", "./assets/tilesets/TSMapa/PNG/tileset.png");
+function preload ()
+{
     this.load.tilemapTiledJSON("map", "assets/tilemaps/mapa.json");
-  }
-function create() {
+    this.load.image('sky', 'assets/sky.png');
+    this.load.image('ground', 'assets/platform.png');
+    this.load.image('star', 'assets/star.png');
+    this.load.image('bomb', 'assets/bomb.png');
+    this.load.spritesheet('dude', 
+        'assets/dude.png',
+        { frameWidth: 32, frameHeight: 48 }
+    );
+}
+
+function create ()
+{
     const map = this.make.tilemap({ key: "map" });
-    // const tileset = map.addTilesetImage("tileset", "tiles");
-    // const ground = map.createLayer("ground", tileset, 0, 0);
-    // const walls = map.createLayer("walls", tileset, 0, 0);
-    // const camera = this.cameras.main;
-  }
+}
 
 function update ()
 {
