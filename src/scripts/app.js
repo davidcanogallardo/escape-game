@@ -1,6 +1,6 @@
 $(document).ready(function () {
-
-    /**************************************************************************************** */
+    /*****************************************************************************************/
+    loadPages()
     changePage('main')
 
     $('.container').on('click','.link', function (event) {
@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     //*******************************************************************************************//
     
-    //Enviar/recibir invitación
+    //Enviar/recibir invitación a una partida
     $('.container').on('click','.send-invitation', function (event) {
         console.log($(this.parentNode)[0].childNodes[3].innerText);
         $(".pages .invitation-page").clone(true).appendTo('.container');
@@ -21,46 +21,42 @@ $(document).ready(function () {
         $('.container > *').fadeIn(500);
     });
 
-    //Enviar solicitud de amistad
-    $('.container').on('click','.send-friend-request', function (event) {
-        var friendName = $("#user-request").val()
-        if (friendName != "") {
-            $(".friend-request").animate({"bottom":"5vw"}).delay(250).fadeTo(450, 0)
-            addFriendRequest(friendName)
-        }
-    });
 
-    //Borrar una notificación
-    $('.container').on('click','.list-item .btn', function (event) {
-        var friendName = event.currentTarget.parentElement.childNodes[3].innerHTML
-        if (event.currentTarget.classList.contains("green")) {
-            addFriend(friendName)
-        }
-        var arr = JSON.parse(localStorage.getItem("notificationList"))
-        if (arr.includes(friendName)) {
-            arr.splice(arr.indexOf(friendName),1)
-            localStorage.setItem("notificationList", JSON.stringify(arr))
-        }
-        
-        $(event.currentTarget.parentElement).fadeOut(500, function (event) {$(this).remove  })
-    });
 });
 
-function click() {
-    
+function loadPages() {
+    $(".pages .main").load("./pages/main.html", () => {
+        $(".pages .profile-page").load("./pages/profile.html", () => {
+            $(".pages .trophy-page").load("./pages/trophys.html", () => {
+                if (sessionStorage.getItem("session") != null) {
+                    console.log("session");
+                    var data = JSON.parse(sessionStorage.getItem("session"))
+                    changeProfile(data)
+                    console.log(data.friendList);
+                    createFriendsList(data.friendList)
+                    createRequestList(data.friendsRequest)
+                } else {
+                    console.log("object");
+                }
+            });
+        });
+    });
+    $(".pages .settings-page").load("./pages/settings_pages/menu_ajustes.html")
+    $(".pages .login-page").load("./pages/login_signup.html")
+    $(".pages .recover-page").load("./pages/password_recover.html")
+    $(".pages .connect-controller-page").load("./pages/settings_pages/sincronizar_mando.html")
+    $(".pages .controller-settings-page").load("./pages/settings_pages/probar_mando.html")
+    $(".pages .sound-settings-page").load("./pages/settings_pages/ajustes_sonido.html")
+    $(".pages .friend-profile-page").load("./pages/profile_friend.html")
+    $(".pages .ranking-page").load("./pages/ranking.html")
+    $(".pages .invitation-page").load("./pages/invitation.html")
+    $(".pages .login-warning").load("./pages/login_warning.html")
 }
 
 function rightMenu(params) {
-    var isLogged = JSON.parse(localStorage.getItem('isLogged'))
-    if (!isLogged) {
-        $('.container .page').clone(true).appendTo(".pages");
-        $('.container > *').remove()
-
-        $(".pages .login-warning").clone(true).appendTo('.container');
-        $(".pages .login-warning").remove()
-
-        $('.container .login-warning').fadeOut(1);
-        $('.container .login-warning').fadeIn(500);
+    //var isLogged = JSON.parse(localStorage.getItem('isLogged'))
+    if (!isLogged()) {
+        changePage("login-warning")
     } else {
         if ($.trim($('.slide-menu').html()) === "") {
             var menu = $(".menus > "+ params)
@@ -77,16 +73,8 @@ function rightMenu(params) {
 }
 
 function changePage(pageName) {
-    var isLogged = JSON.parse(localStorage.getItem('isLogged'))
-    if (!isLogged && pageName != "main" && pageName != "recover-page" && pageName != "login-page") {
-        $('.container .page').clone(true).appendTo(".pages");
-        $('.container > *').remove()
-
-        $(".pages .login-warning").clone(true).appendTo('.container');
-        $(".pages .login-warning").remove()
-
-        $('.container > *').fadeOut(1);
-        $('.container > *').fadeIn(500);
+    if (!isLogged() && pageName != "main" && pageName != "recover-page" && pageName != "login-page" && pageName != "login-warning") {
+        changePage("login-warning")
     } else {
         localStorage.setItem("currentPage", pageName)
         $('.container .page').clone(true).appendTo(".pages");
@@ -99,4 +87,8 @@ function changePage(pageName) {
         $('.container > *').fadeIn(500);
             
     }
+}
+
+function isLogged() {  
+    return sessionStorage.getItem('session')
 }

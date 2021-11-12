@@ -1,79 +1,11 @@
 $(document).ready(function () {
-    //La url tiene que ser desde la raiz
+    //Eventos que activan las peticiones al servidor
     var _url = "./petitions.php";
 
-    //checkLocalStorage()
-
-    //PETICION REGISTER
-    function a(param) {  
-
-        
-        //RECUPERAR PASS
-        $.ajax({
-            // En data puedes utilizar un objeto JSON, un array o un query string
-            data: {"petition" : "recover", "params" : {"user":"pruebaemail@gmail.com"}},
-            //Cambiar a type: POST si necesario
-            type: "POST",
-            // Formato de datos que se espera en la respuesta
-            dataType: "json",
-            // URL a la que se enviará la solicitud Ajax
-            url: _url,
-        })
-        .done(function(data) {
-            console.log(data);
-        })
-        .fail(function(textStatus) {
-            if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
-            }
-        });
-    
-        //SOLICITUD DE AMISTAD
-        $.ajax({
-            // En data puedes utilizar un objeto JSON, un array o un query string
-            data: {"petition" : "friendData", "params" : {"friendUser":"Alex"}},
-            //Cambiar a type: POST si necesario
-            type: "POST",
-            // Formato de datos que se espera en la respuesta
-            dataType: "json",
-            // URL a la que se enviará la solicitud Ajax
-            url: _url,
-        })
-        .done(function(data) {
-            console.log(data);
-        })
-        .fail(function(textStatus) {
-            if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
-            }
-        });
-    
-        //RANKING
-        $.ajax({
-            // En data puedes utilizar un objeto JSON, un array o un query string
-            data: {"petition" : "ranking"},
-            //Cambiar a type: POST si necesario
-            type: "POST",
-            // Formato de datos que se espera en la respuesta
-            dataType: "json",
-            // URL a la que se enviará la solicitud Ajax
-            url: _url,
-        })
-        .done(function(data) {
-            console.log(data);
-        })
-        .fail(function(textStatus) {
-            if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
-            }
-        });
-    }
-
+    // login
     $('.container').on('click','.login-link', function (event) {
         var form_data = $("#login").serializeArray()
-
         $.ajax({
-            // En data puedes utilizar un objeto JSON, un array o un query string
             data: {
                 "petition" : "login", 
                 "params" : {
@@ -81,11 +13,8 @@ $(document).ready(function () {
                     "password":form_data[1].value
                 }
             },
-            //Cambiar a type: POST si necesario
             type: "POST",
-            // Formato de datos que se espera en la respuesta
             dataType: "json",
-            // URL a la que se enviará la solicitud Ajax
             url: _url,
         })
         .done(function( data, textStatus, jqXHR ) {
@@ -93,19 +22,10 @@ $(document).ready(function () {
                 console.log( "La solicitud se ha completado correctamente." );
                 console.log( data );
                 if(data.success){
-                    sessionStorage.setItem("session",JSON.stringify(data.userData))
-
-                    console.log(data.message);
-                    setLoginInStorage(data.userData.usuario)
-                    changeProfile(data.userData)
-                    console.log(data.userData.friendList);
-                    createFriendsList(data.userData.friendList)
-                    createRequestList(data.userData.friendsRequest)
-                    changePage("main");
+                    login(data)
                 } else {
                     console.log(data.message);
                     $("#login").append("<p>El usuario no existe</p>")
-                    //TODO: función que muestre mensaje de error al usuario
                 }
             }
         })
@@ -116,10 +36,10 @@ $(document).ready(function () {
         });
     });
 
+    // signup
     $(".container").on("click",".signup-link", () => {
         var form_data = $("#signup").serializeArray()
         $.ajax({
-            // En data puedes utilizar un objeto JSON, un array o un query string
             data: {
                 "petition" : "register", 
                 "params" : {
@@ -128,11 +48,8 @@ $(document).ready(function () {
                     "password":form_data[2].value
                 }
             },
-            //Cambiar a type: POST si necesario
             type: "POST",
-            // Formato de datos que se espera en la respuesta
             dataType: "json",
-            // URL a la que se enviará la solicitud Ajax
             url: _url,
         })
         .done(function(data) {
@@ -145,9 +62,234 @@ $(document).ready(function () {
         });
     })
 
+    // recover
+    $(".container").on("click",".recover-pass", () => {
+        var form_data = $("#form-recover").serializeArray()
+        $.ajax({
+            data: {
+                "petition" : "recover", 
+                "params" : {
+                    "mail":form_data[0].value
+                }
+            },
+            type: "POST",
+            dataType: "json",
+            url: _url,
+        })
+        .done(function(data) {
+            console.log(data);
+        })
+        .fail(function(textStatus) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+            }
+        });
+    })
 
+    // friend profile
+    $(".container").on("click",".friend-profile-link", () => {
+        var name = event.originalTarget.attributes.name.value
+        $.ajax({
+            data: {
+                "petition" : "friendData", 
+                "params" : {
+                    "friendUser":name
+                }
+            },
+            type: "POST",
+            dataType: "json",
+            url: _url,
+        })
+        .done(function(data) {
+            console.log(data);
+            updateFriendProfile(data)
+        })
+        .fail(function(textStatus) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+            }
+        });
+    })
 
+    // ranking
+    $(".container").on("click",".ranking-link", () => {
+        $.ajax({
+            data: {"petition" : "ranking"},
+            type: "POST",
+            dataType: "json",
+            url: _url,
+        })
+        .done(function(data) {
+            console.log(data);
+            updateRanking(data)
+        })
+        .fail(function(textStatus) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+            }
+        });
+    })
+
+    // aceptar / cancelar solicitud de amistad
+    $('.container').on('click','.list-item .btn', function (event) {
+        var friendName = event.currentTarget.parentElement.childNodes[3].innerHTML
+        var accept
+        if (event.currentTarget.classList.contains("accept")) {
+            accept = true;
+        } else {
+            accept = false;
+        }
+
+        $.ajax({
+            data: {
+                "petition" : "friend-request",
+                "params" : {
+                    "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
+                    "friend" : friendName,
+                    "accept" : accept
+                }
+            },
+            type: "POST",
+            dataType: "json",
+            url: _url,
+        })
+        .done(function(data) {
+            console.log(data);
+            if (data.success) {
+                updateFriendList(event, accept, friendName)
+            }
+        })
+        .fail(function(textStatus) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log(textStatus);
+            }
+        });
+        
+        
+    });
+
+    // enviar solicitud
+    $('.container').on('click','.send-friend-request', function (event) {
+        var friendName = $("#user-request").val()
+        $.ajax({
+            data: {
+                "petition" : "send_request",
+                "params" : {
+                    "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
+                    "friend" : friendName
+                }
+            },
+            type: "POST",
+            dataType: "json",
+            url: _url,
+        })
+        .done(function(data) {
+            console.log(data);
+            if (data.success) {
+                console.log(data.params);
+                updateFriendNotification(friendName)
+            }
+        })
+        .fail(function(textStatus) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log(textStatus);
+            }
+        });
+    });
+
+    // cerrar sesion
+    $('.container').on('click','.close-sesion', function (event) {
+        $.ajax({
+            data: {
+                "petition" : "send_request",
+                "params" : {
+                    "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
+                }
+            },
+            type: "POST",
+            dataType: "json",
+            url: _url,
+        })
+        .done(function(data) {
+            console.log(data);
+            if (data.success) {
+                closeSession()
+            }
+        })
+        .fail(function(textStatus) {
+            if ( console && console.log ) {
+                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log(textStatus);
+            }
+        });
+    });
 })
+
+//Funciones para gestionar las respuestas
+function login(data) {  
+    sessionStorage.clear()
+
+    sessionStorage.setItem("session",JSON.stringify(data.userData))
+
+    console.log(data.message);
+    changeProfile(data.userData)
+    console.log(data.userData.friendList);
+    createFriendsList(data.userData.friendList)
+    createRequestList(data.userData.friendsRequest)
+    changePage("main");
+}
+
+function updateFriendProfile(data) {  
+    changeFriendProfile(data.userData)
+    changePage("friend-profile-page")
+}
+
+function updateRanking(data) {
+    for (i in data.levels) {
+        Object.entries(data.levels[i]).forEach((l) =>{
+            var new_row = `
+            <p>
+               `+0+`
+               `+l[0]+`
+               `+l[1]+`
+            </p>
+            `
+            $(".ranking-list").append(new_row)
+        })
+    }
+
+
+}
+
+function updateFriendList(event, accept, friendName) {
+    $(event.currentTarget.parentElement).fadeOut(500, function (event) {
+        $(this).remove()  
+    })
+    var new_session = JSON.parse(sessionStorage.getItem("session"))
+    if (accept) {
+        createFriendsList([friendName])
+        new_session.friendList.push(friendName)
+    }
+    new_session.friendsRequest.pop(friendName)
+    sessionStorage.setItem("session", JSON.stringify(new_session))
+}
+
+function updateFriendNotification(friendName) {
+    $(".friend-request").animate({"bottom":"5vw"}).delay(250).fadeTo(450, 0)
+    createRequestList([friendName])
+    var new_session = JSON.parse(sessionStorage.getItem("session"))
+    new_session.friendsRequest.push(friendName)
+    sessionStorage.setItem("session", JSON.stringify(new_session))
+}
+
+function closeSession(params) {
+    changePage('main'); 
+    sessionStorage.clear()
+}
+
+//************************************************************************************************************************//
 
 function createFriendsList(friendsList) {
     //var array = JSON.parse(localStorage.getItem("friendsList"))
@@ -157,12 +299,12 @@ function createFriendsList(friendsList) {
     //}
     friendsList.forEach(name => {
         let newFriend = `
-        <div title="Ver perfil" class="list-item">
-            <div class="icon-container pr-btn friend-profile-link link" page="friend-profile-page">
+        <div title="Ver perfil" class="list-item friend-profile-link" >
+            <div class="icon-container pr-btn " page="friend-profile-page" name="`+name+`">
                 <i class="fas fa-user" aria-hidden="true"></i>
             </div>
             <span>`+name+`</span>
-            <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation">
+            <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation" onclick="return false">
                 <i class="fas fa-user-plus" aria-hidden="true"></i>
             </div>
         </div>
@@ -197,42 +339,9 @@ function createRequestList(requestList) {
 
 }
 
-function setLoginInStorage(name) {
-    localStorage.setItem('isLogged', "true")
-    localStorage.setItem('username', name)
-    //console.log("user logged");
-}
-
-function checkLocalStorage() {
-    //Para cerrar sesión descomenta la línea de abajo, refresca la página y luego coméntalo
-    localStorage.setItem('isLogged', "false")
-    
-    if (localStorage.getItem("friendsList") == null) {
-        var arr = ["Jorge", "Carlos", "Miguel", "Lucas", "Diego", "Mario"]
-        localStorage.setItem("friendsList", JSON.stringify(arr))
-    }
-    if (localStorage.getItem("notificationList") == null) {
-        var arr = ["Andrés", "Gerard", "Hugo", "Lucas", "Nora", "Sara"]
-        localStorage.setItem("notificationList", JSON.stringify(arr))
-    }
-    if (localStorage.getItem("currentPage") == null) {
-        localStorage.setItem("currentPage", "")
-    }
-
-    var array = JSON.parse(localStorage.getItem("friendsList"))
-    array.forEach(name => {
-        addFriend(name)
-    });
-
-    array = JSON.parse(localStorage.getItem("notificationList"))
-    array.forEach(name => {
-        addFriendRequest(name)
-    });
-}
-
 function changeProfile(data) {
-    $("#profile-name").text(data.name)
-    $("#invite-name").text(data.name)
+    $("#profile-name").text(data.usuario)
+    $("#invite-name").text(data.usuario)
     $("#fav-map").text(data.favMap)
     $("#total-trophys").text(data.numCopas)
 
@@ -270,3 +379,10 @@ function changeProfile(data) {
     
 
 }
+
+function changeFriendProfile(data) {  
+    $("#fr-profile-name").text(data.usuario)
+    $("#fr-fav-map").text(data.favMap)
+    $("#fr-total-trophys").text(data.numCopas)
+}
+

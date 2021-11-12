@@ -3,43 +3,33 @@ if(isset($_REQUEST['petition'])) {
     if($_REQUEST['petition']=="login"){
         if(isset($_REQUEST['params'])){
             $data = loginResponse($_REQUEST['params']['user']);
-
-            //Aunque el content-type no sea un problema en la mayoría de casos, es recomendable especificarlo
-            header('Content-type: application/json; charset=utf-8');
-            echo json_encode($data);
-            exit();
         }
     } else if($_REQUEST['petition']=='register') {
         if(isset($_REQUEST['params'])){
             $data = registerResponse();
-
-            header('Content-type: application/json; charset=utf-8');
-            echo json_encode($data);
-            exit();
         }
     } else if($_REQUEST['petition']=='recover') {
         if(isset($_REQUEST['params'])){
-            $data = recoverPassword($_REQUEST['params']['user']);
-
-            header('Content-type: application/json; charset=utf-8');
-            echo json_encode($data);
-            exit();
+            $data = recoverPassword($_REQUEST['params']['mail']);
         }
     } else if($_REQUEST['petition']=='friendData') {
         if(isset($_REQUEST['params'])){
             $data = friendData($_REQUEST['params']['friendUser']);
-            
-            header('Content-type: application/json; charset=utf-8');
-            echo json_encode($data);
-            exit();
         }
     } else if($_REQUEST['petition']=='ranking'){
         $data = ranking();
 
-        header('Content-type: application/json; charset=utf-8');
-        echo json_encode($data);
-        exit();
+
+    } else if($_REQUEST['petition']=='friend-request'){
+        $data = friendRequest($_REQUEST['params']);
+    } else if($_REQUEST['petition']=='send_request'){
+        $data = sendRequest($_REQUEST['params']);
+    } else if($_REQUEST['petition']=='close-sesion'){
+        $data = closeSession($_REQUEST['params']);
     }
+    header('Content-type: application/json; charset=utf-8');
+    echo json_encode($data);
+    exit();
 }
 
 function loginResponse($name){
@@ -92,10 +82,11 @@ function registerResponse(){
     return $data;
 }
 
-function recoverPassword(){
+function recoverPassword($user){
     $data = [];
     $data['success'] = true;
     $data['message'] = 'Todo ha ido bien.';
+    $data['mail'] = $user;
 
     return $data;
 }
@@ -105,7 +96,7 @@ function friendData($user){
     $data['success'] = true;
     $data['userData'] = [
         'usuario' => $user,
-        'trohpys' => 6,
+        'numCopas' => 69,
         'favMap' => 'PisosPicados'
     ];
 
@@ -122,6 +113,33 @@ function ranking(){
             'Adnan' => '03:10:03'
         ]
     ];
+
+    return $data;
+}
+
+function friendRequest($params) {
+    $data = [];
+    $data['success'] = true;
+    $data['message'] = 'Todo ha ido bien.';
+    $data["params"] = $params;
+
+    return $data;
+}
+
+function sendRequest($params) {
+    $data = [];
+    $data['success'] = true;
+    $data['message'] = 'Todo ha ido bien.';
+    $data["params"] = $params;
+
+    return $data;
+}
+
+function closeSession($params) {
+    $data = [];
+    $data['success'] = true;
+    $data['message'] = 'Todo ha ido bien.';
+    $data["params"] = $params;
 
     return $data;
 }
