@@ -519,7 +519,7 @@ td,th{
     border: 1px solid #562800;
 }
 
-input[type=text]{
+input[type=password], input[type=email], input[type=text]{
     width: 36vw;
     height: 3vw;
     background: rgba(172, 171, 171, 0.33);
@@ -530,6 +530,7 @@ input[type=text]{
     padding-left: 10px;
     margin-bottom: 10px;
 }
+
 
 /********************************************Página principal**************************************/
 
@@ -1028,29 +1029,14 @@ input[type=text]{
     justify-content: space-between;
 }
 
-#forms-container .btn{
-    background: #14448D;
-    border: 0px black;
-    border-radius: 16px;
-    color: #EFDEC3;
-    text-align: center;
-    cursor: pointer;
-    font-family: Bebas;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 8vw;
-    padding: 10px 100px 10px 100px;
-}
-
-#forms-container .btn:hover{
-    background: #EFDEC3;
-    color: #14448D;  /* Color del texto*/
-    outline: 3px solid #14448D;
-}
-
 #recover-form{
     display: flex;
     justify-content: center;
+}
+
+.recover-form{
+    display: flex;
+    flex-direction: column;
 }
 
 #recover .btn .blue{
