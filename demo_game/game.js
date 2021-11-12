@@ -15,11 +15,14 @@ const config = {
   function preload() {
     this.load.image("tiles", "assets/tilesets/TSMapa/PNG/tileset.png");
     this.load.tilemapTiledJSON("map", "assets/tilemaps/mapa.json");
+    this.load.atlas("player", "assets/character/player.png" , "assets/character/player.json");
+    this.cursors = this.input.keyboard.createCursorKeys();
   }
   
   function create() {
     const map = this.make.tilemap({ key: "map" });
     const tileset = map.addTilesetImage('dungeon', 'tiles');
+    const player = this.add.sprite(128,128, 'player');
     map.createStaticLayer('ground', tileset);
     map.createStaticLayer('walls', tileset);
   }
