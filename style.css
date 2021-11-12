@@ -202,6 +202,10 @@ body {
     border-spacing: 5px 10px;
 }
 
+.table-profile .td-width{
+    width: 20vw;
+}
+
 .i-table{
     margin-left: 5px;
     color: #FAA942;
@@ -296,8 +300,6 @@ body {
     width: 35vw;
 }
 
-.volver{
-}
 
 /*Boton azul*/
 .blue{
@@ -1010,7 +1012,15 @@ input[type=password], input[type=email], input[type=text]{
     overflow-y: scroll;
     overflow-x: hidden;
 }
-
+.table-ranking .mid{
+    width: 82%;
+}
+.table-ranking .right{
+    width: 10%;
+}
+.level p{
+    margin: 0px;
+}
 @media (max-height: 600px) {
     .level .table{
         width: 60vw;
