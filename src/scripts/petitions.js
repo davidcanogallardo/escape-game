@@ -48,7 +48,7 @@ $(document).ready(function () {
                     "password":form_data[2].value
                 }
             },
-            type: "POST",
+            type: "PUT",
             dataType: "json",
             url: _url,
         })
@@ -247,6 +247,7 @@ function updateFriendProfile(data) {
 }
 
 function updateRanking(data) {
+    $(".ranking-list > *").remove()
     for (i in data.levels) {
         Object.entries(data.levels[i]).forEach((l) =>{
             var new_row = `
@@ -269,8 +270,8 @@ function updateFriendList(event, accept, friendName) {
     })
     var new_session = JSON.parse(sessionStorage.getItem("session"))
     if (accept) {
-        createFriendsList([friendName])
         new_session.friendList.push(friendName)
+        createFriendsList(new_session.friendList)
     }
     new_session.friendsRequest.pop(friendName)
     sessionStorage.setItem("session", JSON.stringify(new_session))
@@ -278,9 +279,9 @@ function updateFriendList(event, accept, friendName) {
 
 function updateFriendNotification(friendName) {
     $(".friend-request").animate({"bottom":"5vw"}).delay(250).fadeTo(450, 0)
-    createRequestList([friendName])
     var new_session = JSON.parse(sessionStorage.getItem("session"))
     new_session.friendsRequest.push(friendName)
+    createRequestList(new_session.friendsRequest)
     sessionStorage.setItem("session", JSON.stringify(new_session))
 }
 
@@ -292,11 +293,8 @@ function closeSession(params) {
 //************************************************************************************************************************//
 
 function createFriendsList(friendsList) {
-    //var array = JSON.parse(localStorage.getItem("friendsList"))
-    //if (!array.includes(friendName)) {
-    //    array[array.length] = friendName
-    //    localStorage.setItem("friendsList", JSON.stringify(array))
-    //}
+    $(".slide-list-container .slide-list > *").remove()
+
     friendsList.forEach(name => {
         let newFriend = `
         <div title="Ver perfil" class="list-item friend-profile-link" >
@@ -314,11 +312,8 @@ function createFriendsList(friendsList) {
 }
 
 function createRequestList(requestList) { 
-    //var array = JSON.parse(localStorage.getItem("notificationList"))
-    //if (!array.includes(name)) {
-    //    array[array.length] = name
-    //    localStorage.setItem("notificationList", JSON.stringify(array))
-    //} 
+    $(".notification-container .slide-list > *").remove()
+
     requestList.forEach(name => {
         let newRequest = `                
         <div class="list-item">
@@ -345,6 +340,7 @@ function changeProfile(data) {
     $("#fav-map").text(data.favMap)
     $("#total-trophys").text(data.numCopas)
 
+    $(".niveles > *").remove()
     Object.entries(data.completeLevels).forEach((level) => {
         if (level[1].trophies.bronze) {
             var bronzeClass = "bronze"
