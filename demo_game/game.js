@@ -34,11 +34,12 @@ function create() {
   });
   tileset = map.addTilesetImage('dungeon', 'tiles');
   map.createStaticLayer('ground', tileset);
-  map.createStaticLayer('walls', tileset);
-  player = this.physics.add.sprite(100, 250, 'player','walk-side-3.png' );
-
-  this.physics.add.collider('player', 'walls')
-
+  wallsLayer = map.createStaticLayer('walls', tileset);
+  wallsLayer.setCollisionByProperty({ collides: true })
+  player = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
+  this.physics.add.collider(player, wallsLayer)
+  
+ //animaciones del personaje
 	this.anims.create({
 		key: 'player-idle-down',
 		frames: [{ key: 'player', frame: 'walk-down-3.png' }]
@@ -84,6 +85,7 @@ function create() {
 }
 
 function update() {
+
   speed = 100
 
   leftDown = cursors.left?.isDown
@@ -92,20 +94,28 @@ function update() {
   downDown = cursors.down?.isDown
 
   if (leftDown) {
-    this.anims.play('walk-down-3.png', true)
+
+    this.anims.play('walk-side-3', true)
     player.setVelocity(-speed, 0)
+
   } else if (rightDown) {
-    this.anims.play('walk-down-3.png', true)
+
+    this.anims.play('walk-side-3', true)
     player.setVelocity(speed, 0)
+
   } else if (upDown) {
-    this.anims.play('walk-down-3.png', true)
+
+    this.anims.play('walk-side-3', true)
     player.setVelocity(0, -speed)
+
   } else if (downDown) {
-    this.anims.play('walk-down-3.png', true)
+
+    this.anims.play('walk-side-3', true)
     player.setVelocity(0, speed)
+
   } else
   {
-    this.anims.play('walk-down-3.png', true)
+    this.anims.play('walk-side-3', true)
     player.setVelocity(0, 0)
   }
 }
