@@ -1,7 +1,7 @@
 {
 	"textures": [
 		{
-			"image": "fauna.png",
+			"image": "player.png",
 			"format": "RGBA8888",
 			"size": {
 				"w": 130,
