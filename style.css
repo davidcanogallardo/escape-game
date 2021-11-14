@@ -890,7 +890,7 @@ input[type=password], input[type=email], input[type=text]{
     position: fixed;
     overflow-y: scroll;
     top: 0; right: 0; bottom: 0; left: 0;
-    z-index: 15;
+    z-index: 45;
     background:  rgba(40,40,40, .75);
     display: flex;
     justify-content: center;
@@ -906,6 +906,7 @@ input[type=password], input[type=email], input[type=text]{
     border: 0.3vw solid #68492E;
     border-radius: 1vw;
     position: absolute;
+    z-index: 45;
 }
 
 .cancel_confirm{

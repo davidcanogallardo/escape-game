@@ -38,10 +38,10 @@
                 <div class="icon-container main-icon  own-profile-link link" page="profile-page">
                     <i class="fas fa-user"></i>
                 </div>
-                <div class="icon-container main-icon friends-list slide" page=".slide-list-container">
+                <div class="icon-container main-icon friends-list slide-link" page=".slide-list-container">
                     <i class="fas fa-user-friends"></i>
                 </div>
-                <div class="icon-container main-icon notificacion-list slide" page=".notification-container">
+                <div class="icon-container main-icon notificacion-list slide-link" page=".notification-container">
                     <i class="fas fa-bell"></i>
                 </div>
                 <div class="icon-container main-icon ranking-link link" page="ranking-page">
@@ -70,7 +70,7 @@
         
         <div class="page ranking-page"></div>
 
-        <div class="page invitation-page"></div>
+        <div class="page invitation-page" style="position: relative; z-index: 199;"></div>
 
         <div class="page login-warning"></div>
         
@@ -78,13 +78,13 @@
     </div>
     
     <div class="menus">
-        <div class="slide-list-container slide">
+        <div class="slide-list-container">
             <div class="slide-header">
                 <i class="fas fa-user-friends" aria-hidden="true">
                     <span>Lista de amigos</span>
                 </i>
                 
-                <i class="fas fa-times friends-list" aria-hidden="true"></i>
+                <i class="fas fa-times friends-list slide-link" page=".slide-list-container" aria-hidden="true"></i>
             </div>
             
             <div class="slide-list"></div>
@@ -96,13 +96,13 @@
             </div>
         </div>
         
-        <div class="notification-container slide">
+        <div class="notification-container">
             <div class="slide-header">
                 <i class="fas fa-bell" aria-hidden="true">
                     <span>Notificaciones</span>
                 </i>
                 
-                <i class="fas fa-times notificacion-list" aria-hidden="true"></i>
+                <i class="fas fa-times notificacion-list slide-link" page=".notification-container" aria-hidden="true"></i>
             </div>
             
             <div class="slide-list"></div>
