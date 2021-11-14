@@ -21,60 +21,27 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         } else if($_REQUEST['petition']=='ranking'){
             $data = ranking();
-    
-    
-        } else if($_REQUEST['petition']=='friend-request'){
-            $data = friendRequest($_REQUEST['params']);
-        } else if($_REQUEST['petition']=='send_request'){
-            $data = sendRequest($_REQUEST['params']);
         } else if($_REQUEST['petition']=='close-sesion'){
             $data = closeSession($_REQUEST['params']);
         }
+
         header('Content-type: application/json; charset=utf-8');
         echo json_encode($data);
         exit();
     }
 } elseif($_SERVER['REQUEST_METHOD'] == 'PUT') {
     parse_str(file_get_contents("php://input"),$post_vars);
-    $data = recoverPassword($post_vars['params']['email']);
 
-    header('Content-type: application/json; charset=utf-8');
-    echo json_encode($data);
-    exit();
-}
-
-if(isset($_REQUEST['petition'])) {
-    if($_REQUEST['petition']=="login"){
-        if(isset($_REQUEST['params'])){
-            $data = loginResponse($_REQUEST['params']['user']);
-        }
-    } else if($_REQUEST['petition']=='register') {
-        if(isset($_REQUEST['params'])){
-            $data = registerResponse();
-        }
-    } else if($_REQUEST['petition']=='recover') {
-        if(isset($_REQUEST['params'])){
-            if($_SERVER['REQUEST_METHOD'] == 'PUT'){
-                parse_str(file_get_contents("php://input"),$post_vars);
-            }
-            
-            $data = recoverPassword($post_vars['params']['mail']);
-        }
-    } else if($_REQUEST['petition']=='friendData') {
-        if(isset($_REQUEST['params'])){
-            $data = friendData($_REQUEST['params']['friendUser']);
-        }
-    } else if($_REQUEST['petition']=='ranking'){
+    if ($post_vars['petition'] == 'register') {
+        $data = recoverPassword($post_vars['params']['email']);
+    } else if($post_vars['petition']=='friend-request'){
+        $data = friendRequest($post_vars['params']);
+    } else if($post_vars['petition']=='send_request'){
+        $data = sendRequest($post_vars['params']);
+    } else if($post_vars['petition']=='ranking'){
         $data = ranking();
-
-
-    } else if($_REQUEST['petition']=='friend-request'){
-        $data = friendRequest($_REQUEST['params']);
-    } else if($_REQUEST['petition']=='send_request'){
-        $data = sendRequest($_REQUEST['params']);
-    } else if($_REQUEST['petition']=='close-sesion'){
-        $data = closeSession($_REQUEST['params']);
     }
+
     header('Content-type: application/json; charset=utf-8');
     echo json_encode($data);
     exit();

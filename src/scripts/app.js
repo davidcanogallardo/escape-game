@@ -2,12 +2,11 @@ $(document).ready(function () {
     /*****************************************************************************************/
     loadPages()
     changePage("main")
-    
 
     $('.container').on('click','.link', function (event) {
         changePage(event.currentTarget.attributes["page"].value)
     })
-    $('.container').on('click','.slide', function (event) {
+    $('.container').on('click','.slide-link', function (event) {
         rightMenu(event.currentTarget.attributes.page.value)
     })
 
@@ -18,8 +17,8 @@ $(document).ready(function () {
         console.log($(this.parentNode)[0].childNodes[3].innerText);
         $(".pages .invitation-page").clone(true).appendTo('.container');
         $(".pages .invitation-page").remove()
-        $('.container > *').fadeOut(1);
-        $('.container > *').fadeIn(500);
+        $('.container > .invitation-page').fadeOut(1)
+        $('.container > .invitation-page').fadeIn(220);
     });
 
 
@@ -115,7 +114,7 @@ function loadPages() {
             
         });
         
-        if(count == load_pages.length){
+        if(count == load_pages.length) {
             console.log("session");
             var data = JSON.parse(sessionStorage.getItem("session"))
             if (data) {
@@ -143,7 +142,7 @@ function rightMenu(params) {
             });
             $('.menus > '+ params).animate({ "right": "-40vw" }, "slow");
         } else {
-            var xd = $.trim(`<div class="menu-close" onclick="rightMenu('`+params+`')"></div>`)
+            var xd = $.trim(`<div class="menu-close slide-link" page="`+params+`"></div>`)
             $(xd).appendTo(".slide-menu");
             //pensar un nombre para la variable uwu
             $(".menus > "+ params).clone(true).appendTo(".slide-menu")

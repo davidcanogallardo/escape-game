@@ -21,12 +21,7 @@ $(document).ready(function () {
             if ( console && console.log ) {
                 console.log( "La solicitud se ha completado correctamente." );
                 console.log( data );
-                if(data.success){
-                    login(data)
-                } else {
-                    console.log(data.message);
-                    $("#login").append("<p>El usuario no existe</p>")
-                }
+                login(data)
             }
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
@@ -153,7 +148,7 @@ $(document).ready(function () {
                     "accept" : accept
                 }
             },
-            type: "POST",
+            type: "PUT",
             dataType: "json",
             url: _url,
         })
@@ -184,7 +179,7 @@ $(document).ready(function () {
                     "friend" : friendName
                 }
             },
-            type: "POST",
+            type: "PUT",
             dataType: "json",
             url: _url,
         })
@@ -207,7 +202,7 @@ $(document).ready(function () {
     $('.container').on('click','.close-sesion', function (event) {
         $.ajax({
             data: {
-                "petition" : "send_request",
+                "petition" : "close-sesion",
                 "params" : {
                     "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
                 }
@@ -232,17 +227,24 @@ $(document).ready(function () {
 })
 
 //Funciones para gestionar las respuestas
-function login(data) {  
-    sessionStorage.clear()
-
-    sessionStorage.setItem("session",JSON.stringify(data.userData))
-
-    console.log(data.message);
-    changeProfile(data.userData)
-    console.log(data.userData.friendList);
-    createFriendsList(data.userData.friendList)
-    createRequestList(data.userData.friendsRequest)
-    changePage("main");
+function login(data) {
+    if (data.success) {
+        sessionStorage.clear()
+    
+        sessionStorage.setItem("session",JSON.stringify(data.userData))
+    
+        console.log(data.message);
+        changeProfile(data.userData)
+        console.log(data.userData.friendList);
+        createFriendsList(data.userData.friendList)
+        createRequestList(data.userData.friendsRequest)
+        changePage("main");
+    } else {
+        //TODO: poner animación al mensaje de error
+        console.log(data.message);
+        $("#login > .error > *").remove()
+        $("#login > .error").append("<p>El usuario no existe</p>")
+    }
 }
 
 function updateFriendProfile(data) {  
@@ -386,3 +388,30 @@ function changeFriendProfile(data) {
     $("#fr-total-trophys").text(data.numCopas)
 }
 
+//Función para Actualizar ranking / lista de niveles al acabar partida
+function PUT_ranking() {
+    var _url = "./petitions.php";
+
+    $.ajax({
+        data: {
+            "petition" : "ranking",
+            "params" : {
+                "players" : [ "david", "adnan" ],
+                "time" : "00:12:13",
+                "level" : "summonerRift"
+            }
+        },
+        type: "PUT",
+        dataType: "json",
+        url: _url,
+    })
+    .done(function(data) {
+        console.log(data);
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+            console.log(textStatus);
+        }
+    });
+}
