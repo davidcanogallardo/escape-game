@@ -1,7 +1,8 @@
 $(document).ready(function () {
     /*****************************************************************************************/
     loadPages()
-    changePage('main')
+    changePage("main")
+    
 
     $('.container').on('click','.link', function (event) {
         changePage(event.currentTarget.attributes["page"].value)
@@ -25,32 +26,110 @@ $(document).ready(function () {
 });
 
 function loadPages() {
-    $(".pages .main").load("./pages/main.html", () => {
-        $(".pages .profile-page").load("./pages/profile.html", () => {
-            $(".pages .trophy-page").load("./pages/trophys.html", () => {
-                if (sessionStorage.getItem("session") != null) {
-                    console.log("session");
-                    var data = JSON.parse(sessionStorage.getItem("session"))
-                    changeProfile(data)
-                    console.log(data.friendList);
-                    createFriendsList(data.friendList)
-                    createRequestList(data.friendsRequest)
-                } else {
-                    console.log("object");
-                }
-            });
+    var load_pages = [
+        {
+            path: "./pages/profile.html",
+            selector: ".pages .profile-page",
+            done: false
+        },
+        {
+            path: "./pages/trophys.html",
+            selector: ".pages .trophy-page",
+            done: false
+        },
+        {
+            path: "./pages/settings_pages/menu_ajustes.html",
+            selector: ".pages .settings-page",
+            done: false
+        },
+        {
+            path: "./pages/login_signup.html",
+            selector: ".pages .login-page",
+            done: false
+        },
+        {
+            path: "./pages/password_recover.html",
+            selector: ".pages .recover-page",
+            done: false
+        },
+        {
+            path: "./pages/login_warning.html",
+            selector: ".pages .login-warning",
+            done: false
+        },
+        {
+            path: "./pages/settings_pages/sincronizar_mando.html",
+            selector: ".pages .connect-controller-page",
+            done: false
+        },
+        {
+            path: "./pages/settings_pages/probar_mando.html",
+            selector: ".pages .controller-settings-page",
+            done: false
+        },
+        {
+            path: "./pages/settings_pages/ajustes_sonido.html",
+            selector: ".pages .sound-settings-page",
+            done: false
+        },
+        {
+            path: "./pages/profile_friend.html",
+            selector: ".pages .friend-profile-page",
+            done: false
+        },
+        {
+            path: "./pages/ranking.html",
+            selector: ".pages .ranking-page",
+            done: false
+        },
+        {
+            path: "./pages/invitation.html",
+            selector: ".pages .invitation-page",
+            done: false
+        },
+        {
+            path: "./pages/login_warning.html",
+            selector: ".pages .login-warning",
+            done: false
+        },
+    ];
+
+
+    load_page("")
+
+    function load_page(page_name) {
+        console.log(page_name);
+        load_pages.forEach(page => {
+            if(page.path == page_name) page.done = true;
         });
-    });
-    $(".pages .settings-page").load("./pages/settings_pages/menu_ajustes.html")
-    $(".pages .login-page").load("./pages/login_signup.html")
-    $(".pages .recover-page").load("./pages/password_recover.html")
-    $(".pages .connect-controller-page").load("./pages/settings_pages/sincronizar_mando.html")
-    $(".pages .controller-settings-page").load("./pages/settings_pages/probar_mando.html")
-    $(".pages .sound-settings-page").load("./pages/settings_pages/ajustes_sonido.html")
-    $(".pages .friend-profile-page").load("./pages/profile_friend.html")
-    $(".pages .ranking-page").load("./pages/ranking.html")
-    $(".pages .invitation-page").load("./pages/invitation.html")
-    $(".pages .login-warning").load("./pages/login_warning.html")
+
+        var count = 0;
+        load_pages.forEach(page => {
+            if (!page.done) {
+                $(page.selector).load(page.path, load_page(page.path))
+                return
+            } else{
+                count++;
+            }
+            console.log(page.done+count);
+            
+        });
+        
+        if(count == load_pages.length){
+            console.log("session");
+            var data = JSON.parse(sessionStorage.getItem("session"))
+            if (data) {
+                console.log("sesion detectada");
+                changeProfile(data)
+                console.log(data.friendList);
+                createFriendsList(data.friendList)
+                createRequestList(data.friendsRequest)
+                
+            } else {
+                console.log("no hay sesion");
+            }
+        }
+    }
 }
 
 function rightMenu(params) {

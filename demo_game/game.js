@@ -1,29 +1,31 @@
-var map;
-var layer;
-
-function preload() {
-    game.load.tilemap('map', 'assets/tilemaps/mapa.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.image('tiles', 'assets/tilesets/TSMapa/PNG/tileset.png');  
-}
-
-
-
-function create() {
-    map = game.add.tilemap('map1');  // 
-    map.addTilesetImage('tileset', 'tiles');  // set tileset name
-    layer = map.createLayer('ground');  // set layer name
-    layer.resizeWorld();
+const config = {
+    type: Phaser.AUTO, // Which renderer to use
+    width: 320, // Canvas width in pixels
+    height: 600, // Canvas height in pixels
+    parent: "game-container", // ID of the DOM element to add the canvas to
+    scene: {
+      preload: preload,
+      create: create,
+      update: update
+    }
+  };
+  
+  const game = new Phaser.Game(config);
+  
+  function preload() {
+    this.load.image("tiles", "assets/tilesets/TSMapa/PNG/tileset.png");
+    this.load.tilemapTiledJSON("map", "assets/tilemaps/mapa.json");
+    this.load.atlas("player", "assets/character/player.png" , "assets/character/player.json");
+    this.cursors = this.input.keyboard.createCursorKeys();
+  }
+  
+  function create() {
+    const map = this.make.tilemap({ key: "map" });
+    const tileset = map.addTilesetImage('dungeon', 'tiles');
+    const player = this.add.sprite(128,128, 'player');
+    map.createStaticLayer('ground', tileset);
+    map.createStaticLayer('walls', tileset);
   }
 
-var config = {
-    type: Phaser.AUTO,
-    width: 750,
-    height: 500,
-    parent: 'game',
-    scene: {
-        preload: preload,
-        create: create
-    }
-};
-
-var game = new Phaser.Game(config);
+  function update() {
+  }
