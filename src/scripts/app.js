@@ -54,20 +54,22 @@ function loadPages() {
 }
 
 function rightMenu(params) {
-    //var isLogged = JSON.parse(localStorage.getItem('isLogged'))
     if (!isLogged()) {
         changePage("login-warning")
     } else {
-        if ($.trim($('.slide-menu').html()) === "") {
-            var menu = $(".menus > "+ params)
-            var menuClone = menu.clone()
-            var xd = $.trim(`<div class="menu-close" onclick="rightMenu('`+params+`')"></div>`)
-            //pensar un nombre para la variable uwu
-            $('.slide-menu').append(menuClone).append(xd);
-            $('.slide-menu > '+ params).animate({"right":"0vw"})
+        if ($.trim($('.slide-menu').html()) !== "") {
+            $('.slide-menu > '+ params).clone(true).appendTo(".menus")
+            $('.slide-menu > '+ params).animate({ "right": "-=400vw" }, "slow", () => {
+                $(".slide-menu > *").remove()
+            });
+            $('.menus > '+ params).animate({ "right": "-40vw" }, "slow");
         } else {
-            $(params).animate({ "right": "-=400vw" }, "slow" ,function() { $('.slide-menu > *').remove();});
-            $('.menus > '+ params).animate({ "right": "-40vw" });
+            var xd = $.trim(`<div class="menu-close" onclick="rightMenu('`+params+`')"></div>`)
+            $(xd).appendTo(".slide-menu");
+            //pensar un nombre para la variable uwu
+            $(".menus > "+ params).clone(true).appendTo(".slide-menu")
+            $(".menus > "+ params).remove()
+            $('.slide-menu > '+ params).animate({"right":"0vw"}, "slow")
         }
     }
 }
