@@ -903,6 +903,11 @@ input[type=password], input[type=email], input[type=text]{
     align-items: center;
 }
 
+.invitation-page {
+    position: relative; 
+    z-index: 199;
+}
+
 .overlay-content {
     width: 38vw;
     height: 28vw;

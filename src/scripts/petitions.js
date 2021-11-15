@@ -324,11 +324,11 @@ function createFriendsList(friendsList) {
 
     friendsList.forEach(name => {
         let newFriend = `
-        <div title="Ver perfil" class="list-item friend-profile-link" >
-            <div class="icon-container pr-btn " page="friend-profile-page" name="`+name+`">
-                <i class="fas fa-user" aria-hidden="true"></i>
+        <div title="Ver perfil" class="list-item friend-profile-link" page="friend-profile-page" name="`+name+`" >
+            <div class="icon-container pr-btn" name="`+name+`">
+                <i class="fas fa-user" aria-hidden="true" name="`+name+`"></i>
             </div>
-            <span>`+name+`</span>
+            <span name="`+name+`">`+name+`</span>
             <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation" onclick="return false">
                 <i class="fas fa-user-plus" aria-hidden="true"></i>
             </div>
