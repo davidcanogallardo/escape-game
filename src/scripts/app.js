@@ -21,6 +21,12 @@ $(document).ready(function () {
         $('.container > .invitation-page').fadeIn(220);
     });
 
+    //SLIDER RANKING
+    $(".container").on('click', '.level-slider img', function(e) {
+        $(".container").find(".selected").removeClass("selected");
+        $(e.currentTarget).addClass("selected");
+        $(".container .level-name").text(e.currentTarget.id);
+    });
 
 });
 
@@ -117,3 +123,4 @@ function changePage(pageName) {
 function isLogged() {  
     return sessionStorage.getItem('session')
 }
+
