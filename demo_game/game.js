@@ -1,8 +1,7 @@
 var config = {
   type: Phaser.AUTO, // Which renderer to use
   width: 320, // Canvas width in pixels
-  height: 600, // Canvas height in pixels
-  parent: "game-container", // ID of the DOM element to add the canvas to
+  height: 320, // Canvas height in pixels
   physics: {
     default: 'arcade',
     arcade: {
@@ -34,12 +33,13 @@ function create() {
   });
   tileset = map.addTilesetImage('dungeon', 'tiles');
   map.createStaticLayer('ground', tileset);
+  map.createStaticLayer('items', tileset);
   wallsLayer = map.createStaticLayer('walls', tileset);
   wallsLayer.setCollisionByProperty({ colides: true })
   player = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
   player.body.setSize(player.width*0.5, player.height * 0.8)
   this.physics.add.collider(player, wallsLayer)
-  
+
  //animaciones del personaje
 	this.anims.create({
 		key: 'player-idle-down',
@@ -76,6 +76,7 @@ function create() {
 		repeat: -1,
 		frameRate: 15
 	})
+
 
 }
 
