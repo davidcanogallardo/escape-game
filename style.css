@@ -523,7 +523,7 @@ td,th{
 }
 
 input[type=password], input[type=email], input[type=text]{
-    width: 36vw;
+    width: 98%;
     height: 3vw;
     background: rgba(172, 171, 171, 0.33);
     border: 2px solid #68492E;
@@ -1087,10 +1087,35 @@ input[type=password], input[type=email], input[type=text]{
   
 /**********************************Página login signup**************************************************/
 #forms-container{
-    padding: 0px 7vw 0px 7vw;
-    
     display: flex;
-    justify-content: space-between;
+    gap: 7vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+.sign-up-container {
+    display: flex;
+    flex-direction: column;
+    width: 40%; 
+}
+.sign-up-container h2 {
+    text-align: center;
+}
+
+#signup, #login {
+    display: flex;
+    flex-direction: column;
+}
+
+#form-space {
+    transform: rotate(180deg);
+    margin: 0vw;
+}
+
+.recover-link {
+    text-align: center;
+    font-size: 2.5vw;
+    margin: 20px 0px 0px 0px;  
 }
 
 #recover-form{
@@ -1136,10 +1161,12 @@ input[type=password], input[type=email], input[type=text]{
     text-align: center;
     border-radius: 2vw;
     font-family: Bebas;
+    margin-top: 3vw;
 }
 
 label{
-    font-size: 3vw;
+    font-size: 2vw;
+    text-align: left;
 }
 
 /*********************************Página de aviso de login*********************************/

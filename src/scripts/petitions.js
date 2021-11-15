@@ -242,8 +242,8 @@ function login(data) {
     } else {
         //TODO: poner animación al mensaje de error
         console.log(data.message);
-        $("#login > .error > *").remove()
-        $("#login > .error").append("<p>El usuario no existe</p>")
+        $(".error > *").remove()
+        $(".error").append("<p>El usuario no existe</p>")
     }
 }
 
