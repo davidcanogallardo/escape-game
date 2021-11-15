@@ -7,7 +7,7 @@ var config = {
     default: 'arcade',
     arcade: {
         gravity: { y: 0 },
-        debug: false
+        debug: true
     }
   },
   scene: {
@@ -35,8 +35,9 @@ function create() {
   tileset = map.addTilesetImage('dungeon', 'tiles');
   map.createStaticLayer('ground', tileset);
   wallsLayer = map.createStaticLayer('walls', tileset);
-  wallsLayer.setCollisionByProperty({ collides: true })
+  wallsLayer.setCollisionByProperty({ colides: true })
   player = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
+  player.body.setSize(player.width*0.5, player.height * 0.8)
   this.physics.add.collider(player, wallsLayer)
   
  //animaciones del personaje
@@ -73,12 +74,6 @@ function create() {
 		key: 'player-run-side',
 		frames: this.anims.generateFrameNames('player', { start: 1, end: 8, prefix: 'run-side-', suffix: '.png' }),
 		repeat: -1,
-		frameRate: 15
-	})
-
-	this.anims.create({
-		key: 'player-faint',
-		frames: this.anims.generateFrameNames('player', { start: 1, end: 4, prefix: 'faint-', suffix: '.png' }),
 		frameRate: 15
 	})
 
