@@ -1210,7 +1210,6 @@ label{
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
 }
 
 .login_warning p{
@@ -1225,9 +1224,7 @@ label{
     justify-content: center;
 }
 
-.botones_warning .btn{
-    width: 30vw;
-}
+
 
 .login_warning .cruz{
     font-size: 3.2vw;
@@ -1303,7 +1300,7 @@ label{
         top: 100%;
         left: 0;
         display: flex;
-    justify-content: center;
+        justify-content: center;
     }
 
     .right-menu > div, .settings-btn-container {
@@ -1378,5 +1375,26 @@ label{
         height: 8vw;
         font-size: 6vw;
     }
+
+    /************************************LOGIN WARNING*************************************/
+    .login-warning {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .login-warning h1 {
+        font-size: 17vw;
+    }
+    .login-warning p {
+        font-size: 6vw;
+    }
+    .botones_warning .btn {
+        font-size: 13vw;
+    }
+    .login-warning .red{
+        font-size: 9vw;
+    }
+        
 
 }
