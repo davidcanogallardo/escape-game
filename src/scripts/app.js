@@ -1,7 +1,7 @@
 $(document).ready(function () {
     /*****************************************************************************************/
     loadPages()
-    changePage("main")
+    changePage("recover-page")
 
     $('.container').on('click','.link', function (event) {
         changePage(event.currentTarget.attributes["page"].value)
@@ -37,7 +37,7 @@ function loadPages() {
                 console.log(1);
                 $(".pages .login-page").load("./pages/login_signup.html", () => {
                     console.log(2);
-                    $(".pages .recover-page").load("./pages/password_recover.html", () => {
+                    $(".recover-page").load("./pages/password_recover.html", () => {
                         console.log(3);
                         $(".pages .connect-controller-page").load("./pages/settings_pages/sincronizar_mando.html", () => {
                             console.log(3);

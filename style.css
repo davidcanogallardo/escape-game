@@ -292,7 +292,7 @@ body {
     text-transform: uppercase;
     text-align: center;
     text-decoration: none;
-    position: relative;
+    /*! position: relative; */
     cursor: pointer;
 }
 
@@ -531,9 +531,33 @@ input[type=password], input[type=email], input[type=text]{
     color: #68492E;
 }
 
-.recover-page input[type=text] {
-
+/**********************************RECOVER PAGE ********************************/
+.recover-page {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
 }
+
+#recover_email {
+    height: 4vw;
+    font-size: 3vw;
+}
+
+.recover-page p {
+    font-size: 2vw;
+}
+
+ #form-recover {
+    text-align: left;
+    width: 80%;
+ }
+
+ .recover-page .signup-link {
+    margin-top: 3vw;
+    
+}
+
 
 
 /********************************************Página principal**************************************/
@@ -1132,6 +1156,7 @@ input[type=password], input[type=email], input[type=text]{
 #recover-form{
     display: flex;
     justify-content: center;
+    /*! width: 55%; */
 }
 
 .recover-form{
@@ -1176,7 +1201,7 @@ input[type=password], input[type=email], input[type=text]{
 }
 
 label{
-    font-size: 2vw;
+    font-size: 3vw;
     text-align: left;
 }
 
@@ -1277,6 +1302,8 @@ label{
         position: absolute;
         top: 100%;
         left: 0;
+        display: flex;
+    justify-content: center;
     }
 
     .right-menu > div, .settings-btn-container {
@@ -1293,6 +1320,8 @@ label{
     /************************************LOGIN*************************************/
     .login-page {
         height: 100%;
+        width: 100%;
+        
     }
     #forms-container {
         width: 90%;
@@ -1325,5 +1354,30 @@ label{
         height: 6vw;
     }
 
+    /************************************RECOVER PAGE*************************************/
+    .recover-page {
+        width: 60%;
+    }
+    .recover-page h1 {
+        font-size: 9vw;
+    }
+    .recover-page p {
+        font-size: 5vw;
+    }
+    .recover-page .signup-link {
+        height: 11vw;
+        font-size: 9vw;
+        
+    }
+    .recover-page .volver {
+        width: 17%;
+        font-size: 8vw;
+        text-align: center;
+    }
+
+    #recover_email {
+        height: 8vw;
+        font-size: 6vw;
+    }
 
 }
