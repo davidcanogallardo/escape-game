@@ -1,46 +1,36 @@
-<div id="forms-container">
-    <div id="create">
-    <div style="width:43vw;">
-        <h2>CREAR CUENTA</h2>
-        </div>
-        <form id="signup" method="put">  
-            <label for="email" required="">Email</label><br>
-            <input type="email" id="register_email" name="mail" required=""><br>
-            <label for="uname">Nombre de usuario</label><br>
-            <input type="text" id="lname" name="username" required=""><br>
-            <label for="password">Contraseña</label><br>
-            <input type="password" id="register_password" name="password" required=""><br>
-            <label for="confirm">Repetir contraseña</label><br>
-            <input type="password" id="confirm" name="password_confirm" required=""><br>
+<div id="forms-container" style="">
+    <div style="" class="sign-up-container">
+        <h2 style="">CREAR CUENTA</h2>
+        <form id="signup" method="put" style="">  
+            <label for="email" required="">Email</label>
+            <input type="email" id="register_email" name="mail" required="" style="">
+            <label for="uname">Nombre de usuario</label>
+            <input type="text" id="lname" name="username" required="" style="">
+            <label for="password">Contraseña</label>
+            <input type="password" id="register_password" name="password" required="">
+            <label for="confirm">Repetir contraseña</label>
+            <input type="password" id="confirm" name="password_confirm" required="">
 
-            <!-- <button class="btn blue signup-link">CREAR CUENTA</button> -->
-            <div style="width:37vw;">
-                <div class=" form-button blue signup-link">CREAR CUENTA</div>
-            </div>
-            <!--TODO: login requirements-->
+            <div class=" form-button blue signup-link">CREAR CUENTA</div>
         </form>
     </div>
-    <div style="border-left: 2px solid #68492E;margin: 0px;margin-right: 3vw;"></div>
-    <div id="#login-container">
-        <div style="width:48vw">
-            <h2>INICIAR SESIÓN</h2>
-            </div>
-        <form id="login" method="post">
-            <label for="uname">Nombre de usuario</label><br>
-            <input type="text" id="login-name" name="username"><br>
-            <label for="password">Contraseña</label><br>
-            <input type="password" id="login_password" name="password"><br><br>
-            <div style="width:34vw;text-align:left">
-                <a class="recover-link link" page="recover-page"><b>He olvidado mi contraseña</b></a>
-            </div><br>
-            <!-- NO DEBERIA SER SUBMIT -->
-            <!-- <button class="btn blue signup-link">INICIAR SESIÓN</button> -->
 
-            <div style="width:37vw">
-                <div class=" form-button blue login-link">INICIAR SESIÓN</div>
+    <hr id="form-space" style="">
+
+    <div style="" class="sign-up-container">
+        <h2 style="">INICIAR SESIÓN</h2>
+        <form id="login" method="post" style="">  
+            <label for="uname">Nombre de usuario</label>
+            <input type="text" id="login-name" name="username" required="" style="">
+            <label for="password">Contraseña</label>
+            <input type="password" id="login_password" name="password" required="">
+            <div class="recover-link link" page="recover-page">
+                <a class="recover-link link" page="recover-page">
+                    <b>He olvidado mi contraseña</b>
+                </a>
             </div>
-            <div class="error"></div>
+            <div class=" form-button blue login-link">INICIAR SESIÓN</div>
         </form>
+        <div class="error"></div>
     </div>
 </div>
-<!--TODO: nueva pagina de login-->
