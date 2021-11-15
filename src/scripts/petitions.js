@@ -242,8 +242,8 @@ function login(data) {
     } else {
         //TODO: poner animación al mensaje de error
         console.log(data.message);
-        $("#login > .error > *").remove()
-        $("#login > .error").append("<p>El usuario no existe</p>")
+        $(".error > *").remove()
+        $(".error").append("<p>El usuario no existe</p>")
     }
 }
 
@@ -253,21 +253,42 @@ function updateFriendProfile(data) {
 }
 
 function updateRanking(data) {
-    $(".ranking-list > *").remove()
+    $(".all-levels > *").remove();
+    var contador = 1;
+
     for (i in data.levels) {
+        var table = `
+        <div id="`+(i+1)+`">
+        <table>
+            <thead>
+                <tr>
+                    <th>Posición</th>
+                    <th class="name">Nombre</th>
+                    <th>Tiempo</th>
+                </tr>
+            </thead>
+            <tbody>
+        `
         Object.entries(data.levels[i]).forEach((l) =>{
-            var new_row = `
-            <p>
-               `+0+`
-               `+l[0]+`
-               `+l[1]+`
-            </p>
+            
+            table+=`
+            <tr>
+                <td>`+(contador++)+`</td>
+                <td class="name">`+l[0]+`</td>
+                <td>`+l[1]+`</td>
+            </tr>
             `
-            $(".ranking-list").append(new_row)
         })
+        table+=`</tbody> </table> </div>`;
+        $(".all-levels").append(table);
     }
 
 
+}
+
+function createTable(){
+
+    var new_table = ''
 }
 
 function updateFriendList(event, accept, friendName) {
