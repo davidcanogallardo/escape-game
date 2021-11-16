@@ -1320,6 +1320,10 @@ label{
         width: 100%;
         
     }
+    .login-page h2 {
+        font-size: 6vw;
+        
+    }
     #forms-container {
         width: 90%;
         justify-content: center;
@@ -1334,12 +1338,12 @@ label{
     }
 
     label {
-        font-size: 5vw;
+        font-size: 3.5vw;
     }
 
     input[type="password"], input[type="email"], input[type="text"] {
-        height: 4vw;
-        font-size: 4vw;
+        height: 8vw;
+        font-size: 6vw;
     }
 
     .recover-link {
@@ -1399,6 +1403,10 @@ label{
     /************************************MAIN*************************************/
     .right-menu {
         right: 16vw;
+    }
+
+    .play {
+        font-size: 8.5vw;
     }
 
     /************************************MAIN*************************************/
