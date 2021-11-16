@@ -23,7 +23,7 @@ function preload() {
   this.load.image("tiles", "assets/tilesets/TSMapa/PNG/tileset.png");
   this.load.tilemapTiledJSON("map", "assets/tilemaps/mapa.json");
   this.load.atlas('player', 'assets/character/player.png', 'assets/character/player.json');
-  this.load.atlas('chest', 'assets/character/chest.png', 'assets/character/chest.json');
+  this.load.atlas('chest', 'assets/objects/chest.png', 'assets/objects/chest.json');
   
 
 }
@@ -41,6 +41,12 @@ function create() {
   player.body.setSize(player.width*0.5, player.height * 0.8)
   this.physics.add.collider(player, wallsLayer)
 
+  //chest
+  const chest = this.add.sprite(56,72,'chest','chest_empty_open_anim_f0.png');
+  this.time.delayedCall(1000,()=>{
+    chest.animations.add('chest-open');
+  })
+  
  //animaciones del personaje
 	this.anims.create({
 		key: 'player-idle-down',
@@ -103,8 +109,6 @@ function update() {
   } else {
     
   }
-
-  
 
   if (leftDown) {
 
