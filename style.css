@@ -1198,6 +1198,7 @@ input[type=password], input[type=email], input[type=text]{
     border-radius: 2vw;
     font-family: Bebas;
     margin-top: 3vw;
+    cursor: pointer;
 }
 
 label{
