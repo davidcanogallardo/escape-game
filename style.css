@@ -87,17 +87,51 @@ body {
     flex-direction: column;
     align-items: center;
 }
+.sincronizar_mando h1{
+    font-size: 7vw;
+}
+.sincronizar_mando p{
+    font-size: 2.3vw;
+    margin: 0;
+}
+
+.sinc_mand_cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+}
+
+.new_mandos {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    margin-bottom: 1vw;
+}
+
+.mandos_sincronizados {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 0.4vw;
+    margin-bottom: 1vw;
+}
 
 .nuevos_dispositivos{
-    overflow-y: scroll ;
-    overflow-x: hidden;
-    height: 20vw;
+    overflow-y: scroll;
+    display: flex;
+    align-items: center;
+    gap: 0.7vw;
+    flex-direction: column;
+    min-height: 1vw;
+    height: 13vw;
 }
 
 .mando {
     background: #68492E;
-    width: 30vw;
-    height: 5vh;
+    width: 21vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -106,8 +140,8 @@ body {
     text-align: center;
     border-radius: 10px;
     border: 2px solid #68492E;
-    margin: 10px;
     color: #EFDEC3;
+    flex: 0 0 3vw;
 }
 
 .mando > *{
@@ -118,21 +152,21 @@ body {
     margin-right: 20px;
 }
 
-.mando .selected{
+.selected{
     background-color: rgba(196, 196, 196, 0.56);
     border: 2px solid #68492E;
     color: #68492E;
 }
 
-.mando .selected fa-gamepad{
+.selected fa-gamepad{
     color: #68492E;
 }
 
-.mando .selected > * {
+.selected > * {
     color: #68492E;
 }
 
-.mando .selected i {
+.selected i {
     color: #68492E;
 }
 
@@ -161,6 +195,12 @@ body {
 .icon-small i{
     font-size: 3vw;
 }
+
+.profile-page h1 {
+    font-size: 5vw;
+}
+
+
 /***************************************Página del perfil********************************/
 .profile{
     display: flex; 
@@ -203,7 +243,7 @@ body {
 }
 
 .table-profile .td-width{
-    width: 20vw;
+    width: 17vw;
 }
 
 .i-table{
@@ -213,6 +253,10 @@ body {
 
 .center{
     text-align: center;
+}
+
+.profile-page td {
+    border-radius: 1vw;
 }
 /*************************************************************************/
 
@@ -944,6 +988,7 @@ input[type=password], input[type=email], input[type=text]{
     border-radius: 1vw;
     position: absolute;
     z-index: 45;
+    border-radius: 3vw;
 }
 
 .cancel_confirm{
@@ -1198,6 +1243,7 @@ input[type=password], input[type=email], input[type=text]{
     border-radius: 2vw;
     font-family: Bebas;
     margin-top: 3vw;
+    cursor: pointer;
 }
 
 label{
@@ -1371,7 +1417,8 @@ label{
     }
     .recover-page .volver {
         width: 17%;
-        font-size: 8vw;
+        font-size: 8vw
+        ;
         text-align: center;
     }
 
@@ -1399,6 +1446,25 @@ label{
     .login-warning .red{
         font-size: 9vw;
     }
+
+    /************************************invitation html*************************************/
+    .overlay-content {
+        width: 72vw ;
+        height: 51vw;
+    }
+
+    .overlay-content h3 {
+        font-size: 11vw;
+
+    }
+    .overlay-content p {
+        font-size: 4vw;
+
+    }
+
+    .overlay-content .btn {
+        padding: 4px 11vw;
+    }
         
     /************************************MAIN*************************************/
     .right-menu {
@@ -1410,6 +1476,187 @@ label{
     }
 
     /************************************MAIN*************************************/
+    /************************************conectar mandos html*************************************/
+    .sincronizar_mando {
+        margin-top: 8vw;
+        height: 100%;
+    }
+    .sincronizar_mando p {
+        font-size: 5vw;
+    }
+
+    .mando {
+        width: 58vw;
+        font-size: 6vw;
+        flex: 0 0 11vw;
+    }
+
+    .nuevos_dispositivos {
+        height: 60vw;
+        width: 68vw;
+    }
+
+    .sinc_mand_cont {
+        width: 110%;
+        flex-direction: row;
+        gap: 8vw;
+        align-items: flex-start;
+    }
+
+    .sincronizar_mando .btn {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        border-radius: 40vw;
+        padding: 3vw;
+    }
+
+    /************************************menu ajustes*************************************/
+    .settings_menu {
+        height: 100%;
+        justify-content: center;
+    }
+    .botones {
+        flex: 0;
+    }
+    .botones .btn {
+        width: 60vw;
+        font-size: 9vw;
+        border-radius: 3vw;
+    }
+
+    .red {
+        padding: 3vw;
+        font-size: 7vw;
+        border-radius: 3vw;
+    }
+
+    /************************************lista de amigos*************************************/
+    .slide-header {
+        font-size: 4vw;
+    }
+
+    .slide-list {
+        height: 62vw;
+    }
+
+    .list-item {
+        font-size: 5.5vw;
+    }
+
+    .list-item div {
+        width: 12vw;
+        height: 12vw;
+    }
+
+    .list-item div i {
+        font-size: 6.5vw;
+    }
+    .add-btn {
+        width: 12vw !important;
+        height: 12vw !important;
+    }
+
+    .form-fr-request {
+        font-size: 4vw;
+    }
+
+    #user-request {
+        height: 8vw;
+    }
+
+    .form-fr-request #send {
+        font-size: 6.1vw;
+        height: 8vw;
+        border-radius: 2.4vw;
+    }
+
+    /************************************notificaciones*************************************/
+    .list-item > .btn {
+        width: 21vw;
+        height: 10vw;
+    }
+
+    .notification-container .slide-list {
+        height: inherit;
+    }
+
+    /************************************perfil propio*************************************/
+
+    .all-levels th, td {
+        padding: 2vw 5vw;
+    }
+
+    td, th {
+        border-radius: 2vw;
+    }
+
+    .profile .btn {
+        font-size: 7vw;
+    }
+
+
+    .table-profile .td-width {
+        width: auto;
+    }
+    .table-profile {
+        width: 107vw;
+    }
+
+    /************************************perfil amigo*************************************/
+
+    .icon-small {
+        width: 15vw;
+        height: 15vw;
+    }
+
+    .icon-small i {
+        font-size: 7vw;
+    }
+
+    .page.friend-profile-page {
+        width: 90%;
+    }
+
+
+/*
+
+    .container-profile{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .icon-profile{
+      float: left;
+    }
+
+    .icon-small{
+        width: 5.5vw;
+        height: 5.5vw;
+    }
+    
+    .icon-profile{
+        width: 18vw; 
+        height: 40vh;
+        box-shadow: 0px 8px 8px rgb(0 0 0 / 25%);
+    }
+
+    .table-profile{
+        padding-left: 20px;
+        width: 35vw;
+        height: 25vh;
+        border-collapse: separate;
+        border-spacing: 5px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+
+
+*/
 
 
 }
