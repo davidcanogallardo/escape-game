@@ -21,47 +21,57 @@ $(document).ready(function () {
         $('.container > .invitation-page').fadeIn(220);
     });
 
+    //SLIDER RANKING
+    $(".container").on('click', '.level-slider img', function(e) {
+        $(".container").find(".selected").removeClass("selected");
+        $(e.currentTarget).addClass("selected");
+        $(".container .level-name").text(e.currentTarget.id);
+    });
 
 });
 
 function loadPages() {
-    $(".pages .settings-page").load("./pages/settings_pages/menu_ajustes.html", () => {
-        console.log(1);
-        $(".pages .login-page").load("./pages/login_signup.html", () => {
-            console.log(2);
-            $(".pages .recover-page").load("./pages/password_recover.html", () => {
-                console.log(3);
-                $(".pages .connect-controller-page").load("./pages/settings_pages/sincronizar_mando.html", () => {
-                    console.log(3);
-                    $(".pages .controller-settings-page").load("./pages/settings_pages/probar_mando.html", () => {
-                        console.log(4);
-                        $(".pages .sound-settings-page").load("./pages/settings_pages/ajustes_sonido.html", () => {
-                            console.log(5)
-                            console.log(6);
-                            $(".pages .profile-page").load("./pages/profile.html", () => {
-                                console.log(7);
-                                $(".pages .friend-profile-page").load("./pages/profile_friend.html", () => {
-                                    console.log(8);
-                                    $(".pages .ranking-page").load("./pages/ranking.html", () => {
-                                        console.log(9);
-                                        $(".pages .invitation-page").load("./pages/invitation.html", () => {
-                                            console.log(10);
-                                            $(".pages .login-warning").load("./pages/login_warning.html", () => {
-                                                console.log(11);
-                                                $(".pages .trophy-page").load("./pages/trophys.html", () => {
-                                                    console.log(12);
-                                                    console.log("session");
-                                                    var data = JSON.parse(sessionStorage.getItem("session"))
-                                                    if (data) {
-                                                        console.log("sesion detectada");
-                                                        changeProfile(data)
-                                                        console.log(data.friendList);
-                                                        createFriendsList(data.friendList)
-                                                        createRequestList(data.friendsRequest)
-                                                        
-                                                    } else {
-                                                        console.log("no hay sesion");
-                                                    }
+    $(".menus .slide-list-container").load("./pages/menus/friend-list.html", () => {
+        $(".menus .notification-container").load("./pages/menus/notifications.html", () => {
+            $(".pages .settings-page").load("./pages/settings_pages/menu_ajustes.html", () => {
+                console.log(1);
+                $(".pages .login-page").load("./pages/login_signup.html", () => {
+                    console.log(2);
+                    $(".recover-page").load("./pages/password_recover.html", () => {
+                        console.log(3);
+                        $(".pages .connect-controller-page").load("./pages/settings_pages/sincronizar_mando.html", () => {
+                            console.log(3);
+                            $(".pages .controller-settings-page").load("./pages/settings_pages/probar_mando.html", () => {
+                                console.log(4);
+                                $(".pages .sound-settings-page").load("./pages/settings_pages/ajustes_sonido.html", () => {
+                                    console.log(5)
+                                    console.log(6);
+                                    $(".pages .profile-page").load("./pages/profile.html", () => {
+                                        console.log(7);
+                                        $(".pages .friend-profile-page").load("./pages/profile_friend.html", () => {
+                                            console.log(8);
+                                            $(".pages .ranking-page").load("./pages/ranking.html", () => {
+                                                console.log(9);
+                                                $(".pages .invitation-page").load("./pages/invitation.html", () => {
+                                                    console.log(10);
+                                                    $(".pages .login-warning").load("./pages/login_warning.html", () => {
+                                                        console.log(11);
+                                                        $(".pages .trophy-page").load("./pages/trophys.html", () => {
+                                                            console.log(12);
+                                                            console.log("session");
+                                                            var data = JSON.parse(sessionStorage.getItem("session"))
+                                                            if (data) {
+                                                                console.log("sesion detectada");
+                                                                changeProfile(data)
+                                                                console.log(data.friendList);
+                                                                createFriendsList(data.friendList)
+                                                                createRequestList(data.friendsRequest)
+                                                                
+                                                            } else {
+                                                                console.log("no hay sesion");
+                                                            }
+                                                        })
+                                                    })
                                                 })
                                             })
                                         })
@@ -73,7 +83,7 @@ function loadPages() {
                 })
             })
         })
-    })
+    })  
 }
 
 function rightMenu(params) {
@@ -117,3 +127,4 @@ function changePage(pageName) {
 function isLogged() {  
     return sessionStorage.getItem('session')
 }
+
