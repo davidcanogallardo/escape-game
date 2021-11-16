@@ -23,7 +23,8 @@ function preload() {
   cursors = this.input.keyboard.createCursorKeys();
   this.load.image("tiles", "assets/tilesets/TSMapa/PNG/tileset.png");
   this.load.tilemapTiledJSON("map", "assets/tilemaps/mapa.json");
-  this.load.atlas('player', 'assets/character/player.png', 'assets/character/player.json')
+  this.load.atlas('player', 'assets/character/player.png', 'assets/character/player.json');
+  this.load.atlas('chest', 'assets/character/chest.png', 'assets/character/chest.json');
   
 
 }
