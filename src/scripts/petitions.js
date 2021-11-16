@@ -170,32 +170,38 @@ $(document).ready(function () {
 
     // enviar solicitud
     $('.container').on('click','.send-friend-request', function (event) {
-        var friendName = $("#user-request").val()
-        $.ajax({
-            data: {
-                "petition" : "send_request",
-                "params" : {
-                    "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
-                    "friend" : friendName
+        var friendName = $("#user-request").val();
+        $("#user-request").val('');
+        if(friendName!=''){
+            $.ajax({
+                data: {
+                    "petition" : "send_request",
+                    "params" : {
+                        "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
+                        "friend" : friendName
+                    }
+                },
+                type: "PUT",
+                dataType: "json",
+                url: _url,
+            })
+            .done(function(data) {
+                console.log(data);
+                if (data.success) {
+                    console.log(data.params);
+                    updateFriendNotification(friendName)
                 }
-            },
-            type: "PUT",
-            dataType: "json",
-            url: _url,
-        })
-        .done(function(data) {
-            console.log(data);
-            if (data.success) {
-                console.log(data.params);
-                updateFriendNotification(friendName)
-            }
-        })
-        .fail(function(textStatus) {
-            if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
-                console.log(textStatus);
-            }
-        });
+            })
+            .fail(function(textStatus) {
+                if ( console && console.log ) {
+                    console.log( "La solicitud a fallado: " +  textStatus);
+                    console.log(textStatus);
+                }
+            });
+        } else {
+            console.log("Esta vacio");
+        }
+        
     });
 
     // cerrar sesion
