@@ -170,32 +170,38 @@ $(document).ready(function () {
 
     // enviar solicitud
     $('.container').on('click','.send-friend-request', function (event) {
-        var friendName = $("#user-request").val()
-        $.ajax({
-            data: {
-                "petition" : "send_request",
-                "params" : {
-                    "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
-                    "friend" : friendName
+        var friendName = $("#user-request").val();
+        $("#user-request").val('');
+        if(friendName!=''){
+            $.ajax({
+                data: {
+                    "petition" : "send_request",
+                    "params" : {
+                        "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
+                        "friend" : friendName
+                    }
+                },
+                type: "PUT",
+                dataType: "json",
+                url: _url,
+            })
+            .done(function(data) {
+                console.log(data);
+                if (data.success) {
+                    console.log(data.params);
+                    updateFriendNotification(friendName)
                 }
-            },
-            type: "PUT",
-            dataType: "json",
-            url: _url,
-        })
-        .done(function(data) {
-            console.log(data);
-            if (data.success) {
-                console.log(data.params);
-                updateFriendNotification(friendName)
-            }
-        })
-        .fail(function(textStatus) {
-            if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
-                console.log(textStatus);
-            }
-        });
+            })
+            .fail(function(textStatus) {
+                if ( console && console.log ) {
+                    console.log( "La solicitud a fallado: " +  textStatus);
+                    console.log(textStatus);
+                }
+            });
+        } else {
+            console.log("Esta vacio");
+        }
+        
     });
 
     // cerrar sesion
@@ -324,11 +330,11 @@ function createFriendsList(friendsList) {
 
     friendsList.forEach(name => {
         let newFriend = `
-        <div title="Ver perfil" class="list-item friend-profile-link" >
-            <div class="icon-container pr-btn " page="friend-profile-page" name="`+name+`">
-                <i class="fas fa-user" aria-hidden="true"></i>
+        <div title="Ver perfil" class="list-item friend-profile-link" page="friend-profile-page" name="`+name+`" >
+            <div class="icon-container pr-btn" name="`+name+`">
+                <i class="fas fa-user" aria-hidden="true" name="`+name+`"></i>
             </div>
-            <span>`+name+`</span>
+            <span name="`+name+`">`+name+`</span>
             <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation" onclick="return false">
                 <i class="fas fa-user-plus" aria-hidden="true"></i>
             </div>

@@ -15,7 +15,7 @@ h1 {
     font-size: 10vw;
     margin: 0;
     color: #68492E;
-    letter-spacing: 3px;
+    letter-spacing: 0.1vw;
 }
 
 h2{
@@ -87,17 +87,50 @@ body {
     flex-direction: column;
     align-items: center;
 }
+.sincronizar_mando h1{
+    font-size: 7vw;
+}
+.sincronizar_mando p{
+    font-size: 2.3vw;
+}
+
+.sinc_mand_cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+}
+
+.new_mandos {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    margin-bottom: 1vw;
+}
+
+.mandos_sincronizados {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 0.4vw;
+    margin-bottom: 1vw;
+}
 
 .nuevos_dispositivos{
-    overflow-y: scroll ;
-    overflow-x: hidden;
-    height: 20vw;
+    overflow-y: scroll;
+    display: flex;
+    align-items: center;
+    gap: 0.7vw;
+    flex-direction: column;
+    min-height: 1vw;
+    height: 13vw;
 }
 
 .mando {
     background: #68492E;
-    width: 30vw;
-    height: 5vh;
+    width: 21vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -106,8 +139,8 @@ body {
     text-align: center;
     border-radius: 10px;
     border: 2px solid #68492E;
-    margin: 10px;
     color: #EFDEC3;
+    flex: 0 0 3vw;
 }
 
 .mando > *{
@@ -118,21 +151,21 @@ body {
     margin-right: 20px;
 }
 
-.mando .selected{
+.selected{
     background-color: rgba(196, 196, 196, 0.56);
     border: 2px solid #68492E;
     color: #68492E;
 }
 
-.mando .selected fa-gamepad{
+.selected fa-gamepad{
     color: #68492E;
 }
 
-.mando .selected > * {
+.selected > * {
     color: #68492E;
 }
 
-.mando .selected i {
+.selected i {
     color: #68492E;
 }
 
@@ -292,7 +325,7 @@ body {
     text-transform: uppercase;
     text-align: center;
     text-decoration: none;
-    position: relative;
+    /*! position: relative; */
     cursor: pointer;
 }
 
@@ -523,16 +556,41 @@ td,th{
 }
 
 input[type=password], input[type=email], input[type=text]{
-    width: 98%;
-    height: 3vw;
+    height: 2vw;
     background: rgba(172, 171, 171, 0.33);
-    border: 2px solid #68492E;
-    border-radius: 10px;
-    font-size: 2.5vw;
+    border: 0.2vw solid #68492E;
+    border-radius: 0.6vw;
+    font-size: 1.9vw;
     color: #68492E;
-    padding-left: 10px;
-    margin-bottom: 10px;
 }
+
+/**********************************RECOVER PAGE ********************************/
+.recover-page {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+#recover_email {
+    height: 4vw;
+    font-size: 3vw;
+}
+
+.recover-page p {
+    font-size: 2vw;
+}
+
+ #form-recover {
+    text-align: left;
+    width: 80%;
+ }
+
+ .recover-page .signup-link {
+    margin-top: 3vw;
+    
+}
+
 
 
 /********************************************Página principal**************************************/
@@ -904,6 +962,11 @@ input[type=password], input[type=email], input[type=text]{
     align-items: center;
 }
 
+.invitation-page {
+    position: relative; 
+    z-index: 199;
+}
+
 .overlay-content {
     width: 38vw;
     height: 28vw;
@@ -914,6 +977,7 @@ input[type=password], input[type=email], input[type=text]{
     border-radius: 1vw;
     position: absolute;
     z-index: 45;
+    border-radius: 3vw;
 }
 
 .cancel_confirm{
@@ -1088,15 +1152,20 @@ input[type=password], input[type=email], input[type=text]{
 /**********************************Página login signup**************************************************/
 #forms-container{
     display: flex;
-    gap: 7vw;
-    margin-left: 5vw;
-    margin-right: 5vw;
+    gap: 4vw;
+    width: 80%;
+}
+
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .sign-up-container {
     display: flex;
     flex-direction: column;
-    width: 40%; 
+    width: 50%;
 }
 .sign-up-container h2 {
     text-align: center;
@@ -1114,13 +1183,14 @@ input[type=password], input[type=email], input[type=text]{
 
 .recover-link {
     text-align: center;
-    font-size: 2.5vw;
-    margin: 20px 0px 0px 0px;  
+    font-size: 2vw;
+    margin-top: 3vw;
 }
 
 #recover-form{
     display: flex;
     justify-content: center;
+    /*! width: 55%; */
 }
 
 .recover-form{
@@ -1162,10 +1232,11 @@ input[type=password], input[type=email], input[type=text]{
     border-radius: 2vw;
     font-family: Bebas;
     margin-top: 3vw;
+    cursor: pointer;
 }
 
 label{
-    font-size: 2vw;
+    font-size: 3vw;
     text-align: left;
 }
 
@@ -1174,7 +1245,6 @@ label{
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
 }
 
 .login_warning p{
@@ -1189,9 +1259,7 @@ label{
     justify-content: center;
 }
 
-.botones_warning .btn{
-    width: 30vw;
-}
+
 
 .login_warning .cruz{
     font-size: 3.2vw;
@@ -1245,6 +1313,14 @@ label{
 /**************************************************************************************************************************************/
 /*Media query para girar en horizontal la página al abrirla en mvil*/
 @media only screen and (orientation:portrait) {
+    /******************************generico*************************************/
+
+    h2 {
+        font-size: 9vw;
+    }
+
+    /******************************generico*************************************/
+
     .container {
         /* Rotate the content container */
         transform: rotate(-90deg);
@@ -1258,6 +1334,8 @@ label{
         position: absolute;
         top: 100%;
         left: 0;
+        display: flex;
+        justify-content: center;
     }
 
     .right-menu > div, .settings-btn-container {
@@ -1270,4 +1348,108 @@ label{
         font-size: 9.5vw;
         font-family: "Bebas";
     }
+
+    /************************************LOGIN*************************************/
+    .login-page {
+        height: 100%;
+        width: 100%;
+        
+    }
+    #forms-container {
+        width: 90%;
+        justify-content: center;
+    }
+
+    .sign-up-container {
+        width: 36%;
+    }
+
+    #signup, #login {
+        gap: 2.1vw;
+    }
+
+    label {
+        font-size: 5vw;
+    }
+
+    input[type="password"], input[type="email"], input[type="text"] {
+        height: 4vw;
+        font-size: 4vw;
+    }
+
+    .recover-link {
+        font-size: 4.5vw;
+    }
+
+    .form-button {
+        font-size: 5vw;
+        height: 6vw;
+    }
+
+    /************************************RECOVER PAGE*************************************/
+    .recover-page {
+        width: 60%;
+    }
+    .recover-page h1 {
+        font-size: 9vw;
+    }
+    .recover-page p {
+        font-size: 4vw;
+    }
+    .recover-page .signup-link {
+        font-size: 6vw;
+        
+    }
+    .recover-page .volver {
+        width: 17%;
+        font-size: 8vw
+        ;
+        text-align: center;
+    }
+
+    #recover_email {
+        height: 8vw;
+        font-size: 6vw;
+    }
+
+    /************************************LOGIN WARNING*************************************/
+    .login-warning {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .login-warning h1 {
+        font-size: 17vw;
+    }
+    .login-warning p {
+        font-size: 6vw;
+    }
+    .botones_warning .btn {
+        font-size: 13vw;
+    }
+    .login-warning .red{
+        font-size: 9vw;
+    }
+
+    /************************************invitation html*************************************/
+    .overlay-content {
+        width: 72vw ;
+        height: 51vw;
+    }
+
+    .overlay-content h3 {
+        font-size: 11vw;
+
+    }
+    .overlay-content p {
+        font-size: 4vw;
+
+    }
+
+    .overlay-content .btn {
+        padding: 4px 11vw;
+    }
+        
+
 }

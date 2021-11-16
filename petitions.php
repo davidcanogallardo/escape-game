@@ -48,7 +48,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 function loginResponse($name){
-    if (in_array($name, ["david", "alex", "adnan", "oscar", ])) {
+    if (in_array($name, ["david", "alex", "adnan", "oscar", "a"])) {
         $data = [];
         $data['success'] = true;
         $data['message'] = 'Hola! El valor recibido es correcto.';
