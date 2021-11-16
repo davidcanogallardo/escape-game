@@ -92,6 +92,7 @@ body {
 }
 .sincronizar_mando p{
     font-size: 2.3vw;
+    margin: 0;
 }
 
 .sinc_mand_cont {
@@ -1451,5 +1452,38 @@ label{
         padding: 4px 11vw;
     }
         
+    /************************************conectar mandos html*************************************/
+    .sincronizar_mando {
+        margin-top: 8vw;
+        height: 100%;
+    }
+    .sincronizar_mando p {
+        font-size: 5vw;
+    }
 
+    .mando {
+        width: 58vw;
+        font-size: 6vw;
+        flex: 0 0 11vw;
+    }
+
+    .nuevos_dispositivos {
+        height: 60vw;
+        width: 68vw;
+    }
+
+    .sinc_mand_cont {
+        width: 110%;
+        flex-direction: row;
+        gap: 8vw;
+        align-items: flex-start;
+    }
+
+    .sincronizar_mando .btn {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        border-radius: 40vw;
+        padding: 3vw;
+    }
 }
