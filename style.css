@@ -87,17 +87,50 @@ body {
     flex-direction: column;
     align-items: center;
 }
+.sincronizar_mando h1{
+    font-size: 7vw;
+}
+.sincronizar_mando p{
+    font-size: 2.3vw;
+}
+
+.sinc_mand_cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+}
+
+.new_mandos {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    margin-bottom: 1vw;
+}
+
+.mandos_sincronizados {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 0.4vw;
+    margin-bottom: 1vw;
+}
 
 .nuevos_dispositivos{
-    overflow-y: scroll ;
-    overflow-x: hidden;
-    height: 20vw;
+    overflow-y: scroll;
+    display: flex;
+    align-items: center;
+    gap: 0.7vw;
+    flex-direction: column;
+    min-height: 1vw;
+    height: 13vw;
 }
 
 .mando {
     background: #68492E;
-    width: 30vw;
-    height: 5vh;
+    width: 21vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -106,8 +139,8 @@ body {
     text-align: center;
     border-radius: 10px;
     border: 2px solid #68492E;
-    margin: 10px;
     color: #EFDEC3;
+    flex: 0 0 3vw;
 }
 
 .mando > *{
@@ -118,21 +151,21 @@ body {
     margin-right: 20px;
 }
 
-.mando .selected{
+.selected{
     background-color: rgba(196, 196, 196, 0.56);
     border: 2px solid #68492E;
     color: #68492E;
 }
 
-.mando .selected fa-gamepad{
+.selected fa-gamepad{
     color: #68492E;
 }
 
-.mando .selected > * {
+.selected > * {
     color: #68492E;
 }
 
-.mando .selected i {
+.selected i {
     color: #68492E;
 }
 
