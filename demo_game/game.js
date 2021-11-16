@@ -32,7 +32,7 @@ function create() {
     key: "map"
   });
   tileset = map.addTilesetImage('dungeon', 'tiles');
-  map.createStaticLayer('ground', tileset);
+  groundLayer = map.createStaticLayer('ground', tileset);
   map.createStaticLayer('items', tileset);
   wallsLayer = map.createStaticLayer('walls', tileset);
   wallsLayer.setCollisionByProperty({ colides: true })
@@ -88,6 +88,22 @@ function update() {
   rightDown = cursors.right?.isDown
   upDown = cursors.up?.isDown
   downDown = cursors.down?.isDown
+
+  // con estas condiciones movemos la hitbox del personaje dependiendo donde colisione 
+  if(player.body.blocked.down === true){
+    player.body.setSize(player.width*0.5, player.height * 0.3).setOffset(8,0)
+    wallsLayer.setDepth(2)
+    player.setDepth(1)
+    
+  } else if(player.body.blocked.up === true){
+    player.body.setSize(player.width*0.5, player.height * 0.3).setOffset(8,20)
+    player.setDepth(2)
+    wallsLayer.setDepth(1)
+  } else {
+    
+  }
+
+  
 
   if (leftDown) {
 
