@@ -944,6 +944,7 @@ input[type=password], input[type=email], input[type=text]{
     border-radius: 1vw;
     position: absolute;
     z-index: 45;
+    border-radius: 3vw;
 }
 
 .cancel_confirm{
@@ -1367,7 +1368,8 @@ label{
     }
     .recover-page .volver {
         width: 17%;
-        font-size: 8vw;
+        font-size: 8vw
+        ;
         text-align: center;
     }
 
@@ -1394,6 +1396,25 @@ label{
     }
     .login-warning .red{
         font-size: 9vw;
+    }
+
+    /************************************invitation html*************************************/
+    .overlay-content {
+        width: 72vw ;
+        height: 51vw;
+    }
+
+    .overlay-content h3 {
+        font-size: 11vw;
+
+    }
+    .overlay-content p {
+        font-size: 4vw;
+
+    }
+
+    .overlay-content .btn {
+        padding: 4px 11vw;
     }
         
 
