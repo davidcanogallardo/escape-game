@@ -1585,6 +1585,7 @@ label{
 
     .all-levels th, td {
         padding: 2vw 5vw;
+        font-size: 4vw;
     }
 
     td, th {
@@ -1600,10 +1601,26 @@ label{
         width: auto;
     }
     .table-profile {
-        width: 107vw;
+        min-width: 77vw;
     }
 
     /************************************perfil amigo*************************************/
+
+    #profile-name {
+        font-size: 11vw;
+    }
+
+    .container-profile {
+        flex-direction: row;
+        gap: 8vw;
+    }
+    .icon-profile {
+        width: 50vw;
+        height: 50vw;
+    }
+    .icon-profile i {
+        font-size: 29vw;
+    }
 
     .icon-small {
         width: 15vw;
@@ -1618,7 +1635,14 @@ label{
         width: 90%;
     }
 
-
+    .profile .btn {
+        font-size: 6vw;
+        width: 23%;
+    }
+    .red {
+        padding: 1vw;
+        border-radius: 3vw;
+    }
 /*
 
     .container-profile{
