@@ -1,6 +1,4 @@
-import Phaser from 'phaser';
-
-export default createChestAnims {
+export default createChestAnims({
     (anims) => {
         
     anims.create({
@@ -13,5 +11,5 @@ export default createChestAnims {
         key: 'chest-closed',
         frames: ({key: 'chest', frame:'chest_empty_open_anim_f0.png'})
     })
-}
+})
 
