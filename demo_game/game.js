@@ -27,7 +27,7 @@ function preload() {
   
 
 }
-
+//map.getLayer("walls").data[5][5].properties?.horitzontalWall
 function create() {
   map = this.make.tilemap({
     key: "map"
@@ -41,6 +41,7 @@ function create() {
   player.body.setSize(player.width*0.5, player.height * 0.8)
   this.physics.add.collider(player, wallsLayer)
 
+  wallsLayer.debug = true;
   //chest
   chest = this.add.sprite(56,72,'chest','chest_empty_open_anim_f0.png');
   this.time.delayedCall(1000,()=>{
@@ -83,13 +84,13 @@ function create() {
 		repeat: -1,
 		frameRate: 15
 	})
-
+  
 
 }
 
 function update() {
 
-  speed = 100
+  speed = 200
 
   leftDown = cursors.left?.isDown
   rightDown = cursors.right?.isDown
@@ -124,15 +125,18 @@ function update() {
     player.setVelocity(0, 0)
   }
 
-  // con estas condiciones movemos la hitbox del personaje dependiendo donde colisione 
-  if(player.body.blocked.down == true){
-    player.body.setSize(player.width*0.5, player.height * 0.3).setOffset(8,0)
-    wallsLayer.setDepth(2)
-    player.setDepth(1)
-    
-  } else if(player.body.blocked.up == true){
-    player.body.setSize(player.width*0.5, player.height * 0.3).setOffset(8,20)
-    player.setDepth(2)
-    wallsLayer.setDepth(1)
-  }
+  
+  // while (i < wallsLayer.length) {
+  //   let j = i
+  //   while (j>0 && wallsLayer[j-1].position.y > children[j].position.y) {
+  //     a = wallsLayer[j]
+  //     b = wallsLayer[j - 1]
+
+  //     wallsLayer[j] = b
+  //     wallsLayer[j-1] = a  
+
+  //     j = j-1
+  //   }
+  //   i += 1
+  // }
 }
