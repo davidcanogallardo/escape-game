@@ -25,7 +25,7 @@ function preload() {
   this.load.atlas('player', 'assets/character/player.png', 'assets/character/player.json');
   this.load.atlas('chest', 'assets/objects/chest.png', 'assets/objects/chest.json');
 }
-
+//map.getLayer("walls").data[5][5].properties?.horitzontalWall
 function create() {
   map = this.make.tilemap({
     key: "map"
@@ -41,17 +41,56 @@ function create() {
 
   this.physics.add.collider(player, wallsLayer)
   
+  wallsLayer.debug = true;
   //chest
   chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
   this.physics.add.existing(chest)
   
   this.physics.add.overlap(player, chest, () => {endGame(1)})
   
+ //animaciones del personaje
+	this.anims.create({
+		key: 'player-idle-down',
+		frames: [{ key: 'player', frame: 'walk-down-3.png' }]
+	})
+
+	this.anims.create({
+		key: 'player-idle-up',
+		frames: [{ key: 'player', frame: 'walk-up-3.png' }]
+	})
+
+	this.anims.create({
+		key: 'player-idle-side',
+		frames: [{ key: 'player', frame: 'walk-side-3.png' }]
+	})
+
+	this.anims.create({
+		key: 'player-run-down',
+		frames: this.anims.generateFrameNames('player', { start: 1, end: 8, prefix: 'run-down-', suffix: '.png' }),
+		repeat: -1,
+		frameRate: 15
+	})
+
+	this.anims.create({
+		key: 'player-run-up',
+		frames: this.anims.generateFrameNames('player', { start: 1, end: 8, prefix: 'run-up-', suffix: '.png' }),
+		repeat: -1,
+		frameRate: 15
+	})
+
+	this.anims.create({
+		key: 'player-run-side',
+		frames: this.anims.generateFrameNames('player', { start: 1, end: 8, prefix: 'run-side-', suffix: '.png' }),
+		repeat: -1,
+		frameRate: 15
+	})
+  
+
 }
 
 function update() {
 
-  speed = 100
+  speed = 200
 
   leftDown = cursors.left?.isDown
   rightDown = cursors.right?.isDown
@@ -90,4 +129,18 @@ function update() {
 
 function endGame(time) {
   console.log("object");
+  
+  // while (i < wallsLayer.length) {
+  //   let j = i
+  //   while (j>0 && wallsLayer[j-1].position.y > children[j].position.y) {
+  //     a = wallsLayer[j]
+  //     b = wallsLayer[j - 1]
+
+  //     wallsLayer[j] = b
+  //     wallsLayer[j-1] = a  
+
+  //     j = j-1
+  //   }
+  //   i += 1
+  // }
 }
