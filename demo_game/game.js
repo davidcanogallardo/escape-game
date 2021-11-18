@@ -42,9 +42,9 @@ function create() {
   this.physics.add.collider(player, wallsLayer)
 
   //chest
-  const chest = this.add.sprite(56,72,'chest','chest_empty_open_anim_f0.png');
+  chest = this.add.sprite(56,72,'chest','chest_empty_open_anim_f0.png');
   this.time.delayedCall(1000,()=>{
-    chest.animations.add('chest-open');
+    //chest.animations.add('chest-open');
   })
   
  //animaciones del personaje
@@ -96,20 +96,8 @@ function update() {
   upDown = cursors.up?.isDown
   downDown = cursors.down?.isDown
 
-  // con estas condiciones movemos la hitbox del personaje dependiendo donde colisione 
-  if(player.body.blocked.down === true){
-    player.body.setSize(player.width*0.5, player.height * 0.3).setOffset(8,0)
-    wallsLayer.setDepth(2)
-    player.setDepth(1)
-    
-  } else if(player.body.blocked.up === true){
-    player.body.setSize(player.width*0.5, player.height * 0.3).setOffset(8,20)
-    player.setDepth(2)
-    wallsLayer.setDepth(1)
-  } else {
-    
-  }
-
+  
+  // Aqui indicamos las animaciones del personaje al pulsar cada boton
   if (leftDown) {
 
     this.anims.play('walk-side-3', true)
@@ -134,5 +122,21 @@ function update() {
   {
     this.anims.play('walk-side-3', true)
     player.setVelocity(0, 0)
+  }
+
+  // con estas condiciones movemos la hitbox del personaje dependiendo donde colisione 
+  if(player.body.blocked.down == true){
+    player.body.setSize(player.width*0.5, player.height * 0.3).setOffset(8,0)
+    wallsLayer.setDepth(2)
+    player.setDepth(1)
+    
+  } else if(player.body.blocked.up == true){
+    player.body.setSize(player.width*0.5, player.height * 0.3).setOffset(8,20)
+    player.setDepth(2)
+    wallsLayer.setDepth(1)
+  } else if (player.body.blocked.none == true) {
+    player.body.setSize(player.width*0.5, player.height * 0.8)
+    player.setDepth(1)
+    wallsLayer.setDepth(0)
   }
 }
