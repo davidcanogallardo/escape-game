@@ -134,9 +134,5 @@ function update() {
     player.body.setSize(player.width*0.5, player.height * 0.3).setOffset(8,20)
     player.setDepth(2)
     wallsLayer.setDepth(1)
-  } else if (player.body.blocked.none == true) {
-    player.body.setSize(player.width*0.5, player.height * 0.8)
-    player.setDepth(1)
-    wallsLayer.setDepth(0)
   }
 }
