@@ -7,20 +7,20 @@
   <image source="../tilesets/TSMapa/PNG/tileset.png" width="512" height="512"/>
   <tile id="1">
    <properties>
-    <property name="bottomWalls" type="bool" value="true"/>
     <property name="colides" type="bool" value="true"/>
+    <property name="horizontalWalls" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="2">
    <properties>
-    <property name="bottomWalls" type="bool" value="true"/>
     <property name="colides" type="bool" value="true"/>
+    <property name="horizontalWalls" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
-    <property name="bottomWalls" type="bool" value="true"/>
     <property name="colides" type="bool" value="true"/>
+    <property name="horizontalWalls" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="4">
@@ -154,11 +154,13 @@
   <tile id="226">
    <properties>
     <property name="colides" type="bool" value="true"/>
+    <property name="horizontalWalls" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="227">
    <properties>
     <property name="colides" type="bool" value="true"/>
+    <property name="horizontalWalls" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="256">

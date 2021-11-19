@@ -2,7 +2,7 @@ class Game extends Phaser.Scene {
     constructor() {
         super("game")
     }
-
+    //map.getLayer("walls").data[5][5].properties?.horitzontalWall
     preload() {
         this.segundos = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -97,4 +97,6 @@ class Game extends Phaser.Scene {
         this.segundos += 1;
         this.title.setText('Tiempo: ' + this.formatTime(this.segundos));
     }
+
+
 }

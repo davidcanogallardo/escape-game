@@ -11,7 +11,7 @@
          "name":"ground",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":20,
          "x":0,
          "y":0
@@ -25,7 +25,7 @@
          "name":"items",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":20,
          "x":0,
          "y":0
@@ -67,12 +67,12 @@
                  "id":1,
                  "properties":[
                         {
-                         "name":"bottomWalls",
+                         "name":"colides",
                          "type":"bool",
                          "value":true
                         }, 
                         {
-                         "name":"colides",
+                         "name":"horizontalWalls",
                          "type":"bool",
                          "value":true
                         }]
@@ -81,12 +81,12 @@
                  "id":2,
                  "properties":[
                         {
-                         "name":"bottomWalls",
+                         "name":"colides",
                          "type":"bool",
                          "value":true
                         }, 
                         {
-                         "name":"colides",
+                         "name":"horizontalWalls",
                          "type":"bool",
                          "value":true
                         }]
@@ -95,12 +95,12 @@
                  "id":3,
                  "properties":[
                         {
-                         "name":"bottomWalls",
+                         "name":"colides",
                          "type":"bool",
                          "value":true
                         }, 
                         {
-                         "name":"colides",
+                         "name":"horizontalWalls",
                          "type":"bool",
                          "value":true
                         }]
@@ -139,6 +139,11 @@
                          "name":"colides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"horizontalWalls",
+                         "type":"bool",
+                         "value":true
                         }]
                 }, 
                 {
@@ -148,6 +153,11 @@
                          "name":"colides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"horizontalWalls",
+                         "type":"bool",
+                         "value":true
                         }]
                 }, 
                 {
@@ -155,6 +165,11 @@
                  "properties":[
                         {
                          "name":"colides",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"horizontalWalls",
                          "type":"bool",
                          "value":true
                         }]
@@ -337,6 +352,11 @@
                          "name":"colides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"horizontalWalls",
+                         "type":"bool",
+                         "value":true
                         }]
                 }, 
                 {
@@ -344,6 +364,11 @@
                  "properties":[
                         {
                          "name":"colides",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"horizontalWalls",
                          "type":"bool",
                          "value":true
                         }]
@@ -373,6 +398,11 @@
                          "name":"colides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"horizontalWalls",
+                         "type":"bool",
+                         "value":true
                         }]
                 }, 
                 {
@@ -380,6 +410,11 @@
                  "properties":[
                         {
                          "name":"colides",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"horizontalWalls",
                          "type":"bool",
                          "value":true
                         }]
@@ -463,6 +498,11 @@
                          "name":"colides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"horizontalWalls",
+                         "type":"bool",
+                         "value":true
                         }]
                 }, 
                 {
@@ -470,6 +510,11 @@
                  "properties":[
                         {
                          "name":"colides",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"horizontalWalls",
                          "type":"bool",
                          "value":true
                         }]
@@ -544,6 +589,11 @@
                          "name":"colides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"horizontalWalls",
+                         "type":"bool",
+                         "value":true
                         }]
                 }, 
                 {
@@ -569,6 +619,11 @@
                  "properties":[
                         {
                          "name":"colides",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"horizontalWalls",
                          "type":"bool",
                          "value":true
                         }]
