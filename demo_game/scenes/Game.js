@@ -14,15 +14,18 @@ class Game extends Phaser.Scene {
 
     create() {
         //Mapa, layers..
-        var map = this.make.tilemap({
+        this.map = this.make.tilemap({
             key: "map"
         });
+        window.test = this.map
+        console.log(this.map.getLayer("walls"));
 
-        var tileset = map.addTilesetImage('dungeon', 'tiles');
-        var groundLayer = map.createStaticLayer('ground', tileset);
-        var itemLayer = map.createStaticLayer('items', tileset);
-        var wallsLayer = map.createStaticLayer('walls', tileset);
+        var tileset = this.map.addTilesetImage('dungeon', 'tiles');
+        var groundLayer = this.map.createStaticLayer('ground', tileset);
+        var itemLayer = this.map.createStaticLayer('items', tileset);
+        var wallsLayer = this.map.createStaticLayer('walls', tileset);
         
+        console.log(this.map.getLayer("walls").data[5][5].properties?.horitzontalWall);
         wallsLayer.setCollisionByProperty({ colides: true })
         wallsLayer.debug = true;
         
