@@ -292,11 +292,6 @@ function updateRanking(data) {
 
 }
 
-function createTable(){
-
-    var new_table = ''
-}
-
 function updateFriendList(event, accept, friendName) {
     $(event.currentTarget.parentElement).fadeOut(500, function (event) {
         $(this).remove()  
