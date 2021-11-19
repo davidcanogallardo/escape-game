@@ -29,6 +29,12 @@ class Game extends Phaser.Scene {
         wallsLayer.setCollisionByProperty({ colides: true })
         wallsLayer.debug = true;
         
+        const debugGraphics = this.add.graphics().setAlpha(0.7)
+        wallsLayer.renderDebug(debugGraphics, {
+            tileColor: null,
+            collidingTileColor: new Phaser.Display.Color(243,234, 48, 255 ),
+            faceColor: new Phaser.Display.Color(40,39,37, 255)
+        })
         //Player
         this.player = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
         this.player.body.setSize(this.player.width*0.5, this.player.height * 0.3).setOffset(8,20)
@@ -50,6 +56,16 @@ class Game extends Phaser.Scene {
         
         //Evento que se ejecturá en bucle cada 1s y actualizará el tiempo
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.updateTime, callbackScope: this, loop: true });
+
+        for (let i = 0; i < this.map.getLayer("walls").data[i]; i++) {
+            for (let j = 0; j < this.map.getLayer("walls").data[i][j]; j++) {
+                if (this.map.getLayer("walls").data[i][j].properties.horizontalWalls === true) {
+                    this.map.test.getLayer("walls").data[i][j].height = 2
+                }
+                
+            }
+            
+        }
     }
   
     update() {
@@ -100,6 +116,5 @@ class Game extends Phaser.Scene {
         this.segundos += 1;
         this.title.setText('Tiempo: ' + this.formatTime(this.segundos));
     }
-
 
 }
