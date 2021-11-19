@@ -27,20 +27,20 @@ class Game extends Phaser.Scene {
         window.wall = wallsLayer
         wallsLayer.debug = true;
         
-        this.spikeGroup = this.physics.add.staticGroup();
-        wallsLayer.forEachTile(tile => {
-            console.log(tile.properties);
-            if (tile.properties.horizontalWalls == true) {
-                tile.properties.colides = false
-                console.log(tile);
-                const x = tile.getCenterX();
-                const y = tile.getCenterY();
-                const spike = this.spikeGroup.create(x, y, "TextureTintPipeline");
-                spike.body.setSize(tile.width, tile.height).setOffset(8,20)
-                //wallsLayer.removeTileAt(tile.x, tile.y);
+        // this.spikeGroup = this.physics.add.staticGroup();
+        // wallsLayer.forEachTile(tile => {
+        //     console.log(tile.properties);
+        //     if (tile.properties.horizontalWalls == true) {
+        //         tile.properties.colides = false
+        //         console.log(tile);
+        //         const x = tile.getCenterX();
+        //         const y = tile.getCenterY();
+        //         const spike = this.spikeGroup.create(x, y, "TextureTintPipeline");
+        //         spike.body.setSize(tile.width, tile.height).setOffset(8,20)
+        //         //wallsLayer.removeTileAt(tile.x, tile.y);
                 
-            }
-        })
+        //     }
+        // })
         
         wallsLayer.setCollisionByProperty({ colides: true })
         const debugGraphics = this.add.graphics().setAlpha(0.7)
