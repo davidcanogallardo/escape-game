@@ -22,7 +22,7 @@ class Game extends Phaser.Scene {
         var tileset = this.map.addTilesetImage('dungeon', 'tiles');
         var groundLayer = this.map.createStaticLayer('ground', tileset);
         var itemLayer = this.map.createStaticLayer('items', tileset);
-        var wallsLayer = this.map.createDynamicLayer('walls', tileset);
+        var wallsLayer = this.map.createLayer('walls', tileset);
         
         window.wall = wallsLayer
         wallsLayer.debug = true;
