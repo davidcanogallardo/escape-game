@@ -20,7 +20,7 @@ class Titlescreen extends Phaser.Scene {
         })
         .setOrigin(0.5)
     
-        this.input.keyboard.once('keyup_SPACE', () => {
+        this.input.keyboard.once('keydown-SPACE', () => {
             console.log("object");
             this.scene.start("game")
         })

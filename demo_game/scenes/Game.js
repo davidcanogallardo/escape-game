@@ -18,17 +18,31 @@ class Game extends Phaser.Scene {
             key: "map"
         });
         window.test = this.map
-        console.log(this.map.getLayer("walls"));
-
+        
         var tileset = this.map.addTilesetImage('dungeon', 'tiles');
         var groundLayer = this.map.createStaticLayer('ground', tileset);
         var itemLayer = this.map.createStaticLayer('items', tileset);
-        var wallsLayer = this.map.createStaticLayer('walls', tileset);
+        var wallsLayer = this.map.createDynamicLayer('walls', tileset);
         
-        console.log(this.map.getLayer("walls").data[5][5].properties?.horitzontalWall);
-        wallsLayer.setCollisionByProperty({ colides: true })
+        window.wall = wallsLayer
         wallsLayer.debug = true;
         
+        this.spikeGroup = this.physics.add.staticGroup();
+        wallsLayer.forEachTile(tile => {
+            console.log(tile.properties);
+            if (tile.properties.horizontalWalls == true) {
+                tile.properties.colides = false
+                console.log(tile);
+                const x = tile.getCenterX();
+                const y = tile.getCenterY();
+                const spike = this.spikeGroup.create(x, y, "TextureTintPipeline");
+                spike.body.setSize(tile.width, tile.height).setOffset(8,20)
+                //wallsLayer.removeTileAt(tile.x, tile.y);
+                
+            }
+        })
+        
+        wallsLayer.setCollisionByProperty({ colides: true })
         const debugGraphics = this.add.graphics().setAlpha(0.7)
         wallsLayer.renderDebug(debugGraphics, {
             tileColor: null,
@@ -78,24 +92,18 @@ class Game extends Phaser.Scene {
 
         // Aqui indicamos las animaciones del personaje al pulsar cada boton
         if (leftDown) {
-            this.anims.play('walk-side-3', true)
             this.player.setVelocity(-speed, 0)
 
         } else if (rightDown) {
-            this.anims.play('walk-side-3', true)
             this.player.setVelocity(speed, 0)
 
         } else if (upDown) {
-            this.anims.play('walk-side-3', true)
             this.player.setVelocity(0, -speed)
 
         } else if (downDown) {
-            this.anims.play('walk-side-3', true)
             this.player.setVelocity(0, speed)
 
-        } else
-        {
-            this.anims.play('walk-side-3', true)
+        } else {
             this.player.setVelocity(0, 0)
         }
     }
