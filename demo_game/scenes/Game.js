@@ -23,24 +23,41 @@ class Game extends Phaser.Scene {
         var groundLayer = this.map.createStaticLayer('ground', tileset);
         var itemLayer = this.map.createStaticLayer('items', tileset);
         var wallsLayer = this.map.createLayer('walls', tileset);
+        wallsLayer.renderDebug
+        wallsLayer.setDepth(2)
         
         window.wall = wallsLayer
         wallsLayer.debug = true;
+
+        //Player
+        this.player = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
+        this.player.body.setSize(this.player.width*0.5, this.player.height * 0.3).setOffset(8,20)
+        this.player.setDepth(0)
+        window.p = this.player
         
-        // this.spikeGroup = this.physics.add.staticGroup();
-        // wallsLayer.forEachTile(tile => {
-        //     console.log(tile.properties);
-        //     if (tile.properties.horizontalWalls == true) {
-        //         tile.properties.colides = false
-        //         console.log(tile);
-        //         const x = tile.getCenterX();
-        //         const y = tile.getCenterY();
-        //         const spike = this.spikeGroup.create(x, y, "TextureTintPipeline");
-        //         spike.body.setSize(tile.width, tile.height).setOffset(8,20)
-        //         //wallsLayer.removeTileAt(tile.x, tile.y);
-                
-        //     }
-        // })
+        this.physics.add.collider(this.player, wallsLayer)
+
+
+        this.wallGroup = this.physics.add.staticGroup();
+        wallsLayer.forEachTile(tile => {
+            if (tile.properties.wall == true) {
+                //Quito la propiedad de colisión del tile
+                tile.properties.colides = false
+                // console.log(tile);
+                const x = tile.getCenterX();
+                const y = tile.getCenterY();
+
+                //Creo el nuevo tile
+                const new_tile = this.wallGroup.create(x,y, "");
+                //Le pongo tamaño y lo posiciono (setOffset)
+                new_tile.body.setSize(tile.width, tile.height*0.1).setOffset(tile.width-7,tile.height+5)
+                //Añado la colisión al nuevo tile
+                this.physics.add.collider(this.player, new_tile)
+
+                //Lo hago invisible así solo se ve el muro, pero la colision es con el new_tile
+                new_tile.visible = false
+            }
+        })
         
         wallsLayer.setCollisionByProperty({ colides: true })
         const debugGraphics = this.add.graphics().setAlpha(0.7)
@@ -49,11 +66,7 @@ class Game extends Phaser.Scene {
             collidingTileColor: new Phaser.Display.Color(243,234, 48, 255 ),
             faceColor: new Phaser.Display.Color(40,39,37, 255)
         })
-        //Player
-        this.player = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
-        this.player.body.setSize(this.player.width*0.5, this.player.height * 0.3).setOffset(8,20)
-        
-        this.physics.add.collider(this.player, wallsLayer)
+
         
         //Cofre
         var chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');

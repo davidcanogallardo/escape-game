@@ -10,6 +10,7 @@ var config = {
     }
   },
   scene: [Titlescreen, Game, GameOver]
+
 };
 
 var game = new Phaser.Game(config);
