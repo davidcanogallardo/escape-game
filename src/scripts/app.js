@@ -15,7 +15,7 @@ $(document).ready(function () {
     
     //Enviar/recibir invitación a una partida
     $('.container').on('click','.send-invitation', function (event) {
-        console.log($(this.parentNode)[0].childNodes[3].innerText);
+        // console.log($(this.parentNode)[0].childNodes[3].innerText);
         $(".pages .invitation-page").clone(true).appendTo('.container');
         $(".pages .invitation-page").remove()
         $('.container > .invitation-page').fadeOut(1)
@@ -124,7 +124,7 @@ function changePage(pageName) {
         $(".pages ."+ pageName).remove()
 
         $('.container > *').fadeOut(1);
-        $('.container > *').fadeIn(500);
+        $('.container > *').fadeIn(500).css({"opacity":"1"});
             
     }
 }
@@ -133,3 +133,15 @@ function isLogged() {
     return sessionStorage.getItem('session')
 }
 
+function showNotification(message,color) {
+    var div = `<div class="notification">`+message+`</div>`
+
+    $(div).appendTo("body")
+    $(".notification").css({
+        "bottom":"-5vw", 
+        "opacity":"1",
+        "background-color":color
+    }).animate({"bottom":"1.5vw"}).delay(250).fadeTo(450, 0, () => {
+        $(".notification").remove()
+    })
+}

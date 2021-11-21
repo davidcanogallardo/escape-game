@@ -243,7 +243,7 @@ body {
 }
 
 .table-profile .td-width{
-    width: 17vw;
+    white-space: nowrap;
 }
 
 .i-table{
@@ -824,7 +824,7 @@ input[type=password], input[type=email], input[type=text]{
 }
 
 .add-btn i {
-    font-size: 2vw;
+    font-size: 2vw !important;
 }
 
 /*Formulario para mandar solicitud de amistad*/
@@ -1300,22 +1300,18 @@ label{
     }
 }
 
-/************************div que informa se ha enviado una solicitud de amistad*****************************/
-.friend-request {
-    bottom: -10vw;
+/************************CONTENEDOR DE NOTIFICACIONES*****************************/
+.notification {
+    left: 1vw;
     position: absolute;
-    left: 41vw;
-    width: 20vw;
-    min-height: 8vw;
+    min-width: 10vw;
     z-index: 10;
     border-radius: 1vw;
-    text-align: center;
-    padding: 0.5vw;
+    padding: 2vw;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    opacity: 1;
     color: rgb(255, 255, 255);
     font-size: 2vw;
     background: #49EE63;
