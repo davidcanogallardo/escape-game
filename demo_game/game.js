@@ -1,3 +1,5 @@
+import Phaser from "phaser";
+
 var config = {
   type: Phaser.AUTO, // Which renderer to use
   width: 320, // Canvas width in pixels
