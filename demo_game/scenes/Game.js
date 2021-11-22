@@ -69,8 +69,8 @@ class Game extends Phaser.Scene {
 
         
         //Cofre
-        var chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
-        this.physics.add.existing(chest)
+        this.chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
+        this.physics.add.existing(this.chest);
         
         //Tiempo
         this.title = this.add.text(5,0, 'Tiempo: ', {
@@ -79,8 +79,8 @@ class Game extends Phaser.Scene {
         })
         
         //Evento para terminar la partida
-        this.physics.add.overlap(this.player, chest, () => {this.scene.start("gameover",{ score : this.segundos})})
-        
+        //this.physics.add.overlap(this.player, chest, () => {this.scene.start("gameover",{ score : this.segundos})})
+
         //Evento que se ejecturá en bucle cada 1s y actualizará el tiempo
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.updateTime, callbackScope: this, loop: true });
 
@@ -102,6 +102,8 @@ class Game extends Phaser.Scene {
         var rightDown = this.cursors.right?.isDown
         var upDown = this.cursors.up?.isDown
         var downDown = this.cursors.down?.isDown
+        var eKey = this.input.keyboard.addKey('E');
+        var eKeyDown = eKey?.isDown
 
         // Aqui indicamos las animaciones del personaje al pulsar cada boton
         if (leftDown) {
@@ -118,6 +120,17 @@ class Game extends Phaser.Scene {
 
         } else {
             this.player.setVelocity(0, 0)
+        }
+
+        console.log(this.player.y - this.chest.y);
+
+        if(this.player.x - this.chest.x < 30 && this.player.y - this.chest.y < 30){
+            if(this.player.x - this.chest.x > -30 && this.player.y - this.chest.y > -30){
+                console.log("El jugador esta cerca del cofre");
+                if(eKeyDown){
+                    this.scene.switch('password_scene');
+                }
+            }
         }
     }
 

@@ -9,7 +9,7 @@ var config = {
         debug: true
     }
   },
-  scene: [Titlescreen, Game, GameOver]
+  scene: [Titlescreen, Game, GameOver, Password_scene]
 
 };
 
