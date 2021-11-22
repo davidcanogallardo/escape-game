@@ -248,8 +248,9 @@ function login(data) {
     } else {
         //TODO: poner animación al mensaje de error
         console.log(data.message);
-        $(".error > *").remove()
-        $(".error").append("<p>El usuario no existe</p>")
+        // $(".error > *").remove()
+        // $(".error").append("<p>El usuario no existe</p>")
+        showNotification("El usuario no existe", "red")
     }
 }
 
@@ -292,11 +293,6 @@ function updateRanking(data) {
 
 }
 
-function createTable(){
-
-    var new_table = ''
-}
-
 function updateFriendList(event, accept, friendName) {
     $(event.currentTarget.parentElement).fadeOut(500, function (event) {
         $(this).remove()  
@@ -311,7 +307,7 @@ function updateFriendList(event, accept, friendName) {
 }
 
 function updateFriendNotification(friendName) {
-    $(".friend-request").animate({"bottom":"5vw"}).delay(250).fadeTo(450, 0)
+    showNotification("Petición de amistad enviada a "+friendName, "#49EE63")
     var new_session = JSON.parse(sessionStorage.getItem("session"))
     new_session.friendsRequest.push(friendName)
     createRequestList(new_session.friendsRequest)
