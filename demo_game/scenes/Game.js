@@ -71,6 +71,19 @@ class Game extends Phaser.Scene {
         //Cofre
         this.chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
         this.physics.add.existing(this.chest);
+
+        //Player action area
+        this.playerCollider = this.physics.add.image(200, 50,);
+        
+        var eKey = this.input.keyboard.addKey('E');
+        var eKeyDown = eKey?.isDown
+        //this.physics.add.overlap(this.player, chest, () => {this.scene.start("gameover",{ score : this.segundos})})
+
+        this.physics.add.overlap(this.playerCollider, this.chest, () => {
+            this.input.keyboard.once('keydown-E', () => {
+                this.scene.switch('password_scene');
+            })
+        });
         
         //Tiempo
         this.title = this.add.text(5,0, 'Tiempo: ', {
@@ -96,18 +109,16 @@ class Game extends Phaser.Scene {
     }
   
     update() {
-        var speed = 200
+        var speed = 100
 
         var leftDown = this.cursors.left?.isDown
         var rightDown = this.cursors.right?.isDown
         var upDown = this.cursors.up?.isDown
         var downDown = this.cursors.down?.isDown
-        var eKey = this.input.keyboard.addKey('E');
-        var eKeyDown = eKey?.isDown
 
         // Aqui indicamos las animaciones del personaje al pulsar cada boton
         if (leftDown) {
-            this.player.setVelocity(-speed, 0)
+            this.player.setVelocity(-speed, 0);
 
         } else if (rightDown) {
             this.player.setVelocity(speed, 0)
@@ -122,16 +133,18 @@ class Game extends Phaser.Scene {
             this.player.setVelocity(0, 0)
         }
 
-        console.log(this.player.y - this.chest.y);
+        this.centerBodyonBody(this.playerCollider.body, this.player.body);
 
-        if(this.player.x - this.chest.x < 30 && this.player.y - this.chest.y < 30){
-            if(this.player.x - this.chest.x > -30 && this.player.y - this.chest.y > -30){
-                console.log("El jugador esta cerca del cofre");
-                if(eKeyDown){
-                    this.scene.switch('password_scene');
-                }
-            }
-        }
+        //console.log(this.player.y - this.chest.y);
+
+        // if(this.player.x - this.chest.x < 30 && this.player.y - this.chest.y < 30){
+        //     if(this.player.x - this.chest.x > -30 && this.player.y - this.chest.y > -30){
+        //         //console.log("El jugador esta cerca del cofre");
+        //         if(eKeyDown){
+        //             this.scene.switch('password_scene');
+        //         }
+        //     }
+        // }
     }
 
     formatTime(seconds){
@@ -149,6 +162,13 @@ class Game extends Phaser.Scene {
     updateTime () {
         this.segundos += 1;
         this.title.setText('Tiempo: ' + this.formatTime(this.segundos));
+    }
+
+    centerBodyonBody(collider, player) {
+        collider.position.set(
+            player.x + player.halfWidth - collider.halfWidth,
+            player.y + player.halfHeight - collider.halfHeight
+        );
     }
 
 }
