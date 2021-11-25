@@ -86,12 +86,13 @@ class Game extends Phaser.Scene {
                 this.scene.switch('password_scene');
             })
         });
-        
+
         window.wg = this.wallGroup;
         this.physics.add.overlap(this.playerCollider, this.wallGroup, () => {
             for (let i = 0; i < this.wallGroup.children.entries.length; i++) {
-                if (this.player.y > this.wallGroup.children.entries[i].y) {
+                if (this.player.y > this.wallGroup.children.entries[i].y && this.player._depth != 10) {
                     this.player.setDepth(10);
+                    console.log("a")
                 }
             }
         });
