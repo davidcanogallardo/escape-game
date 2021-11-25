@@ -48,7 +48,7 @@ class Game extends Phaser.Scene {
                 const y = tile.getCenterY();
 
                 //Creo el nuevo tile
-                const new_tile = this.wallGroup.create(x,y, "");
+                const new_tile = this.wallGroup.create(x,y);
                 //Le pongo tamaño y lo posiciono (setOffset)
                 new_tile.body.setSize(tile.width, tile.height*0.1).setOffset(tile.width-7,tile.height+5)
                 //Añado la colisión al nuevo tile

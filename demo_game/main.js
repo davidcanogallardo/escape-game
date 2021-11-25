@@ -7,8 +7,8 @@ var config = {
     arcade: {
         gravity: { y: 0 },
         debug: true
-    }
-  },
+    },
+  },zoom: 2.5,
   scene: [Titlescreen, Game, GameOver, Password_scene]
 
 };
