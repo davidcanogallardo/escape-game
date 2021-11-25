@@ -31,11 +31,14 @@ class Game extends Phaser.Scene {
 
         //Player
         this.player = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
-        this.player.body.setSize(this.player.width*0.5, this.player.height * 0.3).setOffset(8,20)
+        this.player.body.setSize(this.player.width*0.5, this.player.height * 0.3).setOffset(8,18)
         this.player.setDepth(0)
-        window.p = this.player
-        
         this.physics.add.collider(this.player, wallsLayer)
+        window.p = this.player
+
+        //Player action area
+        this.playerCollider = this.physics.add.image()
+        
 
 
         this.wallGroup = this.physics.add.staticGroup();
@@ -72,8 +75,7 @@ class Game extends Phaser.Scene {
         this.chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
         this.physics.add.existing(this.chest);
 
-        //Player action area
-        this.playerCollider = this.physics.add.image(200, 50,);
+        
         
         var eKey = this.input.keyboard.addKey('E');
         var eKeyDown = eKey?.isDown
@@ -85,6 +87,15 @@ class Game extends Phaser.Scene {
             })
         });
         
+        window.wg = this.wallGroup;
+        this.physics.add.overlap(this.playerCollider, this.wallGroup, () => {
+            for (let i = 0; i < this.wallGroup.children.entries.length; i++) {
+                if (this.player.y > this.wallGroup.children.entries[i].y) {
+                    this.player.setDepth(10);
+                }
+            }
+        });
+
         //Tiempo
         this.title = this.add.text(5,0, 'Tiempo: ', {
             fontSize: 9,
@@ -96,19 +107,11 @@ class Game extends Phaser.Scene {
 
         //Evento que se ejecturá en bucle cada 1s y actualizará el tiempo
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.updateTime, callbackScope: this, loop: true });
-
-        for (let i = 0; i < this.map.getLayer("walls").data[i]; i++) {
-            for (let j = 0; j < this.map.getLayer("walls").data[i][j]; j++) {
-                if (this.map.getLayer("walls").data[i][j].properties.horizontalWalls === true) {
-                    this.map.test.getLayer("walls").data[i][j].height = 2
-                }
-                
-            }
-            
-        }
     }
   
     update() {
+
+
         var speed = 100
 
         var leftDown = this.cursors.left?.isDown
@@ -145,6 +148,7 @@ class Game extends Phaser.Scene {
         //         }
         //     }
         // }
+        
     }
 
     formatTime(seconds){
