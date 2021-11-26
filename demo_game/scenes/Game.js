@@ -10,6 +10,7 @@ class Game extends Phaser.Scene {
         this.load.tilemapTiledJSON("map", "assets/tilemaps/mapa.json");
         this.load.atlas('player', 'assets/character/player.png', 'assets/character/player.json');
         this.load.atlas('chest', 'assets/objects/chest.png', 'assets/objects/chest.json');
+        this.cursors = this.input.keyboard.createCursorKeys();
     }
 
     create() {
@@ -112,32 +113,76 @@ class Game extends Phaser.Scene {
 
         //Evento que se ejecturá en bucle cada 1s y actualizará el tiempo
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.updateTime, callbackScope: this, loop: true });
+
+        for (let i = 0; i < this.map.getLayer("walls").data[i]; i++) {
+            for (let j = 0; j < this.map.getLayer("walls").data[i][j]; j++) {
+                if (this.map.getLayer("walls").data[i][j].properties.horizontalWalls === true) {
+                    this.map.test.getLayer("walls").data[i][j].height = 2
+                }
+                
+            }
+            
+        }
+
+        //animaciones personaje
+    	//stoped
+        this.anims.create({
+            key: 'player-idle-down',
+            frames: [{key: 'player', frame: 'walk-down-3.png'}],
+        })
+
+        //arriba
+        this.anims.create({
+            key: 'player-run-down',
+            frames: this.anims.generateFrameNames('player',{start: 1 , end: 8, prefix: 'run-down-',suffix: '.png'}),
+            repeat: -1,
+            frameRate: 15
+        })
+        //abajo
+        this.anims.create({
+            key: 'player-run-up',
+            frames: this.anims.generateFrameNames('player',{start: 1 , end: 8, prefix: 'run-up-',suffix: '.png'}),
+            repeat: -1,
+            frameRate: 15
+        })
+        //side
+        this.anims.create({
+            key: 'player-run-side',
+            frames: this.anims.generateFrameNames('player',{start: 1 , end: 8, prefix: 'run-side-',suffix: '.png'}),
+            repeat: -1,
+            frameRate: 15
+        })
+        
     }
   
     update() {
-
-
-        var speed = 100
-
-        var leftDown = this.cursors.left?.isDown
-        var rightDown = this.cursors.right?.isDown
-        var upDown = this.cursors.up?.isDown
-        var downDown = this.cursors.down?.isDown
+        let speed = 100
+        let eKey = this.input.keyboard.addKey('E');
+        let eKeyDown = eKey?.isDown
 
         // Aqui indicamos las animaciones del personaje al pulsar cada boton
-        if (leftDown) {
-            this.player.setVelocity(-speed, 0);
+        if (this.cursors.left?.isDown) {
+            this.player.setVelocity(-speed, 0)
+            this.player.anims.play('player-run-side',true)
+            this.player.scaleX = -1;
+            this.player.body.offset.x = 24;
 
-        } else if (rightDown) {
+        } else if (this.cursors.right?.isDown) {
             this.player.setVelocity(speed, 0)
+            this.player.anims.play('player-run-side',true)
+            this.player.scaleX = 1;
+            this.player.body.offset.x = 8;
 
-        } else if (upDown) {
+        } else if (this.cursors.up?.isDown) {
             this.player.setVelocity(0, -speed)
+            this.player.anims.play('player-run-up', true)
 
-        } else if (downDown) {
+        } else if (this.cursors.down?.isDown) {
             this.player.setVelocity(0, speed)
+            this.player.anims.play('player-run-down', true)
 
         } else {
+            this.player.anims.play('player-idle-down')
             this.player.setVelocity(0, 0)
         }
 
