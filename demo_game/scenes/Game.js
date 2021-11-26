@@ -11,14 +11,14 @@ class Game extends Phaser.Scene {
         this.load.atlas('player', 'assets/character/player.png', 'assets/character/player.json');
         this.load.atlas('chest', 'assets/objects/chest.png', 'assets/objects/chest.json');
         this.load.image("password_background", "assets/password_paper.png");
-        this.load.spritesheet('closed_door', 'assets/closed_door.png', {
-            frameWidth: 32,
-            frameHeight: 32
-        });
-        this.load.spritesheet('opened_door', 'assets/opened_door.png', {
-            frameWidth: 32,
-            frameHeight: 32
-        })
+        // this.load.spritesheet('closed_door', 'assets/closed_door.png', {
+        //     frameWidth: 32,
+        //     frameHeight: 32
+        // });
+        // this.load.spritesheet('opened_door', 'assets/opened_door.png', {
+        //     frameWidth: 32,
+        //     frameHeight: 32
+        // })
         this.load.atlas('door', 'assets/objects/door/door.png', 'assets/objects/door/door.json');
         this.cursors = this.input.keyboard.createCursorKeys();
     }
@@ -103,43 +103,35 @@ class Game extends Phaser.Scene {
         //iterar por todos los objetos de la capa de objetos
         objectLayer.objects.forEach(object => {
             //Popriedades de cada objeto
-            const {x = 0, y = 0, height, width,id, name} =  object;
+            const {x = 0, y = 0, height, width, id, name} =  object;
 
             switch(name){
                 case 'closed_door':
                     //Cambiar la hitbox de la puerta cerrada
-                    this.closed_door = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'closed_door');
+                    this.closed_door = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'door', 'door-closed');
+                    //this.closed_door.anims.play('door-closed');
                     this.closed_door.body.setSize(width, height*0.1).setOffset(width-33,height-5);
                     
                     //Agregar puerta al grupo de puertas
                     this.closed_doorGroup.add(this.closed_door);
                     break;
-                case 'opened_door':
-                    this.opened_door = this.physics.add.sprite(x+(x+(width/2),y-(height/2), 'opened_door'));
-                    this.opened_doorGroup.add(this.opened_door);
-                    this.opened_doorGroup.setVisible(true);
-                    console.log(this.opened_door);
-                    break;
+                // case 'opened_door':
+                //     this.opened_door = this.physics.add.sprite(x+(x+(width/2),y-(height/2), 'opened_door'));
+                //     this.opened_doorGroup.add(this.opened_door);
+                //     this.opened_doorGroup.setVisible(true);
+                //     console.log(this.opened_door);
+                //     break;
             }
             //this.physics.add.collider(this.player, door);
         });
         //Añadir colider al grupo de puertas
         let closed_doorColider = this.physics.add.collider(this.player, this.closed_doorGroup);
 
-        //Añadir overlar del collider del jugador con el grupo de puertas
-        this.physics.add.overlap(this.playerCollider, this.closed_doorGroup, () => {
-            console.log("Esta tocando la puerta")
-            this.input.keyboard.once('keydown-E', () => {
-                this.physics.world.removeCollider(closed_doorColider);
-                this.closed_doorGroup.setVisible(false);
-                this.opened_doorGroup.setVisible(true);
-            })
-        });
-
         this.physics.add.overlap(this.playerCollider, this.chest, () => {
             this.input.keyboard.once('keydown-E', () => {
                 this.scene.switch('password_scene');
-                chestIsOpen = true;
+                this.physics.world.removeCollider(closed_doorColider);
+                this.closed_doorGroup.playAnimation('opening-door');
             })
         });
 
@@ -218,25 +210,19 @@ class Game extends Phaser.Scene {
         })
         
         //puerta
-        this.door = this.physics.add.sprite(80, 160, 'door','door-0.png' );
-        this.door.setDepth(0);
+        //this.door = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
         this.anims.create({
             key: 'door-closed',
             frames: [{key: 'door', frame: 'door-0.png'}],
         })
-        this.door.anims.play('door-closed');
+        // this.door
 
         this.anims.create({
             key: 'opening-door',
             frames: this.anims.generateFrameNames('door',{start: 0 , end: 3, prefix: 'door-',suffix: '.png'}),
-            repeat: -1,
+            repeat: 0,
             frameRate: 5
         })
-        let dKey = this.input.keyboard.addKey('d');
-        if (this.cursors.dKey?.isDown) {
-            this.door.anims.play('opening-door');
-        }
-        
     }
   
     update() {
