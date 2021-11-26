@@ -66,7 +66,7 @@ class User {
     }
 
     addFriend(name) {
-        if (!(this.friendsList.includes(name))) {
+        // if (!(this.friendsList.includes(name))) {
             this.friendsList.push(name)
             let newFriend = 
             `
@@ -82,7 +82,7 @@ class User {
             `
             $(".slide-list-container .slide-list").append(newFriend)
             
-        }
+        // }
     }
 
     addNotification(name) {

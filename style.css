@@ -740,7 +740,7 @@ input[type=password], input[type=email], input[type=text]{
     transition: 1s;
     z-index: 10;
     align-items: center;
-    right: -540px;
+    right: 0;
 }
 
 .slide-list-container > div {
@@ -867,7 +867,7 @@ input[type=password], input[type=email], input[type=text]{
     height: 100%;
     width: 35%;
     position: absolute;
-    right: -540px;
+    right: 0;
     top: 0px;
     display: flex;
     flex-direction: column;

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    loadPages()
+    // loadPages()
   
     /*****************************************************************************************/
     //changePage("main")
@@ -95,10 +95,12 @@ function afterLoad() {
             data.favMap,
             data.numTrophies
         )
+        window.u = user
+        console.log(user);
         user.createProfile()
-        //user.createFriendList()
-        // user.createNotifications()
-        $.getScript("./src/scripts/vue.js");
+        // user.createFriendList()
+        user.createNotifications()
+        // $.getScript("./src/scripts/vue.js");
     } else {
         console.log("no hay sesion");
     }
