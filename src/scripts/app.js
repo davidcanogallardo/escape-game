@@ -3,10 +3,10 @@ $(document).ready(function () {
     loadPages()
     //changePage("main")
     
-
     $('.container').on('click','.link', function (event) {
         changePage(event.currentTarget.attributes["page"].value)
     })
+
     $('.container').on('click','.slide-link', function (event) {
         rightMenu(event.currentTarget.attributes.page.value)
     })
@@ -63,12 +63,20 @@ function loadPages() {
                                                                 console.log(12);
                                                                 console.log("session");
                                                                 var data = JSON.parse(sessionStorage.getItem("session"))
+                                                                window.d = data
                                                                 if (data) {
                                                                     console.log("sesion detectada");
-                                                                    changeProfile(data)
-                                                                    console.log(data.friendList);
-                                                                    createFriendsList(data.friendList)
-                                                                    createRequestList(data.friendsRequest)
+                                                                    let user = new User(
+                                                                        data.username, 
+                                                                        data.friendList, 
+                                                                        data.notifications, 
+                                                                        data.levels,
+                                                                        data.favMap,
+                                                                        data.numCopas
+                                                                    )
+                                                                    user.createProfile()
+                                                                    user.createFriendList()
+                                                                    user.createNotifications()
                                                                 } else {
                                                                     console.log("no hay sesion");
                                                                 }
