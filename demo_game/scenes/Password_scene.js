@@ -8,6 +8,9 @@ class Password_scene extends Phaser.Scene {
     }
 
     create() {
+        let background = this.add.image(150, 150, "password_background");
+        background.setScale(0.3);
+
         let { width, height } = this.sys.game.canvas;
         const title = this.add.text(width / 2, height / 2, 'password', {
             fontSize: 27,
@@ -19,12 +22,6 @@ class Password_scene extends Phaser.Scene {
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })
         .setOrigin(0.5)
-    
-        
-        // this.input.keyboard.isDown('keydown-SPACE', () => {
-        //     console.log("object");
-
-        // })
     }
 
     update(){
