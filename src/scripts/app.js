@@ -1,5 +1,6 @@
 $(document).ready(function () {
     loadPages()
+  
     /*****************************************************************************************/
     //changePage("main")
     
@@ -30,6 +31,7 @@ $(document).ready(function () {
     });
 
 });
+
 
 function loadPages() {
     $(".pages .main").load("./pages/main.html", () => {
@@ -95,8 +97,8 @@ function afterLoad() {
         )
         user.createProfile()
         //user.createFriendList()
-        user.createNotifications()
-        // vue()
+        // user.createNotifications()
+        $.getScript("./src/scripts/vue.js");
     } else {
         console.log("no hay sesion");
     }

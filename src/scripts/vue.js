@@ -1,4 +1,3 @@
-$(document).ready(function () {
   Vue.component('friend', {
     template: //html
     `
@@ -46,4 +45,5 @@ $(document).ready(function () {
         notifications: JSON.parse(sessionStorage.getItem("session")).notifications
       },
   })
-})
+
+

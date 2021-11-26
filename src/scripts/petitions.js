@@ -125,7 +125,6 @@ $(document).ready(function () {
 
     // ranking
     $(".container").on("click",".ranking-link", () => {
-        console.log(notification);
         $.ajax({
             data: {"petition" : "ranking"},
             type: "POST",
