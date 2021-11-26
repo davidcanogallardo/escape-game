@@ -1,12 +1,13 @@
 $(document).ready(function () {
-    /*****************************************************************************************/
     loadPages()
+  
+    /*****************************************************************************************/
     //changePage("main")
     
-
     $('.container').on('click','.link', function (event) {
         changePage(event.currentTarget.attributes["page"].value)
     })
+
     $('.container').on('click','.slide-link', function (event) {
         rightMenu(event.currentTarget.attributes.page.value)
     })
@@ -30,6 +31,7 @@ $(document).ready(function () {
     });
 
 });
+
 
 function loadPages() {
     $(".pages .main").load("./pages/main.html", () => {
@@ -62,17 +64,7 @@ function loadPages() {
                                                             $(".pages .trophy-page").load("./pages/trophys.html", () => {
                                                                 console.log(12);
                                                                 console.log("session");
-                                                                var data = JSON.parse(sessionStorage.getItem("session"))
-                                                                if (data) {
-                                                                    console.log("sesion detectada");
-                                                                    changeProfile(data)
-                                                                    console.log(data.friendList);
-                                                                    createFriendsList(data.friendList)
-                                                                    createRequestList(data.friendsRequest)
-                                                                } else {
-                                                                    console.log("no hay sesion");
-                                                                }
-                                                                changePage("main")
+                                                                afterLoad()
                                                             })
                                                         })
                                                     })
@@ -88,6 +80,29 @@ function loadPages() {
             })
         })  
     })  
+}
+
+function afterLoad() {
+    var data = JSON.parse(sessionStorage.getItem("session"))
+    window.d = data
+    if (data) {
+        console.log("sesion detectada");
+        let user = new User(
+            data.username, 
+            data.friendsList, 
+            data.notifications, 
+            data.completedLevels,
+            data.favMap,
+            data.numTrophies
+        )
+        user.createProfile()
+        //user.createFriendList()
+        // user.createNotifications()
+        $.getScript("./src/scripts/vue.js");
+    } else {
+        console.log("no hay sesion");
+    }
+    changePage("main")
 }
 
 function rightMenu(params) {
