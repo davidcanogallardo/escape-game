@@ -89,19 +89,16 @@ class Game extends Phaser.Scene {
         });
 
         window.wg = this.wallGroup;
-        // this.physics.add.overlap(this.playerCollider, this.wallGroup, () => {
-        //     for (let i = 0; i < this.wallGroup.children.entries.length; i++) {
-        //         if (this.player.y > this.wallGroup.children.entries[i].y && this.player._depth != 10) {
-        //             this.player.setDepth(10);
-        //             console.log("a")
-        //         }
-        //     }
-        // });
+        window.pc = this.playerCollider;
+        this.physics.add.overlap(this.playerCollider, this.wallGroup,function (param) {
+            for(let i = 0 ; i < window.wg.children.entries.length; i++){
+                if(window.wg.children.entries[i].body.center.y = 173){
+                  window.wg.children.entries[i].setDepth(0)
+                }
+              }
 
-        if(this.player._depth == 10 && this.playerCollider.checkCollision.down){
-            this.player.setDepth(0);
-        }
-
+        });
+        //this.playerCollider.body.gameObject.world.bodies
         //Tiempo
         this.title = this.add.text(5,0, 'Tiempo: ', {
             fontSize: 9,
@@ -156,7 +153,9 @@ class Game extends Phaser.Scene {
     }
   
     update() {
-        let speed = 100
+        
+
+        let speed = 200
         let eKey = this.input.keyboard.addKey('E');
         let eKeyDown = eKey?.isDown
 
@@ -166,12 +165,14 @@ class Game extends Phaser.Scene {
             this.player.anims.play('player-run-side',true)
             this.player.scaleX = -1;
             this.player.body.offset.x = 24;
+            
 
         } else if (this.cursors.right?.isDown) {
             this.player.setVelocity(speed, 0)
             this.player.anims.play('player-run-side',true)
             this.player.scaleX = 1;
             this.player.body.offset.x = 8;
+            
 
         } else if (this.cursors.up?.isDown) {
             this.player.setVelocity(0, -speed)
@@ -186,6 +187,7 @@ class Game extends Phaser.Scene {
             this.player.setVelocity(0, 0)
         }
 
+
         this.centerBodyonBody(this.playerCollider.body, this.player.body);
 
         //console.log(this.player.y - this.chest.y);
@@ -198,8 +200,9 @@ class Game extends Phaser.Scene {
         //         }
         //     }
         // }
-        
+
     }
+    
 
     formatTime(seconds){
         // Minutes
@@ -224,5 +227,7 @@ class Game extends Phaser.Scene {
             player.y + player.halfHeight - collider.halfHeight
         );
     }
+
+    
 
 }
