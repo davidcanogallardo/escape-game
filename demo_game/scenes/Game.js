@@ -88,14 +88,18 @@ class Game extends Phaser.Scene {
         });
 
         window.wg = this.wallGroup;
-        this.physics.add.overlap(this.playerCollider, this.wallGroup, () => {
-            for (let i = 0; i < this.wallGroup.children.entries.length; i++) {
-                if (this.player.y > this.wallGroup.children.entries[i].y && this.player._depth != 10) {
-                    this.player.setDepth(10);
-                    console.log("a")
-                }
-            }
-        });
+        // this.physics.add.overlap(this.playerCollider, this.wallGroup, () => {
+        //     for (let i = 0; i < this.wallGroup.children.entries.length; i++) {
+        //         if (this.player.y > this.wallGroup.children.entries[i].y && this.player._depth != 10) {
+        //             this.player.setDepth(10);
+        //             console.log("a")
+        //         }
+        //     }
+        // });
+
+        if(this.player._depth == 10 && this.playerCollider.checkCollision.down){
+            this.player.setDepth(0);
+        }
 
         //Tiempo
         this.title = this.add.text(5,0, 'Tiempo: ', {
