@@ -10,6 +10,7 @@ class Game extends Phaser.Scene {
         this.load.tilemapTiledJSON("map", "assets/tilemaps/mapa.json");
         this.load.atlas('player', 'assets/character/player.png', 'assets/character/player.json');
         this.load.atlas('chest', 'assets/objects/chest.png', 'assets/objects/chest.json');
+        this.load.atlas('door', 'assets/objects/door/door.png', 'assets/objects/door/door.json');
         this.cursors = this.input.keyboard.createCursorKeys();
     }
 
@@ -161,6 +162,26 @@ class Game extends Phaser.Scene {
             repeat: -1,
             frameRate: 15
         })
+        
+        //puerta
+        this.door = this.physics.add.sprite(80, 160, 'door','door-0.png' );
+        this.door.setDepth(0);
+        this.anims.create({
+            key: 'door-closed',
+            frames: [{key: 'door', frame: 'door-0.png'}],
+        })
+        this.door.anims.play('door-closed');
+
+        this.anims.create({
+            key: 'opening-door',
+            frames: this.anims.generateFrameNames('door',{start: 0 , end: 3, prefix: 'door-',suffix: '.png'}),
+            repeat: -1,
+            frameRate: 5
+        })
+        let dKey = this.input.keyboard.addKey('d');
+        if (this.cursors.dKey?.isDown) {
+            this.door.anims.play('opening-door');
+        }
         
     }
   
