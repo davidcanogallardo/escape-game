@@ -86,9 +86,16 @@ class Game extends Phaser.Scene {
         //Cofre
         this.chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
         this.physics.add.existing(this.chest);
+        //collider para que el personaje con el cofre
+        this.physics.add.collider(this.chest, this.player);
+        //hacer que el pj no empuje al cofre
+        this.chest.body.immovable = true
+
 
         //Player action area
         this.playerCollider = this.physics.add.image(200, 50);
+        //hitbox redonda
+        this.playerCollider.setCircle(18)
         
         
         //this.physics.add.overlap(this.player, chest, () => {this.scene.start("gameover",{ score : this.segundos})})
