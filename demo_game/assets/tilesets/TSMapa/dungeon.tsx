@@ -244,16 +244,28 @@
  <tile id="450">
   <properties>
    <property name="colides" type="bool" value="true"/>
+   <property name="isDoorOpen" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="451">
   <properties>
    <property name="colides" type="bool" value="true"/>
+   <property name="isDoorOpen" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="452">
   <properties>
    <property name="colides" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="453">
+  <properties>
+   <property name="isDoorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="454">
+  <properties>
+   <property name="isDoorOpen" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="481">
@@ -264,16 +276,28 @@
  <tile id="482">
   <properties>
    <property name="colides" type="bool" value="true"/>
+   <property name="isDoorOpen" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="483">
   <properties>
    <property name="colides" type="bool" value="true"/>
+   <property name="isDoorOpen" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="484">
   <properties>
    <property name="colides" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="485">
+  <properties>
+   <property name="isDoorOpen" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="486">
+  <properties>
+   <property name="isDoorOpen" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="595">

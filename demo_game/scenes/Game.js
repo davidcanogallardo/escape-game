@@ -10,6 +10,15 @@ class Game extends Phaser.Scene {
         this.load.tilemapTiledJSON("map", "assets/tilemaps/mapa.json");
         this.load.atlas('player', 'assets/character/player.png', 'assets/character/player.json');
         this.load.atlas('chest', 'assets/objects/chest.png', 'assets/objects/chest.json');
+        this.load.image("password_background", "assets/password_paper.png");
+        this.load.spritesheet('closed_door', 'assets/closed_door.png', {
+            frameWidth: 32,
+            frameHeight: 32
+        });
+        this.load.spritesheet('opened_door', 'assets/opened_door.png', {
+            frameWidth: 32,
+            frameHeight: 32
+        })
     }
 
     create() {
@@ -23,6 +32,7 @@ class Game extends Phaser.Scene {
         var groundLayer = this.map.createStaticLayer('ground', tileset);
         var itemLayer = this.map.createStaticLayer('items', tileset);
         var wallsLayer = this.map.createLayer('walls', tileset);
+        let objectLayer = this.map.getObjectLayer('objects');
         wallsLayer.renderDebug
         wallsLayer.setDepth(2)
         
@@ -73,15 +83,57 @@ class Game extends Phaser.Scene {
         this.physics.add.existing(this.chest);
 
         //Player action area
-        this.playerCollider = this.physics.add.image(200, 50,);
+        this.playerCollider = this.physics.add.image(200, 50);
         
-        var eKey = this.input.keyboard.addKey('E');
-        var eKeyDown = eKey?.isDown
         //this.physics.add.overlap(this.player, chest, () => {this.scene.start("gameover",{ score : this.segundos})})
+
+        //Puzzle para abrir puerta
+        let chestIsOpen = false;
+
+        //Crear grupo donde se almacenan las puertas
+        this.closed_doorGroup = this.physics.add.staticGroup();
+        this.opened_doorGroup = this.physics.add.staticGroup();
+
+        //iterar por todos los objetos de la capa de objetos
+        objectLayer.objects.forEach(object => {
+            //Popriedades de cada objeto
+            const {x = 0, y = 0, height, width,id, name} =  object;
+
+            switch(name){
+                case 'closed_door':
+                    //Cambiar la hitbox de la puerta cerrada
+                    this.closed_door = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'closed_door');
+                    this.closed_door.body.setSize(width, height*0.1).setOffset(width-33,height-5);
+                    
+                    //Agregar puerta al grupo de puertas
+                    this.closed_doorGroup.add(this.closed_door);
+                    break;
+                case 'opened_door':
+                    this.opened_door = this.physics.add.sprite(x+(x+(width/2),y-(height/2), 'opened_door'));
+                    this.opened_doorGroup.add(this.opened_door);
+                    this.opened_doorGroup.setVisible(true);
+                    console.log(this.opened_door);
+                    break;
+            }
+            //this.physics.add.collider(this.player, door);
+        });
+        //Añadir colider al grupo de puertas
+        let closed_doorColider = this.physics.add.collider(this.player, this.closed_doorGroup);
+
+        //Añadir overlar del collider del jugador con el grupo de puertas
+        this.physics.add.overlap(this.playerCollider, this.closed_doorGroup, () => {
+            console.log("Esta tocando la puerta")
+            this.input.keyboard.once('keydown-E', () => {
+                this.physics.world.removeCollider(closed_doorColider);
+                this.closed_doorGroup.setVisible(false);
+                this.opened_doorGroup.setVisible(true);
+            })
+        });
 
         this.physics.add.overlap(this.playerCollider, this.chest, () => {
             this.input.keyboard.once('keydown-E', () => {
                 this.scene.switch('password_scene');
+                chestIsOpen = true;
             })
         });
         
@@ -134,17 +186,6 @@ class Game extends Phaser.Scene {
         }
 
         this.centerBodyonBody(this.playerCollider.body, this.player.body);
-
-        //console.log(this.player.y - this.chest.y);
-
-        // if(this.player.x - this.chest.x < 30 && this.player.y - this.chest.y < 30){
-        //     if(this.player.x - this.chest.x > -30 && this.player.y - this.chest.y > -30){
-        //         //console.log("El jugador esta cerca del cofre");
-        //         if(eKeyDown){
-        //             this.scene.switch('password_scene');
-        //         }
-        //     }
-        // }
     }
 
     formatTime(seconds){
