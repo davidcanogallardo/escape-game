@@ -29,7 +29,6 @@ class Password_scene extends Phaser.Scene {
 
     update(){
         var spaceKey = this.input.keyboard.addKey('E');
-        console.log(spaceKey);
         var spaceKeyDown = spaceKey?.isDown
 
         if(spaceKeyDown){

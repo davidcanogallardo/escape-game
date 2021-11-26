@@ -32,11 +32,14 @@ class Game extends Phaser.Scene {
 
         //Player
         this.player = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
-        this.player.body.setSize(this.player.width*0.5, this.player.height * 0.3).setOffset(8,20)
+        this.player.body.setSize(this.player.width*0.5, this.player.height * 0.3).setOffset(8,18)
         this.player.setDepth(0)
-        window.p = this.player
-        
         this.physics.add.collider(this.player, wallsLayer)
+        window.p = this.player
+
+        //Player action area
+        this.playerCollider = this.physics.add.image()
+        
 
 
         this.wallGroup = this.physics.add.staticGroup();
@@ -49,7 +52,7 @@ class Game extends Phaser.Scene {
                 const y = tile.getCenterY();
 
                 //Creo el nuevo tile
-                const new_tile = this.wallGroup.create(x,y, "");
+                const new_tile = this.wallGroup.create(x,y);
                 //Le pongo tamaño y lo posiciono (setOffset)
                 new_tile.body.setSize(tile.width, tile.height*0.1).setOffset(tile.width-7,tile.height+5)
                 //Añado la colisión al nuevo tile
@@ -72,7 +75,29 @@ class Game extends Phaser.Scene {
         //Cofre
         this.chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
         this.physics.add.existing(this.chest);
+
         
+        
+        var eKey = this.input.keyboard.addKey('E');
+        var eKeyDown = eKey?.isDown
+        //this.physics.add.overlap(this.player, chest, () => {this.scene.start("gameover",{ score : this.segundos})})
+
+        this.physics.add.overlap(this.playerCollider, this.chest, () => {
+            this.input.keyboard.once('keydown-E', () => {
+                this.scene.switch('password_scene');
+            })
+        });
+
+        window.wg = this.wallGroup;
+        this.physics.add.overlap(this.playerCollider, this.wallGroup, () => {
+            for (let i = 0; i < this.wallGroup.children.entries.length; i++) {
+                if (this.player.y > this.wallGroup.children.entries[i].y && this.player._depth != 10) {
+                    this.player.setDepth(10);
+                    console.log("a")
+                }
+            }
+        });
+
         //Tiempo
         this.title = this.add.text(5,0, 'Tiempo: ', {
             fontSize: 9,
@@ -157,16 +182,19 @@ class Game extends Phaser.Scene {
             this.player.setVelocity(0, 0)
         }
 
-        console.log(this.player.y - this.chest.y);
+        this.centerBodyonBody(this.playerCollider.body, this.player.body);
 
-        if(this.player.x - this.chest.x < 30 && this.player.y - this.chest.y < 30){
-            if(this.player.x - this.chest.x > -30 && this.player.y - this.chest.y > -30){
-                console.log("El jugador esta cerca del cofre");
-                if(eKeyDown){
-                    this.scene.switch('password_scene');
-                }
-            }
-        }
+        //console.log(this.player.y - this.chest.y);
+
+        // if(this.player.x - this.chest.x < 30 && this.player.y - this.chest.y < 30){
+        //     if(this.player.x - this.chest.x > -30 && this.player.y - this.chest.y > -30){
+        //         //console.log("El jugador esta cerca del cofre");
+        //         if(eKeyDown){
+        //             this.scene.switch('password_scene');
+        //         }
+        //     }
+        // }
+        
     }
 
     formatTime(seconds){
@@ -184,6 +212,13 @@ class Game extends Phaser.Scene {
     updateTime () {
         this.segundos += 1;
         this.title.setText('Tiempo: ' + this.formatTime(this.segundos));
+    }
+
+    centerBodyonBody(collider, player) {
+        collider.position.set(
+            player.x + player.halfWidth - collider.halfWidth,
+            player.y + player.halfHeight - collider.halfHeight
+        );
     }
 
 }
