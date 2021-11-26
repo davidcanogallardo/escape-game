@@ -6,7 +6,12 @@
     <i class="fas fa-times friends-list slide-link" page=".slide-list-container" aria-hidden="true"></i>
 </div>
 
-<div class="slide-list"></div>
+<div class="slide-list" id="friend-list">
+    <friend
+        v-for="friendName in friends"
+        v-bind:name="friendName"
+    ></friend>
+</div>
 
 <div class="form-fr-request">
     Enviar solicitud a:

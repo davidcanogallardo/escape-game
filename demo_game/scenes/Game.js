@@ -19,6 +19,8 @@ class Game extends Phaser.Scene {
             frameWidth: 32,
             frameHeight: 32
         })
+        this.load.atlas('door', 'assets/objects/door/door.png', 'assets/objects/door/door.json');
+        this.cursors = this.input.keyboard.createCursorKeys();
     }
 
     create() {
@@ -41,11 +43,14 @@ class Game extends Phaser.Scene {
 
         //Player
         this.player = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
-        this.player.body.setSize(this.player.width*0.5, this.player.height * 0.3).setOffset(8,20)
+        this.player.body.setSize(this.player.width*0.5, this.player.height * 0.3).setOffset(8,18)
         this.player.setDepth(0)
-        window.p = this.player
-        
         this.physics.add.collider(this.player, wallsLayer)
+        window.p = this.player
+
+        //Player action area
+        this.playerCollider = this.physics.add.image()
+        
 
 
         this.wallGroup = this.physics.add.staticGroup();
@@ -58,7 +63,7 @@ class Game extends Phaser.Scene {
                 const y = tile.getCenterY();
 
                 //Creo el nuevo tile
-                const new_tile = this.wallGroup.create(x,y, "");
+                const new_tile = this.wallGroup.create(x,y);
                 //Le pongo tamaño y lo posiciono (setOffset)
                 new_tile.body.setSize(tile.width, tile.height*0.1).setOffset(tile.width-7,tile.height+5)
                 //Añado la colisión al nuevo tile
@@ -84,6 +89,7 @@ class Game extends Phaser.Scene {
 
         //Player action area
         this.playerCollider = this.physics.add.image(200, 50);
+        
         
         //this.physics.add.overlap(this.player, chest, () => {this.scene.start("gameover",{ score : this.segundos})})
 
@@ -136,7 +142,21 @@ class Game extends Phaser.Scene {
                 chestIsOpen = true;
             })
         });
-        
+
+        window.wg = this.wallGroup;
+        // this.physics.add.overlap(this.playerCollider, this.wallGroup, () => {
+        //     for (let i = 0; i < this.wallGroup.children.entries.length; i++) {
+        //         if (this.player.y > this.wallGroup.children.entries[i].y && this.player._depth != 10) {
+        //             this.player.setDepth(10);
+        //             console.log("a")
+        //         }
+        //     }
+        // });
+
+        if(this.player._depth == 10 && this.playerCollider.checkCollision.down){
+            this.player.setDepth(0);
+        }
+
         //Tiempo
         this.title = this.add.text(5,0, 'Tiempo: ', {
             fontSize: 9,
@@ -154,37 +174,108 @@ class Game extends Phaser.Scene {
                 if (this.map.getLayer("walls").data[i][j].properties.horizontalWalls === true) {
                     this.map.test.getLayer("walls").data[i][j].height = 2
                 }
-                
             }
-            
         }
+
+        //estados personaje
+    	//lado
+        this.anims.create({
+            key: 'player-idle-side',
+            frames: [{key: 'player', frame: 'walk-side-3.png'}],
+        })
+        //arriba
+        this.anims.create({
+            key: 'player-idle-up',
+            frames: [{key: 'player', frame: 'walk-up-3.png'}],
+        })
+        //abajo
+        this.anims.create({
+            key: 'player-idle-down',
+            frames: [{key: 'player', frame: 'walk-down-3.png'}],
+        })
+
+        //animaciones personaje
+        //arriba
+        this.anims.create({
+            key: 'player-run-down',
+            frames: this.anims.generateFrameNames('player',{start: 1 , end: 8, prefix: 'run-down-',suffix: '.png'}),
+            repeat: -1,
+            frameRate: 15
+        })
+        //abajo
+        this.anims.create({
+            key: 'player-run-up',
+            frames: this.anims.generateFrameNames('player',{start: 1 , end: 8, prefix: 'run-up-',suffix: '.png'}),
+            repeat: -1,
+            frameRate: 15
+        })
+        //lado
+        this.anims.create({
+            key: 'player-run-side',
+            frames: this.anims.generateFrameNames('player',{start: 1 , end: 8, prefix: 'run-side-',suffix: '.png'}),
+            repeat: -1,
+            frameRate: 15
+        })
+        
+        //puerta
+        this.door = this.physics.add.sprite(80, 160, 'door','door-0.png' );
+        this.door.setDepth(0);
+        this.anims.create({
+            key: 'door-closed',
+            frames: [{key: 'door', frame: 'door-0.png'}],
+        })
+        this.door.anims.play('door-closed');
+
+        this.anims.create({
+            key: 'opening-door',
+            frames: this.anims.generateFrameNames('door',{start: 0 , end: 3, prefix: 'door-',suffix: '.png'}),
+            repeat: -1,
+            frameRate: 5
+        })
+        let dKey = this.input.keyboard.addKey('d');
+        if (this.cursors.dKey?.isDown) {
+            this.door.anims.play('opening-door');
+        }
+        
     }
   
     update() {
-        var speed = 100
-
-        var leftDown = this.cursors.left?.isDown
-        var rightDown = this.cursors.right?.isDown
-        var upDown = this.cursors.up?.isDown
-        var downDown = this.cursors.down?.isDown
+        let speed = 100
+        let eKey = this.input.keyboard.addKey('E');
+        let eKeyDown = eKey?.isDown
 
         // Aqui indicamos las animaciones del personaje al pulsar cada boton
-        if (leftDown) {
-            this.player.setVelocity(-speed, 0);
-
-        } else if (rightDown) {
-            this.player.setVelocity(speed, 0)
-
-        } else if (upDown) {
-            this.player.setVelocity(0, -speed)
-
-        } else if (downDown) {
-            this.player.setVelocity(0, speed)
-
-        } else {
-            this.player.setVelocity(0, 0)
+        if(this.player.anims.currentAnim==null){
+            this.player.anims.play('player-idle-down');
+        }else{
+            if (this.cursors.left?.isDown) {
+                this.player.setVelocity(-speed, 0)
+                this.player.anims.play('player-run-side',true)
+                this.player.scaleX = -1;
+                this.player.body.offset.x = 24;
+    
+            } else if (this.cursors.right?.isDown) {
+                this.player.setVelocity(speed, 0)
+                this.player.anims.play('player-run-side',true)
+                this.player.scaleX = 1;
+                this.player.body.offset.x = 8;
+    
+            } else if (this.cursors.up?.isDown) {
+                this.player.setVelocity(0, -speed)
+                this.player.anims.play('player-run-up', true)
+    
+            } else if (this.cursors.down?.isDown) {
+                this.player.setVelocity(0, speed)
+                this.player.anims.play('player-run-down', true)
+    
+            } else {
+                const parts = this.player.anims.currentAnim.key.split('-');
+                parts[1] = 'idle';
+                this.player.anims.play(parts.join('-'));
+                this.player.setVelocity(0, 0);
+            }
         }
-
+        
         this.centerBodyonBody(this.playerCollider.body, this.player.body);
     }
 

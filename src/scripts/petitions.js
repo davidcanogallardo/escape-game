@@ -21,12 +21,25 @@ $(document).ready(function () {
             if ( console && console.log ) {
                 console.log( "La solicitud se ha completado correctamente." );
                 console.log( data );
-                login(data)
+                // login(data)
+                let user = new User(
+                    data.userData.username, 
+                    data.userData.friendsList, 
+                    data.userData.notifications, 
+                    data.userData.completedLevels,
+                    data.userData.favMap,
+                    data.userData.numTrophies
+                )
+                sessionStorage.setItem("session",JSON.stringify(user))
+                user.createProfile()
+                user.createFriendList()
+                user.createNotifications()
+                changePage("main")
             }
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
             }
         });
     });
@@ -54,7 +67,7 @@ $(document).ready(function () {
         })
         .fail(function(XMLHttpRequest, textStatus, errorThrown) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
                 console.log(XMLHttpRequest);
                 console.log(errorThrown);
             }
@@ -80,7 +93,7 @@ $(document).ready(function () {
         })
         .fail(function(textStatus) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
             }
         });
     })
@@ -105,7 +118,7 @@ $(document).ready(function () {
         })
         .fail(function(textStatus) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
             }
         });
     })
@@ -124,7 +137,7 @@ $(document).ready(function () {
         })
         .fail(function(textStatus) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
             }
         });
     })
@@ -143,7 +156,7 @@ $(document).ready(function () {
             data: {
                 "petition" : "friend-request",
                 "params" : {
-                    "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
+                    "user" : JSON.parse(sessionStorage.getItem("session")).username,
                     "friend" : friendName,
                     "accept" : accept
                 }
@@ -160,7 +173,7 @@ $(document).ready(function () {
         })
         .fail(function(textStatus) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
                 console.log(textStatus);
             }
         });
@@ -177,7 +190,7 @@ $(document).ready(function () {
                 data: {
                     "petition" : "send_request",
                     "params" : {
-                        "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
+                        "user" : JSON.parse(sessionStorage.getItem("session")).username,
                         "friend" : friendName
                     }
                 },
@@ -194,7 +207,7 @@ $(document).ready(function () {
             })
             .fail(function(textStatus) {
                 if ( console && console.log ) {
-                    console.log( "La solicitud a fallado: " +  textStatus);
+                    console.log( "La solicitud ha fallado: " +  textStatus);
                     console.log(textStatus);
                 }
             });
@@ -210,7 +223,7 @@ $(document).ready(function () {
             data: {
                 "petition" : "close-sesion",
                 "params" : {
-                    "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
+                    "user" : JSON.parse(sessionStorage.getItem("session")).username,
                 }
             },
             type: "POST",
@@ -218,6 +231,7 @@ $(document).ready(function () {
             url: _url,
         })
         .done(function(data) {
+            console.log("efgwf");
             console.log(data);
             if (data.success) {
                 closeSession()
@@ -225,7 +239,7 @@ $(document).ready(function () {
         })
         .fail(function(textStatus) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
                 console.log(textStatus);
             }
         });
@@ -233,31 +247,9 @@ $(document).ready(function () {
 })
 
 //Funciones para gestionar las respuestas
-function login(data) {
-    if (data.success) {
-        sessionStorage.clear()
-    
-        sessionStorage.setItem("session",JSON.stringify(data.userData))
-    
-        console.log(data.message);
-        changeProfile(data.userData)
-        console.log(data.userData.friendList);
-        createFriendsList(data.userData.friendList)
-        createRequestList(data.userData.friendsRequest)
-        changePage("main");
-    } else {
-        //TODO: poner animación al mensaje de error
-        console.log(data.message);
-        // $(".error > *").remove()
-        // $(".error").append("<p>El usuario no existe</p>")
-        showNotification("El usuario no existe", "red")
-    }
-}
 
-function updateFriendProfile(data) {  
-    changeFriendProfile(data.userData)
-    changePage("friend-profile-page")
-}
+
+
 
 function updateRanking(data) {
     $(".all-levels > *").remove();
@@ -293,14 +285,15 @@ function updateRanking(data) {
 
 }
 
+//USUARIO
 function updateFriendList(event, accept, friendName) {
     $(event.currentTarget.parentElement).fadeOut(500, function (event) {
         $(this).remove()  
     })
+
     var new_session = JSON.parse(sessionStorage.getItem("session"))
     if (accept) {
-        new_session.friendList.push(friendName)
-        createFriendsList(new_session.friendList)
+        user.addFriend(friendName)
     }
     new_session.friendsRequest.pop(friendName)
     sessionStorage.setItem("session", JSON.stringify(new_session))
@@ -314,95 +307,17 @@ function updateFriendNotification(friendName) {
     sessionStorage.setItem("session", JSON.stringify(new_session))
 }
 
-function closeSession(params) {
+function closeSession() {
     changePage('main'); 
     sessionStorage.clear()
 }
 
 //************************************************************************************************************************//
 
-function createFriendsList(friendsList) {
-    $(".slide-list-container .slide-list > *").remove()
-
-    friendsList.forEach(name => {
-        let newFriend = `
-        <div title="Ver perfil" class="list-item friend-profile-link" page="friend-profile-page" name="`+name+`" >
-            <div class="icon-container pr-btn" name="`+name+`">
-                <i class="fas fa-user" aria-hidden="true" name="`+name+`"></i>
-            </div>
-            <span name="`+name+`">`+name+`</span>
-            <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation" onclick="return false">
-                <i class="fas fa-user-plus" aria-hidden="true"></i>
-            </div>
-        </div>
-        `
-        $(".slide-list-container .slide-list").append(newFriend)
-    });
-}
-
-function createRequestList(requestList) { 
-    $(".notification-container .slide-list > *").remove()
-
-    requestList.forEach(name => {
-        let newRequest = `                
-        <div class="list-item">
-            <div class="icon-container pr-btn" >
-                <i class="fas fa-user" aria-hidden="true"></i>
-            </div>
-            <span >`+name+`</span>
-            <div class="btn accept">
-                <i class="fas fa-check" aria-hidden="true"></i>
-            </div>
-            <div class="btn cancel">
-                <i class="fas fa-times" aria-hidden="true"></i>
-            </div>
-        </div> 
-        `
-        $(".notification-container .slide-list").append(newRequest)
-    });
-
-}
-
-function changeProfile(data) {
-    $("#profile-name").text(data.usuario)
-    $("#invite-name").text(data.usuario)
-    $("#fav-map").text(data.favMap)
-    $("#total-trophys").text(data.numCopas)
-
-    $(".niveles > *").remove()
-    Object.entries(data.completeLevels).forEach((level) => {
-        if (level[1].trophies.bronze) {
-            var bronzeClass = "bronze"
-        } else {
-            var bronzeClass = "white"
-        }
-        if (level[1].trophies.silver) {
-            var silverClass = "silver"
-        } else {
-            var silverClass = "white"
-        }
-        if (level[1].trophies.gold) {
-            var goldClass = "gold"
-        } else {
-            var goldClass = "white"
-        }
-
-        var newLevel = `
-            <div class="nivel">
-                <img src="https://www.gametopia.es/learning/2017/img/blog/18-06/og-como-disenar-nivel-videojuego.png" alt="miniatura del nivel">
-                <p class="texto">`+level[0]+`</p>
-                <p class="texto">`+level[1].time+`</p>
-                <div class="trophys-container">
-                    <i class="fas fa-trophy `+ bronzeClass +`"></i>
-                    <i class="fas fa-trophy `+ silverClass +`"></i>
-                    <i class="fas fa-trophy `+ goldClass +`"></i>
-                </div>
-            </div>
-        `
-        $(".niveles").append(newLevel)
-    })
-    
-
+// AMIGOS
+function updateFriendProfile(data) {  
+    changeFriendProfile(data.userData)
+    changePage("friend-profile-page")
 }
 
 function changeFriendProfile(data) {  
@@ -433,8 +348,9 @@ function PUT_ranking() {
     })
     .fail(function(textStatus) {
         if ( console && console.log ) {
-            console.log( "La solicitud a fallado: " +  textStatus);
+            console.log( "La solicitud ha fallado: " +  textStatus);
             console.log(textStatus);
         }
     });
 }
+
