@@ -115,18 +115,27 @@ class Game extends Phaser.Scene {
                 if (this.map.getLayer("walls").data[i][j].properties.horizontalWalls === true) {
                     this.map.test.getLayer("walls").data[i][j].height = 2
                 }
-                
             }
-            
         }
 
-        //animaciones personaje
-    	//stoped
+        //estados personaje
+    	//lado
+        this.anims.create({
+            key: 'player-idle-side',
+            frames: [{key: 'player', frame: 'walk-side-3.png'}],
+        })
+        //arriba
+        this.anims.create({
+            key: 'player-idle-up',
+            frames: [{key: 'player', frame: 'walk-up-3.png'}],
+        })
+        //abajo
         this.anims.create({
             key: 'player-idle-down',
             frames: [{key: 'player', frame: 'walk-down-3.png'}],
         })
 
+        //animaciones personaje
         //arriba
         this.anims.create({
             key: 'player-run-down',
@@ -141,7 +150,7 @@ class Game extends Phaser.Scene {
             repeat: -1,
             frameRate: 15
         })
-        //side
+        //lado
         this.anims.create({
             key: 'player-run-side',
             frames: this.anims.generateFrameNames('player',{start: 1 , end: 8, prefix: 'run-side-',suffix: '.png'}),
@@ -157,31 +166,37 @@ class Game extends Phaser.Scene {
         let eKeyDown = eKey?.isDown
 
         // Aqui indicamos las animaciones del personaje al pulsar cada boton
-        if (this.cursors.left?.isDown) {
-            this.player.setVelocity(-speed, 0)
-            this.player.anims.play('player-run-side',true)
-            this.player.scaleX = -1;
-            this.player.body.offset.x = 24;
-
-        } else if (this.cursors.right?.isDown) {
-            this.player.setVelocity(speed, 0)
-            this.player.anims.play('player-run-side',true)
-            this.player.scaleX = 1;
-            this.player.body.offset.x = 8;
-
-        } else if (this.cursors.up?.isDown) {
-            this.player.setVelocity(0, -speed)
-            this.player.anims.play('player-run-up', true)
-
-        } else if (this.cursors.down?.isDown) {
-            this.player.setVelocity(0, speed)
-            this.player.anims.play('player-run-down', true)
-
-        } else {
-            this.player.anims.play('player-idle-down')
-            this.player.setVelocity(0, 0)
+        if(this.player.anims.currentAnim==null){
+            this.player.anims.play('player-idle-down');
+        }else{
+            if (this.cursors.left?.isDown) {
+                this.player.setVelocity(-speed, 0)
+                this.player.anims.play('player-run-side',true)
+                this.player.scaleX = -1;
+                this.player.body.offset.x = 24;
+    
+            } else if (this.cursors.right?.isDown) {
+                this.player.setVelocity(speed, 0)
+                this.player.anims.play('player-run-side',true)
+                this.player.scaleX = 1;
+                this.player.body.offset.x = 8;
+    
+            } else if (this.cursors.up?.isDown) {
+                this.player.setVelocity(0, -speed)
+                this.player.anims.play('player-run-up', true)
+    
+            } else if (this.cursors.down?.isDown) {
+                this.player.setVelocity(0, speed)
+                this.player.anims.play('player-run-down', true)
+    
+            } else {
+                const parts = this.player.anims.currentAnim.key.split('-');
+                parts[1] = 'idle';
+                this.player.anims.play(parts.join('-'));
+                this.player.setVelocity(0, 0);
+            }
         }
-
+        
         this.centerBodyonBody(this.playerCollider.body, this.player.body);
 
         //console.log(this.player.y - this.chest.y);
