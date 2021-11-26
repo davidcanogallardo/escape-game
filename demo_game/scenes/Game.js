@@ -10,6 +10,16 @@ class Game extends Phaser.Scene {
         this.load.tilemapTiledJSON("map", "assets/tilemaps/mapa.json");
         this.load.atlas('player', 'assets/character/player.png', 'assets/character/player.json');
         this.load.atlas('chest', 'assets/objects/chest.png', 'assets/objects/chest.json');
+        this.load.image("password_background", "assets/password_paper.png");
+        // this.load.spritesheet('closed_door', 'assets/closed_door.png', {
+        //     frameWidth: 32,
+        //     frameHeight: 32
+        // });
+        // this.load.spritesheet('opened_door', 'assets/opened_door.png', {
+        //     frameWidth: 32,
+        //     frameHeight: 32
+        // })
+        this.load.atlas('door', 'assets/objects/door/door.png', 'assets/objects/door/door.json');
         this.cursors = this.input.keyboard.createCursorKeys();
     }
 
@@ -24,6 +34,7 @@ class Game extends Phaser.Scene {
         var groundLayer = this.map.createStaticLayer('ground', tileset);
         var itemLayer = this.map.createStaticLayer('items', tileset);
         var wallsLayer = this.map.createLayer('walls', tileset);
+        let objectLayer = this.map.getObjectLayer('objects');
         wallsLayer.renderDebug
         wallsLayer.setDepth(2)
         
@@ -76,15 +87,51 @@ class Game extends Phaser.Scene {
         this.chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
         this.physics.add.existing(this.chest);
 
+        //Player action area
+        this.playerCollider = this.physics.add.image(200, 50);
         
         
-        var eKey = this.input.keyboard.addKey('E');
-        var eKeyDown = eKey?.isDown
         //this.physics.add.overlap(this.player, chest, () => {this.scene.start("gameover",{ score : this.segundos})})
+
+        //Puzzle para abrir puerta
+        let chestIsOpen = false;
+
+        //Crear grupo donde se almacenan las puertas
+        this.closed_doorGroup = this.physics.add.staticGroup();
+        this.opened_doorGroup = this.physics.add.staticGroup();
+
+        //iterar por todos los objetos de la capa de objetos
+        objectLayer.objects.forEach(object => {
+            //Popriedades de cada objeto
+            const {x = 0, y = 0, height, width, id, name} =  object;
+
+            switch(name){
+                case 'closed_door':
+                    //Cambiar la hitbox de la puerta cerrada
+                    this.closed_door = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'door', 'door-closed');
+                    //this.closed_door.anims.play('door-closed');
+                    this.closed_door.body.setSize(width, height*0.1).setOffset(width-33,height-5);
+                    
+                    //Agregar puerta al grupo de puertas
+                    this.closed_doorGroup.add(this.closed_door);
+                    break;
+                // case 'opened_door':
+                //     this.opened_door = this.physics.add.sprite(x+(x+(width/2),y-(height/2), 'opened_door'));
+                //     this.opened_doorGroup.add(this.opened_door);
+                //     this.opened_doorGroup.setVisible(true);
+                //     console.log(this.opened_door);
+                //     break;
+            }
+            //this.physics.add.collider(this.player, door);
+        });
+        //Añadir colider al grupo de puertas
+        let closed_doorColider = this.physics.add.collider(this.player, this.closed_doorGroup);
 
         this.physics.add.overlap(this.playerCollider, this.chest, () => {
             this.input.keyboard.once('keydown-E', () => {
                 this.scene.switch('password_scene');
+                this.physics.world.removeCollider(closed_doorColider);
+                this.closed_doorGroup.playAnimation('opening-door');
             })
         });
 
@@ -116,18 +163,27 @@ class Game extends Phaser.Scene {
                 if (this.map.getLayer("walls").data[i][j].properties.horizontalWalls === true) {
                     this.map.test.getLayer("walls").data[i][j].height = 2
                 }
-                
             }
-            
         }
 
-        //animaciones personaje
-    	//stoped
+        //estados personaje
+    	//lado
+        this.anims.create({
+            key: 'player-idle-side',
+            frames: [{key: 'player', frame: 'walk-side-3.png'}],
+        })
+        //arriba
+        this.anims.create({
+            key: 'player-idle-up',
+            frames: [{key: 'player', frame: 'walk-up-3.png'}],
+        })
+        //abajo
         this.anims.create({
             key: 'player-idle-down',
             frames: [{key: 'player', frame: 'walk-down-3.png'}],
         })
 
+        //animaciones personaje
         //arriba
         this.anims.create({
             key: 'player-run-down',
@@ -142,7 +198,7 @@ class Game extends Phaser.Scene {
             repeat: -1,
             frameRate: 15
         })
-        //side
+        //lado
         this.anims.create({
             key: 'player-run-side',
             frames: this.anims.generateFrameNames('player',{start: 1 , end: 8, prefix: 'run-side-',suffix: '.png'}),
@@ -150,6 +206,20 @@ class Game extends Phaser.Scene {
             frameRate: 15
         })
         
+        //puerta
+        //this.door = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
+        this.anims.create({
+            key: 'door-closed',
+            frames: [{key: 'door', frame: 'door-0.png'}],
+        })
+        // this.door
+
+        this.anims.create({
+            key: 'opening-door',
+            frames: this.anims.generateFrameNames('door',{start: 0 , end: 3, prefix: 'door-',suffix: '.png'}),
+            repeat: 0,
+            frameRate: 5
+        })
     }
   
     update() {

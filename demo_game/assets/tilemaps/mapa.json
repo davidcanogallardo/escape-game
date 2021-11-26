@@ -11,7 +11,7 @@
          "name":"ground",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":20,
          "x":0,
          "y":0
@@ -25,14 +25,73 @@
          "name":"items",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":20,
          "x":0,
          "y":0
         }, 
         {
+         "draworder":"topdown",
+         "id":7,
+         "name":"objects",
+         "objects":[
+                {
+                 "gid":1025,
+                 "height":32,
+                 "id":22,
+                 "name":"closed_door",
+                 "rotation":0,
+                 "type":"door",
+                 "visible":true,
+                 "width":32,
+                 "x":64,
+                 "y":176
+                }, 
+                {
+                 "gid":1025,
+                 "height":32,
+                 "id":25,
+                 "name":"closed_door",
+                 "rotation":0,
+                 "type":"door",
+                 "visible":true,
+                 "width":32,
+                 "x":224,
+                 "y":176
+                }, 
+                {
+                 "gid":1026,
+                 "height":32,
+                 "id":35,
+                 "name":"opened_doo",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":64,
+                 "y":176
+                }, 
+                {
+                 "gid":1026,
+                 "height":32,
+                 "id":36,
+                 "name":"opened_door",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":223.761,
+                 "y":176
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
+         "x":0,
+         "y":0
+        }, 
+        {
          "compression":"",
-         "data":"4QAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAOIAAAABAQAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAKIBAACjAQAApAEAAKUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACiAQAAowEAAKQBAAClAQAAAAAAAAAAAAACAQAAAQEAAAIAAAACAAAAwgEAAMYBAADHAQAAxQEAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAMIBAADDAQAAxAEAAMUBAAACAAAAAgAAAAIBAAABAQAAIgAAACIAAAAiAAAA5gEAAOcBAAAiAAAAIgAAACIAAAADAQAABAEAACIAAAAiAAAAIgAAAOMBAADkAQAAIgAAACIAAAAiAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgEAAAEBAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIBAAAhAQAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAQAAIQEAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgEAAA==",
+         "data":"4QAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAOIAAAABAQAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAKIBAACjAQAApAEAAKUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACiAQAAowEAAKQBAAClAQAAAAAAAAAAAAACAQAAAQEAAAIAAAACAAAAwgEAAAAAAAAAAAAAxQEAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAMIBAAAAAAAAAAAAAMUBAAACAAAAAgAAAAIBAAABAQAAIgAAACIAAAAiAAAAAAAAAAAAAAAiAAAAIgAAACIAAAADAQAABAEAACIAAAAiAAAAIgAAAAAAAAAAAAAAIgAAACIAAAAiAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgEAAAEBAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIBAAAhAQAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAQAAIQEAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgEAAA==",
          "encoding":"base64",
          "height":20,
          "id":2,
@@ -44,8 +103,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":7,
- "nextobjectid":10,
+ "nextlayerid":8,
+ "nextobjectid":37,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",
@@ -537,6 +596,42 @@
                         }]
                 }, 
                 {
+                 "id":450,
+                 "properties":[
+                        {
+                         "name":"isDoorOpen",
+                         "type":"bool",
+                         "value":false
+                        }]
+                }, 
+                {
+                 "id":451,
+                 "properties":[
+                        {
+                         "name":"isDoorOpen",
+                         "type":"bool",
+                         "value":false
+                        }]
+                }, 
+                {
+                 "id":453,
+                 "properties":[
+                        {
+                         "name":"isDoorOpen",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":454,
+                 "properties":[
+                        {
+                         "name":"isDoorOpen",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
                  "id":481,
                  "properties":[
                         {
@@ -557,6 +652,11 @@
                          "name":"colides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"isDoorOpen",
+                         "type":"bool",
+                         "value":false
                         }]
                 }, 
                 {
@@ -566,6 +666,11 @@
                          "name":"colides",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"isDoorOpen",
+                         "type":"bool",
+                         "value":false
                         }]
                 }, 
                 {
@@ -583,6 +688,24 @@
                         }]
                 }, 
                 {
+                 "id":485,
+                 "properties":[
+                        {
+                         "name":"isDoorOpen",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":486,
+                 "properties":[
+                        {
+                         "name":"isDoorOpen",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
                  "id":595,
                  "properties":[
                         {
@@ -592,6 +715,34 @@
                         }]
                 }],
          "tilewidth":16
+        }, 
+        {
+         "columns":2,
+         "firstgid":1025,
+         "image":"..\/tilesets\/TSMapa\/PNG\/doors.png",
+         "imageheight":32,
+         "imagewidth":64,
+         "margin":0,
+         "name":"doors_spriteSheet",
+         "spacing":0,
+         "tilecount":2,
+         "tileheight":32,
+         "tiles":[
+                {
+                 "id":0,
+                 "properties":[
+                        {
+                         "name":"colides",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "type":"door"
+                }, 
+                {
+                 "id":1,
+                 "type":"door"
+                }],
+         "tilewidth":32
         }],
  "tilewidth":16,
  "type":"map",
