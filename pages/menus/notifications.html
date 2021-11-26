@@ -6,4 +6,9 @@
     <i class="fas fa-times notificacion-list slide-link" page=".notification-container" aria-hidden="true"></i>
 </div>
 
-<div class="slide-list"></div>
+<div class="slide-list" id="notification-list">
+    <friend
+        v-for="name in notifications"
+        v-bind:name="name"
+    ></friend>
+</div>

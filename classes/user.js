@@ -1,17 +1,17 @@
 class User {
-    constructor(username, friendList, notifications, levels, favLevel, numCopas) {
+    constructor(username, friendsList, notifications, completedLevels, favMap, numTrophies) {
         this.username = username
-        this.friendList = friendList
+        this.friendsList = friendsList
         this.notifications = notifications
-        this.levels = levels
-        this.numCopas = numCopas
-        this.favLevel = favLevel
+        this.completedLevels = completedLevels
+        this.favMap = favMap
+        this.numTrophies = numTrophies
     }
 
     createFriendList() {
         $(".slide-list-container .slide-list > *").remove()
 
-        this.friendList.forEach(name => {
+        this.friendsList.forEach(name => {
             this.addFriend(name)
         });
     } 
@@ -19,11 +19,11 @@ class User {
     createProfile() {
         $("#profile-name").text(this.username)
         $("#invite-name").text(this.username)
-        $("#fav-map").text(this.favLevel)
-        $("#total-trophys").text(this.numCopas)
+        $("#fav-map").text(this.favMap)
+        $("#total-trophys").text(this.numTrophies)
         
         $(".niveles > *").remove()
-        Object.entries(this.levels).forEach((level) => {
+        Object.entries(this.completedLevels).forEach((level) => {
             if (level[1].trophies.bronze) {
                 var bronzeClass = "bronze"
             } else {
@@ -66,9 +66,10 @@ class User {
     }
 
     addFriend(name) {
-        if (!(this.friendList.includes(name))) {
-            this.friendList.push(name)
-            let newFriend = `
+        if (!(this.friendsList.includes(name))) {
+            this.friendsList.push(name)
+            let newFriend = 
+            `
             <div title="Ver perfil" class="list-item friend-profile-link" page="friend-profile-page" name="`+name+`" >
                 <div class="icon-container pr-btn" name="`+name+`">
                     <i class="fas fa-user" aria-hidden="true" name="`+name+`"></i>
@@ -103,8 +104,8 @@ class User {
     }
 
     removeFriend(name) {
-        if (this.friendList.includes(name)) {
-            this.friendList.pop(name)
+        if (this.friendsList.includes(name)) {
+            this.friendsList.pop(name)
         }
     }
 }

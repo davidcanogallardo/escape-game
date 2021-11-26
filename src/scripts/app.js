@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    /*****************************************************************************************/
     loadPages()
+    /*****************************************************************************************/
     //changePage("main")
     
     $('.container').on('click','.link', function (event) {
@@ -62,25 +62,7 @@ function loadPages() {
                                                             $(".pages .trophy-page").load("./pages/trophys.html", () => {
                                                                 console.log(12);
                                                                 console.log("session");
-                                                                var data = JSON.parse(sessionStorage.getItem("session"))
-                                                                window.d = data
-                                                                if (data) {
-                                                                    console.log("sesion detectada");
-                                                                    let user = new User(
-                                                                        data.username, 
-                                                                        data.friendList, 
-                                                                        data.notifications, 
-                                                                        data.levels,
-                                                                        data.favMap,
-                                                                        data.numCopas
-                                                                    )
-                                                                    user.createProfile()
-                                                                    user.createFriendList()
-                                                                    user.createNotifications()
-                                                                } else {
-                                                                    console.log("no hay sesion");
-                                                                }
-                                                                changePage("main")
+                                                                afterLoad()
                                                             })
                                                         })
                                                     })
@@ -96,6 +78,29 @@ function loadPages() {
             })
         })  
     })  
+}
+
+function afterLoad() {
+    var data = JSON.parse(sessionStorage.getItem("session"))
+    window.d = data
+    if (data) {
+        console.log("sesion detectada");
+        let user = new User(
+            data.username, 
+            data.friendsList, 
+            data.notifications, 
+            data.completedLevels,
+            data.favMap,
+            data.numTrophies
+        )
+        user.createProfile()
+        //user.createFriendList()
+        user.createNotifications()
+        // vue()
+    } else {
+        console.log("no hay sesion");
+    }
+    changePage("main")
 }
 
 function rightMenu(params) {

@@ -1,6 +1,6 @@
 <?php 
-
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $data = [];
     if(isset($_REQUEST['petition'])) {
         if($_REQUEST['petition']=="login"){
             if(isset($_REQUEST['params'])){
@@ -53,10 +53,10 @@ function loginResponse($name){
         $data['success'] = true;
         $data['message'] = 'Hola! El valor recibido es correcto.';
         $data['userData'] =  [
-            'usuario' => $name,
-            'numCopas' => 5,
+            'username' => $name,
+            'numTrophies' => 5,
             'favMap' => 'pisosPicados',
-            'completeLevels' => [
+            'completedLevels' => [
                 'pisosPicodos' => [
                     'time' => '1:00:20', 
                     'trophies' => [
@@ -75,8 +75,8 @@ function loginResponse($name){
                     ]
                 ]
             ],
-            'friendList' => ['David', 'Oscar', 'Adnan'],
-            'friendsRequest' => ['Luis', 'Jose']         
+            'friendsList' => ['David', 'Oscar', 'Adnan'],
+            'notifications' => ['Luis', 'Jose']         
         ];
     
         return $data;

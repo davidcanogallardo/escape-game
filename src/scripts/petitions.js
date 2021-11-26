@@ -23,12 +23,12 @@ $(document).ready(function () {
                 console.log( data );
                 // login(data)
                 let user = new User(
-                    data.userData.usuario, 
-                    data.userData.friendList, 
-                    data.userData.friendsRequest, 
-                    data.userData.completeLevels,
+                    data.userData.username, 
+                    data.userData.friendsList, 
+                    data.userData.notifications, 
+                    data.userData.completedLevels,
                     data.userData.favMap,
-                    data.userData.numCopas
+                    data.userData.numTrophies
                 )
                 sessionStorage.setItem("session",JSON.stringify(user))
                 user.createProfile()
@@ -39,7 +39,7 @@ $(document).ready(function () {
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
             }
         });
     });
@@ -67,7 +67,7 @@ $(document).ready(function () {
         })
         .fail(function(XMLHttpRequest, textStatus, errorThrown) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
                 console.log(XMLHttpRequest);
                 console.log(errorThrown);
             }
@@ -93,7 +93,7 @@ $(document).ready(function () {
         })
         .fail(function(textStatus) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
             }
         });
     })
@@ -118,13 +118,14 @@ $(document).ready(function () {
         })
         .fail(function(textStatus) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
             }
         });
     })
 
     // ranking
     $(".container").on("click",".ranking-link", () => {
+        console.log(notification);
         $.ajax({
             data: {"petition" : "ranking"},
             type: "POST",
@@ -137,7 +138,7 @@ $(document).ready(function () {
         })
         .fail(function(textStatus) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
             }
         });
     })
@@ -156,7 +157,7 @@ $(document).ready(function () {
             data: {
                 "petition" : "friend-request",
                 "params" : {
-                    "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
+                    "user" : JSON.parse(sessionStorage.getItem("session")).username,
                     "friend" : friendName,
                     "accept" : accept
                 }
@@ -173,7 +174,7 @@ $(document).ready(function () {
         })
         .fail(function(textStatus) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
                 console.log(textStatus);
             }
         });
@@ -190,7 +191,7 @@ $(document).ready(function () {
                 data: {
                     "petition" : "send_request",
                     "params" : {
-                        "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
+                        "user" : JSON.parse(sessionStorage.getItem("session")).username,
                         "friend" : friendName
                     }
                 },
@@ -207,7 +208,7 @@ $(document).ready(function () {
             })
             .fail(function(textStatus) {
                 if ( console && console.log ) {
-                    console.log( "La solicitud a fallado: " +  textStatus);
+                    console.log( "La solicitud ha fallado: " +  textStatus);
                     console.log(textStatus);
                 }
             });
@@ -223,7 +224,7 @@ $(document).ready(function () {
             data: {
                 "petition" : "close-sesion",
                 "params" : {
-                    "user" : JSON.parse(sessionStorage.getItem("session")).usuario,
+                    "user" : JSON.parse(sessionStorage.getItem("session")).username,
                 }
             },
             type: "POST",
@@ -231,6 +232,7 @@ $(document).ready(function () {
             url: _url,
         })
         .done(function(data) {
+            console.log("efgwf");
             console.log(data);
             if (data.success) {
                 closeSession()
@@ -238,7 +240,7 @@ $(document).ready(function () {
         })
         .fail(function(textStatus) {
             if ( console && console.log ) {
-                console.log( "La solicitud a fallado: " +  textStatus);
+                console.log( "La solicitud ha fallado: " +  textStatus);
                 console.log(textStatus);
             }
         });
@@ -290,10 +292,10 @@ function updateFriendList(event, accept, friendName) {
         $(this).remove()  
     })
 
+    var new_session = JSON.parse(sessionStorage.getItem("session"))
     if (accept) {
         user.addFriend(friendName)
     }
-    var new_session = JSON.parse(sessionStorage.getItem("session"))
     new_session.friendsRequest.pop(friendName)
     sessionStorage.setItem("session", JSON.stringify(new_session))
 }
@@ -347,8 +349,9 @@ function PUT_ranking() {
     })
     .fail(function(textStatus) {
         if ( console && console.log ) {
-            console.log( "La solicitud a fallado: " +  textStatus);
+            console.log( "La solicitud ha fallado: " +  textStatus);
             console.log(textStatus);
         }
     });
 }
+
