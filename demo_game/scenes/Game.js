@@ -95,7 +95,7 @@ class Game extends Phaser.Scene {
         //Player action area
         this.playerCollider = this.physics.add.image(200, 50);
         //hitbox redonda
-        this.playerCollider.setCircle(18)
+        // this.playerCollider.setCircle(18)
         
         
         //this.physics.add.overlap(this.player, chest, () => {this.scene.start("gameover",{ score : this.segundos})})
@@ -144,15 +144,15 @@ class Game extends Phaser.Scene {
 
         window.wg = this.wallGroup;
         window.pc = this.playerCollider;
-        this.physics.add.overlap(this.playerCollider, this.wallGroup,function (param) {
-            for(let i = 0 ; i < window.wg.children.entries.length; i++){
-                if(window.wg.children.entries[i].body.center.y = 173){
-                  window.wg.children.entries[i].setDepth(0)
+        this.physics.add.overlap(this.playerCollider, this.wallGroup,function (player,walls) {
+                if(walls.y < player.y){
+                    window.p.setDepth(10);
+                } else {
+                    window.p.setDepth(0);
                 }
-              }
 
         });
-        //this.playerCollider.body.gameObject.world.bodies
+        //params.body.world.bodies.entries[].center.y
         //Tiempo
         this.title = this.add.text(5,0, 'Tiempo: ', {
             fontSize: 9,
