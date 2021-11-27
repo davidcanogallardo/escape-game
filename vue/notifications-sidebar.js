@@ -26,7 +26,7 @@ Vue.component('notification', {
                 <span>Notificaciones</span>
             </i>
             
-            <i class="fas fa-times notificacion-list slide-link" page=".notification-container" aria-hidden="true" v-on:click="$emit('change-page','none')"></i>
+            <i class="fas fa-times notificacion-list slide-link" page=".notification-container" aria-hidden="true" v-on:click="$emit('open-menu','none')"></i>
         </div>
 
         <div class="slide-list" id="notification-list">

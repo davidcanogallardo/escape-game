@@ -1,12 +1,50 @@
+var data = JSON.parse(sessionStorage.getItem("session"))
+let user 
+// if (data) {
+if (true) {
+    console.log("sesion detectada");
+    user = new User(
+      "david", 
+      "david", 
+      "david", 
+      "david",
+      "david",
+      "david"
+    )
+    window.u = user
+    console.log(user);
+    // user.createProfile()
+    // user.createFriendList()
+    // user.createNotifications()
+    // $.getScript("./src/scripts/vue.js");
+} else {
+    console.log("no hay sesion");
+}
 var app = new Vue({
     el: '#app',
     data: {
-      currentPage: "main",
+      currentPage: "home",
       menuOpen: "none",
       friendsArray: ["uwu", "owo",],
       notificationsArray: ["a", "b","c", "d","e", "f"],
-    }
+      user: user,
+    },
+    watch: {
+      // whenever question changes, this function will run
+      currentPage: function (newPage, oldPage) {
+        if (!sessionStorage.getItem("session") && newPage != "home" && newPage != "game") {
+          console.log("no hay sesión");
+          // this.currentPage = "login-warning"
+        } else {
+          console.log("hay sesión");
+        }
+        this.menuOpen = "none"
+      }
+    },
+
 })
+
+
 
   // Vue.component('notification', {
   //   template: //html

@@ -8,6 +8,10 @@ class User {
         this.numTrophies = numTrophies
     }
 
+    getUser() {
+        return this.username
+    }
+
     createFriendList() {
         $(".slide-list-container .slide-list > *").remove()
 

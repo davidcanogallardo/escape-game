@@ -15,29 +15,73 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     
     <!-- <script src="./src/scripts/petitions.js"></script> -->
-    <!-- <script src="./classes/user.js"></script> -->
+    <script src="./classes/user.js"></script>
     <!-- <script src="./src/scripts/app.js"></script> -->
-    <script src="./vue/main.js"></script> 
+    <script src="./vue/home.js"></script> 
     <script src="./vue/friends-sidebar.js"></script> 
-    <script src="./vue/notifications-sidebar.js"></script> 
+    <script src="./vue/notifications-sidebar.js"></script>
+    <script src="./vue/login-warning.js"></script>
+    <script src="./vue/ranking.js"></script>
+    <script src="./vue/profile.js"></script>
+    <script src="./vue/trophies.js"></script>
+    <script src="./vue/settings/connect-controller.js"></script>
+    <script src="./vue/settings/settings.js"></script>
+    <script src="./vue/settings/sound-settings.js"></script>
+    <script src="./vue/settings/test-controller.js"></script>
     
 </head>
 <body>
     <div id="app">
         <div class="container">
             <transition name="fade">
-                <mainn v-if="currentPage == 'main'" v-on:change-page="menuOpen = $event"></mainn>
+                <home v-if="currentPage == 'home'" 
+                    v-on:open-menu="menuOpen = $event" 
+                    v-on:change-page="currentPage = $event">
+                </home>
+                <login-warning 
+                    v-if="currentPage == 'login-warning'" 
+                    v-on:change-page="currentPage = $event">
+                </login-warning>
+                <settings 
+                    v-if="currentPage == 'settings'" 
+                    v-on:change-page="currentPage = $event">
+                </settings>
+                <sound-settings 
+                    v-if="currentPage == 'sound-settings'" 
+                    v-on:change-page="currentPage = $event">
+                </sound-settings>
+                <connect-controller 
+                    v-if="currentPage == 'connect-controller'" 
+                    v-on:change-page="currentPage = $event">
+                </connect-controller>
+                <test-controller 
+                    v-if="currentPage == 'test-controller'" 
+                    v-on:change-page="currentPage = $event">
+                </test-controller>
+                <ranking 
+                    v-if="currentPage == 'ranking'" 
+                    v-on:change-page="currentPage = $event">
+                </ranking>
+                <profile 
+                    v-if="currentPage == 'profile'" 
+                    v-on:change-page="currentPage = $event">
+                </profile>
+                <trophies 
+                    v-if="currentPage == 'trophies'" 
+                    v-on:change-page="currentPage = $event">
+                </trophies>
             </transition>
+
             <transition name="slide">
                 <friend 
                     v-if="menuOpen == 'friend'" 
                     :friends="friendsArray"
-                    v-on:change-page="menuOpen = $event">
+                    v-on:open-menu="menuOpen = $event">
                 </friend>
                 <notification 
                     v-if="menuOpen == 'noti'" 
                     :notifications="notificationsArray"
-                    v-on:change-page="menuOpen = $event">
+                    v-on:open-menu="menuOpen = $event">
                 </notification>
             </transition>
         </div>
