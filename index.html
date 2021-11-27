@@ -25,17 +25,21 @@
 <body>
     <div id="app">
         <div class="container">
-            <mainn v-if="currentPage == 'main'" v-on:change-page="menuOpen = $event"></mainn>
-            <friend 
-                v-if="menuOpen == 'friend'" 
-                :friends="friendsArray"
-                v-on:change-page="menuOpen = $event">
-            </friend>
-            <notification 
-                v-if="menuOpen == 'noti'" 
-                :notifications="notificationsArray"
-                v-on:change-page="menuOpen = $event">
-            </notification>
+            <transition name="fade">
+                <mainn v-if="currentPage == 'main'" v-on:change-page="menuOpen = $event"></mainn>
+            </transition>
+            <transition name="slide">
+                <friend 
+                    v-if="menuOpen == 'friend'" 
+                    :friends="friendsArray"
+                    v-on:change-page="menuOpen = $event">
+                </friend>
+                <notification 
+                    v-if="menuOpen == 'noti'" 
+                    :notifications="notificationsArray"
+                    v-on:change-page="menuOpen = $event">
+                </notification>
+            </transition>
         </div>
     
         <div class="pages">
