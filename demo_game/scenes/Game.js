@@ -24,6 +24,7 @@ class Game extends Phaser.Scene {
     }
 
     create() {
+        
         //Mapa, layers..
         this.map = this.make.tilemap({
             key: "map"
@@ -173,8 +174,8 @@ class Game extends Phaser.Scene {
             }
         }
 
-        
-
+        //necesario para que el juego pause al cambiar la ventana correctamente
+        game.scene.game.hasFocus = true;
         //estados personaje
     	//lado
         this.anims.create({
@@ -240,7 +241,8 @@ class Game extends Phaser.Scene {
         let escKey = this.input.keyboard.addKey('ESC');
         let escKeyDown = escKey?.isDown
 
-        if(escKeyDown){
+        //menu de pausa "ESC" o al cambiar de ventana
+        if(escKeyDown || game.scene.game.hasFocus == false){
             this.scene.launch('pause_scene')
             this.scene.pause();
         }

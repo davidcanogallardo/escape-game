@@ -14,7 +14,7 @@ class Pause_scene extends Phaser.Scene {
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })
         title.setOrigin(0.5, 0.5)
-    
+
         this.add.text(width / 2, height / 2+50, 'Presiona ESC para volver', {
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })
