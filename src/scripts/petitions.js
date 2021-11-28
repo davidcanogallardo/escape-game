@@ -45,7 +45,7 @@ $(document).ready(function () {
     });
 
     // signup
-    $(".container").on("click",".signup-link", () => {
+    $(".container").on("clickk",".signup-link", () => {
         var form_data = $("#signup").serializeArray()
         console.log(form_data);
         $.ajax({
@@ -248,7 +248,7 @@ $(document).ready(function () {
 
 //Funciones para gestionar las respuestas
 
-function loginn(form_data) {
+function loginPetition(form_data) {
     $.ajax({
         data: {
             "petition" : "login", 
@@ -280,6 +280,7 @@ function loginn(form_data) {
                 // user.createFriendList()
                 // user.createNotifications()
                 app.currentPage="home"
+                app.user = user
                 // changePage("main")
                 
             } else {
@@ -294,6 +295,33 @@ function loginn(form_data) {
     });
 }
 
+function signupPetition(form_data) {
+    console.log(form_data);
+    $.ajax({
+        data: {
+            "petition" : "register", 
+            "params" : {
+                "email":form_data.email, 
+                "user":form_data.username,
+                "password":form_data.password
+            }
+        },
+        type: "PUT",
+        dataType: "json",
+        contentType: "application/json",
+        url: _url,
+    })
+    .done(function(data) {
+        console.log(data);
+    })
+    .fail(function(XMLHttpRequest, textStatus, errorThrown) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
+            console.log(XMLHttpRequest);
+            console.log(errorThrown);
+        }
+    });
+}
 
 
 function updateRanking(data) {

@@ -69,11 +69,13 @@
                 </ranking>
                 <profile 
                     v-if="currentPage == 'profile'" 
-                    v-on:change-page="currentPage = $event">
+                    v-on:change-page="currentPage = $event"
+                    :user="user">
                 </profile>
                 <trophies 
                     v-if="currentPage == 'trophies'" 
-                    v-on:change-page="currentPage = $event">
+                    v-on:change-page="currentPage = $event"
+                    :levels="user.completedLevels">
                 </trophies>
                 <!-- <div v-if="currentPage == 'game'">
                     <div id="game"></div>

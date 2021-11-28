@@ -57,7 +57,8 @@ function loginResponse($name){
             'numTrophies' => 5,
             'favMap' => 'pisosPicados',
             'completedLevels' => [
-                'pisosPicodos' => [
+                 [
+                    'name' => 'pisos Picodos',
                     'time' => '1:00:20', 
                     'trophies' => [
                         'bronze' => true,
@@ -65,8 +66,8 @@ function loginResponse($name){
                         'gold' => true
                     ]
                 ],
-    
-                'summonerRift' => [
+                [
+                    'name' => 'summoner Rift',
                     'time' => '3:34:05',
                     'trophies' => [
                         'bronze' => true,
