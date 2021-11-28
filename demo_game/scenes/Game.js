@@ -173,6 +173,8 @@ class Game extends Phaser.Scene {
             }
         }
 
+        
+
         //estados personaje
     	//lado
         this.anims.create({
@@ -235,6 +237,13 @@ class Game extends Phaser.Scene {
         let speed = 200
         let eKey = this.input.keyboard.addKey('E');
         let eKeyDown = eKey?.isDown
+        let escKey = this.input.keyboard.addKey('ESC');
+        let escKeyDown = escKey?.isDown
+
+        if(escKeyDown){
+            this.scene.launch('pause_scene')
+            this.scene.pause();
+        }
 
         // Aqui indicamos las animaciones del personaje al pulsar cada boton
         if (this.cursors.left?.isDown) {
