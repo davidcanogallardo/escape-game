@@ -3,7 +3,7 @@ $(document).ready(function () {
     var _url = "./petitions.php";
 
     // login
-    $('.container').on('click','.login-link', function (event) {
+    $('.container').on('click','.login-linkk', function (event) {
         var form_data = $("#login").serializeArray()
         $.ajax({
             data: {
@@ -248,6 +248,51 @@ $(document).ready(function () {
 
 //Funciones para gestionar las respuestas
 
+function loginn(form_data) {
+    $.ajax({
+        data: {
+            "petition" : "login", 
+            "params" : {
+                "user": form_data.username,
+                "password":form_data.password
+            }
+        },
+        type: "POST",
+        dataType: "json",
+        url: "./petitions.php",
+    })
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud se ha completado correctamente." );
+            console.log( data );
+            // login(data)
+            if (data.success) {
+                let user = new User(
+                    data.userData.username, 
+                    data.userData.friendsList, 
+                    data.userData.notifications, 
+                    data.userData.completedLevels,
+                    data.userData.favMap,
+                    data.userData.numTrophies
+                )
+                sessionStorage.setItem("session",JSON.stringify(user))
+                // user.createProfile()
+                // user.createFriendList()
+                // user.createNotifications()
+                app.currentPage="home"
+                // changePage("main")
+                
+            } else {
+                console.log(data.message);
+            }
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
+        }
+    });
+}
 
 
 

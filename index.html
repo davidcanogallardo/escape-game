@@ -11,16 +11,17 @@
     
     <script src="./src/scripts/jquery-3.6.0.js"></script>
     <script src="https://kit.fontawesome.com/b0d71d7fba.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     
-    <!-- <script src="./src/scripts/petitions.js"></script> -->
+    <script src="./src/scripts/petitions.js"></script>
     <script src="./classes/user.js"></script>
     <!-- <script src="./src/scripts/app.js"></script> -->
     <script src="./vue/home.js"></script> 
     <script src="./vue/friends-sidebar.js"></script> 
     <script src="./vue/notifications-sidebar.js"></script>
     <script src="./vue/login-warning.js"></script>
+    <script src="./vue/login.js"></script>
     <script src="./vue/ranking.js"></script>
     <script src="./vue/profile.js"></script>
     <script src="./vue/trophies.js"></script>
@@ -38,6 +39,10 @@
                     v-on:open-menu="menuOpen = $event" 
                     v-on:change-page="currentPage = $event">
                 </home>
+                <login 
+                    v-if="currentPage == 'login'" 
+                    v-on:change-page="currentPage = $event">
+                </login>
                 <login-warning 
                     v-if="currentPage == 'login-warning'" 
                     v-on:change-page="currentPage = $event">
@@ -70,6 +75,14 @@
                     v-if="currentPage == 'trophies'" 
                     v-on:change-page="currentPage = $event">
                 </trophies>
+                <!-- <div v-if="currentPage == 'game'">
+                    <div id="game"></div>
+                    <script type="application/javascript" defer src="./demo_game/scenes/Titlescreen.js"></script>
+                    <script type="application/javascript" defer src="./demo_game/scenes/Gameover.js"></script>
+                    <script type="application/javascript" defer src="./demo_game/scenes/Game.js"></script>
+                    <script type="application/javascript" defer src="./demo_game/scenes/Password_scene.js"></script>
+                    <script type="application/javascript" defer src="./demo_game/main.js"></script>
+                </div> -->
             </transition>
 
             <transition name="slide">
@@ -85,7 +98,7 @@
                 </notification>
             </transition>
         </div>
-    
+        
         <div class="pages">
             <div class="page main"></div>
             
@@ -120,7 +133,6 @@
             <div class="notification-container"></div>
         </div>
     </div>
-
     <script src="./src/scripts/vue.js"></script> 
 </body>
 </html>

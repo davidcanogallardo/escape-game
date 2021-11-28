@@ -20,6 +20,7 @@ if (true) {
 } else {
     console.log("no hay sesion");
 }
+sessionStorage.clear()
 var app = new Vue({
     el: '#app',
     data: {
@@ -32,9 +33,9 @@ var app = new Vue({
     watch: {
       // whenever question changes, this function will run
       currentPage: function (newPage, oldPage) {
-        if (!sessionStorage.getItem("session") && newPage != "home" && newPage != "game") {
+        if (!sessionStorage.getItem("session") && newPage != "home" && newPage != "game" && newPage != "login") {
           console.log("no hay sesión");
-          // this.currentPage = "login-warning"
+          this.currentPage = "login-warning"
         } else {
           console.log("hay sesión");
         }
