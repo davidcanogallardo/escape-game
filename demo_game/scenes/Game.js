@@ -156,9 +156,11 @@ class Game extends Phaser.Scene {
         //params.body.world.bodies.entries[].center.y
         //Tiempo
         this.title = this.add.text(5,0, 'Tiempo: ', {
-            fontSize: 9,
+            fontSize: 12,
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })
+
+        this.title.setDepth(10)
         
         //Evento para terminar la partida
         //this.physics.add.overlap(this.player, chest, () => {this.scene.start("gameover",{ score : this.segundos})})
