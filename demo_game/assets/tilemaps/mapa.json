@@ -449,7 +449,7 @@
                          "value":true
                         }, 
                         {
-                         "name":"horizontalWalls",
+                         "name":"wall",
                          "type":"bool",
                          "value":true
                         }]
@@ -463,7 +463,7 @@
                          "value":true
                         }, 
                         {
-                         "name":"horizontalWalls",
+                         "name":"wall",
                          "type":"bool",
                          "value":true
                         }]

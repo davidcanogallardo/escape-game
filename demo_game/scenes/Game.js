@@ -11,21 +11,13 @@ class Game extends Phaser.Scene {
         this.load.atlas('player', 'assets/character/player.png', 'assets/character/player.json');
         this.load.atlas('chest', 'assets/objects/chest.png', 'assets/objects/chest.json');
         this.load.image("password_background", "assets/password_paper.png");
-        // this.load.spritesheet('closed_door', 'assets/closed_door.png', {
-        //     frameWidth: 32,
-        //     frameHeight: 32
-        // });
-        // this.load.spritesheet('opened_door', 'assets/opened_door.png', {
-        //     frameWidth: 32,
-        //     frameHeight: 32
-        // })
         this.load.atlas('door', 'assets/objects/door/door.png', 'assets/objects/door/door.json');
         this.cursors = this.input.keyboard.createCursorKeys();
     }
 
     create() {
         
-        //Mapa, layers..
+/**************************************Mapa, layers...****************************/
         this.map = this.make.tilemap({
             key: "map"
         });
@@ -33,7 +25,6 @@ class Game extends Phaser.Scene {
         
         var tileset = this.map.addTilesetImage('dungeon', 'tiles');
         var groundLayer = this.map.createStaticLayer('ground', tileset);
-        var itemLayer = this.map.createStaticLayer('items', tileset);
         var wallsLayer = this.map.createLayer('walls', tileset);
         let objectLayer = this.map.getObjectLayer('objects');
         wallsLayer.renderDebug
