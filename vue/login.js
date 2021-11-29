@@ -29,7 +29,7 @@ Vue.component('login', {
                     <label for="password">Contraseña</label>
                     <input type="password" id="login_password" name="password" v-model="loginInput.password" required="">
                     <div class="recover-link link" page="recover-page">
-                        <a class="recover-link link" page="recover-page">
+                        <a class="recover-link link" page="recover-page" v-on:click="$emit('change-page','password-recover')">
                             <b>He olvidado mi contraseña</b>
                         </a>
                     </div>

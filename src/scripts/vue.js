@@ -1,25 +1,26 @@
 var data = JSON.parse(sessionStorage.getItem("session"))
-let user = null;
-// if (data) {
-// if (true) {
-//     console.log("sesion detectada");
-//     user = new User(
-//       "david", 
-//       "david", 
-//       "david", 
-//       "david",
-//       "david",
-//       "david"
-//     )
-//     window.u = user
-//     console.log(user);
-//     // user.createProfile()
-//     // user.createFriendList()
-//     // user.createNotifications()
-//     // $.getScript("./src/scripts/vue.js");
-// } else {
-//     console.log("no hay sesion");
-// }
+let user
+if (data) {
+  // if (true) {
+    console.log("sesion detectada");
+    user = new User(
+      data.username,
+      data.friendsList,
+      data.notifications,
+      data.completedLevels,
+      data.favMap,
+      data.numTrophies
+      )
+    window.u = user
+    console.log(user);
+    // user.createProfile()
+    // user.createFriendList()
+    // user.createNotifications()
+    // $.getScript("./src/scripts/vue.js");
+  } else {
+    user = null;
+    console.log("no hay sesion");
+}
 // sessionStorage.clear()
 var app = new Vue({
     el: '#app',
@@ -33,7 +34,7 @@ var app = new Vue({
     watch: {
       // whenever question changes, this function will run
       currentPage: function (newPage, oldPage) {
-        if (!sessionStorage.getItem("session") && newPage != "home" && newPage != "game" && newPage != "login") {
+        if (!sessionStorage.getItem("session") && newPage != "home" && newPage != "game" && newPage != "login" && newPage != "password-recover") {
           console.log("no hay sesión");
           this.currentPage = "login-warning"
         } else {

@@ -25,6 +25,7 @@
     <script src="./vue/ranking.js"></script>
     <script src="./vue/profile.js"></script>
     <script src="./vue/trophies.js"></script>
+    <script src="./vue/password-recover.js"></script>
     <script src="./vue/settings/connect-controller.js"></script>
     <script src="./vue/settings/settings.js"></script>
     <script src="./vue/settings/sound-settings.js"></script>
@@ -77,6 +78,10 @@
                     v-on:change-page="currentPage = $event"
                     :levels="user.completedLevels">
                 </trophies>
+                <password-recover
+                    v-if="currentPage == 'password-recover'" 
+                    v-on:change-page="currentPage = $event"
+                ></password-recover>
                 <!-- <div v-if="currentPage == 'game'">
                     <div id="game"></div>
                     <script type="application/javascript" defer src="./demo_game/scenes/Titlescreen.js"></script>
@@ -90,12 +95,12 @@
             <transition name="slide">
                 <friend 
                     v-if="menuOpen == 'friend'" 
-                    :friends="friendsArray"
+                    :friends="user.friendsList"
                     v-on:open-menu="menuOpen = $event">
                 </friend>
                 <notification 
                     v-if="menuOpen == 'noti'" 
-                    :notifications="notificationsArray"
+                    :notifications="user.notifications"
                     v-on:open-menu="menuOpen = $event">
                 </notification>
             </transition>

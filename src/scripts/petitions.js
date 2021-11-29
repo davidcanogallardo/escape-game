@@ -218,7 +218,7 @@ $(document).ready(function () {
     });
 
     // cerrar sesion
-    $('.container').on('click','.close-sesion', function (event) {
+    $('.container').on('clickk','.close-sesion', function (event) {
         $.ajax({
             data: {
                 "petition" : "close-sesion",
@@ -381,7 +381,8 @@ function updateFriendNotification(friendName) {
 }
 
 function closeSession() {
-    changePage('main'); 
+    console.log("cerrar sesión");
+    app.currentPage="home"; 
     sessionStorage.clear()
 }
 
