@@ -12,6 +12,9 @@ class Game extends Phaser.Scene {
         this.load.atlas('chest', 'assets/objects/chest.png', 'assets/objects/chest.json');
         this.load.image("password_background", "assets/password_paper.png");
         this.load.atlas('door', 'assets/objects/door/door.png', 'assets/objects/door/door.json');
+        for(let i = 0; i<9; i++){
+            this.load.image('simbol'+i, 'assets/passwd/simbol'+i+'.png');
+        }
         this.cursors = this.input.keyboard.createCursorKeys();
     }
 
@@ -27,11 +30,9 @@ class Game extends Phaser.Scene {
         var groundLayer = this.map.createStaticLayer('ground', tileset);
         var wallsLayer = this.map.createLayer('walls', tileset);
         let objectLayer = this.map.getObjectLayer('objects');
-        wallsLayer.renderDebug
         wallsLayer.setDepth(2)
         
         window.wall = wallsLayer
-        wallsLayer.debug = true;
 
         //Player
         this.player = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
@@ -43,8 +44,6 @@ class Game extends Phaser.Scene {
         //Player action area
         this.playerCollider = this.physics.add.image()
         
-
-
         this.wallGroup = this.physics.add.staticGroup();
         wallsLayer.forEachTile(tile => {
             if (tile.properties.wall == true) {
@@ -67,12 +66,13 @@ class Game extends Phaser.Scene {
         })
         
         wallsLayer.setCollisionByProperty({ colides: true })
-        const debugGraphics = this.add.graphics().setAlpha(0.7)
-        wallsLayer.renderDebug(debugGraphics, {
-            tileColor: null,
-            collidingTileColor: new Phaser.Display.Color(243,234, 48, 255 ),
-            faceColor: new Phaser.Display.Color(40,39,37, 255)
-        })
+        // DEBUGGER DE MUROS
+        // const debugGraphics = this.add.graphics().setAlpha(0.7)
+        // wallsLayer.renderDebug(debugGraphics, {
+        //     tileColor: null,
+        //     collidingTileColor: new Phaser.Display.Color(243,234, 48, 255 ),
+        //     faceColor: new Phaser.Display.Color(40,39,37, 255)
+        // })
 
         
         //Cofre
@@ -83,64 +83,85 @@ class Game extends Phaser.Scene {
         //hacer que el pj no empuje al cofre
         this.chest.body.immovable = true
 
+        //Añadir objeto para introducir contraseña temporal
+        this.password_input = this.add.rectangle(56, 200, 20, 20, 0x6666ff);
+        this.physics.add.existing(this.password_input);
+        this.physics.add.collider(this.chest, this.player);
+        this.password_input.body.immovable = true;
+
 
         //Player action area
         this.playerCollider = this.physics.add.image(200, 50);
         //hitbox redonda
         // this.playerCollider.setCircle(18)
-        
-        
-        //this.physics.add.overlap(this.player, chest, () => {this.scene.start("gameover",{ score : this.segundos})})
 
         //Puzzle para abrir puerta
         let chestIsOpen = false;
 
         //Crear grupo donde se almacenan las puertas
-        this.closed_doorGroup = this.physics.add.staticGroup();
-        this.opened_doorGroup = this.physics.add.staticGroup();
+        this.doorsGroup = this.physics.add.staticGroup();
+        this.chestsGroup = this.physics.add.staticGroup();
+        this.tablesGroup = this.physics.add.staticGroup();
 
         //iterar por todos los objetos de la capa de objetos
         objectLayer.objects.forEach(object => {
             //Popriedades de cada objeto
-            const {x = 0, y = 0, height, width, id, name} =  object;
+            const {x = 0, y = 0, height, width, type, name} =  object;
 
-            switch(name){
-                case 'closed_door':
+            switch(type){
+                case 'door':
                     //Cambiar la hitbox de la puerta cerrada
-                    this.closed_door = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'door', 'door-closed');
+                    this.door = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'door', 'door-closed');
                     //this.closed_door.anims.play('door-closed');
-                    this.closed_door.body.setSize(width, height*0.1).setOffset(width-33,height-5);
-                    
+                    this.door.body.setSize(width, height*0.1).setOffset(width-33,height-5);
                     //Agregar puerta al grupo de puertas
-                    this.closed_doorGroup.add(this.closed_door);
+                    this.doorsGroup.add(this.door);
                     break;
-                // case 'opened_door':
-                //     this.opened_door = this.physics.add.sprite(x+(x+(width/2),y-(height/2), 'opened_door'));
-                //     this.opened_doorGroup.add(this.opened_door);
-                //     this.opened_doorGroup.setVisible(true);
-                //     console.log(this.opened_door);
-                //     break;
+                case 'chest':
+                    //Cambiar la hitbox del cofre
+                    this.chest = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'chest', 'open-chest');
+                    //this.closed_door.anims.play('door-closed');
+                    this.chest.body.setSize(width, height*0.1).setOffset(width-33,height-5);
+                    //Agregar cofre al grupo de cofres
+                    this.chestsGroup.add(this.chest);
+                    break;
+                case 'table':
+                    //Cambiar la hitbox de la mesa
+                    this.table = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'table');
+                    //this.closed_door.anims.play('door-closed');
+                    this.table.body.setSize(width, height*0.1).setOffset(width-33,height-5);
+                    //Agregar puerta al grupo de puertas
+                    this.tablesGroup.add(this.table);
+                    break;
             }
-            //this.physics.add.collider(this.player, door);
         });
         //Añadir colider al grupo de puertas
-        let closed_doorColider = this.physics.add.collider(this.player, this.closed_doorGroup);
+        let doorsColider = this.physics.add.collider(this.player, this.doorsGroup);
 
-        this.physics.add.overlap(this.playerCollider, this.chest, () => {
+        // this.physics.add.overlap(this.playerCollider, this.chest, () => {
+        //     this.input.keyboard.once('keydown-E', () => {
+        //         this.scene.launch('password_scene');
+        //         this.physics.world.removeCollider(doorsColider);
+        //         this.doorsGroup.playAnimation('opening-door');
+        //     })
+        // });
+
+        this.physics.add.overlap(this.playerCollider, this.password_input, () => {
+            console.log('esta tocando la mesa');
             this.input.keyboard.once('keydown-E', () => {
-                this.scene.switch('password_scene');
-                this.physics.world.removeCollider(closed_doorColider);
-                this.closed_doorGroup.playAnimation('opening-door');
+                console.log('presiona e');
+                this.scene.launch('enter_password_scene');
             })
         });
 
         window.wg = this.wallGroup;
         window.pc = this.playerCollider;
+        var that = this;
         this.physics.add.overlap(this.playerCollider, this.wallGroup,function (player,walls) {
                 if(walls.y < player.y){
-                    window.p.setDepth(10);
+                    that.player.setDepth(10);
                 } else {
-                    window.p.setDepth(0);
+                    that.player.setDepth(0);
                 }
 
         });
@@ -153,9 +174,6 @@ class Game extends Phaser.Scene {
 
         this.title.setDepth(10)
         
-        //Evento para terminar la partida
-        //this.physics.add.overlap(this.player, chest, () => {this.scene.start("gameover",{ score : this.segundos})})
-
         //Evento que se ejecturá en bucle cada 1s y actualizará el tiempo
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.updateTime, callbackScope: this, loop: true });
 
