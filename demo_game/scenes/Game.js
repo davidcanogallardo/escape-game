@@ -31,11 +31,9 @@ class Game extends Phaser.Scene {
         var groundLayer = this.map.createStaticLayer('ground', tileset);
         var wallsLayer = this.map.createLayer('walls', tileset);
         let objectLayer = this.map.getObjectLayer('objects');
-        wallsLayer.renderDebug
         wallsLayer.setDepth(2)
         
         window.wall = wallsLayer
-        wallsLayer.debug = true;
 
         //Player
         this.player = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
@@ -69,12 +67,13 @@ class Game extends Phaser.Scene {
         })
         
         wallsLayer.setCollisionByProperty({ colides: true })
-        const debugGraphics = this.add.graphics().setAlpha(0.7)
-        wallsLayer.renderDebug(debugGraphics, {
-            tileColor: null,
-            collidingTileColor: new Phaser.Display.Color(243,234, 48, 255 ),
-            faceColor: new Phaser.Display.Color(40,39,37, 255)
-        })
+        // DEBUGGER DE MUROS
+        // const debugGraphics = this.add.graphics().setAlpha(0.7)
+        // wallsLayer.renderDebug(debugGraphics, {
+        //     tileColor: null,
+        //     collidingTileColor: new Phaser.Display.Color(243,234, 48, 255 ),
+        //     faceColor: new Phaser.Display.Color(40,39,37, 255)
+        // })
 
         
         //Cofre
@@ -158,11 +157,12 @@ class Game extends Phaser.Scene {
 
         window.wg = this.wallGroup;
         window.pc = this.playerCollider;
+        var that = this;
         this.physics.add.overlap(this.playerCollider, this.wallGroup,function (player,walls) {
                 if(walls.y < player.y){
-                    window.p.setDepth(10);
+                    that.player.setDepth(10);
                 } else {
-                    window.p.setDepth(0);
+                    that.player.setDepth(0);
                 }
 
         });

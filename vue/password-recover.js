@@ -7,9 +7,9 @@ Vue.component('password-recover', {
             <div id="recover-form">
                 <form class="recover-form" id="form-recover" method="post">
                     <label for="email">Email</label>
-                    <input type="email" id="recover_email" name="mail">
+                    <input type="email" id="recover_email" name="mail" v-model="mail">
 
-                    <input type="button" class="btn blue signup-link" value="Recuperar contraseña">
+                    <input type="button" class="btn blue signup-link" value="Recuperar contraseña" v-on:click="recover()">
                     <!-- <div style="width:37vw;">
                         <div class="form-button blue recover-pass" page="login-page">ENVIAR</div>
                     </div> -->
@@ -18,4 +18,14 @@ Vue.component('password-recover', {
             <div class="btn red volver link " page="login-page" v-on:click="$emit('change-page','login')">Volver</div>
     </div>
     `, 
+    data() {
+        return {
+            mail: ""
+        }
+    },
+    methods:{
+        recover(){
+            recoverPassword(this.mail);
+        }
+    }
 })
