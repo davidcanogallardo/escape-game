@@ -4,13 +4,14 @@ class Game extends Phaser.Scene {
     }
     //map.getLayer("walls").data[5][5].properties?.horitzontalWall
     preload() {
+        var path = "./demo_game/"
         this.segundos = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
-        this.load.image("tiles", "assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", "assets/tilemaps/mapa.json");
-        this.load.atlas('player', 'assets/character/player.png', 'assets/character/player.json');
-        this.load.atlas('chest', 'assets/objects/chest.png', 'assets/objects/chest.json');
-        this.load.image("password_background", "assets/password_paper.png");
+        this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/mapa.json");
+        this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
+        this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
+        this.load.image("password_background", path+"assets/password_paper.png");
         // this.load.spritesheet('closed_door', 'assets/closed_door.png', {
         //     frameWidth: 32,
         //     frameHeight: 32
@@ -19,7 +20,7 @@ class Game extends Phaser.Scene {
         //     frameWidth: 32,
         //     frameHeight: 32
         // })
-        this.load.atlas('door', 'assets/objects/door/door.png', 'assets/objects/door/door.json');
+        this.load.atlas('door', path+'assets/objects/door/door.png', path+'assets/objects/door/door.json');
         this.cursors = this.input.keyboard.createCursorKeys();
     }
 

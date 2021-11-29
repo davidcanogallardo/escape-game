@@ -30,6 +30,7 @@ var app = new Vue({
       friendsArray: ["uwu", "owo",],
       notificationsArray: ["a", "b","c", "d","e", "f"],
       user: JSON.parse(sessionStorage.getItem("session")),
+      profile: "null"
     },
     watch: {
       // whenever question changes, this function will run

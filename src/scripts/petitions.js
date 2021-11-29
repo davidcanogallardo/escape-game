@@ -1,130 +1,9 @@
+var _url = "./petitions.php";
 $(document).ready(function () {
     //Eventos que activan las peticiones al servidor
-    var _url = "./petitions.php";
-
-    // login
-    $('.container').on('click','.login-linkk', function (event) {
-        var form_data = $("#login").serializeArray()
-        $.ajax({
-            data: {
-                "petition" : "login", 
-                "params" : {
-                    "user": form_data[0].value,
-                    "password":form_data[1].value
-                }
-            },
-            type: "POST",
-            dataType: "json",
-            url: _url,
-        })
-        .done(function( data, textStatus, jqXHR ) {
-            if ( console && console.log ) {
-                console.log( "La solicitud se ha completado correctamente." );
-                console.log( data );
-                // login(data)
-                let user = new User(
-                    data.userData.username, 
-                    data.userData.friendsList, 
-                    data.userData.notifications, 
-                    data.userData.completedLevels,
-                    data.userData.favMap,
-                    data.userData.numTrophies
-                )
-                sessionStorage.setItem("session",JSON.stringify(user))
-                user.createProfile()
-                user.createFriendList()
-                user.createNotifications()
-                changePage("main")
-            }
-        })
-        .fail(function( jqXHR, textStatus, errorThrown ) {
-            if ( console && console.log ) {
-                console.log( "La solicitud ha fallado: " +  textStatus);
-            }
-        });
-    });
-
-    // signup
-    $(".container").on("clickk",".signup-link", () => {
-        var form_data = $("#signup").serializeArray()
-        console.log(form_data);
-        $.ajax({
-            data: {
-                "petition" : "register", 
-                "params" : {
-                    "email":form_data[0].value, 
-                    "user":form_data[1].value,
-                    "password":form_data[2].value
-                }
-            },
-            type: "PUT",
-            dataType: "json",
-            contentType: "application/json",
-            url: _url,
-        })
-        .done(function(data) {
-            console.log(data);
-        })
-        .fail(function(XMLHttpRequest, textStatus, errorThrown) {
-            if ( console && console.log ) {
-                console.log( "La solicitud ha fallado: " +  textStatus);
-                console.log(XMLHttpRequest);
-                console.log(errorThrown);
-            }
-        });
-    })
-
-    // recover
-    $(".container").on("click",".recover-pass", () => {
-        var form_data = $("#form-recover").serializeArray()
-        $.ajax({
-            data: {
-                "petition" : "recover", 
-                "params" : {
-                    "mail":form_data[0].value
-                }
-            },
-            type: "POST",
-            dataType: "json",
-            url: _url,
-        })
-        .done(function(data) {
-            console.log(data);
-        })
-        .fail(function(textStatus) {
-            if ( console && console.log ) {
-                console.log( "La solicitud ha fallado: " +  textStatus);
-            }
-        });
-    })
-
-    // friend profile
-    $(".container").on("click",".friend-profile-link", () => {
-        var name = event.originalTarget.attributes.name.value
-        $.ajax({
-            data: {
-                "petition" : "friendData", 
-                "params" : {
-                    "friendUser":name
-                }
-            },
-            type: "POST",
-            dataType: "json",
-            url: _url,
-        })
-        .done(function(data) {
-            console.log(data);
-            updateFriendProfile(data)
-        })
-        .fail(function(textStatus) {
-            if ( console && console.log ) {
-                console.log( "La solicitud ha fallado: " +  textStatus);
-            }
-        });
-    })
 
     // ranking
-    $(".container").on("click",".ranking-link", () => {
+    $(".container").on("click",".ranking-linkk", () => {
         $.ajax({
             data: {"petition" : "ranking"},
             type: "POST",
@@ -143,7 +22,7 @@ $(document).ready(function () {
     })
 
     // aceptar / cancelar solicitud de amistad
-    $('.container').on('click','.list-item .btn', function (event) {
+    $('.container').on('click','.klist-item .btn', function (event) {
         var friendName = event.currentTarget.parentElement.childNodes[3].innerHTML
         var accept
         if (event.currentTarget.classList.contains("accept")) {
@@ -181,44 +60,8 @@ $(document).ready(function () {
         
     });
 
-    // enviar solicitud
-    $('.container').on('click','.send-friend-request', function (event) {
-        var friendName = $("#user-request").val();
-        $("#user-request").val('');
-        if(friendName!=''){
-            $.ajax({
-                data: {
-                    "petition" : "send_request",
-                    "params" : {
-                        "user" : JSON.parse(sessionStorage.getItem("session")).username,
-                        "friend" : friendName
-                    }
-                },
-                type: "PUT",
-                dataType: "json",
-                url: _url,
-            })
-            .done(function(data) {
-                console.log(data);
-                if (data.success) {
-                    console.log(data.params);
-                    updateFriendNotification(friendName)
-                }
-            })
-            .fail(function(textStatus) {
-                if ( console && console.log ) {
-                    console.log( "La solicitud ha fallado: " +  textStatus);
-                    console.log(textStatus);
-                }
-            });
-        } else {
-            console.log("Esta vacio");
-        }
-        
-    });
-
     // cerrar sesion
-    $('.container').on('clickk','.close-sesion', function (event) {
+    $('.container').on('clickk','.kclose-sesion', function (event) {
         $.ajax({
             data: {
                 "petition" : "close-sesion",
@@ -323,6 +166,40 @@ function signupPetition(form_data) {
     });
 }
 
+function getFriendData(friendName) {
+    $.ajax({
+        data: {
+            "petition" : "friendData", 
+            "params" : {
+                "friendUser": friendName
+            }
+        },
+        type: "POST",
+        dataType: "json",
+        url: _url,
+    })
+    .done((data) => {
+        console.log(data);
+        if (data.success) {
+            console.log("el usuario existe");
+        } else {
+            console.log("el usuario no existe");
+        }
+        var newProfile =  {
+            username : data.userData.usuario,
+            favMap : data.userData.favMap,
+            numTrophies : data.userData.numCopas
+        }
+        app.profile = newProfile
+        app.currentPage="friend"
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
+        }
+    });
+    
+}
 
 function updateRanking(data) {
     $(".all-levels > *").remove();

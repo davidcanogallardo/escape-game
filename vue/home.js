@@ -16,7 +16,7 @@ Vue.component('home', {
         <div class="btn play" v-on:click="$emit('change-page','game')">Jugar</div>
 
         <div class="right-menu">
-            <div class="icon-container main-icon own-profile-link link" page="profile-page" v-on:click="$emit('change-page','profile')">
+            <div class="icon-container main-icon own-profile-link link" page="profile-page" v-on:click="profile()">
                 <i class="fas fa-user"></i>
             </div>
             <div class="icon-container main-icon friends-list slide-link" page=".slide-list-container" v-on:click="$emit('open-menu','friend')">
@@ -84,6 +84,18 @@ Vue.component('home', {
     </script>
     </div>
     `, 
+    props: ["user"],
+    methods: {
+        profile() {
+            var newProfile =  {
+                username : user.username,
+                favMap : user.favMap,
+                numTrophies : user.numTrophies
+            }
+            this.$emit('update-profile',newProfile)
+            this.$emit('change-page','profile')
+        }
+    },
  
 })
 
