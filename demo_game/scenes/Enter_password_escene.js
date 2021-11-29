@@ -10,9 +10,9 @@ class Enter_password_scene extends Phaser.Scene {
     create() {
         let { width, height } = this.sys.game.canvas;
         console.log(this.sys.game.canvas.width);
-        this.background = this.add.rectangle(0, 0, width, height, 0x6666ff);
+        this.background = this.add.image(0, 0, 'passwd_bg');
+        this.background.setScale(0.3);
         this.background.setOrigin(0,0);
-        
 
         this.puzzle_image= [];
         let x = 0.50;
@@ -20,10 +20,10 @@ class Enter_password_scene extends Phaser.Scene {
             console.log(this.background.height);
             
             if(i>=5){
-                this.puzzle_image[i] = this.add.image(0+(x*60), this.background.height/2+40, 'simbol'+i);
+                this.puzzle_image[i] = this.add.image(0+(x*60), height/2+40, 'simbol'+i);
                 x++;  
             } else {
-                this.puzzle_image[i] = this.add.image(0+(i*60), this.background.height/3+40, 'simbol'+i);
+                this.puzzle_image[i] = this.add.image(0+(i*60), height/3+40, 'simbol'+i);
             }
             this.puzzle_image[i].setScale(0.3);
             this.puzzle_image[i].setOrigin(0,0);
@@ -37,6 +37,8 @@ class Enter_password_scene extends Phaser.Scene {
             this.result_rectangles[i].setScale(0.3);
             this.result_rectangles[i].setOrigin(0,0);
         }
+
+        
 
     }
 

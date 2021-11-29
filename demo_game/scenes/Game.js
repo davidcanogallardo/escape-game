@@ -12,7 +12,8 @@ class Game extends Phaser.Scene {
         this.load.atlas('chest', 'assets/objects/chest.png', 'assets/objects/chest.json');
         this.load.image("password_background", "assets/password_paper.png");
         this.load.atlas('door', 'assets/objects/door/door.png', 'assets/objects/door/door.json');
-        this.load.image('table', 'assets/tilesets/TSMapa/PNG/table.png')
+        this.load.image('table', 'assets/tilesets/TSMapa/PNG/table.png');
+        this.load.image('passwd_bg', 'assets/BGTable.png');
         for(let i = 0; i<9; i++){
             this.load.image('simbol'+i, 'assets/passwd/simbol'+i+'.png');
         }
