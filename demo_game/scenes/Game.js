@@ -20,7 +20,7 @@ class Game extends Phaser.Scene {
 
     create() {
         
-        //Mapa, layers..
+/**************************************Mapa, layers...****************************/
         this.map = this.make.tilemap({
             key: "map"
         });
@@ -28,7 +28,6 @@ class Game extends Phaser.Scene {
         
         var tileset = this.map.addTilesetImage('dungeon', 'tiles');
         var groundLayer = this.map.createStaticLayer('ground', tileset);
-        var itemLayer = this.map.createStaticLayer('items', tileset);
         var wallsLayer = this.map.createLayer('walls', tileset);
         let objectLayer = this.map.getObjectLayer('objects');
         wallsLayer.renderDebug
