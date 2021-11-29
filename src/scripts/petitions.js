@@ -250,7 +250,7 @@ function updateFriendList(event, accept, friendName) {
 }
 
 function updateFriendNotification(friendName) {
-    showNotification("Petición de amistad enviada a "+friendName, "#49EE63")
+    //showNotification("Petición de amistad enviada a "+friendName, "#49EE63")
     var new_session = JSON.parse(sessionStorage.getItem("session"))
     new_session.friendsRequest.push(friendName)
     createRequestList(new_session.friendsRequest)

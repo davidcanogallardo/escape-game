@@ -44,11 +44,21 @@ Vue.component('friend', {
         
         <div class="form-fr-request">
             Enviar solicitud a:
-            <input type="text" id="user-request" >
-            <button id="send" class="btn blue send-friend-request"> Enviar</button>
+            <input type="text" id="user-request" v-model="friend" >
+            <button id="send" class="btn blue send-friend-request" v-on:click="recover()"> Enviar</button>
         </div>
     </div>
     `,
     props: ["friends"],
+    data() {
+      return {
+          friend: ""
+      }
+    },
+    methods:{
+        recover(){
+            sendFriendRequest(this.friend);
+        }
+    }
 
 })

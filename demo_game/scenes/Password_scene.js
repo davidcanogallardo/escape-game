@@ -18,18 +18,20 @@ class Password_scene extends Phaser.Scene {
         })
         title.setOrigin(0.5, 0.5)
     
-        this.add.text(width / 2, height / 2+50, 'Presiona "E" para volver', {
+        this.add.text(width / 2, height / 2+50, 'Presiona "X" para volver', {
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })
         .setOrigin(0.5)
     }
 
     update(){
-        var spaceKey = this.input.keyboard.addKey('E');
-        var spaceKeyDown = spaceKey?.isDown
+        var xKey = this.input.keyboard.addKey('X');
+        var xKeyDown = xKey?.isDown
 
-        if(spaceKeyDown){
-            this.scene.switch("game")
+        if(xKeyDown){
+            this.scene.stop();
+            this.scene.resume("game");
+
         }
     }
 }
