@@ -25,6 +25,7 @@
     <script src="./templates/ranking.js"></script>
     <script src="./templates/profile.js"></script>
     <script src="./templates/trophies.js"></script>
+    <script src="./templates/invitation.js"></script>
     <script src="./templates/password-recover.js"></script>
     <script src="./templates/settings/connect-controller.js"></script>
     <script src="./templates/settings/settings.js"></script>
@@ -89,6 +90,11 @@
                     v-on:change-page="currentPage = $event"
                 ></password-recover>
             </transition>
+            <invitation
+                v-if="modalOpen == 'invitation'" >
+            </invitation>
+
+
             <transition name="fade">
 
                 <div class="menu-close slide-link" v-if="menuOpen != 'none'" v-on:click="menuOpen = 'none'"></div>

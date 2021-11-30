@@ -22,7 +22,8 @@ var app = new Vue({
       currentPage: "home",
       menuOpen: "none",
       user: user,
-      profileInfo: "null",
+      profileInfo: null,
+      modalOpen: "none"
     },
     watch: {
       // whenever question changes, this function will run
