@@ -12,7 +12,7 @@ $(document).ready(function () {
         })
         .done(function(data) {
             console.log(data);
-            updateRanking(data)
+            app.rankingData = data;
         })
         .fail(function(textStatus) {
             if ( console && console.log ) {
@@ -258,6 +258,24 @@ function friendRequest(user, friend, accept) {
         if ( console && console.log ) {
             console.log( "La solicitud ha fallado: " +  textStatus);
             console.log(textStatus);
+        }
+    });
+}
+
+function rankingData() {
+    $.ajax({
+        data: {"petition" : "ranking"},
+        type: "POST",
+        dataType: "json",
+        url: _url,
+    })
+    .done(function(data) {
+        console.log(data);
+        app.rankingData = data;
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
         }
     });
 }

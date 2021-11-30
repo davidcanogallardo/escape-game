@@ -25,7 +25,7 @@ Vue.component('home', {
             <div class="icon-container main-icon notificacion-list slide-link" page=".notification-container" v-on:click="$emit('open-menu','noti')">
                 <i class="fas fa-bell"></i>
             </div>
-            <div class="icon-container main-icon ranking-link link" page="ranking-page" v-on:click="$emit('change-page','ranking')">
+            <div class="icon-container main-icon ranking-link link" page="ranking-page" v-on:click="ranking()">
                 <i class="fas fa-list-ol"></i>
             </div>
         </div>
@@ -45,6 +45,12 @@ Vue.component('home', {
                 this.$emit('update-profile',newProfile)
             }
             this.$emit('change-page','profile')
+        },
+        ranking(){
+            //Petición PHP
+            rankingData()
+            this.$emit('change-page','ranking')
+
         }
     },
  

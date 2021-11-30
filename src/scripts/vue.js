@@ -23,7 +23,8 @@ var app = new Vue({
       menuOpen: "none",
       user: user,
       profileInfo: null,
-      modalOpen: "none"
+      modalOpen: "none",
+      rankingData: null
     },
     watch: {
       // whenever question changes, this function will run

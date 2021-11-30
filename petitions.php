@@ -127,6 +127,12 @@ function ranking(){
             'David' => '02:36:21',
             'Oscar' => '03:01:56',
             'Adnan' => '03:10:03'
+        ],
+        'tomatoTown' => [
+            'Kroma0' => '01:00:02',
+            'Subpole' => '02:36:21',
+            'Striller' => '03:01:56',
+            'Alextintor' => '03:10:03'
         ]
     ];
 
