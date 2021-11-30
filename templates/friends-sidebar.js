@@ -6,14 +6,25 @@ Vue.component('friend-item', {
         <div class="icon-container pr-btn" :name="name">
           <i class="fas fa-user" aria-hidden="true" :name="name"></i>
         </div>
-        <span :name="name">{{name}}</span>
-        <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation" onclick="return false">
+        <span :name="name" >{{name}}</span>
+        <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation" v-on:click.stop="invitation()">
           <i class="fas fa-user-plus" aria-hidden="true"></i>
         </div>
       </div>
     </div>
     `,
-    props: ["name"]
+    props: ["name"],
+    methods: {
+      profile() {
+          getFriendData(this.name)
+          this.$emit('change-page','profile')
+          this.$emit('change-page','profile')
+      },
+      invitation() {
+        app.modalOpen = "invitation"
+      }
+
+    },
 })
 
 Vue.component('friend', {

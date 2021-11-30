@@ -2,33 +2,8 @@ var _url = "./petitions.php";
 $(document).ready(function () {
     //Eventos que activan las peticiones al servidor
 
-    // friend profile
-    $(".container").on("click",".friend-profile-link", () => {
-        var name = event.originalTarget.attributes.name.value
-        $.ajax({
-            data: {
-                "petition" : "friendData", 
-                "params" : {
-                    "friendUser":name
-                }
-            },
-            type: "POST",
-            dataType: "json",
-            url: _url,
-        })
-        .done(function(data) {
-            console.log(data);
-            updateFriendProfile(data)
-        })
-        .fail(function(textStatus) {
-            if ( console && console.log ) {
-                console.log( "La solicitud ha fallado: " +  textStatus);
-            }
-        });
-    })
-
     // ranking
-    $(".container").on("click",".ranking-link", () => {
+    $(".container").on("click",".ranking-linkk", () => {
         $.ajax({
             data: {"petition" : "ranking"},
             type: "POST",
@@ -47,7 +22,7 @@ $(document).ready(function () {
     })
 
     // aceptar / cancelar solicitud de amistad
-    $('.container').on('click','.list-item .btn', function (event) {
+    $('.container').on('click','.klist-item .btn', function (event) {
         var friendName = event.currentTarget.parentElement.childNodes[3].innerHTML
         var accept
         if (event.currentTarget.classList.contains("accept")) {
@@ -56,62 +31,9 @@ $(document).ready(function () {
             accept = false;
         }
 
-        $.ajax({
-            data: {
-                "petition" : "friend-request",
-                "params" : {
-                    "user" : JSON.parse(sessionStorage.getItem("session")).username,
-                    "friend" : friendName,
-                    "accept" : accept
-                }
-            },
-            type: "PUT",
-            dataType: "json",
-            url: _url,
-        })
-        .done(function(data) {
-            console.log(data);
-            if (data.success) {
-                updateFriendList(event, accept, friendName)
-            }
-        })
-        .fail(function(textStatus) {
-            if ( console && console.log ) {
-                console.log( "La solicitud ha fallado: " +  textStatus);
-                console.log(textStatus);
-            }
-        });
+
         
         
-    });
-
-
-    // cerrar sesion
-    $('.container').on('clickk','.close-sesion', function (event) {
-        $.ajax({
-            data: {
-                "petition" : "close-sesion",
-                "params" : {
-                    "user" : JSON.parse(sessionStorage.getItem("session")).username,
-                }
-            },
-            type: "POST",
-            dataType: "json",
-            url: _url,
-        })
-        .done(function(data) {
-            console.log("efgwf");
-            console.log(data);
-            if (data.success) {
-                closeSession()
-            }
-        })
-        .fail(function(textStatus) {
-            if ( console && console.log ) {
-                console.log( "La solicitud ha fallado: " +  textStatus);
-                console.log(textStatus);
-            }
-        });
     });
 })
 
@@ -145,13 +67,8 @@ function loginPetition(form_data) {
                     data.userData.numTrophies
                 )
                 sessionStorage.setItem("session",JSON.stringify(user))
-                // user.createProfile()
-                // user.createFriendList()
-                // user.createNotifications()
                 app.currentPage="home"
                 app.user = user
-                // changePage("main")
-                
             } else {
                 console.log(data.message);
             }
@@ -244,6 +161,134 @@ function sendFriendRequest(friend) {
     });
 }
 
+function getFriendData(friendName) {
+    $.ajax({
+        data: {
+            "petition" : "friendData", 
+            "params" : {
+                "friendUser": friendName
+            }
+        },
+        type: "POST",
+        dataType: "json",
+        url: _url,
+    })
+    .done((data) => {
+        console.log(data);
+        if (data.success) {
+            console.log("el usuario existe");
+        } else {
+            console.log("el usuario no existe");
+        }
+        var newProfile =  {
+            username : data.userData.usuario,
+            favMap : data.userData.favMap,
+            numTrophies : data.userData.numCopas
+        }
+        app.profileInfo = newProfile
+        app.currentPage="friend"
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
+        }
+    });
+    
+}
+
+function closeSession(user) {
+    $.ajax({
+        data: {
+            "petition" : "close-sesion",
+            "params" : {
+                "user" : user,
+            }
+        },
+        type: "POST",
+        dataType: "json",
+        url: _url,
+    })
+    .done(function(data) {
+        console.log("sesion cerrada");
+        console.log(data);
+        if (data.success) {
+            app.user = null
+            sessionStorage.clear()
+            app.currentPage="home"
+        }
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
+            console.log(textStatus);
+        }
+    });
+}
+
+function friendRequest(user, friend, accept) {
+    $.ajax({
+        data: {
+            "petition" : "friend-request",
+            "params" : {
+                "user" : user,
+                "friend" : friend,
+                "accept" : accept
+            }
+        },
+        type: "PUT",
+        dataType: "json",
+        url: _url,
+    })
+    .done(function(data) {
+        console.log(data);
+        if (data.success) {
+            // updateFriendList(event, accept, friendName)
+            if (accept) {
+                app.user.friendsList.push(friend)
+                
+            }
+            var index = app.user.notifications.indexOf(friend);
+            if (index !== -1) {
+                app.user.notifications.splice(index, 1);
+            }
+            sessionStorage.setItem("session", JSON.stringify(app.user))
+        }
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
+            console.log(textStatus);
+        }
+    });
+}
+
+//Función para Actualizar ranking / lista de niveles al acabar partida
+function PUT_ranking() {
+    $.ajax({
+        data: {
+            "petition" : "ranking",
+            "params" : {
+                "players" : [ "david", "adnan" ],
+                "time" : "00:12:13",
+                "level" : "summonerRift"
+            }
+        },
+        type: "PUT",
+        dataType: "json",
+        url: _url,
+    })
+    .done(function(data) {
+        console.log(data);
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
+            console.log(textStatus);
+        }
+    });
+}
+
+// FUNCIONES QUE SUSTITUIR
 function updateRanking(data) {
     $(".all-levels > *").remove();
     var contador = 1;
@@ -277,74 +322,3 @@ function updateRanking(data) {
 
 
 }
-
-//USUARIO
-function updateFriendList(event, accept, friendName) {
-    $(event.currentTarget.parentElement).fadeOut(500, function (event) {
-        $(this).remove()  
-    })
-
-    var new_session = JSON.parse(sessionStorage.getItem("session"))
-    if (accept) {
-        user.addFriend(friendName)
-    }
-    new_session.friendsRequest.pop(friendName)
-    sessionStorage.setItem("session", JSON.stringify(new_session))
-}
-
-function updateFriendNotification(friendName) {
-    //showNotification("Petición de amistad enviada a "+friendName, "#49EE63")
-    var new_session = JSON.parse(sessionStorage.getItem("session"))
-    new_session.friendsRequest.push(friendName)
-    createRequestList(new_session.friendsRequest)
-    sessionStorage.setItem("session", JSON.stringify(new_session))
-}
-
-function closeSession() {
-    console.log("cerrar sesión");
-    app.currentPage="home"; 
-    sessionStorage.clear()
-}
-
-//************************************************************************************************************************//
-
-// AMIGOS
-function updateFriendProfile(data) {  
-    changeFriendProfile(data.userData)
-    changePage("friend-profile-page")
-}
-
-function changeFriendProfile(data) {  
-    $("#fr-profile-name").text(data.usuario)
-    $("#fr-fav-map").text(data.favMap)
-    $("#fr-total-trophys").text(data.numCopas)
-}
-
-//Función para Actualizar ranking / lista de niveles al acabar partida
-function PUT_ranking() {
-    var _url = "./petitions.php";
-
-    $.ajax({
-        data: {
-            "petition" : "ranking",
-            "params" : {
-                "players" : [ "david", "adnan" ],
-                "time" : "00:12:13",
-                "level" : "summonerRift"
-            }
-        },
-        type: "PUT",
-        dataType: "json",
-        url: _url,
-    })
-    .done(function(data) {
-        console.log(data);
-    })
-    .fail(function(textStatus) {
-        if ( console && console.log ) {
-            console.log( "La solicitud ha fallado: " +  textStatus);
-            console.log(textStatus);
-        }
-    });
-}
-

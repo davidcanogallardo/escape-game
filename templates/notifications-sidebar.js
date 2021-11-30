@@ -6,15 +6,20 @@ Vue.component('notification-item', {
             <i class="fas fa-user" aria-hidden="true"></i>
         </div>
         <span >{{name}}</span>
-        <div class="btn accept">
+        <div class="btn accept" v-on:click="request(true)">
             <i class="fas fa-check" aria-hidden="true"></i>
         </div>
-        <div class="btn cancel">
+        <div class="btn cancel" v-on:click="request(false)">
             <i class="fas fa-times" aria-hidden="true"></i>
         </div>
     </div> 
     `,
-    props: ["name"]
+    props: ["name"],
+    methods: {
+        request(type) {
+            friendRequest(app.username, this.name, type)
+        }
+    },
 })
 
 Vue.component('notification', {

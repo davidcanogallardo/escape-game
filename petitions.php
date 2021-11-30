@@ -113,7 +113,7 @@ function friendData($user){
     $data['userData'] = [
         'usuario' => $user,
         'numCopas' => 69,
-        'favMap' => 'PisosPicados'
+        'favMap' => 'la grieta del rift'
     ];
 
     return $data;

@@ -2,6 +2,7 @@ var config = {
   type: Phaser.AUTO, // Which renderer to use
   width: 320, // Canvas width in pixels
   height: 320, // Canvas height in pixels
+  parent: "game2",
   physics: {
     default: 'arcade',
     arcade: {

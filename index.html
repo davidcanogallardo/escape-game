@@ -17,28 +17,34 @@
     <script src="./src/scripts/petitions.js"></script>
     <script src="./classes/user.js"></script>
     <!-- <script src="./src/scripts/app.js"></script> -->
-    <script src="./vue/home.js"></script> 
-    <script src="./vue/friends-sidebar.js"></script> 
-    <script src="./vue/notifications-sidebar.js"></script>
-    <script src="./vue/login-warning.js"></script>
-    <script src="./vue/login.js"></script>
-    <script src="./vue/ranking.js"></script>
-    <script src="./vue/profile.js"></script>
-    <script src="./vue/trophies.js"></script>
-    <script src="./vue/password-recover.js"></script>
-    <script src="./vue/settings/connect-controller.js"></script>
-    <script src="./vue/settings/settings.js"></script>
-    <script src="./vue/settings/sound-settings.js"></script>
-    <script src="./vue/settings/test-controller.js"></script>
+    <script src="./templates/home.js"></script> 
+    <script src="./templates/friends-sidebar.js"></script> 
+    <script src="./templates/notifications-sidebar.js"></script>
+    <script src="./templates/login-warning.js"></script>
+    <script src="./templates/login.js"></script>
+    <script src="./templates/ranking.js"></script>
+    <script src="./templates/profile.js"></script>
+    <script src="./templates/trophies.js"></script>
+    <script src="./templates/invitation.js"></script>
+    <script src="./templates/password-recover.js"></script>
+    <script src="./templates/settings/connect-controller.js"></script>
+    <script src="./templates/settings/settings.js"></script>
+    <script src="./templates/settings/sound-settings.js"></script>
+    <script src="./templates/settings/test-controller.js"></script>
     
 </head>
 <body>
     <div id="app">
         <div class="container">
+            <div v-show="currentPage == 'game'">
+                <div id="game2"></div>
+            </div>
             <transition name="fade">
                 <home v-if="currentPage == 'home'" 
                     v-on:open-menu="menuOpen = $event" 
-                    v-on:change-page="currentPage = $event">
+                    v-on:change-page="currentPage = $event"
+                    v-on:update-profile="profileInfo = $event"
+                    :user="user">
                 </home>
                 <login 
                     v-if="currentPage == 'login'" 
@@ -69,9 +75,10 @@
                     v-on:change-page="currentPage = $event">
                 </ranking>
                 <profile 
-                    v-if="currentPage == 'profile'" 
+                    v-if="currentPage == 'profile' || currentPage == 'friend'" 
                     v-on:change-page="currentPage = $event"
-                    :user="user">
+                    :user="profileInfo"
+                    :page="currentPage">
                 </profile>
                 <trophies 
                     v-if="currentPage == 'trophies'" 
@@ -82,21 +89,24 @@
                     v-if="currentPage == 'password-recover'" 
                     v-on:change-page="currentPage = $event"
                 ></password-recover>
-                <!-- <div v-if="currentPage == 'game'">
-                    <div id="game"></div>
-                    <script type="application/javascript" defer src="./demo_game/scenes/Titlescreen.js"></script>
-                    <script type="application/javascript" defer src="./demo_game/scenes/Gameover.js"></script>
-                    <script type="application/javascript" defer src="./demo_game/scenes/Game.js"></script>
-                    <script type="application/javascript" defer src="./demo_game/scenes/Password_scene.js"></script>
-                    <script type="application/javascript" defer src="./demo_game/main.js"></script>
-                </div> -->
+            </transition>
+            <invitation
+                v-if="modalOpen == 'invitation'" >
+            </invitation>
+
+
+            <transition name="fade">
+
+                <div class="menu-close slide-link" v-if="menuOpen != 'none'" v-on:click="menuOpen = 'none'"></div>
             </transition>
 
             <transition name="slide">
                 <friend 
                     v-if="menuOpen == 'friend'" 
                     :friends="user.friendsList"
-                    v-on:open-menu="menuOpen = $event">
+                    v-on:open-menu="menuOpen = $event"
+                    v-on:change-page="currentPage = $event"
+                    v-on:update-profile="profile = $event">
                 </friend>
                 <notification 
                     v-if="menuOpen == 'noti'" 
@@ -105,42 +115,15 @@
                 </notification>
             </transition>
         </div>
-        
-        <div class="pages">
-            <div class="page main"></div>
-            
-            <div class="page settings-page"></div> 
-            
-            <div class="page login-page"></div>
-            
-            <div class="page recover-page"></div>
-            
-            <div class="page connect-controller-page"></div>
-            
-            <div class="page controller-settings-page"></div>
-            
-            <div class="page sound-settings-page"></div>
-            
-            <div class="page profile-page"></div>
-            
-            <div class="page friend-profile-page"></div>
-            
-            <div class="page ranking-page"></div>
-            
-            <div class="page invitation-page"></div>
-            
-            <div class="page login-warning"></div>
-            
-            <div class="page trophy-page"></div>
-        </div>
-        
-        <div class="menus">
-            <div class="slide-list-container"></div>
-            
-            <div class="notification-container"></div>
-        </div>
     </div>
     <script src="./src/scripts/vue.js"></script> 
+    <script type="application/javascript" defer src="./demo_game/scenes/Titlescreen.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Gameover.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Game.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Password_scene.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Pause_scene.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Enter_password_escene.js"></script>
+    <script type="application/javascript" defer src="./demo_game/main.js"></script>
 </body>
 </html>
 

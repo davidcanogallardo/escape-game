@@ -21,12 +21,20 @@ Vue.component('profile', {
             
             
         </div>
-        <div class="btn blue close-sesion" v-on:click="">Cerrar sesión</div>
-        <div class="btn blue link" page="trophy-page" v-on:click="$emit('change-page','trophies')">Ver trofeos</div>
+        <div v-if="page == 'profile'">
+            <div class="btn blue close-sesion" v-on:click="close()">Cerrar sesión</div>
+            <div class="btn blue link" page="trophy-page" v-on:click="$emit('change-page','trophies')">Ver trofeos</div>
+        </div>
         <div class="btn red volver link" page="main" v-on:click="$emit('change-page','home')">
                 Volver
         </div>
+       
     </div>
-    `, 
-    props: ["user"]
+    `,  
+    props: ["user", "page"],
+    methods: {
+        close() {
+            closeSession(user.username)
+        }
+    },
 })
