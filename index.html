@@ -44,7 +44,7 @@
                     v-on:open-menu="menuOpen = $event" 
                     v-on:change-page="currentPage = $event"
                     v-on:update-profile="profileInfo = $event"
-                    :user="user">
+                    :user2="user">
                 </home>
                 <login 
                     v-if="currentPage == 'login'" 
@@ -106,7 +106,8 @@
                     :friends="user.friendsList"
                     v-on:open-menu="menuOpen = $event"
                     v-on:change-page="currentPage = $event"
-                    v-on:update-profile="profile = $event">
+                    v-on:update-profile="profile = $event"
+                    v-on:open-modal="modalOpen = $event">
                 </friend>
                 <notification 
                     v-if="menuOpen == 'noti'" 
@@ -117,13 +118,13 @@
         </div>
     </div>
     <script src="./src/scripts/vue.js"></script> 
-    <script type="application/javascript" defer src="./demo_game/scenes/Titlescreen.js"></script>
-    <script type="application/javascript" defer src="./demo_game/scenes/Gameover.js"></script>
-    <script type="application/javascript" defer src="./demo_game/scenes/Game.js"></script>
-    <script type="application/javascript" defer src="./demo_game/scenes/Password_scene.js"></script>
-    <script type="application/javascript" defer src="./demo_game/scenes/Pause_scene.js"></script>
-    <script type="application/javascript" defer src="./demo_game/scenes/Enter_password_escene.js"></script>
-    <script type="application/javascript" defer src="./demo_game/main.js"></script>
+    <script type="application/javascript" src="./demo_game/scenes/Titlescreen.js"></script>
+    <script type="application/javascript" src="./demo_game/scenes/Gameover.js"></script>
+    <script type="application/javascript" src="./demo_game/scenes/Game.js"></script>
+    <script type="application/javascript" src="./demo_game/scenes/Password_scene.js"></script>
+    <script type="application/javascript" src="./demo_game/scenes/Pause_scene.js"></script>
+    <script type="application/javascript" src="./demo_game/scenes/Enter_password_escene.js"></script>
+    <script type="application/javascript" src="./demo_game/main.js"></script>
 </body>
 </html>
 

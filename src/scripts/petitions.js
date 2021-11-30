@@ -20,21 +20,6 @@ $(document).ready(function () {
             }
         });
     })
-
-    // aceptar / cancelar solicitud de amistad
-    $('.container').on('click','.klist-item .btn', function (event) {
-        var friendName = event.currentTarget.parentElement.childNodes[3].innerHTML
-        var accept
-        if (event.currentTarget.classList.contains("accept")) {
-            accept = true;
-        } else {
-            accept = false;
-        }
-
-
-        
-        
-    });
 })
 
 //Funciones para gestionar las respuestas
@@ -148,7 +133,7 @@ function sendFriendRequest(friend) {
         console.log(data);
         if (data.success) {
             console.log(data.params);
-            //showNotification("Petición de amistad enviada a "+friend, "#49EE63")
+            showNotification("Petición de amistad enviada a "+friend, "#49EE63")
             app.user.notifications.push(friend)
             sessionStorage.setItem("session", JSON.stringify(app.user))
         }

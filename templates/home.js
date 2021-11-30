@@ -33,14 +33,14 @@ Vue.component('home', {
         <div class="slide-menu"></div>
     </div>
     `, 
-    props: ["user"],
+    props: ["user2"],
     methods: {
         profile() {
-            if (user) {
+            if (this.user2) {
                 var newProfile =  {
-                    username : this.user.username,
-                    favMap : this.user.favMap,
-                    numTrophies : this.user.numTrophies
+                    username : this.user2.username,
+                    favMap : this.user2.favMap,
+                    numTrophies : this.user2.numTrophies
                 }
                 this.$emit('update-profile',newProfile)
             }
