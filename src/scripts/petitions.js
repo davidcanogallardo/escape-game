@@ -31,61 +31,9 @@ $(document).ready(function () {
             accept = false;
         }
 
-        $.ajax({
-            data: {
-                "petition" : "friend-request",
-                "params" : {
-                    "user" : JSON.parse(sessionStorage.getItem("session")).username,
-                    "friend" : friendName,
-                    "accept" : accept
-                }
-            },
-            type: "PUT",
-            dataType: "json",
-            url: _url,
-        })
-        .done(function(data) {
-            console.log(data);
-            if (data.success) {
-                updateFriendList(event, accept, friendName)
-            }
-        })
-        .fail(function(textStatus) {
-            if ( console && console.log ) {
-                console.log( "La solicitud ha fallado: " +  textStatus);
-                console.log(textStatus);
-            }
-        });
-        
-        
-    });
 
-    // cerrar sesion
-    $('.container').on('clickk','.kclose-sesion', function (event) {
-        $.ajax({
-            data: {
-                "petition" : "close-sesion",
-                "params" : {
-                    "user" : JSON.parse(sessionStorage.getItem("session")).username,
-                }
-            },
-            type: "POST",
-            dataType: "json",
-            url: _url,
-        })
-        .done(function(data) {
-            console.log("efgwf");
-            console.log(data);
-            if (data.success) {
-                closeSession()
-            }
-        })
-        .fail(function(textStatus) {
-            if ( console && console.log ) {
-                console.log( "La solicitud ha fallado: " +  textStatus);
-                console.log(textStatus);
-            }
-        });
+        
+        
     });
 })
 
@@ -161,6 +109,58 @@ function signupPetition(form_data) {
     });
 }
 
+function recoverPassword(mail){
+    $.ajax({
+        data: {
+            "petition" : "recover", 
+            "params" : {
+                "mail":mail
+            }
+        },
+        type: "POST",
+        dataType: "json",
+        url: _url,
+    })
+    .done(function(data) {
+        console.log(data);
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
+        }
+    });
+}
+
+function sendFriendRequest(friend) {
+    $.ajax({
+        data: {
+            "petition" : "send_request",
+            "params" : {
+                "user" : app.user.username,
+                "friend" : friend
+            }
+        },
+        type: "PUT",
+        dataType: "json",
+        url: _url,
+    })
+    .done(function(data) {
+        console.log(data);
+        if (data.success) {
+            console.log(data.params);
+            //showNotification("Petición de amistad enviada a "+friend, "#49EE63")
+            app.user.notifications.push(friend)
+            sessionStorage.setItem("session", JSON.stringify(app.user))
+        }
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
+            console.log(textStatus);
+        }
+    });
+}
+
 function getFriendData(friendName) {
     $.ajax({
         data: {
@@ -194,6 +194,72 @@ function getFriendData(friendName) {
         }
     });
     
+}
+
+function closeSession(user) {
+    $.ajax({
+        data: {
+            "petition" : "close-sesion",
+            "params" : {
+                "user" : user,
+            }
+        },
+        type: "POST",
+        dataType: "json",
+        url: _url,
+    })
+    .done(function(data) {
+        console.log("sesion cerrada");
+        console.log(data);
+        if (data.success) {
+            app.user = null
+            sessionStorage.clear()
+            app.currentPage="home"
+        }
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
+            console.log(textStatus);
+        }
+    });
+}
+
+function friendRequest(user, friend, accept) {
+    $.ajax({
+        data: {
+            "petition" : "friend-request",
+            "params" : {
+                "user" : user,
+                "friend" : friend,
+                "accept" : accept
+            }
+        },
+        type: "PUT",
+        dataType: "json",
+        url: _url,
+    })
+    .done(function(data) {
+        console.log(data);
+        if (data.success) {
+            // updateFriendList(event, accept, friendName)
+            if (accept) {
+                app.user.friendsList.push(friend)
+                
+            }
+            var index = app.user.notifications.indexOf(friend);
+            if (index !== -1) {
+                app.user.notifications.splice(index, 1);
+            }
+            sessionStorage.setItem("session", JSON.stringify(app.user))
+        }
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
+            console.log(textStatus);
+        }
+    });
 }
 
 //Función para Actualizar ranking / lista de niveles al acabar partida
@@ -255,10 +321,4 @@ function updateRanking(data) {
     }
 
 
-}
-
-function closeSession() {
-    console.log("cerrar sesión");
-    app.currentPage="home"; 
-    sessionStorage.clear()
 }

@@ -36,12 +36,14 @@ Vue.component('home', {
     props: ["user"],
     methods: {
         profile() {
-            var newProfile =  {
-                username : user.username,
-                favMap : user.favMap,
-                numTrophies : user.numTrophies
+            if (user) {
+                var newProfile =  {
+                    username : this.user.username,
+                    favMap : this.user.favMap,
+                    numTrophies : this.user.numTrophies
+                }
+                this.$emit('update-profile',newProfile)
             }
-            this.$emit('update-profile',newProfile)
             this.$emit('change-page','profile')
         }
     },
