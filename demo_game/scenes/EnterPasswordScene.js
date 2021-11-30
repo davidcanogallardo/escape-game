@@ -1,6 +1,6 @@
-class Enter_password_scene extends Phaser.Scene {
+class EnterPasswordScene extends Phaser.Scene {
     constructor() {
-        super("enter_password_scene")
+        super("enterPasswordScene")
     }
 
     preload() {
@@ -8,6 +8,7 @@ class Enter_password_scene extends Phaser.Scene {
     }
 
     create() {
+        var path2 = ""
         let { width, height } = this.sys.game.canvas;
         console.log(this.sys.game.canvas.width);
         this.background = this.add.image(0, 0, 'passwd_bg');
