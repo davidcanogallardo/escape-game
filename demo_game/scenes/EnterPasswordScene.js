@@ -8,7 +8,7 @@ class EnterPasswordScene extends Phaser.Scene {
     }
 
     create() {
-        var path2 = "./"
+        var path2 = ""
         let { width, height } = this.sys.game.canvas;
         console.log(this.sys.game.canvas.width);
         this.background = this.add.image(0, 0, 'passwd_bg');
@@ -21,10 +21,10 @@ class EnterPasswordScene extends Phaser.Scene {
             console.log(this.background.height);
             
             if(i>=5){
-                this.puzzle_image[i] = this.add.image(0+(x*60), height/2+40, path2+'simbol'+i);
+                this.puzzle_image[i] = this.add.image(0+(x*60), height/2+40, 'simbol'+i);
                 x++;  
             } else {
-                this.puzzle_image[i] = this.add.image(0+(i*60), height/3+40, path2+'simbol'+i);
+                this.puzzle_image[i] = this.add.image(0+(i*60), height/3+40, 'simbol'+i);
             }
             this.puzzle_image[i].setScale(0.3);
             this.puzzle_image[i].setOrigin(0,0);
