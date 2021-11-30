@@ -119,13 +119,8 @@ function loginPetition(form_data) {
                     data.userData.numTrophies
                 )
                 sessionStorage.setItem("session",JSON.stringify(user))
-                // user.createProfile()
-                // user.createFriendList()
-                // user.createNotifications()
                 app.currentPage="home"
                 app.user = user
-                // changePage("main")
-                
             } else {
                 console.log(data.message);
             }
@@ -190,7 +185,7 @@ function getFriendData(friendName) {
             favMap : data.userData.favMap,
             numTrophies : data.userData.numCopas
         }
-        app.profile = newProfile
+        app.profileInfo = newProfile
         app.currentPage="friend"
     })
     .fail(function(textStatus) {
@@ -201,6 +196,33 @@ function getFriendData(friendName) {
     
 }
 
+//Función para Actualizar ranking / lista de niveles al acabar partida
+function PUT_ranking() {
+    $.ajax({
+        data: {
+            "petition" : "ranking",
+            "params" : {
+                "players" : [ "david", "adnan" ],
+                "time" : "00:12:13",
+                "level" : "summonerRift"
+            }
+        },
+        type: "PUT",
+        dataType: "json",
+        url: _url,
+    })
+    .done(function(data) {
+        console.log(data);
+    })
+    .fail(function(textStatus) {
+        if ( console && console.log ) {
+            console.log( "La solicitud ha fallado: " +  textStatus);
+            console.log(textStatus);
+        }
+    });
+}
+
+// FUNCIONES QUE SUSTITUIR
 function updateRanking(data) {
     $(".all-levels > *").remove();
     var contador = 1;
@@ -235,73 +257,8 @@ function updateRanking(data) {
 
 }
 
-//USUARIO
-function updateFriendList(event, accept, friendName) {
-    $(event.currentTarget.parentElement).fadeOut(500, function (event) {
-        $(this).remove()  
-    })
-
-    var new_session = JSON.parse(sessionStorage.getItem("session"))
-    if (accept) {
-        user.addFriend(friendName)
-    }
-    new_session.friendsRequest.pop(friendName)
-    sessionStorage.setItem("session", JSON.stringify(new_session))
-}
-
-function updateFriendNotification(friendName) {
-    //showNotification("Petición de amistad enviada a "+friendName, "#49EE63")
-    var new_session = JSON.parse(sessionStorage.getItem("session"))
-    new_session.friendsRequest.push(friendName)
-    createRequestList(new_session.friendsRequest)
-    sessionStorage.setItem("session", JSON.stringify(new_session))
-}
-
 function closeSession() {
     console.log("cerrar sesión");
     app.currentPage="home"; 
     sessionStorage.clear()
 }
-
-//************************************************************************************************************************//
-
-// AMIGOS
-function updateFriendProfile(data) {  
-    changeFriendProfile(data.userData)
-    changePage("friend-profile-page")
-}
-
-function changeFriendProfile(data) {  
-    $("#fr-profile-name").text(data.usuario)
-    $("#fr-fav-map").text(data.favMap)
-    $("#fr-total-trophys").text(data.numCopas)
-}
-
-//Función para Actualizar ranking / lista de niveles al acabar partida
-function PUT_ranking() {
-    var _url = "./petitions.php";
-
-    $.ajax({
-        data: {
-            "petition" : "ranking",
-            "params" : {
-                "players" : [ "david", "adnan" ],
-                "time" : "00:12:13",
-                "level" : "summonerRift"
-            }
-        },
-        type: "PUT",
-        dataType: "json",
-        url: _url,
-    })
-    .done(function(data) {
-        console.log(data);
-    })
-    .fail(function(textStatus) {
-        if ( console && console.log ) {
-            console.log( "La solicitud ha fallado: " +  textStatus);
-            console.log(textStatus);
-        }
-    });
-}
-

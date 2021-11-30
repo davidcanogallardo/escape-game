@@ -30,6 +30,6 @@ Vue.component('profile', {
         </div>
        
     </div>
-    `, 
+    `,  
     props: ["user", "page"]
 })

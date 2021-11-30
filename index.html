@@ -17,36 +17,33 @@
     <script src="./src/scripts/petitions.js"></script>
     <script src="./classes/user.js"></script>
     <!-- <script src="./src/scripts/app.js"></script> -->
-    <script src="./vue/home.js"></script> 
-    <script src="./vue/friends-sidebar.js"></script> 
-    <script src="./vue/notifications-sidebar.js"></script>
-    <script src="./vue/login-warning.js"></script>
-    <script src="./vue/login.js"></script>
-    <script src="./vue/ranking.js"></script>
-    <script src="./vue/profile.js"></script>
-    <script src="./vue/trophies.js"></script>
-    <script src="./vue/password-recover.js"></script>
-    <script src="./vue/settings/connect-controller.js"></script>
-    <script src="./vue/settings/settings.js"></script>
-    <script src="./vue/settings/sound-settings.js"></script>
-    <script src="./vue/settings/test-controller.js"></script>
+    <script src="./templates/home.js"></script> 
+    <script src="./templates/friends-sidebar.js"></script> 
+    <script src="./templates/notifications-sidebar.js"></script>
+    <script src="./templates/login-warning.js"></script>
+    <script src="./templates/login.js"></script>
+    <script src="./templates/ranking.js"></script>
+    <script src="./templates/profile.js"></script>
+    <script src="./templates/trophies.js"></script>
+    <script src="./templates/password-recover.js"></script>
+    <script src="./templates/settings/connect-controller.js"></script>
+    <script src="./templates/settings/settings.js"></script>
+    <script src="./templates/settings/sound-settings.js"></script>
+    <script src="./templates/settings/test-controller.js"></script>
     
 </head>
 <body>
     <div id="app">
         <div class="container">
             <div v-show="currentPage == 'game'">
-                <div id="game2">
-              
-                </div>
+                <div id="game2"></div>
             </div>
             <transition name="fade">
                 <home v-if="currentPage == 'home'" 
                     v-on:open-menu="menuOpen = $event" 
                     v-on:change-page="currentPage = $event"
-                    v-on:update-profile="profile = $event"
-                    :user="user"
-                    :profile="profile">
+                    v-on:update-profile="profileInfo = $event"
+                    :user="user">
                 </home>
                 <login 
                     v-if="currentPage == 'login'" 
@@ -79,7 +76,7 @@
                 <profile 
                     v-if="currentPage == 'profile' || currentPage == 'friend'" 
                     v-on:change-page="currentPage = $event"
-                    :user="profile"
+                    :user="profileInfo"
                     :page="currentPage">
                 </profile>
                 <trophies 
