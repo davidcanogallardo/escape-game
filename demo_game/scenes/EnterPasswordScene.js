@@ -1,6 +1,6 @@
-class Enter_password_scene extends Phaser.Scene {
+class EnterPasswordScene extends Phaser.Scene {
     constructor() {
-        super("enter_password_scene")
+        super("enterPasswordScene")
     }
 
     preload() {
