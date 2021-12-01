@@ -34,7 +34,7 @@ Vue.component('profile', {
     props: ["user", "page"],
     methods: {
         close() {
-            closeSession(user.username)
+            this.$root.closeSession(user.username)
         }
     },
 })
