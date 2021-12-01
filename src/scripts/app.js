@@ -150,15 +150,4 @@ function isLogged() {
     return sessionStorage.getItem('session')
 }
 
-function showNotification(message,color) {
-    var div = `<div class="notification">`+message+`</div>`
 
-    $(div).appendTo("body")
-    $(".notification").css({
-        "bottom":"-5vw", 
-        "opacity":"1",
-        "background-color":color
-    }).animate({"bottom":"1.5vw"}).delay(250).fadeTo(450, 0, () => {
-        $(".notification").remove()
-    })
-}

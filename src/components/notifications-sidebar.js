@@ -17,7 +17,8 @@ Vue.component('notification-item', {
     props: ["name"],
     methods: {
         request(type) {
-            friendRequest(app.username, this.name, type)
+            //TODO
+            this.$root.friendRequest(app.username, this.name, type)
         }
     },
 })
