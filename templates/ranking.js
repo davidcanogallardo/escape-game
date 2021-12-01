@@ -2,7 +2,7 @@ Vue.component('ranking-table', {
     template: //html
     `             
     <div>
-        <h3 class="level-name">Level 1</h3>
+        <h3 class="level-name">{{levelName}}</h3>
         <div class="all-levels">
             <div class="ranking-table">
                 <table>
@@ -13,26 +13,13 @@ Vue.component('ranking-table', {
                             <th>Tiempo</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody
+                        v-for="(key, value, index) in levelData"
+                    >
                         <tr>
-                            <td>1</td>
-                            <td class="name">Alex</td>
-                            <td>01:20:03</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td class="name">Alex</td>
-                            <td>01:20:03</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td class="name">Alex</td>
-                            <td>01:20:03</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td class="name">Alex</td>
-                            <td>01:20:03</td>
+                            <td>{{index+1}}</td>
+                            <td class="name">{{value}}</td>
+                            <td>{{key}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -40,26 +27,39 @@ Vue.component('ranking-table', {
         </div>
     </div>
     `, 
+    props:["levelName", "levelData"]
 })
 Vue.component('ranking', {
     template: //html
     `             
     <div class="ranking">
-        <div class="level-slider">
-            <img class="selected" src="./src/images/lvl1.jpg" id="Nivel 1" alt="Nivel 1">
-            <img src="./src/images/lvl2.jpg" id="Nivel 2" alt="Nivel 2">
-            <img src="./src/images/lvl3.jpg" id="Nivel 3" alt="Nivel 3">
-            <img src="./src/images/lvl4.jpg" id="Nivel 4" alt="Nivel 4">
-            <img src="./src/images/lvl5.jpg" id="Nivel 5" alt="Nivel 5">
-        </div>
-        <div v-for="(item, index) in ranking.levels">HOLA{{index}}</div>
+    <div class="level-slider">
+        <img 
+            class = "selected"
+            src="./src/images/lvl1.jpg" id="Nivel 1" alt="Nivel 1"
+            v-for="(item, name) in ranking.levels"
+            v-on:click="changeLevel(name)"
+        >
+    </div>
+        <ranking-table 
+            v-for="(item, name) in ranking.levels"
+            v-if="currentLevel == name"
+            :levelName = "name"
+            :levelData = "item"
+            >
+                {{name}}{{item}}
+            </ranking-table>
         <div class="btn red volver link" page="main" v-on:click="$emit('change-page','home')">
             Volver
         </div>
 
     </div>
     `, 
-    props:["ranking"],
-
-
+    props:["ranking","currentLevel"],
+    methods:{
+        changeLevel(name){
+            this.currentLevel = name
+            
+        }
+    }
 })
