@@ -38,7 +38,7 @@ Vue.component('ranking', {
             class = "selected"
             src="./src/images/lvl1.jpg" id="Nivel 1" alt="Nivel 1"
             v-for="(item, name, index) in ranking.levels"
-            v-on:click="changeLevel(name)"
+            v-on:click="changeLevel($event, name)"
         >
     </div>
         <ranking-table 
@@ -63,7 +63,7 @@ Vue.component('ranking', {
         }
     },
     methods:{
-        changeLevel(name){
+        changeLevel(event, name){
             this.currentLevel = name
             
         }
