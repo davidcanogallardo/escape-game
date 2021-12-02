@@ -259,6 +259,33 @@ var app = new Vue({
                     console.log( "La solicitud ha fallado: " +  textStatus);
                 }
             });
+        },
+        updateRanking(data) {
+            $.ajax({
+                data: {
+                    "petition" : "ranking",
+                    "params" : {
+                        // "players" : [ "david", "adnan" ],
+                        "players" : data.players,
+                        // "time" : "00:12:13",
+                        "time" : data.time,
+                        // "level" : "summonerRift"
+                        "level" : data.level
+                    }
+                },
+                type: "PUT",
+                dataType: "json",
+                url: _url,
+            })
+            .done(function(data) {
+                console.log(data);
+            })
+            .fail(function(textStatus) {
+                if ( console && console.log ) {
+                    console.log( "La solicitud ha fallado: " +  textStatus);
+                    console.log(textStatus);
+                }
+            });
         }
     },
 

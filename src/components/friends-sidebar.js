@@ -2,12 +2,12 @@ Vue.component('friend-item', {
     template: //html
     `
     <div>
-      <div title="Ver perfil" class="list-item friend-profile-link" page="friend-profile-page" :name="name" v-on:click="profile()" >
+      <div title="Ver perfil" class="list-item friend-profile-link" page="friend-profile-page" :name="name" v-on:click="profile(); " >
         <div class="icon-container pr-btn" :name="name">
           <i class="fas fa-user" aria-hidden="true" :name="name"></i>
         </div>
         <span :name="name" >{{name}}</span>
-        <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation" v-on:click="invitation()">
+        <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation" v-on:click.stop="invitation();">
           <i class="fas fa-user-plus" aria-hidden="true"></i>
         </div>
       </div>
@@ -20,8 +20,8 @@ Vue.component('friend-item', {
           this.$emit('change-page','profile')
         },
         invitation() {
-          this.$emit('open-modal','invitation')
-          // app.modalOpen = "invitation"
+          console.log("LOG");
+          this.$root.modalOpen ="invitation";
       }
 
     },

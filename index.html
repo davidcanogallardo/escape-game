@@ -94,13 +94,15 @@
                     v-on:change-page="currentPage = $event"
                 ></password-recover>
             </transition>
-            <invitation
-                v-if="modalOpen == 'invitation'" >
-            </invitation>
-
-
+            
+            
             <transition name="fade">
-
+                <invitation
+                    v-if="modalOpen == 'invitation'" 
+                    v-on:change-page="currentPage = $event"
+                    v-on:open-modal="modalOpen = $event"
+                    :username="user.username">
+                </invitation>
                 <div class="menu-close slide-link" v-if="menuOpen != 'none'" v-on:click="menuOpen = 'none'"></div>
             </transition>
 
@@ -129,7 +131,6 @@
     <script type="application/javascript" defer src="./demo_game/scenes/Pause_scene.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/EnterPasswordScene.js"></script>
     <script type="application/javascript" defer src="./demo_game/main.js"></script>
-
 </body>
 </html>
 
