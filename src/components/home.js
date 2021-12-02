@@ -48,7 +48,7 @@ Vue.component('home', {
         },
         ranking(){
             //Petición PHP
-            rankingData()
+            this.$root.getRankingData()
             this.$emit('change-page','ranking')
 
         }

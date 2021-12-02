@@ -75,8 +75,8 @@
                 <ranking 
                     v-if="currentPage == 'ranking'" 
                     v-on:change-page="currentPage = $event"
-                    :ranking = "rankingData"
-                    >
+                    :ranking="rankingData"
+                >
                 </ranking>
                 <profile 
                     v-if="currentPage == 'profile' || currentPage == 'friend'" 

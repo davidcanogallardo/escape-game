@@ -5,7 +5,8 @@ var app = new Vue({
       menuOpen: "none",
       user: user,
       profileInfo: null,
-      modalOpen: "none"
+      modalOpen: "none",
+      rankingData: null
     },
     watch: {
       currentPage: function (newPage, oldPage) {
@@ -27,7 +28,7 @@ var app = new Vue({
       }
     },
     methods: {
-      loginPetition(form_data) {
+        loginPetition(form_data) {
         $.ajax({
             data: {
                 "petition" : "login", 
@@ -67,8 +68,8 @@ var app = new Vue({
                 console.log( "La solicitud ha fallado: " +  textStatus);
             }
         });
-      },
-      signupPetition(form_data) {
+        },
+        signupPetition(form_data) {
         console.log(form_data);
         $.ajax({
             data: {
@@ -94,8 +95,8 @@ var app = new Vue({
                 console.log(errorThrown);
             }
         });
-      },
-      recoverPassword(mail){
+        },
+        recoverPassword(mail){
         $.ajax({
             data: {
                 "petition" : "recover", 
@@ -115,8 +116,8 @@ var app = new Vue({
                 console.log( "La solicitud ha fallado: " +  textStatus);
             }
         });
-      },
-      sendFriendRequest(friend) {
+        },
+        sendFriendRequest(friend) {
         $.ajax({
             data: {
                 "petition" : "send_request",
@@ -144,8 +145,8 @@ var app = new Vue({
                 console.log(textStatus);
             }
         });
-      },
-      getFriendData(friendName) {
+        },
+        getFriendData(friendName) {
         $.ajax({
             data: {
                 "petition" : "friendData", 
@@ -177,8 +178,8 @@ var app = new Vue({
                 console.log( "La solicitud ha fallado: " +  textStatus);
             }
         });
-      },
-      closeSession(username) {
+        },
+        closeSession(username) {
         $.ajax({
             data: {
                 "petition" : "close-sesion",
@@ -205,8 +206,8 @@ var app = new Vue({
                 console.log(textStatus);
             }
         });
-      },
-      friendRequest(username, friend, accept) {
+        },
+        friendRequest(username, friend, accept) {
         $.ajax({
             data: {
                 "petition" : "friend-request",
@@ -230,7 +231,7 @@ var app = new Vue({
                 }
                 var index = this.$root.user.notifications.indexOf(friend);
                 if (index !== -1) {
-                  this.$root.user.notifications.splice(index, 1);
+                    this.$root.user.notifications.splice(index, 1);
                 }
                 sessionStorage.setItem("session", JSON.stringify(this.$root.user))
             }
@@ -241,7 +242,24 @@ var app = new Vue({
                 console.log(textStatus);
             }
         });
-      }
+        },
+        getRankingData() {
+            $.ajax({
+                data: {"petition" : "ranking"},
+                type: "POST",
+                dataType: "json",
+                url: _url,
+            })
+            .done(data => {
+                console.log(data);
+                this.$root.rankingData = data;
+            })
+            .fail(function(textStatus) {
+                if ( console && console.log ) {
+                    console.log( "La solicitud ha fallado: " +  textStatus);
+                }
+            });
+        }
     },
 
 })

@@ -37,7 +37,7 @@ Vue.component('ranking', {
         <img 
             class = "selected"
             src="./src/images/lvl1.jpg" id="Nivel 1" alt="Nivel 1"
-            v-for="(item, name) in ranking.levels"
+            v-for="(item, name, index) in ranking.levels"
             v-on:click="changeLevel(name)"
         >
     </div>
@@ -55,7 +55,13 @@ Vue.component('ranking', {
 
     </div>
     `, 
-    props:["ranking","currentLevel"],
+    props:["ranking"],
+    data() {
+        return {
+            //TODO
+            currentLevel: "tomatoTown"
+        }
+    },
     methods:{
         changeLevel(name){
             this.currentLevel = name

@@ -1,24 +1,5 @@
 var _url = "./petitions.php";
 
-
-function rankingData() {
-    $.ajax({
-        data: {"petition" : "ranking"},
-        type: "POST",
-        dataType: "json",
-        url: _url,
-    })
-    .done(function(data) {
-        console.log(data);
-        app.rankingData = data;
-    })
-    .fail(function(textStatus) {
-        if ( console && console.log ) {
-            console.log( "La solicitud ha fallado: " +  textStatus);
-        }
-    });
-}
-
 //Función para Actualizar ranking / lista de niveles al acabar partida
 function PUT_ranking() {
     $.ajax({
