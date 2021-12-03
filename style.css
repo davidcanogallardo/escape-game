@@ -1217,6 +1217,8 @@ input[type=password], input[type=email], input[type=text]{
     text-align: center;
     font-size: 2vw;
     margin-top: 3vw;
+    cursor: pointer;
+
 }
 
 #recover-form{
