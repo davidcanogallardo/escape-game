@@ -35,10 +35,9 @@ Vue.component('ranking', {
     <div class="ranking">
     <div class="level-slider">
         <img 
-            class = "selected"
             src="./src/images/lvl1.jpg" id="Nivel 1" alt="Nivel 1"
             v-for="(item, name, index) in ranking.levels"
-            v-on:click="changeLevel(name)"
+            v-on:click="changeLevel($event, name)"
         >
     </div>
         <ranking-table 
@@ -58,14 +57,16 @@ Vue.component('ranking', {
     props:["ranking"],
     data() {
         return {
-            //TODO
-            currentLevel: "tomatoTown"
+            currentLevel: {
+                default: "tomatoTown"
+            }
         }
     },
     methods:{
-        changeLevel(name){
+        changeLevel(event, name){
+            $(".level-slider > img").removeClass('selected')
+            event.target.classList.add("selected")
             this.currentLevel = name
-            
         }
     }
 })

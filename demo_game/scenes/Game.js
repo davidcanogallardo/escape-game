@@ -281,32 +281,39 @@ class Game extends Phaser.Scene {
         }
 
         // Aqui indicamos las animaciones del personaje al pulsar cada boton
-        if (this.cursors.left?.isDown) {
-            this.player.setVelocity(-speed, 0)
-            this.player.anims.play('player-run-side',true)
-            this.player.scaleX = -1;
-            this.player.body.offset.x = 24;
-            
-
-        } else if (this.cursors.right?.isDown) {
-            this.player.setVelocity(speed, 0)
-            this.player.anims.play('player-run-side',true)
-            this.player.scaleX = 1;
-            this.player.body.offset.x = 8;
-            
-
-        } else if (this.cursors.up?.isDown) {
-            this.player.setVelocity(0, -speed)
-            this.player.anims.play('player-run-up', true)
-
-        } else if (this.cursors.down?.isDown) {
-            this.player.setVelocity(0, speed)
-            this.player.anims.play('player-run-down', true)
-
+        if ( this.player.anims.currentAnim==null) {
+            this.player.anims.play('player-idle-down');
         } else {
-            this.player.anims.play('player-idle-down')
-            this.player.setVelocity(0, 0)
+            if (this.cursors.left?.isDown) {
+                this.player.setVelocity(-speed, 0)
+                this.player.anims.play('player-run-side',true)
+                this.player.scaleX = -1;
+                this.player.body.offset.x = 24;
+                
+    
+            } else if (this.cursors.right?.isDown) {
+                this.player.setVelocity(speed, 0)
+                this.player.anims.play('player-run-side',true)
+                this.player.scaleX = 1;
+                this.player.body.offset.x = 8;
+                
+    
+            } else if (this.cursors.up?.isDown) {
+                this.player.setVelocity(0, -speed)
+                this.player.anims.play('player-run-up', true)
+    
+            } else if (this.cursors.down?.isDown) {
+                this.player.setVelocity(0, speed)
+                this.player.anims.play('player-run-down', true)
+    
+            } else {
+                const parts = this.player.anims.currentAnim.key.split('-');
+                parts[1] = 'idle';
+                this.player.anims.play(parts.join('-'));
+                this.player.setVelocity(0, 0);
+            }
         }
+        
 
         this.centerBodyonBody(this.playerCollider.body, this.player.body);
     }
