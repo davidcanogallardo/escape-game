@@ -161,13 +161,15 @@ class Game extends Phaser.Scene {
         //Añadir colider al grupo de puertas
         let doorsColider = this.physics.add.collider(this.player, this.doorsGroup);
 
+        let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
         this.physics.add.overlap(this.playerCollider, this.password_input, () => {
             console.log('esta tocando la mesa');
-            this.input.keyboard.once('keydown-E', () => {
+            if (eKey.isDown) {
                 console.log('presiona e');
                 this.scene.launch('enterPasswordScene');
-            })
+                
+            }
         });
 
         window.wg = this.wallGroup;
