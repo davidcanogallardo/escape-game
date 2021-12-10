@@ -38,15 +38,20 @@ class Game extends Phaser.Scene {
         
         window.wall = wallsLayer
 
-        //Player
+        //***************************************************************************************Player
         this.player = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
         this.player.body.setSize(this.player.width*0.5, this.player.height * 0.3).setOffset(8,18)
         this.player.setDepth(0)
         this.physics.add.collider(this.player, wallsLayer)
         window.p = this.player
 
+
         //Player action area
-        this.playerCollider = this.physics.add.image();
+        this.playerCollider = this.physics.add.image(200, 50);
+        //hitbox redonda
+        // this.playerCollider.setCircle(18)
+
+        /*************************************************************************************** */
         
         this.wallGroup = this.physics.add.staticGroup();
         wallsLayer.forEachTile(tile => {
@@ -79,25 +84,42 @@ class Game extends Phaser.Scene {
         // })
 
         
-        //Cofre
+        //****************************************************************************Cofre
         this.chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
         this.physics.add.existing(this.chest);
         //collider para que el personaje con el cofre
         this.physics.add.collider(this.chest, this.player);
+        this.chest.body.setSize(this.chest.width*0.5, this.chest.height*0.8);
+        var that = this;
+
+        this.physics.add.overlap(this.playerCollider, this.chest, function (player,chest) {
+            if(chest.y < player.y){
+                that.player.setDepth(10);
+            } else {
+                that.player.setDepth(0);
+            }
+
+            if (eKey.isDown) {
+                console.log('show pass chest');
+                that.scene.launch('seepass');
+                that.scene.pause();
+            }
+        });
+        let cursors = this.input.keyboard.createCursorKeys();
+        window.cursors = cursors
         //hacer que el pj no empuje al cofre
         this.chest.body.immovable = true
 
+        /******************************************************************************************** */
+
         //Añadir objeto para introducir contraseña temporal
-        this.password_input = this.add.rectangle(56, 200, 20, 20, 0x6666ff);
-        this.physics.add.existing(this.password_input);
-        this.physics.add.collider(this.chest, this.player);
-        this.password_input.body.immovable = true;
+        // this.password_input = this.add.rectangle(56, 200, 20, 20, 0x6666ff);
+        // this.physics.add.existing(this.password_input);
+        // this.physics.add.collider(this.chest, this.player);
+        // this.password_input.body.immovable = true;
 
 
-        //Player action area
-        this.playerCollider = this.physics.add.image(200, 50);
-        //hitbox redonda
-        // this.playerCollider.setCircle(18)
+
 
         //Puzzle para abrir puerta
         let chestIsOpen = false;
@@ -122,18 +144,19 @@ class Game extends Phaser.Scene {
                     this.doorsGroup.add(this.door);
                     break;
                 case 'chest':
-                    //Cambiar la hitbox del cofre
-                    this.chest = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'chest', 'open-chest');
-                    //this.closed_door.anims.play('door-closed');
-                    this.chest.body.setSize(width, height*0.1).setOffset(width-33,height-5);
-                    //Agregar cofre al grupo de cofres
-                    this.chestsGroup.add(this.chest);
+                    // //Cambiar la hitbox del cofre
+                    // this.chest = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'chest', 'open-chest');
+                    // //this.closed_door.anims.play('door-closed');
+                    // this.chest.body.setSize(width, height*0.1).setOffset(width-33,height-5);
+                    // //Agregar cofre al grupo de cofres
+                    // this.chestsGroup.add(this.chest);
                     break;
                 case 'table':
                     //Cambiar la hitbox de la mesa
-                    this.table = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'table');
-                    //this.closed_door.anims.play('door-closed');
-                    this.table.body.setSize(width, height*0.1).setOffset(width-33,height-5);
+                    this.table = this.physics.add.sprite(x+(width/2),y-(height/2), 'table');
+                    //Hitbox de la mesa y que no se pueda mover
+                    this.physics.add.collider(this.table, this.player);
+                    this.table.body.immovable = true
                     //Agregar puerta al grupo de puertas
                     this.tablesGroup.add(this.table);
                     break;
@@ -142,20 +165,26 @@ class Game extends Phaser.Scene {
         //Añadir colider al grupo de puertas
         let doorsColider = this.physics.add.collider(this.player, this.doorsGroup);
 
+        let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
-        this.physics.add.overlap(this.playerCollider, this.password_input, () => {
-            console.log('esta tocando la mesa');
-            this.input.keyboard.once('keydown-E', () => {
+        this.physics.add.overlap(this.playerCollider, this.table, function (player,table) {
+            
+            if(table.y < player.y){
+                that.player.setDepth(10);
+            } else {
+                that.player.setDepth(0);
+            }
+
+            if (eKey.isDown) {
                 console.log('presiona e');
-                console.log(this.doorsGroup)
-                this.doorsGroup.playAnimation('opening-door')
-                //this.scene.launch('enterPasswordScene');
-            })
+                that.scene.launch('enterPasswordScene');
+                that.scene.pause();
+                
+            }
         });
 
         window.wg = this.wallGroup;
         window.pc = this.playerCollider;
-        var that = this;
         this.physics.add.overlap(this.playerCollider, this.wallGroup,function (player,walls) {
                 if(walls.y < player.y){
                     that.player.setDepth(10);
@@ -165,6 +194,9 @@ class Game extends Phaser.Scene {
 
         });
         //params.body.world.bodies.entries[].center.y
+        
+        //*******************************************************TIEMPO  */
+        
         //Tiempo
         this.title = this.add.text(5,0, 'Tiempo: ', {
             fontSize: 12,
@@ -172,7 +204,6 @@ class Game extends Phaser.Scene {
         })
 
         this.title.setDepth(10)
-        
         //Evento que se ejecturá en bucle cada 1s y actualizará el tiempo
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.updateTime, callbackScope: this, loop: true });
 
@@ -184,9 +215,13 @@ class Game extends Phaser.Scene {
             }
         }
 
+        /**************************************************************************************** */
+
         //necesario para que el juego pause al cambiar la ventana correctamente
         game.scene.game.hasFocus = true;
-        //estados personaje
+
+
+        //*************************************************************estados personaje
     	//lado
         this.anims.create({
             key: 'player-idle-side',
@@ -203,7 +238,7 @@ class Game extends Phaser.Scene {
             frames: [{key: 'player', frame: 'walk-down-3.png'}],
         })
 
-        //animaciones personaje
+        //*****************************************************************animaciones personaje
         //arriba
         this.anims.create({
             key: 'player-run-down',

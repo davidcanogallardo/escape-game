@@ -87,6 +87,7 @@ class EnterPasswordScene extends Phaser.Scene {
         if(xKeyDown){
             this.scene.stop();
             this.scene.resume("game");
+            
 
         }
     }
