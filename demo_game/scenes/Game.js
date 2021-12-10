@@ -45,8 +45,7 @@ class Game extends Phaser.Scene {
         this.physics.add.collider(this.player, wallsLayer)
         window.p = this.player
 
-        //Player action area
-        this.playerCollider = this.physics.add.image();
+
         //Player action area
         this.playerCollider = this.physics.add.image(200, 50);
         //hitbox redonda
@@ -86,9 +85,6 @@ class Game extends Phaser.Scene {
 
         
         //****************************************************************************Cofre
-        let qKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
-        let qKeyDown = qKey?.isDown
-
         this.chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
         this.physics.add.existing(this.chest);
         //collider para que el personaje con el cofre
@@ -103,10 +99,10 @@ class Game extends Phaser.Scene {
                 that.player.setDepth(0);
             }
 
-            if (qKey.isDown) {
+            if (eKey.isDown) {
                 console.log('show pass chest');
-                this.scene.launch('seepass');
-                
+                that.scene.launch('seepass');
+                that.scene.pause();
             }
         });
         let cursors = this.input.keyboard.createCursorKeys();
@@ -117,10 +113,10 @@ class Game extends Phaser.Scene {
         /******************************************************************************************** */
 
         //Añadir objeto para introducir contraseña temporal
-        this.password_input = this.add.rectangle(56, 200, 20, 20, 0x6666ff);
-        this.physics.add.existing(this.password_input);
-        this.physics.add.collider(this.chest, this.player);
-        this.password_input.body.immovable = true;
+        // this.password_input = this.add.rectangle(56, 200, 20, 20, 0x6666ff);
+        // this.physics.add.existing(this.password_input);
+        // this.physics.add.collider(this.chest, this.player);
+        // this.password_input.body.immovable = true;
 
 
 
@@ -157,9 +153,10 @@ class Game extends Phaser.Scene {
                     break;
                 case 'table':
                     //Cambiar la hitbox de la mesa
-                    this.table = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'table');
-                    //this.closed_door.anims.play('door-closed');
-                    this.table.body.setSize(width, height*0.1).setOffset(width-33,height-5);
+                    this.table = this.physics.add.sprite(x+(width/2),y-(height/2), 'table');
+                    //Hitbox de la mesa y que no se pueda mover
+                    this.physics.add.collider(this.table, this.player);
+                    this.table.body.immovable = true
                     //Agregar puerta al grupo de puertas
                     this.tablesGroup.add(this.table);
                     break;
@@ -170,11 +167,18 @@ class Game extends Phaser.Scene {
 
         let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
-        this.physics.add.overlap(this.playerCollider, this.password_input, () => {
-            console.log('esta tocando la mesa');
+        this.physics.add.overlap(this.playerCollider, this.table, function (player,table) {
+            
+            if(table.y < player.y){
+                that.player.setDepth(10);
+            } else {
+                that.player.setDepth(0);
+            }
+
             if (eKey.isDown) {
                 console.log('presiona e');
-                this.scene.launch('enterPasswordScene');
+                that.scene.launch('enterPasswordScene');
+                that.scene.pause();
                 
             }
         });
