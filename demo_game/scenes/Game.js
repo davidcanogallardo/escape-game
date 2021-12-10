@@ -93,9 +93,16 @@ class Game extends Phaser.Scene {
         this.physics.add.existing(this.chest);
         //collider para que el personaje con el cofre
         this.physics.add.collider(this.chest, this.player);
+        this.chest.body.setSize(this.chest.width*0.5, this.chest.height*0.8);
+        var that = this;
 
-        this.physics.add.overlap(this.chest, this.playerCollider, () => {
-            // console.error("tocandose");
+        this.physics.add.overlap(this.playerCollider, this.chest, function (player,chest) {
+            if(chest.y < player.y){
+                that.player.setDepth(10);
+            } else {
+                that.player.setDepth(0);
+            }
+
             if (qKey.isDown) {
                 console.log('show pass chest');
                 this.scene.launch('seepass');
@@ -172,7 +179,6 @@ class Game extends Phaser.Scene {
 
         window.wg = this.wallGroup;
         window.pc = this.playerCollider;
-        var that = this;
         this.physics.add.overlap(this.playerCollider, this.wallGroup,function (player,walls) {
                 if(walls.y < player.y){
                     that.player.setDepth(10);
