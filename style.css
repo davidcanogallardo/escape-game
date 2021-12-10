@@ -279,6 +279,10 @@ body {
 .profile-page td {
     border-radius: 1vw;
 }
+
+.form_error{
+    color: red;
+}
 /*************************************************************************/
 
 @media (max-height: 600px) {
@@ -1192,6 +1196,7 @@ input[type=password], input[type=email], input[type=text]{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .sign-up-container {
