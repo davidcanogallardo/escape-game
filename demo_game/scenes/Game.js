@@ -198,14 +198,8 @@ class Game extends Phaser.Scene {
         //*******************************************************TIEMPO  */
         
         //Tiempo
-        this.title = this.add.text(5,0, 'Tiempo: ', {
-            fontSize: 12,
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
-        })
-
-        this.title.setDepth(10)
-        //Evento que se ejecturá en bucle cada 1s y actualizará el tiempo
-        this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.updateTime, callbackScope: this, loop: true });
+       
+        this.scene.launch('time');
 
         for (let i = 0; i < this.map.getLayer("walls").data[i]; i++) {
             for (let j = 0; j < this.map.getLayer("walls").data[i][j]; j++) {
@@ -280,17 +274,18 @@ class Game extends Phaser.Scene {
     update() {
         
 
-        let speed = 200
+        let speed = 150
         let eKey = this.input.keyboard.addKey('E');
         let eKeyDown = eKey?.isDown
         let escKey = this.input.keyboard.addKey('ESC');
         let escKeyDown = escKey?.isDown
 
         //menu de pausa "ESC" o al cambiar de ventana
-        if(escKeyDown || game.scene.game.hasFocus == false){
+        if(game.scene.game.hasFocus == false){
             this.scene.launch('pause_scene')
             this.scene.pause();
         }
+        
 
         // Aqui indicamos las animaciones del personaje al pulsar cada boton
         if ( this.player.anims.currentAnim==null) {
@@ -331,22 +326,7 @@ class Game extends Phaser.Scene {
     }
     
 
-    formatTime(seconds){
-        // Minutes
-        var minutes = Math.floor(seconds/60);
-        // Seconds
-        var partInSeconds = seconds%60;
-        // Adds left zeros to seconds
-        partInSeconds = partInSeconds.toString().padStart(2,'0');
-        // Returns formated time
-        return `${minutes}:${partInSeconds}`;
-    }
     
-    
-    updateTime () {
-        this.segundos += 1;
-        this.title.setText('Tiempo: ' + this.formatTime(this.segundos));
-    }
 
     centerBodyonBody(collider, player) {
         collider.position.set(
