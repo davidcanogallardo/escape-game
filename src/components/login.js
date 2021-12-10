@@ -40,8 +40,13 @@ Vue.component('login', {
                 </form>
                 <div class="error"></div>
             </div>
+            
         </div>
+        <div class="btn red volver settings-link link" page="settings-page" v-on:click="$emit('change-page','home')">
+        Volver
     </div>
+    </div>
+
     `, 
     data() {
         return {
