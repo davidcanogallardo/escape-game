@@ -147,7 +147,9 @@ class Game extends Phaser.Scene {
             console.log('esta tocando la mesa');
             this.input.keyboard.once('keydown-E', () => {
                 console.log('presiona e');
-                this.scene.launch('enterPasswordScene');
+                console.log(this.doorsGroup)
+                this.doorsGroup.playAnimation('opening-door')
+                //this.scene.launch('enterPasswordScene');
             })
         });
 
