@@ -15,7 +15,7 @@ Vue.component('login', {
                     <label for="confirm">Repetir contraseña</label>
                     <input type="password" id="confirm" name="password_confirm" v-model="signupInput.password_confirm" required>
 
-                    <p v-if="!errorMessageIsEmpty()" class="form_error">{{ errorMessage }}</p>
+                    <p v-if="!errorMessageIsEmpty() && this.errorType == 'register'" class="form_error">{{ signupErrorMessage }}</p>
 
                     <div class=" form-button blue signup-link" v-on:click="signup()">CREAR CUENTA</div>
                 </form>
@@ -35,6 +35,7 @@ Vue.component('login', {
                             <b>He olvidado mi contraseña</b>
                         </a>
                     </div>
+                    <p v-if="!errorMessageIsEmpty() && this.errorType == 'login'" class="form_error">{{ loginErrorMessage }}</p>
                     <div class=" form-button blue login-link" v-on:click="login()">INICIAR SESIÓN</div>
                 </form>
                 <div class="error"></div>
@@ -54,7 +55,9 @@ Vue.component('login', {
                 password_confirm: "",
                 mail: ""
             },
-            errorMessage: ""
+            signupErrorMessage: "",
+            loginErrorMessage: "",
+            errorType: ""
         }
     },
     methods: {
@@ -62,7 +65,14 @@ Vue.component('login', {
             console.log(this.loginInput);
             console.log(this.loginInput.username);
             console.log(this.loginInput.password);
-            this.$root.loginPetition(this.loginInput)
+            if(!this.loginInputisEmpty()){
+                this.$root.loginPetition(this.loginInput)
+            } else {
+                console.log('campos vacios');
+                this.errorType = "login";
+                this.loginErrorMessage = "Hay campos vacios";
+            }
+            
         },
         signup() {
             console.log(this.signupInputEmpty());
@@ -79,14 +89,24 @@ Vue.component('login', {
                         console.log(this.signupInput.mail);
                         this.$root.signupPetition(this.signupInput);
                     } else {
-                        this.errorMessage = "Introduce un email valido";
+                        this.errorType = "register";
+                        this.signupErrorMessage = "Introduce un email valido";
                     }
                 } else {
-                    this.errorMessage = "Las contraseñas no coinciden";
+                    this.errorType = "register";
+                    this.signupErrorMessage = "Las contraseñas no coinciden";
                 }
 
             } else {
-                this.errorMessage = "Hay campos vacios";
+                this.errorType = "register";
+                this.signupErrorMessage = "Hay campos vacios";
+            }
+        },
+        loginInputisEmpty(){
+            if(this.loginInput.username == "" || this.loginInput.password == ""){
+                return true;
+            } else {
+                return false;
             }
         },
         signupInputEmpty(){
@@ -97,7 +117,7 @@ Vue.component('login', {
             }
         },
         errorMessageIsEmpty(){
-            if(this.errorMessage == ""){
+            if(this.signupErrorMessage == "" && this.loginErrorMessage == ""){
                 return true;
             } else {
                 return false;
