@@ -1,7 +1,17 @@
+let excludedPages = [
+    "home",
+    "game",
+    "login",
+    "password-recover",
+    "settings",
+    "sound-settings",
+    "connect-controller",
+    "test-controller",
+]
 var app = new Vue({
     el: '#app',
     data: {
-      currentPage: "game",
+      currentPage: "home",
       menuOpen: "none",
       user: user,
       "soundSettings": soundSettings2,
@@ -11,7 +21,7 @@ var app = new Vue({
     },
     watch: {
       currentPage: function (newPage, oldPage) {
-        if (!sessionStorage.getItem("session") && newPage != "home" && newPage != "game" && newPage != "login" && newPage != "password-recover") {
+        if (!sessionStorage.getItem("session") && !excludedPages.includes(newPage)) {
           console.log("no hay sesión");
           this.currentPage = "login-warning"
         } else {
