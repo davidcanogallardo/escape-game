@@ -45,8 +45,7 @@ class Game extends Phaser.Scene {
         this.physics.add.collider(this.player, wallsLayer)
         window.p = this.player
 
-        //Player action area
-        this.playerCollider = this.physics.add.image();
+
         //Player action area
         this.playerCollider = this.physics.add.image(200, 50);
         //hitbox redonda
@@ -86,20 +85,24 @@ class Game extends Phaser.Scene {
 
         
         //****************************************************************************Cofre
-        let qKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
-        let qKeyDown = qKey?.isDown
-
         this.chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
         this.physics.add.existing(this.chest);
         //collider para que el personaje con el cofre
         this.physics.add.collider(this.chest, this.player);
+        this.chest.body.setSize(this.chest.width*0.5, this.chest.height*0.8);
+        var that = this;
 
-        this.physics.add.overlap(this.chest, this.playerCollider, () => {
-            // console.error("tocandose");
-            if (qKey.isDown) {
+        this.physics.add.overlap(this.playerCollider, this.chest, function (player,chest) {
+            if(chest.y < player.y){
+                that.player.setDepth(10);
+            } else {
+                that.player.setDepth(0);
+            }
+
+            if (eKey.isDown) {
                 console.log('show pass chest');
-                this.scene.launch('seepass');
-                
+                that.scene.launch('seepass');
+                that.scene.pause();
             }
         });
         let cursors = this.input.keyboard.createCursorKeys();
@@ -110,10 +113,10 @@ class Game extends Phaser.Scene {
         /******************************************************************************************** */
 
         //Añadir objeto para introducir contraseña temporal
-        this.password_input = this.add.rectangle(56, 200, 20, 20, 0x6666ff);
-        this.physics.add.existing(this.password_input);
-        this.physics.add.collider(this.chest, this.player);
-        this.password_input.body.immovable = true;
+        // this.password_input = this.add.rectangle(56, 200, 20, 20, 0x6666ff);
+        // this.physics.add.existing(this.password_input);
+        // this.physics.add.collider(this.chest, this.player);
+        // this.password_input.body.immovable = true;
 
 
 
@@ -150,9 +153,10 @@ class Game extends Phaser.Scene {
                     break;
                 case 'table':
                     //Cambiar la hitbox de la mesa
-                    this.table = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'table');
-                    //this.closed_door.anims.play('door-closed');
-                    this.table.body.setSize(width, height*0.1).setOffset(width-33,height-5);
+                    this.table = this.physics.add.sprite(x+(width/2),y-(height/2), 'table');
+                    //Hitbox de la mesa y que no se pueda mover
+                    this.physics.add.collider(this.table, this.player);
+                    this.table.body.immovable = true
                     //Agregar puerta al grupo de puertas
                     this.tablesGroup.add(this.table);
                     break;
@@ -161,18 +165,26 @@ class Game extends Phaser.Scene {
         //Añadir colider al grupo de puertas
         let doorsColider = this.physics.add.collider(this.player, this.doorsGroup);
 
+        let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
-        this.physics.add.overlap(this.playerCollider, this.password_input, () => {
-            console.log('esta tocando la mesa');
-            this.input.keyboard.once('keydown-E', () => {
+        this.physics.add.overlap(this.playerCollider, this.table, function (player,table) {
+            
+            if(table.y < player.y){
+                that.player.setDepth(10);
+            } else {
+                that.player.setDepth(0);
+            }
+
+            if (eKey.isDown) {
                 console.log('presiona e');
-                this.scene.launch('enterPasswordScene');
-            })
+                that.scene.launch('enterPasswordScene');
+                that.scene.pause();
+                
+            }
         });
 
         window.wg = this.wallGroup;
         window.pc = this.playerCollider;
-        var that = this;
         this.physics.add.overlap(this.playerCollider, this.wallGroup,function (player,walls) {
                 if(walls.y < player.y){
                     that.player.setDepth(10);
@@ -186,14 +198,8 @@ class Game extends Phaser.Scene {
         //*******************************************************TIEMPO  */
         
         //Tiempo
-        this.title = this.add.text(5,0, 'Tiempo: ', {
-            fontSize: 12,
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
-        })
-
-        this.title.setDepth(10)
-        //Evento que se ejecturá en bucle cada 1s y actualizará el tiempo
-        this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.updateTime, callbackScope: this, loop: true });
+       
+        this.scene.launch('time');
 
         for (let i = 0; i < this.map.getLayer("walls").data[i]; i++) {
             for (let j = 0; j < this.map.getLayer("walls").data[i][j]; j++) {
@@ -268,17 +274,18 @@ class Game extends Phaser.Scene {
     update() {
         
 
-        let speed = 200
+        let speed = 150
         let eKey = this.input.keyboard.addKey('E');
         let eKeyDown = eKey?.isDown
         let escKey = this.input.keyboard.addKey('ESC');
         let escKeyDown = escKey?.isDown
 
         //menu de pausa "ESC" o al cambiar de ventana
-        if(escKeyDown || game.scene.game.hasFocus == false){
+        if(game.scene.game.hasFocus == false){
             this.scene.launch('pause_scene')
             this.scene.pause();
         }
+        
 
         // Aqui indicamos las animaciones del personaje al pulsar cada boton
         if ( this.player.anims.currentAnim==null) {
@@ -319,22 +326,7 @@ class Game extends Phaser.Scene {
     }
     
 
-    formatTime(seconds){
-        // Minutes
-        var minutes = Math.floor(seconds/60);
-        // Seconds
-        var partInSeconds = seconds%60;
-        // Adds left zeros to seconds
-        partInSeconds = partInSeconds.toString().padStart(2,'0');
-        // Returns formated time
-        return `${minutes}:${partInSeconds}`;
-    }
     
-    
-    updateTime () {
-        this.segundos += 1;
-        this.title.setText('Tiempo: ' + this.formatTime(this.segundos));
-    }
 
     centerBodyonBody(collider, player) {
         collider.position.set(

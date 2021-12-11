@@ -54,7 +54,7 @@ class EnterPasswordScene extends Phaser.Scene {
             this.puzzle_buttons[i][0].setOrigin(0,0);
             this.puzzle_buttons[i][1].setOrigin(0,0);
             this.puzzle_buttons[i][1].setDepth(1);
-            
+            window.b = button[0];
             console.log(this.correctAnswer.includes(this.puzzle_buttons[i][0].texture.key)); 
             //console.log(this.puzzle_buttons[i][0].texture.key === "simbol1")
             //this.puzzle_buttons[i][0].setTint(59000000);
@@ -75,8 +75,12 @@ class EnterPasswordScene extends Phaser.Scene {
 
 
     update(){
+        console.log(this.selectedButtonIndex)
         var xKey = this.input.keyboard.addKey('X');
+        var kKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
         var xKeyDown = xKey?.isDown
+        var kKeyDown = kKey?.isDown
+        
 
         if (Phaser.Input.Keyboard.JustDown(this.cursors.left)) {
             this.selectNextButton(-1);
@@ -87,8 +91,14 @@ class EnterPasswordScene extends Phaser.Scene {
         if(xKeyDown){
             this.scene.stop();
             this.scene.resume("game");
-
         }
+        
+        if (kKeyDown) {
+            console.log("aaasdads");
+            this.puzzle_buttons[0][0].destroy();
+            this.puzzle_buttons.splice(this.selectedButtonIndex, 1);
+        }
+
     }
 
     selectIcon(index){

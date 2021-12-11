@@ -19,10 +19,16 @@ class Pause_scene extends Phaser.Scene {
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })
         .setOrigin(0.5)
-    
-        this.input.keyboard.once('keydown-ESC', () => {
+        
+        // this.input.keyboard.once('keydown-ESC', () => {
+        //     this.scene.resume('game');
+        //     this.scene.stop();
+        // })
+    }
+    update(){
+        if (game.scene.game.hasFocus == true) {
             this.scene.resume('game');
             this.scene.stop();
-        })
+        }
     }
 }

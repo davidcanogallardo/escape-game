@@ -88,6 +88,21 @@ var app = new Vue({
         })
         .done((data) => {
             console.log(data);
+            if (data.success) {
+                let user = new User(
+                    data.userData.username, 
+                    data.userData.friendsList, 
+                    data.userData.notifications, 
+                    data.userData.completedLevels,
+                    data.userData.favMap,
+                    data.userData.numTrophies
+                )
+                sessionStorage.setItem("session",JSON.stringify(user))
+                this.$root.currentPage="home"
+                this.$root.user = user
+            } else {
+                console.log(data.message);
+            }
         })
         .fail(function(XMLHttpRequest, textStatus, errorThrown) {
             if ( console && console.log ) {

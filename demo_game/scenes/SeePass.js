@@ -17,17 +17,6 @@ class SeePass extends Phaser.Scene {
         window.w = width
         window.bgg = this.background
 
-        const title = this.add.text(width / 2, (height / 2)-45, 'Esta es la contraseña: ', {
-            fontSize: 13,
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
-        })
-        title.setOrigin(0.5, 0.5)
-        const title2 = this.add.text(width / 2, (height / 2)+35, 'Dile la contraseña a tu compañero', {
-            fontSize: 13,
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
-        })
-        title2.setOrigin(0.5, 0.5)
-
         this.puzzle_image= [];
         let x = 0.50;
         for(let i=0; i<4; i++){
