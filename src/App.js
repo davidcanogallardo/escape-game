@@ -4,6 +4,7 @@ var app = new Vue({
       currentPage: "home",
       menuOpen: "none",
       user: user,
+      "soundSettings": soundSettings2,
       profileInfo: null,
       modalOpen: "none",
       rankingData: null
