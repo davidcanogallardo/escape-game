@@ -10,7 +10,7 @@ var config = {
         debug: true
     },
   },zoom: 2.5,
-  scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, SeePass, Time]
+  scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, SeePass, Time, Ui]
 
 };
 

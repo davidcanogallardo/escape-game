@@ -102,7 +102,7 @@ class Game extends Phaser.Scene {
             if (eKey.isDown) {
                 console.log('show pass chest');
                 that.scene.launch('seepass');
-                that.scene.pause();
+                // that.scene.pause();
             }
         });
         let cursors = this.input.keyboard.createCursorKeys();
@@ -197,9 +197,7 @@ class Game extends Phaser.Scene {
         
         //*******************************************************TIEMPO  */
         
-        //Tiempo
-       
-        this.scene.launch('time');
+        this.scene.launch('ui');
 
         for (let i = 0; i < this.map.getLayer("walls").data[i]; i++) {
             for (let j = 0; j < this.map.getLayer("walls").data[i][j]; j++) {
