@@ -71,16 +71,31 @@ class EnterPasswordScene extends Phaser.Scene {
         console.log(this.puzzle_buttons[0]);
         this.selectIcon(0);
 
+        var that = this;
+        window.r = this.result_rectangles;
+
+        this.input.keyboard.on('keydown-K', function () {
+            var count = 0
+            for (let i = 0; i < that.result_rectangles.length; i++) {
+                if (that.result_rectangles[i].type != "Image") {
+                    count = i;
+                    i = that.result_rectangles.length;
+                }
+            }
+
+            that.result_rectangles[count] = that.add.image(that.result_rectangles[count].x+37,that.result_rectangles[count].y+37,that.puzzle_buttons[that.selectedButtonIndex][0].texture.key);
+            that.result_rectangles[count].setScale(0.3);
+            that.puzzle_buttons[that.selectedButtonIndex][0].destroy();
+            //that.puzzle_buttons.splice(that.selectedButtonIndex, 1);
+        });
     }
 
 
     update(){
         console.log(this.selectedButtonIndex)
         var xKey = this.input.keyboard.addKey('X');
-        var kKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
         var xKeyDown = xKey?.isDown
-        var kKeyDown = kKey?.isDown
-        
+        var win = false;
 
         if (Phaser.Input.Keyboard.JustDown(this.cursors.left)) {
             this.selectNextButton(-1);
@@ -92,11 +107,21 @@ class EnterPasswordScene extends Phaser.Scene {
             this.scene.stop();
             this.scene.resume("game");
         }
-        
-        if (kKeyDown) {
-            console.log("aaasdads");
-            this.puzzle_buttons[0][0].destroy();
-            this.puzzle_buttons.splice(this.selectedButtonIndex, 1);
+
+        for (let i = 0; i < this.result_rectangles.length; i++) {
+            if (this.result_rectangles[i].type == "Image") {
+                if (this.result_rectangles[i].texture.key = this.correctAnswer[i]) {
+                    win = true;
+                }
+            } else {
+                win = false;
+            }
+        }
+
+        if(win == true){
+            console.log("VICTORIA")
+            this.scene.stop();
+            this.scene.resume("game");
         }
 
     }
@@ -118,7 +143,6 @@ class EnterPasswordScene extends Phaser.Scene {
 
     selectNextButton(change){
         let index = this.selectedButtonIndex + change
-
         // wrap the index to the front or end of array
         if (index >= this.puzzle_buttons.length)
         {
