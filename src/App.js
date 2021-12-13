@@ -26,7 +26,7 @@ let excludedPages = [
 var app = new Vue({
     el: '#app',
     data: {
-      currentPage: "home",
+      currentPage: "game",
       menuOpen: "none",
       user: user,
       "soundSettings": soundSettings2,
