@@ -11,7 +11,6 @@ class EnterPasswordScene extends Phaser.Scene {
     selectedButtonIndex = 0;
     puzzle_buttons = [];
 
-    correctAnswer = ["cross1R","cross1B","cross2Y","cross2G"];
 
     constructor() {
         super("enterPasswordScene")
@@ -22,6 +21,7 @@ class EnterPasswordScene extends Phaser.Scene {
     }
 
     create() {
+        this.correctAnswer = ["cross1R","cross1B","cross2Y","cross2G"];
         var path2 = ""
         let { width, height } = this.sys.game.canvas;
         //console.log(this.sys.game.canvas.width);
@@ -113,6 +113,7 @@ class EnterPasswordScene extends Phaser.Scene {
         var that = this;
         window.r = this.result_rectangles;
         this.count = 0;
+        this.win = false;
         this.input.keyboard.on('keydown-K', function () {
             let count = that.count;
             // console.warn((that.result_rectangles[count].width/2));
@@ -122,13 +123,19 @@ class EnterPasswordScene extends Phaser.Scene {
             var x = that.result_rectangles[count].x
             var y = that.result_rectangles[count].y
 
+
             that.password.push(that.puzzle_buttons[that.selectedButtonIndex][2])
 
             that.result_rectangles[count] = that.add.image(x+w,y+h,that.puzzle_buttons[that.selectedButtonIndex][0].texture.key);
             that.result_rectangles[count].setScale(0.3);
             console.error(that.puzzle_buttons[that.selectedButtonIndex][2]);
-            that.puzzle_buttons[that.selectedButtonIndex][0].destroy();
-            //that.puzzle_buttons.splice(that.selectedButtonIndex, 1);
+
+            if (that.arraysEqual(this.password,this.correctAnswer)) {
+                that.win = true;
+            }
+            console.log(that.password);
+            console.log(that.correctAnswer);
+            console.log(that.arraysEqual(that.password,that.correctAnswer));
             that.count++;
             
         });
@@ -138,7 +145,6 @@ class EnterPasswordScene extends Phaser.Scene {
     update(){
         var xKey = this.input.keyboard.addKey('X');
         var xKeyDown = xKey?.isDown
-        var win = false;
 
         if (Phaser.Input.Keyboard.JustDown(this.cursors.left)) {
             this.selectNextButton(-1);
@@ -151,17 +157,7 @@ class EnterPasswordScene extends Phaser.Scene {
             this.scene.resume("game");
         }
 
-        for (let i = 0; i < this.result_rectangles.length; i++) {
-            if (this.result_rectangles[i].type == "Image") {
-                if (this.result_rectangles[i].texture.key = this.correctAnswer[i]) {
-                    win = true;
-                }
-            } else {
-                win = false;
-            }
-        }
-
-        if(win == true){
+        if(this.win){
             console.log("VICTORIA")
             this.scene.stop();
             this.scene.resume("game");
@@ -205,6 +201,11 @@ class EnterPasswordScene extends Phaser.Scene {
 
         // emit the 'selected' event
         button.emit('selected')
+    }
+
+    arraysEqual(a, b) {
+        return JSON.stringify(a) === JSON.stringify(b);
+
     }
 
 }
