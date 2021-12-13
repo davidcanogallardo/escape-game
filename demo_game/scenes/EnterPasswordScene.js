@@ -101,19 +101,32 @@ class EnterPasswordScene extends Phaser.Scene {
 
             this.result_rectangles[i].setScale(0.3);
             this.result_rectangles[i].setOrigin(0,0);
+            
+            console.warn(this.result_rectangles[i].x);
+            // console.warn(this.result_rectangles[i].width);
+            // console.warn(this.result_rectangles[i].height);
+
         }
         this.selectIcon(0);
-        
+        this.password = []
+        window.pass = this.password
         var that = this;
         window.r = this.result_rectangles;
         this.count = 0;
         this.input.keyboard.on('keydown-K', function () {
             let count = that.count;
+            // console.warn((that.result_rectangles[count].width/2));
+            console.warn((that.result_rectangles[count].x));
+            var w = (that.result_rectangles[count].width/2)*0.3
+            var h = (that.result_rectangles[count].height/2)*0.3
+            var x = that.result_rectangles[count].x
+            var y = that.result_rectangles[count].y
 
+            that.password.push(that.puzzle_buttons[that.selectedButtonIndex][2])
 
-            that.result_rectangles[count] = that.add.image(that.result_rectangles[count].x+(that.result_rectangles[count].width/2),that.result_rectangles[count].y+(that.result_rectangles[count].height/2),that.puzzle_buttons[that.selectedButtonIndex][0].texture.key);
+            that.result_rectangles[count] = that.add.image(x+w,y+h,that.puzzle_buttons[that.selectedButtonIndex][0].texture.key);
             that.result_rectangles[count].setScale(0.3);
-            console.log(that.selectedButtonIndex);
+            console.error(that.puzzle_buttons[that.selectedButtonIndex][2]);
             that.puzzle_buttons[that.selectedButtonIndex][0].destroy();
             //that.puzzle_buttons.splice(that.selectedButtonIndex, 1);
             that.count++;
