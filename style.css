@@ -1345,6 +1345,49 @@ label{
     background: #49EE63;
 }
 
+/************************SALA DE ESPERA*****************************/
+.waitingRoom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dot-typing {
+    position: relative;
+    left: -9999px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #14448D;
+    color: #14448D;
+    box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
+    animation: dotTyping 1.5s infinite linear;
+}
+  
+  @keyframes dotTyping {
+    0% {
+      box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
+    }
+    16.667% {
+      box-shadow: 9984px -10px 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
+    }
+    33.333% {
+      box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
+    }
+    50% {
+      box-shadow: 9984px 0 0 0 #14448D, 9999px -10px 0 0 #14448D, 10014px 0 0 0 #14448D;
+    }
+    66.667% {
+      box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
+    }
+    83.333% {
+      box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px -10px 0 0 #14448D;
+    }
+    100% {
+      box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
+    }
+  }
+
 /**************************************************************************************************************************************/
 /*Media query para girar en horizontal la página al abrirla en mvil*/
 @media only screen and (orientation:portrait) {

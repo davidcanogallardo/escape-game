@@ -13,7 +13,9 @@
     <script src="https://kit.fontawesome.com/b0d71d7fba.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    
+    <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
+
+
     <script src="./classes/user.js"></script>
     <script src="./classes/sound-settings.js"></script>
     <!-- <script src="./src/scripts/petitions.js"></script> -->
@@ -33,6 +35,7 @@
     <script src="./src/components/settings/settings.js"></script>
     <script src="./src/components/settings/sound-settings.js"></script>
     <script src="./src/components/settings/test-controller.js"></script>
+    <script src="./src/components/waiting-room.js"></script>
     
     
 </head>
@@ -96,6 +99,10 @@
                     v-if="currentPage == 'password-recover'" 
                     v-on:change-page="currentPage = $event"
                 ></password-recover>
+                <waiting-room
+                    v-on:change-page="currentPage = $event"
+                >
+                </waiting-room>
             </transition>
             
             

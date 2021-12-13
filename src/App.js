@@ -1,3 +1,18 @@
+const socket = io("ws://localhost:3000");
+
+socket.on("connect", () => {
+    // either with send()
+    console.log("Client Socket Connected");
+  
+    // or with emit() and custom event names
+    //socket.emit("salutations", "Hello!", { "mr": "john" }, Uint8Array.from([1, 2, 3, 4]));
+});
+
+socket.on("matchFound", data => {
+    console.log("Partida Encontrada");
+    console.log(data);
+})
+
 let excludedPages = [
     "home",
     "game",
