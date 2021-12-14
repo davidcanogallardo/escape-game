@@ -24,7 +24,7 @@ class Game extends Phaser.Scene {
 
     create() {
         
-/**************************************Mapa, layers...****************************/
+    /**************************************Mapa, layers...****************************/
         this.map = this.make.tilemap({
             key: "map"
         });
@@ -38,7 +38,7 @@ class Game extends Phaser.Scene {
         
         window.wall = wallsLayer
 
-        //***************************************************************************************Player
+        //*************************************************Player
         this.player = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
         this.player.body.setSize(this.player.width*0.5, this.player.height * 0.3).setOffset(8,18)
         this.player.setDepth(0)
@@ -163,7 +163,7 @@ class Game extends Phaser.Scene {
             }
         });
         //Añadir colider al grupo de puertas
-        let doorsColider = this.physics.add.collider(this.player, this.doorsGroup);
+        this.doorsColider = this.physics.add.collider(this.player, this.doorsGroup);
 
         let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
@@ -270,8 +270,6 @@ class Game extends Phaser.Scene {
     }
   
     update() {
-        
-
         let speed = 150
         let eKey = this.input.keyboard.addKey('E');
         let eKeyDown = eKey?.isDown
@@ -279,8 +277,11 @@ class Game extends Phaser.Scene {
         let escKeyDown = escKey?.isDown
 
         //menu de pausa "ESC" o al cambiar de ventana
+        //TODO animacion puerta
         if(game.scene.game.hasFocus == false){
             this.scene.launch('pause_scene')
+            this.physics.world.removeCollider(this.doorsGroup);
+            this.doorsGroup.playAnimation('opening-door');
             this.scene.pause();
         }
         
