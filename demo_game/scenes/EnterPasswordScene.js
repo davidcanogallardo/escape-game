@@ -130,9 +130,10 @@ class EnterPasswordScene extends Phaser.Scene {
             that.result_rectangles[count].setScale(0.3);
             console.error(that.puzzle_buttons[that.selectedButtonIndex][2]);
 
-            if (that.arraysEqual(this.password,this.correctAnswer)) {
+            if (that.arraysEqual(that.password,that.correctAnswer)) {
                 that.win = true;
             }
+            console.log(that.win);
             console.log(that.password);
             console.log(that.correctAnswer);
             console.log(that.arraysEqual(that.password,that.correctAnswer));
