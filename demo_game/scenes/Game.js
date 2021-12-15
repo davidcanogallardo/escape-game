@@ -159,6 +159,11 @@ class Game extends Phaser.Scene {
                     this.table.body.immovable = true
                     //Agregar puerta al grupo de puertas
                     this.tablesGroup.add(this.table);
+                    this.tableCollider = this.physics.add.image(this.table.x, this.table.y);
+                    this.tableCollider.setSize(this.table.width, this.table.height)
+                    this.tableCollider.body.immovable = true
+                    this.physics.add.collider(this.tableCollider, this.player);
+
                     break;
             }
         });
@@ -212,6 +217,15 @@ class Game extends Phaser.Scene {
         //necesario para que el juego pause al cambiar la ventana correctamente
         game.scene.game.hasFocus = true;
 
+
+        //*************************************************************Escena de victoria
+        this.scene.get('enterPasswordScene').events.on('victoria', () => {
+            this.doorsGroup.playAnimation('opening-door');
+            this.physics.world.removeCollider(this.doorsColider);
+            this.table.disableBody();
+            
+        });
+        /**************************************************************************************** */
 
         //*************************************************************estados personaje
     	//lado
@@ -280,8 +294,6 @@ class Game extends Phaser.Scene {
         //TODO animacion puerta
         if(game.scene.game.hasFocus == false){
             this.scene.launch('pause_scene')
-            this.physics.world.removeCollider(this.doorsGroup);
-            this.doorsGroup.playAnimation('opening-door');
             this.scene.pause();
         }
         
