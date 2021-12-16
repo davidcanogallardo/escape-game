@@ -2,7 +2,7 @@ class Player extends Phaser.GameObjects.Sprite{
     constructor(scene) {
         super(scene, 100, 250, 'player')
         scene.add.existing(this)
-        this.setDepth(10)
+        this.setDepth(5)
         this.cursors = scene.input.keyboard.createCursorKeys();
         scene.physics.world.enableBody(this);
         this.body.setSize(this.width*0.5, this.height * 0.3).setOffset(8,18)
@@ -47,8 +47,6 @@ class Player extends Phaser.GameObjects.Sprite{
 
     update() {
         this.centerBodyonBody(this.playerCollider,this)
-        window.p = this.player
-        window.c = this.playerCollider
         let speed = 150;
         if ( this.anims.currentAnim==null) {
             this.anims.play('player-idle-down');
@@ -86,13 +84,7 @@ class Player extends Phaser.GameObjects.Sprite{
     }
 
     centerBodyonBody(collider, player) {
-        // console.log(player.body.halfWidth);
-        // console.log(player.halfWidth)
         collider.x = player.body.x + player.body.halfWidth
         collider.y = player.body.y 
-        // collider.position.set(
-        //     player.x + player.halfWidth - collider.halfWidth,
-        //     player.y + player.halfHeight - collider.halfHeight
-        // );
     }
 }

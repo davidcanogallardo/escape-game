@@ -23,28 +23,21 @@ class Game extends Phaser.Scene {
     }
 
     create() {
-        /**************************************Mapa, layers...****************************/
-        var that = this;
+        var that = this
         this.map = this.make.tilemap({
             key: "map"
         });
         
-        var tileset = this.map.addTilesetImage('dungeon', 'tiles');
-        var groundLayer = this.map.createStaticLayer('ground', tileset);
-        var wallsLayer = this.map.createLayer('walls', tileset);
+        this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
+        var groundLayer = this.map.createStaticLayer('ground', this.tileset);
         let objectLayer = this.map.getObjectLayer('objects');
-        wallsLayer.setDepth(2)
         
-
         //*****************************************Player**************************************************/
         this.player = new Player(this)
-
-        this.physics.add.collider(this.player, wallsLayer)
-
         this.playerCollider = this.player.playerCollider
 
-        /*************************************************************************************** */
-
+        this.wallsLayer = new WallsLayer(this)
+        
         // ***************************************LEYENDA****************************************************************************
 
         //Crear grupo donde se almacenan las puertas
@@ -109,47 +102,6 @@ class Game extends Phaser.Scene {
         });
         this.chest.body.immovable = true
         // ****************************************************************************
-
-        // **************************************   CAMBIAR BODY MUROS **************************************
-        this.wallGroup = this.physics.add.staticGroup();
-        wallsLayer.forEachTile(tile => {
-            if (tile.properties.wall == true) {
-                //Quito la propiedad de colisión del tile
-                tile.properties.colides = false
-                const x = tile.getCenterX();
-                const y = tile.getCenterY();
-
-                //Creo el nuevo tile
-                const new_tile = this.wallGroup.create(x,y);
-                //Le pongo tamaño y lo posiciono (setOffset)
-                new_tile.body.setSize(tile.width, tile.height*0.1).setOffset(tile.width-7,tile.height+5)
-                //Añado la colisión al nuevo tile
-                this.physics.add.collider(this.player, new_tile)
-
-                //Lo hago invisible así solo se ve el muro, pero la colision es con el new_tile
-                new_tile.visible = false
-            }
-        })
-        
-        wallsLayer.setCollisionByProperty({ colides: true })
-
-        this.physics.add.overlap(this.playerCollider, this.wallGroup,function (player,walls) {
-            if(walls.y < player.y){
-                that.player.setDepth(10);
-            } else {
-                that.player.setDepth(0);
-            }
-
-        });
-
-        for (let i = 0; i < this.map.getLayer("walls").data[i]; i++) {
-            for (let j = 0; j < this.map.getLayer("walls").data[i][j]; j++) {
-                if (this.map.getLayer("walls").data[i][j].properties.horizontalWalls === true) {
-                    this.map.test.getLayer("walls").data[i][j].height = 2
-                }
-            }
-        }
-        // ******************************************************************************************************************
         
         // *********************************************puerta****************************************************
         let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);

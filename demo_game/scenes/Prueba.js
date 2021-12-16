@@ -2,7 +2,6 @@ class Prueba extends Phaser.Scene {
     constructor() {
         super("prueba")
     }
-    //map.getLayer("walls").data[5][5].properties?.horitzontalWall
     preload() {
         var path = "./demo_game/"
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -13,21 +12,35 @@ class Prueba extends Phaser.Scene {
     }
 
     create() {
+        var that = this
         this.map = this.make.tilemap({
             key: "map"
         });
-        window.test = this.map
         
-        var tileset = this.map.addTilesetImage('dungeon', 'tiles');
-        var groundLayer = this.map.createStaticLayer('ground', tileset);
-        var wallsLayer = this.map.createLayer('walls', tileset);
+        this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
+        var groundLayer = this.map.createStaticLayer('ground', this.tileset);
+        // groundLayer.setDepth(12)
         let objectLayer = this.map.getObjectLayer('objects');
-        wallsLayer.setDepth(2)
-        this.player = new Player(this, this.cursors)
+        
+        this.player = new Player(this)
+        this.playerCollider = this.player.playerCollider
+        
+        this.wallsLayer = new WallsLayer(this)
+
+        // this.physics.add.overlap(this.playerCollider, this.wallsLayer, function (player,walls) {
+        //     if(walls.y < player.y){
+        //         that.player.setDepth(10);
+        //     } else {
+        //         that.player.setDepth(0);
+        //     }
+
+        // });
+        // window.pp = this.player
     }
 
     update() {
         this.player.update()
+        this.wallsLayer.update()
     }
 
 }
