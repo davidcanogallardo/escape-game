@@ -2,21 +2,23 @@ Vue.component('change',{
     template: //html
     `
     <div class="container-change" >
-        <div class="close">
+        <div class="close" v-on:click="$emit('change-img', false)">
             <i class="fas fa-times"></i>
         </div>
+
         <h2>Elige tu foto de perfil</h2>
         <div class="change-options">
             <div class="current-img">
                 <div :class="'current-bg bg-'+currentBG">
                     <i :class="'fas fa-'+currentIcon+' current-icon color-'+currentIconColor" aria-hidden="true"></i>
                 </div>
+                <br>
+                <div class="btn blue link changeSave" v-on:click="logs()">Guardar</div>
             </div>
 
             <div class="options-img">
                 <h2>Icono</h2>
                 <div class="container-icon-bg">
-
                     <div class="icon-bg" v-for="item in icons">
                         <i :class="'fas fa-'+item.icon" aria-hidden="true" v-on:click="currentIcon=item.icon"></i>
                     </div>
@@ -33,11 +35,8 @@ Vue.component('change',{
                 <div class="container-color">
                     <div v-for="item in colors" :class="'color-bg bg-'+item.color" v-on:click="currentBG=item.color"></div>
                 </div>
+                <br>
             </div>
-        </div>
-        
-        <div class="btn blue link" page="main">
-                Guardar
         </div>
     </div>
 
@@ -66,7 +65,11 @@ Vue.component('change',{
         }
     },
     methods: {
-
+        logs(){
+            console.log(this.currentBG)
+            console.log(this.currentIcon)
+            console.log(this.currentIconColor)
+        }
     },
     //v-on:click="$emit('change-img',false)"
 })

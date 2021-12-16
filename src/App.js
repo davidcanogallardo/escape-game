@@ -314,7 +314,7 @@ var app = new Vue({
             });
         },
         userUpdate(user){
-
+            
         }
     },
 
