@@ -312,6 +312,9 @@ var app = new Vue({
                     console.log(textStatus);
                 }
             });
+        },
+        userUpdate(user){
+
         }
     },
 

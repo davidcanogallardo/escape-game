@@ -280,9 +280,140 @@ body {
     border-radius: 1vw;
 }
 
-.form_error{
+/************************************Pop Up cambiar imagen perfil*************************************/
+
+.change{
+    position: absolute;
+    margin-top: 2vh;
+}
+.container-change{
+    border: 4px solid #68492E;
+    border-radius: 10px;
+    background-color: #FAA942;
+    width: 95%;
+}
+
+.change-options{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+.current-bg{
+    border-radius: 300px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    width: 20vw;
+    height: 20vw;
+}
+
+.current-icon{
+    font-size: 14vw;
+    text-shadow: 0px 4px 2px rgb(0 0 0 / 75%);
+}
+.options-img{
+    width: 30vw;
+}
+
+.container-icon-bg, .container-color{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.icon-bg{
+    background-color: white;
+    border: 2px solid #68492E;
+    border-radius: 5px;
+    width: 5vw;
+    height: 5vw;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-bg:hover, .color-bg:hover{
+    cursor: pointer;
+}
+
+.icon-bg i{
+    color: grey;
+    font-size: 4vw;
+}
+
+.color-icon, .color-bg{
+    background-color: white;
+    border: 2px solid #68492E;
+    border-radius: 5px;
+    width: 5vw;
+    height: 5vw;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-icon i{
+    font-size: 4vw;
+}
+.bg-red{
+    background-color: red;
+}
+.bg-blue{
+    background-color: blue;
+}
+.bg-purple{
+    background-color: purple;
+}
+.bg-pink{
+    background-color: pink;
+}
+.bg-black{
+    background-color: black;
+}
+.bg-white{
+    background-color: white;
+}
+.bg-grey{
+    background-color: grey;
+}
+
+.color-red{
     color: red;
 }
+.color-blue{
+    color: blue;
+}
+.color-purple{
+    color: purple;
+}
+.color-pink{
+    color: pink;
+}
+.color-black{
+    color: black;
+}
+.color-white{
+    color: white;
+}
+.color-grey{
+    color: grey;
+}
+
+.close{
+    position: absolute;
+    margin-top: 1vh;
+    margin-left: 92vw;
+}
+
 /*************************************************************************/
 
 @media (max-height: 600px) {
@@ -592,7 +723,7 @@ td,th{
 }
 
 input[type=password], input[type=email], input[type=text]{
-    height: 2vw;
+    height: 3vw;
     background: rgba(172, 171, 171, 0.33);
     border: 0.2vw solid #68492E;
     border-radius: 0.6vw;
@@ -1848,6 +1979,4 @@ label{
 
 
 */
-
-
 }
