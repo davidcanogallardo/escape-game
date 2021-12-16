@@ -13,6 +13,8 @@
     <script src="https://kit.fontawesome.com/b0d71d7fba.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-i18n@8"></script>
     <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
 
 
@@ -36,6 +38,7 @@
     <script src="./src/components/settings/sound-settings.js"></script>
     <script src="./src/components/settings/test-controller.js"></script>
     <script src="./src/components/waiting-room.js"></script>
+    <script src="./src/components/chat.js"></script>
     
     
 </head>
@@ -107,7 +110,10 @@
                 </waiting-room>
             </transition>
             
-            
+            <chat 
+            v-if="modalOpen == 'chat'" >
+        </chat>
+
             <transition name="fade">
                 <invitation
                     v-if="modalOpen == 'invitation'" 
@@ -116,6 +122,7 @@
                     :username="user.username">
                 </invitation>
                 <div class="menu-close slide-link" v-if="menuOpen != 'none'" v-on:click="menuOpen = 'none'"></div>
+
             </transition>
 
             <transition name="slide">
