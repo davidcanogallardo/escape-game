@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./src/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./src/images/favicon.ico" type="image/x-icon">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/b0d71d7fba.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
+
+
+    <script src="./classes/user.js"></script>
+    <script src="./classes/sound-settings.js"></script>
+    <!-- <script src="./src/scripts/petitions.js"></script> -->
+    <script src="./src/scripts/utils.js"></script>
+    <!-- <script src="./src/scripts/app.js"></script> -->
+    <script src="./src/components/home.js"></script> 
+    <script src="./src/components/friends-sidebar.js"></script> 
+    <script src="./src/components/notifications-sidebar.js"></script>
+    <script src="./src/components/login-warning.js"></script>
+    <script src="./src/components/login.js"></script>
+    <script src="./src/components/ranking.js"></script>
+    <script src="./src/components/profile.js"></script>
+    <script src="./src/components/trophies.js"></script>
+    <script src="./src/components/invitation.js"></script>
+    <script src="./src/components/password-recover.js"></script>
+    <script src="./src/components/settings/connect-controller.js"></script>
+    <script src="./src/components/settings/settings.js"></script>
+    <script src="./src/components/settings/sound-settings.js"></script>
+    <script src="./src/components/settings/test-controller.js"></script>
+    <script src="./src/components/waiting-room.js"></script>
+    
+    
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div v-show="currentPage == 'game'">
+                <div id="game2"></div>
+            </div>
+            <transition name="fade">
+                <home v-if="currentPage == 'home'" 
+                    v-on:open-menu="menuOpen = $event" 
+                    v-on:change-page="currentPage = $event"
+                    v-on:update-profile="profileInfo = $event"
+                    :user2="user">
+                </home>
+                <login 
+                    v-if="currentPage == 'login'" 
+                    v-on:change-page="currentPage = $event">
+                </login>
+                <login-warning 
+                    v-if="currentPage == 'login-warning'" 
+                    v-on:change-page="currentPage = $event">
+                </login-warning>
+                <settings 
+                    v-if="currentPage == 'settings'" 
+                    v-on:change-page="currentPage = $event">
+                </settings>
+                <sound-settings 
+                    v-if="currentPage == 'sound-settings'" 
+                    v-on:change-page="currentPage = $event"
+                    v-on:update-sound="soundSettings = $event"
+                    :sound="soundSettings">
+                </sound-settings>
+                <connect-controller 
+                    v-if="currentPage == 'connect-controller'" 
+                    v-on:change-page="currentPage = $event">
+                </connect-controller>
+                <test-controller 
+                    v-if="currentPage == 'test-controller'" 
+                    v-on:change-page="currentPage = $event">
+                </test-controller>
+                <ranking 
+                    v-if="currentPage == 'ranking'" 
+                    v-on:change-page="currentPage = $event"
+                    :ranking="rankingData"
+                >
+                </ranking>
+                <profile 
+                    v-if="currentPage == 'profile' || currentPage == 'friend'" 
+                    v-on:change-page="currentPage = $event"
+                    :user="profileInfo"
+                    :page="currentPage">
+                </profile>
+                <trophies 
+                    v-if="currentPage == 'trophies'" 
+                    v-on:change-page="currentPage = $event"
+                    :levels="user.completedLevels">
+                </trophies>
+                <password-recover
+                    v-if="currentPage == 'password-recover'" 
+                    v-on:change-page="currentPage = $event"
+                ></password-recover>
+                <waiting-room
+                    v-if="currentPage == 'waiting-room'" 
+                    v-on:change-page="currentPage = $event"
+                >
+                </waiting-room>
+            </transition>
+            
+            
+            <transition name="fade">
+                <invitation
+                    v-if="modalOpen == 'invitation'" 
+                    v-on:change-page="currentPage = $event"
+                    v-on:open-modal="modalOpen = $event"
+                    :username="user.username">
+                </invitation>
+                <div class="menu-close slide-link" v-if="menuOpen != 'none'" v-on:click="menuOpen = 'none'"></div>
+            </transition>
+
+            <transition name="slide">
+                <friend 
+                    v-if="menuOpen == 'friend'" 
+                    :friends="user.friendsList"
+                    v-on:open-menu="menuOpen = $event"
+                    v-on:change-page="currentPage = $event"
+                    v-on:update-profile="profile = $event"
+                    v-on:open-modal="modalOpen = $event">
+                </friend>
+                <notification 
+                    v-if="menuOpen == 'noti'" 
+                    :notifications="user.notifications"
+                    v-on:open-menu="menuOpen = $event">
+                </notification>
+            </transition>
+        </div>
+    </div>
+    <script src="./src/App.js"></script> 
+    <script type="application/javascript" defer src="./demo_game/scenes/Player.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/WallsLayer.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Prueba.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Titlescreen.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Gameover.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Game.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/PasswordScene.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Pause_scene.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/SeePass.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/EnterPasswordScene.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Time.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Ui.js"></script>
+    <script type="application/javascript" defer src="./demo_game/main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="42">
+ <editorsettings>
+  <export target="mapa.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" name="dungeon" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
+  <image source="../tilesets/TSMapa/PNG/tileset.png" width="512" height="512"/>
+  <tile id="1">
+   <properties>
+    <property name="colides" type="bool" value="false"/>
+    <property name="horizontalWalls" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+    <property name="horizontalWalls" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+    <property name="horizontalWalls" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="33">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="34">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="35">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="36">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="37">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="38">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="65">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="66">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="67">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="97">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="98">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="99">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="100">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="101">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="102">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="164">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="165">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="166">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="197">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="198">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="224">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="225">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="226">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+    <property name="horizontalWalls" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="227">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+    <property name="horizontalWalls" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="256">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="257">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="258">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="259">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="260">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="261">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="288">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="289">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="290">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="291">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="292">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="293">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="322">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+    <property name="horizontalWalls" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="323">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+    <property name="horizontalWalls" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="389">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="418">
+   <properties>
+    <property name="colides" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="419">
+   <properties>
+    <property name="colides" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="450">
+   <properties>
+    <property name="isDoorOpen" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="451">
+   <properties>
+    <property name="isDoorOpen" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="453">
+   <properties>
+    <property name="isDoorOpen" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="454">
+   <properties>
+    <property name="isDoorOpen" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="481">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+    <property name="horizontalWalls" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="482">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+    <property name="isDoorOpen" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="483">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+    <property name="isDoorOpen" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="484">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+    <property name="horizontalWalls" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="485">
+   <properties>
+    <property name="isDoorOpen" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="486">
+   <properties>
+    <property name="isDoorOpen" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="595">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="1025" name="doors_spriteSheet" tilewidth="32" tileheight="32" tilecount="2" columns="2">
+  <image source="../tilesets/TSMapa/PNG/doors.png" width="64" height="32"/>
+  <tile id="0" type="door">
+   <properties>
+    <property name="colides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1" type="door"/>
+ </tileset>
+ <tileset firstgid="1027" name="table" tilewidth="32" tileheight="16" tilecount="1" columns="1">
+  <image source="../tilesets/TSMapa/PNG/table.png" width="32" height="16"/>
+ </tileset>
+ <layer id="1" name="ground" width="20" height="20">
+  <data encoding="base64">
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAAAAAAAAAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAAAAAAAAAAAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAAAAAAAAAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAAAAAAAAAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAAAAAAAAAAAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAAAAAAAAAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAAAAAAAAAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAAAAAAAAAAAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAAAAAAAAAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAAAAAAAAAAAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAAAAAAAAAAACDAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAAAAAAAAAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAKQAAAAAAAAAAAAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIMAAACCAAAAAAAAAAAAAACCAAAAgwAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAAAAAAAAAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAAAAAAAAAAAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAAAAAAAAAAACCAAAAgwAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAAAAAAAAAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAgwAAAIIAAAAAAAAAAAAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAAAAAAAAAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAAAAAAAAAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAAAAAAAAAAAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAAAAAAAAAAACCAAAAgwAAAIIAAACCAAAAggAAAIMAAACCAAAAggAAAAAAAAAAAAAAggAAAIMAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAAAAAAAAAAAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAAAAAAAAAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAAAAAAAAAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAAAAAAAAAAAAAIIAAACCAAAAggAAAIIAAACCAAAAggAAAIIAAACCAAAAAAAAAA==
+  </data>
+ </layer>
+ <objectgroup id="7" name="objects">
+  <object id="22" name="door" type="door" gid="1025" x="64" y="176" width="32" height="32"/>
+  <object id="25" name="door" type="door" gid="1025" x="224" y="176" width="32" height="32"/>
+  <object id="37" name="button" type="button" gid="386" x="152" y="96" width="16" height="16"/>
+  <object id="40" name="chest" type="chest" gid="596" x="48" y="284" width="16" height="16"/>
+  <object id="41" name="table" type="table" gid="1027" x="32" y="192" width="32" height="16"/>
+ </objectgroup>
+ <layer id="2" name="walls" width="20" height="20">
+  <data encoding="base64">
+   4QAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAOIAAAABAQAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAKIBAACjAQAApAEAAKUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACiAQAAowEAAKQBAAClAQAAAAAAAAAAAAACAQAAAQEAAAIAAAACAAAAwgEAAAAAAAAAAAAAxQEAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAMIBAAAAAAAAAAAAAMUBAAACAAAAAgAAAAIBAAABAQAAIgAAACIAAAAiAAAAAAAAAAAAAAAiAAAAIgAAACIAAAADAQAABAEAACIAAAAiAAAAIgAAAAAAAAAAAAAAIgAAACIAAAAiAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAQEAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgEAAAEBAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIBAAAhAQAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAQAAIQEAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgEAAA==
+  </data>
+ </layer>
+</map>
