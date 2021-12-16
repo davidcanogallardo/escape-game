@@ -1,8 +1,9 @@
 //const socket = io("ws://localhost:3000");
-
+document.getElementById("agent").innerHTML = getLang();
 Vue.component('home', {
     template: //html
-    `             
+    `       
+    <span id="agent">      
     <div>   
         <div class="icon-container settings-btn-container main-icon settings-link link" page="settings-page" v-on:click="$emit('change-page','settings')">
             <i class="fas fa-cog"></i>
