@@ -22,7 +22,7 @@ class Prueba extends Phaser.Scene {
         // groundLayer.setDepth(12)
         let objectLayer = this.map.getObjectLayer('objects');
         
-        this.player = new Player(this)
+        this.player = new Player(this, 250, 100, 'player')
         this.playerCollider = this.player.playerCollider
         
         this.wallsLayer = new WallsLayer(this)
