@@ -196,6 +196,17 @@ class Game extends Phaser.Scene {
 
         //necesario para que el juego pause al cambiar la ventana correctamente
         game.scene.game.hasFocus = true;
+        if(game.scene.game.hasFocus == false){
+            this.scene.launch('pause_scene')
+            this.scene.pause();
+        }
+        //*************************************************************Escena de victoria
+        this.scene.get('enterPasswordScene').events.on('victoria', () => {
+            this.doorsGroup.playAnimation('opening-door');
+            this.physics.world.removeCollider(this.doorsColider);
+            this.table.disableBody();
+            
+        });
     }
   
     update() {
