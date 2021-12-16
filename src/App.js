@@ -1,16 +1,27 @@
+let excludedPages = [
+    "home",
+    "game",
+    "login",
+    "password-recover",
+    "settings",
+    "sound-settings",
+    "connect-controller",
+    "test-controller",
+]
 var app = new Vue({
     el: '#app',
     data: {
       currentPage: "home",
       menuOpen: "none",
       user: user,
+      "soundSettings": soundSettings2,
       profileInfo: null,
       modalOpen: "none",
       rankingData: null
     },
     watch: {
       currentPage: function (newPage, oldPage) {
-        if (!sessionStorage.getItem("session") && newPage != "home" && newPage != "game" && newPage != "login" && newPage != "password-recover") {
+        if (!sessionStorage.getItem("session") && !excludedPages.includes(newPage)) {
           console.log("no hay sesión");
           this.currentPage = "login-warning"
         } else {
@@ -87,6 +98,21 @@ var app = new Vue({
         })
         .done((data) => {
             console.log(data);
+            if (data.success) {
+                let user = new User(
+                    data.userData.username, 
+                    data.userData.friendsList, 
+                    data.userData.notifications, 
+                    data.userData.completedLevels,
+                    data.userData.favMap,
+                    data.userData.numTrophies
+                )
+                sessionStorage.setItem("session",JSON.stringify(user))
+                this.$root.currentPage="home"
+                this.$root.user = user
+            } else {
+                console.log(data.message);
+            }
         })
         .fail(function(XMLHttpRequest, textStatus, errorThrown) {
             if ( console && console.log ) {

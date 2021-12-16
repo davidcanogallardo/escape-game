@@ -6,10 +6,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             if(isset($_REQUEST['params'])){
                 $data = loginResponse($_REQUEST['params']['user']);
             }
-        } else if($_REQUEST['petition']=='register') {
-            if(isset($_REQUEST['params'])){
-                $data = registerResponse();
-            }
         } else if($_REQUEST['petition']=='recover') {
             if(isset($_REQUEST['params'])){
                 parse_str(file_get_contents("php://input"),$post_vars);
@@ -32,7 +28,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 } elseif($_SERVER['REQUEST_METHOD'] == 'PUT') {
     parse_str(file_get_contents("php://input"),$post_vars);
 
-    if ($post_vars['petition'] == 'register') {
+    if ($post_vars['petition'] == 'recover') {
         $data = recoverPassword($post_vars['params']['email']);
     } else if($post_vars['petition']=='friend-request'){
         $data = friendRequest($post_vars['params']);
@@ -40,6 +36,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $data = sendRequest($post_vars['params']);
     } else if($post_vars['petition']=='ranking'){
         $data = ranking();
+    }else if($post_vars['petition']=='register') {
+
+        $data = registerResponse($post_vars['params']['user']);
+
     }
 
     header('Content-type: application/json; charset=utf-8');
@@ -90,10 +90,18 @@ function loginResponse($name){
     }
 }
 
-function registerResponse(){
+function registerResponse($name){
     $data = [];
     $data['success'] = true;
     $data['message'] = 'Usuario Creado Correctamente';
+    $data['userData'] =  [
+        'username' => $name,
+        'numTrophies' => 0,
+        'favMap' => '',
+        'completedLevels' => [],
+        'friendsList' => [],
+        'notifications' => []         
+    ];
 
     return $data;
 }

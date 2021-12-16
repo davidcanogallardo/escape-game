@@ -7,10 +7,10 @@ var config = {
     default: 'arcade',
     arcade: {
         gravity: { y: 0 },
-        debug: false
+        debug: true
     },
   },zoom: 2.5,
-  scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, SeePass]
+  scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, SeePass, Time, Ui, Prueba]
 
 };
 

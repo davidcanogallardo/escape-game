@@ -13,9 +13,12 @@
     <script src="https://kit.fontawesome.com/b0d71d7fba.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    
+    <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
+
+
     <script src="./classes/user.js"></script>
-    <script src="./src/scripts/petitions.js"></script>
+    <script src="./classes/sound-settings.js"></script>
+    <!-- <script src="./src/scripts/petitions.js"></script> -->
     <script src="./src/scripts/utils.js"></script>
     <!-- <script src="./src/scripts/app.js"></script> -->
     <script src="./src/components/home.js"></script> 
@@ -32,6 +35,7 @@
     <script src="./src/components/settings/settings.js"></script>
     <script src="./src/components/settings/sound-settings.js"></script>
     <script src="./src/components/settings/test-controller.js"></script>
+    <script src="./src/components/waiting-room.js"></script>
     
     
 </head>
@@ -62,7 +66,9 @@
                 </settings>
                 <sound-settings 
                     v-if="currentPage == 'sound-settings'" 
-                    v-on:change-page="currentPage = $event">
+                    v-on:change-page="currentPage = $event"
+                    v-on:update-sound="soundSettings = $event"
+                    :sound="soundSettings">
                 </sound-settings>
                 <connect-controller 
                     v-if="currentPage == 'connect-controller'" 
@@ -94,6 +100,11 @@
                     v-if="currentPage == 'password-recover'" 
                     v-on:change-page="currentPage = $event"
                 ></password-recover>
+                <waiting-room
+                    v-if="currentPage == 'waiting-room'" 
+                    v-on:change-page="currentPage = $event"
+                >
+                </waiting-room>
             </transition>
             
             
@@ -125,6 +136,9 @@
         </div>
     </div>
     <script src="./src/App.js"></script> 
+    <script type="application/javascript" defer src="./demo_game/scenes/Player.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/WallsLayer.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Prueba.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/Titlescreen.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/Gameover.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/Game.js"></script>
@@ -132,6 +146,8 @@
     <script type="application/javascript" defer src="./demo_game/scenes/Pause_scene.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/SeePass.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/EnterPasswordScene.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Time.js"></script>
+    <script type="application/javascript" defer src="./demo_game/scenes/Ui.js"></script>
     <script type="application/javascript" defer src="./demo_game/main.js"></script>
 </body>
 </html>

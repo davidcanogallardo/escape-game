@@ -107,6 +107,7 @@ Vue.component('profile', {
     
     methods: {
         close() {
+            //console.log(user);
             this.$root.closeSession(user.username)
         }
     },

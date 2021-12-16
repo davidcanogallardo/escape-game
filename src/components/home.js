@@ -1,3 +1,5 @@
+//const socket = io("ws://localhost:3000");
+
 Vue.component('home', {
     template: //html
     `             
@@ -13,7 +15,7 @@ Vue.component('home', {
 
         <div id="game"></div>
 
-        <div class="btn play" v-on:click="$emit('change-page','game')">Jugar</div>
+        <div class="btn play" v-on:click="searchGame()">Jugar</div>
 
         <div class="right-menu">
             <div class="icon-container main-icon own-profile-link link" page="profile-page" v-on:click="profile()">
@@ -51,8 +53,15 @@ Vue.component('home', {
             this.$root.getRankingData()
             this.$emit('change-page','ranking')
 
+        },
+        searchGame(){
+            //Cambiar al juego
+            // this.$emit('change-page','waiting-room')
+            this.$emit('change-page','game')
         }
     },
  
 })
+
+//<div class="btn play" v-on:click="$emit('change-page','game')">Jugar</div>
 
