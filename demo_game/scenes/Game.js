@@ -23,8 +23,8 @@ class Game extends Phaser.Scene {
     }
 
     create() {
-        
-    /**************************************Mapa, layers...****************************/
+        /**************************************Mapa, layers...****************************/
+        var that = this;
         this.map = this.make.tilemap({
             key: "map"
         });
@@ -56,7 +56,6 @@ class Game extends Phaser.Scene {
         objectLayer.objects.forEach(object => {
             //Popriedades de cada objeto
             const {x = 0, y = 0, height, width, type, name} =  object;
-            console.log(type);
             switch(type){
                 case 'door':
                     //Cambiar la hitbox de la puerta cerrada
@@ -95,7 +94,7 @@ class Game extends Phaser.Scene {
         //collider para que el personaje con el cofre
         this.physics.add.collider(this.chest, this.player);
         this.chest.body.setSize(this.chest.width*0.5, this.chest.height*0.8);
-        var that = this;
+        
 
         this.physics.add.overlap(this.playerCollider, this.chest, function (player,chest) {
             if(chest.y < player.y){
@@ -105,9 +104,7 @@ class Game extends Phaser.Scene {
             }
 
             if (eKey.isDown) {
-                console.log('show pass chest');
                 that.scene.launch('seepass');
-                // that.scene.pause();
             }
         });
         this.chest.body.immovable = true
@@ -119,7 +116,6 @@ class Game extends Phaser.Scene {
             if (tile.properties.wall == true) {
                 //Quito la propiedad de colisión del tile
                 tile.properties.colides = false
-                // console.log(tile);
                 const x = tile.getCenterX();
                 const y = tile.getCenterY();
 
@@ -157,20 +153,17 @@ class Game extends Phaser.Scene {
         
         // *********************************************puerta****************************************************
         let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-
+        this.canDoPuzzle = true
         this.physics.add.overlap(this.playerCollider, this.table, function (player,table) {
-            
             if(table.y < player.y){
                 that.player.setDepth(10);
             } else {
                 that.player.setDepth(0);
             }
 
-            if (eKey.isDown) {
-                console.log('presiona e');
+            if (eKey.isDown && that.canDoPuzzle) {
                 that.scene.launch('enterPasswordScene');
                 that.scene.pause();
-                
             }
         });
 
@@ -204,8 +197,8 @@ class Game extends Phaser.Scene {
         this.scene.get('enterPasswordScene').events.on('victoria', () => {
             this.doorsGroup.playAnimation('opening-door');
             this.physics.world.removeCollider(this.doorsColider);
-            this.table.disableBody();
-            
+            // this.table.disableBody();
+            that.canDoPuzzle = false
         });
     }
   
