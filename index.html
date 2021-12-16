@@ -36,6 +36,7 @@
     <script src="./src/components/settings/sound-settings.js"></script>
     <script src="./src/components/settings/test-controller.js"></script>
     <script src="./src/components/waiting-room.js"></script>
+    <script src="./src/components/chat.js"></script>
     
     
 </head>
@@ -106,7 +107,10 @@
                 </waiting-room>
             </transition>
             
-            
+            <chat 
+            v-if="modalOpen == 'chat'" >
+        </chat>
+
             <transition name="fade">
                 <invitation
                     v-if="modalOpen == 'invitation'" 
@@ -115,6 +119,7 @@
                     :username="user.username">
                 </invitation>
                 <div class="menu-close slide-link" v-if="menuOpen != 'none'" v-on:click="menuOpen = 'none'"></div>
+
             </transition>
 
             <transition name="slide">

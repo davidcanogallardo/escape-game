@@ -21,7 +21,7 @@ Vue.component('friend-item', {
         },
         invitation() {
           console.log("LOG");
-          this.$root.modalOpen ="invitation";
+          this.$root.modalOpen ="chat";
       }
 
     },

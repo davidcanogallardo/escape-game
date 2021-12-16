@@ -16,7 +16,7 @@ var app = new Vue({
       user: user,
       "soundSettings": soundSettings2,
       profileInfo: null,
-      modalOpen: "none",
+      modalOpen: "chat",
       rankingData: null
     },
     watch: {

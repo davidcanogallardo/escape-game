@@ -1,13 +1,24 @@
-<head><link rel="stylesheet" href="style.css"></head>
-<div class="waitingRoom">
-    <h1>waitingRoom</h1>
-    <br>
-    <p>1 / 2 Players</p>
-    <div class="col-3">
-        <div class="snippet" data-title=".dot-typing">
-          <div class="stage">
-            <div class="dot-typing"></div>
-          </div>
-        </div>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/b0d71d7fba.js" crossorigin="anonymous"></script>
+</head>
+<div class="chat">
+  <div class="chat-head">
+    <p>USER NAME</p>
+    <i class="fas fa-times"></i>
+  </div>
+  <div class="chat-body scrollbar">
+    <div class="msg user">
+      <p>Esto es un ejemplo de mensaje tuyo <span class="time">10:20</span></p>
     </div>
+    <div class="msg friend">
+      <p>Esto es un ejemplo de mensaje de tu amigo <span class="time">10:20</span></p>
+    </div>
+    <div class="msg user">
+      <p>Esto es un ejemplo de mensaje tuyo <span class="time">10:20</span></p>
+    </div>
+  </div>
+  <div class="chat-input">
+    <input type="text" placeholder="Send Message...">
+  </div>
 </div>
