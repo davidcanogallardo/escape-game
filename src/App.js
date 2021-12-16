@@ -1,19 +1,3 @@
-const socket = io("ws://localhost:3000");
-
-socket.on("connect", () => {
-    // either with send()
-    console.log("Client Socket Connected");
-    socket.send("Soy el cliente!");
-    // or with emit() and custom event names
-    //socket.emit("salutations", "Hello!", { "mr": "john" }, Uint8Array.from([1, 2, 3, 4]));
-});
-
-socket.on("matchFound", data => {
-    console.log("Partida Encontrada");
-    app.currentPage = "game";
-    console.log(data);
-})
-
 let excludedPages = [
     "home",
     "game",
@@ -27,7 +11,7 @@ let excludedPages = [
 var app = new Vue({
     el: '#app',
     data: {
-      currentPage: "game",
+      currentPage: "home",
       menuOpen: "none",
       user: user,
       "soundSettings": soundSettings2,
