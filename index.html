@@ -82,7 +82,8 @@
                     v-if="currentPage == 'profile' || currentPage == 'friend'" 
                     v-on:change-page="currentPage = $event"
                     :user="profileInfo"
-                    :page="currentPage">
+                    :page="currentPage"
+                    :changeImg=false>
                 </profile>
                 <trophies 
                     v-if="currentPage == 'trophies'" 

@@ -1,10 +1,84 @@
+Vue.component('change',{
+    template: //html
+    `
+    <div class="container-change" >
+        <div class="close">
+            <i class="fas fa-times"></i>
+        </div>
+        <h2>Elige tu foto de perfil</h2>
+        <div class="change-options">
+            <div class="current-img">
+                <div :class="'current-bg bg-'+currentBG">
+                    <i :class="'fas fa-'+currentIcon+' current-icon color-'+currentIconColor" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="options-img">
+                <h2>Icono</h2>
+                <div class="container-icon-bg">
+
+                    <div class="icon-bg" v-for="item in icons">
+                        <i :class="'fas fa-'+item.icon" aria-hidden="true" v-on:click="currentIcon=item.icon"></i>
+                    </div>
+                </div>
+                <h2>Color del icono</h2>
+                <div class="container-color">
+
+                    <div class="color-icon" v-for="item in colors">
+                        <i :class="'fas fa-user color-'+item.color" aria-hidden="true" v-on:click="currentIconColor=item.color"></i>
+                    </div>
+
+                </div>
+                <h2>Color del fondo</h2>
+                <div class="container-color">
+                    <div v-for="item in colors" :class="'color-bg bg-'+item.color" v-on:click="currentBG=item.color"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="btn blue link" page="main">
+                Guardar
+        </div>
+    </div>
+
+    `,
+    data(){
+        
+        return{
+            currentBG: "white",
+            currentIcon: "user",
+            currentIconColor: "grey",
+
+            icons: [
+                {icon: "user"},
+                {icon: 'angry'},
+                {icon: 'beer'},
+                {icon: 'biohazard'},
+                {icon: 'bomb'},
+            ],
+            colors: [
+                {color: "red"},
+                {color: 'blue'},
+                {color: 'purple'},
+                {color: 'pink'},
+                {color: 'black'},
+            ],
+        }
+    },
+    methods: {
+
+    },
+    //v-on:click="$emit('change-img',false)"
+})
 Vue.component('profile', {
     template: //html
     `             
+    
     <div class="profile">
+    <change v-if="page == 'profile' && changeImg == true" class="change" v-on:change-img="changeImg = $event"></change>
         <h1 id="profile-name">{{user.username}}</h1>
         <div class="container-profile">
-            <div class="icon icon-profile">
+            <div class="icon icon-profile" v-on:click="changeImg = true">
                 <i class="fas fa-user i-profile" aria-hidden="true"></i>
             </div>
             <br>
@@ -18,8 +92,6 @@ Vue.component('profile', {
                     <td id="fav-map" class="center">{{user.favMap}}</td>
                 </tr>
             </tbody></table>
-            
-            
         </div>
         <div v-if="page == 'profile'">
             <div class="btn blue close-sesion" v-on:click="close()">Cerrar sesión</div>
@@ -28,10 +100,11 @@ Vue.component('profile', {
         <div class="btn red volver link" page="main" v-on:click="$emit('change-page','home')">
                 Volver
         </div>
-       
     </div>
+    
     `,  
-    props: ["user", "page"],
+    props: ["user", "page","changeImg"],
+    
     methods: {
         close() {
             this.$root.closeSession(user.username)
