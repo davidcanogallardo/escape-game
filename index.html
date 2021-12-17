@@ -54,7 +54,8 @@
                     v-on:open-menu="menuOpen = $event" 
                     v-on:change-page="currentPage = $event"
                     v-on:update-profile="profileInfo = $event"
-                    :user2="user">
+                    :user2="user"
+                    >
                 </home>
                 <login 
                     v-if="currentPage == 'login'" 
@@ -147,7 +148,7 @@
             </transition>
         </div>
     </div>
-    <script src="./src/App.js"></script> 
+    <script type="module" src="./src/App.js"></script> 
     <script type="application/javascript" defer src="./demo_game/scenes/Player.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/WallsLayer.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/Prueba.js"></script>
