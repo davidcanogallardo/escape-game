@@ -16,8 +16,9 @@ var app = new Vue({
       user: user,
       "soundSettings": soundSettings2,
       profileInfo: null,
-      modalOpen: "chat",
-      rankingData: null
+      modalOpen: "none",
+      rankingData: null,
+      friendChat: null,
     },
     watch: {
       currentPage: function (newPage, oldPage) {
@@ -34,8 +35,9 @@ var app = new Vue({
           console.log("no hay sesión");
           this.currentPage = "login-warning"
         } else {
-          console.log("hay sesión");
-        }
+            this.modalOpen = "none";
+            console.log("hay sesión");
+        } 
       }
     },
     methods: {

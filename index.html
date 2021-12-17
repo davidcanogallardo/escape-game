@@ -111,8 +111,10 @@
             </transition>
             
             <chat 
-            v-if="modalOpen == 'chat'" >
-        </chat>
+                v-if="modalOpen == 'chat'" 
+                v-on:open-modal="modalOpen = $event"
+                :friend="friendChat">
+            </chat>
 
             <transition name="fade">
                 <invitation

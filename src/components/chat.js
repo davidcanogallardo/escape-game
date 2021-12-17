@@ -4,7 +4,7 @@ Vue.component('chat', {
     <div class="chat">
         <div class="chat-head">
             <p>{{friend}}</p>
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times" v-on:click="$emit('open-modal','none')"></i>
         </div>
         <div class="chat-body scrollbar">
 
@@ -17,10 +17,11 @@ Vue.component('chat', {
         </div>
     </div>
     `,
+    props: [
+        "user", "friend"
+    ],
     data(){
         return {
-            user: "Alex",
-            friend: "Oscar",
             message: [
                 {message: "Hola que tal",
                  sender: "user",

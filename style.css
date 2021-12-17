@@ -1112,6 +1112,7 @@ input[type=password], input[type=email], input[type=text]{
 /**************************************INTERFAZ DE CHAT*************************************************/
 .chat{
     display: flex;
+    position: absolute;
     background-color: #FAA942;
     width: 30vw;
     height: 30vw;
@@ -1119,6 +1120,8 @@ input[type=password], input[type=email], input[type=text]{
     flex-direction: column;
     border: 3px solid #68492E;
     z-index: 99999;
+    right: 35%;
+    bottom: 0px;
 }
 
 .chat-head{
