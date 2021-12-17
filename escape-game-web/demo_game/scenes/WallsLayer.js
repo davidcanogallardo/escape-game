@@ -21,7 +21,7 @@ class WallsLayer extends Phaser.Tilemaps.TilemapLayer {
                 //Le pongo tamaño y lo posiciono (setOffset)
                 new_tile.body.setSize(tile.width, tile.height*0.1).setOffset(tile.width-7,tile.height+5)
                 //Añado la colisión al nuevo tile
-                scene.physics.add.collider(scene.player, new_tile)
+                scene.physics.add.collider(scene.playersGroup, new_tile)
 
                 //Lo hago invisible así solo se ve el muro, pero la colision es con el new_tile
                 new_tile.visible = false
@@ -31,7 +31,7 @@ class WallsLayer extends Phaser.Tilemaps.TilemapLayer {
         scene.physics.add.collider(scene.player, this)
         this.setCollisionByProperty({ colides: true })
 
-        scene.physics.add.overlap(scene.player.playerCollider, this.wallGroup, function (player,walls) {
+        scene.physics.add.overlap(scene.playersGroup.playerCollider, this.wallGroup, function (player,walls) {
             if(walls.y < player.y){
                 scene.player.setDepth(10);
             } else {

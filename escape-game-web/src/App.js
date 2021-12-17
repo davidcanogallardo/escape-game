@@ -11,7 +11,14 @@ socket.on("connect", () => {
 socket.on("matchFound", data => {
     console.log("Partida Encontrada");
     app.currentPage = "game";
-    console.log(data);
+
+})
+
+socket.on("matchPlayers", data => {
+    console.log("Me llegan los jugadores");
+    console.log("Data: "+data);
+    var titleScreen = game.scene.getScene("titlescreen");
+    titleScreen.setPlayers(data);
 })
 
 let excludedPages = [
@@ -27,13 +34,13 @@ let excludedPages = [
 var app = new Vue({
     el: '#app',
     data: {
-      currentPage: "game",
+      currentPage: "home",
       menuOpen: "none",
       user: user,
       "soundSettings": soundSettings2,
       profileInfo: null,
       modalOpen: "none",
-      rankingData: null
+      rankingData: null,
     },
     watch: {
       currentPage: function (newPage, oldPage) {

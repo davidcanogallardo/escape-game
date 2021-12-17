@@ -3,6 +3,12 @@ class Game extends Phaser.Scene {
         super("game")
     }
     //map.getLayer("walls").data[5][5].properties?.horitzontalWall
+    init(data){
+        console.log(data);
+        this.playersGroup = data;
+        console.log(this.playersGroup);
+    }
+
     preload() {
         var path = "./demo_game/"
         this.segundos = 0;
@@ -33,8 +39,9 @@ class Game extends Phaser.Scene {
         let objectLayer = this.map.getObjectLayer('objects');
         
         //*****************************************Player**************************************************/
-        this.player = new Player(this, 250, 100, 'player')
-        this.playerCollider = this.player.playerCollider
+        console.log(this.playersGroup);
+        // this.player = new Player(this, 250, 100, 'player')
+        // this.playerCollider = this.player.playerCollider
 
         this.wallsLayer = new WallsLayer(this)
         
@@ -160,6 +167,9 @@ class Game extends Phaser.Scene {
     }
   
     update() {
-        this.player.update()
+        // this.playersGroup.getChildren().forEach(function(sprite) {
+        //     this.children.update();
+        // }, this);
+        console.log(this.playersGroup.getChildren()); 
     }
 }

@@ -17,14 +17,14 @@ class ComunicacionServidor {
             });
             socket.on("startQueue", (data) => {
                 console.log("Cola Iniciada: ");
-                console.log(this.queue.length);
+                console.log("Tamaño de la cola: "+this.queue.length);
                 if(this.queue.length==0){
                     console.log("Añado a la cola");
                     const player = {
                         id: socket.id,
                         userame: data.username,
-                        x: 0,
-                        y: 0
+                        x: 250,
+                        y: 100
                     }
                     socket.join("gameRoom");
                     this.queue.push(player);
@@ -32,19 +32,28 @@ class ComunicacionServidor {
                     const player = {
                         id: socket.id,
                         userame: data.username,
-                        x: 0,
-                        y: 0
+                        x: 200,
+                        y: 100
                     }
                     socket.join("gameRoom");
                     this.queue.push(player);
-                    //this.players.push(this.queue.slice(0,2));
+                    let tempPlayers = this.queue.slice(0,2);
+                    tempPlayers.forEach(element => {
+                        this.players.push(element);
+                        //console.log("Jugador en array jugadores");
+                    });
+                    //console.log("Temp players: "+tempPlayers);
+                    //this.players.push();
                     //console.log("Jugadores: ");
-                    //console.log(this.players);
+                    console.log("Jugadores: "+this.players);
                     this.io.in("gameRoom").emit('matchFound');
+                    this.io.in("gameRoom").emit('matchPlayers', this.players);
+                    this.players = [];
                 }
-                console.log(this.queue);
+                console.log("Tamaño de la cola: "+this.queue.length);
+                //console.log(this.queue);
                 console.log(this.io.sockets.adapter.rooms);
-                console.log(socket.rooms);
+                //console.log(socket.rooms);
             });
             socket.on("disconnect", () => {
                 console.log("Un cliente se ha desconectado")
