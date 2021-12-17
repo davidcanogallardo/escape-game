@@ -1,3 +1,9 @@
+import { i18n } from "./scripts/language.js";
+
+console.log(i18n)
+
+window.i = i18n;
+
 let excludedPages = [
     "home",
     "game",
@@ -9,6 +15,7 @@ let excludedPages = [
     "test-controller",
 ]
 var app = new Vue({
+    i18n,
     el: '#app',
     data: {
       currentPage: "home",

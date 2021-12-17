@@ -4,7 +4,6 @@ Vue.component('home', {
     template: //html
     `       
     <div>   
-        <div v-on:click="getLang()">AAAAAAAAAAAAAAAAAA</div>
         <div class="icon-container settings-btn-container main-icon settings-link link" page="settings-page" v-on:click="$emit('change-page','settings')">
             <i class="fas fa-cog"></i>
         </div>
@@ -16,7 +15,7 @@ Vue.component('home', {
 
         <div id="game"></div>
 
-        <div class="btn play" v-on:click="searchGame()">Jugar</div>
+        <div class="btn play" v-on:click="searchGame()">{{ $t("message.play") }}</div>
 
         <div class="right-menu">
             <div class="icon-container main-icon own-profile-link link" page="profile-page" v-on:click="profile()">
@@ -59,10 +58,6 @@ Vue.component('home', {
             //Cambiar al juego
             // this.$emit('change-page','waiting-room')
             this.$emit('change-page','game')
-        },
-        getLang() {
-            if (navigator.languages != undefined) console.log(navigator.languages[0]);
-            console.log(navigator.languages);
         }
     },
  
