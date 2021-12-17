@@ -68,17 +68,17 @@ h3{
 /*Scrollbar*/
 .scrollbar::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
+	border-radius: 0.2vw;
 	background-color: #F5F5F5;
 }
 
 .scrollbar::-webkit-scrollbar {
-	width: 12px;
+	width: 1vw;
 	background-color: #F5F5F5;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-	border-radius: 10px;
+	border-radius: 0.2vw;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: #68492E;
 }
@@ -287,8 +287,8 @@ body {
     margin-top: 2vh;
 }
 .container-change{
-    border: 4px solid #68492E;
-    border-radius: 10px;
+    border: 5px solid #68492E;
+    border-radius: 2.5vh;
     background-color: #FAA942;
     width: 95%;
 }
@@ -302,22 +302,22 @@ body {
 }
 
 .current-bg{
-    border-radius: 300px;
+    border-radius: 300vh;
     text-align: center;
     align-items: center;
     display: flex;
     justify-content: center;
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-    width: 20vw;
-    height: 20vw;
+    width: 30vw;
+    height: 30vw;
 }
 
 .current-icon{
-    font-size: 14vw;
-    text-shadow: 0px 4px 2px rgb(0 0 0 / 75%);
+    font-size: 21vw;
+    /* text-shadow: 0px 4px 2px rgb(0 0 0 / 75%); */
 }
 .options-img{
-    width: 30vw;
+    width: 35vw;
 }
 
 .container-icon-bg, .container-color{
@@ -328,19 +328,7 @@ body {
     align-items: center;
 }
 
-.icon-bg{
-    background-color: white;
-    border: 2px solid #68492E;
-    border-radius: 5px;
-    width: 5vw;
-    height: 5vw;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-}
-
-.icon-bg:hover, .color-bg:hover{
+.color-icon:hover, .icon-bg:hover{
     cursor: pointer;
 }
 
@@ -349,16 +337,26 @@ body {
     font-size: 4vw;
 }
 
-.color-icon, .color-bg{
+.color-icon, .color-bg, .icon-bg{
     background-color: white;
-    border: 2px solid #68492E;
+    border: 3px solid #68492E;
     border-radius: 5px;
-    width: 5vw;
-    height: 5vw;
+    width: 6vw;
+    height: 6vw;
     display: flex;
     text-align: center;
     align-items: center;
     justify-content: center;
+}
+
+.close{
+    position: absolute;
+    margin-top: 1vh;
+    margin-left: 92vw;
+}
+
+.change-save-btn{
+
 }
 
 .color-icon i{
@@ -406,12 +404,6 @@ body {
 }
 .color-grey{
     color: grey;
-}
-
-.close{
-    position: absolute;
-    margin-top: 1vh;
-    margin-left: 92vw;
 }
 
 /*************************************************************************/
@@ -1116,6 +1108,108 @@ input[type=password], input[type=email], input[type=text]{
 .fa-times{
     cursor: pointer;
 }
+
+/**************************************INTERFAZ DE CHAT*************************************************/
+.chat{
+    display: flex;
+    position: absolute;
+    background-color: #FAA942;
+    width: 30vw;
+    height: 30vw;
+    border-radius: 0.5vw;
+    flex-direction: column;
+    border: 3px solid #68492E;
+    z-index: 99999;
+    right: 35%;
+    bottom: 0px;
+}
+
+.chat-head{
+    display: flex;
+    height: 5vh;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.chat-head *{
+    color: #68492E;
+    margin: 10px;
+}
+
+.chat-head p{
+    font-size: 3vh;
+}
+
+.chat-body{
+    display: flex;
+    flex: 1;
+    background-image: url("./src/images/bg.png");
+    background-size: cover;
+    margin: 0.5vw;
+    border-radius: 0.5vw;
+    flex-direction: column;
+    overflow-y: scroll;
+    padding: 0px 10px 0px 10px;
+}
+
+.chat .msg{
+    font-size: 2vw;
+    width: 100%;
+
+}
+
+.msg p{
+    position: relative;
+    border-radius: 0.5vw;
+    background-color: white;
+    width: 75%;
+    padding: 0.5vw;
+    text-align: left !important;
+    margin: 1vw 0.1vw 0vw 0.1vw;
+}
+
+.user p{
+    float: right;
+}
+
+/* .friend p{
+    float: left;
+} */
+
+.chat-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px 0px 10px 10px;
+    width: 100%;
+}
+
+.chat .btn{
+    font-size: 2vw;
+    padding: 0 1vw;
+}
+
+.chat input{
+    width: 95%;
+    margin-bottom: 5px;
+    height: 3vw; 
+    background-color: rgb(255, 255, 255);
+}
+
+.msg .time{
+    position: absolute;
+    font-size: 1.4vw;
+    right: 4px;
+    bottom: 5px;
+}
+
+.chat input::placeholder{
+    color: #68492E;
+
+}
+
+
 
 /*********************Overlay de invitación a una partida******************************/
 #overlay {
@@ -1880,4 +1974,90 @@ label{
 
 
 */
+
+/************************************Pop Up cambiar imagen perfil*************************************/
+.change{
+    position: absolute;
+    margin-top: 1vh;
+}
+.container-change{
+    border: 1vh solid #68492E;
+    border-radius: 3vh;
+    background-color: #FAA942;
+    width: 95%;
+}
+
+.change-options{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+.current-bg{
+    border-radius: 300vh;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    width: 30vh;
+    height: 30vh;
+}
+
+.current-icon{
+    font-size: 21vh;
+    /* text-shadow: 0px 4px 2px rgb(0 0 0 / 75%); */
+}
+.options-img{
+    width: 40vh;
+}
+
+.container-icon-bg, .container-color{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.color-icon:hover, .icon-bg:hover{
+    cursor: pointer;
+}
+
+.icon-bg i{
+    color: grey;
+    font-size: 4vh;
+}
+
+.color-icon, .color-bg, .icon-bg{
+    background-color: white;
+    border: 0.4vh solid #68492E;
+    border-radius: 1vh;
+    width: 6vh;
+    height: 6vh;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-icon i{
+    font-size: 4vh;
+}
+
+.close{
+    font-size: 24px;
+    position: absolute;
+    margin-top: 1vh;
+    margin-left: 85vh;
+}
+
+.changeSave{
+    width: 25vh !important;
+    font-size: 24px !important;
+}
+
 }
