@@ -1,6 +1,6 @@
 class Player extends Phaser.GameObjects.Sprite{
-    constructor(scene x, y, sprite) {
-        super(scene, x, y, sprite)
+    constructor(scene, id,x, y, sprite) {
+        super(scene, id,x, y, sprite)
         scene.add.existing(this)
         this.setDepth(5)
         this.cursors = scene.input.keyboard.createCursorKeys();
