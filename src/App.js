@@ -19,6 +19,7 @@ var app = new Vue({
       modalOpen: "none",
       rankingData: null,
       friendChat: null,
+      lastMessage: null,
     },
     watch: {
       currentPage: function (newPage, oldPage) {

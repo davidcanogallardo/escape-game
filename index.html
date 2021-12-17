@@ -39,6 +39,7 @@
     <script src="./src/components/settings/test-controller.js"></script>
     <script src="./src/components/waiting-room.js"></script>
     <script src="./src/components/chat.js"></script>
+    <script src="./client.js"></script>
     
     
 </head>
@@ -113,7 +114,9 @@
             <chat 
                 v-if="modalOpen == 'chat'" 
                 v-on:open-modal="modalOpen = $event"
-                :friend="friendChat">
+                :friend="friendChat"
+                :user="user.username"
+                :lastmessage="lastMessage">
             </chat>
 
             <transition name="fade">

@@ -8,34 +8,37 @@ Vue.component('chat', {
         </div>
         <div class="chat-body scrollbar">
 
-            <div :class="'msg '+item.sender" v-for="item in message">
+            <div :class="'msg '+item.sender" v-for="item in messages">
                 <p>{{item.message}} <span class="time">{{item.time}}</span></p>
             </div>
         </div>
         <div class="chat-input">
-            <input type="text" placeholder="Send Message...">
+            <input type="text" v-on:keyup.enter="sendd()" v-model="send" placeholder="Send Message...">
         </div>
     </div>
     `,
     props: [
-        "user", "friend"
+        "user", "friend", "lastmessage"
     ],
     data(){
         return {
-            message: [
-                {message: "Hola que tal",
-                 sender: "user",
-                 time: "10:20"   
-                },
-                {message: "Hola, yo muy bien",
-                    sender: "friend",
-                    time: "10:30"   
-                },
-               {message: "Me alegro! uwu",
-                sender: "user",
-                time: "10:40"   
-                }
-            ]
+            messages: [],
+            send:""
         }
-    }
+    },
+    watch: {
+        lastmessage: function (newM, old) {
+            this.messages.push(newM)
+        }
+    },
+    created() {
+        setReceiver(this.friend)
+        connect()
+    },
+    methods: {
+        sendd() {
+            console.log(this.send);
+            sendMessage(this.send)
+        }
+    },
 })

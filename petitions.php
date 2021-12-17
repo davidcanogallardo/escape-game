@@ -76,7 +76,7 @@ function loginResponse($name){
                     ]
                 ]
             ],
-            'friendsList' => ['David', 'Oscar', 'Adnan'],
+            'friendsList' => ['david', 'oscar', 'adnan','alex','a'],
             'notifications' => ['Luis', 'Jose']         
         ];
     
