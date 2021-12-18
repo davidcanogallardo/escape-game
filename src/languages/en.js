@@ -7,7 +7,7 @@ export default {
     send: "Send",
     trophiesobtained: "Trophies obtained",
     prefmap: "Preferred map",
-    closesession: "Close session",
+    closesession: "Log out",
     seetrophies: "See trophies",
     return: "Return",
     createaccount: "Create Account",
