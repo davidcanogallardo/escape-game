@@ -87,21 +87,21 @@ Vue.component('profile', {
             <br>
             <table class="table-profile">
                 <tbody><tr>
-                    <td class="td-width"><i class="fas fa-trophy i-table" aria-hidden="true"></i> Copas obtenidas</td>
+                    <td class="td-width"><i class="fas fa-trophy i-table" aria-hidden="true"></i> {{ $t("trophiesobtained") }}</td>
                     <td id="total-trophys" class="center">{{user.numTrophies}}</td>
                 </tr>
                 <tr>
-                    <td class="td-width"><i class="fas fa-star i-table" aria-hidden="true"></i> Mapa favorito</td>
+                    <td class="td-width"><i class="fas fa-star i-table" aria-hidden="true"></i> {{ $t("prefmap") }}</td>
                     <td id="fav-map" class="center">{{user.favMap}}</td>
                 </tr>
             </tbody></table>
         </div>
         <div v-if="page == 'profile'">
-            <div class="btn blue close-sesion" v-on:click="close()">Cerrar sesión</div>
-            <div class="btn blue link" page="trophy-page" v-on:click="$emit('change-page','trophies')">Ver trofeos</div>
+            <div class="btn blue close-sesion" v-on:click="close()">{{ $t("closesession") }}</div>
+            <div class="btn blue link" page="trophy-page" v-on:click="$emit('change-page','trophies')">{{ $t("seetrophies") }}</div>
         </div>
         <div class="btn red volver link" page="main" v-on:click="$emit('change-page','home')">
-                Volver
+            {{ $t("return") }}
         </div>
     </div>
     

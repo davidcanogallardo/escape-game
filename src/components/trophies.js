@@ -42,7 +42,7 @@ Vue.component('trophies', {
     template: //html
     `             
     <div class="trophys">
-        <h1>Lista de niveles</h1>
+        <h1>{{ $t("levelslist") }}</h1>
 
         <div class="niveles scrollbar">
             <level
@@ -53,7 +53,7 @@ Vue.component('trophies', {
             
         </div>
 
-        <div class="btn red volver link" page="profile-page" v-on:click="$emit('change-page','profile')">Volver</div>
+        <div class="btn red volver link" page="profile-page" v-on:click="$emit('change-page','profile')">{{ $t("return") }}</div>
 
     </div>
     `, 

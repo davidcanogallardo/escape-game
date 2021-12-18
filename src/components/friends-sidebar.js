@@ -34,7 +34,7 @@ Vue.component('friend', {
     <div class="slide-list-container">
         <div class="slide-header">
             <i class="fas fa-user-friends" aria-hidden="true">
-                <span>Lista de amigos</span>
+                <span>{{ $t("friend_list") }}</span>
             </i>
             <i class="fas fa-times friends-list slide-link" page=".slide-list-container" aria-hidden="true" v-on:click="$emit('open-menu','none')"></i>
         </div>
@@ -48,9 +48,9 @@ Vue.component('friend', {
         </div>
         
         <div class="form-fr-request">
-            Enviar solicitud a:
+            {{ $t("sendsolicitude") }}
             <input type="text" id="user-request" v-model="friend" >
-            <button id="send" class="btn blue send-friend-request" v-on:click="request()"> Enviar</button>
+            <button id="send" class="btn blue send-friend-request" v-on:click="request()"> {{ $t("send") }}</button>
         </div>
     </div>
     `,

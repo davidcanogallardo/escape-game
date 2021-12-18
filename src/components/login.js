@@ -4,46 +4,46 @@ Vue.component('login', {
     <div class="page login-page">  
         <div id="forms-container" >
             <div  class="sign-up-container">
-                <h2 >CREAR CUENTA</h2>
+                <h2 >{{ $t("createaccount") }}</h2>
                 <form id="signup" method="put" >  
                     <label for="email" required="">Email</label>
                     <input type="email" id="register_email" name="mail" v-model="signupInput.mail" required>
-                    <label for="uname">Nombre de usuario</label>
+                    <label for="uname">{{ $t("username") }}</label>
                     <input type="text" id="lname" name="username" v-model="signupInput.username" required>
-                    <label for="password">Contraseña</label>
+                    <label for="password">{{ $t("password") }}</label>
                     <input type="password" id="register_password" name="password" v-model="signupInput.password" required>
-                    <label for="confirm">Repetir contraseña</label>
+                    <label for="confirm">{{ $t("repeatpassword") }}</label>
                     <input type="password" id="confirm" name="password_confirm" v-model="signupInput.password_confirm" required>
 
                     <p v-if="!errorMessageIsEmpty() && this.errorType == 'register'" class="form_error">{{ signupErrorMessage }}</p>
 
-                    <div class=" form-button blue signup-link" v-on:click="signup()">CREAR CUENTA</div>
+                    <div class=" form-button blue signup-link" v-on:click="signup()">{{ $t("createaccount") }}</div>
                 </form>
             </div>
 
             <hr id="form-space" >
 
             <div  class="sign-up-container">
-                <h2 >INICIAR SESIÓN</h2>
+                <h2 >{{ $t("login") }}</h2>
                 <form id="login" method="post" >  
-                    <label for="uname">Nombre de usuario</label>
+                    <label for="uname">{{ $t("username") }}</label>
                     <input type="text" id="login-name" name="username" v-model="loginInput.username" required>
-                    <label for="password">Contraseña</label>
+                    <label for="password">{{ $t("password") }}</label>
                     <input type="password" id="login_password" name="password" v-model="loginInput.password" required>
                     <div class="recover-link link" page="recover-page">
                         <a class="recover-link link" page="recover-page" v-on:click="$emit('change-page','password-recover')">
-                            <b>He olvidado mi contraseña</b>
+                            <b>{{ $t("forgotpassword") }}</b>
                         </a>
                     </div>
                     <p v-if="!errorMessageIsEmpty() && this.errorType == 'login'" class="form_error">{{ loginErrorMessage }}</p>
-                    <div class=" form-button blue login-link" v-on:click="login()">INICIAR SESIÓN</div>
+                    <div class=" form-button blue login-link" v-on:click="login()">{{ $t("login") }}</div>
                 </form>
                 <div class="error"></div>
             </div>
             
         </div>
         <div class="btn red volver settings-link link" page="settings-page" v-on:click="$emit('change-page','home')">
-        Volver
+        {{ $t("return") }}
     </div>
     </div>
 
