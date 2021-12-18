@@ -1,4 +1,4 @@
-import { i18n } from "./scripts/language.js";
+import { i18n } from "./languages/language.js";
 
 console.log(i18n)
 
