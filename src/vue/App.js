@@ -1,4 +1,6 @@
 import { i18n } from "../languages/language.js";
+import {getSessionUser} from "../js/utils.js"
+import { connect, disconnect} from "../js/chat-client.js";
 
 let excludedPages = [
     "home",
@@ -19,8 +21,7 @@ var app = new Vue({
     data: {
       currentPage: "home",
       menuOpen: "none",
-      user: user,
-      "soundSettings": soundSettings2,
+      user: getSessionUser(),
       profileInfo: null,
       modalOpen: "none",
       rankingData: null,
@@ -46,6 +47,11 @@ var app = new Vue({
             console.log("hay sesión");
         } 
       }
+    },
+    mounted() {
+        if (this.$root.user) {
+            connect()
+        }
     },
     methods: {
         loginPetition(form_data) {
@@ -78,6 +84,7 @@ var app = new Vue({
                     sessionStorage.setItem("session",JSON.stringify(user))
                     this.$root.currentPage="home"
                     this.$root.user = user
+                    connect()
                 } else {
                     console.log(data.message);
                 }
@@ -233,6 +240,7 @@ var app = new Vue({
                 this.$root.user = null
                 sessionStorage.clear()
                 this.$root.currentPage="home"
+                disconnect()
             }
         })
         .fail(function(textStatus) {
@@ -328,5 +336,5 @@ var app = new Vue({
     },
 
 })
-
+window.a = app
 export { app } 

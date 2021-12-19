@@ -110,8 +110,8 @@ Vue.component('profile', {
     
     methods: {
         close() {
-            //console.log(user);
-            this.$root.closeSession(user.username)
+            console.log(this.user);
+            this.$root.closeSession(this.user.username)
         }
     },
 })

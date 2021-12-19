@@ -1,35 +1,43 @@
+import { connect } from "./chat-client.js";
 //recover user session
-let sessionUser = JSON.parse(sessionStorage.getItem("session"));
-var user;
-if (sessionUser) {
-  console.log("sesion detectada");
-  user = new User(
-    sessionUser.username,
-    sessionUser.friendsList,
-    sessionUser.notifications,
-    sessionUser.completedLevels,
-    sessionUser.favMap,
-    sessionUser.numTrophies
-  );
-} else {
-  user = null;
-  console.log("no hay sesion");
+function getSessionUser() {
+  let sessionUser = JSON.parse(sessionStorage.getItem("session"));
+  var user;
+  if (sessionUser) {
+    console.log("sesion detectada");
+    user = new User(
+      sessionUser.username,
+      sessionUser.friendsList,
+      sessionUser.notifications,
+      sessionUser.completedLevels,
+      sessionUser.favMap,
+      sessionUser.numTrophies
+    );
+    // connect()
+  } else {
+    user = null;
+    console.log("no hay sesion");
+  }
+  return user;
 }
 
 //recover sound settings
-let sessionSoundSettings = JSON.parse(sessionStorage.getItem("sound-settings"));
-if (sessionSoundSettings) {
-  console.log("settings de sonido");
-  var soundSettings2 = new SoundSettings(
-    sessionSoundSettings.volume,
-    sessionSoundSettings.micVolume,
-    sessionSoundSettings.micSensitivity,
-  );
-} else {
-  var soundSettings2 = new SoundSettings();
-  console.log("no hay settings de sonido ");
+function getSessionSoundConf() {
+  let sessionSoundSettings = JSON.parse(sessionStorage.getItem("sound-settings"));
+  let soundConf
+  if (sessionSoundSettings) {
+    console.log("settings de sonido");
+    soundConf = new SoundSettings(
+      sessionSoundSettings.volume,
+      sessionSoundSettings.micVolume,
+      sessionSoundSettings.micSensitivity,
+    );
+  } else {
+    soundConf = new SoundSettings();
+    console.log("no hay settings de sonido ");
+  }
+  return soundConf
 }
-
 
 function showNotification(message, color) {
   var div = `<div class="notification">` + message + `</div>`;
@@ -49,3 +57,5 @@ function showNotification(message, color) {
       $(".notification").remove();
     });
 }
+
+export {getSessionUser, getSessionSoundConf, showNotification}

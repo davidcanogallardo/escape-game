@@ -1,8 +1,8 @@
 import en from './en.js'
 import es from './es.js' 
 
-console.log(en);
-console.log(es);
+// console.log(en);
+// console.log(es);
 
 export const defaultLocale = 'es'
 

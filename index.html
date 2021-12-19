@@ -18,7 +18,6 @@
     <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
 
     <script src="./src/classes/user.js"></script>
-    <script src="./src/classes/sound-settings.js"></script>
     <script src="./src/vue/components/home.js"></script> 
     <script src="./src/vue/components/friends-sidebar.js"></script> 
     <script src="./src/vue/components/notifications-sidebar.js"></script>
@@ -35,8 +34,9 @@
     <script src="./src/vue/components/settings/test-controller.js"></script>
     <script src="./src/vue/components/waiting-room.js"></script>
     <script type="module" type="application/javascript" src="./src/vue/components/chat.js"></script>
+    <script type="module" type="application/javascript" src="./src/classes/sound-settings.js"></script>
     <script type="module" src="./src/js/chat-client.js"></script>
-    <script src="./src/js/utils.js"></script>
+    <!-- <script src="./src/js/utils.js"></script> -->
     
     
 </head>
@@ -69,8 +69,7 @@
                 <sound-settings 
                     v-if="currentPage == 'sound-settings'" 
                     v-on:change-page="currentPage = $event"
-                    v-on:update-sound="soundSettings = $event"
-                    :sound="soundSettings">
+                    v-on:update-sound="soundSettings = $event">
                 </sound-settings>
                 <connect-controller 
                     v-if="currentPage == 'connect-controller'" 
@@ -146,7 +145,7 @@
         </div>
     </div>
 
-    <script type="module" src="./src/vue/App.js"></script> 
+    <script type="module" src="./src/vue/App.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/Player.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/WallsLayer.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/Prueba.js"></script>

@@ -23,7 +23,7 @@ socket.on("newMessage", data => {
 })
 
 function connect() {
-  socket.auth = { "hola": "sgd" };
+  // socket.auth = { "hola": "sgd" };
   socket.connect();
   sender = app.user.username
   socket.emit("userConnect", sender);
@@ -52,8 +52,12 @@ function sendMessage(text) {
   })
 }
 
+function disconnect() {
+  socket.disconnect()
+}
+
 function append(params) {
   app.lastMessage = params
 }
 
-export { connect, setReceiver, sendMessage }
+export { connect, setReceiver, sendMessage, disconnect }

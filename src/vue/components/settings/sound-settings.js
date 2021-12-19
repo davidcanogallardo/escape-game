@@ -1,3 +1,5 @@
+import {getSessionSoundConf} from "./../../../js/utils"
+
 Vue.component('sound-settings', {
     template: //html
     `             
@@ -52,4 +54,7 @@ Vue.component('sound-settings', {
 
         }
     },
+    created() {
+        this.sound = getSessionSoundConf()
+    }
 })
