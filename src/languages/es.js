@@ -37,5 +37,10 @@ export default {
     synccontroller: "Sincronizar Mandos",
     syncmsg1: "Mandos sincronizados anteriormente",
     syncmsg2: "Nuevos dispositivos",
-    invitation: "te ha invitado a su partida"
+    invitation: "te ha invitado a su partida",
+    choosepic: "Elige tu foto de perfil",
+    icon: "Icono",
+    iconcolor: "Color del icono",
+    iconbkg: "Color del fondo",
+    save: "Guardar"
 }

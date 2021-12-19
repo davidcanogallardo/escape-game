@@ -37,5 +37,11 @@ export default {
     synccontroller: "Sync Controllers",
     syncmsg1: "Controllers synchronized before",
     syncmsg2: "New devices",
-    invitation: "has invited you"
+    invitation: "has invited you",
+    loginErrorMessage: "Request send to ",
+    choosepic: "Choose your profile picture",
+    icon: "Icon",
+    iconcolor: "Icon color",
+    iconbkg: "Background color",
+    save: "Save"
 }
