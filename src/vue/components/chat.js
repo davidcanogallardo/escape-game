@@ -1,3 +1,5 @@
+import {connect, setReceiver, sendMessage} from "./../../js/chat-client.js"
+
 Vue.component('chat', {
     template: //HTML
     `
@@ -37,8 +39,10 @@ Vue.component('chat', {
     },
     methods: {
         sendd() {
-            console.log(this.send);
-            sendMessage(this.send)
+            if (this.send != "") {
+                sendMessage(this.send)
+                this.send = ""
+            }
         }
     },
 })

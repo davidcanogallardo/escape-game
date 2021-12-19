@@ -1,3 +1,5 @@
+import {app} from "../vue/App.js"
+
 const socket = io("ws://localhost:3000", {
   autoConnect: false
 });
@@ -23,7 +25,7 @@ socket.on("newMessage", data => {
 function connect() {
   socket.auth = { "hola": "sgd" };
   socket.connect();
-  sender = this.app.user.username
+  sender = app.user.username
   socket.emit("userConnect", sender);
 }
 
@@ -51,5 +53,7 @@ function sendMessage(text) {
 }
 
 function append(params) {
-  this.app.lastMessage = params
+  app.lastMessage = params
 }
+
+export { connect, setReceiver, sendMessage }

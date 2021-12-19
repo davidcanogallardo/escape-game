@@ -1,8 +1,4 @@
-import { i18n } from "./scripts/language.js";
-
-console.log(i18n)
-
-window.i = i18n;
+import { i18n } from "../js/language.js";
 
 let excludedPages = [
     "home",
@@ -14,6 +10,9 @@ let excludedPages = [
     "connect-controller",
     "test-controller",
 ]
+
+let _url = "./src/backend/petitions.php";
+
 var app = new Vue({
     i18n,
     el: '#app',
@@ -60,7 +59,7 @@ var app = new Vue({
             },
             type: "POST",
             dataType: "json",
-            url: "./petitions.php",
+            url: _url,
         })
         .done(( data, textStatus, jqXHR ) => {
             if ( console && console.log ) {
@@ -329,3 +328,5 @@ var app = new Vue({
     },
 
 })
+
+export { app } 

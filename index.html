@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escape Game</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./src/css/style.css">
     <link rel="shortcut icon" href="./src/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="./src/images/favicon.ico" type="image/x-icon">
     
@@ -18,28 +18,28 @@
     <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
 
 
-    <script src="./classes/user.js"></script>
-    <script src="./classes/sound-settings.js"></script>
+    <script src="./src/classes/user.js"></script>
+    <script src="./src/classes/sound-settings.js"></script>
     <!-- <script src="./src/scripts/petitions.js"></script> -->
-    <script src="./src/scripts/utils.js"></script>
     <!-- <script src="./src/scripts/app.js"></script> -->
-    <script src="./src/components/home.js"></script> 
-    <script src="./src/components/friends-sidebar.js"></script> 
-    <script src="./src/components/notifications-sidebar.js"></script>
-    <script src="./src/components/login-warning.js"></script>
-    <script src="./src/components/login.js"></script>
-    <script src="./src/components/ranking.js"></script>
-    <script src="./src/components/profile.js"></script>
-    <script src="./src/components/trophies.js"></script>
-    <script src="./src/components/invitation.js"></script>
-    <script src="./src/components/password-recover.js"></script>
-    <script src="./src/components/settings/connect-controller.js"></script>
-    <script src="./src/components/settings/settings.js"></script>
-    <script src="./src/components/settings/sound-settings.js"></script>
-    <script src="./src/components/settings/test-controller.js"></script>
-    <script src="./src/components/waiting-room.js"></script>
-    <script src="./src/components/chat.js"></script>
-    <script src="./client.js"></script>
+    <script src="./src/vue/components/home.js"></script> 
+    <script src="./src/vue/components/friends-sidebar.js"></script> 
+    <script src="./src/vue/components/notifications-sidebar.js"></script>
+    <script src="./src/vue/components/login-warning.js"></script>
+    <script src="./src/vue/components/login.js"></script>
+    <script src="./src/vue/components/ranking.js"></script>
+    <script src="./src/vue/components/profile.js"></script>
+    <script src="./src/vue/components/trophies.js"></script>
+    <script src="./src/vue/components/invitation.js"></script>
+    <script src="./src/vue/components/password-recover.js"></script>
+    <script src="./src/vue/components/settings/connect-controller.js"></script>
+    <script src="./src/vue/components/settings/settings.js"></script>
+    <script src="./src/vue/components/settings/sound-settings.js"></script>
+    <script src="./src/vue/components/settings/test-controller.js"></script>
+    <script src="./src/vue/components/waiting-room.js"></script>
+    <script type="module" type="application/javascript" src="./src/vue/components/chat.js"></script>
+    <script type="module" src="./src/js/chat-client.js"></script>
+    <script src="./src/js/utils.js"></script>
     
     
 </head>
@@ -148,7 +148,7 @@
             </transition>
         </div>
     </div>
-    <script type="module" src="./src/App.js"></script> 
+    <script type="module" src="./src/vue/App.js"></script> 
     <script type="application/javascript" defer src="./demo_game/scenes/Player.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/WallsLayer.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/Prueba.js"></script>

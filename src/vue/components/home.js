@@ -62,6 +62,3 @@ Vue.component('home', {
     },
  
 })
-
-//<div class="btn play" v-on:click="$emit('change-page','game')">Jugar</div>
-

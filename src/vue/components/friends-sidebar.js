@@ -7,7 +7,7 @@ Vue.component('friend-item', {
           <i class="fas fa-user" aria-hidden="true" :name="name"></i>
         </div>
         <span :name="name" >{{name}}</span>
-        <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation" v-on:click.stop="invitation();">
+        <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation" v-on:click.stop="chat();">
           <i class="fas fa-user-plus" aria-hidden="true"></i>
         </div>
       </div>
@@ -19,10 +19,12 @@ Vue.component('friend-item', {
           this.$root.getFriendData(this.name)
           this.$emit('change-page','profile')
         },
-        invitation() {
-          console.log("LOG");
-          this.$root.modalOpen ="chat";
-          this.$root.friendChat = this.name;
+        chat() {
+          this.$root.modalOpen = null;
+          this.$nextTick(() => {
+            this.$root.modalOpen ="chat";
+            this.$root.friendChat = this.name;
+          });
       }
 
     },

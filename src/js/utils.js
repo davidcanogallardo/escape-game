@@ -1,8 +1,7 @@
-//recover session
+//recover user session
 let sessionUser = JSON.parse(sessionStorage.getItem("session"));
 var user;
 if (sessionUser) {
-  // if (true) {
   console.log("sesion detectada");
   user = new User(
     sessionUser.username,
@@ -31,7 +30,6 @@ if (sessionSoundSettings) {
   console.log("no hay settings de sonido ");
 }
 
-let _url = "./petitions.php";
 
 function showNotification(message, color) {
   var div = `<div class="notification">` + message + `</div>`;
