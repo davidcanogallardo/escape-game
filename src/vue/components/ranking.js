@@ -8,9 +8,9 @@ Vue.component('ranking-table', {
                 <table>
                     <thead>
                         <tr>
-                            <th>Posición</th>
-                            <th class="name">Nombre</th>
-                            <th>Tiempo</th>
+                            <th>{{ $t("position") }}</th>
+                            <th class="name">{{ $t("name") }}</th>
+                            <th>{{ $t("time") }}</th>
                         </tr>
                     </thead>
                     <tbody
@@ -49,7 +49,7 @@ Vue.component('ranking', {
                 {{name}}{{item}}
             </ranking-table>
         <div class="btn red volver link" page="main" v-on:click="$emit('change-page','home')">
-            Volver
+            {{ $t("return") }}
         </div>
 
     </div>

@@ -15,7 +15,7 @@ Vue.component('home', {
 
         <div id="game"></div>
 
-        <div class="btn play" v-on:click="searchGame()">{{ $t("message.play") }}</div>
+        <div class="btn play" v-on:click="searchGame()">{{ $t("play") }}</div>
 
         <div class="right-menu">
             <div class="icon-container main-icon own-profile-link link" page="profile-page" v-on:click="profile()">

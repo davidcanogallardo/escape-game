@@ -2,11 +2,11 @@ Vue.component('connect-controller', {
     template: //html
     `             
     <div class="sincronizar_mando">
-        <h1>Sincronizar Mando</h1>
+        <h1>{{ $t("synccontroller") }}</h1>
 
         <div class="sinc_mand_cont">
             <div class="mandos_sincronizados">
-                <p >Mandos sincronizados anteriormente</p>
+                <p >{{ $t("syncmsg1") }}</p>
 
             <div class="mando selected">
                 <i class="fas fa-gamepad" aria-hidden="true" ></i>
@@ -18,7 +18,7 @@ Vue.component('connect-controller', {
             </div>
             </div>
             <div class="new_mandos">
-                <p >Nuevos dispositivos</p>
+                <p >{{ $t("syncmsg2") }}</p>
             <div class="nuevos_dispositivos scrollbar">
                 <div class="mando">
                     <i class="fas fa-gamepad" aria-hidden="true"></i>
@@ -74,7 +74,7 @@ Vue.component('connect-controller', {
         </div>
 
         <div class="btn red volver settings-link link" page="settings-page" v-on:click="$emit('change-page','settings')">
-            Volver
+            {{ $t("return") }}
         </div>
     </div>
     `, 

@@ -29,7 +29,7 @@ Vue.component('notification', {
     <div class="notification-container">
         <div class="slide-header">
             <i class="fas fa-bell" aria-hidden="true">
-                <span>Notificaciones</span>
+                <span>{{ $t("notifications") }}</span>
             </i>
             
             <i class="fas fa-times notificacion-list slide-link" page=".notification-container" aria-hidden="true" v-on:click="$emit('open-menu','none')"></i>
