@@ -1144,7 +1144,7 @@ input[type=password], input[type=email], input[type=text]{
 .chat-body{
     display: flex;
     flex: 1;
-    background-image: url("./src/images/bg.png");
+    background-image: url("./../images/bg.png");
     background-size: cover;
     margin: 0.5vw;
     border-radius: 0.5vw;

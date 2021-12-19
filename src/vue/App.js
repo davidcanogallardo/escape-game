@@ -1,4 +1,4 @@
-import { i18n } from "../js/language.js";
+import { i18n } from "../languages/language.js";
 
 let excludedPages = [
     "home",
@@ -146,7 +146,7 @@ var app = new Vue({
         .done(function(data) {
             console.log(data);
         })
-        .fail(function(textStatus) {
+        .fail( function(textStatus) {
             if ( console && console.log ) {
                 console.log( "La solicitud ha fallado: " +  textStatus);
             }
