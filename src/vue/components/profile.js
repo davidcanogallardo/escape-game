@@ -6,24 +6,24 @@ Vue.component('change',{
             <i class="fas fa-times"></i>
         </div>
 
-        <h2>Elige tu foto de perfil</h2>
+        <h2>{{ $t("choosepic") }}</h2>
         <div class="change-options">
             <div class="current-img">
                 <div :class="'current-bg bg-'+currentBG">
                     <i :class="'fas fa-'+currentIcon+' current-icon color-'+currentIconColor" aria-hidden="true"></i>
                 </div>
                 <br>
-                <div class="btn blue link changeSave" v-on:click="logs()">Guardar</div>
+                <div class="btn blue link changeSave" v-on:click="logs()">{{ $t("save") }}</div>
             </div>
 
             <div class="options-img">
-                <h2>Icono</h2>
+                <h2>{{ $t("icon") }}</h2>
                 <div class="container-icon-bg">
                     <div class="icon-bg" v-for="item in icons">
                         <i :class="'fas fa-'+item.icon" aria-hidden="true" v-on:click="currentIcon=item.icon"></i>
                     </div>
                 </div>
-                <h2>Color del icono</h2>
+                <h2>{{ $t("iconcolor") }}</h2>
                 <div class="container-color">
 
                     <div class="color-icon" v-for="item in colors">
@@ -31,7 +31,7 @@ Vue.component('change',{
                     </div>
 
                 </div>
-                <h2>Color del fondo</h2>
+                <h2>{{ $t("iconbkg") }}</h2>
                 <div class="container-color">
                     <div v-for="item in colors" :class="'color-bg bg-'+item.color" v-on:click="currentBG=item.color"></div>
                 </div>
