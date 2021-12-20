@@ -17,17 +17,6 @@ Vue.component('change',{
             </div>
 
             <div class="options-img">
-<<<<<<< HEAD:src/components/profile.js
-
-                <h2>Icono</h2>
-                <div class="container-color">
-                    <div class="icon-bg" v-for="item in icons" v-on:click="currentIcon=item.icon">
-                        <i :class="'fas fa-'+item.icon" aria-hidden="true" ></i>
-                    </div>
-                </div>
-
-                <h2>Color del icono</h2>
-=======
                 <h2>{{ $t("icon") }}</h2>
                 <div class="container-icon-bg">
                     <div class="icon-bg" v-for="item in icons">
@@ -35,18 +24,12 @@ Vue.component('change',{
                     </div>
                 </div>
                 <h2>{{ $t("iconcolor") }}</h2>
->>>>>>> 96b4c785b538aa02574e523c124f607639da0738:src/vue/components/profile.js
                 <div class="container-color">
                     <div class="color-icon" v-for="item in colors" v-on:click="changeIC(item.color)">
                         <i :class="'fas fa-user color-'+item.color" aria-hidden="true" ></i>
                     </div>
                 </div>
-<<<<<<< HEAD:src/components/profile.js
-
-                <h2>Color del fondo</h2>
-=======
                 <h2>{{ $t("iconbkg") }}</h2>
->>>>>>> 96b4c785b538aa02574e523c124f607639da0738:src/vue/components/profile.js
                 <div class="container-color">
                     <div v-for="item in colors" :class="'color-bg bg-'+item.color" v-on:click="changeBG(item.color)"></div>
                 </div>
