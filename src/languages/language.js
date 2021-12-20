@@ -9,5 +9,5 @@ var i18n = new VueI18n({
   messages
 })
 
-
+window.i = i18n
 export { i18n };

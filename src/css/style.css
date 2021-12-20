@@ -844,7 +844,7 @@ input[type=password], input[type=email], input[type=text]{
 .play:hover{
     color: #EFDEC3;
     background-color: #aa0000;
-    border: 10px solid #700000;
+    border: 1vw solid #700000;
     text-shadow: 0px 0px 0px rgb(0 0 0 / 50%);
     box-shadow: 0px 0px 0px rgb(0 0 0 / 25%);
 }
@@ -852,7 +852,7 @@ input[type=password], input[type=email], input[type=text]{
 .play{
     color: #EFDEC3;
     background-color: #14448d;
-    border: 10px solid #002966;
+    border: 1vw solid #002966;
     text-shadow: 0px 3px 1px rgb(0 0 0 / 50%);
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
     margin: 0 auto;
@@ -1120,7 +1120,7 @@ input[type=password], input[type=email], input[type=text]{
     height: 30vw;
     border-radius: 0.5vw;
     flex-direction: column;
-    border: 3px solid #68492E;
+    border: 0.3vw solid #68492E;
     z-index: 99999;
     right: 35%;
     bottom: 0px;
@@ -2072,4 +2072,18 @@ label{
     font-size: 24px !important;
 }
 
+}
+
+/************************************Ajustes idiomas*************************************/
+
+.change_language{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.change_language_options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
