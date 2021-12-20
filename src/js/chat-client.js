@@ -1,8 +1,11 @@
 import {app} from "../vue/App.js"
 
+console.log("before connecting");
 const socket = io("ws://localhost:3000", {
   autoConnect: false
 });
+
+
 let sender = ""
 let receiver = ""
 
@@ -36,6 +39,8 @@ socket.on("newMessage", data => {
 })
 
 function connect() {
+  console.log("fdffdf");
+  console.log("=>"+socket);
   // socket.auth = { "hola": "sgd" };
   socket.connect();
   sender = app.user.username

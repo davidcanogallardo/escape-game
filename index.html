@@ -30,15 +30,12 @@
     <script src="./src/vue/components/password-recover.js"></script>
     <script src="./src/vue/components/settings/connect-controller.js"></script>
     <script src="./src/vue/components/settings/settings.js"></script>
-    <script src="./src/vue/components/settings/sound-settings.js"></script>
+    <script  type="module" src="./src/vue/components/settings/sound-settings.js"></script>
     <script src="./src/vue/components/settings/test-controller.js"></script>
+    <script src="./src/vue/components/settings/change-language.js"></script>
     <script src="./src/vue/components/waiting-room.js"></script>
     <script type="module" type="application/javascript" src="./src/vue/components/chat.js"></script>
-    <script type="module" type="application/javascript" src="./src/classes/sound-settings.js"></script>
-    <script type="module" src="./src/js/chat-client.js"></script>
-    <!-- <script src="./src/js/utils.js"></script> -->
-    
-    
+    <script type="application/javascript" src="./src/classes/sound-settings.js"></script>
 </head>
 <body>
     <div id="app">
@@ -62,14 +59,14 @@
                     v-if="currentPage == 'login-warning'" 
                     v-on:change-page="currentPage = $event">
                 </login-warning>
-                <settings 
+                <settings
                     v-if="currentPage == 'settings'" 
                     v-on:change-page="currentPage = $event">
                 </settings>
                 <sound-settings 
                     v-if="currentPage == 'sound-settings'" 
                     v-on:change-page="currentPage = $event"
-                    v-on:update-sound="soundSettings = $event">
+                >
                 </sound-settings>
                 <connect-controller 
                     v-if="currentPage == 'connect-controller'" 
@@ -79,6 +76,10 @@
                     v-if="currentPage == 'test-controller'" 
                     v-on:change-page="currentPage = $event">
                 </test-controller>
+                <change-language
+                    v-if="currentPage == 'change-language'" 
+                    v-on:change-page="currentPage = $event">
+                </change-language>
                 <ranking 
                     v-if="currentPage == 'ranking'" 
                     v-on:change-page="currentPage = $event"
