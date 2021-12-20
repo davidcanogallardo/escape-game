@@ -79,7 +79,8 @@ var app = new Vue({
                         data.userData.notifications, 
                         data.userData.completedLevels,
                         data.userData.favMap,
-                        data.userData.numTrophies
+                        data.userData.numTrophies,
+                        data.userData.profileImg
                     )
                     sessionStorage.setItem("session",JSON.stringify(user))
                     this.$root.currentPage="home"
@@ -121,7 +122,8 @@ var app = new Vue({
                     data.userData.notifications, 
                     data.userData.completedLevels,
                     data.userData.favMap,
-                    data.userData.numTrophies
+                    data.userData.numTrophies,
+                    data.userData.profileImg
                 )
                 sessionStorage.setItem("session",JSON.stringify(user))
                 this.$root.currentPage="home"
@@ -330,8 +332,32 @@ var app = new Vue({
                 }
             });
         },
-        userUpdate(user){
-            
+        updateUser(user){
+            $.ajax({
+                data: {
+                    "petition" : "updateUser",
+                    "params" : {
+                        "user" : user,
+                    }
+                },
+                type: "PUT",
+                dataType: "json",
+                url: _url,
+            })
+            .done(data => {
+                if (data.success) {
+                    console.log("Cambios en usuario aplicados");
+                    console.log(data);
+                    this.user=user
+                    sessionStorage.setItem("session", JSON.stringify(this.$root.user))
+                }
+            })
+            .fail(function(textStatus) {
+                if ( console && console.log ) {
+                    console.log("No se han actualizado los cambios");
+                    console.log(textStatus);
+                }
+            });
         }
     },
 

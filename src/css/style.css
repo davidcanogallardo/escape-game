@@ -203,10 +203,6 @@ body {
     cursor: pointer;
 }
 
-.icon i{
-    color: #EFDEC3;
-    text-shadow: 0px 3px 1px rgb(0 0 0 / 50%);
-}
 
 .icon-small{
     width: 6vw;

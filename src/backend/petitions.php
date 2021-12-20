@@ -40,6 +40,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $data = registerResponse($post_vars['params']['user']);
 
+    }else if ($post_vars['petition']=='updateUser') {
+        $data = updateProfile($post_vars['params']['user']);
     }
 
     header('Content-type: application/json; charset=utf-8');
@@ -56,6 +58,11 @@ function loginResponse($name){
             'username' => $name,
             'numTrophies' => 5,
             'favMap' => 'pisosPicados',
+            'profileImg' =>[
+                'icon'=>'user',
+                'iconColor'=>'grey',
+                'iconBG'=>'white'
+            ],
             'completedLevels' => [
                  [
                     'name' => 'pisos Picodos',
@@ -77,7 +84,8 @@ function loginResponse($name){
                 ]
             ],
             'friendsList' => ['david', 'oscar', 'adnan','alex','a'],
-            'notifications' => ['Luis', 'Jose']         
+            'notifications' => ['Luis', 'Jose'],
+                 
         ];
     
         return $data;
@@ -170,6 +178,14 @@ function closeSession($params) {
     $data['success'] = true;
     $data['message'] = 'Todo ha ido bien.';
     $data["params"] = $params;
+
+    return $data;
+}
+function updateProfile($user){
+    $data = [];
+    $data['success'] = true;
+    $data['message'] = 'Cambios actualizados.';
+    $data["user"] = $user;
 
     return $data;
 }
