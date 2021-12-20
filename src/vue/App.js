@@ -11,6 +11,7 @@ let excludedPages = [
     "sound-settings",
     "connect-controller",
     "test-controller",
+    "change-language"
 ]
 
 let _url = "./src/backend/petitions.php";
