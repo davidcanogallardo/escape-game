@@ -17,23 +17,24 @@ Vue.component('change',{
             </div>
 
             <div class="options-img">
+
                 <h2>Icono</h2>
-                <div class="container-icon-bg">
-                    <div class="icon-bg" v-for="item in icons">
-                        <i :class="'fas fa-'+item.icon" aria-hidden="true" v-on:click="currentIcon=item.icon"></i>
+                <div class="container-color">
+                    <div class="icon-bg" v-for="item in icons" v-on:click="currentIcon=item.icon">
+                        <i :class="'fas fa-'+item.icon" aria-hidden="true" ></i>
                     </div>
                 </div>
+
                 <h2>Color del icono</h2>
                 <div class="container-color">
-
-                    <div class="color-icon" v-for="item in colors">
-                        <i :class="'fas fa-user color-'+item.color" aria-hidden="true" v-on:click="currentIconColor=item.color"></i>
+                    <div class="color-icon" v-for="item in colors" v-on:click="changeIC(item.color)">
+                        <i :class="'fas fa-user color-'+item.color" aria-hidden="true" ></i>
                     </div>
-
                 </div>
+
                 <h2>Color del fondo</h2>
                 <div class="container-color">
-                    <div v-for="item in colors" :class="'color-bg bg-'+item.color" v-on:click="currentBG=item.color"></div>
+                    <div v-for="item in colors" :class="'color-bg bg-'+item.color" v-on:click="changeBG(item.color)"></div>
                 </div>
                 <br>
             </div>
@@ -49,14 +50,14 @@ Vue.component('change',{
             currentIconColor: "grey",
 
             icons: [
-                {icon: "user"},
+                {icon: 'user'},
                 {icon: 'angry'},
                 {icon: 'beer'},
                 {icon: 'biohazard'},
                 {icon: 'bomb'},
             ],
             colors: [
-                {color: "red"},
+                {color: 'red'},
                 {color: 'blue'},
                 {color: 'purple'},
                 {color: 'pink'},
@@ -65,6 +66,16 @@ Vue.component('change',{
         }
     },
     methods: {
+        changeBG(color){
+            if (this.currentIconColor!=color) {
+                this.currentBG=color;
+            }
+        },
+        changeIC(color){
+            if (this.currentBG!=color) {
+                this.currentIconColor=color;
+            }
+        },
         logs(){
             console.log(this.currentBG)
             console.log(this.currentIcon)

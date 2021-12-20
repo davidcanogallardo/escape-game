@@ -291,6 +291,7 @@ body {
     border-radius: 2.5vh;
     background-color: #FAA942;
     width: 95%;
+    height: 52vw;
 }
 
 .change-options{
@@ -320,16 +321,20 @@ body {
     width: 35vw;
 }
 
-.container-icon-bg, .container-color{
+.container-color{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    height: 9vw;
 }
 
-.color-icon:hover, .icon-bg:hover{
+.color-icon:hover, .icon-bg:hover, .color-bg:hover{
     cursor: pointer;
+    width: 8vw;
+    height: 8vw;
+    font-size: 6vw;
 }
 
 .icon-bg i{
@@ -355,8 +360,8 @@ body {
     margin-left: 92vw;
 }
 
-.change-save-btn{
-
+.changeSave{
+    border-radius: 1vw !important;
 }
 
 .color-icon i{
@@ -2020,11 +2025,6 @@ label{
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-}
-
-
-.color-icon:hover, .icon-bg:hover{
-    cursor: pointer;
 }
 
 .icon-bg i{
