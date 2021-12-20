@@ -48,11 +48,14 @@ var app = new Vue({
         } 
       }
     },
-    mounted() {
-        if (this.$root.user) {
-            connect()
-        }
-    },
+    // mounted() {
+    //     if (this.user) {
+    //         console.log("before connect!");
+    //         connect()
+    //         console.log("after connect!");
+
+    //     }
+    // },
     methods: {
         loginPetition(form_data) {
         $.ajax({
