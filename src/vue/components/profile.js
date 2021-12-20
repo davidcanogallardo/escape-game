@@ -13,7 +13,7 @@ Vue.component('change',{
                     <i :class="'fas fa-'+currentIcon+' current-icon color-'+currentIconColor" aria-hidden="true"></i>
                 </div>
                 <br>
-                <div class="btn blue link changeSave" v-on:click="saveChanges()">{{ $t("save") }}</div>
+                <div class="btn blue link changeSave" v-on:click="saveChanges();  $emit('change-img', false);">{{ $t("save") }}</div>
             </div>
 
             <div class="options-img">
@@ -44,9 +44,9 @@ Vue.component('change',{
     `,
     data(){
         return{
-            currentBG: 'white',
-            currentIcon: 'user',
-            currentIconColor: 'grey',
+            currentBG: this.$root.user.profileImg.currentBG,
+            currentIcon: this.$root.user.profileImg.currentIcon,
+            currentIconColor: this.$root.user.profileImg.currentIconColor,
 
             icons: [
                 {icon: 'user'},
@@ -103,8 +103,8 @@ Vue.component('profile', {
     <change v-if="page == 'profile' && changeImg == true" class="change" v-on:change-img="changeImg = $event"></change>
         <h1 id="profile-name">{{user.username}}</h1>
         <div class="container-profile">
-            <div :class="'icon icon-profile bg-'+currentBG" v-on:click="changeImg = true">
-                <i :class="'fas fa-'+currentIcon+' i-profile color-'+currentIconColor" aria-hidden="true"></i>
+            <div :class="'icon icon-profile '+currentBG"v-on:click="changeImg = true">
+                <i :class="'i-profile '+currentIcon+' '+currentIconColor" aria-hidden="true"></i>
             </div>
             <br>
             <table class="table-profile">
@@ -130,9 +130,9 @@ Vue.component('profile', {
     `, 
     data(){
         return{
-            currentBG: this.$root.user.profileImg.currentBG,
-            currentIcon: this.$root.user.profileImg.currentIcon,
-            currentIconColor: this.$root.user.profileImg.currentIconColor
+            currentBG: 'bg-'+this.$root.user.profileImg.currentBG,
+            currentIcon: 'fas fa-'+this.$root.user.profileImg.currentIcon,
+            currentIconColor: 'color-'+this.$root.user.profileImg.currentIconColor
         }
     },
     props: ["user", "page","changeImg"],
@@ -140,7 +140,7 @@ Vue.component('profile', {
     methods: {
         close() {
             console.log(this.user);
-            //this.$root.closeSession(this.user.username)
+            this.$root.closeSession(this.user.username)
         }
     },
 })
