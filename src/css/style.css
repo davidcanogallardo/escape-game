@@ -203,10 +203,6 @@ body {
     cursor: pointer;
 }
 
-.icon i{
-    color: #EFDEC3;
-    text-shadow: 0px 3px 1px rgb(0 0 0 / 50%);
-}
 
 .icon-small{
     width: 6vw;
@@ -331,8 +327,6 @@ body {
     height: 9vw;
 }
 
-
-
 .icon-bg i{
     color: grey;
     font-size: 4vw;
@@ -352,8 +346,8 @@ body {
 
 .color-icon:hover, .icon-bg:hover, .color-bg:hover{
     cursor: pointer;
-    width: 8vw;
-    height: 8vw;
+    width: 7vw;
+    height: 7vw;
     font-size: 6vw;
 }
 
@@ -850,7 +844,7 @@ input[type=password], input[type=email], input[type=text]{
 .play:hover{
     color: #EFDEC3;
     background-color: #aa0000;
-    border: 10px solid #700000;
+    border: 1vw solid #700000;
     text-shadow: 0px 0px 0px rgb(0 0 0 / 50%);
     box-shadow: 0px 0px 0px rgb(0 0 0 / 25%);
 }
@@ -858,7 +852,7 @@ input[type=password], input[type=email], input[type=text]{
 .play{
     color: #EFDEC3;
     background-color: #14448d;
-    border: 10px solid #002966;
+    border: 1vw solid #002966;
     text-shadow: 0px 3px 1px rgb(0 0 0 / 50%);
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
     margin: 0 auto;
@@ -1126,7 +1120,7 @@ input[type=password], input[type=email], input[type=text]{
     height: 30vw;
     border-radius: 0.5vw;
     flex-direction: column;
-    border: 3px solid #68492E;
+    border: 0.3vw solid #68492E;
     z-index: 99999;
     right: 35%;
     bottom: 0px;
@@ -1995,6 +1989,14 @@ label{
     width: 95%;
 }
 
+.container-change{
+    border: 0.5vh solid #68492E;
+    border-radius: 2.5vh;
+    background-color: #FAA942;
+    width: 95%;
+    height: 90vw;
+}
+
 .change-options{
     display: flex;
     align-items: center;
@@ -2022,17 +2024,19 @@ label{
     width: 40vh;
 }
 
-.container-icon-bg, .container-color{
+.container-color{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    height: 12vw;
 }
-
-
-.color-icon:hover, .icon-bg:hover{
+.color-icon:hover, .icon-bg:hover, .color-bg:hover{
     cursor: pointer;
+    width: 7vh;
+    height: 7vh;
+    font-size: 6vh;
 }
 
 .icon-bg i{
@@ -2068,4 +2072,18 @@ label{
     font-size: 24px !important;
 }
 
+}
+
+/************************************Ajustes idiomas*************************************/
+
+.change_language{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.change_language_options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

@@ -32,6 +32,7 @@
     <script src="./src/vue/components/settings/settings.js"></script>
     <script  type="module" src="./src/vue/components/settings/sound-settings.js"></script>
     <script src="./src/vue/components/settings/test-controller.js"></script>
+    <script src="./src/vue/components/settings/change-language.js"></script>
     <script src="./src/vue/components/waiting-room.js"></script>
     <script type="module" type="application/javascript" src="./src/vue/components/chat.js"></script>
     <script type="application/javascript" src="./src/classes/sound-settings.js"></script>
@@ -75,6 +76,10 @@
                     v-if="currentPage == 'test-controller'" 
                     v-on:change-page="currentPage = $event">
                 </test-controller>
+                <change-language
+                    v-if="currentPage == 'change-language'" 
+                    v-on:change-page="currentPage = $event">
+                </change-language>
                 <ranking 
                     v-if="currentPage == 'ranking'" 
                     v-on:change-page="currentPage = $event"

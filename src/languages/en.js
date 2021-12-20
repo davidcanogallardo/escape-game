@@ -43,5 +43,9 @@ export default {
     icon: "Icon",
     iconcolor: "Icon color",
     iconbkg: "Background color",
-    save: "Save"
+    save: "Save",
+    language: "Languages",
+    spanish: "Spanish",
+    english: "English",
+    changelanguage: "Change Language"
 }

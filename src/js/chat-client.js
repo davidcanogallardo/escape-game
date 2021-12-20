@@ -31,7 +31,7 @@ function connect() {
   // socket.auth = { "hola": "sgd" };
   socket.connect();
   sender = app.user.username
-  socket.emit("userConnect", sender);
+  socket.emit("chatUserConnect", sender);
 }
 
 function setReceiver(name) {
@@ -41,7 +41,7 @@ function setReceiver(name) {
 function sendMessage(text) {
   console.log(receiver+" ...--------");
   let messagee = text;
-  socket.emit("sendMessage",{"users": {sender, receiver}, "message": messagee}, (response) => {
+  socket.emit("sendChatMessage",{"users": {sender, receiver}, "message": messagee}, (response) => {
     if (response.success) {
       console.log("mensaje enviado");
       console.log(messagee);
