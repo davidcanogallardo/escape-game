@@ -10,8 +10,9 @@ Vue.component('chat', {
         </div>
         <div class="chat-body scrollbar">
 
-            <div :class="'msg '+item.sender" v-for="item in messages">
-                <p>{{item.message}} <span class="time">{{item.time}}</span></p>
+            <div id="data" :class="'msg '+item.sender" v-for="item in messages">
+                <div class="textMessage">{{item.message}}</div>
+                <span class="time">{{item.time}}</span>
             </div>
         </div>
         <div class="chat-input">
@@ -45,4 +46,4 @@ Vue.component('chat', {
             }
         }
     },
-})
+});

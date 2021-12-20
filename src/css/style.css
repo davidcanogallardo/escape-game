@@ -1156,23 +1156,24 @@ input[type=password], input[type=email], input[type=text]{
 }
 
 .chat .msg{
+    position: relative;
     font-size: 2vw;
     width: 100%;
-
 }
 
-.msg p{
-    position: relative;
+.msg .textMessage{
     border-radius: 0.5vw;
     background-color: white;
     width: 75%;
     padding: 0.5vw;
     text-align: left !important;
     margin: 1vw 0.1vw 0vw 0.1vw;
+    word-wrap: break-word;
 }
 
-.user p{
+.user .textMessage{
     float: right;
+    height: auto;
 }
 
 /* .friend p{
@@ -1768,6 +1769,29 @@ label{
 
     .play {
         font-size: 8.5vw;
+    }
+
+    .chat{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        right: 0px;
+        bottom: 0px;
+    }
+
+    .chat .msg{
+        font-size: 5vw;
+    }
+
+    .msg p{
+        width: 30%;
+        padding: 0.5vw;
+        text-align: left !important;
+        margin: 1vw 0.1vw 0vw 0.1vw;
+    }
+
+    .msg .time{
+        font-size: 1.5vw;
     }
 
     /************************************MAIN*************************************/

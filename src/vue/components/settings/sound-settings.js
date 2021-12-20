@@ -1,4 +1,4 @@
-import {getSessionSoundConf} from "./../../../js/utils"
+import {getSessionSoundConf} from "./../../../js/utils.js"
 
 Vue.component('sound-settings', {
     template: //html
@@ -50,11 +50,11 @@ Vue.component('sound-settings', {
     methods: {
         updateSound() {
             let soundSettings = new SoundSettings($("#general-volume").val(), $("#mic-volume").val(), $("#mic-sensitivity").val())
-            this.$emit('update-sound',soundSettings)
-
+            // this.$emit('update-sound',soundSettings)
+            sessionStorage.setItem("sound-settings", JSON.stringify(soundSettings))
         }
     },
-    created() {
+    mounted() {
         this.sound = getSessionSoundConf()
     }
 })
