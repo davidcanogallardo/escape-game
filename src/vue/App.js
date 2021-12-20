@@ -49,11 +49,9 @@ var app = new Vue({
         } 
       }
     },
-    // mounted() {
-    //     if (this.$root.user) {
-    //         connect()
-    //     }
-    // },
+    mounted() {
+        this._i18n.locale = this.user.language;
+    },
     methods: {
         loginPetition(form_data) {
         $.ajax({

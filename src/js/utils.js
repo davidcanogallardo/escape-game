@@ -12,7 +12,8 @@ function getSessionUser() {
       sessionUser.completedLevels,
       sessionUser.favMap,
       sessionUser.numTrophies,
-      sessionUser.profileImg
+      sessionUser.profileImg,
+      sessionUser.language
     );
     // connect()
   } else {
