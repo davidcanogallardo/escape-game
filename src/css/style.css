@@ -331,8 +331,6 @@ body {
     height: 9vw;
 }
 
-
-
 .icon-bg i{
     color: grey;
     font-size: 4vw;
@@ -352,8 +350,8 @@ body {
 
 .color-icon:hover, .icon-bg:hover, .color-bg:hover{
     cursor: pointer;
-    width: 8vw;
-    height: 8vw;
+    width: 7vw;
+    height: 7vw;
     font-size: 6vw;
 }
 
@@ -1995,6 +1993,14 @@ label{
     width: 95%;
 }
 
+.container-change{
+    border: 0.5vh solid #68492E;
+    border-radius: 2.5vh;
+    background-color: #FAA942;
+    width: 95%;
+    height: 90vw;
+}
+
 .change-options{
     display: flex;
     align-items: center;
@@ -2022,17 +2028,19 @@ label{
     width: 40vh;
 }
 
-.container-icon-bg, .container-color{
+.container-color{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    height: 12vw;
 }
-
-
-.color-icon:hover, .icon-bg:hover{
+.color-icon:hover, .icon-bg:hover, .color-bg:hover{
     cursor: pointer;
+    width: 7vh;
+    height: 7vh;
+    font-size: 6vh;
 }
 
 .icon-bg i{

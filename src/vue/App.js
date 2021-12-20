@@ -49,11 +49,11 @@ var app = new Vue({
         } 
       }
     },
-    mounted() {
-        if (this.$root.user) {
-            connect()
-        }
-    },
+    // mounted() {
+    //     if (this.$root.user) {
+    //         connect()
+    //     }
+    // },
     methods: {
         loginPetition(form_data) {
         $.ajax({
