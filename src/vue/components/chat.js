@@ -32,9 +32,7 @@ Vue.component('chat', {
     watch: {
         lastmessage: function (newM, old) {
             this.messages.push(newM);
-            // $('#chat-body').scrollTop($('#chat-body')[0].scrollHeight);
-            $('#chat-body').scrollTop(80000);
-            console.log($('#chat-body'));
+            $('#chat-body').scrollTop($('#chat-body')[0].scrollHeight);
         }
     },
     created() {
