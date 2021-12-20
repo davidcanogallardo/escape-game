@@ -1,5 +1,5 @@
 const httpServer = require("http").createServer();
-const k = require("socket.io")(httpServer, {  
+const io = require("socket.io")(httpServer, {  
     cors: {
         origin: "*",
         methods: ["GET", "POST"]
@@ -9,12 +9,12 @@ let users = {}
 console.log("---------------");
 console.log(users);
 
-k.use((socket, next) => {
-  console.log(socket);
+io.use((socket, next) => {
+  // console.log(socket);
   next();
 });
 
-k.on("connection", socket => {
+io.on("connection", socket => {
   socket.send("keionn");
 
   socket.on("message", data => {  
@@ -44,7 +44,7 @@ k.on("connection", socket => {
     })
     if (success) {
       let socketId = users[data.users.receiver]
-      k.to(socketId).emit("newMessage", data)
+      io.to(socketId).emit("newMessage", data)
     }
   });
 });
