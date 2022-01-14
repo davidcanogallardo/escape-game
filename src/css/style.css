@@ -33,7 +33,7 @@
 /**************************************Clases generales**********************/
 h1 {
     font-family: Bebas;
-    font-size: 10vw;
+    font-size: 8vw;
     margin: 0;
     color: #68492E;
     letter-spacing: 0.1vw;
@@ -303,7 +303,7 @@ body {
     align-items: center;
     display: flex;
     justify-content: center;
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    box-shadow: 0px 0.5vw 0.5vw rgb(0 0 0 / 25%);
     width: 22vw;
     height: 22vw;
 }
@@ -767,6 +767,18 @@ input[type=password], input[type=email], input[type=text]{
     cursor: pointer;
 }
 
+.profile-right-btn-container {
+    position: absolute;
+	top: 3vw;
+	right: 3vw;
+    height: 3vw;
+    width: 3vw;
+    box-shadow: 0px 0.5vw 0.5vw rgba(0, 0, 0, 0.25);
+    font-size: 3.5vw;
+    padding: 1.5vw;
+    cursor: pointer;
+}
+
 .icon-container {
     background-color: #FAA942;
     border-radius: 300px;
@@ -804,7 +816,7 @@ input[type=password], input[type=email], input[type=text]{
 .right-menu > div {
     height: 3vw;
     width: 3vw;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0.5vw 0.5vw rgba(0, 0, 0, 0.25);
     font-size: 3.5vw;
     padding: 1.5vw;
     cursor: pointer;
@@ -851,7 +863,7 @@ input[type=password], input[type=email], input[type=text]{
     background-color: #14448d;
     border: 1vw solid #002966;
     text-shadow: 0px 3px 1px rgb(0 0 0 / 50%);
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    box-shadow: 0px 0.5vw 0.5vw rgb(0 0 0 / 25%);
     margin: 0 auto;
 }
 
@@ -2030,7 +2042,7 @@ label{
     align-items: center;
     display: flex;
     justify-content: center;
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    box-shadow: 0px 0.5vw 0.5vw rgb(0 0 0 / 25%);
     width: 22vw;
     height: 22vw;
 }

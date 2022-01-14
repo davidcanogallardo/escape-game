@@ -16,8 +16,11 @@ Vue.component('home', {
 
         <div class="btn play" v-on:click="searchGame()">{{ $t("play") }}</div>
 
+        <div class="icon-container profile-right-btn-container main-icon own-profile-link link" v-if="user2==null" page="profile-page" v-on:click="profile()">
+            <i class="fas fa-user"></i>
+        </div>
         <div class="right-menu">
-            <div class="icon-container main-icon own-profile-link link" page="profile-page" v-on:click="profile()">
+            <div class="icon-container main-icon own-profile-link link" page="profile-page" v-if="user2!=null" v-on:click="profile()">
                 <i class="fas fa-user"></i>
             </div>
             
