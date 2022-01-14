@@ -809,7 +809,6 @@ input[type=password], input[type=email], input[type=text]{
     padding: 1.5vw;
     cursor: pointer;
 }
-
 /*titulo*/
 #title {
     font-size: 4.5vw;
