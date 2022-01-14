@@ -44,9 +44,9 @@ Vue.component('change',{
     `,
     data(){
         return{
-            currentBG: this.$root.user.profileImg.currentBG,
-            currentIcon: this.$root.user.profileImg.currentIcon,
-            currentIconColor: this.$root.user.profileImg.currentIconColor,
+            currentBG: this.user.profileImg.iconBG,
+            currentIcon: this.user.profileImg.icon,
+            currentIconColor: this.user.profileImg.iconColor,
 
             icons: [
                 {icon: 'user'},
@@ -64,7 +64,7 @@ Vue.component('change',{
             ]
         }
     },
-    props:["user", "page","changeImg"],
+    props:["user"],
 
     methods: {
         changeBG(color){
@@ -77,17 +77,12 @@ Vue.component('change',{
                 this.currentIconColor=color;
             }
         },
-        logs(){
-            console.log(this.currentBG)
-            console.log(this.currentIcon)
-            console.log(this.currentIconColor)
-        },
         saveChanges(){
-            userCopy=this.$root.user;
+            userCopy=this.user;
             profileImg={
-                currentBG: this.currentBG,
-                currentIcon: this.currentIcon,
-                currentIconColor: this.currentIconColor,
+                iconBG: this.currentBG,
+                icon: this.currentIcon,
+                iconColor: this.currentIconColor,
             };
             console.log(this.$root.user);
             userCopy.profileImg=profileImg;
@@ -100,7 +95,7 @@ Vue.component('profile', {
     `             
     
     <div class="profile">
-    <change v-if="page == 'profile' && changeImg == true" class="change" v-on:change-img="changeImg = $event"></change>
+    <change v-if="page == 'profile' && changeImg == true" class="change" v-on:change-img="changeImg = $event" :user="user"></change>
         <h1 id="profile-name">{{user.username}}</h1>
         <div class="container-profile">
             <div :class="'icon icon-profile '+currentBG"v-on:click="changeImg = true">
@@ -130,9 +125,9 @@ Vue.component('profile', {
     `, 
     data(){
         return{
-            currentBG: 'bg-'+this.$root.user.profileImg.currentBG,
-            currentIcon: 'fas fa-'+this.$root.user.profileImg.currentIcon,
-            currentIconColor: 'color-'+this.$root.user.profileImg.currentIconColor
+            currentBG: 'bg-'+this.user.profileImg.iconBG,
+            currentIcon: 'fas fa-'+this.user.profileImg.icon,
+            currentIconColor: 'color-'+this.user.profileImg.iconColor
         }
     },
     props: ["user", "page","changeImg"],

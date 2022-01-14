@@ -211,7 +211,8 @@ var app = new Vue({
             var newProfile =  {
                 username : data.userData.usuario,
                 favMap : data.userData.favMap,
-                numTrophies : data.userData.numCopas
+                numTrophies : data.userData.numCopas,
+                profileImg : data.userData.profileImg
             }
             this.$root.profileInfo = newProfile
             this.$root.currentPage="friend"
