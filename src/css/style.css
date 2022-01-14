@@ -33,7 +33,7 @@
 /**************************************Clases generales**********************/
 h1 {
     font-family: Bebas;
-    font-size: 10vw;
+    font-size: 8vw;
     margin: 0;
     color: #68492E;
     letter-spacing: 0.1vw;
@@ -280,20 +280,18 @@ body {
 
 .change{
     position: absolute;
-    margin-top: 2vh;
 }
 .container-change{
     border: 5px solid #68492E;
     border-radius: 2.5vh;
     background-color: #FAA942;
-    width: 95%;
-    height: 52vw;
+    width: 79vw;
+    height: 42.5vw;
 }
 
 
 .change-options{
     display: flex;
-    align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-evenly;
@@ -305,13 +303,13 @@ body {
     align-items: center;
     display: flex;
     justify-content: center;
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-    width: 30vw;
-    height: 30vw;
+    box-shadow: 0px 0.5vw 0.5vw rgb(0 0 0 / 25%);
+    width: 22vw;
+    height: 22vw;
 }
 
 .current-icon{
-    font-size: 21vw;
+    font-size: 15vw;
     /* text-shadow: 0px 4px 2px rgb(0 0 0 / 75%); */
 }
 .options-img{
@@ -324,7 +322,7 @@ body {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    height: 9vw;
+    height: 7vw;
 }
 
 .icon-bg i{
@@ -354,7 +352,7 @@ body {
 .close{
     position: absolute;
     margin-top: 1vh;
-    margin-left: 92vw;
+    margin-left: 75vw;
 }
 
 .changeSave{
@@ -769,6 +767,18 @@ input[type=password], input[type=email], input[type=text]{
     cursor: pointer;
 }
 
+.profile-right-btn-container {
+    position: absolute;
+	top: 3vw;
+	right: 3vw;
+    height: 3vw;
+    width: 3vw;
+    box-shadow: 0px 0.5vw 0.5vw rgba(0, 0, 0, 0.25);
+    font-size: 3.5vw;
+    padding: 1.5vw;
+    cursor: pointer;
+}
+
 .icon-container {
     background-color: #FAA942;
     border-radius: 300px;
@@ -806,12 +816,11 @@ input[type=password], input[type=email], input[type=text]{
 .right-menu > div {
     height: 3vw;
     width: 3vw;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0.5vw 0.5vw rgba(0, 0, 0, 0.25);
     font-size: 3.5vw;
     padding: 1.5vw;
     cursor: pointer;
 }
-
 /*titulo*/
 #title {
     font-size: 4.5vw;
@@ -854,7 +863,7 @@ input[type=password], input[type=email], input[type=text]{
     background-color: #14448d;
     border: 1vw solid #002966;
     text-shadow: 0px 3px 1px rgb(0 0 0 / 50%);
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    box-shadow: 0px 0.5vw 0.5vw rgb(0 0 0 / 25%);
     margin: 0 auto;
 }
 
@@ -2004,7 +2013,6 @@ label{
 /************************************Pop Up cambiar imagen perfil*************************************/
 .change{
     position: absolute;
-    margin-top: 1vh;
 }
 .container-change{
     border: 1vh solid #68492E;
@@ -2023,7 +2031,6 @@ label{
 
 .change-options{
     display: flex;
-    align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-evenly;
@@ -2035,9 +2042,9 @@ label{
     align-items: center;
     display: flex;
     justify-content: center;
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-    width: 30vh;
-    height: 30vh;
+    box-shadow: 0px 0.5vw 0.5vw rgb(0 0 0 / 25%);
+    width: 22vw;
+    height: 22vw;
 }
 
 .current-icon{
@@ -2045,7 +2052,7 @@ label{
     /* text-shadow: 0px 4px 2px rgb(0 0 0 / 75%); */
 }
 .options-img{
-    width: 40vh;
+    width: 35vh;
 }
 
 .container-color{

@@ -7,7 +7,6 @@ Vue.component('home', {
         <div class="icon-container settings-btn-container main-icon settings-link link" page="settings-page" v-on:click="$emit('change-page','settings')">
             <i class="fas fa-cog"></i>
         </div>
-
         <div id="title">
             <span class="red-title">Escape</span>
             <span class="blue-title">Game</span>
@@ -17,17 +16,23 @@ Vue.component('home', {
 
         <div class="btn play" v-on:click="searchGame()">{{ $t("play") }}</div>
 
+        <div class="icon-container profile-right-btn-container main-icon own-profile-link link" v-if="user2==null" page="profile-page" v-on:click="profile()">
+            <i class="fas fa-user"></i>
+        </div>
         <div class="right-menu">
-            <div class="icon-container main-icon own-profile-link link" page="profile-page" v-on:click="profile()">
+            <div class="icon-container main-icon own-profile-link link" page="profile-page" v-if="user2!=null" v-on:click="profile()">
                 <i class="fas fa-user"></i>
             </div>
-            <div class="icon-container main-icon friends-list slide-link" page=".slide-list-container" v-on:click="$emit('open-menu','friend')">
+            
+            <div class="icon-container main-icon friends-list slide-link" page=".slide-list-container" v-if="user2!=null" v-on:click="$emit('open-menu','friend')">
                 <i class="fas fa-user-friends"></i>
             </div>
-            <div class="icon-container main-icon notificacion-list slide-link" page=".notification-container" v-on:click="$emit('open-menu','noti')">
+
+            <div class="icon-container main-icon notificacion-list slide-link" page=".notification-container"  v-if="user2!=null" v-on:click="$emit('open-menu','noti')">
                 <i class="fas fa-bell"></i>
+
             </div>
-            <div class="icon-container main-icon ranking-link link" page="ranking-page" v-on:click="ranking()">
+            <div class="icon-container main-icon ranking-link link" page="ranking-page" v-if="user2!=null" v-on:click="ranking()">
                 <i class="fas fa-list-ol"></i>
             </div>
         </div>
