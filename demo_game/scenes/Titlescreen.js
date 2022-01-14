@@ -4,7 +4,8 @@ class Titlescreen extends Phaser.Scene {
     }
 
     preload() {
-        
+        var path = "./demo_game/"
+        this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
     }
 
     create() {
@@ -19,10 +20,47 @@ class Titlescreen extends Phaser.Scene {
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })
         .setOrigin(0.5)
-    
+
         this.input.keyboard.once('keydown-SPACE', () => {
             // this.scene.start("prueba")
-            this.scene.start("game")
+            
         })
+    }
+
+    /*update(){
+        //Comprobar si se han añadido los objectos que tocan.
+        console.log(this.playersGroup.getLength());
+        if(this.playersGroup.getLength() == 2){
+            console.log("Ou yea!!");
+            console.log(this.playersGroup);
+            this.scene.start("game", this.playersGroup)
+            
+            //this.player = false;
+        }
+
+    }*/
+
+    setPlayers(players){
+        console.log(players);
+        //this.playersGroup = this.add.group();
+        console.log(this.playersGroup);
+        let playersArray = [];
+        players.forEach(element => {
+            //console.log(elegment);
+            this.player = new Player(this, element.id, element.x, element.y, "player");
+            console.log(this.player);
+            playersArray.push(this.player);
+            //this.playersGroup.add(this.player);
+            console.log(playersArray);
+            //console.log(this.playersGroup);
+            console.log("Introduzco jugador en el grupo");
+
+ 
+        });
+        //console.log(this.playersGroup);
+
+        setTimeout(this.scene.start("game", playersArray), 3000);
+        
+        //this.p = true;
     }
 }

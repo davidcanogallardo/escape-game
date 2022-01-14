@@ -1,5 +1,7 @@
 class clientCommunication{
-    constructor(){
-        
+    constructor(socket){
+        this.socket = socket;
     }
+
+    
 }

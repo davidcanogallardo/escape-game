@@ -3,6 +3,24 @@ class Game extends Phaser.Scene {
         super("game")
     }
     //map.getLayer("walls").data[5][5].properties?.horitzontalWall
+    init(data){
+        console.log(data);
+        let playersArray = [];
+        data.forEach(element => {
+            //console.log(elegment);
+            this.player = new Player(this, element.id, element.x, element.y, "player");
+            console.log(this.player);
+            playersArray.push(this.player);
+            //this.playersGroup.add(this.player);
+            console.log(playersArray);
+            //console.log(this.playersGroup);
+            console.log("Introduzco jugador en el grupo");
+
+ 
+        });
+        this.playersGroup = this.add.group(playersArray);
+    }
+
     preload() {
         var path = "./demo_game/"
         this.segundos = 0;
@@ -32,11 +50,12 @@ class Game extends Phaser.Scene {
         var groundLayer = this.map.createStaticLayer('ground', this.tileset);
         let objectLayer = this.map.getObjectLayer('objects');
         
-        //*****************************************Player**************************************************/
-        this.player = new Player(this)
-        this.playerCollider = this.player.playerCollider
+        //*****************************************Players**************************************************/
+        console.log(this.playersGroup);
+        //this.player = new Player(this);
+        //this.playerCollider = this.player.playerCollider
 
-        this.wallsLayer = new WallsLayer(this)
+        this.wallsLayer = new WallsLayer(this);
         
         // ***************************************LEYENDA****************************************************************************
 
@@ -160,6 +179,9 @@ class Game extends Phaser.Scene {
     }
   
     update() {
-        this.player.update()
+        this.playersGroup.getChildren().forEach(player => {
+            player.update();
+        });
+        //this.playersGroup.update()
     }
 }

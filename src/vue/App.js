@@ -2,6 +2,23 @@ import { i18n } from "../languages/language.js";
 import {getSessionUser} from "../js/utils.js"
 import { connect, disconnect} from "../js/chat-client.js";
 
+
+//console.log(socket);
+socket.on("matchFound", data => {
+    console.log("Partida Encontrada");
+    //console.log(data);
+    var titleScreen = game.scene.getScene("titlescreen");
+    titleScreen.setPlayers(data);
+    app.currentPage = "game";
+    
+})
+
+socket.on("matchPlayers", data => {
+    console.log("Me llegan los jugadores");
+    console.log("Data: "+data);
+
+})
+
 let excludedPages = [
     "home",
     "game",

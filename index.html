@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/vue-i18n@8"></script>
     <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
 
+    <script type="module" src="./src/vue/App.js"></script>
     <script src="./src/classes/user.js"></script>
     <script src="./src/vue/components/home.js"></script> 
     <script src="./src/vue/components/friends-sidebar.js"></script> 
@@ -145,8 +146,9 @@
             </transition>
         </div>
     </div>
-
-    <script type="module" src="./src/vue/App.js"></script>
+    <script>
+        const socket = io("ws://localhost:3000");
+    </script> 
     <script type="application/javascript" defer src="./demo_game/scenes/Player.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/WallsLayer.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/Prueba.js"></script>

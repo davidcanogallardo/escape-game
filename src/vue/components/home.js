@@ -56,6 +56,7 @@ Vue.component('home', {
         },
         searchGame(){
             //Cambiar al juego
+            //console.log(socket);
             socket.emit('startQueue', this.user2);
             this.$emit('change-page','waiting-room');
             //this.$emit('change-page','game')

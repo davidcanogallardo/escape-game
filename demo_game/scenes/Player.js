@@ -1,11 +1,14 @@
 class Player extends Phaser.GameObjects.Sprite{
-    constructor(scene) {
-        super(scene, 100, 250, 'player')
-        scene.add.existing(this)
-        this.setDepth(5)
+    constructor(scene, id, x, y, sprite) {
+        super(scene, x, y, sprite);
+        this.id = id;
+        scene.add.existing(this);
+        this.setDepth(5);
         this.cursors = scene.input.keyboard.createCursorKeys();
         scene.physics.world.enableBody(this);
-        this.body.setSize(this.width*0.5, this.height * 0.3).setOffset(8,18)
+        this.body.setSize(this.width*0.5, this.height * 0.3).setOffset(8,18);
+        console.log("BODY!")
+        console.log(this.body);
         this.playerCollider = scene.physics.add.image(200, 50);
         console.log(this.playerCollider);
     

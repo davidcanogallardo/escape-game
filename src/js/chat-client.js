@@ -1,10 +1,7 @@
 import {app} from "../vue/App.js"
 
 console.log("before connecting");
-const socket = io("ws://localhost:3000", {
-  autoConnect: false
-});
-
+//console.log(socket);
 
 let sender = ""
 let receiver = ""
@@ -13,19 +10,6 @@ socket.on("message", data => {
   console.log(data);
   console.log(socket.id);
 });
-
-socket.on("matchFound", data => {
-  console.log("Partida Encontrada");
-  app.currentPage = "game";
-
-})
-
-socket.on("matchPlayers", data => {
-  console.log("Me llegan los jugadores");
-  console.log("Data: "+data);
-  var titleScreen = game.scene.getScene("titlescreen");
-  titleScreen.setPlayers(data);
-})
 
 socket.on("newMessage", data => {
   console.log(data);
