@@ -280,20 +280,18 @@ body {
 
 .change{
     position: absolute;
-    margin-top: 2vh;
 }
 .container-change{
     border: 5px solid #68492E;
     border-radius: 2.5vh;
     background-color: #FAA942;
-    width: 95%;
-    height: 52vw;
+    width: 79vw;
+    height: 42.5vw;
 }
 
 
 .change-options{
     display: flex;
-    align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-evenly;
@@ -306,12 +304,12 @@ body {
     display: flex;
     justify-content: center;
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-    width: 30vw;
-    height: 30vw;
+    width: 22vw;
+    height: 22vw;
 }
 
 .current-icon{
-    font-size: 21vw;
+    font-size: 15vw;
     /* text-shadow: 0px 4px 2px rgb(0 0 0 / 75%); */
 }
 .options-img{
@@ -324,7 +322,7 @@ body {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    height: 9vw;
+    height: 7vw;
 }
 
 .icon-bg i{
@@ -354,7 +352,7 @@ body {
 .close{
     position: absolute;
     margin-top: 1vh;
-    margin-left: 92vw;
+    margin-left: 75vw;
 }
 
 .changeSave{
@@ -2004,7 +2002,6 @@ label{
 /************************************Pop Up cambiar imagen perfil*************************************/
 .change{
     position: absolute;
-    margin-top: 1vh;
 }
 .container-change{
     border: 1vh solid #68492E;
@@ -2023,7 +2020,6 @@ label{
 
 .change-options{
     display: flex;
-    align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-evenly;
@@ -2036,8 +2032,8 @@ label{
     display: flex;
     justify-content: center;
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-    width: 30vh;
-    height: 30vh;
+    width: 22vw;
+    height: 22vw;
 }
 
 .current-icon{
@@ -2045,7 +2041,7 @@ label{
     /* text-shadow: 0px 4px 2px rgb(0 0 0 / 75%); */
 }
 .options-img{
-    width: 40vh;
+    width: 35vh;
 }
 
 .container-color{
