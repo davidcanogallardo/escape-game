@@ -31,6 +31,11 @@ class ComunicacionServidor {
                     this.queue.splice(indexItemToRemove, 1);
                     console.log(this.queue);
                 });
+
+                socket.on("playerMove", (moveData) => {
+                    console.log(moveData);
+                    this.io.in()
+                });
             });
         }
     

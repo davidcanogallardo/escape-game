@@ -55,11 +55,20 @@ class Player extends Phaser.GameObjects.Sprite{
             this.anims.play('player-idle-down');
         } else {
             if (this.cursors.left?.isDown) {
+                
                 this.body.setVelocity(-speed, 0)
                 this.anims.play('player-run-side',true)
                 this.scaleX = -1;
                 this.body.offset.x = 24;
-                
+
+                let moveData = {
+                    id: this.id,
+                    speed: -speed,
+                    direction: "left",
+                    x: this.x,
+                    y: this.y
+                }
+                socket.emit("playerMove", moveData);                
     
             } else if (this.cursors.right?.isDown) {
                 this.body.setVelocity(speed, 0)
@@ -82,6 +91,9 @@ class Player extends Phaser.GameObjects.Sprite{
                 this.anims.play(parts.join('-'));
                 this.body.setVelocity(0, 0);
             }
+
+
+
         }
 
     }
