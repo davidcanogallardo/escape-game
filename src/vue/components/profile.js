@@ -85,9 +85,7 @@ Vue.component('change',{
                 iconColor: this.currentIconColor,
             };
             this.$root.user.profileImg = profileImg;
-            console.log(profileImg);
-            console.log(this.$root.user);
-            console.log(this.$root.user.profileImg);
+            sessionStorage.setItem("session", JSON.stringify(this.$root.user))
         }
     },
 })
