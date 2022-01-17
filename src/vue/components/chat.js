@@ -8,10 +8,11 @@ Vue.component('chat', {
             <p>{{friend}}</p>
             <i class="fas fa-times" v-on:click="$emit('open-modal','none')"></i>
         </div>
-        <div class="chat-body scrollbar">
+        <div id="chat-body" class="chat-body scrollbar">
 
-            <div :class="'msg '+item.sender" v-for="item in messages">
-                <p>{{item.message}} <span class="time">{{item.time}}</span></p>
+            <div id="data" :class="'msg '+item.sender" v-for="item in messages">
+                <div class="textMessage">{{item.message}}</div>
+                <span class="time">{{item.time}}</span>
             </div>
         </div>
         <div class="chat-input">
@@ -30,7 +31,8 @@ Vue.component('chat', {
     },
     watch: {
         lastmessage: function (newM, old) {
-            this.messages.push(newM)
+            this.messages.push(newM);
+            $('#chat-body').scrollTop($('#chat-body')[0].scrollHeight);
         }
     },
     created() {
@@ -45,4 +47,6 @@ Vue.component('chat', {
             }
         }
     },
-})
+});
+
+

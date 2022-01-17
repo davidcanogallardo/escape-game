@@ -13,7 +13,7 @@ Vue.component('change',{
                     <i :class="'fas fa-'+currentIcon+' current-icon color-'+currentIconColor" aria-hidden="true"></i>
                 </div>
                 <br>
-                <div class="btn blue link changeSave" v-on:click="saveChanges()">{{ $t("save") }}</div>
+                <div class="btn blue link changeSave" v-on:click="saveChanges(); $emit('change-img', false), $emit('changeProfileImg',this.profileImg);">{{ $t("save") }}</div>
             </div>
 
             <div class="options-img">
@@ -44,9 +44,9 @@ Vue.component('change',{
     `,
     data(){
         return{
-            currentBG: 'white',
-            currentIcon: 'user',
-            currentIconColor: 'grey',
+            currentBG: this.user.profileImg.iconBG,
+            currentIcon: this.user.profileImg.icon,
+            currentIconColor: this.user.profileImg.iconColor,
 
             icons: [
                 {icon: 'user'},
@@ -55,6 +55,7 @@ Vue.component('change',{
                 {icon: 'biohazard'},
                 {icon: 'bomb'},
             ],
+
             colors: [
                 {color: 'red'},
                 {color: 'blue'},
@@ -64,7 +65,7 @@ Vue.component('change',{
             ]
         }
     },
-    props:["user", "page","changeImg"],
+    props:["user"],
 
     methods: {
         changeBG(color){
@@ -77,21 +78,16 @@ Vue.component('change',{
                 this.currentIconColor=color;
             }
         },
-        logs(){
-            console.log(this.currentBG)
-            console.log(this.currentIcon)
-            console.log(this.currentIconColor)
-        },
         saveChanges(){
-            userCopy=this.$root.user;
             profileImg={
-                currentBG: this.currentBG,
-                currentIcon: this.currentIcon,
-                currentIconColor: this.currentIconColor,
+                iconBG: this.currentBG,
+                icon: this.currentIcon,
+                iconColor: this.currentIconColor,
             };
+            this.$root.user.profileImg= this.profileImg;
+            console.log(profileImg);
             console.log(this.$root.user);
-            userCopy.profileImg=profileImg;
-            this.$root.updateUser(userCopy);
+            console.log(this.$root.user.profileImg);
         }
     },
 })
@@ -100,11 +96,11 @@ Vue.component('profile', {
     `             
     
     <div class="profile">
-    <change v-if="page == 'profile' && changeImg == true" class="change" v-on:change-img="changeImg = $event"></change>
+    <change v-if="page == 'profile' && changeImg == true" class="change" v-on:change-img="changeImg = $event" v-on:changeProfileImg="profileImg = $event" :user="user"></change>
         <h1 id="profile-name">{{user.username}}</h1>
         <div class="container-profile">
-            <div :class="'icon icon-profile bg-'+currentBG" v-on:click="changeImg = true">
-                <i :class="'fas fa-'+currentIcon+' i-profile color-'+currentIconColor" aria-hidden="true"></i>
+            <div :class="'icon icon-profile bg-'+profileImg.iconBG"v-on:click="changeImg = true">
+                <i :class="'i-profile fas fa-'+profileImg.icon+' color-'+profileImg.iconColor" aria-hidden="true"></i>
             </div>
             <br>
             <table class="table-profile">
@@ -141,7 +137,7 @@ Vue.component('profile', {
     methods: {
         close() {
             console.log(this.user);
-            //this.$root.closeSession(this.user.username)
-        }
+            this.$root.closeSession(this.user.username)
+        },
     },
 })

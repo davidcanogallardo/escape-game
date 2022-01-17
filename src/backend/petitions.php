@@ -83,7 +83,7 @@ function loginResponse($name){
                     ]
                 ]
             ],
-            'friendsList' => ['david', 'oscar', 'adnan','alex','a'],
+            'friendsList' => ['david','oscar','adnan','alex','a'],
             'notifications' => ['Luis', 'Jose'],
                  
         ];
@@ -129,7 +129,12 @@ function friendData($user){
     $data['userData'] = [
         'usuario' => $user,
         'numCopas' => 69,
-        'favMap' => 'la grieta del rift'
+        'favMap' => 'la grieta del rift',
+        'profileImg' =>[
+            'icon'=>'user',
+            'iconColor'=>'red',
+            'iconBG'=>'white'
+        ],
     ];
 
     return $data;
@@ -185,7 +190,7 @@ function updateProfile($user){
     $data = [];
     $data['success'] = true;
     $data['message'] = 'Cambios actualizados.';
-    $data["user"] = $user;
+    $data['userData'] = $user;
 
     return $data;
 }
