@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "browserify-shim": "^3.8.14",
+    "getusermedia": "^2.0.1",
+    "save": "^2.4.0"
+  }
+}

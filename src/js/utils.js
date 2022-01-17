@@ -1,4 +1,6 @@
 import { connect } from "./chat-client.js";
+var a = new SoundSettings()
+console.error(a);
 //recover user session
 function getSessionUser() {
   let sessionUser = JSON.parse(sessionStorage.getItem("session"));
@@ -17,7 +19,7 @@ function getSessionUser() {
     );
     // connect()
   } else {
-    user = null;
+    user = "";
     console.log("no hay sesion");
   }
   return user;

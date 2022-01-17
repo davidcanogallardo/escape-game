@@ -177,7 +177,7 @@ var app = new Vue({
             console.log(data);
             if (data.success) {
                 console.log(data.params);
-                showNotification("Petición de amistad enviada a "+friend, "#49EE63")
+                // showNotification("Petición de amistad enviada a "+friend, "#49EE63")
                 this.$root.user.notifications.push(friend)
                 sessionStorage.setItem("session", JSON.stringify(this.$root.user))
             }

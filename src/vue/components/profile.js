@@ -128,14 +128,15 @@ Vue.component('profile', {
     </div>
     
     `, 
+    props: ["user", "page","changeImg"],
     data(){
-        return{
-            currentBG: this.$root.user.profileImg.currentBG,
-            currentIcon: this.$root.user.profileImg.currentIcon,
-            currentIconColor: this.$root.user.profileImg.currentIconColor
+        return {
+            currentBG: this.user.profileImg.currentBG,
+            currentIcon: this.user.profileImg.currentIcon,
+            currentIconColor: this.user.profileImg.currentIconColor
         }
     },
-    props: ["user", "page","changeImg"],
+   
     
     methods: {
         close() {

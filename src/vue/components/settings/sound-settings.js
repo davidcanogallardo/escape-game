@@ -21,10 +21,6 @@ Vue.component('sound-settings', {
                 <div class="ajuste">
                     <p for="mic">{{ $t("selectmic") }}</p>
                     <select name="mic" id="mic">
-                        <option value="" selected>{{ $t("selectmic1") }}</option>
-                        <option value="pimerMic">Micro 1</option>
-                        <option value="pimerMic">Micro 1</option>
-                        <option value="pimerMic">Micro 1</option>
                     </select>
                 </div>
                 <div class="ajuste">
@@ -54,7 +50,17 @@ Vue.component('sound-settings', {
             sessionStorage.setItem("sound-settings", JSON.stringify(soundSettings))
         }
     },
-    mounted() {
+    created() {
         this.sound = getSessionSoundConf()
-    }
+
+    },
+    mounted() {
+        console.log(window.mic);
+        (window.mic).forEach(device => {
+            var option = document.createElement("option");
+            option.innerHTML = device.label;
+            option.value = device.deviceId;
+            document.getElementById("mic").appendChild(option)
+        });
+    },
 })
