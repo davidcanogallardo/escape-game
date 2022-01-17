@@ -24,6 +24,9 @@ Vue.component('sound-settings', {
                     </select>
                 </div>
                 <div class="ajuste">
+                    <button id="micTest" v-on:click="testAudio()" type="button">TEST MICROPHONE</button>
+                </div>
+                <div class="ajuste">
                     <p>{{ $t("micvol") }}</p>
                     <div class="volumen-range">
                     0 <input id="mic-volume" type="range" min="0" max="100" :value="sound.micVolume" step="10"> 100
@@ -48,6 +51,9 @@ Vue.component('sound-settings', {
             let soundSettings = new SoundSettings($("#general-volume").val(), $("#mic-volume").val(), $("#mic-sensitivity").val())
             // this.$emit('update-sound',soundSettings)
             sessionStorage.setItem("sound-settings", JSON.stringify(soundSettings))
+        },
+        testAudio(){
+            testMic();
         }
     },
     created() {
@@ -59,7 +65,7 @@ Vue.component('sound-settings', {
         (window.mic).forEach(device => {
             var option = document.createElement("option");
             option.innerHTML = device.label;
-            option.value = device.deviceId;
+            option.value = device.id;
             document.getElementById("mic").appendChild(option)
         });
     },
