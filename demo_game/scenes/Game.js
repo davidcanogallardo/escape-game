@@ -4,19 +4,10 @@ class Game extends Phaser.Scene {
     }
     //map.getLayer("walls").data[5][5].properties?.horitzontalWall
     init(data){
-        console.log(data);
         let playersArray = [];
         data.forEach(element => {
-            //console.log(elegment);
             this.player = new Player(this, element.id, element.x, element.y, "player");
-            console.log(this.player);
             playersArray.push(this.player);
-            //this.playersGroup.add(this.player);
-            console.log(playersArray);
-            //console.log(this.playersGroup);
-            console.log("Introduzco jugador en el grupo");
-
- 
         });
         this.playersGroup = this.add.group(playersArray);
     }
@@ -51,7 +42,7 @@ class Game extends Phaser.Scene {
         let objectLayer = this.map.getObjectLayer('objects');
         
         //*****************************************Players**************************************************/
-        console.log(this.playersGroup);
+        //console.log(this.playersGroup);
         //this.player = new Player(this);
         //this.playerCollider = this.player.playerCollider
 
@@ -104,7 +95,7 @@ class Game extends Phaser.Scene {
         //Añadir colider al grupo de puertas
 
         this.doorsColider = this.physics.add.collider(this.playersGroup, this.doorsGroup);
-        console.log("Pone el collider");
+        //console.log("Pone el collider");
         // ******************************************************************************************************************
 
         //**************************************Cofre**************************************
@@ -210,8 +201,34 @@ class Game extends Phaser.Scene {
   
     update() {
         this.playersGroup.getChildren().forEach(player => {
-            player.update();
+            if(socket.id == player.id){
+                player.update();
+                let moveData = {
+                    id: player.id,
+                    speed: player.speed,
+                    x: player.x,
+                    y: player.y
+                }
+                socket.emit("playerMoved", moveData);
+            }
         });
+
+        socket.on("playerMoveResponse", (moveData) => {
+            this.playersGroup.getChildren().forEach(player => {
+                if(moveData.id == player.id){
+                    player.x = moveData.x;
+                    player.y = moveData.y;
+                    //player.update();
+                    // let moveData = {
+                    //     id: player.id,
+                    //     speed: player.speed,
+                    //     x: player.x,
+                    //     y: player.y
+                    // }
+                    // socket.emit("playerMoved", moveData);
+                }
+            });
+        })
         //this.playersGroup.update()
     }
 }

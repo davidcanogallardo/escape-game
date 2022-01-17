@@ -32,9 +32,9 @@ class ComunicacionServidor {
                     console.log(this.queue);
                 });
 
-                socket.on("playerMove", (moveData) => {
+                socket.on("playerMoved", (moveData) => {
                     console.log(moveData);
-                    this.io.in()
+                    socket.in("gameRoom").emit("playerMoveResponse", moveData);
                 });
             });
         }

@@ -27,6 +27,7 @@ class Titlescreen extends Phaser.Scene {
         })
     }
 
+    //Comprobaciones para mas adelante
     /*update(){
         //Comprobar si se han añadido los objectos que tocan.
         console.log(this.playersGroup.getLength());
@@ -41,26 +42,12 @@ class Titlescreen extends Phaser.Scene {
     }*/
 
     setPlayers(players){
-        console.log(players);
-        //this.playersGroup = this.add.group();
-        console.log(this.playersGroup);
         let playersArray = [];
         players.forEach(element => {
-            //console.log(elegment);
             this.player = new Player(this, element.id, element.x, element.y, "player");
-            console.log(this.player);
             playersArray.push(this.player);
-            //this.playersGroup.add(this.player);
-            console.log(playersArray);
-            //console.log(this.playersGroup);
-            console.log("Introduzco jugador en el grupo");
-
- 
         });
-        //console.log(this.playersGroup);
-
-        setTimeout(this.scene.start("game", playersArray), 3000);
-        
-        //this.p = true;
+        this.scene.start("game", playersArray)
+        //setTimeout(, 3000);
     }
 }

@@ -4,8 +4,7 @@ class WallsLayer extends Phaser.Tilemaps.TilemapLayer {
         super(scene, scene.map, 1, scene.tileset)
         scene.add.existing(this)
         this.setDepth(5)
-        console.log(scene.playersGroup);
-        console.log(scene.playersGroup.getChildren());
+
         let players = scene.playersGroup.getChildren();
 
 
