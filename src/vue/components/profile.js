@@ -84,10 +84,8 @@ Vue.component('change',{
                 icon: this.currentIcon,
                 iconColor: this.currentIconColor,
             };
-            this.$root.user.profileImg= this.profileImg;
-            console.log(profileImg);
-            console.log(this.$root.user);
-            console.log(this.$root.user.profileImg);
+            this.$root.user.profileImg = profileImg;
+            sessionStorage.setItem("session", JSON.stringify(this.$root.user))
         }
     },
 })
@@ -127,9 +125,12 @@ Vue.component('profile', {
     props: ["user", "page","changeImg"],
     data(){
         return {
-            currentBG: this.user.profileImg.currentBG,
-            currentIcon: this.user.profileImg.currentIcon,
-            currentIconColor: this.user.profileImg.currentIconColor
+            profileImg:{
+                iconBG: this.user.profileImg.iconBG,
+                icon: this.user.profileImg.icon,
+                iconColor: this.user.profileImg.iconColor
+            }
+            
         }
     },
    
