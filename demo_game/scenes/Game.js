@@ -89,31 +89,46 @@ class Game extends Phaser.Scene {
                     //Cambiar la hitbox de la mesa
                     this.table = this.physics.add.sprite(x+(width/2),y-(height/2), 'table');
                     //Hitbox de la mesa y que no se pueda mover
-                    this.physics.add.collider(this.table, this.player);
+                    this.physics.add.collider(this.table, this.playersGroup);
                     this.table.body.immovable = true
                     //Agregar puerta al grupo de puertas
                     this.tablesGroup.add(this.table);
                     this.tableCollider = this.physics.add.image(this.table.x, this.table.y);
                     this.tableCollider.setSize(this.table.width, this.table.height)
                     this.tableCollider.body.immovable = true
-                    this.physics.add.collider(this.tableCollider, this.player);
+                    this.physics.add.collider(this.tableCollider, this.playersGroup);
 
                     break;
             }
         });
         //Añadir colider al grupo de puertas
-        this.doorsColider = this.physics.add.collider(this.player, this.doorsGroup);
+
+        this.doorsColider = this.physics.add.collider(this.playersGroup, this.doorsGroup);
+        console.log("Pone el collider");
         // ******************************************************************************************************************
 
         //**************************************Cofre**************************************
         this.chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
         this.physics.add.existing(this.chest);
         //collider para que el personaje con el cofre
-        this.physics.add.collider(this.chest, this.player);
+        this.physics.add.collider(this.chest, this.playersGroup);
         this.chest.body.setSize(this.chest.width*0.5, this.chest.height*0.8);
         
+        this.playersGroup.getChildren().forEach(player => {
+            this.physics.add.overlap(player.playerCollider, this.chest, function (player,chest) {
+                if(chest.y < player.y){
+                    that.player.setDepth(10);
+                } else {
+                    that.player.setDepth(0);
+                }
+    
+                if (eKey.isDown) {
+                    that.scene.launch('seepass');
+                }
+            });
+        });
 
-        this.physics.add.overlap(this.playerCollider, this.chest, function (player,chest) {
+        /*this.physics.add.overlap(this.playerCollider, this.chest, function (player,chest) {
             if(chest.y < player.y){
                 that.player.setDepth(10);
             } else {
@@ -123,14 +138,29 @@ class Game extends Phaser.Scene {
             if (eKey.isDown) {
                 that.scene.launch('seepass');
             }
-        });
+        });*/
         this.chest.body.immovable = true
         // ****************************************************************************
         
         // *********************************************puerta****************************************************
         let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         this.canDoPuzzle = true
-        this.physics.add.overlap(this.playerCollider, this.table, function (player,table) {
+
+        this.playersGroup.getChildren().forEach(player => {
+            this.physics.add.overlap(player.playerCollider, this.table, function (player,table) {
+                if(table.y < player.y){
+                    that.player.setDepth(10);
+                } else {
+                    that.player.setDepth(0);
+                }
+    
+                if (eKey.isDown && that.canDoPuzzle) {
+                    that.scene.launch('enterPasswordScene');
+                    that.scene.pause();
+                }
+            });
+        });
+        /*this.physics.add.overlap(this.playerCollider, this.table, function (player,table) {
             if(table.y < player.y){
                 that.player.setDepth(10);
             } else {
@@ -141,7 +171,7 @@ class Game extends Phaser.Scene {
                 that.scene.launch('enterPasswordScene');
                 that.scene.pause();
             }
-        });
+        });*/
 
         //this.door = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
         this.anims.create({
