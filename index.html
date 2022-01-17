@@ -20,6 +20,8 @@
     <script src="./node_modules/getusermedia/getusermedia.bundle.js"></script>
 
     <script src="./src/js/media.js"></script>
+
+    <script type="module" src="./src/vue/App.js"></script>
     <script src="./src/classes/user.js"></script>
     <script src="./src/vue/components/home.js"></script> 
     <script src="./src/vue/components/friends-sidebar.js"></script> 
@@ -148,7 +150,9 @@
             </transition>
         </div>
     </div>
-    
+    <script>
+        const socket = io("ws://192.168.16.64:3000");
+    </script> 
     <script type="application/javascript" defer src="./demo_game/scenes/Player.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/WallsLayer.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/Prueba.js"></script>

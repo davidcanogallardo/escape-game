@@ -4,7 +4,8 @@ class Titlescreen extends Phaser.Scene {
     }
 
     preload() {
-        
+        var path = "./demo_game/"
+        this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
     }
 
     create() {
@@ -19,10 +20,34 @@ class Titlescreen extends Phaser.Scene {
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })
         .setOrigin(0.5)
-    
+
         this.input.keyboard.once('keydown-SPACE', () => {
             // this.scene.start("prueba")
-            this.scene.start("game")
+            
         })
+    }
+
+    //Comprobaciones para mas adelante
+    /*update(){
+        //Comprobar si se han añadido los objectos que tocan.
+        console.log(this.playersGroup.getLength());
+        if(this.playersGroup.getLength() == 2){
+            console.log("Ou yea!!");
+            console.log(this.playersGroup);
+            this.scene.start("game", this.playersGroup)
+            
+            //this.player = false;
+        }
+
+    }*/
+
+    setPlayers(players){
+        let playersArray = [];
+        players.forEach(element => {
+            this.player = new Player(this, element.id, element.x, element.y, "player");
+            playersArray.push(this.player);
+        });
+        this.scene.start("game", playersArray)
+        //setTimeout(, 3000);
     }
 }

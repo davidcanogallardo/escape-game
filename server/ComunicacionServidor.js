@@ -17,7 +17,7 @@ class ComunicacionServidor {
                     console.log("SERVER:RANDOM MESSAGE => "+data);
                 });
                 socket.on("startQueue", (data) => {
-                    manageQueue(socket, data);
+                    this.manageQueue(socket, data);
                 });
                 socket.on("chatUserConnect", (username) => {
                     this.connectUserToChat(username, socket);
@@ -31,9 +31,13 @@ class ComunicacionServidor {
                     this.queue.splice(indexItemToRemove, 1);
                     console.log(this.queue);
                 });
+
+                socket.on("playerMoved", (moveData) => {
+                    console.log(moveData);
+                    socket.in("gameRoom").emit("playerMoveResponse", moveData);
+                });
             });
         }
-    
     
         manageQueue(socket, data){
             console.log("Cola Iniciada: ");
@@ -43,8 +47,8 @@ class ComunicacionServidor {
                         const player = {
                             id: socket.id,
                             userame: data.username,
-                            x: 0,
-                            y: 0
+                            x: 100,
+                            y: 250
                         }
                         socket.join("gameRoom");
                         this.queue.push(player);
@@ -52,15 +56,15 @@ class ComunicacionServidor {
                         const player = {
                             id: socket.id,
                             userame: data.username,
-                            x: 0,
-                            y: 0
+                            x: 250,
+                            y: 250
                         }
                         socket.join("gameRoom");
                         this.queue.push(player);
                         //this.players.push(this.queue.slice(0,2));
                         //console.log("Jugadores: ");
-                        //console.log(this.players);
-                        this.io.in("gameRoom").emit('matchFound');
+                        console.log("PARTIDA ENCONTRADA");
+                        this.io.in("gameRoom").emit('matchFound', this.queue);
                     }
                     console.log(this.queue);
                     console.log(this.io.sockets.adapter.rooms);

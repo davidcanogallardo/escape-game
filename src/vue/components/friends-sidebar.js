@@ -7,8 +7,8 @@ Vue.component('friend-item', {
           <i class="fas fa-user" aria-hidden="true" :name="name"></i>
         </div>
         <span :name="name" >{{name}}</span>
-        <div title="Enviar invitación a una partida" class="icon-container add-btn send-invitation" v-on:click.stop="chat();">
-          <i class="fas fa-user-plus" aria-hidden="true"></i>
+        <div title="Chatear" class="icon-container add-btn send-invitation" v-on:click.stop="chat();">
+        <i class="far fa-comment-dots"></i>
         </div>
       </div>
     </div>

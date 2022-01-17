@@ -65,6 +65,7 @@ Vue.component('sound-settings', {
         (window.mic).forEach(device => {
             var option = document.createElement("option");
             option.innerHTML = device.label;
+            console.log(device);
             option.value = device.id;
             document.getElementById("mic").appendChild(option)
         });
