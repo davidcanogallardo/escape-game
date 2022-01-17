@@ -190,7 +190,7 @@ function updateProfile($user){
     $data = [];
     $data['success'] = true;
     $data['message'] = 'Cambios actualizados.';
-    $data["user"] = $user;
+    $data['userData'] = $user;
 
     return $data;
 }

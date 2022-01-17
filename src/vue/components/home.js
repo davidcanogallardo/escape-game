@@ -48,7 +48,8 @@ Vue.component('home', {
                     username : this.user2.username,
                     favMap : this.user2.favMap,
                     numTrophies : this.user2.numTrophies,
-                    profileImg : this.user2.profileImg
+                    profileImg : this.user2.profileImg,
+                    //friendList: this.user2.friendList
                 }
                 this.$emit('update-profile',newProfile)
             }

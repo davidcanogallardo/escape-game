@@ -55,6 +55,7 @@ Vue.component('change',{
                 {icon: 'biohazard'},
                 {icon: 'bomb'},
             ],
+
             colors: [
                 {color: 'red'},
                 {color: 'blue'},
@@ -78,21 +79,15 @@ Vue.component('change',{
             }
         },
         saveChanges(){
-            userCopy=this.user;
             profileImg={
                 iconBG: this.currentBG,
                 icon: this.currentIcon,
                 iconColor: this.currentIconColor,
             };
+            this.$root.user.profileImg= this.profileImg;
+            console.log(profileImg);
             console.log(this.$root.user);
-            userCopy.profileImg=profileImg;
-            this.$root.updateUser(userCopy);
-
-            profileImg={
-                iconBG: this.currentBG,
-                icon: this.currentIcon,
-                iconColor: this.currentIconColor,
-            };
+            console.log(this.$root.user.profileImg);
         }
     },
 })
