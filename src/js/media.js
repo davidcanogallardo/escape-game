@@ -2,7 +2,7 @@ var getusermedia = window.getUserMedia
 
 var devices = undefined;
 var webcamStarted = false;
-// var video = document.getElementById("myVideoStream");
+var audio = document.createElement('audio');
 
 /**
  * Get all the devices and populate the SELECT Html TAG called "webcam"
@@ -77,12 +77,33 @@ mediaDevicesPromise
 /**
  * Library to wrap navigator.getUserMedia and handle errors for all the diferent kind of browsers.
  */
-function startCamera() {
+
+function testMic(idMic) {
+	micButton = document.getElementById("micTest");
+	if (webcamStarted) {
+		console.log("turining OFF web cam");
+		micButton.innerHTML = "START TEST";
+	
+		if (audio) {
+			window.stream.getAudioTracks().forEach(track => track.stop());
+			// window.stream = null;
+		}
+	  } else {
+		console.log("turning ON webcam");
+		micButton.innerHTML = "STOP TEST";
+		startMic(idMic);
+	  }
+	  webcamStarted = !webcamStarted;
+}
+function startMic(idMic) {
+	var constraintsObject = {
+		deviceId: window.mic[0].id
+	  };
 	getusermedia(
 		{
 			//video: true,
-			video: constraintsObject,
-			audio: false,
+			video: false,
+			audio: constraintsObject,
 		},
 		function (err, stream) {
 			if (err) {
@@ -91,9 +112,11 @@ function startCamera() {
 				//We can create the object dinamycly if we need to
 				//video = document.createElement("video");
 				//document.body.appendChild(video);
-
-				video.srcObject = stream;
-				video.play();
+				const audio = document.createElement('audio');
+				audio.controls = true;
+				audio.autoplay = true;
+				window.stream = stream;
+				audio.srcObject = stream;
 			}
 		}
 	);
@@ -108,3 +131,38 @@ var constraintsObject = {
 		exact: undefined,
 	},
 };
+
+function micTest(){
+	micButton = document.getElementById("micTest");
+	if (navigator.mediaDevices) {
+	const constraints = window.constraints = {
+		audio: true, 
+		video: false
+	}
+	navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError)
+	}
+	micButton.innerHTML = "STOP TEST";
+}
+
+// Based On https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/audio
+
+	function handleSuccess(stream) {
+		if (window.stream) {
+			window.stream.getAudioTracks().forEach(track => track.stop());
+			window.stream = null;
+			micButton.innerHTML = "TEST MICROPHONE";
+			
+		} else {
+			const audio = document.createElement('audio');
+			audio.controls = true;
+			audio.autoplay = true;
+			window.stream = stream;
+			audio.srcObject = stream;
+
+			stream.oninactive = function() {
+			console.log('Stream ended');
+			};
+		}
+	}
+
+	function handleError(e){console.log("ruin", e.message);}
