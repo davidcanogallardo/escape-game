@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="./src/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="./src/images/favicon.ico" type="image/x-icon">
     
+    <!-- CDNs -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/b0d71d7fba.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
@@ -17,12 +18,16 @@
     <script src="https://unpkg.com/vue-i18n@8"></script>
     <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
     
+    <!-- Media -->
     <script src="./node_modules/getusermedia/getusermedia.bundle.js"></script>
-
     <script src="./src/js/media.js"></script>
 
+    <!-- Peer -->
+    <script type="module" src="./src/js/peer.js"></script>
+    <script type="module" src="./src/js/peer-controller.js"></script>
+
+    <!-- Vue -->
     <script type="module" src="./src/vue/App.js"></script>
-    <script src="./src/classes/user.js"></script>
     <script src="./src/vue/components/home.js"></script> 
     <script src="./src/vue/components/friends-sidebar.js"></script> 
     <script src="./src/vue/components/notifications-sidebar.js"></script>
@@ -40,6 +45,9 @@
     <script src="./src/vue/components/settings/change-language.js"></script>
     <script src="./src/vue/components/waiting-room.js"></script>
     <script type="module" type="application/javascript" src="./src/vue/components/chat.js"></script>
+    
+    <!-- Clases -->
+    <script src="./src/classes/user.js"></script>
     <script type="application/javascript" src="./src/classes/sound-settings.js"></script>
 </head>
 <body>

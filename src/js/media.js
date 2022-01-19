@@ -78,7 +78,7 @@ mediaDevicesPromise
  * Library to wrap navigator.getUserMedia and handle errors for all the diferent kind of browsers.
  */
 
-function testMic() {
+function testMic(idMic) {
 	micButton = document.getElementById("micTest");
 	if (webcamStarted) {
 		console.log("turining OFF web cam");
@@ -86,18 +86,18 @@ function testMic() {
 	
 		if (audio) {
 			window.stream.getAudioTracks().forEach(track => track.stop());
-			window.stream = null;
+			// window.stream = null;
 		}
 	  } else {
 		console.log("turning ON webcam");
 		micButton.innerHTML = "STOP TEST";
-		startMic();
+		startMic(idMic);
 	  }
 	  webcamStarted = !webcamStarted;
 }
-function startMic() {
+function startMic(idMic) {
 	var constraintsObject = {
-		deviceId: window.mic[1].id
+		deviceId: window.mic[0].id
 	  };
 	getusermedia(
 		{
