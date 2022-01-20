@@ -12,12 +12,14 @@ socket.on("message", data => {
 });
 
 socket.on("newMessage", data => {
+  var today = new Date();
+  var mins = ('0'+today.getMinutes()).slice(-2);
   console.log(data);
   console.log();
   let data2 = {
     message: data.message,
     sender: "friend",
-    time: "10:20"   
+    time: today.getHours() + ":" + mins 
   }
   append(data2)
 })
@@ -36,6 +38,8 @@ function setReceiver(name) {
 }
 
 function sendMessage(text) {
+  var today = new Date();
+  var mins = ('0'+today.getMinutes()).slice(-2);
   console.log(receiver+" ...--------");
   let messagee = text;
   socket.emit("sendChatMessage",{"users": {sender, receiver}, "message": messagee}, (response) => {
@@ -45,7 +49,7 @@ function sendMessage(text) {
       let data = {
         message: messagee,
         sender: "user",
-        time: "10:20"   
+        time: today.getHours() + ":" + mins 
       }
       append(data)
     } else {
