@@ -33,8 +33,16 @@ class ComunicacionServidor {
                 });
 
                 socket.on("playerMoved", (moveData) => {
-                    console.log(moveData);
+                    //console.log(moveData);
                     socket.in("gameRoom").emit("playerMoveResponse", moveData);
+                });
+
+                socket.on("getGuestID", (peerHostID) => {
+                    socket.emit("sendHostID", peerHostID);
+                });
+
+                socket.on("sendGuestID", (peerGuestID) => {
+                    socket.emit("guestResponse", peerGuestID);
                 });
             });
         }

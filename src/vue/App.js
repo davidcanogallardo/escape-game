@@ -2,20 +2,41 @@ import { i18n } from "../languages/language.js";
 import {getSessionUser} from "../js/utils.js"
 import { connect, disconnect} from "../js/chat-client.js";
 
+let peer = {
+    initiator: true,
+    trickle: false,
+};
+
 socket.on("matchFound", data => {
     console.log("Partida Encontrada");
-    //console.log(data);
     var titleScreen = game.scene.getScene("titlescreen");
     titleScreen.setPlayers(data);
-    app.currentPage = "game";
+
+    socket.emit("startPeer", peer);
     
-})
+    //app.currentPage = "game";
+});
 
-socket.on("matchPlayers", data => {
-    console.log("Me llegan los jugadores");
-    console.log("Data: "+data);
+socket.on("signalPeer", (peer) => {
+    let guestPeer = {
+        initiator: false,
+        trickle: false,
+    }
 
-})
+    guestPeer.signal(peer);
+
+    guestPeer.on("signal", (data) => {
+        if(data.type == "answer"){
+            socket.emit("guestAnswer", JSON.stringify(data));
+        }
+    });
+
+});
+
+socket.on("guestResponse", (guestID) => {
+    
+    peer.on()
+});
 
 let excludedPages = [
     "home",
