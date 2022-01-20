@@ -5,9 +5,11 @@ class PeerClient {
     }
 
     connection() {
+        this.peer.on("signal", (data) => {
+            console.log(data);
+            console.log("aaaafdbgfdngfn");
+        });
         //Handshake per iniciar la comunicació sense server
-
-
         this.peer.on("data", (data) => {
             console.log(data);
         });
@@ -20,7 +22,7 @@ class PeerClient {
         });
 
         this.peer.on("connect", () => {
-            console.log("Connection Established!!!");
+            console.log("1111111Connection Established!!!");
         });
 
         this.peer.on("close", () => {
@@ -40,5 +42,10 @@ class PeerClient {
             // controlsStreamingButton.style.backgroundColor = "lightcoral";
             streamingStarted = false;
         });
+    }
+
+    sendText(message) {
+        console.log("message => " + message);
+        this.peer.send(message);
     }
 }
