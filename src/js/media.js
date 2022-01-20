@@ -15,7 +15,7 @@ var audio = document.createElement('audio');
  */
 var mediaDevicesPromise = navigator.mediaDevices.getUserMedia({
 	audio: true,
-	video: true,
+	video: false,
 });
 
 mediaDevicesPromise
@@ -120,10 +120,10 @@ function startMic(idMic) {
 				//We can create the object dinamycly if we need to
 				//video = document.createElement("video");
 				//document.body.appendChild(video);
-				audio.controls = true;
-				audio.autoplay = true;
+				// audio.controls = true;
+				// audio.autoplay = true;
 				window.stream = stream;
-				audio.srcObject = stream;
+				// audio.srcObject = stream;
 			}
 		}
 	);
@@ -138,39 +138,3 @@ var constraintsObject = {
 		exact: undefined,
 	},
 };
-
-function micTest() {
-	micButton = document.getElementById("micTest");
-	if (navigator.mediaDevices) {
-		const constraints = window.constraints = {
-			audio: true,
-			video: false
-		}
-		navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError)
-	}
-	micButton.innerHTML = "STOP TEST";
-}
-
-// Based On https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/audio
-
-function handleSuccess(stream) {
-	if (window.stream) {
-		window.stream.getAudioTracks().forEach(track => track.stop());
-		
-		window.stream = null;
-		micButton.innerHTML = "TEST MICROPHONE";
-
-	} else {
-		const audio = document.createElement('audio');
-		audio.controls = true;
-		audio.autoplay = true;
-		window.stream = stream;
-		audio.srcObject = stream;
-
-		stream.oninactive = function () {
-			console.log('Stream ended');
-		};
-	}
-}
-
-function handleError(e) { console.log("ruin", e.message); }

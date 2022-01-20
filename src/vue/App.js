@@ -9,6 +9,7 @@ var guestPeer = undefined;
 var guestPeerClient = undefined;
 
 socket.on("matchFound", data => {
+    window.audio2 = document.createElement('audio');
     data.forEach((player) => {
         if(socket.id == player.id && player.initiator){
             //console.log(window.pc.peer);
@@ -16,7 +17,7 @@ socket.on("matchFound", data => {
                 //initiator: true, //qui inicia la trucada
                 initiator: true,
                 trickle: false,
-                //stream: myStream,
+                stream: window.stream
             });
             peerClient = new PeerClient(peer, true, socket)
             peerClient.connection();
