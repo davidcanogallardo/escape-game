@@ -1,4 +1,4 @@
-import Peer from '../../node_modules/simple-peer-light/simplepeer.min.js';
+/*import Peer from '../../node_modules/simple-peer-light/simplepeer.min.js';
 import {addLogMessage, getMyPeerId, signalMyPeer, step3} from './peer.js'
 
 var peer = new Peer({
@@ -28,3 +28,4 @@ window.step3 = step3
 // window.log = addLogMessage
 // addLogMessage("uwu")
 
+*/

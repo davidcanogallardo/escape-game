@@ -1,13 +1,20 @@
 class PeerClient {
-    constructor(peer, isInitiator) {
+    constructor(peer, isInitiator, id) {
         this.peer = peer
         this.isInitiator = isInitiator
+        this.id = undefined
+        this.socket = socket
+        this.name = this.socket.id;
     }
 
     connection() {
         this.peer.on("signal", (data) => {
-            console.log(data);
-            console.log("aaaafdbgfdngfn");
+            this.id = data;
+            if(this.isInitiator && data.type == "offer"){
+                socket.emit("startPeer", data);
+            } else if(!this.isInitiator && data.type == "answer"){
+                socket.emit("sendGuestID", data);
+            }
         });
         //Handshake per iniciar la comunicació sense server
         this.peer.on("data", (data) => {
@@ -31,7 +38,7 @@ class PeerClient {
 
             // controlsStreamingButton.innerHTML = "START STREAMING";
             // controlsStreamingButton.style.backgroundColor = "lightcoral";
-            streamingStarted = false;
+            //streamingStarted = false;
         });
         
         this.peer.on("error", (err) => {
@@ -40,7 +47,7 @@ class PeerClient {
 
             // controlsStreamingButton.innerHTML = "START STREAMING";
             // controlsStreamingButton.style.backgroundColor = "lightcoral";
-            streamingStarted = false;
+            //streamingStarted = false;
         });
     }
 

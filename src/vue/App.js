@@ -1,41 +1,45 @@
 import { i18n } from "../languages/language.js";
 import {getSessionUser} from "../js/utils.js"
 import { connect, disconnect} from "../js/chat-client.js";
+import Peer from '../../node_modules/simple-peer-light/simplepeer.min.js'
 
-let peer = {
-    initiator: true,
-    trickle: false,
-};
+var peer = undefined;
+var peerClient = undefined;
+var guestPeer = undefined;
+var guestPeerClient = undefined;
 
 socket.on("matchFound", data => {
-    console.log("Partida Encontrada");
-    var titleScreen = game.scene.getScene("titlescreen");
-    titleScreen.setPlayers(data);
-
-    socket.emit("startPeer", peer);
-    
-    //app.currentPage = "game";
-});
-
-socket.on("signalPeer", (peer) => {
-    let guestPeer = {
-        initiator: false,
-        trickle: false,
-    }
-
-    guestPeer.signal(peer);
-
-    guestPeer.on("signal", (data) => {
-        if(data.type == "answer"){
-            socket.emit("guestAnswer", JSON.stringify(data));
+    data.forEach((player) => {
+        if(socket.id == player.id && player.initiator){
+            //console.log(window.pc.peer);
+            peer = new Peer({
+                //initiator: true, //qui inicia la trucada
+                initiator: true,
+                trickle: false,
+                //stream: myStream,
+            });
+            peerClient = new PeerClient(peer, true, socket)
+            peerClient.connection();
+        } else {
+            guestPeer = new Peer({
+                initiator: false,
+                trickle: false,
+            })
+            guestPeerClient = new PeerClient(guestPeer, false, socket)
+            guestPeerClient.connection();
         }
     });
 
-});
+    socket.on("getGuestID", (guestID) => {
+        peerClient.peer.signal(guestID);
+    })
 
-socket.on("guestResponse", (guestID) => {
+    socket.on("sendHostID", (hostID) => {
+        guestPeerClient.peer.signal(hostID);
+    })
     
-    peer.on()
+    var titleScreen = game.scene.getScene("titlescreen");
+    titleScreen.setPlayers(data);
 });
 
 let excludedPages = [
