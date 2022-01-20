@@ -1,6 +1,4 @@
-import { connect } from "./chat-client.js";
-var a = new SoundSettings()
-console.error(a);
+// import { connect } from "./chat-client.js";
 //recover user session
 function getSessionUser() {
   let sessionUser = JSON.parse(sessionStorage.getItem("session"));

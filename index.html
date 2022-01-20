@@ -27,12 +27,7 @@
     <script src="./node_modules/getusermedia/getusermedia.bundle.js"></script>
     <script src="./src/js/media.js"></script>
 
-    <!-- Peer -->
-    <script type="module" src="./src/js/peer.js"></script>
-    <script type="module" src="./src/js/peer-controller.js"></script>
-
     <!-- Vue -->
-    <script type="module" src="./src/vue/App.js"></script>
     <script src="./src/vue/components/home.js"></script> 
     <script src="./src/vue/components/friends-sidebar.js"></script> 
     <script src="./src/vue/components/notifications-sidebar.js"></script>
@@ -51,6 +46,7 @@
     <script src="./src/vue/components/waiting-room.js"></script>
     <script type="module" type="application/javascript" src="./src/vue/components/chat.js"></script>
     
+    <script type="module" src="./src/vue/App.js"></script>
 
 </head>
 <body>
@@ -82,6 +78,7 @@
                 <sound-settings 
                     v-if="currentPage == 'sound-settings'" 
                     v-on:change-page="currentPage = $event"
+                    v-on:update-mic="mainMicId = $event"
                 >
                 </sound-settings>
                 <connect-controller 
@@ -162,8 +159,9 @@
         </div>
     </div>
     <script>
-        const socket = io("ws://192.168.0.17:3000");
-    </script> 
+        const socket = io("ws://192.168.0.14:3000");
+    </script>
+    <!-- Scenes Phaser -->
     <script type="application/javascript" defer src="./demo_game/scenes/Player.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/WallsLayer.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/Prueba.js"></script>
