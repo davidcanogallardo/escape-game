@@ -33,8 +33,17 @@ class ComunicacionServidor {
                 });
 
                 socket.on("playerMoved", (moveData) => {
-                    console.log(moveData);
                     socket.in("gameRoom").emit("playerMoveResponse", moveData);
+                });
+
+
+                //Create Peer Connection
+                socket.on("startPeer", (hostID) => {
+                    socket.in("gameRoom").emit("sendHostID", hostID);
+                });
+
+                socket.on("sendGuestID", (guestID) => {
+                    socket.in("gameRoom").emit("getGuestID", guestID);
                 });
             });
         }
@@ -48,7 +57,8 @@ class ComunicacionServidor {
                             id: socket.id,
                             userame: data.username,
                             x: 100,
-                            y: 250
+                            y: 250,
+                            initiator: true
                         }
                         socket.join("gameRoom");
                         this.queue.push(player);
@@ -57,7 +67,8 @@ class ComunicacionServidor {
                             id: socket.id,
                             userame: data.username,
                             x: 250,
-                            y: 250
+                            y: 250,
+                            initiator: false
                         }
                         socket.join("gameRoom");
                         this.queue.push(player);
@@ -65,6 +76,8 @@ class ComunicacionServidor {
                         //console.log("Jugadores: ");
                         console.log("PARTIDA ENCONTRADA");
                         this.io.in("gameRoom").emit('matchFound', this.queue);
+
+
                     }
                     console.log(this.queue);
                     console.log(this.io.sockets.adapter.rooms);

@@ -1,7 +1,7 @@
 import Peer from '../../node_modules/simple-peer-light/simplepeer.min.js';
 var peer = undefined;
 
-
+// step 1
 function getMyPeerId() {
 	console.log("I'm the initiator and i'm ready to get my Peer ID");
 	peer = new Peer({
@@ -10,6 +10,8 @@ function getMyPeerId() {
 		trickle: false,
 		//stream: myStream,
 	});
+	window.peer = peer
+	console.log(peer.initiator);
 
 	//Handshake per iniciar la comunicació sense server
 	peer.on("signal", (data) => {
@@ -26,7 +28,64 @@ function getMyPeerId() {
 		addLogMessage("SIGNALING TYPE : " + data.type);
 
 		if (data.type == "offer") {
-			document.getElementById("yourID").value = JSON.stringify(data);
+			addLogMessage(JSON.stringify(data))
+			// document.getElementById("yourID").value = JSON.stringify(data);
+		} else {
+			console.log("a");
+			addLogMessage(JSON.stringify(data));
+		}
+	});
+
+	peer.on("data", (data) => {
+		addLogMessage(data);
+	});
+
+	peer.on("stream", (stream) => {
+		//Stream de dades que rebo de l'altre costat
+		console.log("event on stream from initiator");
+		// document.getElementById("remoteVideoStream").srcObject = stream;
+		// document.getElementById("remoteVideoStream").play();
+	});
+
+	peer.on("connect", () => {
+		addLogMessage("Connection Established!!!");
+	});
+
+	peer.on("close", () => {
+		addLogMessage("Connection Closed");
+		// var controlsStreamingButton = document.getElementById("sendVideoStream");
+
+		// controlsStreamingButton.innerHTML = "START STREAMING";
+		// controlsStreamingButton.style.backgroundColor = "lightcoral";
+		streamingStarted = false;
+	});
+	
+	peer.on("error", (err) => {
+		addLogError(err);
+		// var controlsStreamingButton = document.getElementById("sendVideoStream");
+
+		// controlsStreamingButton.innerHTML = "START STREAMING";
+		// controlsStreamingButton.style.backgroundColor = "lightcoral";
+		streamingStarted = false;
+	});
+}
+
+// step 2
+function signalMyPeer(remoteID) {
+	console.log("Signaling my peer");
+	peer = new Peer({
+		initiator: false,
+		trickle: false,
+		//stream: myStream,
+	});
+	peer.on("signal", (data) => {
+		//es crida cada cop que es crea un nou objecte Peer
+		console.log("MY ID TO ACCEPT CALL:");
+		console.log(data);
+		addLogMessage("SIGNALING TYPE : " + data.type);
+		if (data.type == "answer") {
+			console.log(JSON.stringify(data));
+			// document.getElementById("yourID").value = JSON.stringify(data);
 		} else {
 			addLogMessage(JSON.stringify(data));
 		}
@@ -36,35 +95,46 @@ function getMyPeerId() {
 	});
 	peer.on("stream", (stream) => {
 		//Stream de dades que rebo de l'altre costat
-		console.log("event on stream from initiator");
-		document.getElementById("remoteVideoStream").srcObject = stream;
-		document.getElementById("remoteVideoStream").play();
+
+		// console.log("event on stream from NO initiator user");
+
+		// document.getElementById("remoteVideoStream").srcObject = stream;
+		// document.getElementById("remoteVideoStream").play();
 	});
+
+	//Need to signal the initiator to be abble to get our ID
+	console.log(remoteID);
+	console.log(typeof remoteID);
+	peer.signal(remoteID);
 
 	peer.on("connect", () => {
 		addLogMessage("Connection Established!!!");
 	});
 	peer.on("close", () => {
 		addLogMessage("Connection Closed");
-		var controlsStreamingButton = document.getElementById("sendVideoStream");
+		// var controlsStreamingButton = document.getElementById("sendVideoStream");
 
-		controlsStreamingButton.innerHTML = "START STREAMING";
-		controlsStreamingButton.style.backgroundColor = "lightcoral";
+		// controlsStreamingButton.innerHTML = "START STREAMING";
+		// controlsStreamingButton.style.backgroundColor = "lightcoral";
 		streamingStarted = false;
 	});
 	peer.on("error", (err) => {
-		addLogError(err);
-		var controlsStreamingButton = document.getElementById("sendVideoStream");
+		addLogMessage(err);
+		// var controlsStreamingButton = document.getElementById("sendVideoStream");
 
-		controlsStreamingButton.innerHTML = "START STREAMING";
-		controlsStreamingButton.style.backgroundColor = "lightcoral";
+		// controlsStreamingButton.innerHTML = "START STREAMING";
+		// controlsStreamingButton.style.backgroundColor = "lightcoral";
 		streamingStarted = false;
 	});
 }
 
-
-function addLogMessage(txt) {
-	console.log(txt);
+// step 3
+function step3(remoteID) {
+	peer.signal(remoteID);
 }
 
-export {addLogMessage, getMyPeerId}
+function addLogMessage(txt) {
+	console.error(txt);
+}
+
+export {addLogMessage, getMyPeerId, signalMyPeer, step3}

@@ -1,21 +1,46 @@
 import { i18n } from "../languages/language.js";
 import {getSessionUser} from "../js/utils.js"
 import { connect, disconnect} from "../js/chat-client.js";
+import Peer from '../../node_modules/simple-peer-light/simplepeer.min.js'
+
+var peer = undefined;
+var peerClient = undefined;
+var guestPeer = undefined;
+var guestPeerClient = undefined;
 
 socket.on("matchFound", data => {
-    console.log("Partida Encontrada");
-    //console.log(data);
+    data.forEach((player) => {
+        if(socket.id == player.id && player.initiator){
+            //console.log(window.pc.peer);
+            peer = new Peer({
+                //initiator: true, //qui inicia la trucada
+                initiator: true,
+                trickle: false,
+                //stream: myStream,
+            });
+            peerClient = new PeerClient(peer, true, socket)
+            peerClient.connection();
+        } else {
+            guestPeer = new Peer({
+                initiator: false,
+                trickle: false,
+            })
+            guestPeerClient = new PeerClient(guestPeer, false, socket)
+            guestPeerClient.connection();
+        }
+    });
+
+    socket.on("getGuestID", (guestID) => {
+        peerClient.peer.signal(guestID);
+    })
+
+    socket.on("sendHostID", (hostID) => {
+        guestPeerClient.peer.signal(hostID);
+    })
+    
     var titleScreen = game.scene.getScene("titlescreen");
     titleScreen.setPlayers(data);
-    app.currentPage = "game";
-    
-})
-
-socket.on("matchPlayers", data => {
-    console.log("Me llegan los jugadores");
-    console.log("Data: "+data);
-
-})
+});
 
 let excludedPages = [
     "home",
