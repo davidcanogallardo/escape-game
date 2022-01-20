@@ -1,6 +1,5 @@
 import Peer from '../../node_modules/simple-peer-light/simplepeer.min.js';
 var peer = undefined;
-var streamingStarted = false;
 
 // step 1
 function getMyPeerId() {
@@ -11,6 +10,8 @@ function getMyPeerId() {
 		trickle: false,
 		//stream: myStream,
 	});
+	window.peer = peer
+	console.log(peer.initiator);
 
 	//Handshake per iniciar la comunicació sense server
 	peer.on("signal", (data) => {
@@ -34,9 +35,11 @@ function getMyPeerId() {
 			addLogMessage(JSON.stringify(data));
 		}
 	});
+
 	peer.on("data", (data) => {
 		addLogMessage(data);
 	});
+
 	peer.on("stream", (stream) => {
 		//Stream de dades que rebo de l'altre costat
 		console.log("event on stream from initiator");
@@ -47,6 +50,7 @@ function getMyPeerId() {
 	peer.on("connect", () => {
 		addLogMessage("Connection Established!!!");
 	});
+
 	peer.on("close", () => {
 		addLogMessage("Connection Closed");
 		// var controlsStreamingButton = document.getElementById("sendVideoStream");
@@ -55,6 +59,7 @@ function getMyPeerId() {
 		// controlsStreamingButton.style.backgroundColor = "lightcoral";
 		streamingStarted = false;
 	});
+	
 	peer.on("error", (err) => {
 		addLogError(err);
 		// var controlsStreamingButton = document.getElementById("sendVideoStream");
@@ -125,7 +130,7 @@ function signalMyPeer(remoteID) {
 
 // step 3
 function step3(remoteID) {
-	peer.signal(JSON.stringify(remoteID));
+	peer.signal(remoteID);
 }
 
 function addLogMessage(txt) {
