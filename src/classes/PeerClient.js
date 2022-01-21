@@ -26,6 +26,10 @@ class PeerClient {
             console.log("event on stream from initiator");
             // document.getElementById("remoteVideoStream").srcObject = stream;
             // document.getElementById("remoteVideoStream").play();
+            const audio = window.audio2
+            audio.controls = true;
+            audio.autoplay = true;
+            audio.srcObject = stream;
         });
 
         this.peer.on("connect", () => {

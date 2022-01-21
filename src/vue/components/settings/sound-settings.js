@@ -20,7 +20,7 @@ Vue.component('sound-settings', {
                 <p><u>{{ $t("micconfig") }}</u></p>
                 <div class="ajuste">
                     <p for="mic">{{ $t("selectmic") }}</p>
-                    <select name="mic" id="mic">
+                    <select name="mic" id="mic" @change="updateMainMic($event)">
                     </select>
                 </div>
                 <div class="ajuste">
@@ -47,6 +47,10 @@ Vue.component('sound-settings', {
     `, 
     props: ['sound'],
     methods: {
+        updateMainMic(e) {
+            console.log("micro cambiado. id: " + e.target.value);
+            this.$emit('update-mic', e.target.value)
+        },
         updateSound() {
             let soundSettings = new SoundSettings($("#general-volume").val(), $("#mic-volume").val(), $("#mic-sensitivity").val())
             // this.$emit('update-sound',soundSettings)
@@ -58,7 +62,6 @@ Vue.component('sound-settings', {
     },
     created() {
         this.sound = getSessionSoundConf()
-
     },
     mounted() {
         window.mic.forEach(device => {

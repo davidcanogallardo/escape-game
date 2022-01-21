@@ -4,18 +4,9 @@ var devices = undefined;
 var webcamStarted = false;
 var audio = document.createElement('audio');
 
-/**
- * Get all the devices and populate the SELECT Html TAG called "webcam"
- * So we can recover the id of any devive and start the webcam
- *
- * We put this code inside of a promise, otherwise if we don't have permissions from the user yet
- * we couldn't recive the información and we would need to reload.
- * If we place the code in the "then" part of the promise, the code is gonna run just in the moment
- * when we got answer from the user.
- */
 var mediaDevicesPromise = navigator.mediaDevices.getUserMedia({
 	audio: true,
-	video: true,
+	video: false,
 });
 
 mediaDevicesPromise
@@ -62,7 +53,6 @@ mediaDevicesPromise
 						// micArray.appendChild(option);
 					}
 					window.mic = micArray
-					console.log(micArray);
 					window.cam = camArray
 				});
 			})
@@ -80,6 +70,7 @@ mediaDevicesPromise
  */
 
 function testMic() {
+
 	micButton = document.getElementById("micTest");
 	if (webcamStarted) {
 		console.log("turining OFF web cam");
@@ -120,10 +111,10 @@ function startMic(idMic) {
 				//We can create the object dinamycly if we need to
 				//video = document.createElement("video");
 				//document.body.appendChild(video);
-				audio.controls = true;
-				audio.autoplay = true;
+				// audio.controls = true;
+				// audio.autoplay = true;
 				window.stream = stream;
-				audio.srcObject = stream;
+				// audio.srcObject = stream;
 			}
 		}
 	);

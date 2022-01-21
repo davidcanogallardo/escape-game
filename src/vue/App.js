@@ -7,16 +7,17 @@ var peer = undefined;
 var peerClient = undefined;
 var guestPeer = undefined;
 var guestPeerClient = undefined;
-
+var mic = undefined
 socket.on("matchFound", data => {
+    window.audio2 = document.createElement('audio');
+    // startMic(mic)
     data.forEach((player) => {
         if(socket.id == player.id && player.initiator){
-            //console.log(window.pc.peer);
+            console.log(app);
             peer = new Peer({
-                //initiator: true, //qui inicia la trucada
                 initiator: true,
                 trickle: false,
-                //stream: myStream,
+                stream: window.stream
             });
             peerClient = new PeerClient(peer, true, socket)
             peerClient.connection();
@@ -51,7 +52,8 @@ let excludedPages = [
     "sound-settings",
     "connect-controller",
     "test-controller",
-    "change-language"
+    "change-language",
+    "waiting-room"
 ]
 
 let _url = "./src/backend/petitions.php";
@@ -68,26 +70,35 @@ var app = new Vue({
       rankingData: null,
       friendChat: null,
       lastMessage: null,
+      mainMicId: null
     },
     watch: {
-      currentPage: function (newPage, oldPage) {
+        currentPage: function (newPage, oldPage) {
         if (!sessionStorage.getItem("session") && !excludedPages.includes(newPage)) {
-          console.log("no hay sesión");
-          this.currentPage = "login-warning"
+            console.log("no hay sesión");
+            this.currentPage = "login-warning"
         } else {
-          console.log("hay sesión");
+            console.log("hay sesión "+ newPage);
+            if (newPage=="waiting-room") {
+                if (!this.mainMicId) {
+                    this.mainMicId = window.mic[0].id
+                }
+            }
         }
         this.menuOpen = "none"
-      },
-      menuOpen: function () {
+        },
+        menuOpen: function () {
         if (!sessionStorage.getItem("session") ) {
-          console.log("no hay sesión");
-          this.currentPage = "login-warning"
+            console.log("no hay sesión");
+            this.currentPage = "login-warning"
         } else {
             this.modalOpen = "none";
             console.log("hay sesión");
         } 
-      }
+        },
+        mainMicId: function (n,o) {  
+            mic = n;
+        }
     },
     mounted() {
         this._i18n.locale = this.user.language;
@@ -402,5 +413,5 @@ var app = new Vue({
     },
 
 })
-window.a = app
+var that = this
 export { app } 
