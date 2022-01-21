@@ -30,10 +30,7 @@ mediaDevicesPromise
 						// option.innerHTML = device.label;
 						// option.value = device.deviceId;
 
-						if (constraintsObject.deviceId == undefined) {
-							//Checking the right one
-							constraintsObject.deviceId = device.deviceId;
-						}
+						
 						camArray.push(cam)
 						// camArray.appendChild(option);
 					} else if (device.kind == "audioinput") {
@@ -45,10 +42,7 @@ mediaDevicesPromise
 						// option.innerHTML = device.label;
 						// option.value = device.deviceId;
 
-						if (constraintsObject.deviceId == undefined) {
-							//Checking the right one
-							constraintsObject.deviceId = device.deviceId;
-						}
+						
 						micArray.push(mic)
 						// micArray.appendChild(option);
 					}
@@ -115,6 +109,7 @@ function startMic(idMic) {
 				// audio.autoplay = true;
 				window.stream = stream;
 				// audio.srcObject = stream;
+				return "a"
 			}
 		}
 	);
