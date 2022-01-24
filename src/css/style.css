@@ -90,7 +90,7 @@ h3{
 }
 
 body {
-    font-size: 3vw;
+    font-size: 2vw;
     background-image: url("./../images/bg.png");
     overflow: hidden;
     
@@ -537,12 +537,12 @@ body {
 .all_settings{
     display: flex;
     flex-direction: column;
-    width: 100vw;
+    width: 80vw;
     align-items: center;
 }
 
 .ajuste_sonido{
-    width: 80%;
+    width: 60vw;
 }
 
 .ajuste{
@@ -553,7 +553,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100px;
+    height: 4vw;
 }
 
 .ajuste > *{
@@ -569,7 +569,7 @@ body {
 .mic_config{
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 60vw;
 }
 
 .mic_config > .ajuste{
@@ -577,12 +577,12 @@ body {
 }
 
 .mic_config select{
-    height: 50px;
-    width: 30%;
+    height: 3vw;
+    width: 20vw;
     padding-right: 2%;
     border: none;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 14px;
 }
 
 .sound_settings input[type=range] {
