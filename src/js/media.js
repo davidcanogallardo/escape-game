@@ -69,7 +69,7 @@ function testMic() {
 	if (webcamStarted) {
 		console.log("turining OFF web cam");
 		micButton.innerHTML = "TEST MICROPHONE";
-
+		document.getElementById("video").removeChild(video);
 		if (audio) {
 			console.log("hay audio");
 			window.stream.getAudioTracks().forEach(track => track.stop());
@@ -83,19 +83,19 @@ function testMic() {
 		audio = document.createElement('audio');
 		console.log("turning ON webcam");
 		micButton.innerHTML = "STOP TEST";
-		startMic(idMic);
+		startMedia();
 	}
 	webcamStarted = !webcamStarted;
 }
-function startMic(idMic) {
+function startMedia() {
 	var constraintMic = {
-		deviceId: {exact:idMic},
+		deviceId: {exact:window.mic[0].id},
 	};	
 	
 	getusermedia(
 		{
 			//video: true,
-			video: false,
+			video: window.cam[0].id,
 			audio: constraintMic
 		},
 		function (err, stream) {
@@ -103,12 +103,12 @@ function startMic(idMic) {
 				console.log(err);
 			} else {
 				//We can create the object dinamycly if we need to
-				//video = document.createElement("video");
-				//document.body.appendChild(video);
-				// audio.controls = true;
-				// audio.autoplay = true;
+				video = document.createElement("video");
+				document.getElementById("video").appendChild(video);
+				audio.controls = true;
+				audio.autoplay = true;
 				window.stream = stream;
-				// audio.srcObject = stream;
+				audio.srcObject = stream;
 				return "a"
 			}
 		}

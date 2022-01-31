@@ -40,9 +40,8 @@ Vue.component('sound-settings', {
                 </div>
             </div>
         </div>
-
         <div class="btn red block volver settings-link link" page="settings-page" v-on:click="updateSound();$emit('change-page','settings')">{{ $t("return") }}</div>
-        
+        <div id = "video"></div>
     </div>
     `, 
     props: ['sound'],
