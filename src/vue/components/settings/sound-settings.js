@@ -4,6 +4,7 @@ Vue.component('sound-settings', {
     template: //html
     `             
     <div class="sound_settings">
+    <div id="video"></div>
         <h1>{{ $t("soundconfig") }}</h1>
 
         <div class="all_settings scrollbar">
@@ -41,7 +42,6 @@ Vue.component('sound-settings', {
             </div>
         </div>
         <div class="btn red block volver settings-link link" page="settings-page" v-on:click="updateSound();$emit('change-page','settings')">{{ $t("return") }}</div>
-        <div id = "video"></div>
     </div>
     `, 
     props: ['sound'],
