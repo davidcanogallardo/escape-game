@@ -45,6 +45,10 @@ class ComunicacionServidor {
                 socket.on("sendGuestID", (guestID) => {
                     socket.in("gameRoom").emit("getGuestID", guestID);
                 });
+
+                socket.on("switchToGame", () => {
+                    this.io.in("gameRoom").emit("windowGame");
+                });
             });
         }
     
@@ -76,8 +80,6 @@ class ComunicacionServidor {
                         //console.log("Jugadores: ");
                         console.log("PARTIDA ENCONTRADA");
                         this.io.in("gameRoom").emit('matchFound', this.queue);
-
-
                     }
                     console.log(this.queue);
                     console.log(this.io.sockets.adapter.rooms);
