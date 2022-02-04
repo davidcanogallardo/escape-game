@@ -237,15 +237,15 @@ class Game extends Phaser.Scene {
   
     update() {
         this.playersGroup.getChildren().forEach(player => {
-            console.log(player);
+            // console.log(player);
             let count = 0;
-            console.log(count);
+            // console.log(count);
             if(player.inZone==true){
                 count++;
-                console.log(count);
+                // console.log(count);
             }
             if(count == 2){
-                console.log(count);
+                // console.log(count);
                 socket.emit("playerInEndZone", player);
             }
         });

@@ -9,15 +9,12 @@ var guestPeer = undefined;
 var guestPeerClient = undefined;
 var mic = undefined
 socket.on("matchFound", data => {
-    startPeerStream(startClientPeer)
-
+    startPeerStream(startClientPeer, data)
 });
 
-function startClientPeer() {
-    // 
+function startClientPeer(data) {
     data.forEach((player) => {
         if (socket.id == player.id && player.initiator) {
-            //console.log(app);
             peer = new Peer({
                 initiator: true,
                 trickle: false,
@@ -46,7 +43,6 @@ function startClientPeer() {
 
     var titleScreen = game.scene.getScene("titlescreen");
     titleScreen.setPlayers(data);
-    // 
 }
 
 console.log("Prueba");
@@ -333,7 +329,6 @@ var app = new Vue({
                 .done((data) => {
                     console.log(data);
                     if (data.success) {
-                        // updateFriendList(event, accept, friendName)
                         if (accept) {
                             this.$root.user.friendsList.push(friend)
 
