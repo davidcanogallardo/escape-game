@@ -7,7 +7,6 @@ var peer = undefined;
 var peerClient = undefined;
 var guestPeer = undefined;
 var guestPeerClient = undefined;
-var mic = undefined
 socket.on("matchFound", data => {
     startPeerStream(startClientPeer, data)
 });
@@ -111,6 +110,11 @@ var app = new Vue({
     },
     mounted() {
         this._i18n.locale = this.user.language;
+        this.$nextTick(() => {
+            if (this.user) {
+                connect()
+            }
+          });
     },
     methods: {
         loginPetition(form_data) {

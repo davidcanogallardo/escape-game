@@ -25,9 +25,8 @@ socket.on("newMessage", data => {
 })
 
 function connect() {
-  console.log("fdffdf");
+  console.log("conectado a socket server");
   console.log("=>"+socket);
-  // socket.auth = { "hola": "sgd" };
   socket.connect();
   sender = app.user.username
   socket.emit("chatUserConnect", sender);
