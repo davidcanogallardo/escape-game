@@ -17,7 +17,7 @@ class Time extends Phaser.Scene {
         //Evento que se ejecturá en bucle cada 1s y actualizará el tiempo
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.updateTime, callbackScope: this, loop: true });
 
-        this.scene.get('game').events.on("end", this.end, this)
+        this.scene.get('game').events.on("end", this.end, this);
     }
 
     update() {

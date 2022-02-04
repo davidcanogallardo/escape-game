@@ -58,10 +58,23 @@ class Game extends Phaser.Scene {
         endTile.body.setSize(35,20)
         endTile.visible = false
 
-        this.physics.add.overlap(endTile, this.playersGroup, function () {
-            console.log("fin de partida")
+        this.playersGroup.getChildren().forEach(player => {
+            this.physics.add.overlap(endTile, player, function () {
+                //player.active = false;
+                player.inZone = true;
+                //
+            });
+        });
+
+
+        socket.on("endGame", () => {
+            console.log("fin de partida");
             that.events.emit("end");
-        })
+        });
+        // this.physics.add.overlap(endTile, this.playersGroup, function () {
+        //     console.log("fin de partida")
+        //     that.events.emit("end");
+        // })
 
         this.wallsLayer = new WallsLayer(this);
         
@@ -223,7 +236,19 @@ class Game extends Phaser.Scene {
     }
   
     update() {
-        
+        this.playersGroup.getChildren().forEach(player => {
+            console.log(player);
+            let count = 0;
+            console.log(count);
+            if(player.inZone==true){
+                count++;
+                console.log(count);
+            }
+            if(count == 2){
+                console.log(count);
+                socket.emit("playerInEndZone", player);
+            }
+        });
 
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
