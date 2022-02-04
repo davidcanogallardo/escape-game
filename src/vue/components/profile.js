@@ -1,7 +1,7 @@
 Vue.component('change',{
     template: //html
     `
-    <div class="container-change" >
+    <div class="container-change">
         <div class="close" v-on:click="$emit('change-img', false)">
             <i class="fas fa-times"></i>
         </div>
@@ -97,8 +97,10 @@ Vue.component('profile', {
     <change v-if="page == 'profile' && changeImg == true" class="change" v-on:change-img="changeImg = $event" v-on:changeProfileImg="profileImg = $event" :user="user"></change>
         <h1 id="profile-name">{{user.username}}</h1>
         <div class="container-profile">
-            <div :class="'icon icon-profile bg-'+profileImg.iconBG"v-on:click="changeImg = true">
+            <div :class="'icon icon-profile bg-'+profileImg.iconBG"v-on:click="changeImg = true" style="position:relative;">
                 <i :class="'i-profile fas fa-'+profileImg.icon+' color-'+profileImg.iconColor" aria-hidden="true"></i>
+
+                <i v-if="page == 'profile'" class="fas fa-edit" aria-hidden="true" style="position: absolute;top: 0;right: -1vw;font-size: 3vw;color: black;"></i>
             </div>
             <br>
             <table class="table-profile">
