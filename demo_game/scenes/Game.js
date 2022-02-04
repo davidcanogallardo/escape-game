@@ -33,6 +33,13 @@ class Game extends Phaser.Scene {
 
     create() {
         var that = this
+
+        this.events.on("tiempo", (tiempo) => {
+            that.scene.remove('time')
+            console.log("tiempo recibido "+ tiempo)
+            that.scene.start("gameover",{ score : tiempo})
+        }, this)
+
         this.map = this.make.tilemap({
             key: "map"
         });
@@ -45,6 +52,29 @@ class Game extends Phaser.Scene {
         //console.log(this.playersGroup);
         //this.player = new Player(this);
         //this.playerCollider = this.player.playerCollider
+
+        var end = this.physics.add.staticGroup();
+        var endTile = end.create(158,14)
+        endTile.body.setSize(35,20)
+        endTile.visible = false
+
+        this.playersGroup.getChildren().forEach(player => {
+            this.physics.add.overlap(endTile, player, function () {
+                //player.active = false;
+                player.inZone = true;
+                //
+            });
+        });
+
+
+        socket.on("endGame", () => {
+            console.log("fin de partida");
+            that.events.emit("end");
+        });
+        // this.physics.add.overlap(endTile, this.playersGroup, function () {
+        //     console.log("fin de partida")
+        //     that.events.emit("end");
+        // })
 
         this.wallsLayer = new WallsLayer(this);
         
@@ -191,15 +221,35 @@ class Game extends Phaser.Scene {
             this.scene.pause();
         }
         //*************************************************************Escena de victoria
-        this.scene.get('enterPasswordScene').events.on('victoria', () => {
+        socket.on("passwordPuzzleResolved", (data) => {
             this.doorsGroup.playAnimation('opening-door');
             this.physics.world.removeCollider(this.doorsColider);
             // this.table.disableBody();
             that.canDoPuzzle = false
         });
+        // this.scene.get('enterPasswordScene').events.on('victoria', () => {
+        //     this.doorsGroup.playAnimation('opening-door');
+        //     this.physics.world.removeCollider(this.doorsColider);
+        //     // this.table.disableBody();
+        //     that.canDoPuzzle = false
+        // });
     }
   
     update() {
+        this.playersGroup.getChildren().forEach(player => {
+            console.log(player);
+            let count = 0;
+            console.log(count);
+            if(player.inZone==true){
+                count++;
+                console.log(count);
+            }
+            if(count == 2){
+                console.log(count);
+                socket.emit("playerInEndZone", player);
+            }
+        });
+
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
                 player.update();

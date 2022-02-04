@@ -49,6 +49,21 @@ class ComunicacionServidor {
                 socket.on("switchToGame", () => {
                     this.io.in("gameRoom").emit("windowGame");
                 });
+
+                socket.on("passwordPuzzleComplete", () => {
+                    this.io.in("gameRoom").emit("passwordPuzzleResolved")
+                });
+
+                let playerCount = 0;
+                socket.on("playerInEndZone", (players) => {
+                    console.log(socket.room.countEndZone);
+                    socket.room.countEndZone++;
+                    console.log(socket.room.countEndZone);
+                    //console.log(playerCount);
+                    if(socket.room.countEndZone==2){
+                        this.io.in("gameRoom").emit("endGame");
+                    }
+                });
             });
         }
     
@@ -65,6 +80,11 @@ class ComunicacionServidor {
                             initiator: true
                         }
                         socket.join("gameRoom");
+                        //console.log(socket.rooms.get("gameRoom"));
+                        console.log(this.io.sockets.adapter.rooms.get("gameRoom"));
+                        var _room = this.io.sockets.adapter.rooms.get("gameRoom");
+                        socket.room = _room;
+                        socket.room.countEndZone = 0;
                         this.queue.push(player);
                     } else {
                         const player = {
@@ -75,6 +95,9 @@ class ComunicacionServidor {
                             initiator: false
                         }
                         socket.join("gameRoom");
+                        let _room = this.io.sockets.adapter.rooms.get("gameRoom");
+                        socket.room = _room; 
+                        console.log("countEndZone del room:"+socket.room.countEndZone)
                         this.queue.push(player);
                         //this.players.push(this.queue.slice(0,2));
                         //console.log("Jugadores: ");

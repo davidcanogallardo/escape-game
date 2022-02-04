@@ -55,7 +55,7 @@ class Player extends Phaser.GameObjects.Sprite{
 
         if ( this.anims.currentAnim==null) {
             this.anims.play('player-idle-down');
-        } else {
+        } else if(!this.inZone) {
             if (this.cursors.left?.isDown) {
                 this.body.setVelocity(-this.speed, 0)
                 this.anims.play('player-run-side',true)
@@ -82,6 +82,12 @@ class Player extends Phaser.GameObjects.Sprite{
                 this.anims.play(parts.join('-'));
                 this.body.setVelocity(0, 0);
             }
+        }
+
+        if(this.inZone && !this.end){
+            //Enviar al serve jugador end
+            socket.emit("playerInEndZone");
+            this.end = true;
         }
     }
 
