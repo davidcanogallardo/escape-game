@@ -33,6 +33,13 @@ class Game extends Phaser.Scene {
 
     create() {
         var that = this
+
+        this.events.on("tiempo", (tiempo) => {
+            that.scene.remove('time')
+            console.log("tiempo recibido "+ tiempo)
+            that.scene.start("gameover",{ score : tiempo})
+        }, this)
+
         this.map = this.make.tilemap({
             key: "map"
         });
@@ -45,6 +52,16 @@ class Game extends Phaser.Scene {
         //console.log(this.playersGroup);
         //this.player = new Player(this);
         //this.playerCollider = this.player.playerCollider
+
+        var end = this.physics.add.staticGroup();
+        var endTile = end.create(158,14)
+        endTile.body.setSize(35,20)
+        endTile.visible = false
+
+        this.physics.add.overlap(endTile, this.playersGroup, function () {
+            console.log("fin de partida")
+            that.events.emit("end");
+        })
 
         this.wallsLayer = new WallsLayer(this);
         
