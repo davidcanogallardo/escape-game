@@ -1,7 +1,7 @@
 var getusermedia = window.getUserMedia
 
 var devices = undefined;
-var webcamStarted = false;
+var micStarted = false;
 var audio = document.createElement('audio');
 var video = document.createElement('video');
 
@@ -31,7 +31,7 @@ mediaDevicesPromise
 						// option.innerHTML = device.label;
 						// option.value = device.deviceId;
 
-						
+
 						camArray.push(cam)
 						// camArray.appendChild(option);
 					} else if (device.kind == "audioinput") {
@@ -43,7 +43,7 @@ mediaDevicesPromise
 						// option.innerHTML = device.label;
 						// option.value = device.deviceId;
 
-						
+
 						micArray.push(mic)
 						// micArray.appendChild(option);
 					}
@@ -63,11 +63,9 @@ mediaDevicesPromise
 /**
  * Library to wrap navigator.getUserMedia and handle errors for all the diferent kind of browsers.
  */
-
-function testMic() {
+function callback_1(a) {
 	micButton = document.getElementById("micTest");
-	stream = startMedia();
-	if (webcamStarted) {
+	if (micStarted) {
 		console.log("turining OFF webcam");
 		micButton.innerHTML = "TEST MICROPHONE";
 		//document.getElementById("video").removeChild(video);
@@ -85,43 +83,71 @@ function testMic() {
 		console.log("hola");
 		audio.controls = true;
 		audio.autoplay = true;
-		audio.srcObject = stream;
-		video.srcObject = stream;
-		
+		audio.srcObject = window.stream;
+		video.srcObject = window.stream;
+
 	}
-	webcamStarted = !webcamStarted;
+	micStarted = !micStarted;
 }
-	function startMedia() {	
+function testMic(micID) {
 	var constraintMic = {
-		deviceId: {exact:window.mic[0].id},
-	};	
+		deviceId: { exact: micID },
+	};
 	var constraintCam = {
-		deviceId: {exact:window.cam[0].id},
-	};	
-	getusermedia(
-		{
-			//video: true,
-			video: {constraintCam,
-			width: 200,
-			height: 150
+		deviceId: { exact: window.cam[0].id },
+	};
+
+	startStream(callback_1, constraintMic, false);
+}
+
+function startPeerStream(callback) {
+	// var micID = document.querySelector('#app').__vue__.mainMicId;
+	var micID = window.mic[0].id;
+	if (window.cam[0] == null) {
+		var constraintCam = false;
+
+	} else {
+		var constraintCam = {
+			deviceId: { exact: window.cam[0].id },
+		};
+	}
+
+	var constraintMic = {
+		deviceId: { exact: micID },
+	};
+
+	startStream(callback, constraintMic, constraintCam)
+}
+function startStream(callback, constraintMic, constraintCam) {
+	if (window.stream) {
+		callback("Ya tenia el stream!")
+	} else {
+		getusermedia(
+			{
+				//video: true,
+				video: {
+					constraintCam,
+					width: 200,
+					height: 150
+				},
+				audio: constraintMic
 			},
-			audio: constraintMic
-		},
-		function (err, stream) {
-			if (err) {
-				console.log(err);
-			} else {
-				//We can create the object dinamycly if we need to
-				// document.getElementById("video").appendChild(video);
-				// audio.controls = true;
-				// audio.autoplay = true;
-				// audio.srcObject = stream;
-				// video.srcObject = stream;
-				// video.play();
-				window.stream=stream;
+			function (err, stream) {
+				if (err) {
+					console.log(err);
+				} else {
+					//We can create the object dinamycly if we need to
+					// document.getElementById("video").appendChild(video);
+					// audio.controls = true;
+					// audio.autoplay = true;
+					// audio.srcObject = stream;
+					// video.srcObject = stream;
+					// video.play();
+					window.stream = stream;
+					callback()
+				}
+
 			}
-			
-		}
-	);
-	return window.stream;
+		);
+	}
 }

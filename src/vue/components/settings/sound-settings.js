@@ -56,7 +56,7 @@ Vue.component('sound-settings', {
             sessionStorage.setItem("sound-settings", JSON.stringify(soundSettings))
         },
         testAudio(){
-            testMic();
+            testMic($("#mic")[0].value);
         }
     },
     created() {
