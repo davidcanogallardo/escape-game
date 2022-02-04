@@ -1,5 +1,5 @@
 class PeerClient {
-    constructor(peer, isInitiator, id) {
+    constructor(peer, isInitiator, socket) {
         this.peer = peer
         this.isInitiator = isInitiator
         this.id = undefined
@@ -33,7 +33,8 @@ class PeerClient {
         });
 
         this.peer.on("connect", () => {
-            console.log("1111111Connection Established!!!");
+            console.log("Conexion Establecida");
+            this.socket.emit("switchToGame");
         });
 
         this.peer.on("close", () => {

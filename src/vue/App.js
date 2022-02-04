@@ -13,7 +13,7 @@ socket.on("matchFound", data => {
     // startMic(mic)
     data.forEach((player) => {
         if(socket.id == player.id && player.initiator){
-            console.log(app);
+            //console.log(app);
             peer = new Peer({
                 initiator: true,
                 trickle: false,
@@ -41,6 +41,15 @@ socket.on("matchFound", data => {
     
     var titleScreen = game.scene.getScene("titlescreen");
     titleScreen.setPlayers(data);
+
+});
+
+
+console.log("Prueba");
+socket.on("windowGame", (data) => {
+    console.log("cambiar al juego");
+    console.log(app.currentPage);
+    app.currentPage = "game";
 });
 
 let excludedPages = [
