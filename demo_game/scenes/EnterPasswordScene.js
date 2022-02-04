@@ -167,7 +167,7 @@ class EnterPasswordScene extends Phaser.Scene {
             console.log("VICTORIA")
             this.scene.stop();
             this.scene.resume("game");
-            this.events.emit('victoria');
+            socket.emit("passwordPuzzleComplete")
         }
 
     }

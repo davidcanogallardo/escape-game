@@ -49,6 +49,10 @@ class ComunicacionServidor {
                 socket.on("switchToGame", () => {
                     this.io.in("gameRoom").emit("windowGame");
                 });
+
+                socket.on("passwordPuzzleComplete", () => {
+                    this.io.in("gameRoom").emit("passwordPuzzleResolved")
+                })
             });
         }
     
