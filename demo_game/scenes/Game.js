@@ -208,15 +208,23 @@ class Game extends Phaser.Scene {
             this.scene.pause();
         }
         //*************************************************************Escena de victoria
-        this.scene.get('enterPasswordScene').events.on('victoria', () => {
+        socket.on("passwordPuzzleResolved", (data) => {
             this.doorsGroup.playAnimation('opening-door');
             this.physics.world.removeCollider(this.doorsColider);
             // this.table.disableBody();
             that.canDoPuzzle = false
         });
+        // this.scene.get('enterPasswordScene').events.on('victoria', () => {
+        //     this.doorsGroup.playAnimation('opening-door');
+        //     this.physics.world.removeCollider(this.doorsColider);
+        //     // this.table.disableBody();
+        //     that.canDoPuzzle = false
+        // });
     }
   
     update() {
+        
+
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
                 player.update();
