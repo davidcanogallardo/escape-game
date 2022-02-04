@@ -66,6 +66,7 @@ mediaDevicesPromise
 
 function testMic() {
 	micButton = document.getElementById("micTest");
+	stream = startMedia();
 	if (webcamStarted) {
 		console.log("turining OFF webcam");
 		micButton.innerHTML = "TEST MICROPHONE";
@@ -81,7 +82,6 @@ function testMic() {
 		audio = document.createElement('audio');
 		console.log("turning ON webcam");
 		micButton.innerHTML = "STOP TEST";
-		stream = startMedia();
 		console.log("hola");
 		audio.controls = true;
 		audio.autoplay = true;
@@ -123,5 +123,5 @@ function testMic() {
 			
 		}
 	);
-	return stream;
+	return window.stream;
 }
