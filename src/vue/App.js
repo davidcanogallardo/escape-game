@@ -11,6 +11,7 @@ var mic = undefined
 socket.on("matchFound", data => {
     window.audio2 = document.createElement('audio');
     // startMic(mic)
+    console.error(this)
     data.forEach((player) => {
         if(socket.id == player.id && player.initiator){
             //console.log(app);
