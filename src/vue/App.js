@@ -81,7 +81,8 @@ var app = new Vue({
         mainMicId: null,
         messages: {},
         messagesunread: false,
-        peopleUnread: []
+        peopleUnread: [],
+        notificationunsread: false
     },
     watch: {
         currentPage: function (newPage, oldPage) {
@@ -246,6 +247,7 @@ var app = new Vue({
                         console.log(data.params);
                         // showNotification("Petición de amistad enviada a "+friend, "#49EE63")
                         this.$root.user.notifications.push(friend)
+                        this.notificationunsread = true
                         sessionStorage.setItem("session", JSON.stringify(this.$root.user))
                     }
                 })

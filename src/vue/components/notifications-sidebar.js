@@ -1,3 +1,5 @@
+import {app} from "./../App.js"
+
 Vue.component('notification-item', {
     template: //html
     `
@@ -45,4 +47,11 @@ Vue.component('notification', {
     </div>
     `,
     props: ["notifications"],
+    created() {
+        console.log("created");
+        console.log(app.notificationunsread);
+        if (app.notificationunsread) {
+            app.notificationunsread = false
+        }
+    }
 })

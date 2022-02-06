@@ -29,9 +29,9 @@ Vue.component('home', {
                 <i v-if="messages_unread" aria-hidden="true" class="fas fa-circle" style="position: absolute; top: -0.3vw; right: -0.2vw; font-size: 1.9vw; color: red; text-shadow: none;"></i>
             </div>
 
-            <div class="icon-container main-icon notificacion-list slide-link" page=".notification-container"  v-if="user2!=''" v-on:click="$emit('open-menu','noti')">
+            <div class="icon-container main-icon notificacion-list slide-link" page=".notification-container"  v-if="user2!=''" v-on:click="$emit('open-menu','noti')" style="position:relative;">
                 <i class="fas fa-bell"></i>
-
+                <i v-if="notifications_unread" aria-hidden="true" class="fas fa-circle" style="position: absolute; top: -0.3vw; right: -0.2vw; font-size: 1.9vw; color: red; text-shadow: none;"></i>
             </div>
             <div class="icon-container main-icon ranking-link link" page="ranking-page" v-if="user2!=''" v-on:click="ranking()">
                 <i class="fas fa-list-ol"></i>
@@ -41,7 +41,7 @@ Vue.component('home', {
         <div class="slide-menu"></div>
     </div>
     `, 
-    props: ["user2", "messages_unread"],
+    props: ["user2", "messages_unread", "notifications_unread"],
     methods: {
         profile() {
             if (this.user2) {
