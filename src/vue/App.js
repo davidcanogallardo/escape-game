@@ -78,7 +78,8 @@ var app = new Vue({
         rankingData: null,
         friendChat: null,
         lastMessage: null,
-        mainMicId: null
+        mainMicId: null,
+        messages: {}
     },
     watch: {
         currentPage: function (newPage, oldPage) {

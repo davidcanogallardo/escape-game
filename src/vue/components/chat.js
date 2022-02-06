@@ -1,4 +1,5 @@
 import {connect, setReceiver, sendMessage} from "./../../js/chat-client.js"
+import {app} from "./../App.js"
 
 Vue.component('chat', {
     template: //HTML
@@ -31,13 +32,18 @@ Vue.component('chat', {
     },
     watch: {
         lastmessage: function (newM, old) {
+            console.log("watcher last")
             this.messages.push(newM);
             $('#chat-body').scrollTop($('#chat-body')[0].scrollHeight);
         }
     },
     created() {
+        // this.messages= []
         setReceiver(this.friend)
-        connect()
+        if (app.messages[this.friend]) {
+            this.messages = app.messages[this.friend]
+        }
+        // connect()
     },
     methods: {
         sendd() {

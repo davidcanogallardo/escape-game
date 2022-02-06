@@ -21,6 +21,12 @@ socket.on("newMessage", data => {
     sender: "friend",
     time: today.getHours() + ":" + mins 
   }
+  if(!app.messages[data.users.sender]) {
+    app.messages[data.users.sender] = []
+  }
+
+  app.messages[data.users.sender].push(data2)
+
   append(data2)
 })
 
@@ -39,7 +45,7 @@ function setReceiver(name) {
 function sendMessage(text) {
   var today = new Date();
   var mins = ('0'+today.getMinutes()).slice(-2);
-  console.log(receiver+" ...--------");
+  // console.log(receiver+" ...--------");
   let messagee = text;
   socket.emit("sendChatMessage",{"users": {sender, receiver}, "message": messagee}, (response) => {
     if (response.success) {
@@ -50,6 +56,10 @@ function sendMessage(text) {
         sender: "user",
         time: today.getHours() + ":" + mins 
       }
+      if(!app.messages[receiver]) {
+        app.messages[receiver] = []
+      }
+      app.messages[receiver].push(data)
       append(data)
     } else {
       console.log("no");
