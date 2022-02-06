@@ -79,7 +79,9 @@ var app = new Vue({
         friendChat: null,
         lastMessage: null,
         mainMicId: null,
-        messages: {}
+        messages: {},
+        messagesunread: false,
+        peopleUnread: []
     },
     watch: {
         currentPage: function (newPage, oldPage) {

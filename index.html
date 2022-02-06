@@ -29,7 +29,7 @@
 
     <!-- Vue -->
     <script src="./src/vue/components/home.js"></script> 
-    <script src="./src/vue/components/friends-sidebar.js"></script> 
+    <script type="module" src="./src/vue/components/friends-sidebar.js"></script> 
     <script src="./src/vue/components/notifications-sidebar.js"></script>
     <script src="./src/vue/components/login-warning.js"></script>
     <script src="./src/vue/components/login.js"></script>
@@ -61,6 +61,7 @@
                     v-on:change-page="currentPage = $event"
                     v-on:update-profile="profileInfo = $event"
                     :user2="user"
+                    :messages_unread="messagesunread"
                     >
                 </home>
                 <login 

@@ -25,6 +25,13 @@ socket.on("newMessage", data => {
     app.messages[data.users.sender] = []
   }
 
+  if (app.peopleUnread.indexOf(data.users.sender) == -1) {
+      app.peopleUnread.push(data.users.sender)
+      if (!app.messagesunread) {
+        app.messagesunread = true
+      }
+  }
+
   app.messages[data.users.sender].push(data2)
 
   append(data2)

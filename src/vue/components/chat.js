@@ -35,6 +35,13 @@ Vue.component('chat', {
             console.log("watcher last")
             this.messages.push(newM);
             $('#chat-body').scrollTop($('#chat-body')[0].scrollHeight);
+            if (app.peopleUnread.indexOf(this.friend) != -1) {
+                var friendIndex = app.peopleUnread.indexOf(this.friend)
+                app.peopleUnread.splice(friendIndex,1)
+                if (app.peopleUnread.length == 0) {
+                    app.messagesunread = false
+                }
+            }
         }
     },
     created() {
@@ -42,6 +49,14 @@ Vue.component('chat', {
         setReceiver(this.friend)
         if (app.messages[this.friend]) {
             this.messages = app.messages[this.friend]
+        }
+        
+        if (app.peopleUnread.indexOf(this.friend) != -1) {
+            var friendIndex = app.peopleUnread.indexOf(this.friend)
+            app.peopleUnread.splice(friendIndex,1)
+            if (app.peopleUnread.length == 0) {
+                app.messagesunread = false
+            }
         }
         // connect()
     },

@@ -1,4 +1,4 @@
-//const socket = io("ws://localhost:3000");
+// import {app} from "./../App.js"
 
 Vue.component('home', {
     template: //html
@@ -24,8 +24,9 @@ Vue.component('home', {
                 <i class="fas fa-user"></i>
             </div>
             
-            <div class="icon-container main-icon friends-list slide-link" page=".slide-list-container" v-if="user2!=''" v-on:click="$emit('open-menu','friend')">
+            <div class="icon-container main-icon friends-list slide-link" page=".slide-list-container" v-if="user2!=''" v-on:click="$emit('open-menu','friend')" style="position:relative;">
                 <i class="fas fa-user-friends"></i>
+                <i v-if="messages_unread" aria-hidden="true" class="fas fa-circle" style="position: absolute; top: -0.3vw; right: -0.2vw; font-size: 1.9vw; color: red; text-shadow: none;"></i>
             </div>
 
             <div class="icon-container main-icon notificacion-list slide-link" page=".notification-container"  v-if="user2!=''" v-on:click="$emit('open-menu','noti')">
@@ -40,7 +41,7 @@ Vue.component('home', {
         <div class="slide-menu"></div>
     </div>
     `, 
-    props: ["user2"],
+    props: ["user2", "messages_unread"],
     methods: {
         profile() {
             if (this.user2) {
