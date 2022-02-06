@@ -23,9 +23,7 @@ Vue.component('sound-settings', {
                     <p for="mic">{{ $t("selectmic") }}</p>
                     <select name="mic" id="mic" @change="updateMainMic($event)">
                     </select>
-                </div>
-                <div class="ajuste">
-                    <button id="micTest" v-on:click="testAudio()" type="button">TEST MICROPHONE</button>
+                    <button id="micTest" class="btn blue" v-on:click="testAudio()" type="button">TEST MICROPHONE</button>
                 </div>
                 <div class="ajuste">
                     <p>{{ $t("micvol") }}</p>

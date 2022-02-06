@@ -1,21 +1,29 @@
 /* vue transitions */
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
     transition: opacity .5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+.fade-enter,
+.fade-leave-to
+
+/* .fade-leave-active below version 2.1.8 */
+    {
     opacity: 0;
 }
 
 
 .slide-leave-active,
 .slide-enter-active {
-  transition: 1s;
+    transition: 1s;
 }
+
 .slide-enter {
-  transform: translate(100%, 0);
+    transform: translate(100%, 0);
 }
+
 .slide-leave-to {
-  transform: translate(99%, 0);
+    transform: translate(99%, 0);
 }
 
 
@@ -39,7 +47,7 @@ h1 {
     letter-spacing: 0.1vw;
 }
 
-h2{
+h2 {
     font-family: Bebas;
     font-size: 4vw;
     margin: 0;
@@ -47,7 +55,7 @@ h2{
     letter-spacing: 3px;
 }
 
-h3{
+h3 {
     font-family: Bebas;
     font-size: 4vw;
     margin: 1vw;
@@ -67,20 +75,20 @@ h3{
 
 /*Scrollbar*/
 .scrollbar::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 0.2vw;
-	background-color: #F5F5F5;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 0.2vw;
+    background-color: #F5F5F5;
 }
 
 .scrollbar::-webkit-scrollbar {
-	width: 1vw;
-	background-color: #F5F5F5;
+    width: 1vw;
+    background-color: #F5F5F5;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-	border-radius: 0.2vw;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #68492E;
+    border-radius: 0.2vw;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #68492E;
 }
 
 /***********************************************container*********************************/
@@ -93,7 +101,7 @@ body {
     font-size: 2vw;
     background-image: url("./../images/bg.png");
     overflow: hidden;
-    
+
 }
 
 .container {
@@ -103,15 +111,17 @@ body {
 }
 
 /*********************************************Página de conectar mandos******************************************/
-.sincronizar_mando{
+.sincronizar_mando {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.sincronizar_mando h1{
+
+.sincronizar_mando h1 {
     font-size: 7vw;
 }
-.sincronizar_mando p{
+
+.sincronizar_mando p {
     font-size: 2.3vw;
     margin: 0;
 }
@@ -140,7 +150,7 @@ body {
     margin-bottom: 1vw;
 }
 
-.nuevos_dispositivos{
+.nuevos_dispositivos {
     overflow-y: scroll;
     display: flex;
     align-items: center;
@@ -165,25 +175,25 @@ body {
     flex: 0 0 3vw;
 }
 
-.mando > *{
+.mando>* {
     color: #EFDEC3;
 }
 
-.mando > i{
+.mando>i {
     margin-right: 20px;
 }
 
-.selected{
+.selected {
     background-color: rgba(196, 196, 196, 0.56);
     border: 2px solid #68492E;
     color: #68492E;
 }
 
-.selected fa-gamepad{
+.selected fa-gamepad {
     color: #68492E;
 }
 
-.selected > * {
+.selected>* {
     color: #68492E;
 }
 
@@ -192,7 +202,7 @@ body {
 }
 
 /*****************************************Página de perfil***************************************/
-.icon{
+.icon {
     background-color: #FAA942;
     border-radius: 300px;
     text-align: center;
@@ -204,12 +214,12 @@ body {
 }
 
 
-.icon-small{
+.icon-small {
     width: 6vw;
     height: 12vh;
 }
 
-.icon-small i{
+.icon-small i {
     font-size: 3vw;
 }
 
@@ -217,11 +227,19 @@ body {
     font-size: 5vw;
 }
 
+.edit-icon {
+    position: absolute;
+    top: 0;
+    right: -1vw;
+    font-size: 3vw;
+    color: black;
+}
+
 
 /***************************************Página del perfil********************************/
-.profile{
-    display: flex; 
-    flex-direction: column; 
+.profile {
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -229,46 +247,46 @@ body {
     font-size: 3vw;
 }
 
-.container-profile{
+.container-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.icon-profile{
-    width: 15vw; 
+.icon-profile {
+    width: 15vw;
     height: 15vw;
     box-shadow: 0px 8px 8px rgb(0 0 0 / 25%);
 }
 
-.i-profile{
+.i-profile {
     text-shadow: 0px 6px 2px rgb(0 0 0 / 50%);
     font-size: 9vw;
 }
 
-.i-s-absolute{
+.i-s-absolute {
     position: absolute;
     margin-left: 1%;
     margin-top: 1%;
 }
 
-.table-profile{
+.table-profile {
     width: 35vw;
     border-collapse: separate;
     border-spacing: 5px 10px;
 }
 
-.table-profile .td-width{
+.table-profile .td-width {
     white-space: nowrap;
 }
 
-.i-table{
+.i-table {
     margin-left: 5px;
     color: #FAA942;
 }
 
-.center{
+.center {
     text-align: center;
 }
 
@@ -278,27 +296,28 @@ body {
 
 /************************************Pop Up cambiar imagen perfil*************************************/
 
-.change{
+.change {
     position: absolute;
 }
-.container-change{
+
+.container-change {
     border: 5px solid #68492E;
     border-radius: 2.5vh;
     background-color: #FAA942;
     width: 79vw;
     height: 42.5vw;
-    z-index:22;
+    z-index: 22;
 }
 
 
-.change-options{
+.change-options {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-evenly;
 }
 
-.current-bg{
+.current-bg {
     border-radius: 300vh;
     text-align: center;
     align-items: center;
@@ -309,15 +328,16 @@ body {
     height: 22vw;
 }
 
-.current-icon{
+.current-icon {
     font-size: 15vw;
     /* text-shadow: 0px 4px 2px rgb(0 0 0 / 75%); */
 }
-.options-img{
+
+.options-img {
     width: 35vw;
 }
 
-.container-color{
+.container-color {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -326,12 +346,14 @@ body {
     height: 7vw;
 }
 
-.icon-bg i{
+.icon-bg i {
     color: grey;
     font-size: 4vw;
 }
 
-.color-icon, .color-bg, .icon-bg{
+.color-icon,
+.color-bg,
+.icon-bg {
     background-color: white;
     border: 3px solid #68492E;
     border-radius: 5px;
@@ -343,95 +365,110 @@ body {
     justify-content: center;
 }
 
-.color-icon:hover, .icon-bg:hover, .color-bg:hover{
+.color-icon:hover,
+.icon-bg:hover,
+.color-bg:hover {
     cursor: pointer;
     width: 7vw;
     height: 7vw;
     font-size: 6vw;
 }
 
-.close{
+.close {
     position: absolute;
     margin-top: 1vh;
     margin-left: 75vw;
 }
 
-.changeSave{
+.changeSave {
     border-radius: 1vw !important;
 }
 
-.color-icon i{
+.color-icon i {
     font-size: 4vw;
 }
-.bg-red{
-    background-color: red;
-}
-.bg-blue{
-    background-color: blue;
-}
-.bg-purple{
-    background-color: purple;
-}
-.bg-pink{
-    background-color: pink;
-}
-.bg-black{
-    background-color: black;
-}
-.bg-white{
-    background-color: white;
-}
-.bg-grey{
-    background-color: grey;
+
+.bg-red {
+    background-color: red !important;
 }
 
-.color-red{
+.bg-blue {
+    background-color: blue !important;
+}
+
+.bg-purple {
+    background-color: purple !important;
+}
+
+.bg-pink {
+    background-color: pink !important;
+}
+
+.bg-black {
+    background-color: black !important;
+}
+
+.bg-white {
+    background-color: white !important;
+}
+
+.bg-grey {
+    background-color: grey !important;
+}
+
+.color-red {
     color: red;
 }
-.color-blue{
+
+.color-blue {
     color: blue;
 }
-.color-purple{
+
+.color-purple {
     color: purple;
 }
-.color-pink{
+
+.color-pink {
     color: pink;
 }
-.color-black{
+
+.color-black {
     color: black;
 }
-.color-white{
+
+.color-white {
     color: white;
 }
-.color-grey{
+
+.color-grey {
     color: grey;
 }
 
 /*************************************************************************/
 
 @media (max-height: 600px) {
-    .container-profile{
+    .container-profile {
         display: flex;
         flex-direction: row;
         align-items: center;
     }
 
-    .icon-profile{
-      float: left;
+    .icon-profile {
+        float: left;
     }
 
-    .icon-small{
+    .icon-small {
         width: 5.5vw;
         height: 12vh;
     }
-    
-    .icon-profile{
-        width: 18vw; 
+
+    .icon-profile {
+        width: 18vw;
         height: 40vh;
         box-shadow: 0px 8px 8px rgb(0 0 0 / 25%);
     }
 
-    .table-profile{
+    .table-profile {
         padding-left: 20px;
         width: 35vw;
         height: 25vh;
@@ -442,18 +479,18 @@ body {
         justify-content: center;
     }
 
-    .sinc_mand_cont{
+    .sinc_mand_cont {
         display: flex;
         flex-direction: row;
     }
 
-    .mando{
+    .mando {
         width: 40vw;
     }
 }
 
 /*********************************************Página de configuración*****************************************/
-.settings_menu{
+.settings_menu {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -463,14 +500,14 @@ body {
 /*********************************************************************************/
 
 /*Conjunto de botones*/
-.botones{
+.botones {
     display: flex;
     flex-direction: column;
     flex: 1;
 }
 
 /* Boton por defecto*/
-.btn{
+.btn {
     border: none;
     padding: 0 5vw;
     border-radius: 2vw;
@@ -495,30 +532,30 @@ body {
 
 
 /*Boton azul*/
-.blue{
+.blue {
     background: #14448D;
     color: #EFDEC3;
- 
+
 }
 
-.blue:hover{
+.blue:hover {
     background: #EFDEC3;
     color: #14448D;
     outline: 3px solid #14448D;
 }
 
 /*Boton Rojo*/
-.red{
+.red {
     padding: 0 1em;
     background: #aa0000;
     color: #EFDEC3;
 }
 
-.red i{
+.red i {
     color: #EFDEC3;
 }
 
-.red:hover i{
+.red:hover i {
     color: #68492E;
 }
 
@@ -529,24 +566,31 @@ body {
 }
 
 /***********************************Página ajustes de sonido*********************************************/
-.sound_settings{
+.sound_settings {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.all_settings{
+.all_settings {
     display: flex;
     flex-direction: column;
     width: 80vw;
     align-items: center;
 }
 
-.ajuste_sonido{
+.ajuste_sonido {
     width: 60vw;
 }
 
-.ajuste{
+#micTest {
+    font-size: 1.3vw;
+    padding: 0.6vw !important;
+    border: none;
+    border-radius: 0.7vw;
+}
+
+.ajuste {
     border: 1px solid #68492E;
     border-radius: 13px;
     background-color: #c4c4c485;
@@ -557,33 +601,33 @@ body {
     height: 4vw;
 }
 
-.ajuste > *{
+.ajuste>* {
     display: flex;
     margin-right: 20px;
 }
 
-.ajuste select{
+.ajuste select {
     background-color: #FBF1E3;
     justify-self: end;
 }
 
-.mic_config{
+.mic_config {
     display: flex;
     flex-direction: column;
     width: 60vw;
 }
 
-.mic_config > .ajuste{
+.mic_config>.ajuste {
     margin-bottom: 10px;
 }
 
-.mic_config select{
+.mic_config select {
     height: 3vw;
     width: 20vw;
     padding-right: 2%;
     border: none;
     border-radius: 10px;
-    font-size: 14px;
+    font-size: 1.2vw;
 }
 
 .sound_settings input[type=range] {
@@ -616,11 +660,11 @@ body {
     cursor: pointer;
     -webkit-appearance: none;
 }
-  
+
 .sound_settings input[type=range]:focus::-webkit-slider-runnable-track {
     background: #030303;
 }
-  
+
 .sound_settings input[type=range]::-moz-range-track {
     background: rgba(0, 0, 0, 0);
     border: 0.1px solid #000000;
@@ -628,7 +672,7 @@ body {
     height: 0px;
     cursor: pointer;
 }
-  
+
 .sound_settings input[type=range]::-moz-range-thumb {
     width: 25px;
     height: 25px;
@@ -638,7 +682,7 @@ body {
     border-radius: 50px;
     cursor: pointer;
 }
-  
+
 .sound_settings input[type=range]::-ms-track {
     background: transparent;
     border-color: transparent;
@@ -648,17 +692,17 @@ body {
     height: 0px;
     cursor: pointer;
 }
-  
+
 .sound_settings input[type=range]::-ms-fill-lower {
     background: #000000;
     border: 0.1px solid #000000;
 }
-  
+
 .sound_settings input[type=range]::-ms-fill-upper {
     background: rgba(0, 0, 0, 0);
     border: 0.1px solid #000000;
 }
-  
+
 .sound_settings input[type=range]::-ms-thumb {
     width: 25px;
     height: 25px;
@@ -670,52 +714,56 @@ body {
     margin-top: 0px;
     /*Needed to keep the Edge thumb centred*/
 }
-  
+
 .sound_settings input[type=range]:focus::-ms-fill-lower {
     background: rgba(0, 0, 0, 0);
 }
-  
+
 .sound_settings input[type=range]:focus::-ms-fill-upper {
     background: #030303;
 }
-  
+
 @supports (-ms-ime-align:auto) {
+
     /* Pre-Chromium Edge only styles, selector taken from hhttps://stackoverflow.com/a/32202953/7077589 */
     input[type=range] {
-      margin: 0;
-      /*Edge starts the margin from the thumb, not the track as other browsers do*/
+        margin: 0;
+        /*Edge starts the margin from the thumb, not the track as other browsers do*/
     }
 }
 
 /********************************Página de probar Mando*************************/
-.probar_mando{
+.probar_mando {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
 }
 
-.controller_action{
+.controller_action {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
 }
 
-.gesto{
+.gesto {
     font-size: 15vw;
     flex-grow: 1;
 }
 
 /*******************************************************************************************/
 
-td,th{ 
+td,
+th {
     font-size: 24px;
     background-color: #c4c4c486;
     border: 1px solid #562800;
 }
 
-input[type=password], input[type=email], input[type=text]{
+input[type=password],
+input[type=email],
+input[type=text] {
     height: 3vw;
     background: rgba(172, 171, 171, 0.33);
     border: 0.2vw solid #68492E;
@@ -741,14 +789,14 @@ input[type=password], input[type=email], input[type=text]{
     font-size: 2vw;
 }
 
- #form-recover {
+#form-recover {
     text-align: left;
     width: 80%;
- }
+}
 
- .recover-page .signup-link {
+.recover-page .signup-link {
     margin-top: 3vw;
-    
+
 }
 
 
@@ -758,8 +806,8 @@ input[type=password], input[type=email], input[type=text]{
 /*Boton de configuración*/
 .settings-btn-container {
     position: absolute;
-	top: 3vw;
-	left: 3vw;
+    top: 3vw;
+    left: 3vw;
     height: 3vw;
     width: 3vw;
     box-shadow: 0px 0.5vw 0.5vw rgba(0, 0, 0, 0.25);
@@ -770,8 +818,8 @@ input[type=password], input[type=email], input[type=text]{
 
 .profile-right-btn-container {
     position: absolute;
-	top: 3vw;
-	right: 3vw;
+    top: 3vw;
+    right: 3vw;
     height: 3vw;
     width: 3vw;
     box-shadow: 0px 0.5vw 0.5vw rgba(0, 0, 0, 0.25);
@@ -814,7 +862,7 @@ input[type=password], input[type=email], input[type=text]{
     transform: translateY(-50%);
 }
 
-.right-menu > div {
+.right-menu>div {
     height: 3vw;
     width: 3vw;
     box-shadow: 0px 0.5vw 0.5vw rgba(0, 0, 0, 0.25);
@@ -822,6 +870,7 @@ input[type=password], input[type=email], input[type=text]{
     padding: 1.5vw;
     cursor: pointer;
 }
+
 /*titulo*/
 #title {
     font-size: 4.5vw;
@@ -851,7 +900,7 @@ input[type=password], input[type=email], input[type=text]{
 }
 
 /*Boton play*/
-.play:hover{
+.play:hover {
     color: #EFDEC3;
     background-color: #aa0000;
     border: 1vw solid #700000;
@@ -859,7 +908,7 @@ input[type=password], input[type=email], input[type=text]{
     box-shadow: 0px 0px 0px rgb(0 0 0 / 25%);
 }
 
-.play{
+.play {
     color: #EFDEC3;
     background-color: #14448d;
     border: 1vw solid #002966;
@@ -903,7 +952,7 @@ input[type=password], input[type=email], input[type=text]{
     right: 0;
 }
 
-.slide-list-container > div {
+.slide-list-container>div {
     margin: 0.8vw 0.8vw 0.8vw 0.8vw;
 }
 
@@ -929,7 +978,7 @@ input[type=password], input[type=email], input[type=text]{
     flex-flow: column;
     gap: 0.3vw;
     overflow-x: hidden;
-    scrollbar-color:#EFDEC3 #EFDEC3;
+    scrollbar-color: #EFDEC3 #EFDEC3;
     scrollbar-width: thin;
     width: 90%;
     margin-top: 0 !important;
@@ -959,7 +1008,8 @@ input[type=password], input[type=email], input[type=text]{
     padding: 0vw;
     font-size: 1.5vw;
 }
-.list-item div i{
+
+.list-item div i {
     font-size: 2.5vw;
 }
 
@@ -990,7 +1040,7 @@ input[type=password], input[type=email], input[type=text]{
 /*Formulario para mandar solicitud de amistad*/
 .form-fr-request * {
     margin: 10px;
-    
+
 }
 
 .form-fr-request {
@@ -1040,7 +1090,7 @@ input[type=password], input[type=email], input[type=text]{
     align-items: center;
 }
 
-.notification-container > div {
+.notification-container>div {
     margin: 0.8vw 0.8vw 0.8vw 0.8vw;
 }
 
@@ -1049,45 +1099,45 @@ input[type=password], input[type=email], input[type=text]{
 }
 
 /*Estilo de los botones*/
-.list-item > .btn {
+.list-item>.btn {
     width: 10vw;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.accept{
+.accept {
     background-color: #00FF04;
     color: #000000;
 }
 
-.accept > i{
+.accept>i {
     color: #000000;
 }
 
-.accept:hover{
+.accept:hover {
     background-color: #EBDFCB;
     outline: 2px solid #68492E;
 }
 
-.accept:hover > i{
+.accept:hover>i {
     color: #68492E;
 }
 
-.cancel{
+.cancel {
     background-color: #FF6161;
 }
 
-.cancel > i{
+.cancel>i {
     color: #000000;
 }
 
-.cancel:hover{
+.cancel:hover {
     background-color: #EBDFCB;
     outline: 2px solid #68492E;
 }
 
-.cancel:hover > i{
+.cancel:hover>i {
     color: #68492E;
 }
 
@@ -1103,7 +1153,7 @@ input[type=password], input[type=email], input[type=text]{
     transition: 0.5s;
 }
 
-.green i{
+.green i {
     color: #EFDEC3;
 }
 
@@ -1113,16 +1163,16 @@ input[type=password], input[type=email], input[type=text]{
     outline: 3px solid #49EE63;
 }
 
-.green:hover i{
+.green:hover i {
     color: #68492E;
 }
 
-.fa-times{
+.fa-times {
     cursor: pointer;
 }
 
 /**************************************INTERFAZ DE CHAT*************************************************/
-.chat{
+.chat {
     display: flex;
     position: absolute;
     background-color: #FAA942;
@@ -1136,7 +1186,7 @@ input[type=password], input[type=email], input[type=text]{
     bottom: 0px;
 }
 
-.chat-head{
+.chat-head {
     display: flex;
     height: 5vh;
     align-items: center;
@@ -1144,16 +1194,16 @@ input[type=password], input[type=email], input[type=text]{
     border-radius: 10px 10px 0px 0px;
 }
 
-.chat-head *{
+.chat-head * {
     color: #68492E;
     margin: 10px;
 }
 
-.chat-head p{
+.chat-head p {
     font-size: 3vh;
 }
 
-.chat-body{
+.chat-body {
     display: flex;
     flex: 1;
     background-image: url("./../images/bg.png");
@@ -1165,13 +1215,13 @@ input[type=password], input[type=email], input[type=text]{
     padding: 0px 10px 0px 10px;
 }
 
-.chat .msg{
+.chat .msg {
     position: relative;
     font-size: 2vw;
     width: 100%;
 }
 
-.msg .textMessage{
+.msg .textMessage {
     border-radius: 0.5vw;
     background-color: white;
     width: 75%;
@@ -1181,7 +1231,7 @@ input[type=password], input[type=email], input[type=text]{
     word-wrap: break-word;
 }
 
-.user .textMessage{
+.user .textMessage {
     float: right;
     height: auto;
 }
@@ -1190,7 +1240,7 @@ input[type=password], input[type=email], input[type=text]{
     float: left;
 } */
 
-.chat-input{
+.chat-input {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1198,26 +1248,26 @@ input[type=password], input[type=email], input[type=text]{
     width: 100%;
 }
 
-.chat .btn{
+.chat .btn {
     font-size: 2vw;
     padding: 0 1vw;
 }
 
-.chat input{
+.chat input {
     width: 95%;
     margin-bottom: 5px;
-    height: 3vw; 
+    height: 3vw;
     background-color: rgb(255, 255, 255);
 }
 
-.msg .time{
+.msg .time {
     position: absolute;
     font-size: 1.4vw;
     right: 4px;
     bottom: 5px;
 }
 
-.chat input::placeholder{
+.chat input::placeholder {
     color: #68492E;
 
 }
@@ -1228,16 +1278,19 @@ input[type=password], input[type=email], input[type=text]{
 #overlay {
     position: fixed;
     overflow-y: scroll;
-    top: 0; right: 0; bottom: 0; left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     z-index: 45;
-    background:  rgba(40,40,40, .75);
+    background: rgba(40, 40, 40, .75);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .invitation-page {
-    position: relative; 
+    position: relative;
     z-index: 199;
 }
 
@@ -1254,19 +1307,19 @@ input[type=password], input[type=email], input[type=text]{
     border-radius: 3vw;
 }
 
-.cancel_confirm{
+.cancel_confirm {
     display: flex;
     justify-content: center;
 }
 
 /**********************************Página de trofeos Trophys.html******************************/
-.trophys{
+.trophys {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.niveles{
+.niveles {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1277,7 +1330,7 @@ input[type=password], input[type=email], input[type=text]{
     gap: 0.3vw;
 }
 
-.nivel{
+.nivel {
     border: 2px solid #68492E;
     background-color: #c4c4c486;
     border-radius: 9px;
@@ -1289,37 +1342,38 @@ input[type=password], input[type=email], input[type=text]{
     margin-bottom: 20px;
 }
 
-.nivel img{
+.nivel img {
     border-radius: 5px;
     width: 20%;
 }
 
-.trophys-container i{
+.trophys-container i {
     font-size: 32px;
     margin-right: 10px;
 }
 
-.white{
+.white {
     color: white;
 }
 
-.bronze{
+.bronze {
     color: #99401A;
 }
 
-.silver{
+.silver {
     color: #A9A6A6;
 }
 
-.gold{
+.gold {
     color: #FFB800;
 }
 
 @media (max-height: 600px) {
-    .niveles{
+    .niveles {
         width: 70vw;
         height: 45vh;
     }
+
     .nivel {
         width: 95%;
     }
@@ -1327,7 +1381,7 @@ input[type=password], input[type=email], input[type=text]{
 
 /********************************Página de ranking************************************/
 
-.level-slider{
+.level-slider {
     margin-top: 50px;
     display: flex;
     justify-content: center;
@@ -1335,37 +1389,38 @@ input[type=password], input[type=email], input[type=text]{
     align-items: center;
 }
 
-.level-slider img{
+.level-slider img {
     width: 15vw;
     height: 10vw;
     transition: 0.5s all ease-in-out;
 }
 
-.level-slider img:hover{
+.level-slider img:hover {
     transform: scale(1.3);
 }
 
-.level-slider .selected{
-    -webkit-box-shadow: 0px 0px 9px 10px rgba(0,0,0,0.33); 
-    box-shadow: 0px 0px 9px 10px rgba(0,0,0,0.33);
+.level-slider .selected {
+    -webkit-box-shadow: 0px 0px 9px 10px rgba(0, 0, 0, 0.33);
+    box-shadow: 0px 0px 9px 10px rgba(0, 0, 0, 0.33);
     transform: scale(1.3);
 }
 
-.level-name{
+.level-name {
     margin-top: 50px;
 }
 
-.all-levels{
+.all-levels {
     margin-top: 20px;
     display: flex;
     justify-content: center;
 }
 
-.all-levels th, td{
+.all-levels th,
+td {
     padding: 10px;
 }
 
-.all-levels .name{
+.all-levels .name {
     width: 50vw;
     text-align: left;
 }
@@ -1422,9 +1477,9 @@ input[type=password], input[type=email], input[type=text]{
     }
 } */
 /*******************************************************************************************/
-  
+
 /**********************************Página login signup**************************************************/
-#forms-container{
+#forms-container {
     display: flex;
     gap: 4vw;
     width: 80%;
@@ -1442,11 +1497,13 @@ input[type=password], input[type=email], input[type=text]{
     flex-direction: column;
     width: 50%;
 }
+
 .sign-up-container h2 {
     text-align: center;
 }
 
-#signup, #login {
+#signup,
+#login {
     display: flex;
     flex-direction: column;
 }
@@ -1464,18 +1521,18 @@ input[type=password], input[type=email], input[type=text]{
 
 }
 
-#recover-form{
+#recover-form {
     display: flex;
     justify-content: center;
     /*! width: 55%; */
 }
 
-.recover-form{
+.recover-form {
     display: flex;
     flex-direction: column;
 }
 
-#recover .btn .blue{
+#recover .btn .blue {
     background: #14448D;
     border: 0px black;
     border-radius: 16px;
@@ -1489,21 +1546,22 @@ input[type=password], input[type=email], input[type=text]{
     padding: 10px 140px 10px 140px;
 }
 
-#recover .btn.blue:hover{
+#recover .btn.blue:hover {
     background: #EFDEC3;
-    color: #14448D;  /* Color del texto*/
+    color: #14448D;
+    /* Color del texto*/
     outline: 3px solid #14448D;
 }
 
-#create{
+#create {
     text-align: left;
 }
 
-#login-container{
+#login-container {
     text-align: left;
 }
 
-.form-button{
+.form-button {
     font-size: 3vw;
     text-align: center;
     border-radius: 2vw;
@@ -1512,23 +1570,23 @@ input[type=password], input[type=email], input[type=text]{
     cursor: pointer;
 }
 
-label{
+label {
     font-size: 3vw;
     text-align: left;
 }
 
 /*********************************Página de aviso de login*********************************/
-.login_warning{
+.login_warning {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.login_warning p{
+.login_warning p {
     width: auto;
 }
 
-.botones_warning{
+.botones_warning {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1538,7 +1596,7 @@ label{
 
 
 
-.login_warning .cruz{
+.login_warning .cruz {
     font-size: 3.2vw;
     position: absolute;
     top: 10px;
@@ -1555,7 +1613,7 @@ label{
 }
 
 @media screen and (max-height: 600px) {
-    .sound_settings .all_settings{
+    .sound_settings .all_settings {
         overflow-y: scroll;
         overflow-x: hidden;
         display: flex;
@@ -1584,7 +1642,7 @@ label{
 }
 
 /************************SALA DE ESPERA*****************************/
-.waitingRoom{
+.waitingRoom {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1601,30 +1659,36 @@ label{
     box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
     animation: dotTyping 1.5s infinite linear;
 }
-  
-  @keyframes dotTyping {
+
+@keyframes dotTyping {
     0% {
-      box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
+        box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
     }
+
     16.667% {
-      box-shadow: 9984px -10px 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
+        box-shadow: 9984px -10px 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
     }
+
     33.333% {
-      box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
+        box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
     }
+
     50% {
-      box-shadow: 9984px 0 0 0 #14448D, 9999px -10px 0 0 #14448D, 10014px 0 0 0 #14448D;
+        box-shadow: 9984px 0 0 0 #14448D, 9999px -10px 0 0 #14448D, 10014px 0 0 0 #14448D;
     }
+
     66.667% {
-      box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
+        box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
     }
+
     83.333% {
-      box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px -10px 0 0 #14448D;
+        box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px -10px 0 0 #14448D;
     }
+
     100% {
-      box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
+        box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
     }
-  }
+}
 
 /**************************************************************************************************************************************/
 /*Media query para girar en horizontal la página al abrirla en mvil*/
@@ -1645,7 +1709,7 @@ label{
         /* con 100vmax el panel de notificaciones tapa la web */
         width: 94vmax;
         /* Set content height to viewport width */
-        height:100vmin;
+        height: 100vmin;
         overflow-x: hidden;
         overflow-y: hidden;
         position: absolute;
@@ -1655,7 +1719,8 @@ label{
         justify-content: center;
     }
 
-    .right-menu > div, .settings-btn-container {
+    .right-menu>div,
+    .settings-btn-container {
         height: 13vw;
         width: 13vw;
         font-size: 9.5vw;
@@ -1666,26 +1731,52 @@ label{
         font-family: "Bebas";
     }
 
+    .icon-container {
+        border-radius: 100vw;
+    }
+
+    .profile-right-btn-container {
+        height: 13vw;
+        width: 13vw;
+        font-size: 9.5vw;
+    }
+
+    .btn {
+        border-radius: 4vw;
+        font-size: 10.5vw;
+        /* width: 55vw; */
+        padding: 0 5vw !important;
+    }
+
     /************************************LOGIN*************************************/
     .login-page {
         height: 100%;
         width: 100%;
-        
+
     }
+
     .login-page h2 {
         font-size: 6vw;
-        
+
     }
+
+    .ajuste_sonido {
+        width: 83vw;
+        height: 11vw;
+    }
+
     #forms-container {
         width: 90%;
         justify-content: center;
+        height: 90vw;
     }
 
     .sign-up-container {
         width: 36%;
     }
 
-    #signup, #login {
+    #signup,
+    #login {
         gap: 2.1vw;
     }
 
@@ -1693,7 +1784,9 @@ label{
         font-size: 3.5vw;
     }
 
-    input[type="password"], input[type="email"], input[type="text"] {
+    input[type="password"],
+    input[type="email"],
+    input[type="text"] {
         height: 8vw;
         font-size: 6vw;
     }
@@ -1707,24 +1800,29 @@ label{
         height: 6vw;
     }
 
+
+
     /************************************RECOVER PAGE*************************************/
     .recover-page {
         width: 60%;
     }
+
     .recover-page h1 {
         font-size: 9vw;
     }
+
     .recover-page p {
         font-size: 4vw;
     }
+
     .recover-page .signup-link {
         font-size: 6vw;
-        
+
     }
+
     .recover-page .volver {
         width: 17%;
-        font-size: 8vw
-        ;
+        font-size: 8vw;
         text-align: center;
     }
 
@@ -1743,19 +1841,33 @@ label{
     .login-warning h1 {
         font-size: 17vw;
     }
+
     .login-warning p {
         font-size: 6vw;
     }
+
     .botones_warning .btn {
-        font-size: 13vw;
+        font-size: 10vw;
+        width: 35vw;
     }
-    .login-warning .red{
+
+    .login-warning .red {
         font-size: 9vw;
     }
 
+
+    .botones_warning {
+        height: 44vw;
+    }
+
+    .login_warning p {
+        font-size: 5vw;
+    }
+
+
     /************************************invitation html*************************************/
     .overlay-content {
-        width: 72vw ;
+        width: 72vw;
         height: 51vw;
     }
 
@@ -1763,6 +1875,7 @@ label{
         font-size: 11vw;
 
     }
+
     .overlay-content p {
         font-size: 4vw;
 
@@ -1771,7 +1884,7 @@ label{
     .overlay-content .btn {
         padding: 4px 11vw;
     }
-        
+
     /************************************MAIN*************************************/
     .right-menu {
         right: 16vw;
@@ -1781,28 +1894,7 @@ label{
         font-size: 8.5vw;
     }
 
-    .chat{
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        right: 0px;
-        bottom: 0px;
-    }
 
-    .chat .msg{
-        font-size: 5vw;
-    }
-
-    .msg p{
-        width: 30%;
-        padding: 0.5vw;
-        text-align: left !important;
-        margin: 1vw 0.1vw 0vw 0.1vw;
-    }
-
-    .msg .time{
-        font-size: 1.5vw;
-    }
 
     /************************************MAIN*************************************/
     /************************************conectar mandos html*************************************/
@@ -1810,6 +1902,7 @@ label{
         margin-top: 8vw;
         height: 100%;
     }
+
     .sincronizar_mando p {
         font-size: 5vw;
     }
@@ -1845,11 +1938,13 @@ label{
         height: 100%;
         justify-content: center;
     }
+
     .botones {
         flex: 0;
     }
+
     .botones .btn {
-        width: 60vw;
+        width: 69vw;
         font-size: 9vw;
         border-radius: 3vw;
     }
@@ -1860,9 +1955,72 @@ label{
         border-radius: 3vw;
     }
 
+    /************************************ajustes sonido*************************************/
+    .ajuste_sonido {
+        width: 83vw;
+        height: 11vw;
+    }
+
+    .mic_config>.ajuste {
+        margin-bottom: 2vw;
+    }
+
+    .ajuste {
+        padding: 0 2em;
+        height: 10vw;
+    }
+
+    .ajuste>* {
+        margin-right: 5vw;
+        margin: 0;
+        padding: 0;
+    }
+
+    .sound_settings input[type="range"] {
+        width: 100%;
+        margin: -1vw 0;
+        margin-left: 2vw;
+        margin-right: 2vw;
+        width: 46vw;
+    }
+
+    .mic_config select {
+        height: 6vw;
+        width: 34vw;
+        font-size: 2vw;
+    }
+
+    .mic_config {
+        width: 83vw;
+      }
+
+      #micTest {
+        font-size: 2.3vw;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /************************************lista de amigos*************************************/
+    .slide-list-container {
+        width: 46%;
+    }
+
     .slide-header {
         font-size: 4vw;
+        position: relative;
+        justify-content: center;
     }
 
     .slide-list {
@@ -1881,6 +2039,7 @@ label{
     .list-item div i {
         font-size: 6.5vw;
     }
+
     .add-btn {
         width: 12vw !important;
         height: 12vw !important;
@@ -1900,8 +2059,17 @@ label{
         border-radius: 2.4vw;
     }
 
+    .send-invitation>i {
+        font-size: 7vw !important;
+    }
+
+    .close-sidebar {
+        position: absolute;
+        right: 0;
+    }
+
     /************************************notificaciones*************************************/
-    .list-item > .btn {
+    .list-item>.btn {
         width: 21vw;
         height: 10vw;
     }
@@ -1910,27 +2078,44 @@ label{
         height: inherit;
     }
 
+    .notification-container {
+        width: 45%;
+    }
+
     /************************************perfil propio*************************************/
 
-    .all-levels th, td {
+    .all-levels th,
+    td {
         padding: 2vw 5vw;
         font-size: 4vw;
     }
 
-    td, th {
+    td,
+    th {
         border-radius: 2vw;
     }
 
     .profile .btn {
-        font-size: 7vw;
+        font-size: 6vw;
+        width: 26vw;
     }
 
 
     .table-profile .td-width {
         width: auto;
     }
+
     .table-profile {
         min-width: 77vw;
+    }
+
+    .container-profile {
+        gap: 6vw;
+        margin: 5vw;
+    }
+
+    .edit-icon {
+        font-size: 10vw !important;
     }
 
     /************************************perfil amigo*************************************/
@@ -1943,10 +2128,12 @@ label{
         flex-direction: row;
         gap: 8vw;
     }
+
     .icon-profile {
         width: 50vw;
         height: 50vw;
     }
+
     .icon-profile i {
         font-size: 29vw;
     }
@@ -1968,11 +2155,13 @@ label{
         font-size: 6vw;
         width: 23%;
     }
+
     .red {
         padding: 1vw;
         border-radius: 3vw;
     }
-/*
+
+    /*
 
     .container-profile{
         display: flex;
@@ -2010,110 +2199,182 @@ label{
 
 
 */
+    /************************************lista de niveles*************************************/
+    .niveles {
+        width: 142vw;
+    }
 
-/************************************Pop Up cambiar imagen perfil*************************************/
-.change{
-    position: absolute;
-}
-.container-change{
-    border: 1vh solid #68492E;
-    border-radius: 3vh;
-    background-color: #FAA942;
-    width: 95%;
-}
+    .nivel {
+        height: 18vw;
+    }
 
-.container-change{
-    border: 0.5vh solid #68492E;
-    border-radius: 2.5vh;
-    background-color: #FAA942;
-    width: 95%;
-    height: 90vw;
-}
+    .texto {
+        font-size: 5vw;
+    }
 
-.change-options{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-}
+    /************************************ajustes mando*************************************/
+    .sincronizar_mando .btn {
+        border-radius: 4vw;
+    }
 
-.current-bg{
-    border-radius: 300vh;
-    text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    box-shadow: 0px 0.5vw 0.5vw rgb(0 0 0 / 25%);
-    width: 22vw;
-    height: 22vw;
-}
+    /************************************probar mando*************************************/
+    .controller_action {
+        height: 50vw;
+    }
 
-.current-icon{
-    font-size: 21vh;
-    /* text-shadow: 0px 4px 2px rgb(0 0 0 / 75%); */
-}
-.options-img{
-    width: 35vh;
-}
+    /************************************Pop Up cambiar imagen perfil*************************************/
+    .change {
+        position: absolute;
+    }
 
-.container-color{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 12vw;
-}
-.color-icon:hover, .icon-bg:hover, .color-bg:hover{
-    cursor: pointer;
-    width: 7vh;
-    height: 7vh;
-    font-size: 6vh;
-}
+    .container-change {
+        border: 1vh solid #68492E;
+        border-radius: 3vh;
+        background-color: #FAA942;
+        width: 95%;
+    }
 
-.icon-bg i{
-    color: grey;
-    font-size: 4vh;
-}
+    .container-change {
+        border: 0.5vh solid #68492E;
+        border-radius: 2.5vh;
+        background-color: #FAA942;
+        width: 95%;
+        height: 90vw;
+    }
 
-.color-icon, .color-bg, .icon-bg{
-    background-color: white;
-    border: 0.4vh solid #68492E;
-    border-radius: 1vh;
-    width: 6vh;
-    height: 6vh;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-}
+    .change-options {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+    }
 
-.color-icon i{
-    font-size: 4vh;
-}
+    .current-bg {
+        border-radius: 300vh;
+        text-align: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        box-shadow: 0px 0.5vw 0.5vw rgb(0 0 0 / 25%);
+        width: 44vw;
+        height: 44vw;
+    }
 
-.close{
-    font-size: 24px;
-    position: absolute;
-    margin-top: 1vh;
-    margin-left: 85vh;
-}
+    .current-icon {
+        font-size: 28vw;
+        /* text-shadow: 0px 4px 2px rgb(0 0 0 / 75%); */
+    }
 
-.changeSave{
-    width: 25vh !important;
-    font-size: 24px !important;
-}
+    .options-img {
+        width: 90vw;
+      }
+    .options-img > h2{
+        font-size: 7vw;
+      }
+
+    .container-color {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 14vw;
+    }
+
+    .color-icon:hover,
+    .icon-bg:hover,
+    .color-bg:hover {
+        cursor: pointer;
+        width: 7vh;
+        height: 7vh;
+        font-size: 6vh;
+    }
+
+    .icon-bg i {
+        color: grey;
+        font-size: 4vh;
+    }
+
+    .color-icon,
+    .color-bg,
+    .icon-bg {
+        background-color: white;
+        border: 0.4vh solid #68492E;
+        border-radius: 1.6vw;
+        width: 6vh;
+        height: 6vh;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .color-icon i {
+        font-size: 4vh;
+    }
+
+    .close {
+        font-size: 24px;
+        position: absolute;
+        margin-top: 1vh;
+        margin-left: 85vh;
+    }
+
+    .changeSave {
+        width: 25vh !important;
+        font-size: 24px !important;
+    }
+
+    
+    /************************************chat*************************************/
+    .chat-head {
+        font-size: 9vw;
+      }
+
+      .user .textMessage {
+        height: auto;
+        padding-right: 17vw;
+        min-height: 14vw;
+      }
+      .msg .time {
+        font-size: 5.5vw;
+      }
+
+      .chat {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        right: 0px;
+        bottom: 0px;
+    }
+
+    .chat .msg {
+        font-size: 9vw;
+    }
+
+    .msg p {
+        width: 30%;
+        padding: 0.5vw;
+        text-align: left !important;
+        margin: 1vw 0.1vw 0vw 0.1vw;
+    }
+
+
+
+
+
 
 }
 
 /************************************Ajustes idiomas*************************************/
 
-.change_language{
+.change_language {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.change_language_options{
+
+.change_language_options {
     display: flex;
     flex-direction: column;
     align-items: center;

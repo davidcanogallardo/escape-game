@@ -100,7 +100,7 @@ Vue.component('profile', {
             <div :class="'icon icon-profile bg-'+profileImg.iconBG"v-on:click="changeImg = true" style="position:relative;">
                 <i :class="'i-profile fas fa-'+profileImg.icon+' color-'+profileImg.iconColor" aria-hidden="true"></i>
 
-                <i v-if="page == 'profile'" class="fas fa-edit" aria-hidden="true" style="position: absolute;top: 0;right: -1vw;font-size: 3vw;color: black;"></i>
+                <i v-if="page == 'profile'" class="fas fa-edit edit-icon" aria-hidden="true"></i>
             </div>
             <br>
             <table class="table-profile">
@@ -114,7 +114,7 @@ Vue.component('profile', {
                 </tr>
             </tbody></table>
         </div>
-        <div v-if="page == 'profile'">
+        <div v-if="page == 'profile'" style="width: 130vw;">
             <div class="btn blue close-sesion" v-on:click="close()">{{ $t("closesession") }}</div>
             <div class="btn blue link" page="trophy-page" v-on:click="$emit('change-page','trophies')">{{ $t("seetrophies") }}</div>
         </div>

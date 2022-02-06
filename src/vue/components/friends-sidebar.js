@@ -48,7 +48,7 @@ Vue.component('friend', {
             <i class="fas fa-user-friends" aria-hidden="true">
                 <span>{{ $t("friend_list") }}</span>
             </i>
-            <i class="fas fa-times friends-list slide-link" page=".slide-list-container" aria-hidden="true" v-on:click="$emit('open-menu','none')"></i>
+            <i class="fas fa-times friends-list slide-link close-sidebar" page=".slide-list-container" aria-hidden="true" v-on:click="$emit('open-menu','none')"></i>
         </div>
         
         <div class="slide-list" id="friend-list">
