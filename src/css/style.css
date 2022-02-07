@@ -604,6 +604,11 @@ body {
 .ajuste>* {
     display: flex;
     margin-right: 20px;
+    align-items: center;
+}
+
+.volumen-range > input[type=range] {
+    width: 22vw !important;
 }
 
 .ajuste select {
@@ -635,6 +640,8 @@ body {
     margin: 12.5px 0;
     background-color: transparent;
     -webkit-appearance: none;
+    margin-left: 1vw;
+    margin-right: 1vw;
 }
 
 .sound_settings input[type=range]:focus {

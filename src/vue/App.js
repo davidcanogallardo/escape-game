@@ -78,7 +78,7 @@ var app = new Vue({
         rankingData: null,
         friendChat: null,
         lastMessage: null,
-        mainMicId: null,
+        mainMicId: "default",
         messages: {},
         messagesunread: false,
         peopleUnread: [],
