@@ -32,6 +32,40 @@ class Game extends Phaser.Scene {
     }
 
     create() {
+        socket.on("playerMoveResponse", (moveData) => {
+            this.playersGroup.getChildren().forEach(player => {
+                if(moveData.id == player.id){
+                    if (moveData.direction == 'left') {
+                        player.move(-moveData.speed,0);
+                    }
+                    if (moveData.direction == 'right') {
+                        player.move(moveData.speed,0);
+                    }
+                    if (moveData.direction == 'up') {
+                        player.move(0,-moveData.speed);
+                    }
+                    if (moveData.direction == 'down') {
+                        player.move(0,moveData.speed);
+                    }
+                    if (moveData.direction == 'idle') {
+                        player.move(0,0);
+                    }
+                    if (moveData.direction == 'player-idle-down') {
+                        player.move(null,null);
+                    }
+                    console.log(moveData)
+                   
+                    // let moveData = {
+                    //     id: player.id,
+                    //     speed: player.speed,
+                    //     x: player.x,
+                    //     y: player.y
+                    // }
+                    // socket.emit("playerMoved", moveData);
+                }
+            });
+        })
+
         var that = this
 
         this.events.on("tiempo", (tiempo) => {
@@ -253,32 +287,11 @@ class Game extends Phaser.Scene {
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
                 player.update();
-                let moveData = {
-                    id: player.id,
-                    speed: player.speed,
-                    x: player.x,
-                    y: player.y
-                }
-                socket.emit("playerMoved", moveData);
+                
             }
         });
 
-        socket.on("playerMoveResponse", (moveData) => {
-            this.playersGroup.getChildren().forEach(player => {
-                if(moveData.id == player.id){
-                    player.x = moveData.x;
-                    player.y = moveData.y;
-                    //player.update();
-                    // let moveData = {
-                    //     id: player.id,
-                    //     speed: player.speed,
-                    //     x: player.x,
-                    //     y: player.y
-                    // }
-                    // socket.emit("playerMoved", moveData);
-                }
-            });
-        })
+        
         //this.playersGroup.update()
     }
 }
