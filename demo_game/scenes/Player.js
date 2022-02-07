@@ -52,29 +52,35 @@ class Player extends Phaser.GameObjects.Sprite{
     update() {
         this.centerBodyonBody(this.playerCollider,this)
         this.speed = 150;
-
+        var speed = this.speed
         if ( this.anims.currentAnim==null) {
             this.anims.play('player-idle-down');
-        } else if(!this.inZone) {
+        } else {
             if (this.cursors.left?.isDown) {
-                this.body.setVelocity(-this.speed, 0)
-                this.anims.play('player-run-side',true)
-                this.scaleX = -1;
-                this.body.offset.x = 24;
-
+                // this.body.setVelocity(-speed, 0)
+                // this.anims.play('player-run-side',true)
+                // this.scaleX = -1;
+                // this.body.offset.x = 24;
+                this.move(-speed,0)
+                
+    
             } else if (this.cursors.right?.isDown) {
-                this.body.setVelocity(this.speed, 0)
-                this.anims.play('player-run-side',true)
-                this.scaleX = 1;
-                this.body.offset.x = 8;
-                                
+                // this.body.setVelocity(speed, 0)
+                // this.anims.play('player-run-side',true)
+                // this.scaleX = 1;
+                // this.body.offset.x = 8;
+                this.move(speed,0)
+                
+    
             } else if (this.cursors.up?.isDown) {
-                this.body.setVelocity(0, -this.speed)
-                this.anims.play('player-run-up', true)
+                // this.body.setVelocity(0, -speed)
+                // this.anims.play('player-run-up', true)
+                this.move(0,-speed)
     
             } else if (this.cursors.down?.isDown) {
-                this.body.setVelocity(0, this.speed)
-                this.anims.play('player-run-down', true)
+                // this.body.setVelocity(0, speed)
+                // this.anims.play('player-run-down', true)
+                this.move(0,speed)
     
             } else {
                 const parts = this.anims.currentAnim.key.split('-');
@@ -89,6 +95,32 @@ class Player extends Phaser.GameObjects.Sprite{
             socket.emit("playerInEndZone");
             this.end = true;
         }
+    }
+
+    move(leftright, updown) {
+        this.body.setVelocity(leftright, updown)
+        // this.anims.play('player-run-side',true)
+        if (leftright<0) {
+            // console.log("1");
+            this.anims.play('player-run-side', true)
+            this.scaleX = -1;
+            this.body.offset.x = 24;
+        } 
+        if(leftright>0) {
+            // console.log("2");
+            this.anims.play('player-run-side', true)
+            this.scaleX = 1;
+            this.body.offset.x = 8;
+        } 
+        if (updown>0) {
+            // console.log("3");
+            this.anims.play('player-run-down', true)
+        } 
+        if (updown<0) {
+            // console.log("4");
+            this.anims.play('player-run-up', true)
+        }
+        this.centerBodyonBody(this.playerCollider,this)
     }
 
     centerBodyonBody(collider, player) {
