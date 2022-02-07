@@ -26,12 +26,12 @@ Vue.component('home', {
             
             <div class="icon-container main-icon friends-list slide-link" page=".slide-list-container" v-if="user2!=''" v-on:click="$emit('open-menu','friend')" style="position:relative;">
                 <i class="fas fa-user-friends"></i>
-                <i v-if="messages_unread" aria-hidden="true" class="fas fa-circle" style="position: absolute; top: -0.3vw; right: -0.2vw; font-size: 1.9vw; color: red; text-shadow: none;"></i>
+                <i v-if="messages_unread" aria-hidden="true" class="fas fa-circle notification-icon" ></i>
             </div>
 
             <div class="icon-container main-icon notificacion-list slide-link" page=".notification-container"  v-if="user2!=''" v-on:click="$emit('open-menu','noti')" style="position:relative;">
                 <i class="fas fa-bell"></i>
-                <i v-if="notifications_unread" aria-hidden="true" class="fas fa-circle" style="position: absolute; top: -0.3vw; right: -0.2vw; font-size: 1.9vw; color: red; text-shadow: none;"></i>
+                <i v-if="notifications_unread" aria-hidden="true" class="fas fa-circle notification-icon"></i>
             </div>
             <div class="icon-container main-icon ranking-link link" page="ranking-page" v-if="user2!=''" v-on:click="ranking()">
                 <i class="fas fa-list-ol"></i>
