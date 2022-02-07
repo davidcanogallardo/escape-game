@@ -756,7 +756,7 @@ body {
 
 td,
 th {
-    font-size: 24px;
+    font-size: 2vw;
     background-color: #c4c4c486;
     border: 1px solid #562800;
 }
@@ -1417,7 +1417,7 @@ input[type=text] {
 
 .all-levels th,
 td {
-    padding: 10px;
+    padding: 1vw;
 }
 
 .all-levels .name {

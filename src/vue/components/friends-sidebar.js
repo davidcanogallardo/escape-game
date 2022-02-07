@@ -75,6 +75,7 @@ Vue.component('friend', {
     methods:{
         request(){
           this.$root.sendFriendRequest(this.friend);
+          this.friend = ""
         }
     }
 
