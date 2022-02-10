@@ -14,4 +14,33 @@ var config = {
 
 };
 
-var game = new Phaser.Game(config);
+class PhaserGame extends Phaser.Game {
+  constructor(config) {
+      super(config)
+  }
+
+  moveStick(){
+    let data = "x:10,22;y:120,1";
+    let x = data.split(';')[0];
+    let y = data.split(';')[1];
+    x = x.split(':')[1];
+    y = y.split(':')[1];
+
+
+    let speeds = {x: x,y: y};
+    let activeScene = this.scene.getScene('game');
+    activeScene.moveStick(speeds);
+  } 
+
+  pressStick(){
+    let activeScene = this.scene.getScene('game');
+    activeScene.pressStick();
+  }
+
+  pressBtn(){
+    let activeScene = this.scene.getScene('game');
+    activeScene.pressBtn();
+  }
+}
+var game = new PhaserGame(config);
+let bluetoothConnection = new BluetoothGamePadReciver(game.moveStick(), game.pressStick(), game.pressBtn());
