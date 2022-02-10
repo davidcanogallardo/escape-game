@@ -57,6 +57,11 @@ class PeerClient {
             // controlsStreamingButton.style.backgroundColor = "lightcoral";
             //streamingStarted = false;
         });
+
+        //renegociaciones
+        socket.on("renegotiationFromGuest", (peerId) =>{
+            socket.emit("renegotiationToHost",peerGuest);
+        })
     }
 
     sendText(message) {

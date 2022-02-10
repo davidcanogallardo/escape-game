@@ -40,6 +40,8 @@ function startClientPeer(data) {
         guestPeerClient.peer.signal(hostID);
     })
 
+    
+
     var titleScreen = game.scene.getScene("titlescreen");
     titleScreen.setPlayers(data);
 }
