@@ -52,8 +52,18 @@ class Player extends Phaser.GameObjects.Sprite{
 
     update() {
         this.centerBodyonBody(this.playerCollider,this)
-        this.speed = 150;
-        var speed = this.speed
+        this.speed.x = 150;
+        this.speed.y = 150;
+        
+        var speed_x = this.speed.x;
+        var speed_y = this.speed.y;
+
+        if(controller_connected){
+            this.move(this.speed_x, this.speed_y);
+        } else {
+
+        }
+
         if ( this.anims.currentAnim==null) {
             this.anims.play('player-idle-down');
         } else {

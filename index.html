@@ -45,6 +45,7 @@
     <script src="./src/vue/components/settings/change-language.js"></script>
     <script src="./src/vue/components/waiting-room.js"></script>
     <script type="module" type="application/javascript" src="./src/vue/components/chat.js"></script>
+    <script src="./demo_game/classes/BluetoothConnection.js"></script>
     
     <script type="module" src="./src/vue/App.js"></script>
 
@@ -162,7 +163,7 @@
     </div>
     <video src="" id="cam"></video>
     <script>
-        const socket = io("ws://192.168.16.14:3000");
+        const socket = io("ws://localhost:3000");
     </script>
     
     <!-- Scenes Phaser -->

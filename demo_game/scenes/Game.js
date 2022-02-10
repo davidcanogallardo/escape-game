@@ -53,7 +53,7 @@ class Game extends Phaser.Scene {
                     if (moveData.direction == 'player-idle-down') {
                         player.move(null,null);
                     }
-                    console.log(moveData)
+                    //console.log(moveData)
                    
                     // let moveData = {
                     //     id: player.id,
@@ -168,19 +168,38 @@ class Game extends Phaser.Scene {
         //collider para que el personaje con el cofre
         this.physics.add.collider(this.chest, this.playersGroup);
         this.chest.body.setSize(this.chest.width*0.5, this.chest.height*0.8);
-        
+
         this.playersGroup.getChildren().forEach(player => {
-            this.physics.add.overlap(player.playerCollider, this.chest, function (player,chest) {
-                if(chest.y < player.y){
-                    that.player.setDepth(10);
-                } else {
-                    that.player.setDepth(0);
-                }
+            if(player.id == socket.id){
+                //Añadir colision al jugador con el mismo socket
+                //Cofre
+                this.physics.add.overlap(player.playerCollider, this.chest, function (player, chest) {
+                    if(chest.y < player.y){
+                        that.player.setDepth(10);
+                    } else {
+                        that.player.setDepth(0);
+                    }
     
-                if (eKey.isDown) {
-                    that.scene.launch('seepass');
-                }
-            });
+                    if (eKey.isDown) {
+                        that.scene.launch('seepass');
+                    }
+                });
+                //Mesa
+                this.physics.add.overlap(player.playerCollider, this.table, function (player,table) {
+                    if(table.y < player.y){
+                        that.player.setDepth(10);
+                    } else {
+                        that.player.setDepth(0);
+                    }
+        
+                    if (eKey.isDown && that.canDoPuzzle) {
+                        that.scene.launch('enterPasswordScene');
+                        //that.scene.pause();
+                    }
+                });
+
+
+            }
         });
 
         /*this.physics.add.overlap(this.playerCollider, this.chest, function (player,chest) {
@@ -201,20 +220,6 @@ class Game extends Phaser.Scene {
         let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         this.canDoPuzzle = true
 
-        this.playersGroup.getChildren().forEach(player => {
-            this.physics.add.overlap(player.playerCollider, this.table, function (player,table) {
-                if(table.y < player.y){
-                    that.player.setDepth(10);
-                } else {
-                    that.player.setDepth(0);
-                }
-    
-                if (eKey.isDown && that.canDoPuzzle) {
-                    that.scene.launch('enterPasswordScene');
-                    that.scene.pause();
-                }
-            });
-        });
         /*this.physics.add.overlap(this.playerCollider, this.table, function (player,table) {
             if(table.y < player.y){
                 that.player.setDepth(10);
@@ -271,27 +276,33 @@ class Game extends Phaser.Scene {
   
     update() {
         this.playersGroup.getChildren().forEach(player => {
-            // console.log(player);
             let count = 0;
-            // console.log(count);
             if(player.inZone==true){
                 count++;
-                // console.log(count);
             }
             if(count == 2){
-                // console.log(count);
                 socket.emit("playerInEndZone", player);
             }
         });
 
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
+                player.x_speed = this.speeds['x'];
+                player.y_speed = this.speeds['y'];
                 player.update();
-                
             }
         });
+    }
 
-        
-        //this.playersGroup.update()
+    moveStick(speeds){
+        this.speeds = speeds; 
+    } 
+    
+    pressStick(data){
+    
+    }
+    
+    pressBtn(data){
+    
     }
 }
