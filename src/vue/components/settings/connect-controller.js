@@ -4,6 +4,34 @@ Vue.component('connect-controller', {
     <div class="sincronizar_mando">
         <h1>{{ $t("synccontroller") }}</h1>
 
+        <div class="btn" v-on:click="connectBluetoothDevice()">
+            Search Controller
+        </div>
+
+        <div class="btn red volver settings-link link" page="settings-page" v-on:click="$emit('change-page','settings')">
+            {{ $t("return") }}
+        </div>
+    </div>
+    `, 
+    methods: {
+        connectBluetoothDevice(){
+            console.log("Conectar bluetooth");
+            window.bluetoothConnection = new BluetoothGamePadReciver();
+            window.bluetoothConnection.connect();
+            
+            var gameScene = game.scene.getScene("game");
+            gameScene.setBluetoothConnection( window.bluetoothConnection);
+        }
+    }
+})
+
+/*
+Vue.component('old-connect-controller', {
+    template: //html
+    `             
+    <div class="sincronizar_mando">
+        <h1>{{ $t("synccontroller") }}</h1>
+
         <div class="sinc_mand_cont">
             <div class="mandos_sincronizados">
                 <p >{{ $t("syncmsg1") }}</p>
@@ -78,4 +106,4 @@ Vue.component('connect-controller', {
         </div>
     </div>
     `, 
-})
+})*/
