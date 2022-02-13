@@ -19,28 +19,43 @@ class PhaserGame extends Phaser.Game {
       super(config)
   }
 
-  moveStick(){
+  /*
+  moveStick(velocidades){
     let data = "x:10,22;y:120,1";
     let x = data.split(';')[0];
     let y = data.split(';')[1];
     x = x.split(':')[1];
     y = y.split(':')[1];
 
-
     let speeds = {x: x,y: y};
-    let activeScene = this.scene.getScene('game');
-    activeScene.moveStick(speeds);
+    if(this.isGameActive()){
+      let activeScene = this.scene.getScene('game');
+      bluetoothConnection.setCallbackButtonA(this.moveStick(data));
+      activeScene.moveStick(speeds);
+    }
   } 
 
   pressStick(){
-    let activeScene = this.scene.getScene('game');
-    activeScene.pressStick();
+    if(this.isGameActive()){
+      let activeScene = this.scene.getScene('game');
+      bluetoothConnection.setCallbackButtonJoystick(this.pressStick());
+      activeScene.pressStick();
+    }
   }
 
   pressBtn(){
-    let activeScene = this.scene.getScene('game');
-    activeScene.pressBtn();
+    if(this.isGameActive()){
+      let activeScene = this.scene.getScene('game');
+      bluetoothConnection.setCallbackJoystick(this.pressBtn());
+      activeScene.pressBtn();
+    }
   }
+
+  isGameActive(){
+    let activeScenes = this.scene.getScenes();
+    console.log(activeScenes.includes("game"));
+    return activeScenes.includes("game");
+  }*/
 }
+
 var game = new PhaserGame(config);
-let bluetoothConnection = new BluetoothGamePadReciver(game.moveStick(), game.pressStick(), game.pressBtn());

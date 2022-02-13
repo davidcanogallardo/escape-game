@@ -1,5 +1,5 @@
 class BluetoothGamePadReciver{
-    constructor(_callbackButtonA = null, _callbackButtonJoystick = null, _callbackJoystick){
+    constructor(){
         //define properties
         this.stop = false;
         this.autorefresh = false; //in case you wanna autorefresh values automaticly
@@ -19,9 +19,9 @@ class BluetoothGamePadReciver{
         this.decoder = new TextDecoder('utf8');
         //end define properties
         console.log("BluetoothReciver constructor");
-        this.callbackButtonA = _callbackButtonA;
-        this.callbackButtonJoystick = _callbackButtonJoystick;
-        this.callbackJoystick = _callbackJoystick;
+        this.callbackButtonA = null;
+        this.callbackButtonJoystick = null;
+        this.callbackJoystick = null;
     }
 
     isWebBLEAvailable(){
@@ -173,7 +173,23 @@ class BluetoothGamePadReciver{
             this.readBLECharactristicJoystick();
         }
     }
+    /*
+    _callbackButtonA = null, _callbackButtonJoystick = null, _callbackJoystick
+    this.callbackButtonA = _callbackButtonA;
+    this.callbackButtonJoystick = _callbackButtonJoystick;
+    this.callbackJoystick = _callbackJoystick;*/
+    
+    setCallbackButtonA(_callbackButtonA = null){
+        this.callbackButtonA = _callbackButtonA;
+    }
 
+    setCallbackButtonJoystick(_callbackButtonJoystick = null){
+        this.callbackButtonJoystick = _callbackButtonJoystick;
+    }
+
+    setCallbackJoystick(_callbackJoystick = null){
+        this.callbackJoystick = _callbackJoystick;
+    }
 
 }
 
