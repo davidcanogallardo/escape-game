@@ -183,12 +183,15 @@ class Game extends Phaser.Scene {
                 objectLayer.objects.forEach(object => {
                     switch(object.type){
                         case 'door':
-                            console.log(object.type);
-                            if(object.properties[0] == 1){
-                                object.playAnimation('opening-door');
+                            if(object.properties[0].value == 1){
+                                console.log(object);
+                                this.doorsGroup.children.entries[0].play('opening-door');
+                                this.doorsGroup.children.entries[1].play('opening-door');
                                 this.physics.world.removeCollider(this.doorsColider);
                                 this.table.disableBody();
                                 that.canDoPuzzle = false 
+                            } else if (object.properties[0].value == -1) {
+                                this.doorsGroup.children.entries[2].play('opening-door');
                             }
                             
                         break;
@@ -198,6 +201,10 @@ class Game extends Phaser.Scene {
             }
             
         });
+
+        if (this.challenge == this.map.objects[1].objects[0].properties[0].value) {
+            this.challenge == -1
+        }
     }
   
     update() {
