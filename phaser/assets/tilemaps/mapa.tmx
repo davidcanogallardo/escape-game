@@ -340,7 +340,7 @@
   </object>
   <object id="37" name="button" type="button" gid="386" x="152" y="96" width="16" height="16"/>
   <object id="40" name="chest" type="chest" gid="596" x="48" y="284" width="16" height="16"/>
-  <object id="41" name="table" type="table" gid="1027" x="186.667" y="192.667" width="32" height="16"/>
+  <object id="41" name="table" type="table" gid="1027" x="18.854" y="193.883" width="32" height="16"/>
   <object id="42" name="door" type="door" gid="1025" x="144.011" y="31.997" width="32" height="32">
    <properties>
     <property name="challenge" type="int" value="-1"/>
