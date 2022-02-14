@@ -4,12 +4,15 @@ class Game extends Phaser.Scene {
     }
     //map.getLayer("walls").data[5][5].properties?.horitzontalWall
     init(data){
+        console.log(data);
         let playersArray = [];
         data.forEach(element => {
-            this.player = new Player(this, element.id, element.x, element.y, "player");
+            //console.log(element);
+            this.player = new Player(this, element.id, element.x, element.y, "player", element.peerClient);
             playersArray.push(this.player);
         });
         this.playersGroup = this.add.group(playersArray);
+        //console.log(this.playersGroup);
     }   
 
     preload() {
@@ -29,7 +32,7 @@ class Game extends Phaser.Scene {
         for(let i=0; i<9; i++){
             this.load.image('simbol'+i, path+'assets/passwd/simbol'+i+'.png');
         }
-        this.buttonActive = false;
+        this.buttonActive;
         this.stickButtonActive = false;
         this.stickActive = false;
         if(this.controllerConnected){
@@ -191,12 +194,13 @@ class Game extends Phaser.Scene {
     
                     if (eKey.isDown) {
                         that.scene.launch('seepass');
-
                     }
-                    console.log(that.buttonActive);
-                    if(that.buttonActive){
+                    if(that.buttonActive == true){
                         that.scene.launch('seepass');
                         that.buttonActive = false;
+                        //mirar si esta activa escena
+                        //recupera escena as objeto
+                        //llamo funcion buttonActive()
                     }
 
                 });
@@ -326,29 +330,30 @@ class Game extends Phaser.Scene {
         let y = data.split(';')[1];
         x = x.split(':')[1];
         y = y.split(':')[1];
-        this.stickActive = true;
-        this.speeds = {x:x,y:y}
-
+        game.scene.getScene('game').stickActive = true;
+        game.scene.getScene('game').speeds = {x:x,y:y};
     } 
     
     pressStick(data){
         console.log("My callback pressStick");
+        data = 1;
         if(data == 1){
-            this.stickButtonActive = true
+            game.scene.getScene('game').stickButtonActive = true;
+
+            let activeScenes = game.scene.getScenes();
+            for(let i = 1; i<activeScenes.length; i++){
+                activeScenes[i].stickButtonActive = true;
+                console.log(activeScenes[i]);
+            }
         }
-        // Decir arduino leido
     }
     
     pressBtn(data){
         console.log("My callback presbutton");
 
         if(data == 1){
-            this.buttonActive = true;
+            game.scene.getScene('game').buttonActive = true;
         }
-
-        console.log(this.buttonActive);
-
-        // Decir arduino leido
     }
 
     setBluetoothConnection(_bluetoothConnection){
