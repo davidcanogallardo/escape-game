@@ -10,7 +10,7 @@ class Game extends Phaser.Scene {
             playersArray.push(this.player);
         });
         this.playersGroup = this.add.group(playersArray);
-    }
+    }   
 
     preload() {
         var path = "./demo_game/"
@@ -28,6 +28,15 @@ class Game extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
         for(let i=0; i<9; i++){
             this.load.image('simbol'+i, path+'assets/passwd/simbol'+i+'.png');
+        }
+        this.buttonActive = false;
+        this.stickButtonActive = false;
+        this.stickActive = false;
+        if(this.controllerConnected){
+            console.log("Controller Connected");
+            this.bluetoothConnection.setCallbackButtonA(this.pressBtn);
+            this.bluetoothConnection.setCallbackButtonJoystick(this.pressStick);
+            this.bluetoothConnection.setCallbackJoystick(this.moveStick);
         }
     }
 
@@ -182,7 +191,14 @@ class Game extends Phaser.Scene {
     
                     if (eKey.isDown) {
                         that.scene.launch('seepass');
+
                     }
+                    console.log(that.buttonActive);
+                    if(that.buttonActive){
+                        that.scene.launch('seepass');
+                        that.buttonActive = false;
+                    }
+
                 });
                 //Mesa
                 this.physics.add.overlap(player.playerCollider, this.table, function (player,table) {
@@ -195,6 +211,11 @@ class Game extends Phaser.Scene {
                     if (eKey.isDown && that.canDoPuzzle) {
                         that.scene.launch('enterPasswordScene');
                         //that.scene.pause();
+                    }
+
+                    if(that.buttonActive){
+                        that.scene.launch('enterPasswordScene');
+                        that.buttonActive = false;
                     }
                 });
 
@@ -287,22 +308,51 @@ class Game extends Phaser.Scene {
 
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
-                player.x_speed = this.speeds['x'];
-                player.y_speed = this.speeds['y'];
+                if(this.stickActive){
+                    player.x_speed = this.speeds['x'];
+                    player.y_speed = this.speeds['y'];
+                    this.stickActive = false;
+                }
                 player.update();
             }
         });
     }
 
-    moveStick(speeds){
-        this.speeds = speeds; 
+    moveStick(data){
+        console.log("My callback move stick");
+
+        // let data = "x:10,22;y:120,1";
+        let x = data.split(';')[0];
+        let y = data.split(';')[1];
+        x = x.split(':')[1];
+        y = y.split(':')[1];
+        this.stickActive = true;
+        this.speeds = {x:x,y:y}
+
     } 
     
     pressStick(data){
-    
+        console.log("My callback pressStick");
+        if(data == 1){
+            this.stickButtonActive = true
+        }
+        // Decir arduino leido
     }
     
     pressBtn(data){
-    
+        console.log("My callback presbutton");
+
+        if(data == 1){
+            this.buttonActive = true;
+        }
+
+        console.log(this.buttonActive);
+
+        // Decir arduino leido
+    }
+
+    setBluetoothConnection(_bluetoothConnection){
+        this.bluetoothConnection = _bluetoothConnection;
+        this.controllerConnected = true;
     }
 }

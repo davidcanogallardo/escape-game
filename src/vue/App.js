@@ -68,7 +68,8 @@ let excludedPages = [
 
 let _url = "./src/backend/petitions.php";
 
-var app = new Vue({
+//window.vue_app
+  var app = new Vue({
     i18n,
     el: '#app',
     data: {
@@ -84,7 +85,8 @@ var app = new Vue({
         messages: {},
         messagesunread: false,
         peopleUnread: [],
-        notificationunsread: false
+        notificationunsread: false,
+        bluetoothConnection: null,
     },
     watch: {
         currentPage: function (newPage, oldPage) {

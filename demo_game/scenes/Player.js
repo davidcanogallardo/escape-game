@@ -52,36 +52,31 @@ class Player extends Phaser.GameObjects.Sprite{
 
     update() {
         this.centerBodyonBody(this.playerCollider,this)
-        this.speed.x = 150;
-        this.speed.y = 150;
+        this.x_speed = 150;
+        this.y_speed = 150;
         
-        var speed_x = this.speed.x;
-        var speed_y = this.speed.y;
+        var speed_x = this.x_speed;
+        var speed_y = this.y_speed;
 
-        if(controller_connected){
-            this.move(this.speed_x, this.speed_y);
-        } else {
-
-        }
 
         if ( this.anims.currentAnim==null) {
             this.anims.play('player-idle-down');
         } else {
             if (this.cursors.left?.isDown) {
-                this.move(-speed,0)
+                this.move(-this.x_speed,0)
                 this.direction = 'left'
     
             } else if (this.cursors.right?.isDown) {
-                this.move(speed,0)
+                this.move(this.x_speed,0)
                 this.direction = 'right'
                 
     
             } else if (this.cursors.up?.isDown) {
-                this.move(0,-speed)
+                this.move(0,-this.y_speed)
                 this.direction = 'up'
     
             } else if (this.cursors.down?.isDown) {
-                this.move(0,speed)
+                this.move(0,this.y_speed)
                 this.direction = 'down'
     
             } else {

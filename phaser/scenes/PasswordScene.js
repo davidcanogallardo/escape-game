@@ -31,13 +31,7 @@ class PasswordScene extends Phaser.Scene {
         if(xKeyDown){
             this.scene.stop();
             this.scene.resume("game");
-        }
 
-        console.log(this.sys.game.stickButtonActive);
-        if(this.sys.game.stickButtonActive){
-            this.scene.stop();
-            this.scene.resume("game");
-            this.sys.game.stickButtonActive = false;
         }
     }
 }
