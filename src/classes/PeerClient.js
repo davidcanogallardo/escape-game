@@ -2,14 +2,13 @@ class PeerClient {
     constructor(peer, isInitiator, socket) {
         this.peer = peer
         this.isInitiator = isInitiator
-        this.id = undefined
         this.socket = socket
         this.name = this.socket.id;
     }
 
     connection() {
         this.peer.on("signal", (data) => {
-            this.id = data;
+            console.log(data)
             if(this.isInitiator && data.type == "offer"){
                 socket.emit("startPeer", data);
             } else if(!this.isInitiator && data.type == "answer"){
@@ -24,19 +23,21 @@ class PeerClient {
         this.peer.on("stream", (stream) => {
             //Stream de dades que rebo de l'altre costat
             console.log("event on stream from initiator");
-            // document.getElementById("remoteVideoStream").srcObject = stream;
-            // document.getElementById("remoteVideoStream").play();
-            // const audio = window.audio2
-            // audio.controls = true;
-            // audio.autoplay = true;
-            // audio.srcObject = stream;
-            var video = document.getElementById("cam");
-            video.srcObject = stream;
-            video.play();
+            var audio = document.getElementById("mic");
+            audio.controls = true;
+            audio.autoplay = true;
+            audio.srcObject = stream;
         });
 
         this.peer.on("connect", () => {
             console.log("Conexion Establecida");
+            if(audio.reneg){
+                console.log("pause audio");
+                audio.pause();
+                audio.currentTime = 0;
+                audio.srcObject = null;
+                audio.reneg = false;
+            }
             this.socket.emit("switchToGame");
         });
 
@@ -58,10 +59,10 @@ class PeerClient {
             //streamingStarted = false;
         });
 
-        //renegociaciones
-        socket.on("renegotiationFromGuest", (peerId) =>{
-            socket.emit("renegotiationToHost",peerGuest);
-        })
+
+        
+
+        
     }
 
     sendText(message) {
