@@ -4,6 +4,7 @@ var devices = undefined;
 var micStarted = false;
 var audio = document.createElement('audio');
 var video = document.createElement('video');
+audio.reneg = false;
 
 var mediaDevicesPromise = navigator.mediaDevices.getUserMedia({
 	audio: true,
@@ -50,11 +51,14 @@ function startTestMic() {
 		console.log("turining OFF mic");
 		micButton.innerHTML = "TEST MICROPHONE";
 		if (audio) {
+			//El que envia el audio
 			window.stream.getAudioTracks().forEach(track => track.stop());
 			window.stream = null;
+			//el que recibe el audio
 			audio.pause();
 			audio.currentTime = 0;
 			audio.srcObject = null;
+			audio.reneg = false;
 		}
 	} else {
 		audio = document.createElement('audio');
@@ -77,21 +81,12 @@ function testMic(micID) {
 
 function startPeerStream(callback, data) {
 	var micID = window.mic[0].id;
-	if (window.cam[0] == null) {
-		var constraintCam = false;
-	} else {
-		var constraintCam = {
-			deviceId: { exact: window.cam[0].id },
-			width: 400,
-			height: 250
-		}
-	}
-
+	
 	var constraintMic = {
 		deviceId: { exact: micID },
 	};
 
-	startStream(callback, constraintMic, constraintCam, data)
+	startStream(callback, constraintMic, false, data)
 }
 
 function startStream(callback, constraintMic, constraintCam, data) {
