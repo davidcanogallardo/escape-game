@@ -32,6 +32,7 @@ class PeerClient {
         this.peer.on("connect", () => {
             console.log("Conexion Establecida");
             if(audio.reneg){
+                console.log("pause audio");
                 audio.pause();
                 audio.currentTime = 0;
                 audio.srcObject = null;
@@ -59,12 +60,7 @@ class PeerClient {
         });
 
 
-        //renegociaciones
-        socket.on("renegotiation", (peer) =>{
-            console.log(peer)
-            audio.reneg = true;
-            this.peer.emit("signal",peer);
-        })
+        
 
         
     }
