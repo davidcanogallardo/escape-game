@@ -41,6 +41,8 @@ class Game extends Phaser.Scene {
             this.bluetoothConnection.setCallbackButtonJoystick(this.pressStick);
             this.bluetoothConnection.setCallbackJoystick(this.moveStick);
         }
+        
+        
     }
 
     create() {
@@ -195,6 +197,11 @@ class Game extends Phaser.Scene {
                     if (eKey.isDown) {
                         that.scene.launch('seepass');
                     }
+
+                    if(mKey.isDown){
+                        socket.emit("iniciarRenegociacion");
+                    }
+
                     if(that.buttonActive == true){
                         that.scene.launch('seepass');
                         that.buttonActive = false;
@@ -243,7 +250,10 @@ class Game extends Phaser.Scene {
         
         // *********************************************puerta****************************************************
         let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+        let mKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
         this.canDoPuzzle = true
+
+
 
         /*this.physics.add.overlap(this.playerCollider, this.table, function (player,table) {
             if(table.y < player.y){

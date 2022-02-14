@@ -13,7 +13,7 @@ class PeerClient {
                 socket.emit("startPeer", data);
             } else if(!this.isInitiator && data.type == "answer"){
                 socket.emit("sendGuestID", data);
-            }
+            } 
         });
         //Handshake per iniciar la comunicació sense server
         this.peer.on("data", (data) => {
@@ -58,11 +58,6 @@ class PeerClient {
             // controlsStreamingButton.style.backgroundColor = "lightcoral";
             //streamingStarted = false;
         });
-
-
-        
-
-        
     }
 
     sendText(message) {
