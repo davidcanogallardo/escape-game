@@ -1,4 +1,28 @@
-class SeePass extends Phaser.Scene {
+class GenericMiniGame extends Phaser.Scene{
+    constructor(name){
+        super(name);
+        this.buttonActive;
+        this.stickButtonActive;
+        this.stickActive;
+        this.stickSpeeds;
+    }
+
+    activeButton(){
+        this.buttonActive = true;
+    }
+
+    activeJoystickButton(){
+        this.stickButtonActive = true;
+    }
+
+    moveStick(data = null){
+        this.stickActive = true;
+        this.stickSpeeds = data;
+    }
+}
+
+
+class SeePass extends GenericMiniGame {
     constructor() {
         super("seepass")
     }
@@ -9,7 +33,7 @@ class SeePass extends Phaser.Scene {
 
     create() {
         let { width, height } = this.sys.game.canvas;
-        console.log(this.sys.game.canvas.width);
+        //console.log(this.sys.game.canvas.width);
         this.background = this.add.image(0, 0, 'passwd_bg');
         this.background.setScale(0.12);
         this.background.setOrigin(-0.2 , -0.7)
@@ -20,7 +44,7 @@ class SeePass extends Phaser.Scene {
         this.puzzle_image= [];
         let x = 0.50;
         for(let i=0; i<4; i++){
-            console.log(this.background.height);
+            //console.log(this.background.height);
             
             if(i>=5){
                 this.puzzle_image[i] = this.add.image(0+(x*50), height/2+40, 'simbol'+i);
@@ -54,11 +78,11 @@ class SeePass extends Phaser.Scene {
             this.scene.resume("game");
         }
 
-        console.log(this.sys.game.stickButtonActive);
-        if(this.sys.game.stickButtonActive){
+        // console.log(this);
+        if(this.stickButtonActive){
             this.scene.stop();
             this.scene.resume("game");
-            this.sys.game.stickButtonActive = false;
+            this.stickButtonActive = false;
         }
     }
 }

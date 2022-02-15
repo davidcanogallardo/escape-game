@@ -62,6 +62,10 @@ class ComunicacionServidor {
                         this.io.in(this.roomName).emit("endGame");
                     }
                 });
+
+                socket.on("iniciarRenegociacion", () => {
+                    socket.in(this.roomName).emit("renegotiation");
+                });
             });
         }
     

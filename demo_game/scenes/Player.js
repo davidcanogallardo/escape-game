@@ -1,6 +1,6 @@
 class Player extends Phaser.GameObjects.Sprite{
-    constructor(scene, id, x, y, sprite) {
-        super(scene, x, y, sprite);
+    constructor(scene, id, x, y, sprite, peerClient) {
+        super(scene, x, y, sprite, peerClient);
         this.id = id;
         this.speed = 150;
         scene.add.existing(this);
@@ -13,6 +13,7 @@ class Player extends Phaser.GameObjects.Sprite{
         this.playerCollider = scene.physics.add.image(200, 50);
         //console.log(this.playerCollider);
         this.direction = 'idle'
+        this.peerClient = peerClient;
     
 
         this.anims.create({

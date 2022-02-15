@@ -39,9 +39,7 @@ function startClientPeer(data) {
     socket.on("sendHostID", (hostID) => {
         guestPeerClient.peer.signal(hostID);
     })
-
     
-
     var titleScreen = game.scene.getScene("titlescreen");
     titleScreen.setPlayers(data);
 }
@@ -52,6 +50,29 @@ socket.on("windowGame", (data) => {
     console.log(app.currentPage);
     app.currentPage = "game";
 });
+
+
+
+
+//renegociaciones
+socket.on("renegotiation",(peer) =>{
+    // console.log(peer)
+    // audio.reneg = true;
+    // peerClient.peer.signal(peer);
+    console.log("entro en renegotiation");
+    console.log(peerClient);
+    console.log(peerGuest);
+
+    if(peerClient.socket.id == socket.id){
+        audio.reneg = true;
+        peerClient.peer.signal();   
+        console.log("Hago signal cliente");
+    } else {
+        audio.reneg = true;
+        peerGuest.peer.signal();
+        console.log("Hago signal cliente");
+    }
+})
 
 let excludedPages = [
     "home",
