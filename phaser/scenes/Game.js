@@ -109,7 +109,9 @@ class Game extends Phaser.Scene {
             }
         });
         //Añadir colider al grupo de puertas
-        this.doorsColider = this.physics.add.collider(this.player, this.doorsGroup);
+        this.doorColider0 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[0]);
+        this.doorColider1 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[1]);
+        this.doorColider2 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[2]);
         // ******************************************************************************************************************
 
         //**************************************Cofre**************************************
@@ -178,29 +180,22 @@ class Game extends Phaser.Scene {
         }
         //*************************************************************Escena de victoria
         this.scene.get('enterPasswordScene').events.on('victoria', () => {
-            this.challenge = 1
+            this.challenge++;
             if (this.challenge == 1) {
-                objectLayer.objects.forEach(object => {
-                    switch(object.type){
-                        case 'door':
-                            if(object.properties[0].value == 1){
-                                console.log(object);
-                                this.doorsGroup.children.entries[0].play('opening-door');
-                                this.doorsGroup.children.entries[1].play('opening-door');
-                                this.physics.world.removeCollider(this.doorsColider);
-                                this.table.disableBody();
-                                that.canDoPuzzle = false 
-                            } else if (object.properties[0].value == -1) {
-                                this.doorsGroup.children.entries[2].play('opening-door');
-                            }
-                            
-                        break;
-                    }
-                });
-                
+                console.log(object);
+                this.doorsGroup.children.entries[0].play('opening-door');
+                this.doorsGroup.children.entries[1].play('opening-door');
+                this.physics.world.removeCollider(this.doorColider0);
+                this.physics.world.removeCollider(this.doorColider1);
+                this.table.disableBody();
+                console.error("soy tontisimo")
+                    that.canDoPuzzle = false
+            } else if (this.objectLayer.properties[0].value == -1) {
+                this.doorsGroup.children.entries[2].play('opening-door');
+                this.physics.world.removeCollider(this.doorColider2);
             }
-            
         });
+            
 
         if (this.challenge == this.map.objects[1].objects[0].properties[0].value) {
             this.challenge == -1
