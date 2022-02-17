@@ -20,11 +20,11 @@ class Game extends Phaser.Scene {
         for(let i=0; i<9; i++){
             this.load.image('simbol'+i, path+'assets/passwd/simbol'+i+'.png');
         }
+        this.load.image('mask', 'assets/mask1.png');
     }
 
     create() {
         var that = this
-
         this.events.on("tiempo", (tiempo) => {
             that.scene.remove('time')
             console.log("tiempo recibido "+ tiempo)
@@ -45,7 +45,25 @@ class Game extends Phaser.Scene {
         this.playerCollider = this.player.playerCollider
 
         this.wallsLayer = new WallsLayer(this);
+       
+        let rt = this.add.renderTexture(0, 0, 800, 600);
+        rt.depth = 20
+        window.rt = rt
+        rt.fill(0x000000);
+
+        this.spotlight = this.make.sprite({
+            x: 400,
+            y: 300,
+            key: "mask",
+            add: false
+        });
+
+        let mask = rt.createBitmapMask(this.spotlight)
+        mask.invertAlpha = true;
+        rt.setMask(mask);
+
         
+
 
         var end = this.physics.add.staticGroup();
         var endTile = end.create(158,14)
@@ -211,5 +229,7 @@ class Game extends Phaser.Scene {
   
     update() {
         this.player.update()
+        this.spotlight.x = this.player.x;
+        this.spotlight.y = this.player.y;
     }
 }

@@ -8,11 +8,13 @@ var peerClient = undefined;
 var guestPeer = undefined;
 var guestPeerClient = undefined;
 socket.on("matchFound", data => {
+    console.log(data);
     startPeerStream(startClientPeer, data)
 });
 
 function startClientPeer(data) {
     data.forEach((player) => {
+        
         if (socket.id == player.id && player.initiator) {
             peer = new Peer({
                 initiator: true,
@@ -84,7 +86,8 @@ let excludedPages = [
     "connect-controller",
     "test-controller",
     "change-language",
-    "waiting-room"
+    "waiting-room",
+    "select-solo-duo"
 ]
 
 let _url = "./src/backend/petitions.php";

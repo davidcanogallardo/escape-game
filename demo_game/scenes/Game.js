@@ -42,8 +42,7 @@ class Game extends Phaser.Scene {
             this.bluetoothConnection.setCallbackButtonJoystick(this.pressStick);
             this.bluetoothConnection.setCallbackJoystick(this.moveStick);
         }
-        
-        
+        this.loadedScene = "";
     }
 
     create() {
@@ -202,7 +201,7 @@ class Game extends Phaser.Scene {
                         that.player.setDepth(0);
                     }
                     if (eKey.isDown) {
-                        that.scene.launch('seepass');
+                        that.scene.launch('SeePass');
                     }
 
                     if(mKey.isDown){
@@ -210,7 +209,7 @@ class Game extends Phaser.Scene {
                     }
 
                     if(that.buttonActive == true){
-                        that.scene.launch('seepass');
+                        that.scene.launch('SeePass');
                         that.buttonActive = false;
                         //mirar si esta activa escena
                         //recupera escena as objeto
@@ -249,7 +248,7 @@ class Game extends Phaser.Scene {
             }
 
             if (eKey.isDown) {
-                that.scene.launch('seepass');
+                that.scene.launch('SeePass');
             }
         });*/
         this.chest.body.immovable = true
@@ -357,16 +356,30 @@ class Game extends Phaser.Scene {
 
     moveStick(data){
         console.log("My callback move stick");
+        let gameScene = game.scene.getScene('game');
 
         // let data = "x:10,22;y:120,1";
         let x = data.split(';')[0];
         let y = data.split(';')[1];
         x = x.split(':')[1];
         y = y.split(':')[1];
-        let stickDirection = getStickDirection(data);
-        game.scene.getScene('game').stickActive = true;
-        game.scene.getScene('game').speeds = {x:x,y:y};
-        game.scene.getScene('game').stickDirection= stickDirection;
+        let speeds = {x:x,y:y};
+        let stickDirection = getStickDirection(speeds);
+
+        if(this.loadedScene==""){
+            gameScene.stickActive = true;
+            gameScene.speeds = speeds;
+            gameScene.stickDirection= stickDirection;
+        } else { 
+            game.scene.getScene(gameScene.loadedScene).moveStick(speeds, stickDirection);
+        }
+
+
+
+        // let activeScenes = game.scene.getScenes();
+        //     for(let i = 1; i<activeScenes.length; i++){
+        //         activeScenes[i].moveStick(speeds, stickDirection);
+        //     }
     } 
 
     getStickDirection(data){
