@@ -13,7 +13,9 @@ class PeerClient {
                 socket.emit("startPeer", data);
             } else if(!this.isInitiator && data.type == "answer"){
                 socket.emit("sendGuestID", data);
-            } 
+            }else{
+                socket.emit("renegotiate",data);
+            }
         });
         //Handshake per iniciar la comunicació sense server
         this.peer.on("data", (data) => {
@@ -31,6 +33,11 @@ class PeerClient {
 
         this.peer.on("connect", () => {
             console.log("Conexion Establecida");
+            this.socket.emit("switchToGame");
+        });
+
+        this.peer.on("renegotiate", () => {
+            console.log("Conexion renegociandose");
             if(audio.reneg){
                 console.log("pause audio");
                 audio.pause();

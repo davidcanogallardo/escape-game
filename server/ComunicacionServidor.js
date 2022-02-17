@@ -63,8 +63,26 @@ class ComunicacionServidor {
                     }
                 });
 
-                socket.on("iniciarRenegociacion", () => {
-                    socket.in(this.roomName).emit("renegotiation");
+                socket.on("iniciarRenegociacion", (playerId) => {
+                    console.log("iniciarRenegociacion");
+                    //console.log(playerId);
+                    //console.log(this.roomName)
+                    console.log(this.players.length)
+                    this.players.forEach(player => {
+                        if (player.id==playerId) {
+                            console.log("player initiator: "+player.initiator);
+                            console.log("id player room"+player.id);
+                            console.log("playerId: "+playerId);
+                            if (player.id==playerId) {
+                                this.io.to(playerId).emit("renegotiation",player.initiator);
+                            }
+                            
+                        }
+                        
+                        
+
+                        
+                    });
                 });
             });
         }
@@ -88,6 +106,7 @@ class ComunicacionServidor {
                 socket.room = _room;
                 socket.room.countEndZone = 0;
                 this.queue.push(player);
+                this.players.push(player);
             } else {
                 const player = {
                     id: socket.id,
@@ -106,6 +125,8 @@ class ComunicacionServidor {
                 //console.log("Jugadores: ");
                 console.log("PARTIDA ENCONTRADA");
                 this.io.in(this.roomName).emit('matchFound', this.queue);
+                
+                this.players.push(player);
             }
             console.log(this.queue);
             console.log(this.io.sockets.adapter.rooms);

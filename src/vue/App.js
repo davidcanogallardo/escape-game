@@ -51,26 +51,23 @@ socket.on("windowGame", (data) => {
     app.currentPage = "game";
 });
 
-
-
-
 //renegociaciones
-socket.on("renegotiation",(peer) =>{
+socket.on("renegotiation",(initiator) =>{
+    console.log("entro en renegotiation");
     // console.log(peer)
     // audio.reneg = true;
     // peerClient.peer.signal(peer);
-    console.log("entro en renegotiation");
-    console.log(peerClient);
-    console.log(peerGuest);
-
-    if(peerClient.socket.id == socket.id){
+    
+    if(initiator){
         audio.reneg = true;
-        peerClient.peer.signal();   
-        console.log("Hago signal cliente");
+        console.log("Hago signal host");
+        console.log(peerClient);
+        // peerClient.peer.signal(Que tengo que pasar por aqui?);   
+        
     } else {
         audio.reneg = true;
-        peerGuest.peer.signal();
-        console.log("Hago signal cliente");
+        console.log("Hago signal guest");
+        guestPeerClient.peer.signal(guestPeerClient);
     }
 })
 
