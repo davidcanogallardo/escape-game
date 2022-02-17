@@ -18,6 +18,7 @@ class Game extends Phaser.Scene {
     preload() {
         var path = "./demo_game/"
         this.segundos = 0;
+        this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
         this.load.tilemapTiledJSON("map", path+"assets/tilemaps/mapa.json");
@@ -144,6 +145,11 @@ class Game extends Phaser.Scene {
                     this.door.body.setSize(width, height*0.1).setOffset(width-33,height-5);
                     //Agregar puerta al grupo de puertas
                     this.doorsGroup.add(this.door);
+                    window.door = this.doorsGroup;
+                    //Propiedades challenge de las puertas 
+                    //window.map.objects[0].objects[0].properties[0].value
+                    //window.map.objects[0].objects[1].properties[0].value
+                    //window.map.objects[0].objects[5].properties[0].value
                     break;
                 case 'chest':
                     // //Cambiar la hitbox del cofre
@@ -170,7 +176,9 @@ class Game extends Phaser.Scene {
             }
         });
         //Añadir colider al grupo de puertas
-
+        this.doorColider0 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[0]);
+        this.doorColider1 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[1]);
+        this.doorColider2 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[2]);
         this.doorsColider = this.physics.add.collider(this.playersGroup, this.doorsGroup);
         //console.log("Pone el collider");
         // ******************************************************************************************************************
@@ -294,10 +302,26 @@ class Game extends Phaser.Scene {
         }
         //*************************************************************Escena de victoria
         socket.on("passwordPuzzleResolved", (data) => {
-            this.doorsGroup.playAnimation('opening-door');
-            this.physics.world.removeCollider(this.doorsColider);
-            // this.table.disableBody();
-            that.canDoPuzzle = false
+            this.challenge++;
+
+            objectLayer.objects.forEach(object => {
+                switch(object.type){
+                    case 'door':
+                        if (object.properties[0].value == this.challenge && this.challenge == 1) {
+                            this.doorsGroup.children.entries[0].play('opening-door');
+                            this.doorsGroup.children.entries[1].play('opening-door'); 
+                            this.physics.world.removeCollider(this.doorColider0);
+                            this.physics.world.removeCollider(this.doorColider1);
+                            this.table.disableBody();
+                            that.canDoPuzzle = false
+                        } else if (this.challenge == 1) {
+                            this.doorsGroup.children.entries[2].play('opening-door');
+                            this.physics.world.removeCollider(this.doorColider2);
+                        }
+                        break;
+    
+                }
+            })
         });
         // this.scene.get('enterPasswordScene').events.on('victoria', () => {
         //     this.doorsGroup.playAnimation('opening-door');
