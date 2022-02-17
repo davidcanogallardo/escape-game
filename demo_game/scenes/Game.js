@@ -18,6 +18,7 @@ class Game extends Phaser.Scene {
     preload() {
         var path = "./demo_game/"
         this.segundos = 0;
+        this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
         this.load.tilemapTiledJSON("map", path+"assets/tilemaps/mapa.json");
@@ -41,8 +42,7 @@ class Game extends Phaser.Scene {
             this.bluetoothConnection.setCallbackButtonJoystick(this.pressStick);
             this.bluetoothConnection.setCallbackJoystick(this.moveStick);
         }
-        
-        
+        this.loadedScene = "";
     }
 
     create() {
@@ -145,6 +145,11 @@ class Game extends Phaser.Scene {
                     this.door.body.setSize(width, height*0.1).setOffset(width-33,height-5);
                     //Agregar puerta al grupo de puertas
                     this.doorsGroup.add(this.door);
+                    window.door = this.doorsGroup;
+                    //Propiedades challenge de las puertas 
+                    //window.map.objects[0].objects[0].properties[0].value
+                    //window.map.objects[0].objects[1].properties[0].value
+                    //window.map.objects[0].objects[5].properties[0].value
                     break;
                 case 'chest':
                     // //Cambiar la hitbox del cofre
@@ -171,7 +176,9 @@ class Game extends Phaser.Scene {
             }
         });
         //Añadir colider al grupo de puertas
-
+        this.doorColider0 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[0]);
+        this.doorColider1 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[1]);
+        this.doorColider2 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[2]);
         this.doorsColider = this.physics.add.collider(this.playersGroup, this.doorsGroup);
         //console.log("Pone el collider");
         // ******************************************************************************************************************
@@ -193,15 +200,14 @@ class Game extends Phaser.Scene {
                     } else {
                         that.player.setDepth(0);
                     }
-    
                     if (eKey.isDown) {
-                        that.scene.launch('seepass');
+                        that.scene.launch('SeePass');
                     }
 
                     
 
                     if(that.buttonActive == true){
-                        that.scene.launch('seepass');
+                        that.scene.launch('SeePass');
                         that.buttonActive = false;
                         //mirar si esta activa escena
                         //recupera escena as objeto
@@ -240,7 +246,7 @@ class Game extends Phaser.Scene {
             }
 
             if (eKey.isDown) {
-                that.scene.launch('seepass');
+                that.scene.launch('SeePass');
             }
         });*/
         this.chest.body.immovable = true
@@ -294,10 +300,26 @@ class Game extends Phaser.Scene {
         }
         //*************************************************************Escena de victoria
         socket.on("passwordPuzzleResolved", (data) => {
-            this.doorsGroup.playAnimation('opening-door');
-            this.physics.world.removeCollider(this.doorsColider);
-            // this.table.disableBody();
-            that.canDoPuzzle = false
+            this.challenge++;
+
+            objectLayer.objects.forEach(object => {
+                switch(object.type){
+                    case 'door':
+                        if (object.properties[0].value == this.challenge && this.challenge == 1) {
+                            this.doorsGroup.children.entries[0].play('opening-door');
+                            this.doorsGroup.children.entries[1].play('opening-door'); 
+                            this.physics.world.removeCollider(this.doorColider0);
+                            this.physics.world.removeCollider(this.doorColider1);
+                            this.table.disableBody();
+                            that.canDoPuzzle = false
+                        } else if (this.challenge == 1) {
+                            this.doorsGroup.children.entries[2].play('opening-door');
+                            this.physics.world.removeCollider(this.doorColider2);
+                        }
+                        break;
+    
+                }
+            })
         });
         // this.scene.get('enterPasswordScene').events.on('victoria', () => {
         //     this.doorsGroup.playAnimation('opening-door');
@@ -346,22 +368,41 @@ class Game extends Phaser.Scene {
 
     moveStick(data){
         console.log("My callback move stick");
+        let gameScene = game.scene.getScene('game');
 
         // let data = "x:10,22;y:120,1";
         let x = data.split(';')[0];
         let y = data.split(';')[1];
         x = x.split(':')[1];
         y = y.split(':')[1];
-        game.scene.getScene('game').stickActive = true;
-        game.scene.getScene('game').speeds = {x:x,y:y};
+        let speeds = {x:x,y:y};
+        let stickDirection = getStickDirection(speeds);
+
+        if(this.loadedScene==""){
+            gameScene.stickActive = true;
+            gameScene.speeds = speeds;
+            gameScene.stickDirection= stickDirection;
+        } else { 
+            game.scene.getScene(gameScene.loadedScene).moveStick(speeds, stickDirection);
+        }
+
+
+
+        // let activeScenes = game.scene.getScenes();
+        //     for(let i = 1; i<activeScenes.length; i++){
+        //         activeScenes[i].moveStick(speeds, stickDirection);
+        //     }
     } 
+
+    getStickDirection(data){
+        //TODO
+    }
     
     pressStick(data){
         console.log("My callback pressStick");
         data = 1;
         if(data == 1){
             game.scene.getScene('game').stickButtonActive = true;
-
             let activeScenes = game.scene.getScenes();
             for(let i = 1; i<activeScenes.length; i++){
                 activeScenes[i].stickButtonActive = true;

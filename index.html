@@ -45,9 +45,11 @@
     <script src="./src/vue/components/settings/change-language.js"></script>
     <script src="./src/vue/components/waiting-room.js"></script>
     <script type="module" type="application/javascript" src="./src/vue/components/chat.js"></script>
-    <script src="./demo_game/classes/BluetoothConnection.js"></script>
-    
+    <script src="./src/vue/components/select-solo-duo.js"></script>
     <script type="module" src="./src/vue/App.js"></script>
+
+    <script src="./demo_game/classes/BluetoothConnection.js"></script>
+    <script src="./demo_game/classes/GenericMiniGame.js"></script>
 
 </head>
 <body>
@@ -56,6 +58,10 @@
             <div v-show="currentPage == 'game'">
                 <div id="game2"></div>
             </div>
+            <select-solo-duo
+                v-if="currentPage == 'select-solo-duo'"
+                v-on:change-page="currentPage = $event">
+            </select-solo-duo>
             <transition name="fade">
                 <home v-if="currentPage == 'home'" 
                     v-on:open-menu="menuOpen = $event" 
@@ -120,10 +126,10 @@
                 ></password-recover>
                 <waiting-room
                     v-if="currentPage == 'waiting-room'" 
-                    v-on:change-page="currentPage = $event"
-                >
+                    v-on:change-page="currentPage = $event">
                 </waiting-room>
             </transition>
+
             
             <chat 
                 v-if="modalOpen == 'chat'" 
@@ -179,6 +185,7 @@
     <script type="application/javascript" defer src="./demo_game/scenes/EnterPasswordScene.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/Time.js"></script>
     <script type="application/javascript" defer src="./demo_game/scenes/Ui.js"></script>
+
     <script type="application/javascript" defer src="./demo_game/main.js"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@ class Game extends Phaser.Scene {
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/mapa.json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/mapa2.json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -20,16 +20,17 @@ class Game extends Phaser.Scene {
         for(let i=0; i<9; i++){
             this.load.image('simbol'+i, path+'assets/passwd/simbol'+i+'.png');
         }
-        this.load.image('mask', 'assets/mask1.png');
     }
 
     create() {
         var that = this
+
         this.events.on("tiempo", (tiempo) => {
             that.scene.remove('time')
             console.log("tiempo recibido "+ tiempo)
             that.scene.start("gameover",{ score : tiempo})
         }, this)
+        
         this.map = this.make.tilemap({
             key: "map"
         });
@@ -37,33 +38,22 @@ class Game extends Phaser.Scene {
         //valor leyenda: window.map.objects[1].objects[0].properties[0].value
         this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
         var groundLayer = this.map.createStaticLayer('ground', this.tileset);
+        var voidLayer = this.map.createStaticLayer('void', this.tileset);
         let objectLayer = this.map.getObjectLayer('objects');
         window.object = objectLayer
         
         //*****************************************Players**************************************************/
         this.player = new Player(this);
         this.playerCollider = this.player.playerCollider
-
+        this.cameras.main.startFollow(this.player);
+        this.player.setDepth(1)
+        
         this.wallsLayer = new WallsLayer(this);
-       
-        let rt = this.add.renderTexture(0, 0, 800, 600);
-        rt.depth = 20
-        window.rt = rt
-        rt.fill(0x000000);
+        // this.wallsLayer = this.map.createStaticLayer("walls", this.tileset)
 
-        this.spotlight = this.make.sprite({
-            x: 400,
-            y: 300,
-            key: "mask",
-            add: false
-        });
-
-        let mask = rt.createBitmapMask(this.spotlight)
-        mask.invertAlpha = true;
-        rt.setMask(mask);
+        // this.wallsLayer.setDepth(1)
 
         
-
 
         var end = this.physics.add.staticGroup();
         var endTile = end.create(158,14)
@@ -71,7 +61,7 @@ class Game extends Phaser.Scene {
         endTile.visible = false
 
 
-        this.physics.add.overlap(endTile, this.player, function () {
+        this.physics.add.overlap(endTile, this.playerCollider, function () {
             console.log("fin de partida")
             that.events.emit("end");
         })
@@ -229,7 +219,5 @@ class Game extends Phaser.Scene {
   
     update() {
         this.player.update()
-        this.spotlight.x = this.player.x;
-        this.spotlight.y = this.player.y;
     }
 }

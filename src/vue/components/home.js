@@ -64,8 +64,8 @@ Vue.component('home', {
         },
         searchGame(){
             //Cambiar al juego
-            socket.emit('startQueue', this.user2);
-            this.$emit('change-page','waiting-room');
+            //socket.emit('startQueue', this.user2);
+            this.$emit('change-page','select-solo-duo');
             //this.$emit('change-page','game')
         }
     },
