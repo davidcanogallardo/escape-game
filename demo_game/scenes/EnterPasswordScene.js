@@ -2,10 +2,6 @@ class EnterPasswordScene extends Phaser.Scene {
     /*
         TODO
         * RESETEAR CAMPOS RESPUESTA CON TECLA R
-        * RESETEAR CAMPOS RESPUESTA INCORRECTO
-        * PONER IMAGEN EN SU SITIO
-        * DESACTIVAR ICONO CUANDO SE PONE
-        * ACABAR PUZZLE
     */
 
     selectedButtonIndex = 0;
@@ -152,13 +148,13 @@ class EnterPasswordScene extends Phaser.Scene {
         var xKey = this.input.keyboard.addKey('X');
         var xKeyDown = xKey?.isDown
 
-        if (Phaser.Input.Keyboard.JustDown(this.cursors.left)) {
+        if (Phaser.Input.Keyboard.JustDown(this.cursors.left) || this.stickDirection == "left") {
             this.selectNextButton(-1);
-        } else if (Phaser.Input.Keyboard.JustDown(this.cursors.right)) {
+        } else if (Phaser.Input.Keyboard.JustDown(this.cursors.right) || this.stickDirection == "left") {
             this.selectNextButton(1);
         }
 
-        if(xKeyDown){
+        if(xKeyDown || this.stickActive){
             this.scene.stop();
             this.scene.resume("game");
         }

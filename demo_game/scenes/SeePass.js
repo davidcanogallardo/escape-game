@@ -1,27 +1,3 @@
-class GenericMiniGame extends Phaser.Scene{
-    constructor(name){
-        super(name);
-        this.buttonActive;
-        this.stickButtonActive;
-        this.stickActive;
-        this.stickSpeeds;
-    }
-
-    activeButton(){
-        this.buttonActive = true;
-    }
-
-    activeJoystickButton(){
-        this.stickButtonActive = true;
-    }
-
-    moveStick(data = null){
-        this.stickActive = true;
-        this.stickSpeeds = data;
-    }
-}
-
-
 class SeePass extends GenericMiniGame {
     constructor() {
         super("seepass")
