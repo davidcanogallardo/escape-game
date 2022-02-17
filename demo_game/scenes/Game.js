@@ -193,7 +193,6 @@ class Game extends Phaser.Scene {
                     } else {
                         that.player.setDepth(0);
                     }
-    
                     if (eKey.isDown) {
                         that.scene.launch('seepass');
                     }
@@ -340,16 +339,21 @@ class Game extends Phaser.Scene {
         let y = data.split(';')[1];
         x = x.split(':')[1];
         y = y.split(':')[1];
+        let stickDirection = getStickDirection(data);
         game.scene.getScene('game').stickActive = true;
         game.scene.getScene('game').speeds = {x:x,y:y};
+        game.scene.getScene('game').stickDirection= stickDirection;
     } 
+
+    getStickDirection(data){
+        //TODO
+    }
     
     pressStick(data){
         console.log("My callback pressStick");
         data = 1;
         if(data == 1){
             game.scene.getScene('game').stickButtonActive = true;
-
             let activeScenes = game.scene.getScenes();
             for(let i = 1; i<activeScenes.length; i++){
                 activeScenes[i].stickButtonActive = true;
