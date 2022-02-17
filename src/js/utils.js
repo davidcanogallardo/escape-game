@@ -15,6 +15,7 @@ function getSessionUser() {
       sessionUser.profileImg,
       sessionUser.language
     );
+    window.user = user
     // connect()
   } else {
     user = "";
