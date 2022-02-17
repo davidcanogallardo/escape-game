@@ -68,8 +68,26 @@ class ComunicacionServidor {
                     }
                 });
 
-                socket.on("iniciarRenegociacion", () => {
-                    socket.in(this.roomName).emit("renegotiation");
+                socket.on("iniciarRenegociacion", (playerId) => {
+                    console.log("iniciarRenegociacion");
+                    //console.log(playerId);
+                    //console.log(this.roomName)
+                    console.log(this.players.length)
+                    this.players.forEach(player => {
+                        if (player.id==playerId) {
+                            console.log("player initiator: "+player.initiator);
+                            console.log("id player room"+player.id);
+                            console.log("playerId: "+playerId);
+                            if (player.id==playerId) {
+                                this.io.to(playerId).emit("renegotiation",player.initiator);
+                            }
+                            
+                        }
+                        
+                        
+
+                        
+                    });
                 });
             });
         }

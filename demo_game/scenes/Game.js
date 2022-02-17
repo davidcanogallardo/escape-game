@@ -204,9 +204,7 @@ class Game extends Phaser.Scene {
                         that.scene.launch('SeePass');
                     }
 
-                    if(mKey.isDown){
-                        socket.emit("iniciarRenegociacion");
-                    }
+                    
 
                     if(that.buttonActive == true){
                         that.scene.launch('SeePass');
@@ -256,7 +254,7 @@ class Game extends Phaser.Scene {
         
         // *********************************************puerta****************************************************
         let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-        let mKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
+        
         this.canDoPuzzle = true
 
 
@@ -329,6 +327,20 @@ class Game extends Phaser.Scene {
         //     // this.table.disableBody();
         //     that.canDoPuzzle = false
         // });
+
+        //mute button
+
+        this.input.keyboard.on('keydown-M',()=>{
+            this.playersGroup.getChildren().forEach(player => {
+                if(socket.id==player.id){
+                    console.log('mkeydown')
+                    console.log(player.id);
+                    socket.emit("iniciarRenegociacion",player.id);  
+                };
+            });
+        });
+        
+        
     }
   
     update() {
