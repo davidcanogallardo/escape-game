@@ -9,16 +9,19 @@ class GenericMiniGame extends Phaser.Scene{
     }
 
     activeButton(){
+        console.log("ActiveButton function");
         this.buttonActive = true;
     }
 
     activeJoystickButton(){
+        console.log("activeJoysticButton function");
         this.stickButtonActive = true;
     }
 
-    moveStick(data = null, stickDirection){
+    moveStick(speeds, stickDirection){
+        console.log("moveStick function");
         this.stickActive = true;
-        this.stickSpeeds = data;
+        this.stickSpeeds = speeds;
         this.stickDirection = stickDirection;
     }
 }
