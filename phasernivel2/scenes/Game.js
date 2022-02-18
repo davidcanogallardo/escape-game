@@ -39,9 +39,10 @@ class Game extends Phaser.Scene {
         //valor leyenda: window.map.objects[1].objects[0].properties[0].value
         this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
         var groundLayer = this.map.createStaticLayer('ground', this.tileset);
-        this.voidLayer = this.map.createStaticLayer('void', this.tileset);
         let objectLayer = this.map.getObjectLayer('objects');
-        window.object = objectLayer
+        this.voidLayer = this.map.createStaticLayer('void', this.tileset);
+        this.voidLayer.visible = false;
+        //groundLayer.visible = false;
         
         //*****************************************Players**************************************************/
         this.player = new Player(this);
@@ -50,6 +51,8 @@ class Game extends Phaser.Scene {
         this.player.setDepth(1)
         
         this.wallsLayer = new WallsLayer(this);
+        //this.wallsLayer.visible = false;
+
         // this.wallsLayer = this.map.createStaticLayer("walls", this.tileset)
 
         // this.wallsLayer.setDepth(1)
@@ -69,11 +72,12 @@ class Game extends Phaser.Scene {
         mask.invertAlpha = true;
         rt.setMask(mask);
 
+        
 
         var end = this.physics.add.staticGroup();
-        var endTile = end.create(158,14)
+        var endTile = end.create(609,685)
         endTile.body.setSize(35,20)
-        endTile.visible = false
+        endTile.visible = true
 
 
         this.physics.add.overlap(endTile, this.playerCollider, function () {
@@ -81,10 +85,9 @@ class Game extends Phaser.Scene {
             that.events.emit("end");
         })
 
-        
-
-
          // ***************************************LEYENDA****************************************************************************
+
+         
 
         //Crear grupo donde se almacenan las puertas
         this.doorsGroup = this.physics.add.staticGroup();
@@ -136,7 +139,6 @@ class Game extends Phaser.Scene {
         //Añadir colider al grupo de puertas
         this.doorColider0 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[0]);
         this.doorColider1 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[1]);
-        this.doorColider2 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[2]);
         // ******************************************************************************************************************
 
         //**************************************Cofre**************************************
@@ -163,21 +165,6 @@ class Game extends Phaser.Scene {
         
         // *********************************************puerta****************************************************
         let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-        this.canDoPuzzle = true
-        this.physics.add.overlap(this.playerCollider, this.table, function (player,table) {
-            if(table.y < player.y){
-                that.player.setDepth(10);
-            } else {
-                that.player.setDepth(0);
-            }
-
-            if (eKey.isDown && that.canDoPuzzle) {
-                that.scene.launch('enterPasswordScene');
-                that.scene.pause();
-            }
-        });
-
-        //this.door = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
         this.anims.create({
             key: 'door-closed',
             frames: [{key: 'door', frame: 'door-0.png'}],
@@ -189,49 +176,26 @@ class Game extends Phaser.Scene {
             frames: this.anims.generateFrameNames('door',{start: 0 , end: 3, prefix: 'door-',suffix: '.png'}),
             repeat: 0,
             frameRate: 5
-        })
+        })        
 
-        // ******************************************************************************************************************
-
-        //*******************************************************TIEMPO  */
         this.scene.launch('ui');
-        /**************************************************************************************** */
 
-        //necesario para que el juego pause al cambiar la ventana correctamente
         game.scene.game.hasFocus = true;
         if(game.scene.game.hasFocus == false){
             this.scene.launch('pause_scene')
             this.scene.pause();
         }
-        //*************************************************************Escena de victoria
-        this.scene.get('enterPasswordScene').events.on('victoria', () => {
-            this.challenge++;
-            
-            objectLayer.objects.forEach(object => {
-                switch(object.type){
-                    case 'door':
-                        if (object.properties[0].value == this.challenge && this.challenge == 1) {
-                            this.doorsGroup.children.entries[0].play('opening-door');
-                            this.doorsGroup.children.entries[1].play('opening-door'); 
-                            this.physics.world.removeCollider(this.doorColider0);
-                            this.physics.world.removeCollider(this.doorColider1);
-                            this.table.disableBody();
-                            that.canDoPuzzle = false
-                        } else if (this.challenge == 1) {
-                            this.doorsGroup.children.entries[2].play('opening-door');
-                            this.physics.world.removeCollider(this.doorColider2);
-                        }
-                        break;
-    
+        this.physics.add.overlap(this.playerCollider, this.doorsGroup.children.entries[1], function (playerCollider, door) {
+            var removecol
+            if (eKey.isDown) {
+                door.play('opening-door'); 
+                removecol = () => {
+                    that.physics.world.removeCollider(that.doorColider1);
                 }
-            })
+                door.on ('animationcomplete', removecol);
+            }
         });
 
-        
-
-        
-
-        
     }
   
     update() {
