@@ -38,7 +38,8 @@ class Game extends Phaser.Scene {
         //valor leyenda: window.map.objects[1].objects[0].properties[0].value
         this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
         var groundLayer = this.map.createStaticLayer('ground', this.tileset);
-        var voidLayer = this.map.createStaticLayer('void', this.tileset);
+        this.voidLayer = this.map.createStaticLayer('void', this.tileset);
+        this.voidLayer.visible=false
         let objectLayer = this.map.getObjectLayer('objects');
         window.object = objectLayer
         
@@ -53,7 +54,9 @@ class Game extends Phaser.Scene {
 
         // this.wallsLayer.setDepth(1)
 
-        
+        // this.physics.add.collider(voidLayer, this.playerCollider, function () {
+        //     console.log("ha tocao el void")
+        // })   
 
         var end = this.physics.add.staticGroup();
         var endTile = end.create(158,14)
@@ -219,5 +222,13 @@ class Game extends Phaser.Scene {
   
     update() {
         this.player.update()
+        // console.log(this.player)
+        var tile = this.voidLayer.getTileAtWorldXY(this.player.x, this.player.y);
+        // console.log(tile)
+        if (tile?.index == 357) {
+          console.log("toco el voidddd");
+          this.player.x = 165
+          this.player.y = 640
+        }
     }
 }
