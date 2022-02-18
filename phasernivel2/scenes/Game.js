@@ -140,7 +140,6 @@ class Game extends Phaser.Scene {
         });
         //Añadir colider al grupo de puertas
         this.doorColider0 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[0]);
-        this.doorColider1 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[1]);
         // ******************************************************************************************************************
 
         //**************************************Cofre**************************************
