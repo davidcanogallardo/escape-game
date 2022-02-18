@@ -39,6 +39,8 @@ class Game extends Phaser.Scene {
         //valor leyenda: window.map.objects[1].objects[0].properties[0].value
         this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
         var groundLayer = this.map.createStaticLayer('ground', this.tileset);
+        this.voidLayer = this.map.createStaticLayer('void', this.tileset);
+        this.voidLayer.visible = false
         let objectLayer = this.map.getObjectLayer('objects');
         this.voidLayer = this.map.createStaticLayer('void', this.tileset);
         this.voidLayer.visible = false;
@@ -49,6 +51,7 @@ class Game extends Phaser.Scene {
         this.playerCollider = this.player.playerCollider
         this.cameras.main.startFollow(this.player);
         this.player.setDepth(1)
+        window.player = this.player
         
         this.wallsLayer = new WallsLayer(this);
         //this.wallsLayer.visible = false;
@@ -196,26 +199,57 @@ class Game extends Phaser.Scene {
             }
         });
 
+        this.touch = false
+
+        
+
+        
     }
   
     update() {
-        this.player.update()
+        
         // console.log(this.player)
         var tile = this.voidLayer.getTileAtWorldXY(this.player.x, this.player.y);
         // console.log(tile)
-        if (tile?.index == 357) {
-          console.log("toco el voidddd");
-          this.player.x = 165
-          this.player.y = 640
+
+        if (tile?.index == 357 && !this.touch) {
+            this.touch = true
+            this.player.stop()
+            this.player.scale = 1
+            console.log("toco el voidddd");
+             this.time.addEvent({
+                delay: 1000,
+                callback: ()=>{
+                    this.time.removeEvent(this.fallingAnimation)
+                    // this.fallingAnimation.remove()
+                    this.touch = false
+                    this.player.update()
+                    this.player.x = 165
+                    this.player.y = 640
+                    this.player.rotation = 0
+                    this.player.scale = 1
+                    console.log("vuelve el personaje");
+                },
+                loop: false
+            })
+
+            this.fallingAnimation = this.time.addEvent({
+                delay: 50,
+                callback: ()=>{
+                    console.log(this.player.scale)
+                    if (this.player.scale > 0 && (this.player.scale-0.1) > 0) {
+                        this.player.scale -= 0.05
+                        console.log(this.player.scale)
+                    }
+
+                    this.player.rotation+=0.3
+                },
+                loop: true
+            })
+        } else if (tile == null) {
+            this.player.update()
         }
         this.spotlight.x = this.player.x;
         this.spotlight.y = this.player.y;
-
-        var tile = this.voidLayer.getTileAtWorldXY(this.player.x, this.player.y);
-        if (tile?.index == 357) {
-          console.log("toco el voidddd");
-        }
-
-
     }
 }
