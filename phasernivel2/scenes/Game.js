@@ -40,16 +40,20 @@ class Game extends Phaser.Scene {
         this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
         var groundLayer = this.map.createStaticLayer('ground', this.tileset);
         this.voidLayer = this.map.createStaticLayer('void', this.tileset);
+        this.voidLayer.visible = false
         let objectLayer = this.map.getObjectLayer('objects');
-        window.object = objectLayer
+        //groundLayer.visible = false;
         
         //*****************************************Players**************************************************/
         this.player = new Player(this);
         this.playerCollider = this.player.playerCollider
         this.cameras.main.startFollow(this.player);
         this.player.setDepth(1)
+        window.player = this.player
         
         this.wallsLayer = new WallsLayer(this);
+        //this.wallsLayer.visible = false;
+
         // this.wallsLayer = this.map.createStaticLayer("walls", this.tileset)
 
         // this.wallsLayer.setDepth(1)
@@ -69,9 +73,10 @@ class Game extends Phaser.Scene {
         mask.invertAlpha = true;
         rt.setMask(mask);
 
+        
 
         var end = this.physics.add.staticGroup();
-        var endTile = end.create(158,14)
+        var endTile = end.create(609,685)
         endTile.body.setSize(35,20)
         endTile.visible = false
 
@@ -81,10 +86,9 @@ class Game extends Phaser.Scene {
             that.events.emit("end");
         })
 
-        
-
-
          // ***************************************LEYENDA****************************************************************************
+
+         
 
         //Crear grupo donde se almacenan las puertas
         this.doorsGroup = this.physics.add.staticGroup();
@@ -135,8 +139,6 @@ class Game extends Phaser.Scene {
         });
         //Añadir colider al grupo de puertas
         this.doorColider0 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[0]);
-        this.doorColider1 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[1]);
-        this.doorColider2 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[2]);
         // ******************************************************************************************************************
 
         //**************************************Cofre**************************************
@@ -163,21 +165,6 @@ class Game extends Phaser.Scene {
         
         // *********************************************puerta****************************************************
         let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-        this.canDoPuzzle = true
-        this.physics.add.overlap(this.playerCollider, this.table, function (player,table) {
-            if(table.y < player.y){
-                that.player.setDepth(10);
-            } else {
-                that.player.setDepth(0);
-            }
-
-            if (eKey.isDown && that.canDoPuzzle) {
-                that.scene.launch('enterPasswordScene');
-                that.scene.pause();
-            }
-        });
-
-        //this.door = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
         this.anims.create({
             key: 'door-closed',
             frames: [{key: 'door', frame: 'door-0.png'}],
@@ -189,45 +176,27 @@ class Game extends Phaser.Scene {
             frames: this.anims.generateFrameNames('door',{start: 0 , end: 3, prefix: 'door-',suffix: '.png'}),
             repeat: 0,
             frameRate: 5
-        })
+        })        
 
-        // ******************************************************************************************************************
-
-        //*******************************************************TIEMPO  */
         this.scene.launch('ui');
-        /**************************************************************************************** */
 
-        //necesario para que el juego pause al cambiar la ventana correctamente
         game.scene.game.hasFocus = true;
         if(game.scene.game.hasFocus == false){
             this.scene.launch('pause_scene')
             this.scene.pause();
         }
-        //*************************************************************Escena de victoria
-        this.scene.get('enterPasswordScene').events.on('victoria', () => {
-            this.challenge++;
-            
-            objectLayer.objects.forEach(object => {
-                switch(object.type){
-                    case 'door':
-                        if (object.properties[0].value == this.challenge && this.challenge == 1) {
-                            this.doorsGroup.children.entries[0].play('opening-door');
-                            this.doorsGroup.children.entries[1].play('opening-door'); 
-                            this.physics.world.removeCollider(this.doorColider0);
-                            this.physics.world.removeCollider(this.doorColider1);
-                            this.table.disableBody();
-                            that.canDoPuzzle = false
-                        } else if (this.challenge == 1) {
-                            this.doorsGroup.children.entries[2].play('opening-door');
-                            this.physics.world.removeCollider(this.doorColider2);
-                        }
-                        break;
-    
+        this.physics.add.overlap(this.playerCollider, this.doorsGroup.children.entries[1], function (playerCollider, door) {
+            var removecol
+            if (eKey.isDown) {
+                door.play('opening-door'); 
+                removecol = () => {
+                    that.physics.world.removeCollider(that.doorColider1);
                 }
-            })
+                door.on ('animationcomplete', removecol);
+            }
         });
 
-        
+        this.touch = false
 
         
 
@@ -235,23 +204,49 @@ class Game extends Phaser.Scene {
     }
   
     update() {
-        this.player.update()
+        
         // console.log(this.player)
         var tile = this.voidLayer.getTileAtWorldXY(this.player.x, this.player.y);
         // console.log(tile)
-        if (tile?.index == 357) {
-          console.log("toco el voidddd");
-          this.player.x = 165
-          this.player.y = 640
+
+        if (tile?.index == 357 && !this.touch) {
+            this.touch = true
+            this.player.stop()
+            this.player.scale = 1
+            console.log("toco el voidddd");
+             this.time.addEvent({
+                delay: 1000,
+                callback: ()=>{
+                    this.time.removeEvent(this.fallingAnimation)
+                    // this.fallingAnimation.remove()
+                    this.touch = false
+                    this.player.update()
+                    this.player.x = 165
+                    this.player.y = 640
+                    this.player.rotation = 0
+                    this.player.scale = 1
+                    console.log("vuelve el personaje");
+                },
+                loop: false
+            })
+
+            this.fallingAnimation = this.time.addEvent({
+                delay: 50,
+                callback: ()=>{
+                    console.log(this.player.scale)
+                    if (this.player.scale > 0 && (this.player.scale-0.1) > 0) {
+                        this.player.scale -= 0.05
+                        console.log(this.player.scale)
+                    }
+
+                    this.player.rotation+=0.3
+                },
+                loop: true
+            })
+        } else if (tile == null) {
+            this.player.update()
         }
         this.spotlight.x = this.player.x;
         this.spotlight.y = this.player.y;
-
-        var tile = this.voidLayer.getTileAtWorldXY(this.player.x, this.player.y);
-        if (tile?.index == 357) {
-          console.log("toco el voidddd");
-        }
-
-
     }
 }
