@@ -20,6 +20,7 @@ class Game extends Phaser.Scene {
         for(let i=0; i<9; i++){
             this.load.image('simbol'+i, path+'assets/passwd/simbol'+i+'.png');
         }
+        this.load.image('mask', 'assets/mask1.png');
     }
 
     create() {
@@ -53,10 +54,22 @@ class Game extends Phaser.Scene {
         // this.wallsLayer = this.map.createStaticLayer("walls", this.tileset)
 
         // this.wallsLayer.setDepth(1)
+        let rt = this.add.renderTexture(0, 0, 1000, 1000);
+        rt.depth = 20
+        window.rt = rt
+        rt.fill(0x000000);
 
-        // this.physics.add.collider(voidLayer, this.playerCollider, function () {
-        //     console.log("ha tocao el void")
-        // })   
+        this.spotlight = this.make.sprite({
+            x: 400,
+            y: 300,
+            key: "mask",
+            add: false
+        });
+
+        let mask = rt.createBitmapMask(this.spotlight)
+        mask.invertAlpha = true;
+        rt.setMask(mask);
+        
 
         var end = this.physics.add.staticGroup();
         var endTile = end.create(158,14)
@@ -230,5 +243,7 @@ class Game extends Phaser.Scene {
           this.player.x = 165
           this.player.y = 640
         }
+        this.spotlight.x = this.player.x;
+        this.spotlight.y = this.player.y;
     }
 }

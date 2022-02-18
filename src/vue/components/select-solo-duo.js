@@ -16,6 +16,7 @@ Vue.component('select-solo-duo', {
                 <option value="hard">Hard</option>
             </select>
         </div>
+        <div class="btn red block volver link" page="main" v-on:click="$emit('change-page','home')">{{ $t("return") }}</div>
     </div>
     `,
     data(){
@@ -33,6 +34,7 @@ Vue.component('select-solo-duo', {
         },
         searchDuo(){
             console.log("Private");
+            this.$emit('change-page','private-room');
         },
         setDifficulty(event){
             this.difficulty = event.target.value;

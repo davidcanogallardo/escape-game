@@ -46,6 +46,7 @@
     <script src="./src/vue/components/waiting-room.js"></script>
     <script type="module" type="application/javascript" src="./src/vue/components/chat.js"></script>
     <script src="./src/vue/components/select-solo-duo.js"></script>
+    <script src="./src/vue/components/private-room.js"></script>
     <script type="module" src="./src/vue/App.js"></script>
 
     <script src="./demo_game/classes/BluetoothConnection.js"></script>
@@ -58,10 +59,7 @@
             <div v-show="currentPage == 'game'">
                 <div id="game2"></div>
             </div>
-            <select-solo-duo
-                v-if="currentPage == 'select-solo-duo'"
-                v-on:change-page="currentPage = $event">
-            </select-solo-duo>
+
             <transition name="fade">
                 <home v-if="currentPage == 'home'" 
                     v-on:open-menu="menuOpen = $event" 
@@ -128,6 +126,14 @@
                     v-if="currentPage == 'waiting-room'" 
                     v-on:change-page="currentPage = $event">
                 </waiting-room>
+                <select-solo-duo
+                    v-if="currentPage == 'select-solo-duo'"
+                    v-on:change-page="currentPage = $event">
+                </select-solo-duo>
+                <private-room
+                    v-if="currentPage == 'private-room'"
+                    v-on:change-page="currentPage = $event">
+                </private-room>
             </transition>
 
             
