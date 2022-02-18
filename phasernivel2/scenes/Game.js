@@ -236,6 +236,14 @@ class Game extends Phaser.Scene {
   
     update() {
         this.player.update()
+        // console.log(this.player)
+        var tile = this.voidLayer.getTileAtWorldXY(this.player.x, this.player.y);
+        // console.log(tile)
+        if (tile?.index == 357) {
+          console.log("toco el voidddd");
+          this.player.x = 165
+          this.player.y = 640
+        }
         this.spotlight.x = this.player.x;
         this.spotlight.y = this.player.y;
 
