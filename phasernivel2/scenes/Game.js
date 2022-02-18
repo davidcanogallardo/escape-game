@@ -40,7 +40,6 @@ class Game extends Phaser.Scene {
         this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
         var groundLayer = this.map.createStaticLayer('ground', this.tileset);
         this.voidLayer = this.map.createStaticLayer('void', this.tileset);
-        this.voidLayer.visible=false
         let objectLayer = this.map.getObjectLayer('objects');
         window.object = objectLayer
         
@@ -69,7 +68,7 @@ class Game extends Phaser.Scene {
         let mask = rt.createBitmapMask(this.spotlight)
         mask.invertAlpha = true;
         rt.setMask(mask);
-        
+
 
         var end = this.physics.add.staticGroup();
         var endTile = end.create(158,14)
@@ -81,6 +80,8 @@ class Game extends Phaser.Scene {
             console.log("fin de partida")
             that.events.emit("end");
         })
+
+        
 
 
          // ***************************************LEYENDA****************************************************************************
@@ -245,5 +246,12 @@ class Game extends Phaser.Scene {
         }
         this.spotlight.x = this.player.x;
         this.spotlight.y = this.player.y;
+
+        var tile = this.voidLayer.getTileAtWorldXY(this.player.x, this.player.y);
+        if (tile?.index == 357) {
+          console.log("toco el voidddd");
+        }
+
+
     }
 }
