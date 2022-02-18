@@ -1,4 +1,11 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json"
+        }
+    },
  "height":50,
  "infinite":false,
  "layers":[
@@ -9,8 +16,6 @@
          "height":50,
          "id":10,
          "name":"void",
-         "offsetx":0,
-         "offsety":0.0312499999999574,
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -25,8 +30,6 @@
          "height":50,
          "id":1,
          "name":"ground",
-         "offsetx":0.0833333333332007,
-         "offsety":0.151515151515078,
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -56,11 +59,9 @@
                  "x":42.67,
                  "y":49.3333
                 }],
-         "offsetx":0.151515151515133,
-         "offsety":0.0909090909090899,
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -71,8 +72,6 @@
          "height":50,
          "id":2,
          "name":"walls",
-         "offsetx":0.0909090909090899,
-         "offsety":0.121212121211792,
          "opacity":0.93,
          "type":"tilelayer",
          "visible":true,
@@ -103,8 +102,6 @@
                  "x":96.7841,
                  "y":671.659
                 }],
-         "offsetx":0.333333333333343,
-         "offsety":1,
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -121,7 +118,7 @@
         {
          "columns":32,
          "firstgid":1,
-         "image":"..\/..\/..\/demo_game\/assets\/tilesets\/TSMapa\/PNG\/tileset.png",
+         "image":"..\/..\/..\/xampp\/htdocs\/escape-game\/demo_game\/assets\/tilesets\/TSMapa\/PNG\/tileset.png",
          "imageheight":512,
          "imagewidth":512,
          "margin":0,
@@ -736,7 +733,7 @@
         {
          "columns":2,
          "firstgid":1025,
-         "image":"..\/..\/..\/demo_game\/assets\/tilesets\/TSMapa\/PNG\/doors.png",
+         "image":"..\/..\/..\/xampp\/htdocs\/escape-game\/demo_game\/assets\/tilesets\/TSMapa\/PNG\/doors.png",
          "imageheight":32,
          "imagewidth":64,
          "margin":0,
@@ -764,7 +761,7 @@
         {
          "columns":1,
          "firstgid":1027,
-         "image":"..\/..\/..\/demo_game\/assets\/tilesets\/TSMapa\/PNG\/table.png",
+         "image":"..\/..\/..\/xampp\/htdocs\/escape-game\/demo_game\/assets\/tilesets\/TSMapa\/PNG\/table.png",
          "imageheight":16,
          "imagewidth":32,
          "margin":0,
