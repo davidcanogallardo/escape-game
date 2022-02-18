@@ -42,7 +42,6 @@ class Game extends Phaser.Scene {
         this.voidLayer = this.map.createStaticLayer('void', this.tileset);
         this.voidLayer.visible = false
         let objectLayer = this.map.getObjectLayer('objects');
-        this.voidLayer.visible = false;
         //groundLayer.visible = false;
         
         //*****************************************Players**************************************************/
