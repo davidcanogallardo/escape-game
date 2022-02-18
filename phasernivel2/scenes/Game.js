@@ -78,7 +78,7 @@ class Game extends Phaser.Scene {
         var end = this.physics.add.staticGroup();
         var endTile = end.create(609,685)
         endTile.body.setSize(35,20)
-        endTile.visible = true
+        endTile.visible = false
 
 
         this.physics.add.overlap(endTile, this.playerCollider, function () {
