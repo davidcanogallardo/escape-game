@@ -82,6 +82,10 @@ class Player extends Phaser.GameObjects.Sprite{
 
     }
 
+    stop() {
+        this.body.stop();
+    }
+
     centerBodyonBody(collider, player) {
         collider.x = player.body.x + player.body.halfWidth
         collider.y = player.body.y 
