@@ -1,6 +1,6 @@
 class Player extends Phaser.GameObjects.Sprite{
-    constructor(scene, id, x, y, sprite, peerClient) {
-        super(scene, x, y, sprite, peerClient);
+    constructor(scene, id, x, y, sprite) {
+        super(scene, x, y, sprite);
         this.id = id;
         this.speed = 150;
         scene.add.existing(this);
@@ -13,7 +13,8 @@ class Player extends Phaser.GameObjects.Sprite{
         this.playerCollider = scene.physics.add.image(200, 50);
         //console.log(this.playerCollider);
         this.direction = 'idle'
-        this.peerClient = peerClient;
+        this.x_speed = 150;
+        this.y_speed = 150;
     
 
         this.anims.create({
@@ -53,16 +54,11 @@ class Player extends Phaser.GameObjects.Sprite{
 
     update() {
         this.centerBodyonBody(this.playerCollider,this)
-        this.x_speed = 150;
-        this.y_speed = 150;
-        
-        var speed_x = this.x_speed;
-        var speed_y = this.y_speed;
 
-
+        console.log(game.scene.getScene("game").stickActive);
         if ( this.anims.currentAnim==null) {
             this.anims.play('player-idle-down');
-        } else {
+        } else if(!game.scene.getScene("game").stickActive) {
             if (this.cursors.left?.isDown) {
                 this.move(-this.x_speed,0)
                 this.direction = 'left'
@@ -88,6 +84,9 @@ class Player extends Phaser.GameObjects.Sprite{
                 this.direction = 'idle'
             }
             this.moveOtherPlayer()
+        } else {
+            this.move(this.x_speed,this.y_speed)
+            this.moveOtherPlayer()
         }
 
        
@@ -101,7 +100,8 @@ class Player extends Phaser.GameObjects.Sprite{
     moveOtherPlayer(){
         let moveData = {
             id: this.id,
-            speed: this.speed,
+            speed_x: this.x_speed,
+            speed_y: this.y_speed,
             x: this.x,
             y: this.y,
             direction: this.direction

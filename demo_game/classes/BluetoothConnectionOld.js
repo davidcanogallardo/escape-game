@@ -1,8 +1,7 @@
-
 class BluetoothGamePadReciver{
-    constructor(_callbackButtonA = null, _callbackButtonJoystick = null, _callbackJoystick = null){
+    constructor(){
         //define properties
-        this.started = false;
+        this.stop = false;
         this.autorefresh = false; //in case you wanna autorefresh values automaticly
         this.refreshTime = 250; //
         this.callbackButtonA = null; // what function should be called when new value arrives
@@ -20,15 +19,9 @@ class BluetoothGamePadReciver{
         this.decoder = new TextDecoder('utf8');
         //end define properties
         console.log("BluetoothReciver constructor");
-        this.callbackButtonA = _callbackButtonA;
-        this.callbackButtonJoystick = _callbackButtonJoystick;
-        this.callbackJoystick = _callbackJoystick;
-        this.connected = false;
-        this.interval = null;
-        this.JoystickData = null;
-        this.buttonAData = null;
-        this.joystickButtonData = null;
-        
+        this.callbackButtonA = null;
+        this.callbackButtonJoystick = null;
+        this.callbackJoystick = null;
     }
 
     isWebBLEAvailable(){
@@ -99,10 +92,8 @@ class BluetoothGamePadReciver{
         .then(characteristic => {
             console.log("characteristic Joystick");
             this.gattCharacteristic3 = characteristic;
-            //this.gattCharacteristic3.addEventListener('characteristicvaluechanged', handleChangedCharacteristicValue)
         })
         .catch(error => {
-            this.connected = false;
             console.log("ConnectGATT _ Waiting to start reading: "+error);
         });
     
@@ -111,13 +102,11 @@ class BluetoothGamePadReciver{
         this.gattCharacteristic.readValue().then(
             read => { 
                 var data = this.decoder.decode(read);
-                if (this.buttonAData != data){
-                    this.buttonAData = data;
-                    console.log("Characteristic Button A: "+data)
-                    if(this.callbackButtonA){
-                        this.callbackButtonA(data);
-                    }
+                console.log("Characteristic Button A: "+data)
+                if(this.callbackButtonA){
+                    this.callbackButtonA(data);
                 }
+
             }
         )
     }
@@ -125,12 +114,9 @@ class BluetoothGamePadReciver{
         this.gattCharacteristic2.readValue().then(
             read => { 
                 var data = this.decoder.decode(read);
-                if(this.joystickButtonData != data){
-                    this.joystickButtonData = data;
-                    console.log("Characteristic button Joystick: "+data) 
-                    if(this.callbackButtonJoystick){
-                        this.callbackButtonJoystick(data);
-                    }
+                console.log("Characteristic button Joystick: "+data) 
+                if(this.callbackButtonJoystick){
+                    this.callbackButtonJoystick(data);
                 }
             }
         )
@@ -139,82 +125,60 @@ class BluetoothGamePadReciver{
         this.gattCharacteristic3.readValue().then(
             read => { 
                 var data = this.decoder.decode(read)
-                if(this.JoystickData != data){
-                    this.JoystickData = data;
-                    console.log("Characteristic Joystick: "+data) 
-                    if(this.callbackJoystick){
-                        this.callbackJoystick(data);
-                    }
+                console.log("Characteristic Joystick: "+data) 
+                if(this.callbackJoystick){
+                    this.callbackJoystick(data);
                 }
             }
         )
     }   
-    stop(){
-        if (this.connected){
-            if(this.started){
-                clearInterval(this.interval);
-                //anular setInterval
-                this.started = false;
-            }
-        }
-    }
-    start(){
-        if(this.connected){
-            if(!this.started){
-                this.interval = setInterval(this.checkChanges.bind(this), 50);
-                //setinterval per check canvis
-                this.started = true;
-            }
-        }
-        
+    setStop(_stop){
+        this.stop = _stop;
     }
     connect(){
         return (this.bluetoothDeviceDetected ? Promise.resolve() : this.getDeviceInfo())
         .then(this.connectGATT.bind(this))
         .then (_ => {
-            this.connected = true;
+
             console.log("Reading Characteristic...");
             var read  = this.gattCharacteristic.readValue();
-            read  = this.gattCharacteristic2.readValue();
-            //console.log("read");
-            //console.log(read);
+            console.log("read");
+            console.log(read);
             return read
-        })/*.then(read => {
+        }).then(read => {
             console.log("after read");
             
             console.log(this.decoder.decode(read));
             var temp = read
-        })*/
+        })
         .catch(error => {
-            this.connected = false;
             console.log("connect: Waiting to start reading: "+error);
         })
     }
     refreshButtonA(){
-        if(this.started){
-            //console.log("refreshButtonA");
+        if(!this.stop){
+            console.log("refreshButtonA");
             this.readBLECharactristicButtonA();
         }
     }
     refreshButtonJoystick(){
-        if(this.started){
-            //console.log("refreshButtonJoystick");
+        if(!this.stop){
+            console.log("refreshButtonJoystick");
             this.readBLECharactristicButtonJoystick()
         }
     }
     refreshJoystick(){
-        if(this.started){
-            //console.log("refreshJoystick");
+        if(!this.stop){
+            console.log("refreshJoystick");
             this.readBLECharactristicJoystick();
         }
     }
-    checkChanges(){
-        //console.log("checking changes");
-        this.refreshButtonA();
-        this.refreshButtonJoystick();
-        this.refreshJoystick();
-    }
-
+    /*
+    _callbackButtonA = null, _callbackButtonJoystick = null, _callbackJoystick
+    this.callbackButtonA = _callbackButtonA;
+    this.callbackButtonJoystick = _callbackButtonJoystick;
+    this.callbackJoystick = _callbackJoystick;*/
+    
     setCallbackButtonA(_callbackButtonA = null){
         this.callbackButtonA = _callbackButtonA;
     }
@@ -229,7 +193,7 @@ class BluetoothGamePadReciver{
 
 }
 
-bluetoothPad = new BluetoothGamePadReciver ();
+//bluetoothPad = new BluetoothGamePadReciver ();
 
 // /**
 //  * 
@@ -372,16 +336,16 @@ bluetoothPad = new BluetoothGamePadReciver ();
 //     });
 
 // }
-function handleChangedCharacteristicValue(event){
-    console.log("handleChangedCharacteristic");
-    temp = event;
-    console.log(event);
-    let value = event.target.value;
-    var now = new Date();
-    var decoder = new TextDecoder('utf8');
-    console.log("> "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds()+": Value is "+decoder.decode(value));
+// function handleChangedCharacteristicValue(event){
+//     console.log("handleChangedCharacteristic");
+//     temp = event;
+//     console.log(event);
+//     let value = event.target.value;
+//     var now = new Date();
 
-}
+//     console.log("> "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds()+": Value is "+decoder.decode(value));
+
+// }
 
 // function readBLECharactristic(){
 //     gattCharacteristic.readValue().then(

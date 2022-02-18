@@ -4,15 +4,16 @@ class Game extends Phaser.Scene {
     }
     //map.getLayer("walls").data[5][5].properties?.horitzontalWall
     init(data){
-        console.log(data);
         let playersArray = [];
         data.forEach(element => {
-            //console.log(element);
-            this.player = new Player(this, element.id, element.x, element.y, "player", element.peerClient);
+            this.player = new Player(this, element.id, element.x, element.y, "player");
             playersArray.push(this.player);
         });
         this.playersGroup = this.add.group(playersArray);
         //console.log(this.playersGroup);
+        this.activeScene = "game";
+        this.infoScene = "SeePass";
+        this.playableScene = "enterPasswordScene";
     }   
 
     preload() {
@@ -33,7 +34,7 @@ class Game extends Phaser.Scene {
         for(let i=0; i<9; i++){
             this.load.image('simbol'+i, path+'assets/passwd/simbol'+i+'.png');
         }
-        this.buttonActive;
+        this.buttonActive = false;
         this.stickButtonActive = false;
         this.stickActive = false;
         if(this.controllerConnected){
@@ -41,32 +42,39 @@ class Game extends Phaser.Scene {
             this.bluetoothConnection.setCallbackButtonA(this.pressBtn);
             this.bluetoothConnection.setCallbackButtonJoystick(this.pressStick);
             this.bluetoothConnection.setCallbackJoystick(this.moveStick);
+            this.bluetoothConnection.start();
         }
-        this.loadedScene = "";
     }
 
     create() {
         socket.on("playerMoveResponse", (moveData) => {
             this.playersGroup.getChildren().forEach(player => {
                 if(moveData.id == player.id){
-                    if (moveData.direction == 'left') {
-                        player.move(-moveData.speed,0);
+                    if(this.stickActive){
+                        console.log(moveData);
+                        player.move(moveData.speed_x, moveData.speed_y);
+                    } else {
+                        if (moveData.direction == 'left') {
+                            player.move(-moveData.speed,0);
+                        }
+                        if (moveData.direction == 'right') {
+                            player.move(moveData.speed,0);
+                        }
+                        if (moveData.direction == 'up') {
+                            player.move(0,-moveData.speed);
+                        }
+                        if (moveData.direction == 'down') {
+                            player.move(0,moveData.speed);
+                        }
+                        if (moveData.direction == 'idle') {
+                            player.move(0,0);
+                        }
+                        if (moveData.direction == 'player-idle-down') {
+                            player.move(null,null);
+                        }
                     }
-                    if (moveData.direction == 'right') {
-                        player.move(moveData.speed,0);
-                    }
-                    if (moveData.direction == 'up') {
-                        player.move(0,-moveData.speed);
-                    }
-                    if (moveData.direction == 'down') {
-                        player.move(0,moveData.speed);
-                    }
-                    if (moveData.direction == 'idle') {
-                        player.move(0,0);
-                    }
-                    if (moveData.direction == 'player-idle-down') {
-                        player.move(null,null);
-                    }
+
+
                     //console.log(moveData)
                    
                     // let moveData = {
@@ -201,14 +209,22 @@ class Game extends Phaser.Scene {
                         that.player.setDepth(0);
                     }
                     if (eKey.isDown) {
-                        that.scene.launch('SeePass');
+                        //Launch infoScene
+                        //that.scene.launch('SeePass'); 
+                        console.log("Launch info Scene");
+                        console.log(that.infoScene);
+                        that.scene.launch(that.infoScene);
+                        that.activeScene = that.infoScene;
                     }
 
                     
 
                     if(that.buttonActive == true){
-                        that.scene.launch('SeePass');
+                        //that.scene.launch('SeePass');
+                        that.scene.launch(that.infoScene);
                         that.buttonActive = false;
+                        that.activeScene = that.infoScene;
+
                         //mirar si esta activa escena
                         //recupera escena as objeto
                         //llamo funcion buttonActive()
@@ -224,12 +240,17 @@ class Game extends Phaser.Scene {
                     }
         
                     if (eKey.isDown && that.canDoPuzzle) {
-                        that.scene.launch('enterPasswordScene');
+                        //pass this.playableScene
+                        //that.scene.launch('enterPasswordScene');
+                        that.scene.launch(that.playableScene);
+                        that.activeScene = that.playableScene;
                         //that.scene.pause();
                     }
 
                     if(that.buttonActive){
-                        that.scene.launch('enterPasswordScene');
+                        //that.scene.launch('enterPasswordScene');
+                        that.scene.launch(that.playableScene);
+                        that.activeScene = that.playableScene;
                         that.buttonActive = false;
                     }
                 });
@@ -359,7 +380,6 @@ class Game extends Phaser.Scene {
                 if(this.stickActive){
                     player.x_speed = this.speeds['x'];
                     player.y_speed = this.speeds['y'];
-                    this.stickActive = false;
                 }
                 player.update();
             }
@@ -375,15 +395,19 @@ class Game extends Phaser.Scene {
         let y = data.split(';')[1];
         x = x.split(':')[1];
         y = y.split(':')[1];
+        x = parseInt(x, 10);
+        y = parseInt(y, 10);
         let speeds = {x:x,y:y};
-        let stickDirection = getStickDirection(speeds);
+        console.log(speeds);
+        //let stickDirection = getStickDirection(speeds);
 
-        if(this.loadedScene==""){
+        if(gameScene.activeScene=="game"){
             gameScene.stickActive = true;
             gameScene.speeds = speeds;
-            gameScene.stickDirection= stickDirection;
+            //gameScene.stickDirection= stickDirection;
         } else { 
-            game.scene.getScene(gameScene.loadedScene).moveStick(speeds, stickDirection);
+            //game.scene.getScene(gameScene.activeScene).moveStick(speeds, stickDirection);
+            game.scene.getScene(gameScene.activeScene).moveStick(speeds);
         }
 
 
@@ -395,28 +419,48 @@ class Game extends Phaser.Scene {
     } 
 
     getStickDirection(data){
-        //TODO
+        //TODO Funcion devuelve left, right, up, down
     }
     
     pressStick(data){
         console.log("My callback pressStick");
-        data = 1;
+        let gameScene = game.scene.getScene('game');
+        // data = 1;
         if(data == 1){
+
+            if(gameScene.activeScene=="game"){
+                gameScene.stickButtonActive = true;
+            } else { 
+                game.scene.getScene(gameScene.activeScene).activeJoystickButton();
+                gameScene.activeScene="game";
+            }
+
+            /*
             game.scene.getScene('game').stickButtonActive = true;
             let activeScenes = game.scene.getScenes();
             for(let i = 1; i<activeScenes.length; i++){
                 activeScenes[i].stickButtonActive = true;
                 console.log(activeScenes[i]);
-            }
+            }*/
         }
     }
     
     pressBtn(data){
+        let gameScene = game.scene.getScene('game');
         console.log("My callback presbutton");
+        console.log(gameScene.activeScene);
+        if(gameScene.activeScene=="game"){
 
+            console.log("HagoClic");
+            gameScene.buttonActive = true;
+        } else { 
+            game.scene.getScene(gameScene.activeScene).activeButton();
+        }
+
+        /*
         if(data == 1){
             game.scene.getScene('game').buttonActive = true;
-        }
+        }*/
     }
 
     setBluetoothConnection(_bluetoothConnection){

@@ -81,12 +81,7 @@ class ComunicacionServidor {
                             if (player.id==playerId) {
                                 this.io.to(playerId).emit("renegotiation",player.initiator);
                             }
-                            
-                        }
-                        
-                        
-
-                        
+                        }                      
                     });
                 });
             });
@@ -137,12 +132,19 @@ class ComunicacionServidor {
                     diff: diff
                 }
 
+                //call getRandomMiniGames(diff)
+                //pass randomMiniGames and players to game
+
                 let roomName = "Room_"+this.queue[player.diff][0].id;
                 console.log("RoomName: "+roomName);
                 socket.join(roomName);
                 this.queue[player.diff].push(player);
                 this.io.in(roomName).emit('matchFound', this.queue[player.diff]);
                 this.roomName = roomName;
+
+                
+
+
                 
                 // this.queue.forEach((queuePlayer) => {
                 //     if(queuePlayer.diff == player.diff){
