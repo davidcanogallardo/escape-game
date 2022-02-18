@@ -38,7 +38,6 @@ class WallsLayer extends Phaser.Tilemaps.TilemapLayer {
         scene.physics.add.overlap(players, this.wallGroup, function (players,walls) {
             if(walls.y < players.y){
                 scene.players.setDepth(10);
-                console.log("aaaaaaaaaaaaaaaaaa");
             } else {
                 scene.players.setDepth(0);
             }
