@@ -50,10 +50,12 @@ class Game extends Phaser.Scene {
         socket.on("playerMoveResponse", (moveData) => {
             this.playersGroup.getChildren().forEach(player => {
                 if(moveData.id == player.id){
+
                     if(this.stickActive){
                         console.log(moveData);
                         player.move(moveData.speed_x, moveData.speed_y);
                     } else {
+                        console.log("moveOtherPlayer");
                         if (moveData.direction == 'left') {
                             player.move(-moveData.speed,0);
                         }

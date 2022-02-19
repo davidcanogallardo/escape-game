@@ -100,6 +100,7 @@ class Player extends Phaser.GameObjects.Sprite{
     moveOtherPlayer(){
         let moveData = {
             id: this.id,
+            speed: this.speed,
             speed_x: this.x_speed,
             speed_y: this.y_speed,
             x: this.x,

@@ -32,12 +32,18 @@ class ComunicacionServidor {
                 socket.on("sendChatMessage", (data, callback) => {
                     this.sendChatMessage(data, callback);
                 });
-                // socket.on("disconnect", () => {
-                //     console.log("Un cliente se ha desconectado")
-                //     let indexItemToRemove = this.queue.indexOf(this.queue.find(element => element.id == socket.id));
-                //     this.queue.splice(indexItemToRemove, 1);
-                //     console.log(this.queue);
-                // });
+                socket.on("disconnect", () => {
+                    let queueKeys = Object.keys(this.queue);
+
+                    queueKeys.forEach((key) => {
+                        //console.log(key, queue[key])
+                        this.queue[key].forEach((element, index) => {
+                          if(element.id == socket.id){
+                            this.queue[key].splice(index, 1);
+                          }
+                        });
+                    });
+                });
 
                 socket.on("playerMoved", (moveData) => {
                     socket.in(this.roomName).emit("playerMoveResponse", moveData);
