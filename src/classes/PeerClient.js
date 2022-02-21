@@ -38,13 +38,6 @@ class PeerClient {
 
         this.peer.on("renegotiate", () => {
             console.log("Conexion renegociandose");
-            if(audio.reneg){
-                console.log("pause audio");
-                audio.pause();
-                audio.currentTime = 0;
-                audio.srcObject = null;
-                audio.reneg = false;
-            }
             this.socket.emit("switchToGame");
         });
 

@@ -354,13 +354,12 @@ class Game extends Phaser.Scene {
         //mute button
 
         this.input.keyboard.on('keydown-M',()=>{
-            this.playersGroup.getChildren().forEach(player => {
-                if(socket.id==player.id){
-                    console.log('mkeydown')
-                    console.log(player.id);
-                    socket.emit("iniciarRenegociacion",player.id);  
-                };
-            });
+            if (window.stream.getAudioTracks()[0].enabled == true) {
+                window.stream.getAudioTracks()[0].enabled = false;
+                console.log(window.stream.getAudioTracks()[0].enabled)
+            } else {
+                window.stream.getAudioTracks()[0].enabled = true;
+            }
         });
         
         

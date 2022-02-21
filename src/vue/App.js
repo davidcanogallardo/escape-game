@@ -53,25 +53,6 @@ socket.on("windowGame", (data) => {
     app.currentPage = "game";
 });
 
-//renegociaciones
-socket.on("renegotiation",(initiator) =>{
-    console.log("entro en renegotiation");
-    // console.log(peer)
-    // audio.reneg = true;
-    // peerClient.peer.signal(peer);
-    
-    if(initiator){
-        audio.reneg = true;
-        console.log("Hago signal host");
-        console.log(peerClient);
-        // peerClient.peer.signal(Que tengo que pasar por aqui?);   
-        
-    } else {
-        audio.reneg = true;
-        console.log("Hago signal guest");
-        guestPeerClient.peer.signal(guestPeerClient);
-    }
-})
 
 let excludedPages = [
     "home",
