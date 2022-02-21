@@ -18,44 +18,6 @@ class PhaserGame extends Phaser.Game {
   constructor(config) {
       super(config)
   }
-
-  /*
-  moveStick(velocidades){
-    let data = "x:10,22;y:120,1";
-    let x = data.split(';')[0];
-    let y = data.split(';')[1];
-    x = x.split(':')[1];
-    y = y.split(':')[1];
-
-    let speeds = {x: x,y: y};
-    if(this.isGameActive()){
-      let activeScene = this.scene.getScene('game');
-      bluetoothConnection.setCallbackButtonA(this.moveStick(data));
-      activeScene.moveStick(speeds);
-    }
-  } 
-
-  pressStick(){
-    if(this.isGameActive()){
-      let activeScene = this.scene.getScene('game');
-      bluetoothConnection.setCallbackButtonJoystick(this.pressStick());
-      activeScene.pressStick();
-    }
-  }
-
-  pressBtn(){
-    if(this.isGameActive()){
-      let activeScene = this.scene.getScene('game');
-      bluetoothConnection.setCallbackJoystick(this.pressBtn());
-      activeScene.pressBtn();
-    }
-  }
-
-  isGameActive(){
-    let activeScenes = this.scene.getScenes();
-    console.log(activeScenes.includes("game"));
-    return activeScenes.includes("game");
-  }*/
 }
 
 var game = new PhaserGame(config);

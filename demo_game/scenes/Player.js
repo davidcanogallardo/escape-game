@@ -55,7 +55,7 @@ class Player extends Phaser.GameObjects.Sprite{
     update() {
         this.centerBodyonBody(this.playerCollider,this)
 
-        console.log(game.scene.getScene("game").stickActive);
+        //console.log(game.scene.getScene("game").stickActive);
         if ( this.anims.currentAnim==null) {
             this.anims.play('player-idle-down');
         } else if(!game.scene.getScene("game").stickActive) {

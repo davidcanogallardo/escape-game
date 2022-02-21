@@ -1,4 +1,3 @@
-
 class BluetoothGamePadReciver{
     constructor(_callbackButtonA = null, _callbackButtonJoystick = null, _callbackJoystick = null){
         //define properties

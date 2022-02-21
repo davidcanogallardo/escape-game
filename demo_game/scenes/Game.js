@@ -50,12 +50,9 @@ class Game extends Phaser.Scene {
         socket.on("playerMoveResponse", (moveData) => {
             this.playersGroup.getChildren().forEach(player => {
                 if(moveData.id == player.id){
-
                     if(this.stickActive){
-                        console.log(moveData);
                         player.move(moveData.speed_x, moveData.speed_y);
                     } else {
-                        console.log("moveOtherPlayer");
                         if (moveData.direction == 'left') {
                             player.move(-moveData.speed,0);
                         }
@@ -118,9 +115,7 @@ class Game extends Phaser.Scene {
 
         this.playersGroup.getChildren().forEach(player => {
             this.physics.add.overlap(endTile, player, function () {
-                //player.active = false;
                 player.inZone = true;
-                //
             });
         });
 
@@ -213,8 +208,6 @@ class Game extends Phaser.Scene {
                     if (eKey.isDown) {
                         //Launch infoScene
                         //that.scene.launch('SeePass'); 
-                        console.log("Launch info Scene");
-                        console.log(that.infoScene);
                         that.scene.launch(that.infoScene);
                         that.activeScene = that.infoScene;
                     }
@@ -323,24 +316,31 @@ class Game extends Phaser.Scene {
         }
         //*************************************************************Escena de victoria
         socket.on("passwordPuzzleResolved", (data) => {
+            console.log("Puzzle complete");
             this.challenge++;
 
             objectLayer.objects.forEach(object => {
                 switch(object.type){
                     case 'door':
+                        // console.log(object);
+                        // console.log("door");
+                        // console.log(object.properties[0].value);
+                        // console.log(this.challenge);
                         if (object.properties[0].value == this.challenge && this.challenge == 1) {
+                            console.log("Primer if");
                             this.doorsGroup.children.entries[0].play('opening-door');
                             this.doorsGroup.children.entries[1].play('opening-door'); 
                             this.physics.world.removeCollider(this.doorColider0);
                             this.physics.world.removeCollider(this.doorColider1);
+                            this.physics.world.removeCollider(this.doorsColider);
                             this.table.disableBody();
                             that.canDoPuzzle = false
                         } else if (this.challenge == 1) {
+                            console.log("Segundo if");
                             this.doorsGroup.children.entries[2].play('opening-door');
                             this.physics.world.removeCollider(this.doorColider2);
                         }
                         break;
-    
                 }
             })
         });

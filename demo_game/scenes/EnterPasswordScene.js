@@ -50,7 +50,7 @@ class EnterPasswordScene extends Phaser.Scene {
             this.puzzle_buttons[i][1].setOrigin(0,0);
             this.puzzle_buttons[i][1].setDepth(1);
             window.b = button[0];
-            console.log(this.correctAnswer.includes(this.puzzle_buttons[i][0].texture.key)); 
+            //console.log(this.correctAnswer.includes(this.puzzle_buttons[i][0].texture.key)); 
             //console.log(this.puzzle_buttons[i][0].texture.key === "simbol1")
             //this.puzzle_buttons[i][0].setTint(59000000);
         } 
@@ -98,7 +98,7 @@ class EnterPasswordScene extends Phaser.Scene {
             this.result_rectangles[i].setScale(0.3);
             this.result_rectangles[i].setOrigin(0,0);
             
-            console.warn(this.result_rectangles[i].x);
+            //console.warn(this.result_rectangles[i].x);
             // console.warn(this.result_rectangles[i].width);
             // console.warn(this.result_rectangles[i].height);
 
@@ -113,7 +113,7 @@ class EnterPasswordScene extends Phaser.Scene {
         this.input.keyboard.on('keydown-K', function () {
             let count = that.count;
             // console.warn((that.result_rectangles[count].width/2));
-            console.warn((that.result_rectangles[count].x));
+            //console.warn((that.result_rectangles[count].x));
             var w = (that.result_rectangles[count].width/2)*0.3
             var h = (that.result_rectangles[count].height/2)*0.3
             var x = that.result_rectangles[count].x
@@ -124,22 +124,21 @@ class EnterPasswordScene extends Phaser.Scene {
 
             that.result_rectangles[count] = that.add.image(x+w,y+h,that.puzzle_buttons[that.selectedButtonIndex][0].texture.key);
             that.result_rectangles[count].setScale(0.3);
-            console.error(that.puzzle_buttons[that.selectedButtonIndex][2]);
+            //console.error(that.puzzle_buttons[that.selectedButtonIndex][2]);
 
             if (that.password.length == 4 && !that.arraysEqual(that.password,that.correctAnswer)) {
-                console.log("ERROR")
+                //console.log("ERROR")
                 that.scene.stop();
                 that.scene.resume("game");
             }
             if (that.arraysEqual(that.password,that.correctAnswer)) {
                 that.win = true;
             }
-            console.log(that.win);
-            console.log(that.password);
-            console.log(that.correctAnswer);
-            console.log(that.arraysEqual(that.password,that.correctAnswer));
+            // console.log(that.win);
+            // console.log(that.password);
+            // console.log(that.correctAnswer);
+            // console.log(that.arraysEqual(that.password,that.correctAnswer));
             that.count++;
-            
         });
     }
 
@@ -160,7 +159,7 @@ class EnterPasswordScene extends Phaser.Scene {
         }
 
         if(this.win){
-            console.log("VICTORIA")
+            //console.log("VICTORIA")
             this.scene.stop();
             this.scene.resume("game");
             socket.emit("passwordPuzzleComplete")
@@ -169,7 +168,7 @@ class EnterPasswordScene extends Phaser.Scene {
     }
 
     selectIcon(index){
-        console.log(this.puzzle_buttons);
+        //console.log(this.puzzle_buttons);
         const currentIcon = this.puzzle_buttons[this.selectedButtonIndex][0];
         const currentIconBorder = this.puzzle_buttons[this.selectedButtonIndex][1]
         //currentIcon.setTint(59000000);
@@ -208,7 +207,6 @@ class EnterPasswordScene extends Phaser.Scene {
 
     arraysEqual(a, b) {
         return JSON.stringify(a) === JSON.stringify(b);
-
     }
 
 }

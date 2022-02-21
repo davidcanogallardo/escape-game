@@ -46,31 +46,33 @@ class ComunicacionServidor {
                 });
 
                 socket.on("playerMoved", (moveData) => {
-                    socket.in(this.roomName).emit("playerMoveResponse", moveData);
+                    socket.in(socket.room.id).emit("playerMoveResponse", moveData);
                 });
 
 
                 //Create Peer Connection
                 socket.on("startPeer", (hostID) => {
-                    socket.in(this.roomName).emit("sendHostID", hostID);
+                    socket.in(socket.room.id).emit("sendHostID", hostID);
                 });
 
                 socket.on("sendGuestID", (guestID) => {
-                    socket.in(this.roomName).emit("getGuestID", guestID);
+                    socket.in(socket.room.id).emit("getGuestID", guestID);
                 });
 
                 socket.on("switchToGame", () => {
-                    this.io.in(this.roomName).emit("windowGame");
+                    this.io.in(socket.room.id).emit("windowGame");
                 });
 
                 socket.on("passwordPuzzleComplete", () => {
-                    this.io.in(this.roomName).emit("passwordPuzzleResolved")
+                    this.io.in(socket.room.id).emit("passwordPuzzleResolved")
                 });
 
                 socket.on("playerInEndZone", (players) => {
+                    console.log(socket.room.id);
+                    console.log("Player In EndZone");
                     socket.room.countEndZone++;
                     if(socket.room.countEndZone==2){
-                        this.io.in(this.roomName).emit("endGame");
+                        this.io.in(socket.room.id).emit("endGame");
                     }
                 });
 
@@ -105,11 +107,11 @@ class ComunicacionServidor {
             }
             
             let diff = data[1];
-            console.log(user);
-            console.log(diff);
-            console.log("Queue: "+this.queue[diff]);
+            // console.log(user);
+            // console.log(diff);
+            // console.log("Queue: "+this.queue[diff]);
             if(this.queue[diff].length==0){
-                console.log("Añado a la cola");
+                //console.log("Añado a la cola");
                 const player = {
                     id: socket.id,
                     userame: user.username,
@@ -120,13 +122,14 @@ class ComunicacionServidor {
                 }
                 let roomName = "Room_"+socket.id;
                 //this.roomName = "Room_"+socket.id;
-                console.log("Nombre de la sala: "+roomName);
+                //console.log("Nombre de la sala: "+roomName);
                 socket.join(roomName);
                 //console.log(socket.rooms.get(this.roomName));
-                console.log(this.io.sockets.adapter.rooms.get( roomName));
-                var _room = this.io.sockets.adapter.rooms.get( roomName);
+                //console.log(this.io.sockets.adapter.rooms.get(roomName));
+                var _room = this.io.sockets.adapter.rooms.get(roomName);
                 socket.room = _room;
                 socket.room.countEndZone = 0;
+                socket.room.id = roomName;
                 this.queue[player.diff].push(player);
             } else {
                 const player = {
@@ -144,14 +147,14 @@ class ComunicacionServidor {
                 let roomName = "Room_"+this.queue[player.diff][0].id;
                 console.log("RoomName: "+roomName);
                 socket.join(roomName);
+                this.roomName = roomName;
+                var _room = this.io.sockets.adapter.rooms.get(roomName);
+                socket.room = _room;
                 this.queue[player.diff].push(player);
                 this.io.in(roomName).emit('matchFound', this.queue[player.diff]);
-                this.roomName = roomName;
-
-                
+                this.queue[player.diff] = [];
 
 
-                
                 // this.queue.forEach((queuePlayer) => {
                 //     if(queuePlayer.diff == player.diff){
                 //         console.log(this.queue);
