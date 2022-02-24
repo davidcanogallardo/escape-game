@@ -404,6 +404,7 @@ class Game extends Phaser.Scene {
         x = parseInt(x, 10);
         y = parseInt(y, 10);
         let speeds = {x:x,y:y};
+        let direction = this.getStickDirection(speeds);
         console.log(speeds);
         //let stickDirection = getStickDirection(speeds);
         if(gameScene.activeScene=="game"){
@@ -412,7 +413,7 @@ class Game extends Phaser.Scene {
             //gameScene.stickDirection= stickDirection;
         } else { 
             //game.scene.getScene(gameScene.activeScene).moveStick(speeds, stickDirection);
-            game.scene.getScene(gameScene.activeScene).moveStick(speeds);
+            game.scene.getScene(gameScene.activeScene).moveStick(speeds, direction);
         }
         // if(speeds.x != 0 && speeds.y != 0){
 
@@ -427,8 +428,31 @@ class Game extends Phaser.Scene {
         //     }
     } 
 
-    getStickDirection(data){
-        //TODO Funcion devuelve left, right, up, down
+    getStickDirection(speeds){
+        console.log("speeds kachow: "+speeds);
+        let x = Math.abs(speeds.x);
+        let y = Math.abs(speeds.y);
+
+        if (x>y) {
+            if (Math.sign(speeds.x)==1) {
+                return 'right'
+            } else {
+                return 'left'
+            }
+        } else if(x<y){
+            if (Math.sign(speeds.y)==1) {
+                return 'down'
+            } else {
+                return 'up'
+            }
+        }else{
+            if (speeds.x == 0 && speeds.y == 0) {
+                return 'idle'
+            }else{
+                return 'diagonal'
+            }
+            
+        }
     }
     
     pressStick(data){
