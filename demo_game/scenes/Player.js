@@ -83,13 +83,13 @@ class Player extends Phaser.GameObjects.Sprite{
                 this.body.setVelocity(0, 0);
                 this.direction = 'idle'
             }
-            this.moveOtherPlayer()
+            this.moveOtherPlayer(false)
         } else {
+            //console.log("Muevo joystick");
+            //console.log(this.x_speed, this.y_speed);
             this.move(this.x_speed,this.y_speed)
-            this.moveOtherPlayer()
+            this.moveOtherPlayer(true)
         }
-
-       
 
         if(this.inZone && !this.end){
             //Enviar al serve jugador end
@@ -97,7 +97,7 @@ class Player extends Phaser.GameObjects.Sprite{
             this.end = true;
         }
     }
-    moveOtherPlayer(){
+    moveOtherPlayer(_joystickMoved){
         let moveData = {
             id: this.id,
             speed: this.speed,
@@ -105,8 +105,10 @@ class Player extends Phaser.GameObjects.Sprite{
             speed_y: this.y_speed,
             x: this.x,
             y: this.y,
-            direction: this.direction
+            direction: this.direction,
+            joystickMoved: _joystickMoved
         }
+        //console.log("Muevo otro Jugador");
 
         socket.emit("playerMoved", moveData);
     }
