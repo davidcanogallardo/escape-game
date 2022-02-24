@@ -1,6 +1,6 @@
-Vue.component('change',{
-    template: //html
-    `
+Vue.component("change", {
+  //html
+  template: `
     <div class="container-change">
         <div class="close" v-on:click="$emit('change-img', false)">
             <i class="fas fa-times"></i>
@@ -42,56 +42,57 @@ Vue.component('change',{
     </div>
 
     `,
-    data(){
-        return{
-            currentBG: this.user.profileImg.iconBG,
-            currentIcon: this.user.profileImg.icon,
-            currentIconColor: this.user.profileImg.iconColor,
+  data() {
+    return {
+      currentBG: this.user.profileImg.iconBG,
+      currentIcon: this.user.profileImg.icon,
+      currentIconColor: this.user.profileImg.iconColor,
 
-            icons: [
-                {icon: 'user'},
-                {icon: 'angry'},
-                {icon: 'beer'},
-                {icon: 'biohazard'},
-                {icon: 'bomb'},
-            ],
+      icons: [
+        { icon: "user" },
+        { icon: "angry" },
+        { icon: "beer" },
+        { icon: "biohazard" },
+        { icon: "bomb" },
+      ],
 
-            colors: [
-                {color: 'red'},
-                {color: 'blue'},
-                {color: 'purple'},
-                {color: 'pink'},
-                {color: 'black'},
-            ]
-        }
+      colors: [
+        { color: "red" },
+        { color: "blue" },
+        { color: "purple" },
+        { color: "pink" },
+        { color: "black" },
+      ],
+    };
+  },
+  props: ["user"],
+
+  methods: {
+    changeBG(color) {
+      if (this.currentIconColor != color) {
+        this.currentBG = color;
+      }
     },
-    props:["user"],
-
-    methods: {
-        changeBG(color){
-            if (this.currentIconColor!=color) {
-                this.currentBG=color;
-            }
-        },
-        changeIC(color){
-            if (this.currentBG!=color) {
-                this.currentIconColor=color;
-            }
-        },
-        saveChanges(){
-            profileImg={
-                iconBG: this.currentBG,
-                icon: this.currentIcon,
-                iconColor: this.currentIconColor,
-            };
-            this.$root.user.profileImg = profileImg;
-            sessionStorage.setItem("session", JSON.stringify(this.$root.user))
-        }
+    changeIC(color) {
+      if (this.currentBG != color) {
+        this.currentIconColor = color;
+      }
     },
-})
-Vue.component('profile', {
-    template: //html
-    `             
+    saveChanges() {
+      profileImg = {
+        iconBG: this.currentBG,
+        icon: this.currentIcon,
+        iconColor: this.currentIconColor,
+      };
+      this.$root.user.profileImg = profileImg;
+      this.$root.updatePhoto(profileImg);
+      sessionStorage.setItem("session", JSON.stringify(this.$root.user));
+    },
+  },
+});
+Vue.component("profile", {
+  //html
+  template: `             
     
     <div class="profile">
     <change v-if="page == 'profile' && changeImg == true" class="change" v-on:change-img="changeImg = $event" v-on:changeProfileImg="profileImg = $event" :user="user"></change>
@@ -123,24 +124,22 @@ Vue.component('profile', {
         </div>
     </div>
     
-    `, 
-    props: ["user", "page","changeImg"],
-    data(){
-        return {
-            profileImg:{
-                iconBG: this.user.profileImg.iconBG,
-                icon: this.user.profileImg.icon,
-                iconColor: this.user.profileImg.iconColor
-            }
-            
-        }
+    `,
+  props: ["user", "page", "changeImg"],
+  data() {
+    return {
+      profileImg: {
+        iconBG: this.user.profileImg.iconBG,
+        icon: this.user.profileImg.icon,
+        iconColor: this.user.profileImg.iconColor,
+      },
+    };
+  },
+
+  methods: {
+    close() {
+      console.log(this.user);
+      this.$root.closeSession(this.user.username);
     },
-   
-    
-    methods: {
-        close() {
-            console.log(this.user);
-            this.$root.closeSession(this.user.username)
-        },
-    },
-})
+  },
+});
