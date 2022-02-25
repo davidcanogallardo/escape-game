@@ -1,9 +1,9 @@
 class GenericMiniGame extends Phaser.Scene{
     constructor(name,type,difficulty){
         super(name);
-
+        console.log("type: "+type);
         //el tipo del minijuego solamente puede ser reto(challenge) o ayuda (helper)
-        if (type == 'challenge' ||type == 'helper') {
+        if (type == 'challenge' || type == 'helper') {
             this.type = type;
         } else {
             console.log('El tipo del minijuego no es correcto');
