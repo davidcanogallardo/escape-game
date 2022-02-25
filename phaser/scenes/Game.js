@@ -45,22 +45,6 @@ class Game extends Phaser.Scene {
         this.playerCollider = this.player.playerCollider
 
         this.wallsLayer = new WallsLayer(this);
-       
-        let rt = this.add.renderTexture(0, 0, 800, 600);
-        rt.depth = 20
-        window.rt = rt
-        rt.fill(0x000000);
-
-        this.spotlight = this.make.sprite({
-            x: 400,
-            y: 300,
-            key: "mask",
-            add: false
-        });
-
-        let mask = rt.createBitmapMask(this.spotlight)
-        mask.invertAlpha = true;
-        rt.setMask(mask);
 
         // ********************************************* generate password
         var difficulty = 3
@@ -237,7 +221,5 @@ class Game extends Phaser.Scene {
   
     update() {
         this.player.update()
-        this.spotlight.x = this.player.x;
-        this.spotlight.y = this.player.y;
     }
 }
