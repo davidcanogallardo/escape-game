@@ -45,6 +45,39 @@ class Game extends Phaser.Scene {
         this.playerCollider = this.player.playerCollider
 
         this.wallsLayer = new WallsLayer(this);
+       
+        let rt = this.add.renderTexture(0, 0, 800, 600);
+        rt.depth = 20
+        window.rt = rt
+        rt.fill(0x000000);
+
+        this.spotlight = this.make.sprite({
+            x: 400,
+            y: 300,
+            key: "mask",
+            add: false
+        });
+
+        let mask = rt.createBitmapMask(this.spotlight)
+        mask.invertAlpha = true;
+        rt.setMask(mask);
+
+        // ********************************************* generate password
+        var difficulty = 3
+        window.difficulty = difficulty
+        
+        var owo = []
+        for (let i = 0; i < 2+(2*difficulty); i++) {
+            owo.push(Math.floor(Math.random()*9)) 
+        }
+        window.pass = owo
+
+        // input
+        var input = [0,1,2,3,4,5,6,7,8]
+        var input2 = input.sort(() => Math.random() - 0.5)
+        window.input = input2
+
+        // *********************************************
 
         var end = this.physics.add.staticGroup();
         var endTile = end.create(158,14)
@@ -107,12 +140,6 @@ class Game extends Phaser.Scene {
                     break;
             }
         });
-
-        this.table.x = 40
-        this.table.y = 198
-        this.tableCollider.x = 40
-        this.tableCollider.y = 198
-        window.table = this.table
         //Añadir colider al grupo de puertas
         this.doorColider0 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[0]);
         this.doorColider1 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[1]);
@@ -210,5 +237,7 @@ class Game extends Phaser.Scene {
   
     update() {
         this.player.update()
+        this.spotlight.x = this.player.x;
+        this.spotlight.y = this.player.y;
     }
 }
