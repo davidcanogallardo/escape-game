@@ -21,7 +21,8 @@ class EnterPasswordScene extends Phaser.Scene {
     }
 
     create() {
-        this.correctAnswer = ["cross1R","cross1B","cross2Y","cross2G"];
+        // this.correctAnswer = [0,1,2,3];
+        this.correctAnswer = window.pass
         var path2 = ""
         let { width, height } = this.sys.game.canvas;
         //console.log(this.sys.game.canvas.width);
@@ -30,20 +31,20 @@ class EnterPasswordScene extends Phaser.Scene {
         this.background.setOrigin(0,0);
         this.cursors = this.input.keyboard.createCursorKeys();
 
-
+        var difficulty = window.difficulty
 
         let x = 0.50;
         for(let i=0; i<9; i++){
             let button = [];
             if(i>=5){
-                button[0] = this.add.image(0+(x*60), height/2+40, 'simbol'+i);
+                button[0] = this.add.image(0+(x*60), height/2+40, 'simbol'+window.input[i]);
                 button[1] = this.add.rectangle(10+(x*60), height/2+50, 55, 55);
                 button[1].setStrokeStyle(2, 0xffffff);
                 button[1].setVisible(false);
                 this.puzzle_buttons[i] = button;
                 x++;  
             } else {
-                button[0] = this.add.image(0+(i*60), height/3+40, 'simbol'+i);
+                button[0] = this.add.image(0+(i*60), height/3+40, 'simbol'+window.input[i]);
                 button[1] = this.add.rectangle(10+(i*60), height/3+50, 55, 55);
                 button[1].setStrokeStyle(2, 0xffffff);
                 button[1].setVisible(false);
@@ -60,43 +61,18 @@ class EnterPasswordScene extends Phaser.Scene {
         } 
         
         for (let i = 0; i < this.puzzle_buttons.length; i++) {
-            switch (i) {
-                case 0:
-                    this.puzzle_buttons[i].push('cross1R');
-                    break;
-                case 1:
-                    this.puzzle_buttons[i].push('cross1B');
-                    break;
-                case 2:
-                    this.puzzle_buttons[i].push('cross2Y');
-                    break;
-                case 3:
-                    this.puzzle_buttons[i].push('cross2G');
-                    break;
-                case 4:
-                    this.puzzle_buttons[i].push('cross1Y');
-                    break;
-                case 5:
-                    this.puzzle_buttons[i].push('cross1G');
-                    break;
-                case 6:
-                    this.puzzle_buttons[i].push('cross3R');
-                    break;
-                case 7:
-                    this.puzzle_buttons[i].push('cross3B');
-                    break;
-                case 8:
-                    this.puzzle_buttons[i].push('cross2R');
-                    break;
-                default:
-                    break;
-            }
-            
+            this.puzzle_buttons[i].push(window.input[i]);
         }
         
         this.result_rectangles = [];
-        for(let i = 0; i<4; i++){
-            this.result_rectangles[i] = this.add.rectangle(2.5+(i*80), 30, 250, 250, 0x9966ff);
+        for(let i = 0; i<2+(2*difficulty); i++){
+            if (difficulty==1) {
+                this.result_rectangles[i] = this.add.rectangle(2.5+(i*80), 30, 250, 250, 0x9966ff); //difficulty 1
+            } else if (difficulty==2) {
+                this.result_rectangles[i] = this.add.rectangle(2.5+(i*50), 30, 150, 150, 0x9966ff); //difficulty 2
+            } else if (difficulty==3) {
+                this.result_rectangles[i] = this.add.rectangle(2.5+(i*40), 30, 120, 120, 0x9966ff); //difficulty 3
+            }
             this.result_rectangles[i].setStrokeStyle(4, 0xefc53f);
 
             this.result_rectangles[i].setScale(0.3);
@@ -123,14 +99,21 @@ class EnterPasswordScene extends Phaser.Scene {
             var x = that.result_rectangles[count].x
             var y = that.result_rectangles[count].y
 
-
             that.password.push(that.puzzle_buttons[that.selectedButtonIndex][2])
 
             that.result_rectangles[count] = that.add.image(x+w,y+h,that.puzzle_buttons[that.selectedButtonIndex][0].texture.key);
-            that.result_rectangles[count].setScale(0.3);
+            
+            if (difficulty==1) {
+                that.result_rectangles[count].setScale(0.3); //difficulty 1
+            } else if (difficulty==2) {
+                that.result_rectangles[count].setScale(0.2); //difficulty 2
+            } else if (difficulty==3) {
+                that.result_rectangles[count].setScale(0.15); //difficulty 3
+            }
+
             console.error(that.puzzle_buttons[that.selectedButtonIndex][2]);
 
-            if (that.password.length == 4 && !that.arraysEqual(that.password,that.correctAnswer)) {
+            if (that.password.length == 2+(2*difficulty) && !that.arraysEqual(that.password,that.correctAnswer)) {
                 console.log("ERROR")
                 that.scene.stop();
                 that.scene.resume("game");
