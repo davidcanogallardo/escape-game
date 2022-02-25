@@ -8,9 +8,9 @@ class GenericMiniGame extends Phaser.Scene{
         } else {
             console.log('El tipo del minijuego no es correcto');
         }
-        
-        //Dificultad del minijuego
-        if (difficulty == 'easy' || difficulty == 'medium' || difficulty=='hard') {
+
+        //Dificultad del minijuego (easy=1, medium=2, hard=3)
+        if (difficulty ==1 || difficulty ==2 || difficulty==3) {
             this.difficulty = difficulty;
         } else {
             console.log('La dificultad introducida no es correcta');
