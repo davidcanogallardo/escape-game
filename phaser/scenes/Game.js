@@ -62,8 +62,22 @@ class Game extends Phaser.Scene {
         mask.invertAlpha = true;
         rt.setMask(mask);
 
+        // ********************************************* generate password
+        var difficulty = 3
+        window.difficulty = difficulty
         
+        var owo = []
+        for (let i = 0; i < 2+(2*difficulty); i++) {
+            owo.push(Math.floor(Math.random()*9)) 
+        }
+        window.pass = owo
 
+        // input
+        var input = [0,1,2,3,4,5,6,7,8]
+        var input2 = input.sort(() => Math.random() - 0.5)
+        window.input = input2
+
+        // *********************************************
 
         var end = this.physics.add.staticGroup();
         var endTile = end.create(158,14)
