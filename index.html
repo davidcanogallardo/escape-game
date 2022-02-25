@@ -111,7 +111,7 @@
                 <div id="game2"></div>
             </div>
 
-            <transition name="fade">
+            <!-- <transition name="fade"> -->
                 <home v-if="currentPage == 'home'" 
                     v-on:open-menu="menuOpen = $event" 
                     v-on:change-page="currentPage = $event"
@@ -185,7 +185,7 @@
                     v-if="currentPage == 'private-room'"
                     v-on:change-page="currentPage = $event">
                 </private-room>
-            </transition>
+            <!-- </transition> -->
 
             
             <chat 

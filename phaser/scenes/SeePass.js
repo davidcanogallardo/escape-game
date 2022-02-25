@@ -17,17 +17,20 @@ class SeePass extends Phaser.Scene {
         window.w = width
         window.bgg = this.background
 
+        var difficulty = window.difficulty
+
+
         this.puzzle_image= [];
         let x = 0.50;
-        for(let i=0; i<4; i++){
+        for(let i=0; i<2+(2*difficulty); i++){
             console.log(this.background.height);
             
-            if(i>=5){
-                this.puzzle_image[i] = this.add.image(0+(x*50), height/2+40, 'simbol'+i);
-                x++;  
-            } else {
-                this.puzzle_image[i] = this.add.image(60+(i*50), height/3+20, 'simbol'+i);
-            }
+            // if(i>=5){
+            //     this.puzzle_image[i] = this.add.image(0+(x*50), height/2+40, 'simbol'+window.pass[i]);
+            //     x++;  
+            // } else {
+            // }
+            this.puzzle_image[i] = this.add.image(60+(i*50), height/3+20, 'simbol'+window.pass[i]);
             this.puzzle_image[i].setScale(0.2);
             this.puzzle_image[i].setOrigin(0,0);
         }  

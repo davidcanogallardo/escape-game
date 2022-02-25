@@ -37,6 +37,8 @@ class Game extends Phaser.Scene {
         this.buttonActive = false;
         this.stickButtonActive = false;
         this.stickActive = false;
+        //this.controllerConnected = false;
+        console.log("Cargo Juego");
         if(this.controllerConnected){
             console.log("Controller Connected");
             this.bluetoothConnection.setCallbackButtonA(this.pressBtn);
@@ -50,8 +52,11 @@ class Game extends Phaser.Scene {
         socket.on("playerMoveResponse", (moveData) => {
             this.playersGroup.getChildren().forEach(player => {
                 if(moveData.id == player.id){
-                    if(this.stickActive){
+                    //console.log(this.stickActive);
+                    if(moveData.joystickMoved){
+                        //console.log("Joystick activado, Muevo otro jugador");
                         player.move(moveData.speed_x, moveData.speed_y);
+                        //this.stickActive = false;
                     } else {
                         if (moveData.direction == 'left') {
                             player.move(-moveData.speed,0);
@@ -399,17 +404,21 @@ class Game extends Phaser.Scene {
         x = parseInt(x, 10);
         y = parseInt(y, 10);
         let speeds = {x:x,y:y};
+        let direction = this.getStickDirection(speeds);
         console.log(speeds);
         //let stickDirection = getStickDirection(speeds);
-
         if(gameScene.activeScene=="game"){
             gameScene.stickActive = true;
             gameScene.speeds = speeds;
             //gameScene.stickDirection= stickDirection;
         } else { 
             //game.scene.getScene(gameScene.activeScene).moveStick(speeds, stickDirection);
-            game.scene.getScene(gameScene.activeScene).moveStick(speeds);
+            game.scene.getScene(gameScene.activeScene).moveStick(speeds, direction);
         }
+        // if(speeds.x != 0 && speeds.y != 0){
+
+        // }
+
 
 
 
@@ -419,8 +428,31 @@ class Game extends Phaser.Scene {
         //     }
     } 
 
-    getStickDirection(data){
-        //TODO Funcion devuelve left, right, up, down
+    getStickDirection(speeds){
+        console.log("speeds kachow: "+speeds);
+        let x = Math.abs(speeds.x);
+        let y = Math.abs(speeds.y);
+
+        if (x>y) {
+            if (Math.sign(speeds.x)==1) {
+                return 'right'
+            } else {
+                return 'left'
+            }
+        } else if(x<y){
+            if (Math.sign(speeds.y)==1) {
+                return 'down'
+            } else {
+                return 'up'
+            }
+        }else{
+            if (speeds.x == 0 && speeds.y == 0) {
+                return 'idle'
+            }else{
+                return 'diagonal'
+            }
+            
+        }
     }
     
     pressStick(data){
@@ -428,7 +460,6 @@ class Game extends Phaser.Scene {
         let gameScene = game.scene.getScene('game');
         // data = 1;
         if(data == 1){
-
             if(gameScene.activeScene=="game"){
                 gameScene.stickButtonActive = true;
             } else { 
@@ -450,13 +481,15 @@ class Game extends Phaser.Scene {
         let gameScene = game.scene.getScene('game');
         console.log("My callback presbutton");
         console.log(gameScene.activeScene);
-        if(gameScene.activeScene=="game"){
-
-            console.log("HagoClic");
-            gameScene.buttonActive = true;
-        } else { 
-            game.scene.getScene(gameScene.activeScene).activeButton();
+        if(data==1){
+            if(gameScene.activeScene=="game"){
+                console.log("HagoClic");
+                gameScene.buttonActive = true;
+            } else { 
+                game.scene.getScene(gameScene.activeScene).activeButton();
+            }
         }
+
 
         /*
         if(data == 1){
