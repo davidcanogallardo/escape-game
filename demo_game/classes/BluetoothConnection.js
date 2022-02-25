@@ -160,7 +160,7 @@ class BluetoothGamePadReciver{
     start(){
         if(this.connected){
             if(!this.started){
-                this.interval = setInterval(this.checkChanges.bind(this), 50);
+                this.interval = setInterval(this.checkChanges.bind(this), 250);
                 //setinterval per check canvis
                 this.started = true;
             }
