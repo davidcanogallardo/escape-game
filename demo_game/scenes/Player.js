@@ -115,27 +115,49 @@ class Player extends Phaser.GameObjects.Sprite{
     move(leftright, updown) {
         this.body.setVelocity(leftright, updown)
         // this.anims.play('player-run-side',true)
-        if (leftright<0) {
-            // console.log("1");
+        //console.log(this.direction);
+        if (leftright<0 || this.direction == "left") {
+            //console.log("1");
             this.anims.play('player-run-side', true)
             this.scaleX = -1;
             this.body.offset.x = 24;
         } 
-        if(leftright>0) {
-            // console.log("2");
+        if(leftright>0 || this.direction == "right") {
+            //console.log("2");
             this.anims.play('player-run-side', true)
             this.scaleX = 1;
             this.body.offset.x = 8;
         } 
-        if (updown>0) {
+        // if(this.direction== "diagonal_left"){
+        //     console.log("1");
+        //     this.anims.play('player-run-side', true)
+        //     this.scaleX = -1;
+        //     this.body.offset.x = 24;
+        // }
+        // if (updown>0 || this.direction == "down") {
+        //     // console.log("3");
+        //     this.anims.play('player-run-down', true)
+        // } 
+
+        if(this.direction == "diagonal_left"){
+            //console.log("1");
+            this.anims.play('player-run-side', true)
+            this.scaleX = -1;
+            this.body.offset.x = 24;
+        } else if(this.direction == "diagonal_right"){
+            //console.log("2");
+            this.anims.play('player-run-side', true)
+            this.scaleX = 1;
+            this.body.offset.x = 8;
+        } else if (updown<0 || this.direction == "up") {
+            //console.log("4");
+            this.anims.play('player-run-up', true)
+        } else if (updown>0 || this.direction == "down") {
             // console.log("3");
             this.anims.play('player-run-down', true)
         } 
-        if (updown<0) {
-            // console.log("4");
-            this.anims.play('player-run-up', true)
-        }
-        if(updown==0 && leftright == 0){
+
+        if((updown==0 && leftright == 0 )|| this.direction == "idle" ){
             if ( this.anims.currentAnim==null) {
                 this.anims.play('player-idle-down');
             }else{
@@ -146,7 +168,7 @@ class Player extends Phaser.GameObjects.Sprite{
            
         }
 
-        if(updown==null && leftright == null){
+        if((updown==null && leftright == null) || this.direction == null){
             this.anims.play('player-idle-down');
         }
         this.centerBodyonBody(this.playerCollider,this)

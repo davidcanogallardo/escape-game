@@ -51,10 +51,12 @@ class Game extends Phaser.Scene {
     create() {
         socket.on("playerMoveResponse", (moveData) => {
             this.playersGroup.getChildren().forEach(player => {
+                //console.log(moveData.direction);
                 if(moveData.id == player.id){
                     //console.log(this.stickActive);
                     if(moveData.joystickMoved){
                         //console.log("Joystick activado, Muevo otro jugador");
+                        player.direction = moveData.direction;
                         player.move(moveData.speed_x, moveData.speed_y);
                         //this.stickActive = false;
                     } else {
@@ -212,7 +214,7 @@ class Game extends Phaser.Scene {
                     }
                     if (eKey.isDown) {
                         //Launch infoScene
-                        //that.scene.launch('SeePass'); 
+                        that.scene.pause(); 
                         that.scene.launch(that.infoScene);
                         that.activeScene = that.infoScene;
                     }
@@ -220,10 +222,10 @@ class Game extends Phaser.Scene {
                     
 
                     if(that.buttonActive == true){
-                        //that.scene.launch('SeePass');
+                        that.scene.pause();
                         that.scene.launch(that.infoScene);
-                        that.buttonActive = false;
                         that.activeScene = that.infoScene;
+                        that.buttonActive = false;
 
                         //mirar si esta activa escena
                         //recupera escena as objeto
@@ -242,13 +244,15 @@ class Game extends Phaser.Scene {
                     if (eKey.isDown && that.canDoPuzzle) {
                         //pass this.playableScene
                         //that.scene.launch('enterPasswordScene');
+                        that.scene.pause();
                         that.scene.launch(that.playableScene);
                         that.activeScene = that.playableScene;
-                        //that.scene.pause();
+                        
                     }
 
-                    if(that.buttonActive){
+                    if(that.buttonActive && that.canDoPuzzle){
                         //that.scene.launch('enterPasswordScene');
+                        that.scene.pause();
                         that.scene.launch(that.playableScene);
                         that.activeScene = that.playableScene;
                         that.buttonActive = false;
@@ -386,6 +390,8 @@ class Game extends Phaser.Scene {
                 if(this.stickActive){
                     player.x_speed = this.speeds['x'];
                     player.y_speed = this.speeds['y'];
+                    //console.log(this.stickDirection);
+                    player.direction = this.stickDirection;
                 }
                 player.update();
             }
@@ -404,13 +410,14 @@ class Game extends Phaser.Scene {
         x = parseInt(x, 10);
         y = parseInt(y, 10);
         let speeds = {x:x,y:y};
-        let direction = this.getStickDirection(speeds);
-        console.log(speeds);
+        let direction = game.scene.getScene(gameScene.activeScene).getStickDirection(speeds);
+        //console.log(speeds);
         //let stickDirection = getStickDirection(speeds);
+        //console.log(gameScene.activeScene);
         if(gameScene.activeScene=="game"){
             gameScene.stickActive = true;
             gameScene.speeds = speeds;
-            //gameScene.stickDirection= stickDirection;
+            gameScene.getStickDirection(speeds);
         } else { 
             //game.scene.getScene(gameScene.activeScene).moveStick(speeds, stickDirection);
             game.scene.getScene(gameScene.activeScene).moveStick(speeds, direction);
@@ -427,33 +434,6 @@ class Game extends Phaser.Scene {
         //         activeScenes[i].moveStick(speeds, stickDirection);
         //     }
     } 
-
-    getStickDirection(speeds){
-        console.log("speeds kachow: "+speeds);
-        let x = Math.abs(speeds.x);
-        let y = Math.abs(speeds.y);
-
-        if (x>y) {
-            if (Math.sign(speeds.x)==1) {
-                return 'right'
-            } else {
-                return 'left'
-            }
-        } else if(x<y){
-            if (Math.sign(speeds.y)==1) {
-                return 'down'
-            } else {
-                return 'up'
-            }
-        }else{
-            if (speeds.x == 0 && speeds.y == 0) {
-                return 'idle'
-            }else{
-                return 'diagonal'
-            }
-            
-        }
-    }
     
     pressStick(data){
         console.log("My callback pressStick");
@@ -475,6 +455,38 @@ class Game extends Phaser.Scene {
                 console.log(activeScenes[i]);
             }*/
         }
+    }
+
+    getStickDirection(speeds){
+        let gameScene = game.scene.getScene('game');
+        console.log("speeds kachow: "+speeds);
+        let x = Math.abs(speeds.x);
+        let y = Math.abs(speeds.y);
+
+        if (x>y) {
+            if (Math.sign(speeds.x)==1) {
+                gameScene.stickDirection = 'right'
+            } else {
+                gameScene.stickDirection = 'left'
+            }
+        } else if(x<y){
+            if (Math.sign(speeds.y)==1) {
+                gameScene.stickDirection = 'down'
+            } else {
+                gameScene.stickDirection = 'up'
+            }
+        }else{
+            if (speeds.x == 0 && speeds.y == 0) {
+                gameScene.stickDirection = 'idle'
+            }else if(Math.sign(speeds.x)==1){
+                gameScene.stickDirection = 'diagonal_right'
+            } else if(Math.sign(speeds.x)==-1){
+                gameScene.stickDirection = "diagonal_left"
+            }
+            
+        }
+
+        console.log(gameScene.stickDirection);
     }
     
     pressBtn(data){
