@@ -1,6 +1,6 @@
 class SeePass extends GenericMiniGame {
     constructor() {
-        super("SeePass")
+        super("SeePass",'challenge',1)
     }
 
     preload() {

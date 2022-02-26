@@ -111,6 +111,7 @@ class Game extends Phaser.Scene {
                     this.door = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'door', 'door-closed');
                     //this.closed_door.anims.play('door-closed');
                     this.door.body.setSize(width, height*0.1).setOffset(width-33,height-5);
+                    this.door.owo = "uwu"
                     //Agregar puerta al grupo de puertas
                     this.doorsGroup.add(this.door);
                     window.door = this.doorsGroup;

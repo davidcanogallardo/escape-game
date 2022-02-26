@@ -1,4 +1,7 @@
-class EnterPasswordScene extends Phaser.Scene {
+class EnterPasswordScene extends GenericMiniGame {
+    constructor() {
+        super("enterPasswordScene")
+    }
     /*
         TODO
         * RESETEAR CAMPOS RESPUESTA CON TECLA R
@@ -8,9 +11,7 @@ class EnterPasswordScene extends Phaser.Scene {
     puzzle_buttons = [];
 
 
-    constructor() {
-        super("enterPasswordScene")
-    }
+
 
     preload() {
 
@@ -110,36 +111,42 @@ class EnterPasswordScene extends Phaser.Scene {
         window.r = this.result_rectangles;
         this.count = 0;
         this.win = false;
-        this.input.keyboard.on('keydown-K', function () {
-            let count = that.count;
-            // console.warn((that.result_rectangles[count].width/2));
-            //console.warn((that.result_rectangles[count].x));
-            var w = (that.result_rectangles[count].width/2)*0.3
-            var h = (that.result_rectangles[count].height/2)*0.3
-            var x = that.result_rectangles[count].x
-            var y = that.result_rectangles[count].y
+
+        this.input.keyboard.on('keydown-E', this.selectSelectedIcon.bind(this));
 
 
-            that.password.push(that.puzzle_buttons[that.selectedButtonIndex][2])
 
-            that.result_rectangles[count] = that.add.image(x+w,y+h,that.puzzle_buttons[that.selectedButtonIndex][0].texture.key);
-            that.result_rectangles[count].setScale(0.3);
-            //console.error(that.puzzle_buttons[that.selectedButtonIndex][2]);
+    }
 
-            if (that.password.length == 4 && !that.arraysEqual(that.password,that.correctAnswer)) {
-                //console.log("ERROR")
-                that.scene.stop();
-                that.scene.resume("game");
-            }
-            if (that.arraysEqual(that.password,that.correctAnswer)) {
-                that.win = true;
-            }
-            // console.log(that.win);
-            // console.log(that.password);
-            // console.log(that.correctAnswer);
-            // console.log(that.arraysEqual(that.password,that.correctAnswer));
-            that.count++;
-        });
+    selectSelectedIcon(){
+        let count = this.count;
+        //console.warn((that.result_rectangles[count].width/2));
+        //console.warn((that.result_rectangles[count].x));
+        var w = (this.result_rectangles[count].width/2)*0.3
+        var h = (this.result_rectangles[count].height/2)*0.3
+        var x = this.result_rectangles[count].x
+        var y = this.result_rectangles[count].y
+
+
+        this.password.push(this.puzzle_buttons[this.selectedButtonIndex][2])
+
+        this.result_rectangles[count] = this.add.image(x+w,y+h,this.puzzle_buttons[this.selectedButtonIndex][0].texture.key);
+        this.result_rectangles[count].setScale(0.3);
+        //console.error(that.puzzle_buttons[that.selectedButtonIndex][2]);
+
+        if (this.password.length == 4 && !this.arraysEqual(this.password,this.correctAnswer)) {
+            //console.log("ERROR")
+            this.scene.stop();
+            this.scene.resume("game");
+        }
+        if (this.arraysEqual(this.password,this.correctAnswer)) {
+            this.win = true;
+        }
+        // console.log(that.win);
+        // console.log(that.password);
+        // console.log(that.correctAnswer);
+        // console.log(that.arraysEqual(that.password,that.correctAnswer));
+        this.count++;
     }
 
 
@@ -147,15 +154,24 @@ class EnterPasswordScene extends Phaser.Scene {
         var xKey = this.input.keyboard.addKey('X');
         var xKeyDown = xKey?.isDown
 
-        if (Phaser.Input.Keyboard.JustDown(this.cursors.left) || this.stickDirection == "left") {
-            this.selectNextButton(-1);
-        } else if (Phaser.Input.Keyboard.JustDown(this.cursors.right) || this.stickDirection == "left") {
-            this.selectNextButton(1);
+        if(this.buttonActive){
+            console.log("Selecciono con joystick");
+            this.selectSelectedIcon();
+            this.buttonActive = false;
         }
 
-        if(xKeyDown || this.stickActive){
+        if (Phaser.Input.Keyboard.JustDown(this.cursors.left) || this.stickDirection == "left") {
+            this.selectNextButton(-1);
+            this.stickDirection = "idle";
+        } else if (Phaser.Input.Keyboard.JustDown(this.cursors.right) || this.stickDirection == "right") {
+            this.selectNextButton(1);
+            this.stickDirection = "idle";
+        }
+
+        if(xKeyDown || this.stickButtonActive){
             this.scene.stop();
             this.scene.resume("game");
+            this.stickButtonActive = false;
         }
 
         if(this.win){
