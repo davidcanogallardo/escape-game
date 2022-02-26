@@ -8,7 +8,7 @@ class Game extends Phaser.Scene {
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/mapa.json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/nivel1.json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -42,14 +42,33 @@ class Game extends Phaser.Scene {
         
         //*****************************************Players**************************************************/
         this.player = new Player(this);
+        this.spawns = this.map.objects[0].objects;
+        this.spawnsP1 = this.spawns.filter(this.playerFilter,1);
+        this.spawnsP2 = this.spawns.filter(this.playerFilter,2);
+        console.log(this.spawnsP1);
+        this.randpos = Phaser.Math.Between(0, 4);
+        this.player.x = this.spawnsP1[this.randpos].x
+        this.player.y = this.spawnsP1[this.randpos].y
         this.playerCollider = this.player.playerCollider
+
+        var spawns = {
+            "spawnP1":{
+                "x":this.spawnsP1[this.randpos].x,
+                "y":this.spawnsP1[this.randpos].y
+            },
+            "spawnP2":{
+                "x":this.spawnsP2[this.randpos].x,
+                "y":this.spawnsP2[this.randpos].y
+            },
+
+        }
 
         this.wallsLayer = new WallsLayer(this);
 
         // ********************************************* generate password
         var difficulty = 3
         window.difficulty = difficulty
-        
+
         var owo = []
         for (let i = 0; i < 2+(2*difficulty); i++) {
             owo.push(Math.floor(Math.random()*9)) 
@@ -221,5 +240,13 @@ class Game extends Phaser.Scene {
   
     update() {
         this.player.update()
+    }
+
+    playerFilter(spawns, player) {
+        return spawns.properties[0].value  == this && spawns.name == "player";
+    }
+
+    objectFilter(spawns, player) {
+        return spawns.properties[0].value == this && spawns.name == "object";
     }
 }
