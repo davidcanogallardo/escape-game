@@ -42,26 +42,15 @@ class Game extends Phaser.Scene {
         
         //*****************************************Players**************************************************/
         this.player = new Player(this);
+
         this.spawns = this.map.objects[0].objects;
         this.spawnsP1 = this.spawns.filter(this.playerFilter,1);
         this.spawnsP2 = this.spawns.filter(this.playerFilter,2);
-        console.log(this.spawnsP1);
         this.randpos = Phaser.Math.Between(0, 4);
         this.player.x = this.spawnsP1[this.randpos].x
         this.player.y = this.spawnsP1[this.randpos].y
         this.playerCollider = this.player.playerCollider
 
-        var spawns = {
-            "spawnP1":{
-                "x":this.spawnsP1[this.randpos].x,
-                "y":this.spawnsP1[this.randpos].y
-            },
-            "spawnP2":{
-                "x":this.spawnsP2[this.randpos].x,
-                "y":this.spawnsP2[this.randpos].y
-            },
-
-        }
 
         this.wallsLayer = new WallsLayer(this);
 
@@ -237,6 +226,39 @@ class Game extends Phaser.Scene {
                 }
             })
         });
+
+        this.spawnsO1 = this.spawns.filter(this.objectFilter,1);
+        this.spawnsO2 = this.spawns.filter(this.objectFilter,2);
+        this.randposObject = Phaser.Math.Between(0, 3);
+        this.table.x = this.spawnsO1[this.randpos].x
+        this.table.y = this.spawnsO1[this.randpos].y
+        this.tableCollider.x = this.spawnsO1[this.randpos].x
+        this.tableCollider.y = this.spawnsO1[this.randpos].y
+        this.chest.x = this.spawnsO2[this.randpos].x
+        this.chest.y = this.spawnsO2[this.randpos].y
+        this.playerCollider = this.player.playerCollider
+
+
+
+        var spawns = {
+            "spawnP1":{
+                "x":this.spawnsP1[this.randpos].x,
+                "y":this.spawnsP1[this.randpos].y
+            },
+            "spawnP2":{
+                "x":this.spawnsP2[this.randpos].x,
+                "y":this.spawnsP2[this.randpos].y
+            },
+            "spawnO1":{
+                "x":this.spawnsO1[this.randposObject].x,
+                "y":this.spawnsO1[this.randposObject].y
+            },
+            "spawnO2":{
+                "x":this.spawnsO2[this.randposObject].x,
+                "y":this.spawnsO2[this.randposObject].y
+            },
+
+        }
     }
   
     update() {
@@ -244,10 +266,10 @@ class Game extends Phaser.Scene {
     }
 
     playerFilter(spawns, player) {
-        return spawns.properties[0].value  == this && spawns.name == "player";
+        return spawns.name == "player" && spawns.properties[0].value  == this;
     }
 
-    objectFilter(spawns, player) {
-        return spawns.properties[0].value == this && spawns.name == "object";
+    objectFilter(spawns, object) {
+        return spawns.name == "object" && spawns.properties[1].value == this;
     }
 }
