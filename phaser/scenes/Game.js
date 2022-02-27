@@ -239,7 +239,7 @@ class Game extends Phaser.Scene {
         this.playerCollider = this.player.playerCollider
 
 
-
+        
         var spawns = {
             "spawnP1":{
                 "x":this.spawnsP1[this.randpos].x,

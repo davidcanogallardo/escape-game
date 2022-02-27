@@ -452,8 +452,8 @@
     <property name="challenge" type="int" value="1"/>
    </properties>
   </object>
-  <object id="40" name="chest" type="chest" gid="596" x="179" y="92.5" width="16" height="16"/>
-  <object id="41" name="table" type="table" gid="1027" x="199.167" y="93.167" width="32" height="16"/>
+  <object id="40" name="chest" type="chest" gid="596" x="254.64" y="258.685" width="16" height="16"/>
+  <object id="41" name="table" type="table" gid="1027" x="20.6854" y="196.008" width="32" height="16"/>
   <object id="42" name="door" type="door" gid="1025" x="144.011" y="31.997" width="32" height="32">
    <properties>
     <property name="challenge" type="int" value="-1"/>
