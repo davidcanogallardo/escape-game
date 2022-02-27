@@ -8,7 +8,7 @@ Vue.component('friend-item', {
         <div class="icon-container pr-btn" :name="name">
           <i class="fas fa-user" aria-hidden="true" :name="name"></i>
         </div>
-        <span :name="name" >{{name}}</span>
+        <span :name="name" >{{name.name}}</span>
         <div title="Chatear" class="icon-container add-btn send-invitation" v-on:click.stop="chat();" style="position:relative;">
           <i class="far fa-comment-dots"></i>
           <i v-if="hasNewMessages()" class="fas fa-circle" aria-hidden="true" style="position: absolute;top: -0.2vw;right: 0vw;font-size: 3vw;color: red;font-size: 1.2vw !important;text-shadow: none;"></i>

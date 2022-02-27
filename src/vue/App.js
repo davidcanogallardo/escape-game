@@ -123,7 +123,8 @@ var app = new Vue({
     this.$nextTick(() => {
       if (this.user) {
         console.log("set token")
-        this.token = window.token
+        this.token = sessionStorage.getItem("token")
+        window.token = sessionStorage.getItem("token")
         connect();
         window.setInterval(this.updateFriendRequest, 15000);
         window.setInterval(this.updateFriendList, 50000);
