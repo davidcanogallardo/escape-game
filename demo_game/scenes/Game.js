@@ -388,8 +388,8 @@ class Game extends Phaser.Scene {
         //this.table.y = this.spawnsO1[this.randpos].y
         //this.tableCollider.x = this.spawnsO1[this.randpos].x
         //this.tableCollider.y = this.spawnsO1[this.randpos].y
-        //this.chest.x = this.spawnsO2[this.randpos].x
-        //this.chest.y = this.spawnsO2[this.randpos].y
+        this.chest.x = this.spawnsO2[this.randpos].x
+        this.chest.y = this.spawnsO2[this.randpos].y
         this.playerCollider = this.player.playerCollider
 
 
