@@ -14,8 +14,12 @@ class Game extends Phaser.Scene {
         });
         this.playersGroup = this.add.group(playersArray);
         this.activeScene = "game";
-        this.infoScene = "SeePass";
-        this.playableScene = "enterPasswordScene";   
+        this.infoScene = "PasswordMGScene"; 
+        this.playableScene = "enterPasswordScene";
+        this.roleScene = "helper"
+        //this.game.scene.add("SeePass", new SeePass('test'))
+        //this.game.scene.add("SeePass", eval("new SeePass('test')"))
+        this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"',1)"))
     }   
 
     preload() {
