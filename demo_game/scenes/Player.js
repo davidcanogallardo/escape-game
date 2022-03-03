@@ -1,6 +1,8 @@
 class Player extends Phaser.GameObjects.Sprite{
-    constructor(scene, id, x, y, sprite) {
+    constructor(scene, id, x, y, sprite, initiator) {
         super(scene, x, y, sprite);
+        console.log("ALNDFDNFKLJSDNFKJASNFJKLD");
+        console.log(initiator);
         this.id = id;
         this.speed = 150;
         scene.add.existing(this);
@@ -11,11 +13,11 @@ class Player extends Phaser.GameObjects.Sprite{
         //console.log("BODY!")
         //console.log(this.body);
         this.playerCollider = scene.physics.add.image(200, 50);
-        //console.log(this.playerCollider);
+        this.initiator = initiator;
         this.direction = 'idle'
         this.x_speed = 150;
         this.y_speed = 150;
-    
+        
 
         this.anims.create({
             key: 'player-idle-side',

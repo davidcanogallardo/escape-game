@@ -4,16 +4,18 @@ class Game extends Phaser.Scene {
     }
     //map.getLayer("walls").data[5][5].properties?.horitzontalWall
     init(data){
+        console.log(data);
         let playersArray = [];
+        this.isInitiator;
         data.forEach(element => {
-            this.player = new Player(this, element.id, element.x, element.y, "player");
+            this.player = new Player(this, element.id, element.x, element.y, "player", element.initiator);
             playersArray.push(this.player);
+            this.isInitiator = element.initiator;
         });
         this.playersGroup = this.add.group(playersArray);
-        //console.log(this.playersGroup);
         this.activeScene = "game";
         this.infoScene = "SeePass";
-        this.playableScene = "enterPasswordScene";
+        this.playableScene = "enterPasswordScene";   
     }   
 
     preload() {
@@ -100,12 +102,7 @@ class Game extends Phaser.Scene {
             key: "map"
         });
 
-        this.spawns = this.map.objects[0].objects;
-        this.spawnsP1 = this.spawns.filter(this.playerFilter,1);
-        this.spawnsP2 = this.spawns.filter(this.playerFilter,2);
-        this.randpos = Phaser.Math.Between(0, 4);
-        //this.player.x = this.spawnsP1[this.randpos].x
-        //this.player.y = this.spawnsP1[this.randpos].y
+        
         this.playerCollider = this.player.playerCollider
 
         this.events.on("tiempo", (tiempo) => {
@@ -381,40 +378,63 @@ class Game extends Phaser.Scene {
             }
         });
 
-        this.spawnsO1 = this.spawns.filter(this.objectFilter,1);
-        this.spawnsO2 = this.spawns.filter(this.objectFilter,2);
-        this.randposObject = Phaser.Math.Between(0, 3);
-        //this.table.x = this.spawnsO1[this.randpos].x
-        //this.table.y = this.spawnsO1[this.randpos].y
-        //this.tableCollider.x = this.spawnsO1[this.randpos].x
-        //this.tableCollider.y = this.spawnsO1[this.randpos].y
-        this.chest.x = this.spawnsO2[this.randpos].x
-        this.chest.y = this.spawnsO2[this.randpos].y
         this.playerCollider = this.player.playerCollider
+        window.scene = this;
 
+        if (this.isInitiator) {
+            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            //generador de spawns para jugador
+            this.spawns = this.map.objects[0].objects;
+            this.spawnsP1 = this.spawns.filter(this.playerFilter,1);
+            this.spawnsP2 = this.spawns.filter(this.playerFilter,2);
+            this.randpos = Phaser.Math.Between(0, 4);
 
-        
-        var spawns = {
-            "spawnP1":{
-                "x":this.spawnsP1[this.randpos].x,
-                "y":this.spawnsP1[this.randpos].y
-            },
-            "spawnP2":{
-                "x":this.spawnsP2[this.randpos].x,
-                "y":this.spawnsP2[this.randpos].y
-            },
-            "spawnO1":{
-                "x":this.spawnsO1[this.randposObject].x,
-                "y":this.spawnsO1[this.randposObject].y
-            },
-            "spawnO2":{
-                "x":this.spawnsO2[this.randposObject].x,
-                "y":this.spawnsO2[this.randposObject].y
-            },
+            //generador de spawns random para objetos
+            this.spawnsO1 = this.spawns.filter(this.objectFilter,1);
+            this.spawnsO2 = this.spawns.filter(this.objectFilter,2);
+            this.randposObject = Phaser.Math.Between(0, 3);
+            
+            //spawn jugador1
+            this.player.x = this.spawnsP1[this.randpos].x
+            this.player.y = this.spawnsP1[this.randpos].y
+            
+            //spawn mesa
+            this.table.x = this.spawnsO1[this.randpos].x
+            this.table.y = this.spawnsO1[this.randpos].y
+            this.tableCollider.x = this.spawnsO1[this.randpos].x
+            this.tableCollider.y = this.spawnsO1[this.randpos].y
 
+            //spawn cofre
+            this.chest.x = this.spawnsO2[this.randpos].x
+            this.chest.y = this.spawnsO2[this.randpos].y
+
+            var spawns = {
+                "spawnP1":{
+                    "x":this.spawnsP1[this.randpos].x,
+                    "y":this.spawnsP1[this.randpos].y
+                },
+                "spawnP2":{
+                    "x":this.spawnsP2[this.randpos].x,
+                    "y":this.spawnsP2[this.randpos].y
+                },
+                "spawnO1":{
+                    "x":this.spawnsO1[this.randposObject].x,
+                    "y":this.spawnsO1[this.randposObject].y
+                },
+                "spawnO2":{
+                    "x":this.spawnsO2[this.randposObject].x,
+                    "y":this.spawnsO2[this.randposObject].y
+                },
+
+            }
+            socket.emit("spawns", spawns);
+        } else {
+            socket.on("getSpawns", (spawns) => {
+                //spawn jugador2
+                this.player.x = spawns.spawnP2.x;
+                this.player.y = spawns.spawnP2.y;
+            });
         }
-
-        socket.emit("spawns", spawns);
         
     }
   

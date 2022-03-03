@@ -76,7 +76,15 @@ class ComunicacionServidor {
                     }
                 });
 
-                socket.on("spawns", (spawns) => {console.log(spawns);this.spawnP1X = spawns.spawnP1.x; this.spawnP1Y = spawns.spawnP1.y; this.spawnP2X = spawns.spawnP2.x; this.spawnP2Y = spawns.spawnP2.y;});
+                socket.on("spawns", (spawns) => {
+                    console.log(spawns);
+                    this.spawnP1X = spawns.spawnP1.x; 
+                    this.spawnP1Y = spawns.spawnP1.y; 
+                    this.spawnP2X = spawns.spawnP2.x; 
+                    this.spawnP2Y = spawns.spawnP2.y;
+                    socket.in(socket.room.id).emit("getSpawns",spawns);
+                });
+
             });
         }
     

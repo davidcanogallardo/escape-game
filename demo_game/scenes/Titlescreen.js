@@ -44,8 +44,11 @@ class Titlescreen extends Phaser.Scene {
     setPlayers(players){
         let playersArray = [];
         players.forEach(element => {
-            this.player = new Player(this, element.id, element.x, element.y, "player");
+            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            this.player = new Player(this, element.id, element.x, element.y, "player" ,element.initiator);
             playersArray.push(this.player);
+            console.log(this.player);
+
         });
         this.scene.start("game", playersArray)
         //setTimeout(, 3000);

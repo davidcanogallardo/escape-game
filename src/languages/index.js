@@ -10,5 +10,5 @@ export const defaultLocale = 'es'
 export const languages = {
   en: en,
   es: es,
-  ca: en
+  ca: ca
 }
