@@ -6,11 +6,12 @@ class Game extends Phaser.Scene {
     init(data){
         console.log(data);
         let playersArray = [];
-        this.isInitiator;
         data.forEach(element => {
             this.player = new Player(this, element.id, element.x, element.y, "player", element.initiator);
             playersArray.push(this.player);
-            this.isInitiator = element.initiator;
+            if (element.id == socket.id) {
+                this.isInitiator = element.initiator; 
+            }
         });
         this.playersGroup = this.add.group(playersArray);
         this.activeScene = "game";
@@ -383,10 +384,10 @@ class Game extends Phaser.Scene {
         });
 
         this.playerCollider = this.player.playerCollider
-        window.scene = this;
-
+        window.player = this.playersGroup
+        console.log(this.isInitiator);    
         if (this.isInitiator) {
-            console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            console.log("ES INICIADOR");
             //generador de spawns para jugador
             this.spawns = this.map.objects[0].objects;
             this.spawnsP1 = this.spawns.filter(this.playerFilter,1);
@@ -398,19 +399,7 @@ class Game extends Phaser.Scene {
             this.spawnsO2 = this.spawns.filter(this.objectFilter,2);
             this.randposObject = Phaser.Math.Between(0, 3);
             
-            //spawn jugador1
-            this.player.x = this.spawnsP1[this.randpos].x
-            this.player.y = this.spawnsP1[this.randpos].y
-            
-            //spawn mesa
-            this.table.x = this.spawnsO1[this.randpos].x
-            this.table.y = this.spawnsO1[this.randpos].y
-            this.tableCollider.x = this.spawnsO1[this.randpos].x
-            this.tableCollider.y = this.spawnsO1[this.randpos].y
-
-            //spawn cofre
-            this.chest.x = this.spawnsO2[this.randpos].x
-            this.chest.y = this.spawnsO2[this.randpos].y
+          
 
             var spawns = {
                 "spawnP1":{
@@ -431,13 +420,14 @@ class Game extends Phaser.Scene {
                 },
 
             }
+
+            this.placeItems(spawns);
+
             socket.emit("spawns", spawns);
         } else {
             socket.on("getSpawns", (spawns) => {
-                //spawn jugador2
-                this.player.x = spawns.spawnP2.x;
-                this.player.y = spawns.spawnP2.y;
-            });
+                this.placeItems(spawns);
+            })
         }
         
     }
@@ -588,5 +578,26 @@ class Game extends Phaser.Scene {
 
     objectFilter(spawns, object) {
         return spawns.name == "object" && spawns.properties[1].value == this;
+    }
+
+    placeItems(spawns){
+        console.log(spawns);
+        console.log(this.playersGroup.children.entries[0].x);
+         //spawn jugador1
+         this.playersGroup.children.entries[0].x = spawns.spawnP1.x
+         this.playersGroup.children.entries[0].y = spawns.spawnP1.y
+
+         this.playersGroup.children.entries[1].x = spawns.spawnP2.x
+         this.playersGroup.children.entries[1].y = spawns.spawnP2.y
+         
+         //spawn mesa
+         this.table.x = spawns.spawnO1.x
+         this.table.y = spawns.spawnO1.y
+         this.tableCollider.x = spawns.spawnO1.x
+         this.tableCollider.y = spawns.spawnO1.y
+
+         //spawn cofre
+         this.chest.x = spawns.spawnO2.x
+         this.chest.y = spawns.spawnO2.y
     }
 }
