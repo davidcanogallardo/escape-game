@@ -4,14 +4,17 @@ class Game extends Phaser.Scene {
     }
     //map.getLayer("walls").data[5][5].properties?.horitzontalWall
     init(data){
-        console.log(data);
         let playersArray = [];
         this.isInitiator;
-        data.forEach(element => {
+        data.players.forEach(element => {
             this.player = new Player(this, element.id, element.x, element.y, "player", element.initiator);
             playersArray.push(this.player);
             this.isInitiator = element.initiator;
         });
+        this.diff=this.getDiff(data.diff);
+        console.log("this.diff");
+        console.log(this.diff);
+        
         this.playersGroup = this.add.group(playersArray);
         this.activeScene = "game";
         this.infoScene = "PasswordMGScene"; 
@@ -588,5 +591,16 @@ class Game extends Phaser.Scene {
 
     objectFilter(spawns, object) {
         return spawns.name == "object" && spawns.properties[1].value == this;
+    }
+
+    getDiff(diff){
+        switch (diff.toLowerCase()) {
+            case 'easy':
+                return 1
+            case 'medium':
+                return 2
+            case 'hard':
+                return 3
+        }
     }
 }
