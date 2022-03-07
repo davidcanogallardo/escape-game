@@ -583,12 +583,6 @@ class Game extends Phaser.Scene {
         return spawns.name == "object" && spawns.properties[1].value == this;
     }
 
-<<<<<<< HEAD
-    challengeFilter(spawns, challenge) {
-        return spawns.name == "object" && spawns.properties[0].value == this;
-    }
-
-=======
     getDiff(diff){
         switch (diff.toLowerCase()) {
             case 'easy':
@@ -599,7 +593,6 @@ class Game extends Phaser.Scene {
                 return 3
         }
     }
->>>>>>> b71e5b2ebfdf850f30bc648bec7db1d7798b4c4b
     placeItems(spawns){
         console.log(spawns);
         console.log(this.playersGroup.children.entries[0].x);
