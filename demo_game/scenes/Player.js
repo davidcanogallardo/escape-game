@@ -1,6 +1,8 @@
 class Player extends Phaser.GameObjects.Sprite{
     constructor(scene, id, x, y, sprite, initiator) {
         super(scene, x, y, sprite);
+        console.log("ALNDFDNFKLJSDNFKJASNFJKLD");
+        console.log(initiator);
         this.id = id;
         this.speed = 150;
         scene.add.existing(this);

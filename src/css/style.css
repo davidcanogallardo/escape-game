@@ -1397,6 +1397,11 @@ input[type=text] {
 
 /********************************Página de ranking************************************/
 
+.ranking_diff{
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .level-slider {
     margin-top: 50px;
     display: flex;

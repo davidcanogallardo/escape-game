@@ -4,15 +4,18 @@ class Game extends Phaser.Scene {
     }
     //map.getLayer("walls").data[5][5].properties?.horitzontalWall
     init(data){
-        console.log(data);
         let playersArray = [];
-        data.forEach(element => {
+        data.players.forEach(element => {
             this.player = new Player(this, element.id, element.x, element.y, "player", element.initiator);
             playersArray.push(this.player);
             if (element.id == socket.id) {
                 this.isInitiator = element.initiator; 
             }
         });
+        this.diff=this.getDiff(data.diff);
+        console.log("this.diff");
+        console.log(this.diff);
+        
         this.playersGroup = this.add.group(playersArray);
         this.activeScene = "game";
         this.infoScene = "PasswordMGScene"; 
@@ -29,7 +32,7 @@ class Game extends Phaser.Scene {
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/nivel2.json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/1-1.json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -580,10 +583,23 @@ class Game extends Phaser.Scene {
         return spawns.name == "object" && spawns.properties[1].value == this;
     }
 
+<<<<<<< HEAD
     challengeFilter(spawns, challenge) {
         return spawns.name == "object" && spawns.properties[0].value == this;
     }
 
+=======
+    getDiff(diff){
+        switch (diff.toLowerCase()) {
+            case 'easy':
+                return 1
+            case 'medium':
+                return 2
+            case 'hard':
+                return 3
+        }
+    }
+>>>>>>> b71e5b2ebfdf850f30bc648bec7db1d7798b4c4b
     placeItems(spawns){
         console.log(spawns);
         console.log(this.playersGroup.children.entries[0].x);

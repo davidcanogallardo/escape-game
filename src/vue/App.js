@@ -454,9 +454,10 @@ var app = new Vue({
         data: { petition: "ranking" },
         type: "POST",
         dataType: "json",
-        url: _url,
+        url: _url+"/api/ranking",
       })
         .done((data) => {
+          console.log("RankingData");
           console.log(data);
           this.$root.rankingData = data;
         })
