@@ -29,7 +29,7 @@ class Game extends Phaser.Scene {
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/nivel1.json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/nivel2.json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -578,6 +578,10 @@ class Game extends Phaser.Scene {
 
     objectFilter(spawns, object) {
         return spawns.name == "object" && spawns.properties[1].value == this;
+    }
+
+    challengeFilter(spawns, challenge) {
+        return spawns.name == "object" && spawns.properties[0].value == this;
     }
 
     placeItems(spawns){

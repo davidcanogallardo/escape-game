@@ -775,7 +775,7 @@
                         {
                          "name":"challenges",
                          "type":"int",
-                         "value":1
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"",
@@ -814,7 +814,7 @@
         {
          "columns":32,
          "firstgid":1,
-         "image":"..\/tilesets\/TSMapa\/PNG\/tileset.png",
+         "image":"..\/..\/..\/maps\/assets\/tilesets\/TSMapa\/PNG\/tileset.png",
          "imageheight":512,
          "imagewidth":512,
          "margin":0,
@@ -1420,7 +1420,7 @@
         {
          "columns":2,
          "firstgid":1025,
-         "image":"..\/tilesets\/TSMapa\/PNG\/doors.png",
+         "image":"..\/..\/..\/maps\/assets\/tilesets\/TSMapa\/PNG\/doors.png",
          "imageheight":32,
          "imagewidth":64,
          "margin":0,
@@ -1448,7 +1448,7 @@
         {
          "columns":1,
          "firstgid":1027,
-         "image":"..\/tilesets\/TSMapa\/PNG\/table.png",
+         "image":"..\/..\/..\/maps\/assets\/tilesets\/TSMapa\/PNG\/table.png",
          "imageheight":16,
          "imagewidth":32,
          "margin":0,
