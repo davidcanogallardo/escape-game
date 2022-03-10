@@ -435,28 +435,6 @@
                 }, 
                 {
                  "height":15.5,
-                 "id":177,
-                 "name":"object",
-                 "properties":[
-                        {
-                         "name":"challenge",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"player",
-                         "type":"int",
-                         "value":1
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":15.5,
-                 "x":104.75,
-                 "y":486.25
-                }, 
-                {
-                 "height":15.5,
                  "id":178,
                  "name":"object",
                  "properties":[
@@ -476,72 +454,6 @@
                  "width":15.5,
                  "x":72.75,
                  "y":444.75
-                }, 
-                {
-                 "height":15.5,
-                 "id":180,
-                 "name":"object",
-                 "properties":[
-                        {
-                         "name":"challenge",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"player",
-                         "type":"int",
-                         "value":1
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":15.5,
-                 "x":28.25,
-                 "y":481.75
-                }, 
-                {
-                 "height":15.5,
-                 "id":181,
-                 "name":"object",
-                 "properties":[
-                        {
-                         "name":"challenge",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"player",
-                         "type":"int",
-                         "value":2
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":15.5,
-                 "x":272.25,
-                 "y":481.25
-                }, 
-                {
-                 "height":15.5,
-                 "id":182,
-                 "name":"object",
-                 "properties":[
-                        {
-                         "name":"challenge",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"player",
-                         "type":"int",
-                         "value":2
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":15.5,
-                 "x":194.75,
-                 "y":487.75
                 }, 
                 {
                  "height":15.5,
@@ -611,28 +523,6 @@
                 }, 
                 {
                  "height":15.5,
-                 "id":186,
-                 "name":"object",
-                 "properties":[
-                        {
-                         "name":"challenge",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"player",
-                         "type":"int",
-                         "value":2
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":15.5,
-                 "x":211.25,
-                 "y":467.25
-                }, 
-                {
-                 "height":15.5,
                  "id":187,
                  "name":"object",
                  "properties":[
@@ -674,28 +564,6 @@
                  "width":15.5,
                  "x":29.25,
                  "y":408.75
-                }, 
-                {
-                 "height":15.5,
-                 "id":189,
-                 "name":"object",
-                 "properties":[
-                        {
-                         "name":"challenge",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"player",
-                         "type":"int",
-                         "value":1
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":15.5,
-                 "x":72.75,
-                 "y":465.25
                 }, 
                 {
                  "height":15.5,
@@ -940,7 +808,7 @@
  "nextobjectid":193,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.8.2",
+ "tiledversion":"1.7.2",
  "tileheight":16,
  "tilesets":[
         {
@@ -1592,6 +1460,6 @@
         }],
  "tilewidth":16,
  "type":"map",
- "version":"1.8",
+ "version":"1.6",
  "width":20
 }
