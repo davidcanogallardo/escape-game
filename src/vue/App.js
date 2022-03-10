@@ -42,6 +42,9 @@ function startClientPeer(data) {
 
   var titleScreen = game.scene.getScene("titlescreen");
   titleScreen.setPlayers(data);
+
+  // var game = game.scene.getScene("game");
+  // game.start(data);
 }
 
 console.log("Prueba");
