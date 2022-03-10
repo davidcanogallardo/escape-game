@@ -5,17 +5,19 @@ Vue.component('select-solo-duo', {
         <h1>How you wanna play?</h1>
         <br>
         <div class="gamemodes"> 
-            <div v-on:click="searchSolo" class="solo"> <h1>Public</h1> </div>
-            <div v-on:click="searchDuo" class="Duo"> <h1>Private</h1> </div>
+            <div v-on:click="searchSolo" class="btn blue solo"> Public </div>
+            <div v-on:click="searchDuo" class="btn blue duo"> Private </div>
         </div>
         <div class="difficulty">
-            <h1>Select Difficulty</h1>
+            <br>
+            <h2>Select Difficulty</h2>
             <select name="difficulty" id="difficulty" @change="setDifficulty($event)">
                 <option value="easy">Easy</option>
                 <option value="medium" selected>Medium</option>
                 <option value="hard">Hard</option>
             </select>
         </div>
+        <br>
         <div class="btn red block volver link" page="main" v-on:click="$emit('change-page','home')">{{ $t("return") }}</div>
     </div>
     `,

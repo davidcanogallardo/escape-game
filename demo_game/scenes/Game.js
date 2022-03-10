@@ -661,4 +661,25 @@ class Game extends Phaser.Scene {
          this.chest.x = spawns.spawnO2.x
          this.chest.y = spawns.spawnO2.y
     }
+    start(players){
+        let playersArray = [];
+
+        players.forEach(element => {
+            this.player = new Player(this, element.id, element.x, element.y, "player", element.initiator);
+            playersArray.push(this.player);
+            if (element.id == socket.id) {
+                this.isInitiator = element.initiator; 
+            }
+        });
+        this.diff=this.getDiff(data.diff);
+        
+        this.playersGroup = this.add.group(playersArray);
+        this.activeScene = "game";
+        this.infoScene = "PasswordMGScene"; 
+        this.playableScene = "enterPasswordScene";
+        this.roleScene = "helper"
+        //this.game.scene.add("SeePass", new SeePass('test'))
+        //this.game.scene.add("SeePass", eval("new SeePass('test')"))
+        this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"',"+diff+")"))
+    }
 }
