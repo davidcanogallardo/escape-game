@@ -5,6 +5,7 @@ class Game extends Phaser.Scene {
     //map.getLayer("walls").data[5][5].properties?.horitzontalWall
     init(data){
         let playersArray = [];
+        console.log(data);
         data.players.forEach(element => {
             this.player = new Player(this, element.id, element.x, element.y, "player", element.initiator);
             playersArray.push(this.player);
@@ -32,7 +33,7 @@ class Game extends Phaser.Scene {
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/1-1.json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/2-1.json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -105,7 +106,7 @@ class Game extends Phaser.Scene {
         })
 
         var that = this
-
+        
         this.map = this.make.tilemap({
             key: "map"
         });
@@ -391,6 +392,7 @@ class Game extends Phaser.Scene {
         console.log(this.isInitiator);    
         if (this.isInitiator) {
             console.log("ES INICIADOR");
+            this.cameras.main.startFollow(this.player);
             //generador de spawns para jugador
             this.spawns = this.map.objects[0].objects;
             this.spawnsP1 = this.spawns.filter(this.playerFilter,1);
@@ -398,12 +400,20 @@ class Game extends Phaser.Scene {
             this.randpos = Phaser.Math.Between(0, 4);
 
             //generador de spawns random para objetos
+            this.spawnsObjects = [];
             this.spawnsO1 = this.spawns.filter(this.objectFilter,1);
             this.spawnsO2 = this.spawns.filter(this.objectFilter,2);
-            this.randposObject = Phaser.Math.Between(0, 3);
-            
-          
+            this.randposObject = Phaser.Math.Between(0, 4); 
 
+            window.map = this.map;
+            for (let i = 1; i <= this.map.objects[2].objects[0].properties[0].value; i++) {
+                this.spawnsObjects[i-1] = this.spawns.filter(this.challengeFilter,i);
+                
+            }
+            this.spawnsO1 = this.spawnsObjects[0].filter(this.objectFilter,1)
+            this.spawnsO2 = this.spawnsObjects[0].filter(this.objectFilter,2)
+            console.log(this.spawnsO1,this.spawnsO2);
+            console.log(this.spawnsObjects);
             var spawns = {
                 "spawnP1":{
                     "x":this.spawnsP1[this.randpos].x,
@@ -428,6 +438,7 @@ class Game extends Phaser.Scene {
 
             socket.emit("spawns", spawns);
         } else {
+            this.cameras.main.startFollow(this.player);
             socket.on("getSpawns", (spawns) => {
                 this.placeItems(spawns);
             })
@@ -581,6 +592,10 @@ class Game extends Phaser.Scene {
 
     objectFilter(spawns, object) {
         return spawns.name == "object" && spawns.properties[1].value == this;
+    }
+
+    challengeFilter(spawns, challenge) {
+        return spawns.name == "object" && spawns.properties[0].value == this;
     }
 
     getDiff(diff){
