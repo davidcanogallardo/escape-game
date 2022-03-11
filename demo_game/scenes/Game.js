@@ -22,6 +22,7 @@ class Game extends Phaser.Scene {
         this.infoScene = "PasswordMGScene"; 
         this.playableScene = "enterPasswordScene";
         this.roleScene = "helper"
+        this.loadedScenes = [this.infoScene];
         //this.game.scene.add("SeePass", new SeePass('test'))
         //this.game.scene.add("SeePass", eval("new SeePass('test')"))
         this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"',1)"))
@@ -144,8 +145,16 @@ class Game extends Phaser.Scene {
 
 
         socket.on("endGame", () => {
-            console.log("fin de partida");
-            that.events.emit("end");
+            //Terminar Partida
+            this.loadedScenes.forEach(scene => {
+                game.scene.remove(scene);
+                console.log(game.scene.scenes);
+            });
+
+            game.scene.getScene("ui").scene.stop();
+            game.scene.getScene("time").scene.stop();
+            window.stream = undefined;
+            app.currentPage="home";
         });
         // this.physics.add.overlap(endTile, this.playersGroup, function () {
         //     console.log("fin de partida")
@@ -377,6 +386,14 @@ class Game extends Phaser.Scene {
         // });
 
         //mute button
+
+        //HACK PARA TERMINAR PARTIDA XD
+        // this.input.keyboard.on('keydown-Z',()=>{
+        //     console.log("HACK ACTIVAD TERMINAR PARTIDA");
+        //     for(i=0;i<2;i++){
+        //         socket.emit("playerInEndZone");
+        //     }
+        // })
 
         this.input.keyboard.on('keydown-M',()=>{
             if (window.stream.getAudioTracks()[0].enabled == true) {

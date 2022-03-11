@@ -68,16 +68,16 @@ class ComunicacionServidor {
                 });
 
                 socket.on("playerInEndZone", (players) => {
-                    console.log(socket.room.id);
-                    console.log("Player In EndZone");
                     socket.room.countEndZone++;
                     if(socket.room.countEndZone==2){
                         this.io.in(socket.room.id).emit("endGame");
+                        this.io.in(socket.room.id).socketsLeave(socket.room.id);
+                        //console.log(this.io.sockets.adapter.rooms);
                     }
                 });
 
                 socket.on("spawns", (spawns) => {
-                    console.log(spawns);
+                    //console.log(spawns);
                     this.spawnP1X = spawns.spawnP1.x; 
                     this.spawnP1Y = spawns.spawnP1.y; 
                     this.spawnP2X = spawns.spawnP2.x; 
@@ -89,7 +89,7 @@ class ComunicacionServidor {
         }
     
         manageQueue(socket, data){
-            console.log(data);
+            //console.log(data);
             let user;
             if(data[0]==null){
                 user = {
@@ -139,7 +139,7 @@ class ComunicacionServidor {
                 //pass randomMiniGames and players to game
 
                 let roomName = "Room_"+this.queue[player.diff][0].id;
-                console.log("RoomName: "+roomName);
+                //console.log("RoomName: "+roomName);
                 socket.join(roomName);
                 this.roomName = roomName;
                 var _room = this.io.sockets.adapter.rooms.get(roomName);
@@ -167,9 +167,9 @@ class ComunicacionServidor {
 
                 
             }
-            console.log(this.queue);
-            console.log(this.io.sockets.adapter.rooms);
-            console.log(socket.rooms);
+            // console.log(this.queue);
+            // console.log(this.io.sockets.adapter.rooms);
+            // console.log(socket.rooms);
         }
     
         connectUserToChat(username, socket){

@@ -7,6 +7,7 @@ var peer = undefined;
 var peerClient = undefined;
 var guestPeer = undefined;
 var guestPeerClient = undefined;
+let audioTag;
 socket.on("matchFound", (data) => {
   startPeerStream(startClientPeer, data);
 });
@@ -21,6 +22,7 @@ function startClientPeer(data) {
       });
       peerClient = new PeerClient(peer, true, socket);
       peerClient.connection();
+      window.peer = peerClient;
     } else {
       guestPeer = new Peer({
         initiator: false,
@@ -29,16 +31,22 @@ function startClientPeer(data) {
       });
       guestPeerClient = new PeerClient(guestPeer, false, socket);
       guestPeerClient.connection();
+      window.guest = guestPeerClient;
     }
   });
 
-  socket.on("getGuestID", (guestID) => {
+  socket.once("getGuestID", (guestID) => {
     peerClient.peer.signal(guestID);
   });
 
-  socket.on("sendHostID", (hostID) => {
+  socket.once("sendHostID", (hostID) => {
     guestPeerClient.peer.signal(hostID);
   });
+
+  audioTag = document.createElement('audio');
+  audioTag.setAttribute('src','');
+  audioTag.setAttribute('id','mic');
+  document.body.appendChild(audioTag);
 
   var titleScreen = game.scene.getScene("titlescreen");
   titleScreen.setPlayers(data);
@@ -53,6 +61,20 @@ socket.on("windowGame", (data) => {
   console.log(app.currentPage);
   app.currentPage = "game";
 });
+
+socket.on('endGame', () => {
+  document.getElementById('mic').remove();
+  if(peerClient==undefined){
+    guestPeerClient = undefined;
+  } else{
+    peerClient = undefined;
+    guestPeerClient= undefined;
+  }
+
+})
+  
+
+
 
 let excludedPages = [
   "home",
