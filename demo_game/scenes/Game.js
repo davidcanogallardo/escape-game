@@ -13,7 +13,7 @@ class Game extends Phaser.Scene {
                 this.isInitiator = element.initiator; 
             }
         });
-        this.diff=this.getDiff(data.diff);
+        this.diff=data.diff;
         console.log("this.diff");
         console.log(this.diff);
         
@@ -24,7 +24,7 @@ class Game extends Phaser.Scene {
         this.roleScene = "helper"
         //this.game.scene.add("SeePass", new SeePass('test'))
         //this.game.scene.add("SeePass", eval("new SeePass('test')"))
-        this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"',1)"))
+        this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"','medium')"))
     }   
 
     preload() {
@@ -638,7 +638,7 @@ class Game extends Phaser.Scene {
                 this.isInitiator = element.initiator; 
             }
         });
-        this.diff=this.getDiff(data.diff);
+        this.diff=data.diff;
         
         this.playersGroup = this.add.group(playersArray);
         this.activeScene = "game";

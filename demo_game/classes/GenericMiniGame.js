@@ -10,7 +10,7 @@ class GenericMiniGame extends Phaser.Scene{
         }
 
         //Dificultad del minijuego (easy=1, medium=2, hard=3)
-        if (difficulty ==1 || difficulty ==2 || difficulty==3) {
+        if (difficulty=="easy" || difficulty =="medium" || difficulty=="hard"){
             this.difficulty = difficulty;
         } else {
             console.log('La dificultad introducida no es correcta');
@@ -64,6 +64,16 @@ class GenericMiniGame extends Phaser.Scene{
                 return 'diagonal'
             }
             
+        }
+    }
+    getDiff(diff){
+        switch (diff.toLowerCase()) {
+            case 'easy':
+                return 1
+            case 'medium':
+                return 2
+            case 'hard':
+                return 3
         }
     }
 }
