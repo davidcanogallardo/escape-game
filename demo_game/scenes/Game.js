@@ -25,6 +25,8 @@ class Game extends Phaser.Scene {
         //this.game.scene.add("SeePass", new SeePass('test'))
         //this.game.scene.add("SeePass", eval("new SeePass('test')"))
         this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"','medium')"))
+        this.game.scene.add(this.playableScene, eval("new "+this.infoScene+"('challenge','medium')"))
+
     }   
 
     preload() {

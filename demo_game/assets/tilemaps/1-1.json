@@ -467,8 +467,8 @@
                  "type":"chest",
                  "visible":true,
                  "width":16,
-                 "x":179,
-                 "y":92.5
+                 "x":203.928747862436,
+                 "y":7.98546456393692
                 }, 
                 {
                  "gid":1027,
@@ -479,8 +479,8 @@
                  "type":"table",
                  "visible":true,
                  "width":32,
-                 "x":199.167,
-                 "y":93.167
+                 "x":231.99998498955,
+                 "y":9.26048280448413
                 }, 
                 {
                  "gid":1025,
@@ -552,7 +552,7 @@
  "nextobjectid":77,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.8.2",
+ "tiledversion":"1.7.2",
  "tileheight":16,
  "tilesets":[
         {
@@ -1204,6 +1204,6 @@
         }],
  "tilewidth":16,
  "type":"map",
- "version":"1.8",
+ "version":"1.6",
  "width":20
 }
