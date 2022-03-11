@@ -13,7 +13,7 @@ class Game extends Phaser.Scene {
                 this.isInitiator = element.initiator; 
             }
         });
-        this.diff=this.getDiff(data.diff);
+        this.diff=data.diff;
         console.log("this.diff");
         console.log(this.diff);
         
@@ -25,7 +25,7 @@ class Game extends Phaser.Scene {
         this.loadedScenes = [this.infoScene];
         //this.game.scene.add("SeePass", new SeePass('test'))
         //this.game.scene.add("SeePass", eval("new SeePass('test')"))
-        this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"',1)"))
+        this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"','medium')"))
     }   
 
     preload() {
@@ -34,7 +34,7 @@ class Game extends Phaser.Scene {
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/2-1.json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/3-1.json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -197,17 +197,48 @@ class Game extends Phaser.Scene {
                     // this.chestsGroup.add(this.chest);
                     break;
                 case 'table':
+                    this.table = [];
+                    for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
+                        this.table[i] = this.physics.add.sprite(x+(width/2),y-(height/2), 'table');
+                        this.physics.add.collider(this.table[i], this.playersGroup);
+                        this.table[i].body.immovable = true
+                        //Agregar puerta al grupo de puertas
+                        this.tablesGroup.add(this.table[i]);
+                        this.tableCollider = this.physics.add.image(this.table[i].x, this.table[i].y);
+                        this.tableCollider.setSize(this.table[i].width, this.table[i].height)
+                        this.tableCollider.body.immovable = true
+                        this.physics.add.collider(this.tableCollider, this.playersGroup);
+
+
+                        //Mesa
+                        this.physics.add.overlap(that.player.playerCollider, this.table[i], function (player,table) {
+                            if(table.y < player.y){
+                                that.player.setDepth(10);
+                            } else {
+                                that.player.setDepth(0);
+                            }
+                
+                            if (eKey.isDown && that.canDoPuzzle) {
+                                //pass this.playableScene
+                                //that.scene.launch('enterPasswordScene');
+                                that.scene.pause();
+                                that.scene.launch(that.playableScene);
+                                that.activeScene = that.playableScene;
+                                
+                            }
+
+                            if(that.buttonActive && that.canDoPuzzle){
+                                //that.scene.launch('enterPasswordScene');
+                                that.scene.pause();
+                                that.scene.launch(that.playableScene);
+                                that.activeScene = that.playableScene;
+                                that.buttonActive = false;
+                            }
+                        });
+                    }
                     //Cambiar la hitbox de la mesa
-                    this.table = this.physics.add.sprite(x+(width/2),y-(height/2), 'table');
                     //Hitbox de la mesa y que no se pueda mover
-                    this.physics.add.collider(this.table, this.playersGroup);
-                    this.table.body.immovable = true
-                    //Agregar puerta al grupo de puertas
-                    this.tablesGroup.add(this.table);
-                    this.tableCollider = this.physics.add.image(this.table.x, this.table.y);
-                    this.tableCollider.setSize(this.table.width, this.table.height)
-                    this.tableCollider.body.immovable = true
-                    this.physics.add.collider(this.tableCollider, this.playersGroup);
+                    
 
                     break;
             }
@@ -221,11 +252,17 @@ class Game extends Phaser.Scene {
         // ******************************************************************************************************************
 
         //**************************************Cofre**************************************
-        this.chest = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
-        this.physics.add.existing(this.chest);
-        //collider para que el personaje con el cofre
-        this.physics.add.collider(this.chest, this.playersGroup);
-        this.chest.body.setSize(this.chest.width*0.5, this.chest.height*0.8);
+        this.chest = [];
+        for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
+            this.chest[i] = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
+            this.physics.add.existing(this.chest[i]);
+            //collider para que el personaje con el cofre
+            this.physics.add.collider(this.chest[i], this.playersGroup);
+            this.chest[i].body.setSize(this.chest[i].width*0.5, this.chest[i].height*0.8);
+            this.chest[i].body.immovable = true
+
+        }
+        
 
         this.playersGroup.getChildren().forEach(player => {
             if(player.id == socket.id){
@@ -258,31 +295,7 @@ class Game extends Phaser.Scene {
                     }
 
                 });
-                //Mesa
-                this.physics.add.overlap(player.playerCollider, this.table, function (player,table) {
-                    if(table.y < player.y){
-                        that.player.setDepth(10);
-                    } else {
-                        that.player.setDepth(0);
-                    }
-        
-                    if (eKey.isDown && that.canDoPuzzle) {
-                        //pass this.playableScene
-                        //that.scene.launch('enterPasswordScene');
-                        that.scene.pause();
-                        that.scene.launch(that.playableScene);
-                        that.activeScene = that.playableScene;
-                        
-                    }
-
-                    if(that.buttonActive && that.canDoPuzzle){
-                        //that.scene.launch('enterPasswordScene');
-                        that.scene.pause();
-                        that.scene.launch(that.playableScene);
-                        that.activeScene = that.playableScene;
-                        that.buttonActive = false;
-                    }
-                });
+                
 
 
             }
@@ -299,7 +312,6 @@ class Game extends Phaser.Scene {
                 that.scene.launch('SeePass');
             }
         });*/
-        this.chest.body.immovable = true
         // ****************************************************************************
         
         // *********************************************puerta****************************************************
@@ -367,7 +379,7 @@ class Game extends Phaser.Scene {
                             this.physics.world.removeCollider(this.doorColider0);
                             this.physics.world.removeCollider(this.doorColider1);
                             this.physics.world.removeCollider(this.doorsColider);
-                            this.table.disableBody();
+                            //this.table.disableBody();
                             that.canDoPuzzle = false
                         } else if (this.challenge == 1) {
                             console.log("Segundo if");
@@ -427,7 +439,6 @@ class Game extends Phaser.Scene {
             this.spawnsObjects = [];
             this.spawnsO1 = this.spawns.filter(this.objectFilter,1);
             this.spawnsO2 = this.spawns.filter(this.objectFilter,2);
-            console.log(this.spawnsO1,this.spawnsO2);
             this.randposObject = Phaser.Math.Between(0, this.spawnsO1.length-1); 
 
             window.map = this.map;
@@ -457,11 +468,11 @@ class Game extends Phaser.Scene {
 
             var spawns2 = {
                 "players":{
-                    "1": {
+                    "p1": {
                         "x":this.spawnsP1[this.randpos].x,
                         "y":this.spawnsP1[this.randpos].y
                     },
-                    "2": {
+                    "p2": {
                         "x":this.spawnsP2[this.randpos].x,
                         "y":this.spawnsP2[this.randpos].y
                     }
@@ -469,21 +480,26 @@ class Game extends Phaser.Scene {
                 "objects":{
                     "table": [],
                     
-                    "chest": {}
+                    "chest": []
                 }
 
             }
+
+            //añadir los spawns de las mesas y los cofres
             this.spawnsObjects.forEach(element => {
-                this.tables = element.filter(this.playerFilter2,1);
-                this.chests = element.filter(this.playerFilter2,2);
-                console.log("AFNASDKFKLASNDFJNKLSDFJNKLASDFJNKLASDFASDF");
-                console.log(this.tables);
-                
+                this.tablesFilter = element.filter(this.playerFilter2,1);
+                this.chestsFilter = element.filter(this.playerFilter2,2);
+                var randTable = Phaser.Math.Between(0, this.tablesFilter.length-1);
+                var randChest = Phaser.Math.Between(0, this.chestsFilter.length-1);
+                this.tablePosition = [this.tablesFilter[randTable].x,this.tablesFilter[randTable].y];
+                this.chestPosition = [this.chestsFilter[randChest].x,this.chestsFilter[randChest].y];
+                spawns2.objects.table.push(this.tablePosition);
+                spawns2.objects.chest.push(this.chestPosition);
             });
 
-            this.placeItems(spawns);
+            this.placeItems(spawns2);
 
-            socket.emit("spawns", spawns);
+            socket.emit("spawns", spawns2);
         } else {
             socket.on("getSpawns", (spawns) => {
                 this.placeItems(spawns);
@@ -659,24 +675,30 @@ class Game extends Phaser.Scene {
         }
     }
     placeItems(spawns){
-        console.log(spawns);
+        console.log(this.table);
         console.log(this.playersGroup.children.entries[0].x);
-         //spawn jugador1
-         this.playersGroup.children.entries[0].x = spawns.spawnP1.x
-         this.playersGroup.children.entries[0].y = spawns.spawnP1.y
+        //spawn jugador1
+        this.playersGroup.children.entries[0].x = spawns.players.p1.x
+        this.playersGroup.children.entries[0].y = spawns.players.p1.y
 
-         this.playersGroup.children.entries[1].x = spawns.spawnP2.x
-         this.playersGroup.children.entries[1].y = spawns.spawnP2.y
-         
-         //spawn mesa
-         this.table.x = spawns.spawnO1.x
-         this.table.y = spawns.spawnO1.y
-         this.tableCollider.x = spawns.spawnO1.x
-         this.tableCollider.y = spawns.spawnO1.y
+        this.playersGroup.children.entries[1].x = spawns.players.p2.x
+        this.playersGroup.children.entries[1].y = spawns.players.p2.y
+
+        for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
+        this.table[i].x = spawns.objects.table[i][0]
+        this.table[i].y = spawns.objects.table[i][1]
+        }
+
+        for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
+            this.table[i].x = spawns.objects.table[i][0]
+            this.table[i].y = spawns.objects.table[i][1]
+
+            this.chest[i].x = spawns.objects.chest[i][0]
+            this.chest[i].y = spawns.objects.chest[i][1]
+        }
 
          //spawn cofre
-         this.chest.x = spawns.spawnO2.x
-         this.chest.y = spawns.spawnO2.y
+         
     }
     start(players){
         let playersArray = [];
@@ -688,7 +710,7 @@ class Game extends Phaser.Scene {
                 this.isInitiator = element.initiator; 
             }
         });
-        this.diff=this.getDiff(data.diff);
+        this.diff=data.diff;
         
         this.playersGroup = this.add.group(playersArray);
         this.activeScene = "game";
