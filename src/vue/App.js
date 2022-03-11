@@ -394,33 +394,37 @@ var app = new Vue({
         });
     },
     closeSession(username) {
-      $.ajax({
-        data: {
-          petition: "close-sesion",
-          params: {
-            user: username,
-          },
-        },
-        type: "POST",
-        dataType: "json",
-        url: _url,
-      })
-        .done((data) => {
-          console.log("sesion cerrada");
-          console.log(data);
-          if (data.success) {
-            this.$root.user = null;
-            sessionStorage.clear();
-            this.$root.currentPage = "home";
-            disconnect();
-          }
-        })
-        .fail(function (textStatus) {
-          if (console && console.log) {
-            console.log("La solicitud ha fallado: " + textStatus);
-            console.log(textStatus);
-          }
-        });
+      this.$root.user = null;
+      sessionStorage.clear();
+      this.$root.currentPage = "home";
+      disconnect();
+      // $.ajax({
+      //   data: {
+      //     petition: "close-sesion",
+      //     params: {
+      //       user: username,
+      //     },
+      //   },
+      //   type: "POST",
+      //   dataType: "json",
+      //   url: _url,
+      // })
+      //   .done((data) => {
+      //     console.log("sesion cerrada");
+      //     console.log(data);
+      //     if (data.success) {
+      //       this.$root.user = null;
+      //       sessionStorage.clear();
+      //       this.$root.currentPage = "home";
+      //       disconnect();
+      //     }
+      //   })
+      //   .fail(function (textStatus) {
+      //     if (console && console.log) {
+      //       console.log("La solicitud ha fallado: " + textStatus);
+      //       console.log(textStatus);
+      //     }
+      //   });
     },
     //laravel
     friendRequest(username, friend, accept) {
