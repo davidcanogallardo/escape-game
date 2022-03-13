@@ -36,7 +36,7 @@ class Game extends Phaser.Scene {
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/3-1.json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/2-1.json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -200,43 +200,19 @@ class Game extends Phaser.Scene {
                     break;
                 case 'table':
                     this.table = [];
+                    this.tableCollider = [];
                     for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
                         this.table[i] = this.physics.add.sprite(x+(width/2),y-(height/2), 'table');
                         this.physics.add.collider(this.table[i], this.playersGroup);
                         this.table[i].body.immovable = true
-                        //Agregar puerta al grupo de puertas
+
                         this.tablesGroup.add(this.table[i]);
-                        this.tableCollider = this.physics.add.image(this.table[i].x, this.table[i].y);
-                        this.tableCollider.setSize(this.table[i].width, this.table[i].height)
-                        this.tableCollider.body.immovable = true
-                        this.physics.add.collider(this.tableCollider, this.playersGroup);
+                        this.tableCollider[i] = this.physics.add.image(this.table[i].x, this.table[i].y);
+                        this.tableCollider[i].setSize(this.table[i].width, this.table[i].height)
+                        this.tableCollider[i].body.immovable = true
+                        this.physics.add.collider(this.tableCollider[i], this.playersGroup);
 
-
-                        //Mesa
-                        this.physics.add.overlap(that.player.playerCollider, this.table[i], function (player,table) {
-                            if(table.y < player.y){
-                                that.player.setDepth(10);
-                            } else {
-                                that.player.setDepth(0);
-                            }
-                
-                            if (eKey.isDown && that.canDoPuzzle) {
-                                //pass this.playableScene
-                                //that.scene.launch('enterPasswordScene');
-                                that.scene.pause();
-                                that.scene.launch(that.playableScene);
-                                that.activeScene = that.playableScene;
-                                
-                            }
-
-                            if(that.buttonActive && that.canDoPuzzle){
-                                //that.scene.launch('enterPasswordScene');
-                                that.scene.pause();
-                                that.scene.launch(that.playableScene);
-                                that.activeScene = that.playableScene;
-                                that.buttonActive = false;
-                            }
-                        });
+                        
                     }
                     //Cambiar la hitbox de la mesa
                     //Hitbox de la mesa y que no se pueda mover
@@ -246,10 +222,12 @@ class Game extends Phaser.Scene {
             }
         });
         //Añadir colider al grupo de puertas
-        this.doorColider0 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[0]);
-        this.doorColider1 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[1]);
-        this.doorColider2 = this.physics.add.collider(this.player, this.doorsGroup.children.entries[2]);
-        this.doorsColider = this.physics.add.collider(this.playersGroup, this.doorsGroup);
+        this.doorsFilter = this.map.objects[1].objects.filter(this.doorFilter);
+        this.doorsColiders = [];
+        for (let i = 0; i < this.doorsFilter.length; i++) {
+            this.doorsColiders[i] = this.physics.add.collider(this.playersGroup, this.doorsGroup[i]);
+        }
+        console.log(this.doorsColiders);
         //console.log("Pone el collider");
         // ******************************************************************************************************************
 
@@ -271,20 +249,18 @@ class Game extends Phaser.Scene {
                 //Añadir colision al jugador con el mismo socket
                 //Cofre
                 this.physics.add.overlap(player.playerCollider, this.chest, function (player, chest) {
+                    console.log("ASDASDASDDSAD");
                     if(chest.y < player.y){
                         that.player.setDepth(10);
                     } else {
                         that.player.setDepth(0);
                     }
-                    if (eKey.isDown) {
+                    //if (eKey.isDown) {
                         //Launch infoScene
-                        that.scene.pause(); 
-                        that.scene.launch(that.infoScene);
-                        that.activeScene = that.infoScene;
-                    }
-
-                    
-
+                    //    that.scene.pause(); 
+                    //    that.scene.launch(that.infoScene);
+                    //    that.activeScene = that.infoScene;
+                    //}
                     if(that.buttonActive == true){
                         that.scene.pause();
                         that.scene.launch(that.infoScene);
@@ -296,6 +272,32 @@ class Game extends Phaser.Scene {
                         //llamo funcion buttonActive()
                     }
 
+                });
+
+                //Mesa
+                this.physics.add.overlap(player.playerCollider, this.table, function (player,table) {
+                    if(table.y < player.y){
+                        that.player.setDepth(10);
+                    } else {
+                        that.player.setDepth(0);
+                    }
+        
+                    if (eKey.isDown && that.canDoPuzzle) {
+                        //pass this.playableScene
+                        //that.scene.launch('enterPasswordScene');
+                        that.scene.pause();
+                        that.scene.launch(that.playableScene);
+                        that.activeScene = that.playableScene;
+                        
+                    }
+
+                    if(that.buttonActive && that.canDoPuzzle){
+                        //that.scene.launch('enterPasswordScene');
+                        that.scene.pause();
+                        that.scene.launch(that.playableScene);
+                        that.activeScene = that.playableScene;
+                        that.buttonActive = false;
+                    }
                 });
                 
 
@@ -375,18 +377,14 @@ class Game extends Phaser.Scene {
                         // console.log(object.properties[0].value);
                         // console.log(this.challenge);
                         if (object.properties[0].value == this.challenge && this.challenge == 1) {
-                            console.log("Primer if");
-                            this.doorsGroup.children.entries[0].play('opening-door');
+                            console.log(this.doorsColiders[0]);
+                            this.physics.world.removeCollider(this.doorsColiders[0]);
+                            this.physics.world.removeCollider(this.doorsColiders[1]);
+                            this.doorsGroup.children.entries[0].play('opening-door'); 
                             this.doorsGroup.children.entries[1].play('opening-door'); 
-                            this.physics.world.removeCollider(this.doorColider0);
-                            this.physics.world.removeCollider(this.doorColider1);
-                            this.physics.world.removeCollider(this.doorsColider);
+                            
                             //this.table.disableBody();
                             that.canDoPuzzle = false
-                        } else if (this.challenge == 1) {
-                            console.log("Segundo if");
-                            this.doorsGroup.children.entries[2].play('opening-door');
-                            this.physics.world.removeCollider(this.doorColider2);
                         }
                         break;
                 }
@@ -439,36 +437,14 @@ class Game extends Phaser.Scene {
 
             //generador de spawns random para objetos
             this.spawnsObjects = [];
-            this.spawnsO1 = this.spawns.filter(this.objectFilter,1);
-            this.spawnsO2 = this.spawns.filter(this.objectFilter,2);
-            this.randposObject = Phaser.Math.Between(0, this.spawnsO1.length-1); 
 
             window.map = this.map;
             for (let i = 1; i <= this.map.objects[2].objects[0].properties[0].value; i++) {
                 this.spawnsObjects[i-1] = this.spawns.filter(this.challengeFilter,i);
                 
             }
+
             var spawns = {
-                "spawnP1":{
-                    "x":this.spawnsP1[this.randpos].x,
-                    "y":this.spawnsP1[this.randpos].y
-                },
-                "spawnP2":{
-                    "x":this.spawnsP2[this.randpos].x,
-                    "y":this.spawnsP2[this.randpos].y
-                },
-                "spawnO1":{
-                    "x":this.spawnsO1[this.randposObject].x,
-                    "y":this.spawnsO1[this.randposObject].y
-                },
-                "spawnO2":{
-                    "x":this.spawnsO2[this.randposObject].x,
-                    "y":this.spawnsO2[this.randposObject].y
-                },
-
-            }
-
-            var spawns2 = {
                 "players":{
                     "p1": {
                         "x":this.spawnsP1[this.randpos].x,
@@ -487,21 +463,21 @@ class Game extends Phaser.Scene {
 
             }
 
-            //añadir los spawns de las mesas y los cofres
+            //crear spawns de cofres y mesas
             this.spawnsObjects.forEach(element => {
-                this.tablesFilter = element.filter(this.playerFilter2,1);
-                this.chestsFilter = element.filter(this.playerFilter2,2);
+                this.tablesFilter = element.filter(this.objectFilterPlayer,1);
+                this.chestsFilter = element.filter(this.objectFilterPlayer,2);
                 var randTable = Phaser.Math.Between(0, this.tablesFilter.length-1);
                 var randChest = Phaser.Math.Between(0, this.chestsFilter.length-1);
                 this.tablePosition = [this.tablesFilter[randTable].x,this.tablesFilter[randTable].y];
                 this.chestPosition = [this.chestsFilter[randChest].x,this.chestsFilter[randChest].y];
-                spawns2.objects.table.push(this.tablePosition);
-                spawns2.objects.chest.push(this.chestPosition);
+                spawns.objects.table.push(this.tablePosition);
+                spawns.objects.chest.push(this.chestPosition);
             });
 
-            this.placeItems(spawns2);
+            this.placeItems(spawns);
 
-            socket.emit("spawns", spawns2);
+            socket.emit("spawns", spawns);
         } else {
             socket.on("getSpawns", (spawns) => {
                 this.placeItems(spawns);
@@ -654,7 +630,7 @@ class Game extends Phaser.Scene {
         return spawns.name == "player" && spawns.properties[0].value  == this;
     }
 
-    playerFilter2(spawns, player) {
+    objectFilterPlayer(spawns, player) {
         return spawns.properties[1].name == "player" && spawns.properties[1].value  == this;
     }
 
@@ -664,6 +640,14 @@ class Game extends Phaser.Scene {
 
     challengeFilter(spawns, challenge) {
         return spawns.name == "object" && spawns.properties[0].value == this;
+    }
+
+    doorFilter(objects) {
+        return objects.name == "door";
+    }
+
+    doorChallengeFilter(doors, challenge) {
+        return doors.properties[0].value == this;
     }
 
     getDiff(diff){
@@ -677,9 +661,7 @@ class Game extends Phaser.Scene {
         }
     }
     placeItems(spawns){
-        console.log(this.table);
-        console.log(this.playersGroup.children.entries[0].x);
-        //spawn jugador1
+        //spawn jugadores
         this.playersGroup.children.entries[0].x = spawns.players.p1.x
         this.playersGroup.children.entries[0].y = spawns.players.p1.y
 
@@ -687,20 +669,14 @@ class Game extends Phaser.Scene {
         this.playersGroup.children.entries[1].y = spawns.players.p2.y
 
         for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
-        this.table[i].x = spawns.objects.table[i][0]
-        this.table[i].y = spawns.objects.table[i][1]
-        }
-
-        for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
             this.table[i].x = spawns.objects.table[i][0]
             this.table[i].y = spawns.objects.table[i][1]
+            this.tableCollider[i].x = this.table[i].x;
+            this.tableCollider[i].y = this.table[i].y;
 
             this.chest[i].x = spawns.objects.chest[i][0]
             this.chest[i].y = spawns.objects.chest[i][1]
         }
-
-         //spawn cofre
-         
     }
     start(players){
         let playersArray = [];
