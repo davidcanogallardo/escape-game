@@ -10,6 +10,7 @@ class PasswordMGScene extends GenericMiniGame {
         for (let x = 0; x < 2+(2*this.getDiff(this.difficulty)); x++) {
             this.correctPassword.push(shuffled[x]);
         }
+        // window.corr = 
     }
 
     puzzle_buttons = [];
