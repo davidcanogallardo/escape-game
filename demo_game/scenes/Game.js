@@ -37,7 +37,7 @@ class Game extends Phaser.Scene {
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/1-1.json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/2-1.json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -103,7 +103,8 @@ class Game extends Phaser.Scene {
         this.map = this.make.tilemap({
             key: "map"
         });
-
+        this.nChallenges = this.map.objects[2].objects[0].properties[0].value
+        console.log(this.nChallenges)
         
         this.playerCollider = this.player.playerCollider
 
@@ -323,10 +324,12 @@ class Game extends Phaser.Scene {
         //*************************************************************Escena de victoria
         socket.on("passwordPuzzleResolved", (data) => {
             console.log("Puzzle complete");
+            console.log(this.challenge);
             this.challenge++;
-            console.log(this.doorsGroup.children.entries);
+            console.log(this.challenge);
+            console.log(this.nChallenges);
+
             this.doorsGroup.children.entries.forEach(element => {
-                console.log(element)
                 if (element.challenge == this.challenge && this.challenge == 1) {
                     console.log("Primer if");
                     element.play('opening-door');
@@ -334,7 +337,7 @@ class Game extends Phaser.Scene {
                     this.physics.world.removeCollider(element);
                     // this.table.disableBody();
                     that.canDoPuzzle = false
-                } else if (this.challenge == 1) {
+                } else if (this.challenge == this.nChallenges) {
                     console.log("Segundo if");
                     element.play('opening-door');
                     element.disableBody()
@@ -362,10 +365,13 @@ class Game extends Phaser.Scene {
         // })
         this.input.keyboard.on('keydown-Z',()=>{
             console.log("HACK ACTIVAD TERMINAR PARTIDA");
-            for(i=0;i<2;i++){
+            // for(i=0;i<2;i++){
                 socket.emit("passwordPuzzleComplete");
-            }
+            // }
         })
+        window.owo = () => {
+
+        }
 
         this.input.keyboard.on('keydown-M',()=>{
             if (window.stream.getAudioTracks()[0].enabled == true) {
@@ -659,4 +665,5 @@ class Game extends Phaser.Scene {
         //this.game.scene.add("SeePass", eval("new SeePass('test')"))
         this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"',"+diff+")"))
     }
+
 }
