@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="77">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="77">
  <editorsettings>
   <export format="json"/>
  </editorsettings>
@@ -450,8 +450,8 @@
     <property name="challenge" type="int" value="1"/>
    </properties>
   </object>
-  <object id="40" name="chest" type="chest" gid="596" x="179" y="92.5" width="16" height="16"/>
-  <object id="41" name="table" type="table" gid="1027" x="199.167" y="93.167" width="32" height="16"/>
+  <object id="40" name="chest" type="chest" gid="596" x="203.929" y="7.98546" width="16" height="16"/>
+  <object id="41" name="table" type="table" gid="1027" x="232" y="9.26048" width="32" height="16"/>
   <object id="42" name="door" type="door" gid="1025" x="144.011" y="31.997" width="32" height="32">
    <properties>
     <property name="challenge" type="int" value="-1"/>

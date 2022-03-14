@@ -1,6 +1,7 @@
+
 class PasswordMGScene extends GenericMiniGame {
     constructor(type,difficulty) {
-        super("PasswordMGScene", type, difficulty);
+        super("PasswordMGScene_"+type, type, difficulty);
         this.symbols = [0,1,2,3,4,5,6,7,8];
         this.shuffleSymbols = this.symbols.sort(() => Math.random() - 0.5);
         this.correctPassword = [];
@@ -11,6 +12,8 @@ class PasswordMGScene extends GenericMiniGame {
         }
     }
 
+    puzzle_buttons = [];
+    selectedButtonIndex = 0;
     preload(){
 //=============opciones jugador con ventana reto=========================================
 //=============opciones jugador con ventana helper=========================================
@@ -30,7 +33,6 @@ class PasswordMGScene extends GenericMiniGame {
             this.cursors = this.input.keyboard.createCursorKeys();
 
             var difficulty = this.getDiff(this.difficulty);
-
             let x = 0.50;
             for(let i=0; i<9; i++){
                 let button = [];
@@ -39,6 +41,7 @@ class PasswordMGScene extends GenericMiniGame {
                     button[1] = this.add.rectangle(10+(x*60), height/2+50, 55, 55);
                     button[1].setStrokeStyle(2, 0xffffff);
                     button[1].setVisible(false);
+                    
                     this.puzzle_buttons[i] = button;
                     x++;  
                 } else {
@@ -46,6 +49,7 @@ class PasswordMGScene extends GenericMiniGame {
                     button[1] = this.add.rectangle(10+(i*60), height/3+50, 55, 55);
                     button[1].setStrokeStyle(2, 0xffffff);
                     button[1].setVisible(false);
+                    console.log(button);
                     this.puzzle_buttons[i] = button;
                 }
                 this.puzzle_buttons[i][0].setScale(0.3);
@@ -158,20 +162,19 @@ class PasswordMGScene extends GenericMiniGame {
     }
 
     update(){
+        var xKey = this.input.keyboard.addKey('X');
+        var xKeyDown = xKey?.isDown;
+
+        if(xKeyDown){
+            this.scene.stop();
+            this.scene.resume("game");
+        }
 //=============opciones jugador con ventana reto=========================================
         if (this.type=='challenge') {
-            var xKey = this.input.keyboard.addKey('X');
-            var xKeyDown = xKey?.isDown
-
             if (Phaser.Input.Keyboard.JustDown(this.cursors.left)) {
                 this.selectNextButton(-1);
             } else if (Phaser.Input.Keyboard.JustDown(this.cursors.right)) {
                 this.selectNextButton(1);
-            }
-
-            if(xKeyDown){
-                this.scene.stop();
-                this.scene.resume("game");
             }
 
             if(this.win){
@@ -184,14 +187,6 @@ class PasswordMGScene extends GenericMiniGame {
             
 //=============opciones jugador con ventana helper=========================================
         } else {
-            var xKey = this.input.keyboard.addKey('X');
-            var xKeyDown = xKey?.isDown
-
-            if(xKeyDown){
-                this.scene.stop();
-                this.scene.resume("game");
-            }
-
             // console.log(this);
             if(this.stickButtonActive){
                 this.scene.stop();

@@ -60,6 +60,10 @@ class PeerClient {
         });
     }
 
+    disconnect(){
+        this.peer.destroy();
+    }
+
     sendText(message) {
         console.log("message => " + message);
         this.peer.send(message);
