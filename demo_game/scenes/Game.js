@@ -240,7 +240,7 @@ class Game extends Phaser.Scene {
                     } else {
                         that.player.setDepth(0);
                     }
-                    if(that.buttonActive == true){
+                    if(eKey.isDown && that.canDoPuzzle){
                         that.scene.pause();
                         that.scene.launch(that.infoScene);
                         that.activeScene = that.infoScene;

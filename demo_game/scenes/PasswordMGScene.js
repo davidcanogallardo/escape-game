@@ -37,7 +37,7 @@ class PasswordMGScene extends GenericMiniGame {
             for(let i=0; i<9; i++){
                 let button = [];
                 if(i>=5){
-                    button[0] = this.add.image(0+(x*60), height/2+40, 'simbol'+this.shuffleSymbols[i]);
+                    button[0] = this.add.image(0+(x*60), height/2+40, 'simbol'+i);
                     button[1] = this.add.rectangle(10+(x*60), height/2+50, 55, 55);
                     button[1].setStrokeStyle(2, 0xffffff);
                     button[1].setVisible(false);
@@ -45,7 +45,7 @@ class PasswordMGScene extends GenericMiniGame {
                     this.puzzle_buttons[i] = button;
                     x++;  
                 } else {
-                    button[0] = this.add.image(0+(i*60), height/3+40, 'simbol'+this.shuffleSymbols[i]);
+                    button[0] = this.add.image(0+(i*60), height/3+40, 'simbol'+i);
                     button[1] = this.add.rectangle(10+(i*60), height/3+50, 55, 55);
                     button[1].setStrokeStyle(2, 0xffffff);
                     button[1].setVisible(false);
@@ -145,7 +145,7 @@ class PasswordMGScene extends GenericMiniGame {
             this.puzzle_image= [];
 
             let x = 0.50;
-            for(let i=0; i<4; i++){
+            for(let i=0; i<this.correctPassword.length; i++){
                 //console.log(this.background.height);
                 
                 if(i>=5){
