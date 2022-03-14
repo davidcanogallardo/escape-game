@@ -236,7 +236,6 @@ class Game extends Phaser.Scene {
                 //Añadir colision al jugador con el mismo socket
                 //Cofre
                 this.physics.add.overlap(player.playerCollider, this.chest, function (player, chest) {
-                    console.log("ASDASDASDDSAD");
                     if(chest.y < player.y){
                         that.player.setDepth(10);
                     } else {
