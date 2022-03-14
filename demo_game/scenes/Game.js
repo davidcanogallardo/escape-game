@@ -16,17 +16,18 @@ class Game extends Phaser.Scene {
         this.diff=data.diff;
         console.log("this.diff");
         console.log(this.diff);
-        
+        this.miniGames = ["PasswordMGScene"]
         this.playersGroup = this.add.group(playersArray);
         this.activeScene = "game";
-        this.infoScene = "PasswordMGScene"; 
-        this.playableScene = "enterPasswordScene";
+        this.infoScene = "PasswordMGScene_helper"; 
+        this.passwordminigame = "PasswordMGScene"; 
+        this.playableScene = "PasswordMGScene_challenge";
         this.roleScene = "helper"
         this.loadedScenes = [this.infoScene];
         //this.game.scene.add("SeePass", new SeePass('test'))
         //this.game.scene.add("SeePass", eval("new SeePass('test')"))
-        this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"','medium')"))
-        this.game.scene.add(this.playableScene, eval("new "+this.infoScene+"('challenge','medium')"))
+        this.game.scene.add(this.infoScene, eval("new "+this.passwordminigame+"('helper','medium')"))
+        this.game.scene.add(this.playableScene, eval("new "+this.passwordminigame+"('challenge','medium')"))
 
     }   
 
@@ -211,6 +212,7 @@ class Game extends Phaser.Scene {
         for (let i = 0; i < this.doorsFilter.length; i++) {
             this.doorsColiders[i] = this.physics.add.collider(this.playersGroup, this.doorsGroup[i]);
         }
+        this.physics.add.collider(this.playersGroup, this.doorsGroup);
         console.log(this.doorsColiders);
         //console.log("Pone el collider");
         // ******************************************************************************************************************
@@ -240,6 +242,14 @@ class Game extends Phaser.Scene {
                         that.player.setDepth(0);
                     }
                     if(that.buttonActive == true){
+                        that.scene.pause();
+                        that.scene.launch(that.infoScene);
+                        that.activeScene = that.infoScene;
+                        that.buttonActive = false;
+                    }
+
+                    if(that.buttonActive && that.canDoPuzzle){
+                        //that.scene.launch('enterPasswordScene');
                         that.scene.pause();
                         that.scene.launch(that.infoScene);
                         that.activeScene = that.infoScene;
