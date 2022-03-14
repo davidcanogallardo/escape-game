@@ -11,13 +11,19 @@ var config = {
     },
   },zoom: 2.5,
   //scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, SeePass, Time, Ui, Prueba, PasswordMGScene]
-  scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, Time, Ui, Prueba]
+  scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, Time, Ui]
 
 };
 
 class PhaserGame extends Phaser.Game {
   constructor(config) {
       super(config)
+      console.log("constructor game")
+      socket.on("spawns", (spawns) => {
+        console.log("main: ")
+        console.log(spawns)
+        this.spawns = spawns;
+      })
   }
 }
 
