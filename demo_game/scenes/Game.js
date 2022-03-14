@@ -16,17 +16,18 @@ class Game extends Phaser.Scene {
         this.diff=data.diff;
         console.log("this.diff");
         console.log(this.diff);
-        
+        this.miniGames = ["PasswordMGScene"]
         this.playersGroup = this.add.group(playersArray);
         this.activeScene = "game";
-        this.infoScene = "PasswordMGScene"; 
-        this.playableScene = "enterPasswordScene";
+        this.infoScene = "PasswordMGScene_helper"; 
+        this.passwordminigame = "PasswordMGScene"; 
+        this.playableScene = "PasswordMGScene_challenge";
         this.roleScene = "helper"
         this.loadedScenes = [this.infoScene];
         //this.game.scene.add("SeePass", new SeePass('test'))
         //this.game.scene.add("SeePass", eval("new SeePass('test')"))
-        this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"','medium')"))
-        this.game.scene.add(this.playableScene, eval("new "+this.infoScene+"('challenge','medium')"))
+        this.game.scene.add(this.infoScene, eval("new "+this.passwordminigame+"('helper','medium')"))
+        this.game.scene.add(this.playableScene, eval("new "+this.passwordminigame+"('challenge','medium')"))
 
     }   
 
@@ -36,7 +37,7 @@ class Game extends Phaser.Scene {
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/2-1.json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/1-1.json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -227,6 +228,7 @@ class Game extends Phaser.Scene {
         for (let i = 0; i < this.doorsFilter.length; i++) {
             this.doorsColiders[i] = this.physics.add.collider(this.playersGroup, this.doorsGroup[i]);
         }
+        this.physics.add.collider(this.playersGroup, this.doorsGroup);
         console.log(this.doorsColiders);
         //console.log("Pone el collider");
         // ******************************************************************************************************************
@@ -261,7 +263,7 @@ class Game extends Phaser.Scene {
                     //    that.scene.launch(that.infoScene);
                     //    that.activeScene = that.infoScene;
                     //}
-                    if(that.buttonActive == true){
+                    if(eKey.isDown && that.canDoPuzzle){
                         that.scene.pause();
                         that.scene.launch(that.infoScene);
                         that.activeScene = that.infoScene;
@@ -270,6 +272,14 @@ class Game extends Phaser.Scene {
                         //mirar si esta activa escena
                         //recupera escena as objeto
                         //llamo funcion buttonActive()
+                    }
+
+                    if(that.buttonActive && that.canDoPuzzle){
+                        //that.scene.launch('enterPasswordScene');
+                        that.scene.pause();
+                        that.scene.launch(that.infoScene);
+                        that.activeScene = that.infoScene;
+                        that.buttonActive = false;
                     }
 
                 });
