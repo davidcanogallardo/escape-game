@@ -94,17 +94,6 @@ class Game extends Phaser.Scene {
                             player.move(null,null);
                         }
                     }
-
-
-                    //console.log(moveData)
-                   
-                    // let moveData = {
-                    //     id: player.id,
-                    //     speed: player.speed,
-                    //     x: player.x,
-                    //     y: player.y
-                    // }
-                    // socket.emit("playerMoved", moveData);
                 }
             });
         })
@@ -131,9 +120,6 @@ class Game extends Phaser.Scene {
         let objectLayer = this.map.getObjectLayer('objects');
         
         //*****************************************Players**************************************************/
-        //console.log(this.playersGroup);
-        //this.player = new Player(this);
-        //this.playerCollider = this.player.playerCollider
 
         var end = this.physics.add.staticGroup();
         var endTile = end.create(158,14)
@@ -159,10 +145,6 @@ class Game extends Phaser.Scene {
             window.stream = undefined;
             app.currentPage="home";
         });
-        // this.physics.add.overlap(endTile, this.playersGroup, function () {
-        //     console.log("fin de partida")
-        //     that.events.emit("end");
-        // })
 
         this.wallsLayer = new WallsLayer(this);
         
@@ -183,13 +165,11 @@ class Game extends Phaser.Scene {
                     this.door = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'door', 'door-closed');
                     //this.closed_door.anims.play('door-closed');
                     this.door.body.setSize(width, height*0.1).setOffset(width-33,height-5);
+                    this.physics.add.collider(this.door, this.playersGroup)
+                    this.door.challenge = object.properties[0].value
                     //Agregar puerta al grupo de puertas
                     this.doorsGroup.add(this.door);
                     window.door = this.doorsGroup;
-                    //Propiedades challenge de las puertas 
-                    //window.map.objects[0].objects[0].properties[0].value
-                    //window.map.objects[0].objects[1].properties[0].value
-                    //window.map.objects[0].objects[5].properties[0].value
                     break;
                 case 'chest':
                     // //Cambiar la hitbox del cofre
@@ -223,7 +203,11 @@ class Game extends Phaser.Scene {
             }
         });
         //Añadir colider al grupo de puertas
+        console.log();
         this.doorsFilter = this.map.objects[1].objects.filter(this.doorFilter);
+        this.doorsFilter.forEach(element => {
+            console.log(element)
+        });
         this.doorsColiders = [];
         for (let i = 0; i < this.doorsFilter.length; i++) {
             this.doorsColiders[i] = this.physics.add.collider(this.playersGroup, this.doorsGroup[i]);
@@ -256,21 +240,11 @@ class Game extends Phaser.Scene {
                     } else {
                         that.player.setDepth(0);
                     }
-                    //if (eKey.isDown) {
-                        //Launch infoScene
-                    //    that.scene.pause(); 
-                    //    that.scene.launch(that.infoScene);
-                    //    that.activeScene = that.infoScene;
-                    //}
-                    if(eKey.isDown && that.canDoPuzzle){
+                    if(that.buttonActive == true){
                         that.scene.pause();
                         that.scene.launch(that.infoScene);
                         that.activeScene = that.infoScene;
                         that.buttonActive = false;
-
-                        //mirar si esta activa escena
-                        //recupera escena as objeto
-                        //llamo funcion buttonActive()
                     }
 
                     if(that.buttonActive && that.canDoPuzzle){
@@ -313,39 +287,12 @@ class Game extends Phaser.Scene {
 
             }
         });
-
-        /*this.physics.add.overlap(this.playerCollider, this.chest, function (player,chest) {
-            if(chest.y < player.y){
-                that.player.setDepth(10);
-            } else {
-                that.player.setDepth(0);
-            }
-
-            if (eKey.isDown) {
-                that.scene.launch('SeePass');
-            }
-        });*/
         // ****************************************************************************
         
         // *********************************************puerta****************************************************
         let eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         
         this.canDoPuzzle = true
-
-
-
-        /*this.physics.add.overlap(this.playerCollider, this.table, function (player,table) {
-            if(table.y < player.y){
-                that.player.setDepth(10);
-            } else {
-                that.player.setDepth(0);
-            }
-
-            if (eKey.isDown && that.canDoPuzzle) {
-                that.scene.launch('enterPasswordScene');
-                that.scene.pause();
-            }
-        });*/
 
         //this.door = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
         this.anims.create({
@@ -377,27 +324,25 @@ class Game extends Phaser.Scene {
         socket.on("passwordPuzzleResolved", (data) => {
             console.log("Puzzle complete");
             this.challenge++;
+            console.log(this.doorsGroup.children.entries);
+            this.doorsGroup.children.entries.forEach(element => {
+                console.log(element)
+                if (element.challenge == this.challenge && this.challenge == 1) {
+                    console.log("Primer if");
+                    element.play('opening-door');
+                    element.disableBody()
+                    this.physics.world.removeCollider(element);
+                    // this.table.disableBody();
+                    that.canDoPuzzle = false
+                } else if (this.challenge == 1) {
+                    console.log("Segundo if");
+                    element.play('opening-door');
+                    element.disableBody()
+                    // this.table.disableBody();
 
-            objectLayer.objects.forEach(object => {
-                switch(object.type){
-                    case 'door':
-                        // console.log(object);
-                        // console.log("door");
-                        // console.log(object.properties[0].value);
-                        // console.log(this.challenge);
-                        if (object.properties[0].value == this.challenge && this.challenge == 1) {
-                            console.log(this.doorsColiders[0]);
-                            this.physics.world.removeCollider(this.doorsColiders[0]);
-                            this.physics.world.removeCollider(this.doorsColiders[1]);
-                            this.doorsGroup.children.entries[0].play('opening-door'); 
-                            this.doorsGroup.children.entries[1].play('opening-door'); 
-                            
-                            //this.table.disableBody();
-                            that.canDoPuzzle = false
-                        }
-                        break;
+                    // this.physics.world.removeCollider(this.doorColider2);
                 }
-            })
+            });
         });
         // this.scene.get('enterPasswordScene').events.on('victoria', () => {
         //     this.doorsGroup.playAnimation('opening-door');
@@ -415,6 +360,12 @@ class Game extends Phaser.Scene {
         //         socket.emit("playerInEndZone");
         //     }
         // })
+        this.input.keyboard.on('keydown-Z',()=>{
+            console.log("HACK ACTIVAD TERMINAR PARTIDA");
+            for(i=0;i<2;i++){
+                socket.emit("passwordPuzzleComplete");
+            }
+        })
 
         this.input.keyboard.on('keydown-M',()=>{
             if (window.stream.getAudioTracks()[0].enabled == true) {
