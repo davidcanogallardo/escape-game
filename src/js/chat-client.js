@@ -66,7 +66,7 @@ function sendMessage(text) {
       if(!app.messages[receiver]) {
         app.messages[receiver] = []
       }
-      app.messages[receiver].push(data)
+      // app.messages[receiver].push(data)
       append(data)
     } else {
       console.log("no");

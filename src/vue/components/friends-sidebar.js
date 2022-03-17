@@ -19,7 +19,7 @@ Vue.component('friend-item', {
     props: ["name"],
     methods: {
       profile() {
-          this.$root.getFriendData(this.name)
+          this.$root.getFriendData(this.name.id)
           this.$emit('change-page','profile')
         },
         chat() {
@@ -30,7 +30,9 @@ Vue.component('friend-item', {
           });
       },
       hasNewMessages() {
-        if (app.peopleUnread.indexOf(this.name) != -1) {
+        console.log(this.name.name);
+        console.log(app.peopleUnread);
+        if (app.peopleUnread.indexOf(this.name.name) != -1) {
           return true
         } 
         return false

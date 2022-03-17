@@ -6,7 +6,7 @@ Vue.component('chat', {
     `
     <div class="chat">
         <div class="chat-head">
-            <p>{{friend}}</p>
+            <p>{{friend.name}}</p>
             <i class="fas fa-times" v-on:click="$emit('open-modal','none')"></i>
         </div>
         <div id="chat-body" class="chat-body scrollbar">
@@ -35,8 +35,8 @@ Vue.component('chat', {
             console.log("watcher last")
             this.messages.push(newM);
             $('#chat-body').scrollTop($('#chat-body')[0].scrollHeight);
-            if (app.peopleUnread.indexOf(this.friend) != -1) {
-                var friendIndex = app.peopleUnread.indexOf(this.friend)
+            if (app.peopleUnread.indexOf(this.friend.name) != -1) {
+                var friendIndex = app.peopleUnread.indexOf(this.friend.name)
                 app.peopleUnread.splice(friendIndex,1)
                 if (app.peopleUnread.length == 0) {
                     app.messagesunread = false
@@ -46,13 +46,13 @@ Vue.component('chat', {
     },
     created() {
         // this.messages= []
-        setReceiver(this.friend)
-        if (app.messages[this.friend]) {
-            this.messages = app.messages[this.friend]
+        setReceiver(this.friend.name)
+        if (app.messages[this.friend.name]) {
+            this.messages = app.messages[this.friend.name]
         }
         
-        if (app.peopleUnread.indexOf(this.friend) != -1) {
-            var friendIndex = app.peopleUnread.indexOf(this.friend)
+        if (app.peopleUnread.indexOf(this.friend.name) != -1) {
+            var friendIndex = app.peopleUnread.indexOf(this.friend.name)
             app.peopleUnread.splice(friendIndex,1)
             if (app.peopleUnread.length == 0) {
                 app.messagesunread = false
