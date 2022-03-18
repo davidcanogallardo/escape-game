@@ -1,5 +1,5 @@
 import { i18n } from "../languages/language.js";
-import { getSessionUser } from "../js/utils.js";
+import { getSessionUser, showNotification } from "../js/utils.js";
 import { connect, disconnect } from "../js/chat-client.js";
 import Peer from "../../node_modules/simple-peer-light/simplepeer.min.js";
 
@@ -270,6 +270,8 @@ var app = new Vue({
               connect();
             } else {
               console.log(data.message);
+              console.log(".-----------");
+              showNotification("No has podido iniciar sesion", "red")
             }
           }
         })
@@ -278,6 +280,7 @@ var app = new Vue({
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
+            showNotification("Fallo servidor", "red")
             // console.log("La solicitud ha fallado: " + textStatus);
           }
         });
