@@ -16,7 +16,10 @@ class Game extends Phaser.Scene {
         this.diff=data.diff;
         console.log("this.diff");
         console.log(this.diff);
-        this.miniGames = ["PasswordMGScene"]
+        //lista de minijuegos disponibles
+        this.gamesAvailable = ["PasswordMGScene"]
+        this.games = []
+        
         this.playersGroup = this.add.group(playersArray);
         this.activeScene = "game";
         this.infoScene = "PasswordMGScene_helper"; 
@@ -25,10 +28,8 @@ class Game extends Phaser.Scene {
         this.roleScene = "helper"
         this.loadedScenes = [this.infoScene];
         //this.game.scene.add("SeePass", new SeePass('test'))
-        //this.game.scene.add("SeePass", eval("new SeePass('test')"))
-        this.game.scene.add(this.infoScene, eval("new "+this.passwordminigame+"('helper','medium')"))
-        this.game.scene.add(this.playableScene, eval("new "+this.passwordminigame+"('challenge','medium')"))
-
+        //this.game.scene.add("SeePass", eval("new SeePass('test')")
+        
     }   
 
     preload() {
@@ -147,7 +148,7 @@ class Game extends Phaser.Scene {
             app.currentPage="home";
         });
 
-        this.wallsLayer = new WallsLayer(this);
+        //this.wallsLayer = new WallsLayer(this);
         
         // ***************************************LEYENDA****************************************************************************
 
@@ -394,7 +395,21 @@ class Game extends Phaser.Scene {
 
         if (this.isInitiator) {
             console.log("ES INICIADOR");
-            
+            this.helper = new PasswordMGScene('helper','medium',null);
+            this.challenge = new PasswordMGScene('challenge','medium',[1,2,3,4]);
+            //this.game.scene.add(this.infoScene, eval("new "+this.passwordminigame+"('helper','medium')"))
+            //this.game.scene.add(this.playableScene, eval("new "+this.passwordminigame+"('challenge','medium')"))
+            this.game.scene.add(this.infoScene, this.helper)
+            this.game.scene.add(this.playableScene, this.challenge)
+            console.log("helper");
+            console.log(this.helper.getPassword());
+            console.log("challenge");
+            console.log(this.challenge.getPassword());
+            for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
+                this.games.push(this.gamesAvailable[Math.floor(Math.random()*gamesAvailable.length)]);
+            }
+            console.log(this.games);
+
             //generador de spawns para jugador
             this.spawns = this.map.objects[0].objects;
             this.spawnsP1 = this.spawns.filter(this.playerFilter,1);
@@ -435,15 +450,17 @@ class Game extends Phaser.Scene {
                 this.chestsFilter = element.filter(this.objectFilterPlayer,2);
                 var randTable = Phaser.Math.Between(0, this.tablesFilter.length-1);
                 var randChest = Phaser.Math.Between(0, this.chestsFilter.length-1);
-                this.tablePosition = [this.tablesFilter[randTable].x,this.tablesFilter[randTable].y];
-                this.chestPosition = [this.chestsFilter[randChest].x,this.chestsFilter[randChest].y];
+                this.tablePosition = [this.tablesFilter[randTable].x,this.tablesFilter[randTable].y, this.tablesFilter[randTable].properties[0].value];
+                this.chestPosition = [this.chestsFilter[randChest].x,this.chestsFilter[randChest].y, this.tablesFilter[randTable].properties[0].value];
                 spawns.objects.table.push(this.tablePosition);
                 spawns.objects.chest.push(this.chestPosition);
+                console.error(this.tablePosition);
             });
 
             this.placeItems(spawns);
 
             socket.emit("spawns", spawns);
+            socket.emit("password", )
         } else {
             socket.on("getSpawns", (spawns) => {
                 this.placeItems(spawns);
@@ -637,6 +654,7 @@ class Game extends Phaser.Scene {
         for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
             this.table[i].x = spawns.objects.table[i][0]
             this.table[i].y = spawns.objects.table[i][1]
+            this.table[i].challenge = spawns.objects.table[i][2];
             this.tableCollider[i].x = this.table[i].x;
             this.tableCollider[i].y = this.table[i].y;
 

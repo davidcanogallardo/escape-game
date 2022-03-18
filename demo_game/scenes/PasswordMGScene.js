@@ -1,18 +1,33 @@
 
 class PasswordMGScene extends GenericMiniGame {
-    constructor(type,difficulty) {
+    constructor(type,difficulty,password) {
         super("PasswordMGScene_"+type, type, difficulty);
-        this.symbols = [0,1,2,3,4,5,6,7,8];
-        this.shuffleSymbols = this.symbols.sort(() => Math.random() - 0.5);
-        this.correctPassword = [];
+        // this.symbols = [0,1,2,3,4,5,6,7,8];
+        // this.shuffleSymbols = this.symbols.sort(() => Math.random() - 0.5);
+        // this.correctPassword = [];
         
-        let shuffled = this.shuffleSymbols.sort(() => Math.random() - 0.5);
-        for (let x = 0; x < 2+(2*this.getDiff(this.difficulty)); x++) {
-            this.correctPassword.push(shuffled[x]);
-        }
+        // let shuffled = this.shuffleSymbols.sort(() => Math.random() - 0.5);
+        // for (let x = 0; x < 2+(2*this.getDiff(this.difficulty)); x++) {
+        //     this.correctPassword.push(shuffled[x]);
+        // }
         // window.corr = 
+        this.shuffleSymbols = [0,1,2,3,4,5,6,7,8];
+        //Si al constructor no le llega ninguna contraseña este la genera automaticamente en el caso contrario la almacena
+        if (password == null) {
+            if (difficulty = 'easy') {
+                this.correctPassword = [0,1,2,3]
+            } else if (difficulty = 'medium') {
+                this.correctPassword = [0,1,2,3,4,5]
+            } else if (difficulty = 'hard') {
+                this.correctPassword = [0,1,2,3,4,5,6,7]
+            }
+        } else {
+            this.correctPassword = password
+        }
+        
+        
     }
-
+    getPassword(){return this.correctPassword}
     puzzle_buttons = [];
     selectedButtonIndex = 0;
     preload(){
@@ -149,14 +164,14 @@ class PasswordMGScene extends GenericMiniGame {
             for(let i=0; i<this.correctPassword.length; i++){
                 //console.log(this.background.height);
                 
-                if(i>=5){
-                    this.puzzle_image[i] = this.add.image(0+(x*50), height/2+40, 'simbol'+i);
+                //if(i>=5){
+                    this.puzzle_image[i] = this.add.image(0+(i*20), height/2+40, 'simbol'+this.correctPassword[i]);
                     x++;  
-                } else {
-                    this.puzzle_image[i] = this.add.image(60+(i*50), height/3+20, 'simbol'+i);
-                }
+                // } else {
+                //     this.puzzle_image[i] = this.add.image(0+(i*50), height/2+40, 'simbol'+this.correctPassword[i]);
+                // }
 
-                this.puzzle_image[i].setScale(0.2);
+                this.puzzle_image[i].setScale(0.10);
                 this.puzzle_image[i].setOrigin(0,0);
             }  
         }
@@ -183,6 +198,7 @@ class PasswordMGScene extends GenericMiniGame {
                 this.challenge = 1
                 this.scene.stop();
                 this.scene.resume("game");
+                alert("HAS GANADO")
                 this.events.emit('victoria');
             }
             
