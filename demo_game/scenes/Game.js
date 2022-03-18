@@ -194,9 +194,8 @@ class Game extends Phaser.Scene {
                         this.tableCollider[i].setSize(this.table[i].width, this.table[i].height)
                         this.tableCollider[i].body.immovable = true
                         this.physics.add.collider(this.tableCollider[i], this.playersGroup);
-
-                        
                     }
+                    
                     //Cambiar la hitbox de la mesa
                     //Hitbox de la mesa y que no se pueda mover
                     
@@ -204,6 +203,8 @@ class Game extends Phaser.Scene {
                     break;
             }
         });
+
+        window.table = this.table;
         //Añadir colider al grupo de puertas
         console.log();
         this.doorsFilter = this.map.objects[1].objects.filter(this.doorFilter);
@@ -244,16 +245,16 @@ class Game extends Phaser.Scene {
                     }
                     if(eKey.isDown && that.canDoPuzzle){
                         that.scene.pause();
-                        that.scene.launch(that.infoScene);
-                        that.activeScene = that.infoScene;
+                        that.scene.launch(that.games[table.challenge-1]+"_"+table.challenge-1+"_helper");
+                        that.activeScene = that.games[table.challenge-1]+"_"+table.challenge-1+"_helper";
                         that.buttonActive = false;
                     }
 
                     if(that.buttonActive && that.canDoPuzzle){
                         //that.scene.launch('enterPasswordScene');
                         that.scene.pause();
-                        that.scene.launch(that.infoScene);
-                        that.activeScene = that.infoScene;
+                        that.scene.launch(that.games[table.challenge-1]+"_"+table.challenge-1+"_helper");
+                        that.activeScene = that.games[table.challenge-1]+"_"+table.challenge-1+"_helper";
                         that.buttonActive = false;
                     }
 
@@ -266,21 +267,20 @@ class Game extends Phaser.Scene {
                     } else {
                         that.player.setDepth(0);
                     }
-        
                     if (eKey.isDown && that.canDoPuzzle) {
                         //pass this.playableScene
                         //that.scene.launch('enterPasswordScene');
                         that.scene.pause();
-                        that.scene.launch(that.playableScene);
-                        that.activeScene = that.playableScene;
+                        that.scene.launch(that.games[table.challenge-1]+"_"+table.challenge-1+"_challenge");
+                        that.activeScene = that.games[table.challenge-1]+"_"+table.challenge-1+"_challenge";
                         
                     }
 
                     if(that.buttonActive && that.canDoPuzzle){
                         //that.scene.launch('enterPasswordScene');
                         that.scene.pause();
-                        that.scene.launch(that.playableScene);
-                        that.activeScene = that.playableScene;
+                        that.scene.launch(that.games[table.challenge-1]+"_"+table.challenge-1+"_challenge");
+                        that.activeScene = that.games[table.challenge-1]+"_"+table.challenge-1+"_challenge";
                         that.buttonActive = false;
                     }
                 });
@@ -395,19 +395,25 @@ class Game extends Phaser.Scene {
 
         if (this.isInitiator) {
             console.log("ES INICIADOR");
-            this.helper = new PasswordMGScene('helper','medium',null);
-            this.challenge = new PasswordMGScene('challenge','medium',[1,2,3,4]);
             //this.game.scene.add(this.infoScene, eval("new "+this.passwordminigame+"('helper','medium')"))
             //this.game.scene.add(this.playableScene, eval("new "+this.passwordminigame+"('challenge','medium')"))
-            this.game.scene.add(this.infoScene, this.helper)
-            this.game.scene.add(this.playableScene, this.challenge)
-            console.log("helper");
-            console.log(this.helper.getPassword());
-            console.log("challenge");
-            console.log(this.challenge.getPassword());
+            this.helper = [];
+            this.challenge = []
             for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
-                this.games.push(this.gamesAvailable[Math.floor(Math.random()*gamesAvailable.length)]);
+                this.games.push(this.gamesAvailable[Math.floor(Math.random()*this.gamesAvailable.length)]);
+                //this.game.scene.add(this.games[i]+"_helper", eval("new "+this.games[i]+"('helper','medium')"))
+                console.log(this.games[i]+i+"_helper");
+                //this.game.scene.add(this.games[i]+"_challenge",eval("new "+this.games[i]+"('challenge','medium')"))
+                console.log(this.games[i]+i+"_challenge");
+                //this.game.scene.add(this.games[i]+i+"_helper", new PasswordMGScene(i,'helper','medium'));
+                this.game.scene.add(this.games[i]+i+"_helper",eval("new "+this.games[i]+"("+i+",'helper','medium')"))
+                this.game.scene.add(this.games[i]+i+"_challenge",eval("new "+this.games[i]+"("+i+",'challenge','medium')"))
             }
+            
+
+
+            //this.game.scene.add(this.games[0]+"1_challenge",eval("new "+this.games[0]+"('challenge','medium','1')"))
+            //this.game.scene.add(this.games[1]+"2_challenge",eval("new "+this.games[1]+"('challenge','medium','2')"))
             console.log(this.games);
 
             //generador de spawns para jugador
