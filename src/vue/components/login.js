@@ -1,3 +1,5 @@
+import { showNotification } from "../../js/utils.js";
+
 Vue.component('login', {
     template: //html
     `     
@@ -74,8 +76,10 @@ Vue.component('login', {
                 this.$root.loginPetition(this.loginInput)
             } else {
                 console.log('campos vacios');
-                this.errorType = "login";
-                this.loginErrorMessage = "Hay campos vacios";
+                // this.errorType = "login";
+                // this.loginErrorMessage = "Hay campos vacios";
+                // TODO internacionalizacion
+                showNotification("Hay campos vacios", "red")
             }
             
         },
@@ -94,19 +98,27 @@ Vue.component('login', {
                         console.log(this.signupInput.mail);
                         this.$root.signupPetition(this.signupInput);
                     } else {
-                        this.errorType = "register";
-                        this.signupErrorMessage = "Introduce un email valido";
+                        // this.errorType = "register";
+                        // this.signupErrorMessage = "Introduce un email valido";
+                    // TODO internacionalizacion
+                    showNotification("Introduce un email valido", "red")
                     }
                 } else {
-                    this.errorType = "register";
-                    this.signupErrorMessage = "Las contraseñas no coinciden";
+                    // this.errorType = "register";
+                    // this.signupErrorMessage = "Las contraseñas no coinciden";
+                    // TODO internacionalizacion
+                    showNotification("Las contraseñas no coinciden", "red")
                 }
 
             } else {
-                this.errorType = "register";
-                this.signupErrorMessage = "Hay campos vacios";
+                // this.errorType = "register";
+                // this.signupErrorMessage = "Hay campos vacios";
+                // TODO internacionalizacion
+                showNotification("Hay campos vacios", "red")
+
             }
         },
+
         loginInputisEmpty(){
             if(this.loginInput.username == "" || this.loginInput.password == ""){
                 return true;

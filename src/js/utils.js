@@ -18,7 +18,7 @@ function getSessionUser() {
     window.user = user
     // connect()
   } else {
-    user = "";
+    user = null;
     console.log("no hay sesion");
   }
   return user;

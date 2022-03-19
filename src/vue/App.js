@@ -8,6 +8,7 @@ var peerClient = undefined;
 var guestPeer = undefined;
 var guestPeerClient = undefined;
 let audioTag;
+
 socket.on("matchFound", (data) => {
   startPeerStream(startClientPeer, data);
 });
@@ -43,9 +44,9 @@ function startClientPeer(data) {
     guestPeerClient.peer.signal(hostID);
   });
 
-  audioTag = document.createElement('audio');
-  audioTag.setAttribute('src','');
-  audioTag.setAttribute('id','mic');
+  audioTag = document.createElement("audio");
+  audioTag.setAttribute("src", "");
+  audioTag.setAttribute("id", "mic");
   document.body.appendChild(audioTag);
 
   var titleScreen = game.scene.getScene("titlescreen");
@@ -62,19 +63,15 @@ socket.on("windowGame", (data) => {
   app.currentPage = "game";
 });
 
-socket.on('endGame', () => {
-  document.getElementById('mic').remove();
-  if(peerClient==undefined){
+socket.on("endGame", () => {
+  document.getElementById("mic").remove();
+  if (peerClient == undefined) {
     guestPeerClient = undefined;
-  } else{
+  } else {
     peerClient = undefined;
-    guestPeerClient= undefined;
+    guestPeerClient = undefined;
   }
-
-})
-  
-
-
+});
 
 let excludedPages = [
   "home",
@@ -87,7 +84,7 @@ let excludedPages = [
   "test-controller",
   "change-language",
   "waiting-room",
-  "select-solo-duo"
+  "select-solo-duo",
 ];
 
 let _url = "http://127.0.0.1:1111";
@@ -147,83 +144,82 @@ var app = new Vue({
     this._i18n.locale = this.user.language;
     this.$nextTick(() => {
       if (this.user) {
-        console.log("set token")
-        this.token = sessionStorage.getItem("token")
-        window.token = sessionStorage.getItem("token")
+        console.log("set token");
+        this.token = sessionStorage.getItem("token");
+        window.token = sessionStorage.getItem("token");
         connect();
         window.setInterval(this.updateFriendRequest, 15000);
         window.setInterval(this.updateFriendList, 50000);
       }
     });
-
   },
   methods: {
-    //laravel
-    owo() {
-      console.log("owo")
+    saveUserInSession() {
+      sessionStorage.setItem("session", JSON.stringify(this.user));
     },
     //laravel
     updateFriendList() {
-      console.log("trato de actualizar lista amigos")
+      console.log("trato de actualizar lista amigos");
       if (this.user) {
         $.ajax({
           xhrFields: {
-              withCredentials: true
+            withCredentials: true,
           },
           type: "POST",
           // dataType: "json",
           headers: {
-              // 'X-CSRF-TOKEN': "",
-              'Authorization': "Bearer "+ this.token
+            // 'X-CSRF-TOKEN': "",
+            Authorization: "Bearer " + this.token,
           },
-          url: _url+"/api/friendlist",
-        }).done((data) => {
+          url: _url + "/api/friendlist",
+        })
+          .done((data) => {
             console.log(data);
-            this.user.friendsList = data.data.query
-        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            this.user.friendsList = data.data.query;
+            this.saveUserInSession()
+          })
+          .fail(function (XMLHttpRequest, textStatus, errorThrown) {
             if (console && console.log) {
-                console.log("La solicitud ha fallado: " + textStatus);
-                console.log(XMLHttpRequest);
-                console.log(errorThrown);
+              console.log("La solicitud ha fallado: " + textStatus);
+              console.log(XMLHttpRequest);
+              console.log(errorThrown);
             }
-        });
-        
+          });
       }
-      
-    },    
+    },
     //laravel
     updateFriendRequest() {
-      console.log("trato de actualizar peticiones")
+      console.log("trato de actualizar peticiones");
       if (this.user) {
         $.ajax({
           xhrFields: {
-              withCredentials: true
+            withCredentials: true,
           },
           type: "GET",
           // dataType: "json",
           headers: {
-              // 'X-CSRF-TOKEN': "",
-              'Authorization': "Bearer "+ this.token
+            // 'X-CSRF-TOKEN': "",
+            Authorization: "Bearer " + this.token,
           },
-          url: _url+"/api/user/listrequests",
-        }).done((data) => {
-                console.log(data.data.requests);
-                console.log(this.user.notifications);
-                if (data.data.requests>this.user.notifications) {
-                  this.notificationunsread = true
-                }
-                this.user.notifications = data.data.requests
-                sessionStorage.setItem("session", JSON.stringify(this.user));
-        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-            if (console && console.log) {
-                console.log("La solicitud ha fallado: " + textStatus);
-                console.log(XMLHttpRequest);
-                console.log(errorThrown);
+          url: _url + "/api/user/listrequests",
+        })
+          .done((data) => {
+            console.log(data.data.requests);
+            console.log(this.user.notifications);
+            if (data.data.requests > this.user.notifications) {
+              this.notificationunsread = true;
             }
-        });
-        
+            this.user.notifications = data.data.requests;
+            this.saveUserInSession()
+          })
+          .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            if (console && console.log) {
+              console.log("La solicitud ha fallado: " + textStatus);
+              console.log(XMLHttpRequest);
+              console.log(errorThrown);
+            }
+          });
       }
-      
     },
     //laravel
     loginPetition(form_data) {
@@ -234,7 +230,7 @@ var app = new Vue({
         },
         type: "POST",
         // dataType: "json",
-        url: _url+"/api/login",
+        url: _url + "/api/login",
       })
         .done((data, textStatus, jqXHR) => {
           if (console && console.log) {
@@ -260,34 +256,37 @@ var app = new Vue({
                 12,
                 JSON.parse(userInfo.photo)
               );
-              sessionStorage.setItem("session", JSON.stringify(user));
+              this.saveUserInSession()
               sessionStorage.setItem("token", window.token);
               window.setTimeout(this.updateFriendRequest, 15000);
               window.setInterval(this.updateFriendList, 50000);
-              this.$root.currentPage = "home"
+              this.$root.currentPage = "home";
               this.$root.user = user;
               this.$root.token = data.data.token;
               connect();
             } else {
               console.log(data.message);
               console.log(".-----------");
-              showNotification("No has podido iniciar sesion", "red")
+              showNotification("No has podido iniciar sesion", "red");
             }
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
           if (console && console.log) {
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-            showNotification("Fallo servidor", "red")
+            console.warn(jqXHR);
+            console.warn(textStatus);
+            console.warn(errorThrown);
+            if (errorThrown == "") {
+              showNotification("Fallo servidor", "red");
+            } else {
+              showNotification("Credenciales incorrectas", "red");
+            }
             // console.log("La solicitud ha fallado: " + textStatus);
           }
         });
     },
     //laravel
     signupPetition(form_data) {
-      console.log("hola");
       console.log(form_data.username);
       console.log(form_data.mail);
       console.log(form_data.password);
@@ -300,34 +299,26 @@ var app = new Vue({
           confirm_password: form_data.password_confirm,
         },
         type: "POST",
-        // headers: {'X-CSRF-TOKEN': window.token},
-        // dataType: "json",
-        // contentType: "application/json",
-        url: _url+"/api/register",
+        url: _url + "/api/register",
       })
         .done((data) => {
+          console.log("registrado");
+          // TODO internacionalizacion
+          showNotification("Registrado", "green");
           console.log(data);
-          if (data.success) {
-            let user = new User();
-            // data.userData.username,
-            // data.userData.friendsList,
-            // data.userData.notifications,
-            // data.userData.completedLevels,
-            // data.userData.favMap,
-            // data.userData.numTrophies,
-            // data.userData.profileImg
-            sessionStorage.setItem("session", JSON.stringify(user));
-            // this.$root.currentPage = "home"
-            this.$root.user = user;
-          } else {
-            console.log(data.message);
-          }
         })
         .fail(function (XMLHttpRequest, textStatus, errorThrown) {
           if (console && console.log) {
             console.log("La solicitud ha fallado: " + textStatus);
             console.log(XMLHttpRequest);
             console.log(errorThrown);
+            if (errorThrown == "") {
+              // TODO internacionalizacion
+              showNotification("Fallo servidor", "red");
+            } else {
+              // TODO internacionalizacion
+              showNotification("Error", "red");
+            }
           }
         });
     },
@@ -356,32 +347,32 @@ var app = new Vue({
     sendFriendRequest(friend) {
       $.ajax({
         data: {
-            "addressee_name":  friend
+          addressee_name: friend,
         },
         xhrFields: {
-          withCredentials: true
+          withCredentials: true,
         },
         type: "PUT",
         // dataType: "json",
         headers: {
-            // 'X-CSRF-TOKEN': "",
-            'Authorization': "Bearer "+ window.token
+          // 'X-CSRF-TOKEN': "",
+          Authorization: "Bearer " + window.token,
         },
-        url: _url+"/api/user/sendrequest",
-      }).done((data) => {
+        url: _url + "/api/user/sendrequest",
+      })
+        .done((data) => {
           console.log(data);
           if (data.success) {
             console.log("peticion de amistad enviada");
             console.log(data);
-            // showNotification("Petición de amistad enviada a "+friend, "#49EE63")
+            showNotification("Petición de amistad enviada a " + friend,"green");
           } else {
-            console.warn("peticion de amistad no enviada")
+            console.warn("peticion de amistad no enviada");
           }
-        }).fail(function (textStatus) {
-            if (console && console.log) {
-            console.log("La solicitud ha fallado: " + textStatus);
-            console.log(textStatus);
-            }
+        })
+        .fail(function (data) {
+          console.log("La solicitud ha fallado: " + data);
+          showNotification(data.responseJSON.message, "yellow");
         });
     },
     getFriendData(friendName) {
@@ -423,45 +414,20 @@ var app = new Vue({
       sessionStorage.clear();
       this.$root.currentPage = "home";
       disconnect();
-      // $.ajax({
-      //   data: {
-      //     petition: "close-sesion",
-      //     params: {
-      //       user: username,
-      //     },
-      //   },
-      //   type: "POST",
-      //   dataType: "json",
-      //   url: _url,
-      // })
-      //   .done((data) => {
-      //     console.log("sesion cerrada");
-      //     console.log(data);
-      //     if (data.success) {
-      //       this.$root.user = null;
-      //       sessionStorage.clear();
-      //       this.$root.currentPage = "home";
-      //       disconnect();
-      //     }
-      //   })
-      //   .fail(function (textStatus) {
-      //     if (console && console.log) {
-      //       console.log("La solicitud ha fallado: " + textStatus);
-      //       console.log(textStatus);
-      //     }
-      //   });
     },
     //laravel
-    friendRequest(username, friend, accept) {
+    friendRequest(friend, accept) {
       $.ajax({
         type: "PUT",
-        url: _url+"/api/user/handlerequest/"+friend.name+"/"+accept,
+        url: _url + "/api/user/handlerequest/" + friend.name + "/" + accept,
         headers: {
           // 'X-CSRF-TOKEN': "",
-          'Authorization': "Bearer "+ this.token
-      },
-      }).done((data) => {
+          Authorization: "Bearer " + this.token,
+        },
+      })
+        .done((data) => {
           console.log(data);
+          // TODO
           //aun el backend no devuelve nada asi que hago el OR true
           if (data.success || true) {
             if (accept) {
@@ -471,12 +437,13 @@ var app = new Vue({
             if (index !== -1) {
               this.$root.user.notifications.splice(index, 1);
             }
-            sessionStorage.setItem("session", JSON.stringify(this.$root.user));
+            this.saveUserInSession()
           }
         })
         .fail(function (textStatus) {
           if (console && console.log) {
             console.log("La solicitud ha fallado: " + textStatus);
+            showNotification("La solicitud ha fallado: " + textStatus, "red")
             console.log(textStatus);
           }
         });
@@ -486,7 +453,7 @@ var app = new Vue({
         data: { petition: "ranking" },
         type: "POST",
         dataType: "json",
-        url: _url+"/api/ranking",
+        url: _url + "/api/ranking",
       })
         .done((data) => {
           console.log("RankingData");
@@ -496,6 +463,7 @@ var app = new Vue({
         .fail(function (textStatus) {
           if (console && console.log) {
             console.log("La solicitud ha fallado: " + textStatus);
+            showNotification("La solicitud ha fallado: " + textStatus, "red")
           }
         });
     },
@@ -504,11 +472,8 @@ var app = new Vue({
         data: {
           petition: "ranking",
           params: {
-            // "players" : [ "david", "adnan" ],
             players: data.players,
-            // "time" : "00:12:13",
             time: data.time,
-            // "level" : "summonerRift"
             level: data.level,
           },
         },
@@ -526,6 +491,7 @@ var app = new Vue({
           }
         });
     },
+    // TODO no se usa
     updateUser(user) {
       $.ajax({
         data: {
@@ -543,7 +509,7 @@ var app = new Vue({
             console.log("Cambios en usuario aplicados");
             console.log(data);
             this.user = user;
-            sessionStorage.setItem("session", JSON.stringify(this.$root.user));
+            this.saveUserInSession()
           }
         })
         .fail(function (textStatus) {
@@ -557,17 +523,17 @@ var app = new Vue({
     updatePhoto(photo) {
       $.ajax({
         data: {
-          "photo": photo
+          photo: photo,
         },
         type: "PUT",
-        url: _url+"/api/user/update/photo",
+        url: _url + "/api/user/update/photo",
         headers: {
           // 'X-CSRF-TOKEN': "",
-          'Authorization': "Bearer "+ this.token
+          Authorization: "Bearer " + this.token,
         },
-      }).done((data) => {
+      })
+        .done((data) => {
           console.log(data);
-
         })
         .fail(function (textStatus) {
           if (console && console.log) {
@@ -575,7 +541,7 @@ var app = new Vue({
             console.log(textStatus);
           }
         });
-    }
+    },
   },
 });
 var that = this;
