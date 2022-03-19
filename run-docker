@@ -1,0 +1,1 @@
+sudo docker run -d --name web -p 8080:80 --volume /home/pi/web/escape-game:/usr/local/apache2/htdocs/ httpd
