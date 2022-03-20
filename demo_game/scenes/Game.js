@@ -245,16 +245,16 @@ class Game extends Phaser.Scene {
                     }
                     if(eKey.isDown && that.canDoPuzzle){
                         that.scene.pause();
-                        that.scene.launch(that.games[table.challenge-1]+"_"+table.challenge-1+"_helper");
-                        that.activeScene = that.games[table.challenge-1]+"_"+table.challenge-1+"_helper";
+                        that.scene.launch(that.games[chest.challenge-1]+(chest.challenge-1)+"_helper");
+                        that.activeScene = that.games[chest.challenge-1]+(chest.challenge-1)+"_helper";
                         that.buttonActive = false;
                     }
 
                     if(that.buttonActive && that.canDoPuzzle){
                         //that.scene.launch('enterPasswordScene');
                         that.scene.pause();
-                        that.scene.launch(that.games[table.challenge-1]+"_"+table.challenge-1+"_helper");
-                        that.activeScene = that.games[table.challenge-1]+"_"+table.challenge-1+"_helper";
+                        that.scene.launch(that.games[chest.challenge-1]+"_"+(chest.challenge-1)+"_helper");
+                        that.activeScene = that.games[chest.challenge-1]+"_"+(chest.challenge-1)+"_helper";
                         that.buttonActive = false;
                     }
 
@@ -271,16 +271,17 @@ class Game extends Phaser.Scene {
                         //pass this.playableScene
                         //that.scene.launch('enterPasswordScene');
                         that.scene.pause();
-                        that.scene.launch(that.games[table.challenge-1]+"_"+table.challenge-1+"_challenge");
-                        that.activeScene = that.games[table.challenge-1]+"_"+table.challenge-1+"_challenge";
+                        console.log(that.games[table.challenge-1]+(table.challenge-1));
+                        that.scene.launch(that.games[table.challenge-1]+(table.challenge-1)+"_challenge");
+                        that.activeScene = that.games[table.challenge-1]+(table.challenge-1)+"_challenge";
                         
                     }
 
                     if(that.buttonActive && that.canDoPuzzle){
                         //that.scene.launch('enterPasswordScene');
                         that.scene.pause();
-                        that.scene.launch(that.games[table.challenge-1]+"_"+table.challenge-1+"_challenge");
-                        that.activeScene = that.games[table.challenge-1]+"_"+table.challenge-1+"_challenge";
+                        that.scene.launch(that.games[table.challenge-1]+(table.challenge-1)+"_challenge");
+                        that.activeScene = that.games[table.challenge-1]+(table.challenge-1)+"_challenge";
                         that.buttonActive = false;
                     }
                 });
@@ -393,28 +394,31 @@ class Game extends Phaser.Scene {
             }
         });
 
+        //generador de escenas
+        this.helper = [];
+        this.challenge = []
+        for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
+            this.games.push(this.gamesAvailable[Math.floor(Math.random()*this.gamesAvailable.length)]);
+            //this.game.scene.add(this.games[i]+"_helper", eval("new "+this.games[i]+"('helper','medium')"))
+            console.log(this.games[i]+i+"_helper");
+            //this.game.scene.add(this.games[i]+"_challenge",eval("new "+this.games[i]+"('challenge','medium')"))
+            console.log(this.games[i]+i+"_challenge");
+            //this.game.scene.add(this.games[i]+i+"_helper", new PasswordMGScene(i,'helper','medium'));
+            this.game.scene.add(this.games[i]+i+"_helper",eval("new "+this.games[i]+"("+i+",'helper','medium')"))
+            this.game.scene.add(this.games[i]+i+"_challenge",eval("new "+this.games[i]+"("+i+",'challenge','medium')"))
+        }
+        
+
+
+        //this.game.scene.add(this.games[0]+"1_challenge",eval("new "+this.games[0]+"('challenge','medium','1')"))
+        //this.game.scene.add(this.games[1]+"2_challenge",eval("new "+this.games[1]+"('challenge','medium','2')"))
+        console.log(this.games);
+
         if (this.isInitiator) {
             console.log("ES INICIADOR");
             //this.game.scene.add(this.infoScene, eval("new "+this.passwordminigame+"('helper','medium')"))
             //this.game.scene.add(this.playableScene, eval("new "+this.passwordminigame+"('challenge','medium')"))
-            this.helper = [];
-            this.challenge = []
-            for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
-                this.games.push(this.gamesAvailable[Math.floor(Math.random()*this.gamesAvailable.length)]);
-                //this.game.scene.add(this.games[i]+"_helper", eval("new "+this.games[i]+"('helper','medium')"))
-                console.log(this.games[i]+i+"_helper");
-                //this.game.scene.add(this.games[i]+"_challenge",eval("new "+this.games[i]+"('challenge','medium')"))
-                console.log(this.games[i]+i+"_challenge");
-                //this.game.scene.add(this.games[i]+i+"_helper", new PasswordMGScene(i,'helper','medium'));
-                this.game.scene.add(this.games[i]+i+"_helper",eval("new "+this.games[i]+"("+i+",'helper','medium')"))
-                this.game.scene.add(this.games[i]+i+"_challenge",eval("new "+this.games[i]+"("+i+",'challenge','medium')"))
-            }
             
-
-
-            //this.game.scene.add(this.games[0]+"1_challenge",eval("new "+this.games[0]+"('challenge','medium','1')"))
-            //this.game.scene.add(this.games[1]+"2_challenge",eval("new "+this.games[1]+"('challenge','medium','2')"))
-            console.log(this.games);
 
             //generador de spawns para jugador
             this.spawns = this.map.objects[0].objects;
@@ -457,7 +461,7 @@ class Game extends Phaser.Scene {
                 var randTable = Phaser.Math.Between(0, this.tablesFilter.length-1);
                 var randChest = Phaser.Math.Between(0, this.chestsFilter.length-1);
                 this.tablePosition = [this.tablesFilter[randTable].x,this.tablesFilter[randTable].y, this.tablesFilter[randTable].properties[0].value];
-                this.chestPosition = [this.chestsFilter[randChest].x,this.chestsFilter[randChest].y, this.tablesFilter[randTable].properties[0].value];
+                this.chestPosition = [this.chestsFilter[randChest].x,this.chestsFilter[randChest].y, this.chestsFilter[randChest].properties[0].value];
                 spawns.objects.table.push(this.tablePosition);
                 spawns.objects.chest.push(this.chestPosition);
                 console.error(this.tablePosition);
@@ -466,7 +470,6 @@ class Game extends Phaser.Scene {
             this.placeItems(spawns);
 
             socket.emit("spawns", spawns);
-            socket.emit("password", )
         } else {
             socket.on("getSpawns", (spawns) => {
                 this.placeItems(spawns);
@@ -666,6 +669,7 @@ class Game extends Phaser.Scene {
 
             this.chest[i].x = spawns.objects.chest[i][0]
             this.chest[i].y = spawns.objects.chest[i][1]
+            this.chest[i].challenge = spawns.objects.chest[i][2];
         }
     }
     start(players){
