@@ -10,7 +10,6 @@ var i18n = new VueI18n({
   messages
 })
 
-console.error(getSessionUser());
 if (getSessionUser() == null) {
   if (languages[navigator.languages[1] == undefined]) {
     i18n.locale = "ca"

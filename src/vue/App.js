@@ -141,7 +141,6 @@ var app = new Vue({
     },
   },
   mounted() {
-    this._i18n.locale = this.user.language;
     this.$nextTick(() => {
       if (this.user) {
         console.log("set token");
