@@ -112,7 +112,7 @@ var app = new Vue({
   watch: {
     currentPage: function (newPage, oldPage) {
       if (
-        !sessionStorage.getItem("session") &&
+        this.user == null &&
         !excludedPages.includes(newPage)
       ) {
         console.log("no hay sesión");
@@ -141,6 +141,7 @@ var app = new Vue({
     },
   },
   mounted() {
+   
     this.$nextTick(() => {
       if (this.user) {
         console.log("set token");
@@ -521,4 +522,5 @@ var app = new Vue({
 });
 var that = this;
 window.app = app;
+window.get = getSessionUser
 export { app };
