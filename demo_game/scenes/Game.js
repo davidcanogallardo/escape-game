@@ -148,7 +148,7 @@ class Game extends Phaser.Scene {
             app.currentPage="home";
         });
 
-        //this.wallsLayer = new WallsLayer(this);
+        this.wallsLayer = new WallsLayer(this);
         
         // ***************************************LEYENDA****************************************************************************
 
@@ -285,9 +285,6 @@ class Game extends Phaser.Scene {
                         that.buttonActive = false;
                     }
                 });
-                
-
-
             }
         });
         // ****************************************************************************
