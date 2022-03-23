@@ -32,6 +32,10 @@ class PasswordMGScene extends GenericMiniGame {
         return this.correctPassword
     }
 
+    setPassword(){
+        
+    }
+
     puzzle_buttons = [];
     selectedButtonIndex = 0;
     preload(){
