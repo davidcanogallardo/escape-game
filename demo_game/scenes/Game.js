@@ -335,11 +335,11 @@ class Game extends Phaser.Scene {
                     element.disableBody()
                     this.physics.world.removeCollider(element);
                     // this.table.disableBody();
-                    that.canDoPuzzle = false
                 } else if (this.challenge == this.nChallenges) {
                     console.log("Segundo if");
                     element.play('opening-door');
                     element.disableBody()
+                    that.canDoPuzzle = false
                     // this.table.disableBody();
 
                     // this.physics.world.removeCollider(this.doorColider2);
@@ -673,45 +673,37 @@ class Game extends Phaser.Scene {
     }
     placeItems(spawns){
         //spawn jugadores
+        console.log(spawns);
         this.playersGroup.children.entries[0].x = spawns.players.p1.x
         this.playersGroup.children.entries[0].y = spawns.players.p1.y
 
         this.playersGroup.children.entries[1].x = spawns.players.p2.x
         this.playersGroup.children.entries[1].y = spawns.players.p2.y
-        for (let i = 0; i < spawns.table.length; i++) {
-            this.game.scene.add(spawns.gamesList[i]+i+"_challenge",eval("new "+spawns.gamesList[i]+"("+i+",'challenge','medium',"+spawns.objects.chest[i+2]+")"))
-            this.table[i].x = spawns.objects.table[i][0]
-            this.table[i].y = spawns.objects.table[i][1]
-            this.table[i].challenge = spawns.objects.table[i][2];
+
+        //asignar los spawns de los cofres
+        for (let i = 0; i < spawns.objects.chest.length; i++) {
+            this.chest[i].x = spawns.objects.chest[i].x;
+            this.chest[i].y = spawns.objects.chest[i].y;
+            this.chest[i].challenge = spawns.objects.chest[i].challenge;
+        }
+
+        // asignar los spawns de las mesas
+        for (let i = 0; i < spawns.objects.table.length; i++) {
+            this.table[i].x = spawns.objects.table[i].x
+            this.table[i].y = spawns.objects.table[i].y
+            this.table[i].challenge = spawns.objects.table[i].challenge
             this.tableCollider[i].x = this.table[i].x;
             this.tableCollider[i].y = this.table[i].y;
-            
         }
 
-        for (let index = 0; index < spawns.chest.length; index++) {
-            this.chest[i].x = spawns.objects.chest[i][0]
-            this.chest[i].y = spawns.objects.chest[i][1]
-            this.chest[i].challenge = spawns.objects.chest[i][2];
-            
+        //generar las escenas del segundo jugador con las contraseñas 
+        for (let i = 0; i < spawns.gamesList.length; i++) {
+            if (!this.isInitiator) {
+                console.log(spawns.objects.chest[i].password);
+                this.game.scene.add(spawns.gamesList[i]+i+"_helper",eval("new "+spawns.gamesList[i]+"("+i+",'helper','medium',"+spawns.objects.chest[i].password+")"))
+                this.game.scene.add(spawns.gamesList[i]+i+"_challenge",eval("new "+spawns.gamesList[i]+"("+i+",'challenge','medium',"+spawns.objects.table[i].password+")"))
+            }
         }
-        // for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
-        //     this.table[i].x = spawns.objects.table[i][0]
-        //     this.table[i].y = spawns.objects.table[i][1]
-        //     this.table[i].challenge = spawns.objects.table[i][2];
-        //     this.tableCollider[i].x = this.table[i].x;
-        //     this.tableCollider[i].y = this.table[i].y;
-
-        //     this.chest[i].x = spawns.objects.chest[i][0]
-        //     this.chest[i].y = spawns.objects.chest[i][1]
-        //     this.chest[i].challenge = spawns.objects.chest[i][2];
-        //     if (!this.isInitiator) {
-        //         this.gamesList = spawns.gamesList
-        //         this.game.scene.add(spawns.gamesList[i]+i+"_helper",eval("new "+spawns.gamesList[i]+"("+i+",'helper','medium',"+spawns.objects.chest[i+2]+")"))
-        //         this.game.scene.add(spawns.gamesList[i]+i+"_challenge",eval("new "+spawns.gamesList[i]+"("+i+",'challenge','medium',"+spawns.objects.chest[i+2]+")"))
-        //     }
-            
-            
-        // }
     }
     start(players){
         let playersArray = [];

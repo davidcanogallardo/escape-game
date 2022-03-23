@@ -13,6 +13,8 @@ class PasswordMGScene extends GenericMiniGame {
         // window.corr = 
         this.shuffleSymbols = [0,1,2,3,4,5,6,7,8];
         //Si al constructor no le llega ninguna contraseña este la genera automaticamente en el caso contrario la almacena
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        console.log(password);
         if (password == null) {
             if (difficulty = 'easy') {
                 this.correctPassword = [0,1,2,3]
@@ -203,11 +205,10 @@ class PasswordMGScene extends GenericMiniGame {
 
             if(this.win){
                 console.log("VICTORIA")
-                this.challenge = 1
                 this.scene.stop();
                 this.scene.resume("game");
                 alert("HAS GANADO")
-                this.events.emit('victoria');
+                socket.emit('passwordPuzzleComplete');
             }
             
 //=============opciones jugador con ventana helper=========================================
