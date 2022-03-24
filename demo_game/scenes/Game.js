@@ -19,7 +19,7 @@ class Game extends Phaser.Scene {
         //lista de minijuegos disponibles
         this.gamesAvailable = ["PasswordMGScene"]
         this.games = []
-        
+        this.map = this.getRandomMap();
         this.playersGroup = this.add.group(playersArray);
         this.activeScene = "game";
         this.infoScene = "PasswordMGScene_helper"; 
@@ -689,6 +689,20 @@ class Game extends Phaser.Scene {
         //this.game.scene.add("SeePass", new SeePass('test'))
         //this.game.scene.add("SeePass", eval("new SeePass('test')"))
         this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"',"+diff+")"))
+    }
+    getRandomMap(diff){
+        $.ajax({
+            type: "GET",
+            url: _url + "/api/getmaps/"+diff
+        })
+        .done((data) => {
+            //LLegan todos los ids de los mapas con la dificultad elegida
+            console.log(data);
+          
+        })
+        .fail(function () {
+            showNotification("Fallo servidor", "red");
+        });
     }
 
 }
