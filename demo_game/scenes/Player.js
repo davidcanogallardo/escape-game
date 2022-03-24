@@ -114,16 +114,14 @@ class Player extends Phaser.GameObjects.Sprite{
     }
     move(leftright, updown) {
         this.body.setVelocity(leftright, updown)
-        // this.anims.play('player-run-side',true)
+
         //console.log(this.direction);
         if (leftright<0 || this.direction == "left") {
-            //console.log("1");
             this.anims.play('player-run-side', true)
             this.scaleX = -1;
             this.body.offset.x = 24;
         } 
         if(leftright>0 || this.direction == "right") {
-            //console.log("2");
             this.anims.play('player-run-side', true)
             this.scaleX = 1;
             this.body.offset.x = 8;
@@ -156,8 +154,8 @@ class Player extends Phaser.GameObjects.Sprite{
             // console.log("3");
             this.anims.play('player-run-down', true)
         } 
-
-        if((updown==0 && leftright == 0 )|| this.direction == "idle" ){
+        
+        if(updown==0 && leftright == 0){
             if ( this.anims.currentAnim==null) {
                 this.anims.play('player-idle-down');
             }else{
@@ -165,7 +163,6 @@ class Player extends Phaser.GameObjects.Sprite{
                 parts[1] = 'idle';
                 this.anims.play(parts.join('-'));
             }
-           
         }
 
         if((updown==null && leftright == null) || this.direction == null){
