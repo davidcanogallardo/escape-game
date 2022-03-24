@@ -391,7 +391,7 @@ class Game extends Phaser.Scene {
             }
         });
 
-        
+        window.map = this.map;
 
         if (this.isInitiator) {
             console.log("ES INICIADOR");
@@ -408,7 +408,7 @@ class Game extends Phaser.Scene {
             //generador de spawns random para objetos
             this.spawnsObjects = [];
 
-            window.map = this.map;
+            // window.map = this.map;
             for (let i = 1; i <= this.map.objects[2].objects[0].properties[0].value; i++) {
                 this.spawnsObjects[i-1] = this.spawns.filter(this.challengeFilter,i);
                 
@@ -699,9 +699,12 @@ class Game extends Phaser.Scene {
         //generar las escenas del segundo jugador con las contraseñas 
         for (let i = 0; i < spawns.gamesList.length; i++) {
             if (!this.isInitiator) {
-                console.log(spawns.objects.chest[i].password);
-                this.game.scene.add(spawns.gamesList[i]+i+"_helper",eval("new "+spawns.gamesList[i]+"("+i+",'helper','medium',"+spawns.objects.chest[i].password+")"))
-                this.game.scene.add(spawns.gamesList[i]+i+"_challenge",eval("new "+spawns.gamesList[i]+"("+i+",'challenge','medium',"+spawns.objects.table[i].password+")"))
+                // console.error(spawns.objects.chest[i].password);
+                // console.error("new "+spawns.gamesList[i]+"("+i+",'challenge','medium',"+JSON.stringify(spawns.objects.table[i].password)+")");
+                // console.error("new "+spawns.gamesList[i]+"("+i+",'helper','medium',"+JSON.stringify(spawns.objects.chest[i].password)+")");
+                this.game.scene.add(spawns.gamesList[i]+i+"_helper",eval("new "+spawns.gamesList[i]+"("+i+",'helper','medium',"+JSON.stringify(spawns.objects.chest[i].password)+")"))
+                this.game.scene.add(spawns.gamesList[i]+i+"_challenge",eval("new "+spawns.gamesList[i]+"("+i+",'challenge','medium',"+JSON.stringify(spawns.objects.table[i].password)+")"))
+                console.error(this.map);
             }
         }
     }
