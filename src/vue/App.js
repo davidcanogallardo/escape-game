@@ -112,13 +112,14 @@ var app = new Vue({
   watch: {
     currentPage: function (newPage, oldPage) {
       if (
-        !sessionStorage.getItem("session") &&
+        this.user == null &&
         !excludedPages.includes(newPage)
       ) {
         console.log("no hay sesión");
         this.currentPage = "login-warning";
       } else {
         console.log("hay sesión " + newPage);
+        console.log(sessionStorage.getItem('session'));
         if (newPage == "waiting-room") {
           if (!this.mainMicId) {
             this.mainMicId = window.mic[0].id;
@@ -141,6 +142,7 @@ var app = new Vue({
     },
   },
   mounted() {
+   
     this.$nextTick(() => {
       if (this.user) {
         console.log("set token");
@@ -333,28 +335,22 @@ var app = new Vue({
     // TODO
     getFriendData(friendName) {
       $.ajax({
-        data: {
-          petition: "friendData",
-          params: {
-            friendUser: friendName,
-          },
+        type: "GET",
+        url: _url + '/api/user/userinfo/'+friendName,
+        headers: {
+          Authorization: "Bearer " + this.token,
         },
-        type: "POST",
-        dataType: "json",
-        url: _url,
       })
         .done((data) => {
-          console.log(data);
+          console.log(data.data.requests[0]);
           if (data.success) {
             console.log("el usuario existe");
           } else {
             console.log("el usuario no existe");
           }
           var newProfile = {
-            username: data.userData.usuario,
-            favMap: data.userData.favMap,
-            numTrophies: data.userData.numCopas,
-            profileImg: data.userData.profileImg,
+            username: data.data.requests[0].name,
+            profileImg: JSON.parse(data.data.requests[0].profile_photo),
           };
           this.$root.profileInfo = newProfile;
           this.$root.currentPage = "friend";
@@ -521,4 +517,5 @@ var app = new Vue({
 });
 var that = this;
 window.app = app;
+window.get = getSessionUser
 export { app };

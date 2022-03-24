@@ -104,16 +104,6 @@ Vue.component("profile", {
                 <i v-if="page == 'profile'" class="fas fa-edit edit-icon" aria-hidden="true"></i>
             </div>
             <br>
-            <table class="table-profile">
-                <tbody><tr>
-                    <td class="td-width"><i class="fas fa-trophy i-table" aria-hidden="true"></i> {{ $t("trophiesobtained") }}</td>
-                    <td id="total-trophys" class="center">{{user.numTrophies}}</td>
-                </tr>
-                <tr>
-                    <td class="td-width"><i class="fas fa-star i-table" aria-hidden="true"></i> {{ $t("prefmap") }}</td>
-                    <td id="fav-map" class="center">{{user.favMap}}</td>
-                </tr>
-            </tbody></table>
         </div>
         <div v-if="page == 'profile'" style="width: 130vw;">
             <div class="btn blue close-sesion" v-on:click="close()">{{ $t("closesession") }}</div>
