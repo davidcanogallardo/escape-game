@@ -38,7 +38,7 @@ class Game extends Phaser.Scene {
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/2-1.json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/1-1.json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -244,6 +244,7 @@ class Game extends Phaser.Scene {
                         that.player.setDepth(0);
                     }
                     if(eKey.isDown && that.canDoPuzzle){
+                        console.log(that.gamesList);
                         that.scene.pause();
                         that.scene.launch(that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper");
                         that.activeScene = that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper";
@@ -253,8 +254,8 @@ class Game extends Phaser.Scene {
                     if(that.buttonActive && that.canDoPuzzle){
                         //that.scene.launch('enterPasswordScene');
                         that.scene.pause();
-                        that.scene.launch(that.gamesList[chest.challenge-1]+"_"+(chest.challenge-1)+"_helper");
-                        that.activeScene = that.gamesList[chest.challenge-1]+"_"+(chest.challenge-1)+"_helper";
+                        that.scene.launch(that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper");
+                        that.activeScene = that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper";
                         that.buttonActive = false;
                     }
 
@@ -271,7 +272,6 @@ class Game extends Phaser.Scene {
                         //pass this.playableScene
                         //that.scene.launch('enterPasswordScene');
                         that.scene.pause();
-                        console.log(that.gamesList[table.challenge-1]+(table.challenge-1));
                         that.scene.launch(that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge");
                         that.activeScene = that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge";
                         
@@ -329,7 +329,7 @@ class Game extends Phaser.Scene {
             console.log(this.nChallenges);
 
             this.doorsGroup.children.entries.forEach(element => {
-                if (element.challenge == this.challenge && this.challenge == 1) {
+                if (element.challenge == this.challenge) {
                     console.log("Primer if");
                     element.play('opening-door');
                     element.disableBody()
@@ -674,6 +674,7 @@ class Game extends Phaser.Scene {
     placeItems(spawns){
         //spawn jugadores
         console.log(spawns);
+        this.gamesList = spawns.gamesList;
         this.playersGroup.children.entries[0].x = spawns.players.p1.x
         this.playersGroup.children.entries[0].y = spawns.players.p1.y
 

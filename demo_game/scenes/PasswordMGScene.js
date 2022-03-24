@@ -175,13 +175,13 @@ class PasswordMGScene extends GenericMiniGame {
                 //console.log(this.background.height);
                 
                 //if(i>=5){
-                    this.puzzle_image[i] = this.add.image(0+(i*20), height/2+40, 'simbol'+this.correctPassword[i]);
+                    this.puzzle_image[i] = this.add.image(85+(i*40), height/2-20, 'simbol'+this.correctPassword[i]);
                     x++;  
                 // } else {
                 //     this.puzzle_image[i] = this.add.image(0+(i*50), height/2+40, 'simbol'+this.correctPassword[i]);
                 // }
 
-                this.puzzle_image[i].setScale(0.10);
+                this.puzzle_image[i].setScale(0.15);
                 this.puzzle_image[i].setOrigin(0,0);
             }  
         }
@@ -207,7 +207,6 @@ class PasswordMGScene extends GenericMiniGame {
                 console.log("VICTORIA")
                 this.scene.stop();
                 this.scene.resume("game");
-                alert("HAS GANADO")
                 socket.emit('passwordPuzzleComplete');
             }
             
