@@ -4,7 +4,6 @@ function getSessionUser() {
   let sessionUser = JSON.parse(sessionStorage.getItem("session"));
   var user;
   if (sessionUser) {
-    console.log("sesion detectada");
     user = new User(
       sessionUser.username,
       sessionUser.friendsList,
@@ -19,7 +18,6 @@ function getSessionUser() {
     // connect()
   } else {
     user = null;
-    console.log("no hay sesion");
   }
   return user;
 }

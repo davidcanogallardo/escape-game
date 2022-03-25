@@ -56,10 +56,7 @@ function startClientPeer(data) {
   // game.start(data);
 }
 
-console.log("Prueba");
 socket.on("windowGame", (data) => {
-  console.log("cambiar al juego");
-  console.log(app.currentPage);
   app.currentPage = "game";
 });
 
@@ -122,8 +119,6 @@ var app = new Vue({
         console.log("no hay sesión");
         this.currentPage = "login-warning";
       } else {
-        console.log("hay sesión " + newPage);
-        console.log(sessionStorage.getItem('session'));
         if (newPage == "waiting-room") {
           if (!this.mainMicId) {
             this.mainMicId = window.mic[0].id;

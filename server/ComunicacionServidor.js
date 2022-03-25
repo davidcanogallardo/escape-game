@@ -77,6 +77,7 @@ class ComunicacionServidor {
                 });
 
                 socket.on("spawns", (spawns) => {
+                    console.log("spawns server")
                     socket.in(socket.room.id).emit("getSpawns",spawns);
                 });
 

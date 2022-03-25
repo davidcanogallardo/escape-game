@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="20" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="193">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="20" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="194">
  <editorsettings>
   <export format="json"/>
  </editorsettings>
@@ -498,6 +498,7 @@
     <property name="player" type="int" value="2"/>
    </properties>
   </object>
+  <object id="193" name="end" x="142.667" y="265" width="35" height="28.3333"/>
  </objectgroup>
  <objectgroup id="7" name="objects">
   <object id="112" name="door" type="door" gid="1025" x="63.9303" y="543.958" width="32" height="32">

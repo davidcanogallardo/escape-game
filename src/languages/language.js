@@ -3,15 +3,11 @@ import { getSessionUser } from "../js/utils.js";
 
 const messages = languages;
 
-console.log(messages);
-
 var i18n = new VueI18n({
   locale: "ca",
   messages
 })
 
-console.warn(languages);
-console.warn(navigator.language.split("-")[0]);
 // Comrpuebo si hay un usuario en la sesión
 if (getSessionUser() == null) {
   // si no hay usuario tengo que comprobar si el locale de la máquina 

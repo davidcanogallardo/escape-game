@@ -29,8 +29,6 @@ Vue.component('select-solo-duo', {
 
     methods: {
         searchSolo(){
-            console.log("Public");
-            console.log([this.user2, this.difficulty]);
             socket.emit('startQueue', [this.user2, this.difficulty]);
             this.$emit('change-page','waiting-room');
         },
