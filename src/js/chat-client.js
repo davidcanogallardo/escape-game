@@ -1,6 +1,4 @@
 import {app} from "../vue/App.js"
-
-console.log("before connecting");
 //console.log(socket);
 
 let sender = ""

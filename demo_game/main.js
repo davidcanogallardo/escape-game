@@ -21,7 +21,6 @@ class PhaserGame extends Phaser.Game {
       super(config)
       this.spawns = null;
 
-      console.log("constructor game")
       socket.on("getSpawns", (spawns) => {
         console.log("main: ")
         console.log(spawns)

@@ -56,7 +56,6 @@ function startClientPeer(data) {
   // game.start(data);
 }
 
-console.log("Prueba");
 socket.on("windowGame", (data) => {
   console.log("cambiar al juego");
   console.log(app.currentPage);
