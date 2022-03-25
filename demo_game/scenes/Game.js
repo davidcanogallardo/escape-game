@@ -4,6 +4,7 @@ class Game extends Phaser.Scene {
     }
     //map.getLayer("walls").data[5][5].properties?.horitzontalWall
     init(data){
+        console.log("init")
         let playersArray = [];
         console.log(data);
         data.players.forEach(element => {
@@ -19,7 +20,11 @@ class Game extends Phaser.Scene {
         //lista de minijuegos disponibles
         this.gamesAvailable = ["PasswordMGScene"]
         this.games = []
-        this.map = this.getRandomMap();
+        //Set map
+        this.getRandomMap(this.diff);
+        console.log("this.map")
+        console.log(this.map)
+        console.log("despues de mapa")
         this.gamesList = []
         
         this.playersGroup = this.add.group(playersArray);
@@ -31,16 +36,17 @@ class Game extends Phaser.Scene {
         this.loadedScenes = [this.infoScene];
         //this.game.scene.add("SeePass", new SeePass('test'))
         //this.game.scene.add("SeePass", eval("new SeePass('test')")
-        
+
     }   
 
     preload() {
+        console.log("preoload")
         var path = "./demo_game/"
         this.segundos = 0;
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/2-1.json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/"+this.map+".json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -492,9 +498,13 @@ class Game extends Phaser.Scene {
             socket.emit("spawns", spawns);
             this.placeItems(spawns);
         } else {
-            socket.on("getSpawns", (spawns) => {
-                this.placeItems(spawns);
-            })
+            // socket.on("getSpawns", (spawns) => {
+                
+            // })
+
+            this.placeItems(this.game.spawns);
+         
+            
         }
         
     }
@@ -731,19 +741,23 @@ class Game extends Phaser.Scene {
         //this.game.scene.add("SeePass", eval("new SeePass('test')"))
         this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"',"+diff+")"))
     }
-    getRandomMap(diff){
+
+    getRandomMap(diff) {
         $.ajax({
+            async: false,
             type: "GET",
-            url: _url + "/api/getmaps/"+diff
+            url: "http://localhost:1111/api/getmaps/"+diff
         })
         .done((data) => {
             //LLegan todos los ids de los mapas con la dificultad elegida
+            console.log("se hace la peticion")
             console.log(data);
-          
+            console.log(data[Math.floor(Math.random() * data.length)]);
+            console.log(data[Math.floor(Math.random() * data.length)].name)
+            this.map = data[Math.floor(Math.random() * data.length)].name;
         })
         .fail(function () {
             showNotification("Fallo servidor", "red");
         });
-    }
-
+    };
 }
