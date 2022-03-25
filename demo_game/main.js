@@ -9,7 +9,8 @@ var config = {
         gravity: { y: 0 },
         debug: true
     },
-  },zoom: 2.5,
+  },
+  zoom: 2.5,
   //scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, SeePass, Time, Ui, Prueba, PasswordMGScene]
   scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, Time, Ui]
 
@@ -18,11 +19,17 @@ var config = {
 class PhaserGame extends Phaser.Game {
   constructor(config) {
       super(config)
+      this.spawns = null;
+
       console.log("constructor game")
-      socket.on("spawns", (spawns) => {
+      socket.on("getSpawns", (spawns) => {
         console.log("main: ")
         console.log(spawns)
         this.spawns = spawns;
+        console.log(this.scene.getScene("game").activeScene)
+        if (this.scene.getScene("game").activeScene) {
+          this.scene.getScene("game").placeItems(spawns)
+        }
       })
   }
 }
