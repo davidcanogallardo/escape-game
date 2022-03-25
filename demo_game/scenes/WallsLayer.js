@@ -7,8 +7,6 @@ class WallsLayer extends Phaser.Tilemaps.TilemapLayer {
         this.setDepth(5)
 
         let players = scene.playersGroup.getChildren();
-        console.log(players);
-
 
         //this.wallGroup = scene.physics.add.staticGroup();
         scene.wallGroup = scene.physics.add.staticGroup();

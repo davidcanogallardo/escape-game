@@ -196,7 +196,6 @@ class Game extends Phaser.Scene {
         console.log();
         this.doorsFilter = this.map.objects[1].objects.filter(this.doorFilter);
         this.doorsFilter.forEach(element => {
-            console.log(element)
         });
         this.doorsColiders = [];
         for (let i = 0; i < this.doorsFilter.length; i++) {
@@ -414,7 +413,6 @@ class Game extends Phaser.Scene {
                 }
                 spawns.objects.table.push(table);
                 spawns.objects.chest.push(chest);
-                console.error(this.tablePosition);
             });
 
 
