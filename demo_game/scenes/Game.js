@@ -40,7 +40,7 @@ class Game extends Phaser.Scene {
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/1-1.json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/3-1.json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -126,8 +126,10 @@ class Game extends Phaser.Scene {
         //*****************************************Players**************************************************/
 
         var end = this.physics.add.staticGroup();
-        var endTile = end.create(158,14)
-        endTile.body.setSize(35,20)
+        var endSpawn = this.map.objects[0].objects.filter(this.endFilter);
+        console.log(endSpawn[0]);
+        var endTile = end.create(endSpawn[0].x+18,endSpawn[0].y+20)
+        endTile.body.setSize(endSpawn[0].width,endSpawn[0].height)
         endTile.visible = false
 
         this.playersGroup.getChildren().forEach(player => {
@@ -663,6 +665,10 @@ class Game extends Phaser.Scene {
 
     doorChallengeFilter(doors, challenge) {
         return doors.properties[0].value == this;
+    }
+
+    endFilter(objects) {
+        return objects.name == "end";
     }
 
     getDiff(diff){
