@@ -65,9 +65,13 @@ socket.on("windowGame", (data) => {
 
 socket.on("endGame", () => {
   document.getElementById("mic").remove();
-  if (peerClient == undefined) {
+
+  if(socket.id == guestPeerClient.name){
+    guestPeerClient.peer.destroy();
     guestPeerClient = undefined;
-  } else {
+  } else if (socket.id == peerClient.name){
+    peerClient.peer.destroy();
+    guestPeerClient.peer.destroy();
     peerClient = undefined;
     guestPeerClient = undefined;
   }
