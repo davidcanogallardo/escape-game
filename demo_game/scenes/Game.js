@@ -137,17 +137,23 @@ class Game extends Phaser.Scene {
         });
 
 
+        //************ Terminar Partida ***********/
+
         socket.on("endGame", () => {
-            //Terminar Partida
             this.loadedScenes.forEach(scene => {
                 game.scene.remove(scene);
-                console.log(game.scene.scenes);
+                //console.log(game.scene.scenes);
             });
+            
+            this.scene.start("EndGameScene", {nChallenges: this.nChallenges});
 
-            game.scene.getScene("ui").scene.stop();
-            game.scene.getScene("time").scene.stop();
-            window.stream = undefined;
-            app.currentPage="home";
+            // game.scene.getScene("ui").scene.stop();
+            // game.scene.getScene("time").scene.stop();
+            
+
+
+            //window.stream = undefined;
+            //app.currentPage="home";
         });
 
         this.wallsLayer = new WallsLayer(this);

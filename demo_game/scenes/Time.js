@@ -24,9 +24,14 @@ class Time extends Phaser.Scene {
         // 
     }
 
+    getTime(){
+        return this.segundos;
+    }
+
     end() {
+        console.log("End en time");
         this.time.removeEvent(this.timedEvent);
-        this.scene.get('game').events.emit("tiempo", this.segundos)
+        this.scene.get('EndGameScene').events.emit("tiempo", this.segundos)
     }
 
     formatTime(seconds){
