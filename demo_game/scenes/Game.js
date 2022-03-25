@@ -2,11 +2,9 @@ class Game extends Phaser.Scene {
     constructor() {
         super("game")
     }
-    //map.getLayer("walls").data[5][5].properties?.horitzontalWall
     init(data){
         console.log("init")
         let playersArray = [];
-        console.log(data);
         data.players.forEach(element => {
             this.player = new Player(this, element.id, element.x, element.y, "player", element.initiator);
             playersArray.push(this.player);
@@ -15,10 +13,11 @@ class Game extends Phaser.Scene {
             }
         });
         this.diff=data.diff;
-        console.log("this.diff");
-        console.log(this.diff);
+
         //lista de minijuegos disponibles
         this.gamesAvailable = ["PasswordMGScene"]
+
+        //lista de minijuegos que tendra la escena
         this.games = []
         //Set map
         this.getRandomMap(this.diff);
@@ -113,7 +112,6 @@ class Game extends Phaser.Scene {
             key: "map"
         });
         this.nChallenges = this.map.objects[2].objects[0].properties[0].value
-        console.log(this.nChallenges)
         
         this.playerCollider = this.player.playerCollider
 
@@ -133,7 +131,6 @@ class Game extends Phaser.Scene {
 
         var end = this.physics.add.staticGroup();
         var endSpawn = this.map.objects[0].objects.filter(this.endFilter);
-        console.log(endSpawn[0]);
         var endTile = end.create(endSpawn[0].x+18,endSpawn[0].y+20)
         endTile.body.setSize(endSpawn[0].width,endSpawn[0].height)
         endTile.visible = false
@@ -175,21 +172,12 @@ class Game extends Phaser.Scene {
                 case 'door':
                     //Cambiar la hitbox de la puerta cerrada
                     this.door = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'door', 'door-closed');
-                    //this.closed_door.anims.play('door-closed');
                     this.door.body.setSize(width, height*0.1).setOffset(width-33,height-5);
                     this.physics.add.collider(this.door, this.playersGroup)
                     this.door.challenge = object.properties[0].value
                     //Agregar puerta al grupo de puertas
                     this.doorsGroup.add(this.door);
                     window.door = this.doorsGroup;
-                    break;
-                case 'chest':
-                    // //Cambiar la hitbox del cofre
-                    // this.chest = this.physics.add.staticSprite(x+(width/2),y-(height/2), 'chest', 'open-chest');
-                    // //this.closed_door.anims.play('door-closed');
-                    // this.chest.body.setSize(width, height*0.1).setOffset(width-33,height-5);
-                    // //Agregar cofre al grupo de cofres
-                    // this.chestsGroup.add(this.chest);
                     break;
                 case 'table':
                     this.table = [];
@@ -205,11 +193,6 @@ class Game extends Phaser.Scene {
                         this.tableCollider[i].body.immovable = true
                         this.physics.add.collider(this.tableCollider[i], this.playersGroup);
                     }
-                    
-                    //Cambiar la hitbox de la mesa
-                    //Hitbox de la mesa y que no se pueda mover
-                    
-
                     break;
             }
         });
@@ -226,8 +209,6 @@ class Game extends Phaser.Scene {
             this.doorsColiders[i] = this.physics.add.collider(this.playersGroup, this.doorsGroup[i]);
         }
         this.physics.add.collider(this.playersGroup, this.doorsGroup);
-        console.log(this.doorsColiders);
-        //console.log("Pone el collider");
         // ******************************************************************************************************************
 
         //**************************************Cofre**************************************
@@ -254,7 +235,6 @@ class Game extends Phaser.Scene {
                         that.player.setDepth(0);
                     }
                     if(eKey.isDown && that.canDoPuzzle){
-                        console.log(that.gamesList);
                         that.scene.pause();
                         that.scene.launch(that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper");
                         that.activeScene = that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper";
@@ -262,7 +242,6 @@ class Game extends Phaser.Scene {
                     }
 
                     if(that.buttonActive && that.canDoPuzzle){
-                        //that.scene.launch('enterPasswordScene');
                         that.scene.pause();
                         that.scene.launch(that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper");
                         that.activeScene = that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper";
@@ -279,8 +258,6 @@ class Game extends Phaser.Scene {
                         that.player.setDepth(0);
                     }
                     if (eKey.isDown && that.canDoPuzzle) {
-                        //pass this.playableScene
-                        //that.scene.launch('enterPasswordScene');
                         that.scene.pause();
                         that.scene.launch(that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge");
                         that.activeScene = that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge";
@@ -288,7 +265,6 @@ class Game extends Phaser.Scene {
                     }
 
                     if(that.buttonActive && that.canDoPuzzle){
-                        //that.scene.launch('enterPasswordScene');
                         that.scene.pause();
                         that.scene.launch(that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge");
                         that.activeScene = that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge";
@@ -304,12 +280,10 @@ class Game extends Phaser.Scene {
         
         this.canDoPuzzle = true
 
-        //this.door = this.physics.add.sprite(100, 250, 'player','walk-down-3.png' );
         this.anims.create({
             key: 'door-closed',
             frames: [{key: 'door', frame: 'door-0.png'}],
         })
-        // this.door
 
         this.anims.create({
             key: 'opening-door',
@@ -333,38 +307,20 @@ class Game extends Phaser.Scene {
         //*************************************************************Escena de victoria
         socket.on("passwordPuzzleResolved", (data) => {
             console.log("Puzzle complete");
-            console.log(this.challenge);
             this.challenge++;
-            console.log(this.challenge);
-            console.log(this.nChallenges);
 
             this.doorsGroup.children.entries.forEach(element => {
                 if (element.challenge == this.challenge) {
-                    console.log("Primer if");
                     element.play('opening-door');
                     element.disableBody()
                     this.physics.world.removeCollider(element);
-                    // this.table.disableBody();
                 } else if (this.challenge == this.nChallenges) {
-                    console.log("Segundo if");
                     element.play('opening-door');
                     element.disableBody()
                     that.canDoPuzzle = false
-                    // this.table.disableBody();
-
-                    // this.physics.world.removeCollider(this.doorColider2);
                 }
             });
         });
-        // this.scene.get('enterPasswordScene').events.on('victoria', () => {
-        //     this.doorsGroup.playAnimation('opening-door');
-        //     this.physics.world.removeCollider(this.doorsColider);
-        //     // this.table.disableBody();
-        //     that.canDoPuzzle = false
-        // });
-
-        //mute button
-
         //HACK PARA TERMINAR PARTIDA XD
         // this.input.keyboard.on('keydown-Z',()=>{
         //     console.log("HACK ACTIVAD TERMINAR PARTIDA");
@@ -374,9 +330,7 @@ class Game extends Phaser.Scene {
         // })
         this.input.keyboard.on('keydown-Z',()=>{
             console.log("HACK ACTIVAD TERMINAR PARTIDA");
-            // for(i=0;i<2;i++){
                 socket.emit("passwordPuzzleComplete");
-            // }
         })
         window.owo = () => {
 
@@ -393,7 +347,6 @@ class Game extends Phaser.Scene {
 
         this.playerCollider = this.player.playerCollider
         window.player = this.playersGroup
-        console.log(this.isInitiator);    
 
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
@@ -403,11 +356,6 @@ class Game extends Phaser.Scene {
 
         window.map = this.map;
         if (this.isInitiator) {
-            console.log("ES INICIADOR");
-            //this.game.scene.add(this.infoScene, eval("new "+this.passwordminigame+"('helper','medium')"))
-            //this.game.scene.add(this.playableScene, eval("new "+this.passwordminigame+"('challenge','medium')"))
-            
-
             //generador de spawns para jugador
             this.spawns = this.map.objects[0].objects;
             this.spawnsP1 = this.spawns.filter(this.playerFilter,1);
@@ -417,7 +365,6 @@ class Game extends Phaser.Scene {
             //generador de spawns random para objetos
             this.spawnsObjects = [];
 
-            // window.map = this.map;
             for (let i = 1; i <= this.map.objects[2].objects[0].properties[0].value; i++) {
                 this.spawnsObjects[i-1] = this.spawns.filter(this.challengeFilter,i);
                 
@@ -428,22 +375,12 @@ class Game extends Phaser.Scene {
             this.challenge = []
             for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
                 this.gamesList.push(this.gamesAvailable[Math.floor(Math.random()*this.gamesAvailable.length)]);
-                //this.game.scene.add(this.games[i]+"_helper", eval("new "+this.games[i]+"('helper','medium')"))
-                console.log(this.gamesList[i]+i+"_helper");
-                //this.game.scene.add(this.games[i]+"_challenge",eval("new "+this.games[i]+"('challenge','medium')"))
-                console.log(this.gamesList[i]+i+"_challenge");
-                //this.game.scene.add(this.games[i]+i+"_helper", new PasswordMGScene(i,'helper','medium'));
                 this.game.scene.add(this.gamesList[i]+i+"_helper",eval("new "+this.gamesList[i]+"("+i+",'helper','easy')"))
                 this.game.scene.add(this.gamesList[i]+i+"_challenge",eval("new "+this.gamesList[i]+"("+i+",'challenge','easy')"))
                 this.loadedScenes.push(this.gamesList[i]+i+"_helper")
                 this.loadedScenes.push(this.gamesList[i]+i+"_challenge")
             }
             
-
-            //this.game.scene.add(this.games[0]+"1_challenge",eval("new "+this.games[0]+"('challenge','medium','1')"))
-            //this.game.scene.add(this.games[1]+"2_challenge",eval("new "+this.games[1]+"('challenge','medium','2')"))
-            console.log(this.gamesList);
-
             var spawns = {
                 "players":{
                     "p1": {
@@ -497,7 +434,6 @@ class Game extends Phaser.Scene {
                 }
                 
             }
-            console.log(spawns);
             socket.emit("spawns", spawns);
             this.placeItems(spawns);
         } else {
@@ -509,7 +445,6 @@ class Game extends Phaser.Scene {
          
             
         }
-        console.log(this.loadedScenes);
     }
   
     update() {
@@ -528,7 +463,6 @@ class Game extends Phaser.Scene {
                 if(this.stickActive){
                     player.x_speed = this.speeds['x'];
                     player.y_speed = this.speeds['y'];
-                    //console.log(this.stickDirection);
                     player.direction = this.stickDirection;
                 }
                 player.update();
@@ -692,7 +626,6 @@ class Game extends Phaser.Scene {
     }
     placeItems(spawns){
         //spawn jugadores
-        console.log(spawns);
         this.gamesList = spawns.gamesList;
         this.playersGroup.children.entries[0].x = spawns.players.p1.x
         this.playersGroup.children.entries[0].y = spawns.players.p1.y
@@ -719,9 +652,6 @@ class Game extends Phaser.Scene {
         //generar las escenas del segundo jugador con las contraseñas 
         for (let i = 0; i < spawns.gamesList.length; i++) {
             if (!this.isInitiator) {
-                // console.error(spawns.objects.chest[i].password);
-                // console.error("new "+spawns.gamesList[i]+"("+i+",'challenge','medium',"+JSON.stringify(spawns.objects.table[i].password)+")");
-                // console.error("new "+spawns.gamesList[i]+"("+i+",'helper','medium',"+JSON.stringify(spawns.objects.chest[i].password)+")");
                 this.game.scene.add(spawns.gamesList[i]+i+"_helper",eval("new "+spawns.gamesList[i]+"("+i+",'helper','easy',"+JSON.stringify(spawns.objects.chest[i].password)+")"))
                 this.game.scene.add(spawns.gamesList[i]+i+"_challenge",eval("new "+spawns.gamesList[i]+"("+i+",'challenge','easy',"+JSON.stringify(spawns.objects.table[i].password)+")"))
                 this.loadedScenes.push(spawns.gamesList[i]+i+"_helper");
@@ -747,8 +677,6 @@ class Game extends Phaser.Scene {
         this.infoScene = "PasswordMGScene"; 
         this.playableScene = "enterPasswordScene";
         this.roleScene = "helper"
-        //this.game.scene.add("SeePass", new SeePass('test'))
-        //this.game.scene.add("SeePass", eval("new SeePass('test')"))
         this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"',"+diff+")"))
     }
 
