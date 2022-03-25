@@ -3,7 +3,6 @@ class Game extends Phaser.Scene {
         super("game")
     }
     init(data){
-        console.log("init")
         let playersArray = [];
         data.players.forEach(element => {
             this.player = new Player(this, element.id, element.x, element.y, "player", element.initiator);
@@ -21,9 +20,6 @@ class Game extends Phaser.Scene {
         this.games = []
         //Set map
         this.getRandomMap(this.diff);
-        console.log("this.map")
-        console.log(this.map)
-        console.log("despues de mapa")
         this.gamesList = []
         
         this.playersGroup = this.add.group(playersArray);
@@ -39,7 +35,6 @@ class Game extends Phaser.Scene {
     }   
 
     preload() {
-        console.log("preoload")
         var path = "./demo_game/"
         this.segundos = 0;
         this.challenge = 0;
@@ -61,7 +56,6 @@ class Game extends Phaser.Scene {
         this.stickButtonActive = false;
         this.stickActive = false;
         //this.controllerConnected = false;
-        console.log("Cargo Juego");
         if(this.controllerConnected){
             console.log("Controller Connected");
             this.bluetoothConnection.setCallbackButtonA(this.pressBtn);
@@ -687,11 +681,7 @@ class Game extends Phaser.Scene {
             url: "http://localhost:1111/api/getmaps/"+diff
         })
         .done((data) => {
-            //LLegan todos los ids de los mapas con la dificultad elegida
-            console.log("se hace la peticion")
-            console.log(data);
-            console.log(data[Math.floor(Math.random() * data.length)]);
-            console.log(data[Math.floor(Math.random() * data.length)].name)
+            //Llegan todos los ids de los mapas con la dificultad elegida
             this.map = data[Math.floor(Math.random() * data.length)].name;
         })
         .fail(function () {

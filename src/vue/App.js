@@ -121,8 +121,6 @@ var app = new Vue({
         console.log("no hay sesión");
         this.currentPage = "login-warning";
       } else {
-        console.log("hay sesión " + newPage);
-        console.log(sessionStorage.getItem('session'));
         if (newPage == "waiting-room") {
           if (!this.mainMicId) {
             this.mainMicId = window.mic[0].id;

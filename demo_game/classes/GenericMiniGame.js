@@ -1,19 +1,14 @@
 class GenericMiniGame extends Phaser.Scene{
     constructor(name,type,difficulty){
         super(name);
-        console.log("type: "+type);
         //el tipo del minijuego solamente puede ser reto(challenge) o ayuda (helper)
         if (type == 'challenge' || type == 'helper') {
             this.type = type;
-        } else {
-            console.log('El tipo del minijuego no es correcto');
         }
 
         //Dificultad del minijuego (easy=1, medium=2, hard=3)
         if (difficulty=="easy" || difficulty =="medium" || difficulty=="hard"){
             this.difficulty = difficulty;
-        } else {
-            console.log('La dificultad introducida no es correcta');
         }
 
         this.buttonActive;
