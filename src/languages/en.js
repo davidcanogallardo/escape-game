@@ -47,5 +47,20 @@ export default {
     language: "Languages",
     spanish: "Spanish",
     english: "English",
-    changelanguage: "Change Language"
+    changelanguage: "Change Language",
+    // 
+    rankingTitle: "Select a difficulty:",
+    allTimeRankingTable: "All time",
+    weeklyRankingTable: "Weekly",
+    dailyRankingTable: "Daily",
+    easyDifficulty: "Easy",
+    mediumDifficulty: "Medium",
+    hardDifficulty: "Hard",
+    rankingSubtitleEasy: "Ranking of easy difficulty levels:",
+    rankingSubtitleMedium: "Ranking of medium difficulty levels:",
+    rankingSubtitleHard: "Ranking of hard difficulty levels:",
+    // rankingTitle: "Select a difficulty:",
+    // rankingTitle: "Select a difficulty:",
+    // rankingTitle: "Select a difficulty:",
+    // rankingTitle: "Select a difficulty:",
 }

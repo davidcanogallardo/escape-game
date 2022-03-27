@@ -5,6 +5,7 @@ class Game extends Phaser.Scene {
     init(data){
         let playersArray = [];
         data.players.forEach(element => {
+            console.log('players', element);
             this.player = new Player(this, element.id, element.x, element.y, "player", element.initiator);
             playersArray.push(this.player);
             if (element.id == socket.id) {

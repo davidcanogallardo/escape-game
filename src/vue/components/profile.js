@@ -97,12 +97,10 @@ Vue.component("profile", {
     <div class="profile">
     <change v-if="page == 'profile' && changeImg == true" class="change" v-on:change-img="changeImg = $event" v-on:changeProfileImg="profileImg = $event" :user="user"></change>
         <h1 id="profile-name">{{user.username}}</h1>
-        <div class="container-profile">
-            <div :class="'icon icon-profile bg-'+profileImg.iconBG"v-on:click="changeImg = true" style="position:relative;">
-                <i :class="'i-profile fas fa-'+profileImg.icon+' color-'+profileImg.iconColor" aria-hidden="true"></i>
-
-                <i v-if="page == 'profile'" class="fas fa-edit edit-icon" aria-hidden="true"></i>
-            </div>
+        <div class="container-profile" v-on:click="changeImg = true">
+            <profile-photo  :photo="profileImg" class="icon icon-profile" style="position:relative; font-size: 9vw;">
+              <i v-if="page == 'profile'" class="fas fa-edit edit-icon" aria-hidden="true"></i>
+            </profile-photo>
             <br>
         </div>
         <div v-if="page == 'profile'" style="width: 130vw;">

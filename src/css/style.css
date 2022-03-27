@@ -60,7 +60,7 @@ h3 {
     font-size: 4vw;
     margin: 1vw;
     color: #68492E;
-    letter-spacing: 0.3vw;
+    /* letter-spacing: 0.3vw; */
 }
 
 /*Contenedor de plantilla de las páginas*/
@@ -187,6 +187,10 @@ body {
     background-color: rgba(196, 196, 196, 0.56);
     border: 2px solid #68492E;
     color: #68492E;
+    border-radius: 0.6vw;
+    padding: -9.5vw;
+    width: 10vw;
+    font-size: 2.6vw;
 }
 
 .selected fa-gamepad {
@@ -527,7 +531,7 @@ body {
 }
 
 .botones .btn {
-    width: 35vw;
+    width: 40vw;
 }
 
 
@@ -763,9 +767,11 @@ body {
 
 td,
 th {
-    font-size: 2vw;
+    font-size: 1.5vw;
     background-color: #c4c4c486;
     border: 1px solid #562800;
+    border-radius: 0.2vw;
+    letter-spacing: 0.1vw;
 }
 
 input[type=password],
@@ -1397,9 +1403,14 @@ input[type=text] {
 
 /********************************Página de ranking************************************/
 
+#ranking_title {
+    font-size: 2.5vw;
+}
+
 .ranking_diff{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 6vw;
 }
 
 .level-slider {
@@ -1427,7 +1438,8 @@ input[type=text] {
 }
 
 .level-name {
-    margin-top: 50px;
+    margin-top: 0.1vw;
+    font-size: 3vw;
 }
 
 .all-levels {
@@ -1438,7 +1450,7 @@ input[type=text] {
 
 .all-levels th,
 td {
-    padding: 1vw;
+    padding: 0.5vw;
 }
 
 .all-levels .name {

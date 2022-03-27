@@ -73,7 +73,7 @@ Vue.component('login', {
             console.log(this.loginInput.username);
             console.log(this.loginInput.password);
             if(!this.loginInputisEmpty()){
-                this.$root.loginPetition(this.loginInput)
+                this.$root.login(this.loginInput)
             } else {
                 console.log('campos vacios');
                 // this.errorType = "login";
@@ -96,7 +96,7 @@ Vue.component('login', {
                         console.log(this.signupInput.username);
                         console.log(this.signupInput.password);
                         console.log(this.signupInput.mail);
-                        this.$root.signupPetition(this.signupInput);
+                        this.$root.signup(this.signupInput);
                     } else {
                         // this.errorType = "register";
                         // this.signupErrorMessage = "Introduce un email valido";

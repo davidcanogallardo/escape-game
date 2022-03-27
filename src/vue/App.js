@@ -148,8 +148,8 @@ var app = new Vue({
         this.token = sessionStorage.getItem("token");
         window.token = sessionStorage.getItem("token");
         connect();
-        window.setInterval(this.updateFriendRequest, 15000);
-        window.setInterval(this.updateFriendList, 50000);
+        window.setInterval(this.getNotification, 10000);
+        window.setInterval(this.getFriendList, 10000);
       }
     });
   },
@@ -158,22 +158,25 @@ var app = new Vue({
       sessionStorage.setItem("session", JSON.stringify(this.user));
     },
     // *******************************/api/friendlist*********************************************
-    updateFriendList() {
+    getFriendList() {
       console.log("trato de actualizar lista amigos");
       if (this.user) {
         $.ajax({
           xhrFields: {
             withCredentials: true,
           },
-          type: "POST",
+          type: "GET",
           headers: {
             Authorization: "Bearer " + this.token,
           },
-          url: _url + "/api/friendlist",
+          url: _url + "/api/user/friendlist",
         })
           .done((data) => {
             if (data.success) {
               console.log(data);
+              data.data.query.forEach(friend => {
+                friend.profile_photo = JSON.parse(friend.profile_photo)
+              })
               this.user.friendsList = data.data.query;
               this.saveUserInSession()
             
@@ -189,7 +192,7 @@ var app = new Vue({
       }
     },
     // *******************************/api/user/listrequests*********************************************
-    updateFriendRequest() {
+    getNotification() {
       console.log("trato de actualizar peticiones");
       if (this.user) {
         $.ajax({
@@ -200,7 +203,7 @@ var app = new Vue({
           headers: {
             Authorization: "Bearer " + this.token,
           },
-          url: _url + "/api/user/listrequests",
+          url: _url + "/api/user/notification",
         })
           .done((data) => {
             if (data.success) {
@@ -224,17 +227,18 @@ var app = new Vue({
       }
     },
     // *******************************/api/login*********************************************
-    loginPetition(form_data) {
+    login(data) {
       $.ajax({
         data: {
-          email: form_data.username,
-          password: form_data.password,
+          email: data.username,
+          password: data.password,
         },
         type: "POST",
         url: _url + "/api/login",
       })
         .done((data, textStatus, jqXHR) => {
             if (data.success) {
+              console.log('user', data.data);
               window.token = data.data.token;
               var userInfo = data.data;
               let user = new User(
@@ -250,11 +254,12 @@ var app = new Vue({
                 ],
                 "summoners rift",
                 12,
-                JSON.parse(userInfo.photo)
+                // JSON.parse(userInfo.photo)
+                userInfo.photo
               );
               this.saveUserInSession()
               sessionStorage.setItem("token", window.token);
-              window.setTimeout(this.updateFriendRequest, 15000);
+              window.setTimeout(this.getNotification, 15000);
               window.setInterval(this.updateFriendList, 50000);
               this.$root.currentPage = "home";
               this.$root.user = user;
@@ -272,13 +277,13 @@ var app = new Vue({
         });
     },
     // *******************************/api/register*********************************************
-    signupPetition(form_data) {
+    signup(data) {
       $.ajax({
         data: {
-          name: form_data.username,
-          email: form_data.mail,
-          password: form_data.password,
-          confirm_password: form_data.password_confirm,
+          name: data.username,
+          email: data.mail,
+          password: data.password,
+          confirm_password: data.password_confirm,
         },
         type: "POST",
         url: _url + "/api/register",
@@ -312,7 +317,7 @@ var app = new Vue({
         headers: {
           Authorization: "Bearer " + window.token,
         },
-        url: _url + "/api/user/sendrequest",
+        url: _url + "/api/user/friend-request",
       })
         .done((data) => {
           console.log(data);
@@ -331,8 +336,7 @@ var app = new Vue({
           showNotification("Fallo servidor", "red");
       });
     },
-    // TODO
-    getFriendData(friendName) {
+    getUserInfo(friendName) {
       $.ajax({
         type: "GET",
         url: _url + '/api/user/userinfo/'+friendName,
@@ -367,17 +371,17 @@ var app = new Vue({
       disconnect();
     },
     //*********************************************/api/user/handlerequest/*********************************************
-    friendRequest(friend, accept) {
+    handleFriendRequest(friend, response) {
       $.ajax({
         type: "PUT",
-        url: _url + "/api/user/handlerequest/" + friend.name + "/" + accept,
+        url: _url + "/api/user/handle-request/" + friend.name + "/" + response,
         headers: {
           Authorization: "Bearer " + this.token,
         },
       })
         .done((data) => {
           if (data.success) {
-            if (accept) {
+            if (response) {
               this.$root.user.friendsList.push(friend);
             }
             var index = this.$root.user.notifications.indexOf(friend);
@@ -397,14 +401,12 @@ var app = new Vue({
     //*********************************************/api/ranking*********************************************
     getRankingData() {
       $.ajax({
-        data: { petition: "ranking" },
-        type: "POST",
-        dataType: "json",
-        url: _url + "/api/ranking",
+        type: "GET",
+        url: _url + "/api/game/ranking",
       })
         .done((data) => {
           if (data.success) {
-            this.$root.rankingData = data;
+            this.$root.rankingData = data.data.ranking;
             console.log("RankingData");
             console.log(data);
           } else {
@@ -418,11 +420,11 @@ var app = new Vue({
       });
     },
     //*********************************************/user/addgame/{level}/{time}*********************************************
-    updateRanking(data) {
+    addGame(data) {
       $.ajax({
-        type: "POST",
+        type: "PUT",
         dataType: "json",
-        url: _url+ "/api/user/addgame/"+data.level+"/"+data.time,
+        url: _url+ "/api/user/game/"+data.level+"/"+data.time,
       })
         .done(function (data) {
           if (data.success) {
@@ -452,7 +454,8 @@ var app = new Vue({
       })
         .done((data) => {
           if (data.success) {
-            // TODO 
+            // TODO internacionalizacion
+            showNotification("Foto actualizada", "green");
           } else {
             console.log(data);
             // TODO internacionalizacion

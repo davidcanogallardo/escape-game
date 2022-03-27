@@ -5,8 +5,8 @@ Vue.component('friend-item', {
     `
     <div>
       <div title="Ver perfil" class="list-item friend-profile-link" page="friend-profile-page" :name="name" v-on:click="profile(); " >
-        <div class="icon-container pr-btn" :name="name">
-          <i class="fas fa-user" aria-hidden="true" :name="name"></i>
+        <div class="pr-btn">
+          <profile-photo :photo="name.profile_photo" >
         </div>
         <span :name="name" >{{name.name}}</span>
         <div title="Chatear" class="icon-container add-btn send-invitation" v-on:click.stop="chat();" style="position:relative;">
@@ -19,7 +19,7 @@ Vue.component('friend-item', {
     props: ["name"],
     methods: {
       profile() {
-          this.$root.getFriendData(this.name.id)
+          this.$root.getUserInfo(this.name.id)
           this.$emit('change-page','profile')
         },
         chat() {

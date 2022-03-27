@@ -28,7 +28,7 @@ Vue.component('friend-item', {
     props: ["name"],
     methods: {
       profile() {
-          this.$root.getFriendData(this.name)
+          this.$root.getUserInfo(this.name)
           this.$emit('change-page','profile')
         },
         chat() {

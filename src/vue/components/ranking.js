@@ -3,15 +3,18 @@ Vue.component('ranking-sub-table', {
     `
     <table>
         <thead>
-            <th>name</th>
+            <th>Username</th>
             <th>Games Played</th>
-            <th>Score</th>
+            <th>Average score</th>
         </thead>
         <tbody>
             <tr 
                 v-for="(item) in item"
             >
-                <td>{{item.name}}</td>
+                <td style="display: flex;align-items: center; gap: 0.4vw;">
+                    <profile-photo :photo="item.profile_photo" style="width: 3vw;height: 3vw;" />
+                    {{item.name}}
+                </td>
                 <td>{{item.nGames}}</td>
                 <td>{{item.avgScore}}</td>
             </tr>
@@ -25,7 +28,7 @@ Vue.component('ranking-table', {
     template: //html
     `             
     <div>
-        <h3 class="level-name">{{diffName}}</h3>
+        <h3 class="level-name">Ranking of {{diffName}} difficulty levels:</h3>
         <div class="all-levels">
             <div class="ranking-table">
                 <table>
@@ -33,7 +36,7 @@ Vue.component('ranking-table', {
                         <tr>
                             <th 
                                 v-for="(item, name) in diffItem"
-                            >{{name}}</th>
+                            >$t("{{name}}")</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,8 +60,10 @@ Vue.component('ranking-table', {
 })
 Vue.component('ranking', {
     template: //html
+    // TODO internacionalizacion
     `
     <div class="ranking">
+        <div id="ranking_title">Select a difficulty:</div>
         <div class="ranking_diff">
             <div class="ranking_diff_easy selected" v-on:click="changeDiff($event, 'easy')">Easy</div>
             <div class="ranking_diff_medium" v-on:click="changeDiff($event, 'medium')">Medium</div>
