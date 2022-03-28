@@ -26,9 +26,10 @@ class PhaserGame extends Phaser.Game {
         console.log(spawns)
         this.spawns = spawns;
         console.log(this.scene.getScene("game").activeScene)
-        // if (this.scene.getScene("game").activeScene) {
-        //   this.scene.getScene("game").placeItems(spawns)
-        // }
+        if (this.scene.getScene("game").activeScene) {
+          console.log(spawns);
+          this.scene.getScene("game").placeItems(spawns)
+        }
       })
   }
 }
