@@ -147,12 +147,9 @@ class Game extends Phaser.Scene {
             
             this.scene.start("EndGameScene", {nChallenges: this.nChallenges, players: this.playersArray});
 
-            // game.scene.getScene("ui").scene.stop();
-            // game.scene.getScene("time").scene.stop();
-            
-
-
-            //window.stream = undefined;
+            game.scene.getScene("ui").scene.stop();
+    
+            window.stream = undefined;
             //app.currentPage="home";
         });
 
@@ -623,6 +620,7 @@ class Game extends Phaser.Scene {
                 return 3
         }
     }
+
     placeItems(spawns){
         //spawn jugadores
         this.gamesList = spawns.gamesList;
@@ -659,6 +657,7 @@ class Game extends Phaser.Scene {
             }
         }
     }
+    
     start(players){
         this.playersArray = [];
 

@@ -79,6 +79,7 @@ socket.on("endGame", () => {
   }
 });
 
+
 let excludedPages = [
   "home",
   "game",
