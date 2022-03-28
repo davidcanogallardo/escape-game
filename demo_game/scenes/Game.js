@@ -436,7 +436,6 @@ class Game extends Phaser.Scene {
             // socket.on("getSpawns", (spawns) => {
             //    this.placeItems(spawns);
             // })
-
             this.placeItems(this.game.spawns);
          
             
@@ -622,6 +621,7 @@ class Game extends Phaser.Scene {
     }
 
     placeItems(spawns){
+        console.log(spawns);
         //spawn jugadores
         console.warn('spawns', spawns.gamesList);
         this.gamesList = spawns.gamesList;
