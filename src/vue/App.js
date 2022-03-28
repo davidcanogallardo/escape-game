@@ -148,7 +148,7 @@ var app = new Vue({
         this.token = sessionStorage.getItem("token");
         window.token = sessionStorage.getItem("token");
         connect();
-        window.setInterval(this.getNotification, 10000);
+        window.setInterval(this.getNotificationList, 10000);
         window.setInterval(this.getFriendList, 10000);
       }
     });
@@ -157,7 +157,7 @@ var app = new Vue({
     saveUserInSession() {
       sessionStorage.setItem("session", JSON.stringify(this.user));
     },
-    // *******************************/api/friendlist*********************************************
+    // ******************************* GET /api/user/friend-list *********************************************
     getFriendList() {
       console.log("trato de actualizar lista amigos");
       if (this.user) {
@@ -169,7 +169,7 @@ var app = new Vue({
           headers: {
             Authorization: "Bearer " + this.token,
           },
-          url: _url + "/api/user/friendlist",
+          url: _url + "/api/user/friend-list",
         })
           .done((data) => {
             if (data.success) {
@@ -191,8 +191,8 @@ var app = new Vue({
         });
       }
     },
-    // *******************************/api/user/listrequests*********************************************
-    getNotification() {
+    // ******************************* GET /api/user/notification-list *********************************************
+    getNotificationList() {
       console.log("trato de actualizar peticiones");
       if (this.user) {
         $.ajax({
@@ -203,7 +203,7 @@ var app = new Vue({
           headers: {
             Authorization: "Bearer " + this.token,
           },
-          url: _url + "/api/user/notification",
+          url: _url + "/api/user/notification-list",
         })
           .done((data) => {
             if (data.success) {
@@ -226,7 +226,7 @@ var app = new Vue({
         });
       }
     },
-    // *******************************/api/login*********************************************
+    // ******************************* POST /api/login *********************************************
     login(data) {
       $.ajax({
         data: {
@@ -259,8 +259,8 @@ var app = new Vue({
               );
               this.saveUserInSession()
               sessionStorage.setItem("token", window.token);
-              window.setTimeout(this.getNotification, 15000);
-              window.setInterval(this.updateFriendList, 50000);
+              window.setTimeout(this.getNotificationList, 10000);
+              window.setInterval(this.getFriendList, 10000);
               this.$root.currentPage = "home";
               this.$root.user = user;
               this.$root.token = data.data.token;
@@ -276,7 +276,7 @@ var app = new Vue({
             showNotification("Fallo servidor", "red");
         });
     },
-    // *******************************/api/register*********************************************
+    // ******************************* POST /api/register *********************************************
     signup(data) {
       $.ajax({
         data: {
@@ -304,7 +304,7 @@ var app = new Vue({
           showNotification("Fallo servidor", "red");
       });
     },
-    //*********************************************/api/user/sendrequest*********************************************
+    //********************************************* PUT /api/user/friend-request *********************************************
     sendFriendRequest(friend) {
       $.ajax({
         data: {
@@ -336,6 +336,7 @@ var app = new Vue({
           showNotification("Fallo servidor", "red");
       });
     },
+    //********************************************* GET /api/user/userinfo/{id} *********************************************
     getUserInfo(friendName) {
       $.ajax({
         type: "GET",
@@ -370,7 +371,7 @@ var app = new Vue({
       this.$root.currentPage = "home";
       disconnect();
     },
-    //*********************************************/api/user/handlerequest/*********************************************
+    //********************************************* PUT /api/user/handle-request/{friend}/{response} *********************************************
     handleFriendRequest(friend, response) {
       $.ajax({
         type: "PUT",
@@ -398,7 +399,7 @@ var app = new Vue({
           showNotification("Fallo servidor", "red");
       });
     },
-    //*********************************************/api/ranking*********************************************
+    //********************************************* GET /api/game/ranking *********************************************
     getRankingData() {
       $.ajax({
         type: "GET",
@@ -419,7 +420,7 @@ var app = new Vue({
           showNotification("Fallo servidor", "red");
       });
     },
-    //*********************************************/user/addgame/{level}/{time}*********************************************
+    //********************************************* PUT /user/game/{level}/{time} *********************************************
     addGame(data) {
       $.ajax({
         type: "PUT",
@@ -439,7 +440,7 @@ var app = new Vue({
           showNotification("Fallo servidor", "red");
       });
     },
-    //*********************************************/api/user/update/photo*********************************************
+    //********************************************* PUT /user/update/photo ********************************************
     updatePhoto(photo) {
       $.ajax({
         data: {
