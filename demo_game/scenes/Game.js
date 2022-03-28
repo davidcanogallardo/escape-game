@@ -686,8 +686,9 @@ class Game extends Phaser.Scene {
             url: "http://localhost:1111/api/game/random-map/"+diff
         })
         .done((data) => {
+            console.log(data);
             //Llegan todos los ids de los mapas con la dificultad elegida
-            this.map = data[Math.floor(Math.random() * data.length)].name;
+            this.map = data.name;
         })
         .fail(function () {
             showNotification("Fallo servidor", "red");
