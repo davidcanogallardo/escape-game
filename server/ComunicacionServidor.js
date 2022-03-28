@@ -85,16 +85,12 @@ class ComunicacionServidor {
         }
     
         manageQueue(socket, data){
-            //console.log(data);
-            let user;
-            if(data[0]==null){
-                user = {
-                    username: "guest"
-                }
-            } else {
+            console.warn(data);
+            // console.warn(socket);
+            let user = "guest";
+            if(data[0]!=null) {
                 user = data[0];
             }
-
             
             let diff = data[1];
             // console.log(user);
@@ -104,7 +100,7 @@ class ComunicacionServidor {
                 //console.log("Añado a la cola");
                 const player = {
                     id: socket.id,
-                    userame: user.username,
+                    username: user,
                     x: 100,
                     y: 250,
                     initiator: true,
@@ -124,7 +120,7 @@ class ComunicacionServidor {
             } else {
                 const player = {
                     id: socket.id,
-                    userame: user.username,
+                    username: user,
                     x: 250,
                     y: 250,
                     initiator: false,

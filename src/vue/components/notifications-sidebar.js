@@ -4,10 +4,10 @@ Vue.component('notification-item', {
     template: //html
     `
     <div class="list-item">
-        <div class="icon-container pr-btn" >
-            <i class="fas fa-user" aria-hidden="true"></i>
-        </div>
-        <span >{{name.name}}</span>
+        
+        <profile-photo :photo="name.profile_photo">
+        </profile-photo>
+        <span>{{name.name}}</span>
         <div class="btn accept" v-on:click="request(true)">
             <i class="fas fa-check" aria-hidden="true"></i>
         </div>

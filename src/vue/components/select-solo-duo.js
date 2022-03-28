@@ -1,3 +1,5 @@
+import { app } from "../App.js"
+
 Vue.component('select-solo-duo', {
     template: //html
     `
@@ -29,7 +31,11 @@ Vue.component('select-solo-duo', {
 
     methods: {
         searchSolo(){
-            socket.emit('startQueue', [this.user2, this.difficulty]);
+            if (app.user == null) {
+                socket.emit('startQueue', ["guest", this.difficulty]);
+            } else {
+                socket.emit('startQueue', [app.user.username, this.difficulty]);
+            }
             this.$emit('change-page','waiting-room');
         },
         searchDuo(){

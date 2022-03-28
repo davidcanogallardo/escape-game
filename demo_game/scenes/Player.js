@@ -1,5 +1,5 @@
 class Player extends Phaser.GameObjects.Sprite{
-    constructor(scene, id, x, y, sprite, initiator) {
+    constructor(scene, id, x, y, sprite, initiator, username) {
         super(scene, x, y, sprite);
         this.id = id;
         this.speed = 150;
@@ -13,6 +13,7 @@ class Player extends Phaser.GameObjects.Sprite{
         this.playerCollider = scene.physics.add.image(200, 50);
         this.initiator = initiator;
         this.direction = 'idle'
+        this.username = username
         this.x_speed = 150;
         this.y_speed = 150;
         

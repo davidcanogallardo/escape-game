@@ -12,7 +12,7 @@ class EndGameScene extends Phaser.Scene{
     create(){
         let { width, height } = this.sys.game.canvas;
         this.gameTime = this.game.scene.getScene('time').getTime();
-
+        console.warn(this.game.scene.getScene('game'));
         console.log(this.gameTime);
         console.log(this.nChallanges);
         let score = this.getServerScore(this.gameTime, this.nChallanges);

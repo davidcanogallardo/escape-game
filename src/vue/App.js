@@ -10,7 +10,12 @@ var guestPeerClient = undefined;
 let audioTag;
 
 socket.on("matchFound", (data) => {
-  startPeerStream(startClientPeer, data);
+  if (window.mic[0] == undefined) {
+    window.stream = null  
+    startClientPeer(data)  
+  } else {
+    startPeerStream(startClientPeer, data);
+  }
 });
 
 function startClientPeer(data) {
@@ -141,7 +146,6 @@ var app = new Vue({
     },
   },
   mounted() {
-   
     this.$nextTick(() => {
       if (this.user) {
         console.log("set token");
@@ -159,7 +163,7 @@ var app = new Vue({
     },
     // ******************************* GET /api/user/friend-list *********************************************
     getFriendList() {
-      console.log("trato de actualizar lista amigos");
+      // console.log("trato de actualizar lista amigos");
       if (this.user) {
         $.ajax({
           xhrFields: {
@@ -173,10 +177,10 @@ var app = new Vue({
         })
           .done((data) => {
             if (data.success) {
-              console.log(data);
-              data.data.query.forEach(friend => {
-                friend.profile_photo = JSON.parse(friend.profile_photo)
-              })
+              // console.log(data);
+              // data.data.query.forEach(friend => {
+              //   friend.profile_photo = JSON.parse(friend.profile_photo)
+              // })
               this.user.friendsList = data.data.query;
               this.saveUserInSession()
             
@@ -193,7 +197,7 @@ var app = new Vue({
     },
     // ******************************* GET /api/user/notification-list *********************************************
     getNotificationList() {
-      console.log("trato de actualizar peticiones");
+      // console.log("trato de actualizar peticiones");
       if (this.user) {
         $.ajax({
           xhrFields: {
@@ -207,8 +211,8 @@ var app = new Vue({
         })
           .done((data) => {
             if (data.success) {
-              console.log(data);
-              console.log(this.user.notifications);
+              // console.log(data);
+              // console.log(this.user.notifications);
               if (data.data.requests > this.user.notifications) {
                 this.notificationunsread = true;
               }
@@ -518,6 +522,7 @@ var app = new Vue({
     },
   },
 });
+
 var that = this;
 window.app = app;
 window.get = getSessionUser

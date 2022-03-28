@@ -30,8 +30,8 @@ Vue.component('friend-item', {
           });
       },
       hasNewMessages() {
-        console.log(this.name.name);
-        console.log(app.peopleUnread);
+        // console.log(this.name.name);
+        // console.log(app.peopleUnread);
         if (app.peopleUnread.indexOf(this.name.name) != -1) {
           return true
         } 

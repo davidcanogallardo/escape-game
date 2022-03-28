@@ -3,11 +3,11 @@ class Game extends Phaser.Scene {
         super("game")
     }
     init(data){
-        let playersArray = [];
+        this.playersArray = [];
         data.players.forEach(element => {
             console.log('players', element);
-            this.player = new Player(this, element.id, element.x, element.y, "player", element.initiator);
-            playersArray.push(this.player);
+            this.player = new Player(this, element.id, element.x, element.y, "player", element.initiator, element.username);
+            this.playersArray.push(this.player);
             if (element.id == socket.id) {
                 this.isInitiator = element.initiator; 
             }
@@ -23,7 +23,7 @@ class Game extends Phaser.Scene {
         this.getRandomMap(this.diff);
         this.gamesList = []
         
-        this.playersGroup = this.add.group(playersArray);
+        this.playersGroup = this.add.group(this.playersArray);
         this.activeScene = "game";
         this.infoScene = "PasswordMGScene_helper"; 
         this.passwordminigame = "PasswordMGScene"; 
@@ -145,7 +145,7 @@ class Game extends Phaser.Scene {
                 //console.log(game.scene.scenes);
             });
             
-            this.scene.start("EndGameScene", {nChallenges: this.nChallenges});
+            this.scene.start("EndGameScene", {nChallenges: this.nChallenges, players: this.playersArray});
 
             // game.scene.getScene("ui").scene.stop();
             // game.scene.getScene("time").scene.stop();
@@ -156,7 +156,7 @@ class Game extends Phaser.Scene {
             //app.currentPage="home";
         });
 
-        this.wallsLayer = new WallsLayer(this);
+        // this.wallsLayer = new WallsLayer(this);
         
         // ***************************************LEYENDA****************************************************************************
 
@@ -660,18 +660,18 @@ class Game extends Phaser.Scene {
         }
     }
     start(players){
-        let playersArray = [];
+        this.playersArray = [];
 
         players.forEach(element => {
             this.player = new Player(this, element.id, element.x, element.y, "player", element.initiator);
-            playersArray.push(this.player);
+            this.playersArray.push(this.player);
             if (element.id == socket.id) {
                 this.isInitiator = element.initiator; 
             }
         });
         this.diff=data.diff;
         
-        this.playersGroup = this.add.group(playersArray);
+        this.playersGroup = this.add.group(this.playersArray);
         this.activeScene = "game";
         this.infoScene = "PasswordMGScene"; 
         this.playableScene = "enterPasswordScene";
@@ -683,7 +683,7 @@ class Game extends Phaser.Scene {
         $.ajax({
             async: false,
             type: "GET",
-            url: "http://localhost:1111/api/getmaps/"+diff
+            url: "http://localhost:1111/api/game/random-map/"+diff
         })
         .done((data) => {
             //Llegan todos los ids de los mapas con la dificultad elegida

@@ -37,7 +37,7 @@ socket.on("newMessage", data => {
 
 function connect() {
   console.log("conectado a socket server");
-  console.log("=>"+socket);
+  console.log("socket",socket);
   socket.connect();
   sender = app.user.username
   socket.emit("chatUserConnect", sender);
