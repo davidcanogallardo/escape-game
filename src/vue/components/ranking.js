@@ -36,7 +36,7 @@ Vue.component('ranking-table', {
                         <tr>
                             <th 
                                 v-for="(item, name) in diffItem"
-                            >$t("{{name}}")</th>
+                            >{{ $t(name) }}</th>
                         </tr>
                     </thead>
                     <tbody>
