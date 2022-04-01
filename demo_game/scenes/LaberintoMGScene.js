@@ -1,48 +1,41 @@
-class Game extends Phaser.Scene {
-    constructor() {
-        super("game")
+class LaberitnoMGScene extends Phaser.Scene {
+    constructor(room,type,difficulty,) {
+        super("PasswordMGScene"+room+"_"+type, type, difficulty);
     }
     preload() {
         var path = "./"
-        this.segundos = 0;
-        this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/mapa2prueba.json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/mapa2.json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
-        this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
-        this.load.image("password_background", path+"assets/password_paper.png");
         this.load.atlas('door', path+'assets/objects/door/door.png', path+'assets/objects/door/door.json');
-        this.load.image('table', path+'assets/tilesets/TSMapa/PNG/table.png');
-        this.load.image('passwd_bg', path+'assets/BGTable.png');
-        this.load.atlas('door', path+'assets/objects/door/door.png', path+'assets/objects/door/door.json');
-        this.cursors = this.input.keyboard.createCursorKeys();
-        for(let i=0; i<9; i++){
-            this.load.image('simbol'+i, path+'assets/passwd/simbol'+i+'.png');
-        }
+        
+        //mascara para oscurecer jugadores
         this.load.image('mask', 'assets/mask1.png');
+
+        //mapa del laberinto
+        this.map = this.make.tilemap({key: "map"});
+
+        //texturas(Muros,suelo,etc)
+        this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
+        //suelo
+        this.groundLayer = this.map.createStaticLayer('ground', this.tileset);
+
+        //capa vacio del tilemap
+        this.voidLayer = this.map.createStaticLayer('void', this.tileset);
+
+        //quita visibilidad a la capa vacio
+        this.voidLayer.visible = false
+
+        this.objectLayer = this.map.getObjectLayer('objects');
+        
     }
 
     create() {
         var that = this
-
-        this.events.on("tiempo", (tiempo) => {
-            that.scene.remove('time')
-            console.log("tiempo recibido "+ tiempo)
-            that.scene.start("gameover",{ score : tiempo})
-        }, this)
         
-        this.map = this.make.tilemap({
-            key: "map"
-        });
         window.map = this.map
-        //valor leyenda: window.map.objects[1].objects[0].properties[0].value
-        this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
-        var groundLayer = this.map.createStaticLayer('ground', this.tileset);
-        this.voidLayer = this.map.createStaticLayer('void', this.tileset);
-        this.voidLayer.visible = false
-        let objectLayer = this.map.getObjectLayer('objects');
-        //groundLayer.visible = false;
+        
         
         //*****************************************Players**************************************************/
         this.player = new Player(this);
@@ -202,51 +195,4 @@ class Game extends Phaser.Scene {
 
         
     }
-  
-    update() {
-        
-        // console.log(this.player)
-        var tile = this.voidLayer.getTileAtWorldXY(this.player.x, this.player.y);
-        // console.log(tile)
-
-        if (tile?.index == 357 && !this.touch) {
-            this.touch = true
-            this.player.stop()
-            this.player.scale = 1
-            console.log("toco el voidddd");
-             this.time.addEvent({
-                delay: 1000,
-                callback: ()=>{
-                    this.time.removeEvent(this.fallingAnimation)
-                    // this.fallingAnimation.remove()
-                    this.touch = false
-                    this.player.update()
-                    this.player.x = 165
-                    this.player.y = 640
-                    this.player.rotation = 0
-                    this.player.scale = 1
-                    console.log("vuelve el personaje");
-                },
-                loop: false
-            })
-
-            this.fallingAnimation = this.time.addEvent({
-                delay: 50,
-                callback: ()=>{
-                    console.log(this.player.scale)
-                    if (this.player.scale > 0 && (this.player.scale-0.1) > 0) {
-                        this.player.scale -= 0.05
-                        console.log(this.player.scale)
-                    }
-
-                    this.player.rotation+=0.3
-                },
-                loop: true
-            })
-        } else if (tile == null) {
-            this.player.update()
-        }
-        this.spotlight.x = this.player.x;
-        this.spotlight.y = this.player.y;
-    }
-}
+}   
