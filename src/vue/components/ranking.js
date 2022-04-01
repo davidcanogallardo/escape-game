@@ -3,9 +3,9 @@ Vue.component('ranking-sub-table', {
     `
     <table>
         <thead>
-            <th>Username</th>
-            <th>Games Played</th>
-            <th>Average score</th>
+            <th>{{ $t("username") }}</th>
+            <th>{{ $t("gamesPlayed") }}</th>
+            <th>{{ $t("avgScore") }}</th>
         </thead>
         <tbody>
             <tr 
@@ -28,7 +28,7 @@ Vue.component('ranking-table', {
     template: //html
     `             
     <div>
-        <h3 class="level-name">Ranking of {{diffName}} difficulty levels:</h3>
+        <h3 class="level-name">{{ $t("rankingSubtitle"+diffName) }}</h3>
         <div class="all-levels">
             <div class="ranking-table">
                 <table>
@@ -63,11 +63,11 @@ Vue.component('ranking', {
     // TODO internacionalizacion
     `
     <div class="ranking">
-        <div id="ranking_title">Select a difficulty:</div>
+        <div id="ranking_title">{{ $t("rankingTitle") }}</div>
         <div class="ranking_diff">
-            <div class="ranking_diff_easy selected" v-on:click="changeDiff($event, 'easy')">Easy</div>
-            <div class="ranking_diff_medium" v-on:click="changeDiff($event, 'medium')">Medium</div>
-            <div class="ranking_diff_hard" v-on:click="changeDiff($event, 'hard')">Hard</div>
+            <div class="ranking_diff_easy selected" v-on:click="changeDiff($event, 'easy')">{{ $t("easyDifficulty") }}</div>
+            <div class="ranking_diff_medium" v-on:click="changeDiff($event, 'medium')">{{ $t("mediumDifficulty") }}</div>
+            <div class="ranking_diff_hard" v-on:click="changeDiff($event, 'hard')">{{ $t("hardDifficulty") }}</div>
         </div>
         <ranking-table 
             v-for="(item, name) in ranking"
