@@ -426,15 +426,43 @@ var app = new Vue({
       });
     },
     //********************************************* PUT /user/game/{level}/{time} *********************************************
-    addGame(data) {
+    addGame(levelId, time) {
       $.ajax({
         type: "PUT",
         dataType: "json",
-        url: _url+ "/api/user/game/"+data.level+"/"+data.time,
+        url: _url+ "/api/user/game/"+levelId+"/"+time,
+        headers: {
+          // 'X-CSRF-TOKEN': "",
+          Authorization: "Bearer " + this.token,
+        },
       })
         .done(function (data) {
           if (data.success) {
-            
+            console.log(data.message, data);
+          } else {
+            console.log(data);
+            // TODO internacionalizacion
+            showNotification(data.message, "red");
+          }
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          showNotification("Fallo servidor", "red");
+      });
+    },
+    //********************************************* PUT /user/history/{partner}/{level}/{score} *********************************************
+    updateHistory(partner, levelId, score) {
+      $.ajax({
+        type: "PUT",
+        dataType: "json",
+        url: _url+ "/api/user/history/"+partner+"/"+levelId+"/"+score,
+        headers: {
+          // 'X-CSRF-TOKEN': "",
+          Authorization: "Bearer " + this.token,
+        },
+      })
+        .done(function (data) {
+          if (data.success) {
+            console.log(data.message, data);
           } else {
             console.log(data);
             // TODO internacionalizacion
@@ -462,6 +490,29 @@ var app = new Vue({
           if (data.success) {
             // TODO internacionalizacion
             showNotification("Foto actualizada", "green");
+          } else {
+            console.log(data);
+            // TODO internacionalizacion
+            showNotification(data.message, "red");
+          }
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          showNotification("Fallo servidor", "red");
+      });
+    },
+    //********************************************* GET /api/user/history/ ********************************************
+    getUserHistory() {
+      $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: _url+ "/api/user/history",
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+      })
+        .done(function (data) {
+          if (data.success) {
+            console.log(data.message, data);
           } else {
             console.log(data);
             // TODO internacionalizacion
