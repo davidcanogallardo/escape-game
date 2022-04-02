@@ -46,5 +46,17 @@ export default {
     language: "Idiomes",
     spanish: "Espanyol",
     english: "Anglès",
-    changelanguage: "Canviar idioma"
+    changelanguage: "Canviar idioma",
+    rankingTitle: "Seleccioneu Dificultat:",
+    allTimeRankingTable: "Tot el temps",
+    weeklyRankingTable: "Setmanal",
+    dailyRankingTable: "Diari",
+    easyDifficulty: "Diari",
+    mediumDifficulty: "Mitjà",
+    hardDifficulty: "Difícil",
+    rankingSubtitleEasy: "Rànquing de nivells de dificultat fàcil:",
+    rankingSubtitleMedium: "Rànquing de nivells de dificultat mitja:",
+    rankingSubtitleHard: "Rànquing de nivells de dificultat difícils:",
+    gamesPlayed: "Partides jugades",
+    avgScore: "Puntuació mitja"
 }
