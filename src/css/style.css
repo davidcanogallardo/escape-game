@@ -1459,7 +1459,6 @@ td {
 }
 
 
-
 /* .level{
     display: flex;
     flex-direction: column;
@@ -2123,7 +2122,7 @@ label {
     .all-levels th,
     td {
         padding: 2vw 5vw;
-        font-size: 4vw;
+        font-size: 2vw;
     }
 
     td,
