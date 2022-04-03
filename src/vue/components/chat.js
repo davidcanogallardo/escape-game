@@ -30,32 +30,32 @@ Vue.component('chat', {
             send:""
         }
     },
-    watch: {
-        lastmessage: function (newM, old) {
-            console.log("watcher last")
-            this.messages.push(newM);
-            $('#chat-body').scrollTop($('#chat-body')[0].scrollHeight);
-            if (app.peopleUnread.indexOf(this.friend.name) != -1) {
-                var friendIndex = app.peopleUnread.indexOf(this.friend.name)
-                app.peopleUnread.splice(friendIndex,1)
-                if (app.peopleUnread.length == 0) {
-                    app.messagesunread = false
-                }
+watch: {
+    lastmessage: function (newM, old) {
+        console.log("watcher last")
+        this.messages.push(newM);
+        $('#chat-body').scrollTop($('#chat-body')[0].scrollHeight);
+        if (app.chat.friendsUnread.indexOf(this.friend.name) != -1) {
+            var friendIndex = app.chat.friendsUnread.indexOf(this.friend.name)
+            app.chat.friendsUnread.splice(friendIndex,1)
+            if (app.chat.friendsUnread.length == 0) {
+                app.chat.messagesunread = false
             }
         }
-    },
+    }
+},
     created() {
         // this.messages= []
         setReceiver(this.friend.name)
-        if (app.messages[this.friend.name]) {
-            this.messages = app.messages[this.friend.name]
+        if (app.chat.chats[this.friend.name]) {
+            this.messages = app.chat.chats[this.friend.name]
         }
         
-        if (app.peopleUnread.indexOf(this.friend.name) != -1) {
-            var friendIndex = app.peopleUnread.indexOf(this.friend.name)
-            app.peopleUnread.splice(friendIndex,1)
-            if (app.peopleUnread.length == 0) {
-                app.messagesunread = false
+        if (app.chat.friendsUnread.indexOf(this.friend.name) != -1) {
+            var friendIndex = app.chat.friendsUnread.indexOf(this.friend.name)
+            app.chat.friendsUnread.splice(friendIndex,1)
+            if (app.chat.friendsUnread.length == 0) {
+                app.chat.messagesunread = false
             }
         }
         // connect()

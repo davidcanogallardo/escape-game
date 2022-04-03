@@ -56,8 +56,6 @@
     <script>
             $.ajax({
                 type: "GET",
-                // dataType: "json",
-                // contentType: "application/json",
                 url: "http://127.0.0.1:1111/api/csrf-cookie",
             }).done((data) => {
                     console.error(data);
@@ -69,33 +67,6 @@
                     // console.log(errorThrown);
                 }
             });
-            // window.update =  () => {
-            // $.ajax({
-            //     xhrFields: {
-            //         withCredentials: true
-            //     },
-            //     type: "GET",
-            //     // dataType: "json",
-            //     headers: {
-            //         // 'X-CSRF-TOKEN': "",
-            //         'Authorization': "Bearer "+ window.token
-            //     },
-            //     url: "http://127.0.0.1:8000/api/user/listrequests",
-            // }).done((data) => {
-            //         console.log(data.data.requests);
-            //         console.log(window.app.user.notifications);
-            //         if (data.data.requests>window.app.user.notifications) {
-            //             window.app.notificationunsread = true
-            //         }
-            //         window.app.user.notifications = data.data.requests
-            // }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-            //     if (console && console.log) {
-            //         console.log("La solicitud ha fallado: " + textStatus);
-            //         console.log(XMLHttpRequest);
-            //         console.log(errorThrown);
-            //     }
-            // });
-            // }
     </script>
     
 </head>
@@ -112,7 +83,7 @@
                     v-on:change-page="currentPage = $event"
                     v-on:update-profile="profileInfo = $event"
                     :user2="user"
-                    :messages_unread="messagesunread"
+                    :messages_unread="chat.messagesunread"
                     :notifications_unread="notificationunsread"
                     >
                 </home>
@@ -183,13 +154,13 @@
             <!-- </transition> -->
 
             
-            <chat 
-                v-if="modalOpen == 'chat'" 
-                v-on:open-modal="modalOpen = $event"
-                :friend="friendChat"
-                :user="user.username"
-                :lastmessage="lastMessage">
-            </chat>
+<chat 
+    v-if="modalOpen == 'chat'" 
+    v-on:open-modal="modalOpen = $event"
+    :friend="chat.currentOpenChat"
+    :user="user.username"
+    :lastmessage="chat.lastMessage">
+</chat>
 
             <transition name="fade">
                 <invitation

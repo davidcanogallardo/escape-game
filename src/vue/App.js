@@ -102,16 +102,18 @@ var app = new Vue({
   data: {
     currentPage: "home",
     menuOpen: "none",
+    chat: {
+      currentOpenChat: null,
+      chats: {},
+      lastMessage: null,
+      messagesunread: false,
+      friendsUnread: []
+    },
     user: getSessionUser(),
     profileInfo: null,
     modalOpen: "none",
     rankingData: null,
-    friendChat: null,
-    lastMessage: null,
     mainMicId: "default",
-    messages: {},
-    messagesunread: false,
-    peopleUnread: [],
     notificationunsread: false,
     token: null,
     bluetoothConnection: null,
