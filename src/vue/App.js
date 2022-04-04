@@ -115,6 +115,7 @@ var app = new Vue({
     notificationunsread: false,
     token: null,
     bluetoothConnection: null,
+    history: null,
   },
   watch: {
     currentPage: function (newPage, oldPage) {
@@ -510,9 +511,9 @@ var app = new Vue({
           Authorization: "Bearer " + this.token,
         },
       })
-        .done(function (data) {
+        .done((data) => {
           if (data.success) {
-            console.log(data.message, data);
+            this.history = data.data.history
           } else {
             console.log(data);
             // TODO internacionalizacion

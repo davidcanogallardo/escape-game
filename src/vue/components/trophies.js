@@ -34,7 +34,7 @@ Vue.component('trophies', {
     props: ["levels"],
     data() {
         return {
-            fl: app.user.friendsList
+            fl: app.history
         }
     },
 })

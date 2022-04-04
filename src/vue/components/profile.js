@@ -105,7 +105,7 @@ Vue.component("profile", {
         </div>
         <div v-if="page == 'profile'" style="width: 130vw;">
             <div class="btn blue close-sesion" v-on:click="close()">{{ $t("closesession") }}</div>
-            <div class="btn blue link" page="trophy-page" v-on:click="$emit('change-page','trophies')">{{ $t("seetrophies") }}</div>
+            <div class="btn blue link" page="trophy-page" v-on:click="history()">{{ $t("seetrophies") }}</div>
         </div>
         <div class="btn red volver link" page="main" v-on:click="$emit('change-page','home')">
             {{ $t("return") }}
@@ -128,6 +128,10 @@ Vue.component("profile", {
     close() {
       console.log(this.user);
       this.$root.closeSession(this.user.username);
+    },
+    history() {
+      this.$root.getUserHistory()
+      this.$emit('change-page','trophies')
     },
   },
 });
