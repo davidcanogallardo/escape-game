@@ -1,2 +1,0 @@
-docker build . -t node:node
-docker run --name node -p 3000:8080 -d node:node

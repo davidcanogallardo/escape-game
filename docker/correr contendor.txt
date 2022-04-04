@@ -1,3 +1,0 @@
-sudo docker build . -t uwu:uwu
-
-sudo docker run -d --name uwu -p 82:80 --volume /opt/lampp/htdocs/game:/usr/local/apache2/htdocs/ uwu:uwu

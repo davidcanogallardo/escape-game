@@ -26,13 +26,14 @@ Vue.component('friend-item', {
           this.$root.modalOpen = null;
           this.$nextTick(() => {
             this.$root.modalOpen ="chat";
-            this.$root.friendChat = this.name;
+            // this.$root.friendChat = this.name;
+            app.chat.currentOpenChat = this.name;
           });
       },
       hasNewMessages() {
         // console.log(this.name.name);
         // console.log(app.peopleUnread);
-        if (app.peopleUnread.indexOf(this.name.name) != -1) {
+        if (app.chat.friendsUnread.indexOf(this.name.name) != -1) {
           return true
         } 
         return false
