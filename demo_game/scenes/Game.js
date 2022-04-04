@@ -22,7 +22,7 @@ class Game extends Phaser.Scene {
         //lista de minijuegos que tendra la escena
         this.games = []
         //Set map
-        this.map = data.map;
+        this.level = data.map;
 
         this.gamesList = []
         
@@ -44,7 +44,7 @@ class Game extends Phaser.Scene {
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/"+this.map+".json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/"+this.level.name+".json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -162,7 +162,7 @@ class Game extends Phaser.Scene {
             //app.currentPage="home";
         });
 
-        // this.wallsLayer = new WallsLayer(this);
+        this.wallsLayer = new WallsLayer(this);
         
         // ***************************************LEYENDA****************************************************************************
 
