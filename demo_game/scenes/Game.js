@@ -104,6 +104,7 @@ class Game extends Phaser.Scene {
             });
         })
 
+
         var that = this
         
         this.map = this.make.tilemap({
@@ -126,6 +127,11 @@ class Game extends Phaser.Scene {
         let objectLayer = this.map.getObjectLayer('objects');
         
         //*****************************************Players**************************************************/
+        this.playersGroup.getChildren().forEach(player => {
+            if(player.id == socket.id){
+                this.player1 = player
+            }
+        })
 
         var end = this.physics.add.staticGroup();
         var endSpawn = this.map.objects[0].objects.filter(this.endFilter);
@@ -148,7 +154,7 @@ class Game extends Phaser.Scene {
                 //console.log(game.scene.scenes);
             });
             
-            this.scene.start("EndGameScene", {nChallenges: this.nChallenges, players: this.playersArray});
+            this.scene.start("EndGameScene", {nChallenges: this.nChallenges, players: this.playersArray, player: this.player1, map: this.level});
 
             game.scene.getScene("ui").scene.stop();
     
@@ -675,6 +681,5 @@ class Game extends Phaser.Scene {
         this.roleScene = "helper"
         this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"',"+diff+")"))
     }
-
 
 }

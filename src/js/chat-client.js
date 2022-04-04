@@ -13,25 +13,26 @@ socket.on("newMessage", data => {
   var today = new Date();
   var mins = ('0'+today.getMinutes()).slice(-2);
   console.log(data);
-  console.log();
+  console.error("");
   let data2 = {
     message: data.message,
     sender: "friend",
     time: today.getHours() + ":" + mins 
   }
-  if(!app.messages[data.users.sender]) {
-    app.messages[data.users.sender] = []
+
+  if (!app.chat.chats[data.users.sender]) {
+    app.chat.chats[data.users.sender] = []
   }
-
-  if (app.peopleUnread.indexOf(data.users.sender) == -1) {
-      app.peopleUnread.push(data.users.sender)
-      if (!app.messagesunread) {
-        app.messagesunread = true
-      }
+  
+  if (app.chat.friendsUnread.indexOf(data.users.sender) == -1) {
+    app.chat.friendsUnread.push(data.users.sender)
+    if (!app.chat.messagesunread) {
+      app.chat.messagesunread = true
+    }
   }
-
-  app.messages[data.users.sender].push(data2)
-
+  
+  app.chat.chats[data.users.sender].push(data2)
+  
   append(data2)
 })
 
@@ -61,10 +62,10 @@ function sendMessage(text) {
         sender: "user",
         time: today.getHours() + ":" + mins 
       }
-      if(!app.messages[receiver]) {
-        app.messages[receiver] = []
+      if(!app.chat.chats[receiver]) {
+        app.chat.chats[receiver] = []
       }
-      // app.messages[receiver].push(data)
+      app.chat.chats[receiver].push(data)
       append(data)
     } else {
       console.log("no");
@@ -77,7 +78,9 @@ function disconnect() {
 }
 
 function append(params) {
-  app.lastMessage = params
+  console.log("params", params);
+  
+  app.chat.lastMessage = params
 }
 
 export { connect, setReceiver, sendMessage, disconnect }

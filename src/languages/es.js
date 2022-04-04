@@ -8,7 +8,7 @@ export default {
     trophiesobtained: "Copas obtenidas",
     prefmap: "Mapa favorito",
     closesession: "Cerrar sesión",
-    seetrophies: "Ver trofeos",
+    seetrophies: "Historial",
     return: "Volver",
     createaccount: "Crear Cuenta",
     username: "Nombre de usuario",
@@ -21,7 +21,7 @@ export default {
     position: "Posición",
     name: "Nombre",
     time: "Tiempo",
-    levelslist: "Lista de niveles",
+    levelslist: "Historial de partidas",
     settings: "Ajustes",
     sound: "Sonido",
     connectcontroller: "Conectar mando",
@@ -46,5 +46,18 @@ export default {
     language: "Idiomas",
     spanish: "Español",
     english: "Inglés",
-    changelanguage: "Cambiar Idioma"
+    changelanguage: "Cambiar Idioma",
+    //
+    rankingTitle: "Seleccione Dificultad:",
+    allTimeRankingTable: "Todo el tiempo",
+    weeklyRankingTable: "Semanal",
+    dailyRankingTable: "Diario",
+    easyDifficulty: "Fácil",
+    mediumDifficulty: "Medio",
+    hardDifficulty: "Difícil",
+    rankingSubtitleeasy: "Ranking de niveles de dificultad fácil:",
+    rankingSubtitlemedium: "Ranking de niveles de dificultad media:",
+    rankingSubtitlehard: "Ranking de niveles de dificultad difícil:",
+    gamesPlayed: "Partidas jugadas",
+    avgScore: "Puntuación media"
 }
