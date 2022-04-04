@@ -150,8 +150,7 @@ class Game extends Phaser.Scene {
 
         socket.on("endGame", () => {
             this.loadedScenes.forEach(scene => {
-                game.scene.remove(scene);
-                //console.log(game.scene.scenes);
+                this.game.scene.remove(scene);
             });
             
             this.scene.start("EndGameScene", {nChallenges: this.nChallenges, players: this.playersArray, player: this.player1, map: this.level});
@@ -326,16 +325,16 @@ class Game extends Phaser.Scene {
             });
         });
         //HACK PARA TERMINAR PARTIDA XD
-        // this.input.keyboard.on('keydown-Z',()=>{
-        //     console.log("HACK ACTIVAD TERMINAR PARTIDA");
-        //     for(i=0;i<2;i++){
-        //         socket.emit("playerInEndZone");
-        //     }
-        // })
         this.input.keyboard.on('keydown-Z',()=>{
             console.log("HACK ACTIVAD TERMINAR PARTIDA");
-                socket.emit("passwordPuzzleComplete");
+            for(i=0;i<2;i++){
+                socket.emit("playerInEndZone");
+            }
         })
+        // this.input.keyboard.on('keydown-Z',()=>{
+        //     console.log("HACK ACTIVAD TERMINAR PARTIDA");
+        //         socket.emit("passwordPuzzleComplete");
+        // })
         window.owo = () => {
 
         }

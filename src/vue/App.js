@@ -55,7 +55,7 @@ function startClientPeer(data) {
   audioTag.setAttribute("id", "mic");
   document.body.appendChild(audioTag);
 
-  socket.on("serverInitGame", () => {
+  socket.once("serverInitGame", () => {
     console.log("Termina El Peer");
     console.log(data);
 
