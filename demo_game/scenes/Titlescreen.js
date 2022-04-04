@@ -41,13 +41,12 @@ class Titlescreen extends Phaser.Scene {
 
     }*/
 
-    setPlayers(players){
-        let playersArray = [];
-        // players.forEach(element => {
-        //     this.player = new Player(this, element.id, element.x, element.y, "player" ,element.initiator);
-        //     playersArray.push(this.player);
-        // });
-        this.scene.start("game",{ players: players, diff: players[0].diff})
-        //setTimeout(, 3000);
+    setPlayers(data){
+        //console.log(data);
+        let players = data[0];
+        let diff = data[0][0].diff;
+        let map = data[1];
+
+        this.scene.start("game",{ players: players, diff: diff, map: map});
     }
 }

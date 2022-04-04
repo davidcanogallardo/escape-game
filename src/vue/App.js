@@ -19,7 +19,8 @@ socket.on("matchFound", (data) => {
 });
 
 function startClientPeer(data) {
-  data.forEach((player) => {
+  let players = data[0];
+  players.forEach((player) => {
     if (socket.id == player.id && player.initiator) {
       peer = new Peer({
         initiator: true,
@@ -54,16 +55,20 @@ function startClientPeer(data) {
   audioTag.setAttribute("id", "mic");
   document.body.appendChild(audioTag);
 
-  var titleScreen = game.scene.getScene("titlescreen");
-  titleScreen.setPlayers(data);
+  socket.on("serverInitGame", () => {
+    console.log("Termina El Peer");
+    console.log(data);
 
-  // var game = game.scene.getScene("game");
-  // game.start(data);
+    var titleScreen = game.scene.getScene("titlescreen");
+    titleScreen.setPlayers(data);
+    app.currentPage = "game";
+  });
+  
 }
 
-socket.on("windowGame", (data) => {
-  app.currentPage = "game";
-});
+// socket.on("windowGame", (data) => {
+//   app.currentPage = "game";
+// });
 
 socket.on("endGame", () => {
   document.getElementById("mic").remove();

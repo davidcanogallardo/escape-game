@@ -4,8 +4,10 @@ class ComunicacionServidor {
         //estructuras de datos
         //estados
         //consutrcutro (io)
-        constructor(io){
+        constructor(io, axios){
+            this.http = require('http');
             this.io = io;
+            this.axios = axios;
             this.queue = {
                 easy: [],
                 medium: [],
@@ -77,10 +79,13 @@ class ComunicacionServidor {
                 });
 
                 socket.on("spawns", (spawns) => {
-                    console.log("spawns server")
+                    console.log("spawns server");
                     socket.in(socket.room.id).emit("getSpawns",spawns);
                 });
 
+                socket.on("clientInitGame", () => {
+                    this.io.in(socket.room.id).emit("serverInitGame");
+                })
             });
         }
     
@@ -131,36 +136,21 @@ class ComunicacionServidor {
                 //pass randomMiniGames and players to game
 
                 let roomName = "Room_"+this.queue[player.diff][0].id;
-                //console.log("RoomName: "+roomName);
+                //Unir al usuario a la sala
                 socket.join(roomName);
+                //Guardar nombre de la sala
                 this.roomName = roomName;
                 var _room = this.io.sockets.adapter.rooms.get(roomName);
                 socket.room = _room;
+                //Añadir jugador a la cola
                 this.queue[player.diff].push(player);
-                this.io.in(roomName).emit('matchFound', this.queue[player.diff]);
+                //this.io.in(roomName).emit('matchFound', this.queue[player.diff]);
+                this.getRandomMap(player.diff, socket, this.queue[player.diff], this.io);
                 this.queue[player.diff] = [];
-
-
-                // this.queue.forEach((queuePlayer) => {
-                //     if(queuePlayer.diff == player.diff){
-                //         console.log(this.queue);
-                //         console.log("Nombre de la sala 2: "+queuePlayer.id);
-                //         socket.join("Room_"+queuePlayer.id);
-                //         let _room = this.io.sockets.adapter.rooms.get(this.roomName);
-                //         socket.room = _room; 
-                //         console.log("countEndZone del room:"+socket.room.countEndZone)
-                //         this.queue.push(player);
-                //         //this.players.push(this.queue.slice(0,2));
-                //         //console.log("Jugadores: ");
-                //         console.log("PARTIDA ENCONTRADA");
-                        
-                //     }
-                // });
-
                 
             }
             // console.log(this.queue);
-            // console.log(this.io.sockets.adapter.rooms);
+            console.log(this.io.sockets.adapter.rooms);
             // console.log(socket.rooms);
         }
     
@@ -184,6 +174,23 @@ class ComunicacionServidor {
         canSendMessage(users) {
             return true
         }
+
+        getRandomMap(diff, socket, players, io) {
+
+            this.axios.get('http://localhost:1111/api/game/random-map/'+diff)
+            .then(function (response) {
+                // handle success
+                let map = response.data.name;
+
+                //this.io.in(roomName).emit('matchFound', this.queue[player.diff]);
+
+                io.in(socket.room.id).emit("matchFound", [players,map]);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+        };
     
     
         /*listenConnection(){

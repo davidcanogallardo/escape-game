@@ -19,15 +19,12 @@ var config = {
 class PhaserGame extends Phaser.Game {
   constructor(config) {
       super(config)
-      this.spawns = null;
 
       socket.on("getSpawns", (spawns) => {
-        console.log("main: ")
-        console.log(spawns)
-        this.spawns = spawns;
-        console.log(this.scene.getScene("game").activeScene)
-        if (this.scene.getScene("game").activeScene) {
-          console.log(spawns);
+        //Comprobar que los cofres de la escena se han creado
+        if (this.scene.getScene("game").chest=="") {
+          this.scene.getScene("game").objectsForGuest = spawns
+        } else if(this.scene.getScene("game").chest!=""){
           this.scene.getScene("game").placeItems(spawns)
         }
       })

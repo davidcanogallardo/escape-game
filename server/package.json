@@ -12,6 +12,7 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "socket.io": "^4.4.0"
   },
   "description": ""

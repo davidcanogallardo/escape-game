@@ -4,6 +4,8 @@ class Game extends Phaser.Scene {
     }
     init(data){
         this.playersArray = [];
+        this.chest = [];
+        this.objectsForGuest = null;
         data.players.forEach(element => {
             console.log('players', element);
             this.player = new Player(this, element.id, element.x, element.y, "player", element.initiator, element.username);
@@ -20,7 +22,8 @@ class Game extends Phaser.Scene {
         //lista de minijuegos que tendra la escena
         this.games = []
         //Set map
-        this.getRandomMap(this.diff);
+        this.map = data.map;
+
         this.gamesList = []
         
         this.playersGroup = this.add.group(this.playersArray);
@@ -209,7 +212,6 @@ class Game extends Phaser.Scene {
         // ******************************************************************************************************************
 
         //**************************************Cofre**************************************
-        this.chest = [];
         for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
             this.chest[i] = this.add.sprite(56,252,'chest','chest_empty_open_anim_f0.png');
             this.physics.add.existing(this.chest[i]);
@@ -217,7 +219,6 @@ class Game extends Phaser.Scene {
             this.physics.add.collider(this.chest[i], this.playersGroup);
             this.chest[i].body.setSize(this.chest[i].width*0.5, this.chest[i].height*0.8);
             this.chest[i].body.immovable = true
-
         }
         
 
@@ -433,11 +434,9 @@ class Game extends Phaser.Scene {
             socket.emit("spawns", spawns);
             this.placeItems(spawns);
         } else {
-            // socket.on("getSpawns", (spawns) => {
-            //    this.placeItems(spawns);
-            // })
-         
-            
+            if(this.objectsForGuest != null){
+                this.placeItems(this.objectsForGuest);
+            }
         }
     }
   
@@ -622,7 +621,6 @@ class Game extends Phaser.Scene {
     placeItems(spawns){
         console.log(spawns);
         //spawn jugadores
-        console.warn('spawns', spawns.gamesList);
         this.gamesList = spawns.gamesList;
         this.playersGroup.children.entries[0].x = spawns.players.p1.x
         this.playersGroup.children.entries[0].y = spawns.players.p1.y
@@ -678,19 +676,5 @@ class Game extends Phaser.Scene {
         this.game.scene.add(this.infoScene, eval("new "+this.infoScene+"('"+this.roleScene+"',"+diff+")"))
     }
 
-    getRandomMap(diff) {
-        $.ajax({
-            async: false,
-            type: "GET",
-            url: "http://localhost:1111/api/game/random-map/"+diff
-        })
-        .done((data) => {
-            console.log(data);
-            //Llegan todos los ids de los mapas con la dificultad elegida
-            this.map = data.name;
-        })
-        .fail(function () {
-            showNotification("Fallo servidor", "red");
-        });
-    };
+
 }

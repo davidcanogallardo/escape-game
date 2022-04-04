@@ -29,7 +29,10 @@ class PeerClient {
         });
 
         this.peer.on("connect", () => {
-            this.socket.emit("switchToGame");
+            console.log("Peer Establecido");
+            if(this.isInitiator){
+                this.socket.emit("clientInitGame");
+            }
         });
 
         this.peer.on("renegotiate", () => {
