@@ -13,7 +13,7 @@ Vue.component('select-solo-duo', {
         <div class="difficulty">
             <br>
             <h2>Select Difficulty</h2>
-            <select name="difficulty" id="difficulty" @change="setDifficulty($event)">
+            <select class="selector" name="difficulty" id="difficulty" @change="setDifficulty($event)">
                 <option value="easy">Easy</option>
                 <option value="medium" selected>Medium</option>
                 <option value="hard">Hard</option>
