@@ -33,6 +33,10 @@ class Game extends Phaser.Scene {
         this.playableScene = "PasswordMGScene_challenge";
         this.roleScene = "helper"
         this.loadedScenes = [];
+        this.speeds = {
+            x: 0,
+            y: 0
+        }
         //this.game.scene.add("SeePass", new SeePass('test'))
         //this.game.scene.add("SeePass", eval("new SeePass('test')")
 
@@ -484,33 +488,8 @@ class Game extends Phaser.Scene {
         }
 
         //Mover personaje con joystick
-        this.virtualJoyStick.on('update', moveVirtualJoyStick(this));
-
-        function moveVirtualJoyStick(scene){
-            let that = scene;
-            console.log(that);
-            that.playersGroup.getChildren().forEach(player => {
-                if(socket.id == player.id){
-                    // var cursorKeys = that.virtualJoyStick.createCursorKeys();
-                    var s = '';
-                    // for (var name in cursorKeys) {
-                    //     if (cursorKeys[name].isDown) {
-                    //         s = cursorKeys[name];
-                    //     }
-                    // }
-    
-                    player.x_speed = that.virtualJoyStick.x;
-                    player.y_speed = that.virtualJoyStick.y;
-                    player.direction = s;
-                    console.log(player);
-                    player.update();
-                }
-            });
-            console.log("Se movio el joystick");
-    
-            // player.x_speed = this.speeds['x'];
-            // player.y_speed = this.speeds['y'];
-            // player.direction = this.stickDirection;
+        if(navigator.userAgentData.mobile){
+            this.virtualJoyStick.on('update', this.moveVirtualJoyStick.bind(this));
         }
     }
 
@@ -526,9 +505,14 @@ class Game extends Phaser.Scene {
             }
         });
 
+        //Mover con Joystick
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
                 if(this.stickActive){
+                    player.x_speed = this.speeds['x'];
+                    player.y_speed = this.speeds['y'];
+                    player.direction = this.stickDirection;
+                } else if(this.virtualJoyStickIsActive){
                     player.x_speed = this.speeds['x'];
                     player.y_speed = this.speeds['y'];
                     player.direction = this.stickDirection;
@@ -536,9 +520,36 @@ class Game extends Phaser.Scene {
                 player.update();
             }
         });
+
+
     }
 
-    
+    moveVirtualJoyStick(){
+        this.playersGroup.getChildren().forEach(player => {
+            if(socket.id == player.id){
+                var cursorKeys = this.virtualJoyStick.createCursorKeys();
+                var direction = '';
+                for (var name in cursorKeys) {
+                    if (cursorKeys[name].isDown) {
+                        direction += `${name} `;
+                    }
+                }
+                this.virtualJoyStickIsActive = true;
+                //console.log(this.virtualJoyStick.angle);
+                
+                this.speeds['x'] = this.virtualJoyStick.angle;
+                this.speeds['y'] = this.virtualJoyStick.angle;
+                this.stickDirection = direction;
+                //console.log(this.speeds);
+                //console.log(this.stickDirection);
+            }
+        });
+        //console.log("Se movio el joystick");
+
+        // player.x_speed = this.speeds['x'];
+        // player.y_speed = this.speeds['y'];
+        // player.direction = this.stickDirection;
+    }
 
     moveStick(data){
         console.log("My callback move stick");

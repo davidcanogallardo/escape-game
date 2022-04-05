@@ -55,11 +55,10 @@ class Player extends Phaser.GameObjects.Sprite{
 
     update() {
         this.centerBodyonBody(this.playerCollider,this)
-
         //console.log(game.scene.getScene("game").stickActive);
         if ( this.anims.currentAnim==null) {
             this.anims.play('player-idle-down');
-        } else if(!game.scene.getScene("game").stickActive) {
+        } else if(!game.scene.getScene("game").stickActive && !game.scene.getScene("game").virtualJoyStickIsActive) {
             if (this.cursors.left?.isDown) {
                 this.move(-this.x_speed,0)
                 this.direction = 'left'
@@ -85,6 +84,27 @@ class Player extends Phaser.GameObjects.Sprite{
                 this.direction = 'idle'
             }
             this.moveOtherPlayer(false)
+        } else if(game.scene.getScene("game").virtualJoyStickIsActive){
+            //console.log(this.direction.trim());
+            if(this.direction.trim() == "left"){
+                this.move(-150,0);
+            }else if(this.direction.trim() == "right"){
+                this.move(150, 0);
+            } else if (this.direction.trim() == "up"){
+                this.move(0, -150);
+            } else if(this.direction.trim() == "down") {
+                this.move(0, 150)
+            } else if (this.direction.trim() == "up left"){
+                this.move(-150, -150);
+            } else if (this.direction.trim() == "up right"){
+                this.move(150, -150);
+            } else if (this.direction.trim() == "down left"){
+                this.move(-150, 150);
+            } else if (this.direction.trim() == "down right"){
+                this.move(150, 150);
+            } else {
+                this.move(0,0);
+            }
         } else {
             //console.log("Muevo joystick");
             //console.log(this.x_speed, this.y_speed);
