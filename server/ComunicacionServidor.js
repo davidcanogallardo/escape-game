@@ -184,6 +184,7 @@ class ComunicacionServidor {
             })
             .catch(function (error) {
                 // handle error
+                console.log("Error al obtener mapa.");
                 console.log(error);
             })
         };
