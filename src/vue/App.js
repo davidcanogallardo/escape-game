@@ -198,7 +198,6 @@ var app = new Vue({
             
             } else {
               console.log(data);
-              // TODO internacionalizacion
               showNotification(data.message, "red");
             }
           })
@@ -233,7 +232,6 @@ var app = new Vue({
             
             } else {
               console.log(data);
-              // TODO internacionalizacion
               showNotification(data.message, "red");
             }
           })
@@ -283,7 +281,6 @@ var app = new Vue({
               connect();
             } else {
               console.log(data);
-              // TODO internacionalizacion
               // showNotification("No has podido iniciar sesion", "red");
               showNotification(i18n.t(data.message), "red");
             }
@@ -307,11 +304,9 @@ var app = new Vue({
         .done((data) => {
           if (data.success) {
             console.log("registrado");
-            // TODO internacionalizacion
             showNotification(i18n.t(data.message), "green");
           } else {
             console.log(data);
-            // TODO internacionalizacion
             // showNotification("No has podido iniciar sesion", "red");
             showNotification(i18n.t(data.message), "red");
           }
@@ -340,16 +335,14 @@ var app = new Vue({
           if (data.success) {
             console.log("peticion de amistad enviada");
             console.log(data);
-            // TODO internacionalizacion
             showNotification(i18n.t("solicitudesended") + friend,"green");
           } else {
             console.log(data);
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* GET /api/user/userinfo/{id} *********************************************
@@ -407,12 +400,11 @@ var app = new Vue({
             }
             this.saveUserInSession()
           } else {
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* GET /api/game/ranking *********************************************
@@ -428,12 +420,11 @@ var app = new Vue({
             console.log(data);
           } else {
             console.log(data);
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* PUT /user/game/{level}/{time} *********************************************
@@ -452,12 +443,11 @@ var app = new Vue({
             console.log(data.message, data);
           } else {
             console.log(data);
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* PUT /user/history/{partner}/{level}/{score} *********************************************
@@ -476,12 +466,11 @@ var app = new Vue({
             console.log(data.message, data);
           } else {
             console.log(data);
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* PUT /user/update/photo ********************************************
@@ -499,16 +488,14 @@ var app = new Vue({
       })
         .done((data) => {
           if (data.success) {
-            // TODO internacionalizacion
-            showNotification("Foto actualizada", "green");
+            showNotification(i18n.t("imgupdated"), "green");
           } else {
             console.log(data);
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* GET /api/user/history/ ********************************************
@@ -526,12 +513,11 @@ var app = new Vue({
             this.history = data.data.history
           } else {
             console.log(data);
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     // TODO no se usa
