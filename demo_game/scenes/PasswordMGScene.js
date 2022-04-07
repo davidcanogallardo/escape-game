@@ -2,6 +2,9 @@
 class PasswordMGScene extends GenericMiniGame {
     constructor(room,type,difficulty,password) {
         super("PasswordMGScene"+room+"_"+type, type, difficulty);
+        this.type = type;
+        this.difficulty = difficulty;
+        
         // this.symbols = [0,1,2,3,4,5,6,7,8];
         // this.shuffleSymbols = this.symbols.sort(() => Math.random() - 0.5);
         // this.correctPassword = [];
