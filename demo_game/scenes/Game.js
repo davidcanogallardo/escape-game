@@ -22,7 +22,7 @@ class Game extends Phaser.Scene {
         //lista de minijuegos que tendra la escena
         this.games = []
         //Set map
-        this.map = data.map;
+        this.level = data.map;
 
         this.gamesList = []
         
@@ -33,18 +33,25 @@ class Game extends Phaser.Scene {
         this.playableScene = "PasswordMGScene_challenge";
         this.roleScene = "helper"
         this.loadedScenes = [];
+        this.speeds = {
+            x: 0,
+            y: 0
+        }
         //this.game.scene.add("SeePass", new SeePass('test'))
         //this.game.scene.add("SeePass", eval("new SeePass('test')")
 
     }   
 
     preload() {
+        if(navigator.userAgentData.mobile){
+            this.load.plugin('rexvirtualjoystickplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js', true);
+        }
         var path = "./demo_game/"
         this.segundos = 0;
         this.challenge = 0;
         this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
-        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/"+this.map+".json");
+        this.load.tilemapTiledJSON("map", path+"assets/tilemaps/"+this.level.name+".json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
@@ -105,6 +112,44 @@ class Game extends Phaser.Scene {
         })
 
 
+        //*******************************************************TIEMPO  */
+        this.scene.launch('ui');
+        /**************************************************************************************** */
+
+        if(navigator.userAgentData.mobile){
+            this.virtualJoyStick = this.game.plugins.get('rexvirtualjoystickplugin').add(this, {
+                x: 50,
+                y: 250,
+                radius: 20,
+                base: this.add.circle(0, 0, 20, 0x888888),
+                thumb: this.add.circle(0, 0, 10, 0xcccccc),
+                // dir: '8dir',
+                // forceMin: 16,
+                // fixed: true,
+                // enable: true
+            });
+            this.virtualJoyStick.base.setDepth(1000);
+            this.virtualJoyStick.thumb.setDepth(1000);
+
+            
+
+            // this.buttonA = this.add.group(this);
+            // this.buttonACirc = this.add.circle(40, 300, 20, 0x888888);
+            // this.buttonAText = this.add.text(40, 300, 'A');
+            // this.buttonA.add(this.buttonACirc);
+            // this.buttonA.add(this.buttonAText);
+            // this.buttonA.incX(40);
+            // this.buttonA.incY(300);
+
+            // this.buttonB = this.add.group(this);
+            // this.buttonBCirc = this.add.circle(55, 300, 20, 0x888888);
+            // this.buttonBText = this.add.text(55, 300, 'B');
+            // this.buttonB.add(this.buttonBCirc);
+            // this.buttonB.add(this.buttonBText);
+            // this.buttonB.incX(55);
+            // this.buttonB.incY(300);
+        }
+
         var that = this
         
         this.map = this.make.tilemap({
@@ -150,8 +195,7 @@ class Game extends Phaser.Scene {
 
         socket.on("endGame", () => {
             this.loadedScenes.forEach(scene => {
-                game.scene.remove(scene);
-                //console.log(game.scene.scenes);
+                this.game.scene.remove(scene);
             });
             
             this.scene.start("EndGameScene", {nChallenges: this.nChallenges, players: this.playersArray, player: this.player1, map: this.level});
@@ -162,7 +206,7 @@ class Game extends Phaser.Scene {
             //app.currentPage="home";
         });
 
-        // this.wallsLayer = new WallsLayer(this);
+        this.wallsLayer = new WallsLayer(this);
         
         // ***************************************LEYENDA****************************************************************************
 
@@ -298,9 +342,7 @@ class Game extends Phaser.Scene {
 
         // ******************************************************************************************************************
 
-        //*******************************************************TIEMPO  */
-        this.scene.launch('ui');
-        /**************************************************************************************** */
+
 
         //necesario para que el juego pause al cambiar la ventana correctamente
         game.scene.game.hasFocus = true;
@@ -326,16 +368,16 @@ class Game extends Phaser.Scene {
             });
         });
         //HACK PARA TERMINAR PARTIDA XD
-        // this.input.keyboard.on('keydown-Z',()=>{
-        //     console.log("HACK ACTIVAD TERMINAR PARTIDA");
-        //     for(i=0;i<2;i++){
-        //         socket.emit("playerInEndZone");
-        //     }
-        // })
         this.input.keyboard.on('keydown-Z',()=>{
             console.log("HACK ACTIVAD TERMINAR PARTIDA");
-                socket.emit("passwordPuzzleComplete");
+            for(i=0;i<2;i++){
+                socket.emit("playerInEndZone");
+            }
         })
+        // this.input.keyboard.on('keydown-Z',()=>{
+        //     console.log("HACK ACTIVAD TERMINAR PARTIDA");
+        //         socket.emit("passwordPuzzleComplete");
+        // })
         window.owo = () => {
 
         }
@@ -444,7 +486,13 @@ class Game extends Phaser.Scene {
                 this.placeItems(this.objectsForGuest);
             }
         }
+
+        //Mover personaje con joystick
+        if(navigator.userAgentData.mobile){
+            this.virtualJoyStick.on('update', this.moveVirtualJoyStick.bind(this));
+        }
     }
+
   
     update() {
         this.playersGroup.getChildren().forEach(player => {
@@ -457,9 +505,14 @@ class Game extends Phaser.Scene {
             }
         });
 
+        //Mover con Joystick
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
                 if(this.stickActive){
+                    player.x_speed = this.speeds['x'];
+                    player.y_speed = this.speeds['y'];
+                    player.direction = this.stickDirection;
+                } else if(this.virtualJoyStickIsActive){
                     player.x_speed = this.speeds['x'];
                     player.y_speed = this.speeds['y'];
                     player.direction = this.stickDirection;
@@ -467,6 +520,35 @@ class Game extends Phaser.Scene {
                 player.update();
             }
         });
+
+
+    }
+
+    moveVirtualJoyStick(){
+        this.playersGroup.getChildren().forEach(player => {
+            if(socket.id == player.id){
+                var cursorKeys = this.virtualJoyStick.createCursorKeys();
+                var direction = '';
+                for (var name in cursorKeys) {
+                    if (cursorKeys[name].isDown) {
+                        direction += `${name} `;
+                    }
+                }
+                this.virtualJoyStickIsActive = true;
+                //console.log(this.virtualJoyStick.angle);
+                
+                this.speeds['x'] = this.virtualJoyStick.angle;
+                this.speeds['y'] = this.virtualJoyStick.angle;
+                this.stickDirection = direction;
+                //console.log(this.speeds);
+                //console.log(this.stickDirection);
+            }
+        });
+        //console.log("Se movio el joystick");
+
+        // player.x_speed = this.speeds['x'];
+        // player.y_speed = this.speeds['y'];
+        // player.direction = this.stickDirection;
     }
 
     moveStick(data){

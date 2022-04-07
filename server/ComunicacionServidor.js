@@ -180,11 +180,7 @@ class ComunicacionServidor {
             this.axios.get('http://localhost:1111/api/game/random-map/'+diff)
             .then(function (response) {
                 // handle success
-                let map = response.data.name;
-
-                //this.io.in(roomName).emit('matchFound', this.queue[player.diff]);
-
-                io.in(socket.room.id).emit("matchFound", [players,map]);
+                io.in(socket.room.id).emit("matchFound", [players,response.data]);
             })
             .catch(function (error) {
                 // handle error
