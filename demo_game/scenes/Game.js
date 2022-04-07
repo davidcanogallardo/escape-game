@@ -131,6 +131,11 @@ class Game extends Phaser.Scene {
             this.virtualJoyStick.base.setDepth(1000);
             this.virtualJoyStick.thumb.setDepth(1000);
 
+            //Mover personaje con joystick
+            this.virtualJoyStick.on('update', this.moveVirtualJoyStick, this);
+            // if(navigator.userAgentData.mobile){
+                
+            // }
             
 
             // this.buttonA = this.add.group(this);
@@ -487,10 +492,7 @@ class Game extends Phaser.Scene {
             }
         }
 
-        //Mover personaje con joystick
-        if(navigator.userAgentData.mobile){
-            this.virtualJoyStick.on('update', this.moveVirtualJoyStick.bind(this));
-        }
+
     }
 
   
