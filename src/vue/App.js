@@ -197,7 +197,6 @@ var app = new Vue({
             
             } else {
               console.log(data);
-              // TODO internacionalizacion
               showNotification(data.message, "red");
             }
           })
@@ -232,7 +231,6 @@ var app = new Vue({
             
             } else {
               console.log(data);
-              // TODO internacionalizacion
               showNotification(data.message, "red");
             }
           })
@@ -282,7 +280,6 @@ var app = new Vue({
               connect();
             } else {
               console.log(data);
-              // TODO internacionalizacion
               // showNotification("No has podido iniciar sesion", "red");
               showNotification(i18n.t(data.message), "red");
             }
@@ -306,11 +303,9 @@ var app = new Vue({
         .done((data) => {
           if (data.success) {
             console.log("registrado");
-            // TODO internacionalizacion
             showNotification(i18n.t(data.message), "green");
           } else {
             console.log(data);
-            // TODO internacionalizacion
             // showNotification("No has podido iniciar sesion", "red");
             showNotification(i18n.t(data.message), "red");
           }
@@ -339,11 +334,9 @@ var app = new Vue({
           if (data.success) {
             console.log("peticion de amistad enviada");
             console.log(data);
-            // TODO internacionalizacion
             showNotification(i18n.t("solicitudesended") + friend,"green");
           } else {
             console.log(data);
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
@@ -406,7 +399,6 @@ var app = new Vue({
             }
             this.saveUserInSession()
           } else {
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
@@ -427,7 +419,6 @@ var app = new Vue({
             console.log(data);
           } else {
             console.log(data);
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
@@ -451,7 +442,6 @@ var app = new Vue({
             console.log(data.message, data);
           } else {
             console.log(data);
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
@@ -475,7 +465,6 @@ var app = new Vue({
             console.log(data.message, data);
           } else {
             console.log(data);
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
@@ -498,11 +487,9 @@ var app = new Vue({
       })
         .done((data) => {
           if (data.success) {
-            // TODO internacionalizacion
             showNotification(i18n.t("imgupdated"), "green");
           } else {
             console.log(data);
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
@@ -525,7 +512,6 @@ var app = new Vue({
             this.history = data.data.history
           } else {
             console.log(data);
-            // TODO internacionalizacion
             showNotification(data.message, "red");
           }
         })
