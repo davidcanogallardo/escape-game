@@ -116,44 +116,44 @@ class Game extends Phaser.Scene {
         this.scene.launch('ui');
         /**************************************************************************************** */
 
-        if(navigator.userAgentData.mobile){
-            this.virtualJoyStick = this.game.plugins.get('rexvirtualjoystickplugin').add(this, {
-                x: 50,
-                y: 250,
-                radius: 20,
-                base: this.add.circle(0, 0, 20, 0x888888),
-                thumb: this.add.circle(0, 0, 10, 0xcccccc),
-                // dir: '8dir',
-                // forceMin: 16,
-                // fixed: true,
-                // enable: true
-            });
-            this.virtualJoyStick.base.setDepth(1000);
-            this.virtualJoyStick.thumb.setDepth(1000);
+        // if(navigator.userAgentData.mobile){
+        //     this.virtualJoyStick = this.game.plugins.get('rexvirtualjoystickplugin').add(this, {
+        //         x: 50,
+        //         y: 250,
+        //         radius: 20,
+        //         base: this.add.circle(0, 0, 20, 0x888888),
+        //         thumb: this.add.circle(0, 0, 10, 0xcccccc),
+        //         // dir: '8dir',
+        //         // forceMin: 16,
+        //         // fixed: true,
+        //         // enable: true
+        //     });
+        //     this.virtualJoyStick.base.setDepth(1000);
+        //     this.virtualJoyStick.thumb.setDepth(1000);
 
-            //Mover personaje con joystick
-            this.virtualJoyStick.on('update', this.moveVirtualJoyStick, this);
-            // if(navigator.userAgentData.mobile){
+        //     //Mover personaje con joystick
+        //     this.virtualJoyStick.on('update', this.moveVirtualJoyStick, this);
+        //     // if(navigator.userAgentData.mobile){
                 
-            // }
+        //     // }
             
 
-            // this.buttonA = this.add.group(this);
-            // this.buttonACirc = this.add.circle(40, 300, 20, 0x888888);
-            // this.buttonAText = this.add.text(40, 300, 'A');
-            // this.buttonA.add(this.buttonACirc);
-            // this.buttonA.add(this.buttonAText);
-            // this.buttonA.incX(40);
-            // this.buttonA.incY(300);
+        //     // this.buttonA = this.add.group(this);
+        //     // this.buttonACirc = this.add.circle(40, 300, 20, 0x888888);
+        //     // this.buttonAText = this.add.text(40, 300, 'A');
+        //     // this.buttonA.add(this.buttonACirc);
+        //     // this.buttonA.add(this.buttonAText);
+        //     // this.buttonA.incX(40);
+        //     // this.buttonA.incY(300);
 
-            // this.buttonB = this.add.group(this);
-            // this.buttonBCirc = this.add.circle(55, 300, 20, 0x888888);
-            // this.buttonBText = this.add.text(55, 300, 'B');
-            // this.buttonB.add(this.buttonBCirc);
-            // this.buttonB.add(this.buttonBText);
-            // this.buttonB.incX(55);
-            // this.buttonB.incY(300);
-        }
+        //     // this.buttonB = this.add.group(this);
+        //     // this.buttonBCirc = this.add.circle(55, 300, 20, 0x888888);
+        //     // this.buttonBText = this.add.text(55, 300, 'B');
+        //     // this.buttonB.add(this.buttonBCirc);
+        //     // this.buttonB.add(this.buttonBText);
+        //     // this.buttonB.incX(55);
+        //     // this.buttonB.incY(300);
+        // }
 
         var that = this
         
