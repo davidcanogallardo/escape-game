@@ -115,6 +115,7 @@ h3 {
 }
 
 body {
+    margin:0;
     font-size: 2vw;
     background-image: url("./../images/bg.png");
     overflow: hidden;
@@ -1653,13 +1654,6 @@ label {
 }
 
 /*******************************************************************************************/
-
-@media only screen and (max-width: 700px) {
-    canvas {
-        width: 350px !important;
-        height: 270px !important;
-    }
-}
 
 @media screen and (max-height: 600px) {
     .sound_settings .all_settings {
