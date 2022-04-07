@@ -340,7 +340,7 @@ var app = new Vue({
             console.log("peticion de amistad enviada");
             console.log(data);
             // TODO internacionalizacion
-            showNotification("Petición de amistad enviada a " + friend,"green");
+            showNotification(i18n.t("solicitudesended") + friend,"green");
           } else {
             console.log(data);
             // TODO internacionalizacion

@@ -5,6 +5,7 @@ export default {
     loginwarning: "Has de iniciar sessió per accedir a aquesta pàgina",
     sendsolicitude: "Enviar sol·licitud a:",
     send: "Enviar",
+    solicitudesended: "Sol·licitud d'amistat enviada a:",
     trophiesobtained: "Copes obtingudes",
     prefmap: "Mapa favorit",
     closesession: "Tancar sessió",
