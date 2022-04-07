@@ -1,7 +1,7 @@
 var config = {
   type: Phaser.AUTO, // Which renderer to use
-  width: 320, // Canvas width in pixels
-  height: 320, // Canvas height in pixels
+  width: window.innerWidth, // Canvas width in pixels
+  height: window.innerHeight, // Canvas height in pixels
   parent: "game2",
   physics: {
     default: 'arcade',
@@ -10,7 +10,6 @@ var config = {
         debug: true
     },
   },
-  zoom: 2.5,
   //scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, SeePass, Time, Ui, Prueba, PasswordMGScene]
   scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, Time, Ui, EndGameScene]
 

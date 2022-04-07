@@ -5,6 +5,7 @@ export default {
     loginwarning: "Has de iniciar sessió per accedir a aquesta pàgina",
     sendsolicitude: "Enviar sol·licitud a:",
     send: "Enviar",
+    solicitudesended: "Sol·licitud d'amistat enviada a:",
     trophiesobtained: "Copes obtingudes",
     prefmap: "Mapa favorit",
     closesession: "Tancar sessió",
@@ -58,5 +59,9 @@ export default {
     rankingSubtitleMedium: "Rànquing de nivells de dificultat mitja:",
     rankingSubtitleHard: "Rànquing de nivells de dificultat difícils:",
     gamesPlayed: "Partides jugades",
-    avgScore: "Puntuació mitja"
+    avgScore: "Puntuació mitja",
+    registered: "Registrat",
+    genericError: "Hi ha agut un error",
+    serverError: "Error del servidor",
+    imgupdated: "Imatge actualitzada"
 }

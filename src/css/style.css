@@ -85,11 +85,14 @@ h3 {
     background-color: #F5F5F5;
 }
 .selector{
-    text-align: center;
-    width: 8vw;
-    height: 4vw;
-    font-size: 24px;
-    background-color: #c4c4c485;
+    height: 3vw;
+    width: 20vw;
+    padding-right: 2%;
+    border: none;
+    border-radius: 10px;
+    background-color: #FBF1E3;
+    font-size: 2.2vw;
+    align-items: center;
 }
 .selector::-ms-expand {
     display: none; /* Hide the default arrow in Internet Explorer 10 and Internet Explorer 11 */
@@ -115,6 +118,7 @@ h3 {
 }
 
 body {
+    margin:0;
     font-size: 2vw;
     background-image: url("./../images/bg.png");
     overflow: hidden;
@@ -1654,13 +1658,6 @@ label {
 
 /*******************************************************************************************/
 
-@media only screen and (max-width: 700px) {
-    canvas {
-        width: 350px !important;
-        height: 270px !important;
-    }
-}
-
 @media screen and (max-height: 600px) {
     .sound_settings .all_settings {
         overflow-y: scroll;
@@ -2138,7 +2135,7 @@ label {
 
     .all-levels th,
     td {
-        padding: 2vw 5vw;
+        padding: 2vw 2vw;
         font-size: 2vw;
     }
 
