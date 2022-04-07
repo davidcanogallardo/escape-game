@@ -5,6 +5,7 @@ export default {
     loginwarning: "Tienes que iniciar sesión para acceder a esta página",
     sendsolicitude: "Enviar solicitud a:",
     send: "Enviar",
+    solicitudesended: "Petición de amistad enviada a: ",
     trophiesobtained: "Copas obtenidas",
     prefmap: "Mapa favorito",
     closesession: "Cerrar sesión",
