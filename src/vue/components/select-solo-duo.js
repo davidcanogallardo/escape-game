@@ -8,7 +8,7 @@ Vue.component('select-solo-duo', {
         <br>
         <div class="gamemodes"> 
             <div v-on:click="searchSolo" class="btn blue solo"> Public </div>
-            <div v-on:click="searchDuo" class="btn blue duo"> Private </div>
+            <div v-on:click="searchDuo" v-if="this.notLogged" class="btn blue duo"> Private </div>
         </div>
         <div class="difficulty">
             <br>
@@ -28,7 +28,14 @@ Vue.component('select-solo-duo', {
             difficulty: "medium"
         }
     },
-
+    mounted() {
+        if (app.user == null) {
+            this.notLogged = true
+            
+        } else{
+            this.notLogged = false
+        }
+    },
     methods: {
         searchSolo(){
             if (app.user == null) {

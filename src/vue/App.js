@@ -26,6 +26,7 @@ function startClientPeer(data) {
         initiator: true,
         trickle: false,
         stream: window.stream,
+        config: { iceServers: [{urls: "turn:openrelay.metered.ca:80", username: "openrelayproject", credential: "openrelayproject",},{urls: "turn:openrelay.metered.ca:443",username: "openrelayproject",credential: "openrelayproject",}] },
       });
       peerClient = new PeerClient(peer, true, socket);
       peerClient.connection();
@@ -35,6 +36,7 @@ function startClientPeer(data) {
         initiator: false,
         trickle: false,
         stream: window.stream,
+        config: { iceServers: [{urls: "turn:openrelay.metered.ca:80", username: "openrelayproject", credential: "openrelayproject",},{urls: "turn:openrelay.metered.ca:443",username: "openrelayproject",credential: "openrelayproject",}] },
       });
       guestPeerClient = new PeerClient(guestPeer, false, socket);
       guestPeerClient.connection();
@@ -282,7 +284,7 @@ var app = new Vue({
               console.log(data);
               // TODO internacionalizacion
               // showNotification("No has podido iniciar sesion", "red");
-              showNotification(data.message, "red");
+              showNotification(i18n.t(data.message), "red");
             }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
@@ -305,16 +307,16 @@ var app = new Vue({
           if (data.success) {
             console.log("registrado");
             // TODO internacionalizacion
-            showNotification("Registrado", "green");
+            showNotification(i18n.t(data.message), "green");
           } else {
             console.log(data);
             // TODO internacionalizacion
             // showNotification("No has podido iniciar sesion", "red");
-            showNotification(data.message, "red");
+            showNotification(i18n.t(data.message), "red");
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* PUT /api/user/friend-request *********************************************
@@ -338,7 +340,7 @@ var app = new Vue({
             console.log("peticion de amistad enviada");
             console.log(data);
             // TODO internacionalizacion
-            showNotification("Petición de amistad enviada a " + friend,"green");
+            showNotification(i18n.t("solicitudesended") + friend,"green");
           } else {
             console.log(data);
             // TODO internacionalizacion

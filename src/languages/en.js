@@ -5,6 +5,7 @@ export default {
     loginwarning: "You have to log in first to access this page",
     sendsolicitude: "Send friend request to:",
     send: "Send",
+    solicitudesended: "Friend request sended to: ",
     trophiesobtained: "Trophies obtained",
     prefmap: "Preferred map",
     closesession: "Log out",
@@ -60,7 +61,11 @@ export default {
     rankingSubtitlemedium: "Ranking of medium difficulty levels:",
     rankingSubtitlehard: "Ranking of hard difficulty levels:",
     gamesPlayed: "Games Played",
-    avgScore: "Average score"
+    avgScore: "Average score",
+    registered: "Registered",
+    unauthorised: "Incorrect inputs",
+    genericError: "An error has occured",
+    serverError: "Server error"
     // rankingTitle: "Select a difficulty:",
     // rankingTitle: "Select a difficulty:",
     // rankingTitle: "Select a difficulty:",

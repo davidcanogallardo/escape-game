@@ -41,7 +41,7 @@ function getSessionSoundConf() {
 }
 
 function showNotification(message, color) {
-  var div = `<div class="notification">` + message + `</div>`;
+  var div = `<div class="notification">`+message+`</div>`;
 
   $(div).appendTo("body");
   $(".notification")

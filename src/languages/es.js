@@ -5,6 +5,7 @@ export default {
     loginwarning: "Tienes que iniciar sesión para acceder a esta página",
     sendsolicitude: "Enviar solicitud a:",
     send: "Enviar",
+    solicitudesended: "Petición de amistad enviada a: ",
     trophiesobtained: "Copas obtenidas",
     prefmap: "Mapa favorito",
     closesession: "Cerrar sesión",
@@ -59,5 +60,9 @@ export default {
     rankingSubtitlemedium: "Ranking de niveles de dificultad media:",
     rankingSubtitlehard: "Ranking de niveles de dificultad difícil:",
     gamesPlayed: "Partidas jugadas",
-    avgScore: "Puntuación media"
+    avgScore: "Puntuación media",
+    registered: "Registrado",
+    unauthorised: "Datos incorrectos",
+    genericError: "Ha habido un error",
+    serverError: "Error del servidor"
 }
