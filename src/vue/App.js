@@ -346,7 +346,7 @@ var app = new Vue({
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* GET /api/user/userinfo/{id} *********************************************
@@ -409,7 +409,7 @@ var app = new Vue({
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* GET /api/game/ranking *********************************************
@@ -430,7 +430,7 @@ var app = new Vue({
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* PUT /user/game/{level}/{time} *********************************************
@@ -454,7 +454,7 @@ var app = new Vue({
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* PUT /user/history/{partner}/{level}/{score} *********************************************
@@ -478,7 +478,7 @@ var app = new Vue({
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* PUT /user/update/photo ********************************************
@@ -497,7 +497,7 @@ var app = new Vue({
         .done((data) => {
           if (data.success) {
             // TODO internacionalizacion
-            showNotification("Foto actualizada", "green");
+            showNotification(i18n.t("imgupdated"), "green");
           } else {
             console.log(data);
             // TODO internacionalizacion
@@ -505,7 +505,7 @@ var app = new Vue({
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* GET /api/user/history/ ********************************************
@@ -528,7 +528,7 @@ var app = new Vue({
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     // TODO no se usa

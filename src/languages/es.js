@@ -64,5 +64,6 @@ export default {
     registered: "Registrado",
     unauthorised: "Datos incorrectos",
     genericError: "Ha habido un error",
-    serverError: "Error del servidor"
+    serverError: "Error del servidor",
+    imgupdated: "Imagen actualitzada"
 }

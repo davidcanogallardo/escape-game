@@ -65,7 +65,8 @@ export default {
     registered: "Registered",
     unauthorised: "Incorrect inputs",
     genericError: "An error has occured",
-    serverError: "Server error"
+    serverError: "Server error",
+    imgupdated: "Image updated"
     // rankingTitle: "Select a difficulty:",
     // rankingTitle: "Select a difficulty:",
     // rankingTitle: "Select a difficulty:",
