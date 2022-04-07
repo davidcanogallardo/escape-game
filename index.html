@@ -53,10 +53,11 @@
     <script src="./demo_game/classes/BluetoothConnection.js"></script>
     <script src="./demo_game/classes/GenericMiniGame.js"></script>
 
-    <script>
+    <script type="module">
+            import env from "./env.js"
             $.ajax({
                 type: "GET",
-                url: "http://127.0.0.1:1111/api/csrf-cookie",
+                url: `${env.apiUrl}/api/csrf-cookie`,
             }).done((data) => {
                     console.error(data);
                     window.csrf = data
