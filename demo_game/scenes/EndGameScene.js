@@ -42,7 +42,7 @@ class EndGameScene extends Phaser.Scene{
         $.ajax({
             async: false,
             type: "GET",
-            url: `${env.nodeUrl}/api/getScore/${time}/${nChallanges}`
+            url: `$http://localhost:1111/api/getScore/${time}/${nChallanges}`
         }).done((data) => {
             console.log(data);
             this.score = data; 
