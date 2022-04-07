@@ -282,7 +282,7 @@ var app = new Vue({
               console.log(data);
               // TODO internacionalizacion
               // showNotification("No has podido iniciar sesion", "red");
-              showNotification(data.message, "red");
+              showNotification(i18n.t(data.message), "red");
             }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
@@ -305,16 +305,16 @@ var app = new Vue({
           if (data.success) {
             console.log("registrado");
             // TODO internacionalizacion
-            showNotification("Registrado", "green");
+            showNotification(i18n.t(data.message), "green");
           } else {
             console.log(data);
             // TODO internacionalizacion
             // showNotification("No has podido iniciar sesion", "red");
-            showNotification(data.message, "red");
+            showNotification(i18n.t(data.message), "red");
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          showNotification("Fallo servidor", "red");
+          showNotification(i18n.t("serverError"), "red");
       });
     },
     //********************************************* PUT /api/user/friend-request *********************************************

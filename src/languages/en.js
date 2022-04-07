@@ -60,7 +60,11 @@ export default {
     rankingSubtitlemedium: "Ranking of medium difficulty levels:",
     rankingSubtitlehard: "Ranking of hard difficulty levels:",
     gamesPlayed: "Games Played",
-    avgScore: "Average score"
+    avgScore: "Average score",
+    registered: "Registered",
+    unauthorised: "Incorrect inputs",
+    genericError: "An error has occured",
+    serverError: "Server error"
     // rankingTitle: "Select a difficulty:",
     // rankingTitle: "Select a difficulty:",
     // rankingTitle: "Select a difficulty:",

@@ -59,5 +59,9 @@ export default {
     rankingSubtitlemedium: "Ranking de niveles de dificultad media:",
     rankingSubtitlehard: "Ranking de niveles de dificultad difícil:",
     gamesPlayed: "Partidas jugadas",
-    avgScore: "Puntuación media"
+    avgScore: "Puntuación media",
+    registered: "Registrado",
+    unauthorised: "Datos incorrectos",
+    genericError: "Ha habido un error",
+    serverError: "Error del servidor"
 }

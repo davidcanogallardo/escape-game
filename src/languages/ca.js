@@ -58,5 +58,8 @@ export default {
     rankingSubtitleMedium: "Rànquing de nivells de dificultat mitja:",
     rankingSubtitleHard: "Rànquing de nivells de dificultat difícils:",
     gamesPlayed: "Partides jugades",
-    avgScore: "Puntuació mitja"
+    avgScore: "Puntuació mitja",
+    registered: "Registrat",
+    genericError: "Hi ha agut un error",
+    serverError: "Error del servidor"
 }
