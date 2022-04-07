@@ -62,5 +62,6 @@ export default {
     avgScore: "Puntuació mitja",
     registered: "Registrat",
     genericError: "Hi ha agut un error",
-    serverError: "Error del servidor"
+    serverError: "Error del servidor",
+    imgupdated: "Imatge actualitzada"
 }

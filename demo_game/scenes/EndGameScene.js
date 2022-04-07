@@ -1,4 +1,5 @@
 // import { app } from '../../src/vue/App.js'
+// import env from "../../env.js"
 
 class EndGameScene extends Phaser.Scene{
     constructor() {
@@ -41,7 +42,7 @@ class EndGameScene extends Phaser.Scene{
         $.ajax({
             async: false,
             type: "GET",
-            url: `http://localhost:1111/api/getScore/${time}/${nChallanges}`
+            url: `$http://localhost:1111/api/getScore/${time}/${nChallanges}`
         }).done((data) => {
             console.log(data);
             this.score = data; 
