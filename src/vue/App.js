@@ -2,7 +2,6 @@ import { i18n } from "../languages/language.js";
 import { getSessionUser, showNotification } from "../js/utils.js";
 import { connect, disconnect } from "../js/chat-client.js";
 import Peer from "../../node_modules/simple-peer-light/simplepeer.min.js";
-import env from "../../env.js"
 
 var peer = undefined;
 var peerClient = undefined;
@@ -102,7 +101,7 @@ let excludedPages = [
   "select-solo-duo",
 ];
 
-let _url = env.apiUrl;
+let _url = apiUrl;
 
 var app = new Vue({
   i18n,
