@@ -10,7 +10,7 @@ var guestPeerClient = undefined;
 let audioTag;
 
 socket.on("matchFound", (data) => {
-  if (window.mic[0] == undefined) {
+  if (this.mainMicId == null) {
     window.stream = null  
     startClientPeer(data)  
   } else {
@@ -120,7 +120,7 @@ var app = new Vue({
     profileInfo: null,
     modalOpen: "none",
     rankingData: null,
-    mainMicId: "default",
+    mainMicId: null,
     notificationunsread: false,
     token: null,
     bluetoothConnection: null,
@@ -136,10 +136,14 @@ var app = new Vue({
         this.currentPage = "login-warning";
       } else {
         if (newPage == "waiting-room") {
+          // Si el usuario no ha seleccionado un micrófono
           if (!this.mainMicId) {
-            this.mainMicId = window.mic[0].id;
+              // Si el usuario tiene micrófonos
+              if (window.mic[0] != undefined) {
+                  this.mainMicId = window.mic[0].id;
+              }
           }
-        }
+      }
       }
       this.menuOpen = "none";
     },
@@ -153,7 +157,7 @@ var app = new Vue({
       }
     },
     mainMicId: function (n, o) {
-      mic = n;
+      // mic = n;
     },
   },
   mounted() {

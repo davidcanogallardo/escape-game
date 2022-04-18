@@ -27,11 +27,11 @@ mediaDevicesPromise
 						}
 						camArray.push(cam)
 					} else if (device.kind == "audioinput") {
-						var mic = {
+						var mic2 = {
 							label: device.label,
 							id: device.deviceId
 						}
-						micArray.push(mic)
+						micArray.push(mic2)
 					}
 					window.mic = micArray
 					window.cam = camArray

@@ -1,4 +1,5 @@
 import {getSessionSoundConf} from "./../../../js/utils.js"
+import { app } from "../../App.js"
 
 Vue.component('sound-settings', {
     template: //html
@@ -21,7 +22,7 @@ Vue.component('sound-settings', {
                 <p><u>{{ $t("micconfig") }}</u></p>
                 <div class="ajuste">
                     <p for="mic">{{ $t("selectmic") }}</p>
-                    <select name="mic" id="mic" @change="updateMainMic($event)">
+                    <select name="mic" id="mic2" @change="updateMainMic($event)">
                     </select>
                     <button id="micTest" class="btn blue" v-on:click="testAudio()" type="button">TEST MICROPHONE</button>
                 </div>
@@ -46,7 +47,8 @@ Vue.component('sound-settings', {
     methods: {
         updateMainMic(e) {
             console.log("micro cambiado. id: " + e.target.value);
-            this.$emit('update-mic', e.target.value)
+            // this.$emit('update-mic', e.target.value)
+            app.mainMicId = e.target.value
         },
         updateSound() {
             let soundSettings = new SoundSettings($("#general-volume").val(), $("#mic-volume").val(), $("#mic-sensitivity").val())
@@ -54,7 +56,7 @@ Vue.component('sound-settings', {
             sessionStorage.setItem("sound-settings", JSON.stringify(soundSettings))
         },
         testAudio(){
-            testMic($("#mic")[0].value);
+            testMic($("#mic2")[0].value);
         }
     },
     created() {
@@ -64,9 +66,14 @@ Vue.component('sound-settings', {
         window.mic.forEach(device => {
             var option = document.createElement("option");
             option.innerHTML = device.label;
+
             console.log(device);
             option.value = device.id;
-            document.getElementById("mic").appendChild(option)
+
+            if (device.id == app.mainMicId) {
+                option.selected = true
+            }
+            document.getElementById("mic2").appendChild(option)
         });
     },
 })

@@ -176,7 +176,6 @@ class ComunicacionServidor {
         }
 
         getRandomMap(diff, socket, players, io) {
-
             this.axios.get('http://localhost:1111/api/game/random-map/'+diff)
             .then(function (response) {
                 // handle success
