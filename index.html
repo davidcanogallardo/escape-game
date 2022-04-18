@@ -9,7 +9,9 @@
     <link rel="shortcut icon" href="./src/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="./src/images/favicon.ico" type="image/x-icon">
 
+    
     <script src="./env.js"></script>
+
     <!-- CDNs -->
     <script src="./src/cdn/jquery-3.6.0.js"></script>
     <script src="./src/cdn/fontawesome.js"></script>
@@ -53,20 +55,23 @@
     <script src="./demo_game/classes/BluetoothConnection.js"></script>
     <script src="./demo_game/classes/GenericMiniGame.js"></script>
 
-    <script type="module">
+    <script>
             $.ajax({
                 type: "GET",
                 url: `${apiUrl}/api/csrf-cookie`,
-            }).done((data) => {
-                    console.error(data);
-                    window.csrf = data
-            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                if (console && console.log) {
-                    // console.log("La solicitud ha fallado: " + textStatus);
-                    // console.log(XMLHttpRequest);
-                    // console.log(errorThrown);
-                }
-            });
+            })
+            .done((data) => {
+            if (data.success) {
+                console.error("peticion csrf-cookie funciona!");
+                window.csrf = data
+            } else {
+              console.log(data);
+              showNotification(data.message, "red");
+            }
+          })
+          .fail(function (jqXHR, textStatus, errorThrown) {
+            showNotification("Fallo servidor", "red");
+        });
     </script>
     
 </head>
