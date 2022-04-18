@@ -17,7 +17,8 @@ Vue.component('change-language', {
             this.$root._i18n.locale = lang;
             var language = this.$root._i18n.locale;
             userCopy.language=language;
-            sessionStorage.setItem("session", JSON.stringify(userCopy));
+            localStorage.setItem("locale", language)
+            // sessionStorage.setItem("session", JSON.stringify(userCopy));
         },
     },
 })

@@ -10,12 +10,14 @@ var guestPeerClient = undefined;
 let audioTag;
 
 socket.on("matchFound", (data) => {
-  if (this.mainMicId == null) {
-    window.stream = null  
-    startClientPeer(data)  
-  } else {
-    startPeerStream(startClientPeer, data);
-  }
+// No tiene micrófono, envía un stream null
+if (this.mainMicId == null) {
+  window.stream = null  
+  startClientPeer(data)  
+// Si tiene micrófono coge el stream de audio
+} else {
+  startPeerStream(startClientPeer, data);
+}
 });
 
 function startClientPeer(data) {

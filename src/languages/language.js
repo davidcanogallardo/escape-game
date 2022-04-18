@@ -1,5 +1,5 @@
 import { languages } from './index.js'
-import { getSessionUser } from "../js/utils.js";
+// import { getSessionUser } from "../js/utils.js";
 
 const messages = languages;
 
@@ -8,8 +8,9 @@ var i18n = new VueI18n({
   messages
 })
 
-// Comrpuebo si hay un usuario en la sesión
-if (getSessionUser() == null) {
+// Comrpuebo si está el idioma en localStorage
+if (localStorage.getItem("locale") == null) {
+  
   // si no hay usuario tengo que comprobar si el locale de la máquina 
   // está en los idiomas disponibles
 
@@ -27,8 +28,8 @@ if (getSessionUser() == null) {
     i18n.locale = navigator.language.split("-")[0]
   }
 } else {
-  // si hay usuario pongo el locale que tenga ese usuario guardado
-  i18n.locale = getSessionUser().language
+  // si hay usuario pongo el locale que tenga en localStorage
+  i18n.locale = localStorage.getItem("locale")
 }
 
 window.i = i18n
