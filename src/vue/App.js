@@ -9,15 +9,15 @@ var guestPeer = undefined;
 var guestPeerClient = undefined;
 let audioTag;
 
-socket.on("matchFound", (data) => {
+socket.on("matchFound", function (data) {
 // No tiene micrófono, envía un stream null
-if (this.mainMicId == null) {
-  window.stream = null  
-  startClientPeer(data)  
-// Si tiene micrófono coge el stream de audio
-} else {
-  startPeerStream(startClientPeer, data);
-}
+  if (app.mainMicId == null) {
+    window.stream = null  
+    startClientPeer(data)  
+  // Si tiene micrófono coge el stream de audio
+  } else {
+    startPeerStream(startClientPeer, data);
+  }
 });
 
 function startClientPeer(data) {
@@ -136,16 +136,17 @@ var app = new Vue({
       ) {
         console.log("no hay sesión");
         this.currentPage = "login-warning";
-      } else {
-        if (newPage == "waiting-room") {
-          // Si el usuario no ha seleccionado un micrófono
-          if (!this.mainMicId) {
-              // Si el usuario tiene micrófonos
-              if (window.mic[0] != undefined) {
-                  this.mainMicId = window.mic[0].id;
-              }
-          }
       }
+      console.log(newPage);
+      if (newPage == "select-solo-duo") {
+        // Si el usuario no ha seleccionado un micrófono
+        if (this.mainMicId==null) {
+
+            // Si el usuario tiene micrófonos
+            if (window.mic[0] != undefined) {
+                this.mainMicId = window.mic[0].id;
+            }
+        }
       }
       this.menuOpen = "none";
     },
