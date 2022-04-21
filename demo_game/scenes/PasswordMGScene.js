@@ -31,15 +31,13 @@ class PasswordMGScene extends GenericMiniGame {
         } else {
             this.correctPassword = password
         }
-        
-        
     }
 
     getPassword(){
         return this.correctPassword
     }
 
-    setPassword(){
+    setPassword() {
         
     }
 
@@ -51,28 +49,48 @@ class PasswordMGScene extends GenericMiniGame {
     }
 
     create(){
-//=============opciones jugador con ventana reto=========================================
+        //=============opciones jugador con ventana reto=========================================
         if (this.type=='challenge') {
-            // this.correctAnswer = [0,1,2,3];
             this.correctAnswer = this.correctPassword
-            console.log(this.correctPassword);
             var path2 = ""
             let { width, height } = this.sys.game.canvas;
             //console.log(this.sys.game.canvas.width);
-            this.background = this.add.image(0, 0, 'passwd_bg');
-            this.background.setScale(0.3);
-            this.background.setOrigin(0,0);
+            this.background = this.add.image(width/2, height/2, 'passwd_bg');
+            this.background.setScale(0.6);
+            // this.background.setOrigin(0,0);
+            // this.background.x = width/2
+            // this.background.y = 200
+
+
+            window.background = this.background
+            window.w = width
+            window.h = height
+
             this.cursors = this.input.keyboard.createCursorKeys();
 
             var difficulty = this.getDiff(this.difficulty);
             let x = 0.50;
+
             for(let i=0; i<9; i++){
                 let button = [];
-                if(i>=5){
-                    button[0] = this.add.image(0+(x*60), height/2+40, 'simbol'+i);
-                    button[1] = this.add.rectangle(10+(x*60), height/2+50, 55, 55);
+                // if(i>=5){
+                if(true){
+                    button[0] = this.add.image(0+(x*60), height/2+50, 'simbol'+i);
+                    // button[0].y = this.background.y/4
+                    
+                    button[1] = this.add.rectangle(10+(x*60), height/2+50, 100, 100);
                     button[1].setStrokeStyle(2, 0xffffff);
                     button[1].setVisible(false);
+                    if (i!=0) {
+                        console.log(i);
+                        button[0].x = (this.puzzle_buttons[i-1][0].x)+(this.puzzle_buttons[i-1][0].width/2)
+                        button[1].x = (this.puzzle_buttons[i-1][0].x)+(this.puzzle_buttons[i-1][0].width/2)
+                    } else {
+                        button[0].x = (this.background.x/2-20)
+                        button[1].x = (this.background.x/2-20)
+                    }
+                    // button[1].x = window.background.x/2
+                    // button[1].y = window.background.y/2
                     
                     this.puzzle_buttons[i] = button;
                     x++;  
@@ -84,28 +102,32 @@ class PasswordMGScene extends GenericMiniGame {
                     console.log(button);
                     this.puzzle_buttons[i] = button;
                 }
-                this.puzzle_buttons[i][0].setScale(0.3);
-                this.puzzle_buttons[i][0].setOrigin(0,0);
-                this.puzzle_buttons[i][1].setOrigin(0,0);
+                this.puzzle_buttons[i][0].setScale(0.5);
+                // this.puzzle_buttons[i][0].setOrigin(0,0);
+                // this.puzzle_buttons[i][1].setOrigin(0,0);
                 this.puzzle_buttons[i][1].setDepth(1);
                 window.b = button[0];
                 console.log(this.correctAnswer.includes(this.puzzle_buttons[i][0].texture.key)); 
                 //console.log(this.puzzle_buttons[i][0].texture.key === "simbol1")
                 //this.puzzle_buttons[i][0].setTint(59000000);
             } 
+
             
             for (let i = 0; i < this.puzzle_buttons.length; i++) {
                 this.puzzle_buttons[i].push(this.shuffleSymbols[i]);
             }
+
+            window.puzzle_buttons = this.puzzle_buttons
+
             
             this.result_rectangles = [];
             for(let i = 0; i<2+(2*difficulty); i++){
                 if (difficulty==1) {
-                    this.result_rectangles[i] = this.add.rectangle(2.5+(i*80), 30, 250, 250, 0x9966ff); //difficulty 1
+                    this.result_rectangles[i] = this.add.rectangle(this.background.x/2+(i*250), this.background.y/2, 500, 500, 0x9966ff); //difficulty 1
                 } else if (difficulty==2) {
-                    this.result_rectangles[i] = this.add.rectangle(2.5+(i*50), 30, 150, 150, 0x9966ff); //difficulty 2
+                    this.result_rectangles[i] = this.add.rectangle((this.background.x/2)+(i*150)+55, this.background.y/2+100, 350, 350, 0x9966ff); //difficulty 2
                 } else if (difficulty==3) {
-                    this.result_rectangles[i] = this.add.rectangle(2.5+(i*40), 30, 120, 120, 0x9966ff); //difficulty 3
+                    this.result_rectangles[i] = this.add.rectangle((this.background.x/2)-50+(i*130), this.background.y/2+100, 350, 350, 0x9966ff); //difficulty 3
                 }
                 this.result_rectangles[i].setStrokeStyle(4, 0xefc53f);
 
@@ -113,9 +135,6 @@ class PasswordMGScene extends GenericMiniGame {
                 this.result_rectangles[i].setOrigin(0,0);
                 
                 console.warn(this.result_rectangles[i].x);
-                // console.warn(this.result_rectangles[i].width);
-                // console.warn(this.result_rectangles[i].height);
-
             }
             this.selectIcon(0);
             this.password = []
@@ -140,7 +159,7 @@ class PasswordMGScene extends GenericMiniGame {
                 if (difficulty==1) {
                     that.result_rectangles[count].setScale(0.3); //difficulty 1
                 } else if (difficulty==2) {
-                    that.result_rectangles[count].setScale(0.2); //difficulty 2
+                    that.result_rectangles[count].setScale(0.5); //difficulty 2
                 } else if (difficulty==3) {
                     that.result_rectangles[count].setScale(0.15); //difficulty 3
                 }
@@ -163,13 +182,11 @@ class PasswordMGScene extends GenericMiniGame {
                 
             });
             
-//=============opciones jugador con ventana helper=========================================
+        //=============opciones jugador con ventana helper=========================================
         } else {
-            console.log(this.correctPassword);
-            let {width, height} = this.sys.game.canvas;
-            this.background = this.add.image(0, 0, 'passwd_bg');
-            this.background.setScale(0.12);
-            this.background.setOrigin(-0.2 , -0.7);
+            let { width, height } = this.sys.game.canvas;
+            this.background = this.add.image(width/2, height/2, 'passwd_bg');
+            this.background.setScale(0.6);
 
             window.h = height;
             window.w = width;
@@ -177,18 +194,9 @@ class PasswordMGScene extends GenericMiniGame {
 
             this.puzzle_image= [];
 
-            let x = 0.50;
             for(let i=0; i<this.correctPassword.length; i++){
-                //console.log(this.background.height);
-                
-                //if(i>=5){
-                    this.puzzle_image[i] = this.add.image(85+(i*40), height/2-20, 'simbol'+this.correctPassword[i]);
-                    x++;  
-                // } else {
-                //     this.puzzle_image[i] = this.add.image(0+(i*50), height/2+40, 'simbol'+this.correctPassword[i]);
-                // }
-
-                this.puzzle_image[i].setScale(0.15);
+                this.puzzle_image[i] = this.add.image((this.background.x/2.5)+(i*130), this.background.y/1.2, 'simbol'+this.correctPassword[i]);
+                this.puzzle_image[i].setScale(0.6);
                 this.puzzle_image[i].setOrigin(0,0);
             }  
         }
