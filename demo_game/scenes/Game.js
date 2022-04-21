@@ -211,7 +211,7 @@ class Game extends Phaser.Scene {
             //app.currentPage="home";
         });
 
-        this.wallsLayer = new WallsLayer(this);
+        // this.wallsLayer = new WallsLayer(this);
         
         // ***************************************LEYENDA****************************************************************************
 
@@ -433,8 +433,8 @@ class Game extends Phaser.Scene {
             this.challenge = []
             for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
                 this.gamesList.push(this.gamesAvailable[Math.floor(Math.random()*this.gamesAvailable.length)]);
-                this.game.scene.add(this.gamesList[i]+i+"_helper",eval("new "+this.gamesList[i]+"("+i+",'helper','easy')"))
-                this.game.scene.add(this.gamesList[i]+i+"_challenge",eval("new "+this.gamesList[i]+"("+i+",'challenge','easy')"))
+                this.game.scene.add(this.gamesList[i]+i+"_helper",eval("new "+this.gamesList[i]+"("+i+",'helper','"+this.diff+"')"))
+                this.game.scene.add(this.gamesList[i]+i+"_challenge",eval("new "+this.gamesList[i]+"("+i+",'challenge','"+this.diff+"')"))
                 this.loadedScenes.push(this.gamesList[i]+i+"_helper")
                 this.loadedScenes.push(this.gamesList[i]+i+"_challenge")
             }
@@ -486,8 +486,8 @@ class Game extends Phaser.Scene {
                 spawns.objects.table[i].type = this.gamesList[i]
                 spawns.objects.chest[i].type = this.gamesList[i]
                 if (this.gamesList[i] == "PasswordMGScene") {
-                    spawns.objects.table[i].password = this.game.scene.keys[this.gamesList[i]+i+"_helper"].getPassword()
-                    spawns.objects.chest[i].password = this.game.scene.keys[this.gamesList[i]+i+"_helper"].getPassword()
+                    spawns.objects.table[i].password = this.game.scene.keys[this.gamesList[i]+i+"_challenge"].getPassword()
+                    spawns.objects.chest[i].password = this.game.scene.keys[this.gamesList[i]+i+"_challenge"].getPassword()
                 }
                 
             }

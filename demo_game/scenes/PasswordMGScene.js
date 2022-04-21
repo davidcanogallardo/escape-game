@@ -6,13 +6,13 @@ class PasswordMGScene extends GenericMiniGame {
         this.difficulty = difficulty;
         
         this.symbols = [0,1,2,3,4,5,6,7,8];
-        this.shuffleSymbols = this.symbols.sort(() => Math.random() - 0.5);
+        // this.shuffleSymbols = this.symbols.sort(() => Math.random() - 0.5);
         this.correctPassword = [];
         
-        let shuffled = this.shuffleSymbols.sort(() => Math.random() - 0.5);
-        for (let x = 0; x < 2+(2*this.getDiff(this.difficulty)); x++) {
-            this.correctPassword.push(shuffled[x]);
-        }
+        // let shuffled = this.shuffleSymbols.sort(() => Math.random() - 0.5);
+        // for (let x = 0; x < 2+(2*this.getDiff(this.difficulty)); x++) {
+        //     this.correctPassword.push(shuffled[x]);
+        // }
         // window.corr = 
         this.shuffleSymbols = [0,1,2,3,4,5,6,7,8];
         //Si al constructor no le llega ninguna contraseña este la genera automaticamente en el caso contrario la almacena
@@ -24,7 +24,7 @@ class PasswordMGScene extends GenericMiniGame {
             // } else if (difficulty = 'hard') {
             //     this.correctPassword = [0,1,2,3,4,5,6,7]
             // }
-            let shuffled = this.shuffleSymbols.sort(() => Math.random() - 0.5);
+            let shuffled = this.symbols.sort(() => Math.random() - 0.5);
             for (let x = 0; x < 2+(2*this.getDiff(this.difficulty)); x++) {
                 this.correctPassword.push(shuffled[x]);
             }
@@ -55,6 +55,7 @@ class PasswordMGScene extends GenericMiniGame {
         if (this.type=='challenge') {
             // this.correctAnswer = [0,1,2,3];
             this.correctAnswer = this.correctPassword
+            console.log(this.correctPassword);
             var path2 = ""
             let { width, height } = this.sys.game.canvas;
             //console.log(this.sys.game.canvas.width);
@@ -164,6 +165,7 @@ class PasswordMGScene extends GenericMiniGame {
             
 //=============opciones jugador con ventana helper=========================================
         } else {
+            console.log(this.correctPassword);
             let {width, height} = this.sys.game.canvas;
             this.background = this.add.image(0, 0, 'passwd_bg');
             this.background.setScale(0.12);
