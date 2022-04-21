@@ -61,13 +61,8 @@
                 url: `${apiUrl}/api/csrf-cookie`,
             })
             .done((data) => {
-            if (data.success) {
-                console.error("peticion csrf-cookie funciona!");
-                window.csrf = data
-            } else {
-              console.log(data);
-              showNotification(data.message, "red");
-            }
+            console.error("peticion csrf-cookie funciona!");
+            window.csrf = data
           })
           .fail(function (jqXHR, textStatus, errorThrown) {
             showNotification("Fallo servidor", "red");
