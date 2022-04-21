@@ -65,9 +65,9 @@ Vue.component('ranking', {
     <div class="ranking">
         <div id="ranking_title">{{ $t("rankingTitle") }}</div>
         <div class="ranking_diff">
-            <div class="ranking_diff_easy selected" v-on:click="changeDiff($event, 'easy')">{{ $t("easyDifficulty") }}</div>
-            <div class="ranking_diff_medium" v-on:click="changeDiff($event, 'medium')">{{ $t("mediumDifficulty") }}</div>
-            <div class="ranking_diff_hard" v-on:click="changeDiff($event, 'hard')">{{ $t("hardDifficulty") }}</div>
+            <div class="btn blue selected" v-on:click="changeDiff($event, 'easy')">{{ $t("easyDifficulty") }}</div>
+            <div class="btn blue" v-on:click="changeDiff($event, 'medium')">{{ $t("mediumDifficulty") }}</div>
+            <div class="btn blue" v-on:click="changeDiff($event, 'hard')">{{ $t("hardDifficulty") }}</div>
         </div>
         <ranking-table 
             v-for="(item, name) in ranking"

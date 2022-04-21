@@ -205,13 +205,9 @@ body {
 }
 
 .selected {
-    background-color: rgba(196, 196, 196, 0.56);
-    border: 2px solid #68492E;
-    color: #68492E;
-    border-radius: 0.6vw;
-    padding: -9.5vw;
-    width: 10vw;
-    font-size: 2.6vw;
+    background: #EFDEC3 !important;
+    color: #14448D !important;
+    outline: 3px solid #14448D !important;
 }
 
 .selected fa-gamepad {
