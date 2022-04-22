@@ -5,7 +5,7 @@ class PasswordMGScene extends GenericMiniGame {
         this.type = type;
         this.difficulty = difficulty;
         
-        this.symbols = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+        this.symbols = [0,1,2,3,4,5,6,7,8];
         // this.shuffleSymbols = this.symbols.sort(() => Math.random() - 0.5);
         this.correctPassword = [];
         
@@ -14,7 +14,7 @@ class PasswordMGScene extends GenericMiniGame {
         //     this.correctPassword.push(shuffled[x]);
         // }
         // window.corr = 
-        this.shuffleSymbols = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+        this.shuffleSymbols = [0,1,2,3,4,5,6,7,8];
         //Si al constructor no le llega ninguna contraseña este la genera automaticamente en el caso contrario la almacena
         if (password == null) {
             // if (difficulty = 'easy') {
@@ -71,23 +71,23 @@ class PasswordMGScene extends GenericMiniGame {
             var difficulty = this.getDiff(this.difficulty);
             let x = 0.50;
 
-            for(let i=0; i<14; i++){
+            for(let i=0; i<9; i++){
                 let button = [];
                 // if(i>=5){
                 if(true){
                     button[0] = this.add.image(0+(x*60), height/2+50, 'simbol'+i);
                     // button[0].y = this.background.y/4
                     
-                    button[1] = this.add.rectangle(10+(x*60), height/2+50, button[0].width+5, button[0].height+5);
+                    button[1] = this.add.rectangle(10+(x*60), height/2+50, 100, 100);
                     button[1].setStrokeStyle(2, 0xffffff);
                     button[1].setVisible(false);
                     if (i!=0) {
                         console.log(i);
-                        button[0].x = (this.puzzle_buttons[i-1][0].x)+(this.puzzle_buttons[i-1][0].width)+20
-                        button[1].x = (this.puzzle_buttons[i-1][0].x)+(this.puzzle_buttons[i-1][0].width)+20
+                        button[0].x = (this.puzzle_buttons[i-1][0].x)+(this.puzzle_buttons[i-1][0].width/2)
+                        button[1].x = (this.puzzle_buttons[i-1][0].x)+(this.puzzle_buttons[i-1][0].width/2)
                     } else {
-                        button[0].x = (this.background.x/4-20)
-                        button[1].x = (this.background.x/4-20)
+                        button[0].x = (this.background.x/2-20)
+                        button[1].x = (this.background.x/2-20)
                     }
                     // button[1].x = window.background.x/2
                     // button[1].y = window.background.y/2
@@ -102,7 +102,7 @@ class PasswordMGScene extends GenericMiniGame {
                     console.log(button);
                     this.puzzle_buttons[i] = button;
                 }
-                this.puzzle_buttons[i][0].setScale(1);
+                this.puzzle_buttons[i][0].setScale(0.5);
                 // this.puzzle_buttons[i][0].setOrigin(0,0);
                 // this.puzzle_buttons[i][1].setOrigin(0,0);
                 this.puzzle_buttons[i][1].setDepth(1);

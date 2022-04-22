@@ -60,7 +60,7 @@ class Game extends Phaser.Scene {
         this.load.image('passwd_bg', path+'assets/BGTable.png');
         this.load.atlas('door', path+'assets/objects/door/door.png', path+'assets/objects/door/door.json');
         this.cursors = this.input.keyboard.createCursorKeys();
-        for(let i=0; i<14; i++){
+        for(let i=0; i<9; i++){
             this.load.image('simbol'+i, path+'assets/passwd/simbol'+i+'.png');
         }
         this.buttonActive = false;
