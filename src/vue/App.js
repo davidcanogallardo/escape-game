@@ -172,6 +172,7 @@ var app = new Vue({
         connect();
         window.setInterval(this.getNotificationList, 10000);
         window.setInterval(this.getFriendList, 10000);
+        this.getUserHistory();
       }
     });
   },
