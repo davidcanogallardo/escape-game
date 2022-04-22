@@ -185,9 +185,12 @@ class Game extends Phaser.Scene {
 
         var end = this.physics.add.staticGroup();
         var endSpawn = this.map.objects[0].objects.filter(this.endFilter);
+        window.end = endSpawn
+        window.end2 = this.map.objects
         var endTile = end.create(endSpawn[0].x+18,endSpawn[0].y+20)
         endTile.body.setSize(endSpawn[0].width,endSpawn[0].height)
         endTile.visible = false
+
 
         this.playersGroup.getChildren().forEach(player => {
             this.physics.add.overlap(endTile, player, function () {
