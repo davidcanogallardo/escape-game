@@ -6,24 +6,11 @@ class PasswordMGScene extends GenericMiniGame {
         this.difficulty = difficulty;
         
         this.symbols = [0,1,2,3,4,5,6,7,8];
-        // this.shuffleSymbols = this.symbols.sort(() => Math.random() - 0.5);
         this.correctPassword = [];
         
-        // let shuffled = this.shuffleSymbols.sort(() => Math.random() - 0.5);
-        // for (let x = 0; x < 2+(2*this.getDiff(this.difficulty)); x++) {
-        //     this.correctPassword.push(shuffled[x]);
-        // }
-        // window.corr = 
         this.shuffleSymbols = [0,1,2,3,4,5,6,7,8];
         //Si al constructor no le llega ninguna contraseña este la genera automaticamente en el caso contrario la almacena
         if (password == null) {
-            // if (difficulty = 'easy') {
-            //     this.correctPassword = [0,1,2,3]
-            // } else if (difficulty = 'medium') {
-            //     this.correctPassword = [0,1,2,3,4,5]
-            // } else if (difficulty = 'hard') {
-            //     this.correctPassword = [0,1,2,3,4,5,6,7]
-            // }
             let shuffled = this.symbols.sort(() => Math.random() - 0.5);
             for (let x = 0; x < 2+(2*this.getDiff(this.difficulty)); x++) {
                 this.correctPassword.push(shuffled[x]);
@@ -44,8 +31,8 @@ class PasswordMGScene extends GenericMiniGame {
     puzzle_buttons = [];
     selectedButtonIndex = 0;
     preload(){
-//=============opciones jugador con ventana reto=========================================
-//=============opciones jugador con ventana helper=========================================
+    //=============opciones jugador con ventana reto=========================================
+    //=============opciones jugador con ventana helper=========================================
     }
 
     create(){
@@ -54,13 +41,8 @@ class PasswordMGScene extends GenericMiniGame {
             this.correctAnswer = this.correctPassword
             var path2 = ""
             let { width, height } = this.sys.game.canvas;
-            //console.log(this.sys.game.canvas.width);
             this.background = this.add.image(width/2, height/2, 'passwd_bg');
             this.background.setScale(0.6);
-            // this.background.setOrigin(0,0);
-            // this.background.x = width/2
-            // this.background.y = 200
-
 
             window.background = this.background
             window.w = width
@@ -69,72 +51,95 @@ class PasswordMGScene extends GenericMiniGame {
             this.cursors = this.input.keyboard.createCursorKeys();
 
             var difficulty = this.getDiff(this.difficulty);
-            let x = 0.50;
+
+            // ****************************************************************************************
+            var centerWoodX = this.background.displayWidth/2
+            var centerWoodY = this.background.displayHeight/2
+            var woodWidth = this.background.displayWidth
+            var centerDisplayX = width/2
+            var centerDisplayY = height/2
+            var leftWood = centerDisplayX-centerWoodX
+            var topWood = centerDisplayY-centerWoodY
+            
+            var xPosition
+            var xPositionNext;
+            var distanceBetweenPositions
+
+            var pieceXPosition
+            var pieceWidth = 100
+            
+            var nPieces = 9
+            // ****************************************************************************************
 
             for(let i=0; i<9; i++){
                 let button = [];
-                // if(i>=5){
-                if(true){
-                    button[0] = this.add.image(0+(x*60), height/2+50, 'simbol'+i);
-                    // button[0].y = this.background.y/4
-                    
-                    button[1] = this.add.rectangle(10+(x*60), height/2+50, 100, 100);
-                    button[1].setStrokeStyle(2, 0xffffff);
-                    button[1].setVisible(false);
-                    if (i!=0) {
-                        console.log(i);
-                        button[0].x = (this.puzzle_buttons[i-1][0].x)+(this.puzzle_buttons[i-1][0].width/2)
-                        button[1].x = (this.puzzle_buttons[i-1][0].x)+(this.puzzle_buttons[i-1][0].width/2)
-                    } else {
-                        button[0].x = (this.background.x/2-20)
-                        button[1].x = (this.background.x/2-20)
-                    }
-                    // button[1].x = window.background.x/2
-                    // button[1].y = window.background.y/2
-                    
-                    this.puzzle_buttons[i] = button;
-                    x++;  
-                } else {
-                    button[0] = this.add.image(0+(i*60), height/3+40, 'simbol'+i);
-                    button[1] = this.add.rectangle(10+(i*60), height/3+50, 55, 55);
-                    button[1].setStrokeStyle(2, 0xffffff);
-                    button[1].setVisible(false);
-                    console.log(button);
-                    this.puzzle_buttons[i] = button;
-                }
-                this.puzzle_buttons[i][0].setScale(0.5);
-                // this.puzzle_buttons[i][0].setOrigin(0,0);
-                // this.puzzle_buttons[i][1].setOrigin(0,0);
-                this.puzzle_buttons[i][1].setDepth(1);
-                window.b = button[0];
-                console.log(this.correctAnswer.includes(this.puzzle_buttons[i][0].texture.key)); 
-                //console.log(this.puzzle_buttons[i][0].texture.key === "simbol1")
-                //this.puzzle_buttons[i][0].setTint(59000000);
-            } 
 
+                xPosition = leftWood+(i*(woodWidth/nPieces))
+                xPositionNext = leftWood+((i+1)*(woodWidth/nPieces))
+                distanceBetweenPositions = (xPositionNext-xPosition)
+                
+                pieceXPosition = xPosition+((distanceBetweenPositions/2)-(pieceWidth/29))
+
+                button[0] = this.add.image(
+                    pieceXPosition, 
+                    (height/2)+50, 
+                    'simbol'+i
+                );
+                
+                button[1] = this.add.rectangle(
+                    pieceXPosition, 
+                    (height/2)+50, 
+                    pieceWidth, 
+                    pieceWidth
+                );
+
+                button[1].setStrokeStyle(2, 0xffffff);
+                button[1].setVisible(false);
+                
+                this.puzzle_buttons[i] = button;
+                this.puzzle_buttons[i][0].setScale(0.5);
+                this.puzzle_buttons[i][1].setDepth(1);
+            } 
             
             for (let i = 0; i < this.puzzle_buttons.length; i++) {
                 this.puzzle_buttons[i].push(this.shuffleSymbols[i]);
             }
 
             window.puzzle_buttons = this.puzzle_buttons
-
             
             this.result_rectangles = [];
-            for(let i = 0; i<2+(2*difficulty); i++){
-                if (difficulty==1) {
-                    this.result_rectangles[i] = this.add.rectangle(this.background.x/2+(i*250), this.background.y/2, 500, 500, 0x9966ff); //difficulty 1
-                } else if (difficulty==2) {
-                    this.result_rectangles[i] = this.add.rectangle((this.background.x/2)+(i*150)+55, this.background.y/2+100, 350, 350, 0x9966ff); //difficulty 2
-                } else if (difficulty==3) {
-                    this.result_rectangles[i] = this.add.rectangle((this.background.x/2)-50+(i*130), this.background.y/2+100, 350, 350, 0x9966ff); //difficulty 3
-                }
-                this.result_rectangles[i].setStrokeStyle(4, 0xefc53f);
 
-                this.result_rectangles[i].setScale(0.3);
-                this.result_rectangles[i].setOrigin(0,0);
+            // ****************************************************************************************
+            var nCubes = 2+(2*difficulty)
+            var rectangleXPosition
+            var cubeWidth;
+            // ****************************************************************************************
+
+            if (difficulty==1) {
+                cubeWidth=200
+            } else if (difficulty==2) {
+                cubeWidth=150
+            } else if (difficulty==3) {
+                cubeWidth=100
+            }
+
+            for(let i = 0; i<nCubes; i++){
+                xPosition = leftWood+(i*(woodWidth/nCubes))
+                xPositionNext = leftWood+((i+1)*(woodWidth/nCubes))
+                distanceBetweenPositions = (xPositionNext-xPosition)
                 
-                console.warn(this.result_rectangles[i].x);
+                rectangleXPosition = xPosition+((distanceBetweenPositions/2)-(cubeWidth/2))
+
+                this.result_rectangles[i] = this.add.rectangle(
+                    rectangleXPosition,
+                    topWood+50, 
+                    cubeWidth, 
+                    cubeWidth, 
+                    0x9966ff
+                ); 
+             
+                this.result_rectangles[i].setStrokeStyle(4, 0xefc53f);
+                this.result_rectangles[i].setOrigin(0,0);
             }
             this.selectIcon(0);
             this.password = []
@@ -143,6 +148,7 @@ class PasswordMGScene extends GenericMiniGame {
             window.r = this.result_rectangles;
             this.count = 0;
             this.win = false;
+            
             this.input.keyboard.on('keydown-E', function () {
                 let count = that.count;
                 // console.warn((that.result_rectangles[count].width/2));

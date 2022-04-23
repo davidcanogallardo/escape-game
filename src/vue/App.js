@@ -11,7 +11,7 @@ let audioTag;
 
 socket.on("matchFound", function (data) {
 // No tiene micrófono, envía un stream null
-  if (app.mainMicId == null) {
+  if (true) {
     window.stream = null  
     startClientPeer(data)  
   // Si tiene micrófono coge el stream de audio
