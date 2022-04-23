@@ -39,14 +39,9 @@ class PasswordMGScene extends GenericMiniGame {
         //=============opciones jugador con ventana reto=========================================
         if (this.type=='challenge') {
             this.correctAnswer = this.correctPassword
-            var path2 = ""
             let { width, height } = this.sys.game.canvas;
             this.background = this.add.image(width/2, height/2, 'passwd_bg');
             this.background.setScale(0.6);
-
-            window.background = this.background
-            window.w = width
-            window.h = height
 
             this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -72,7 +67,7 @@ class PasswordMGScene extends GenericMiniGame {
             // ****************************************************************************************
 
             for(let i=0; i<9; i++){
-                let button = [];
+                let piece = [];
 
                 xPosition = leftWood+(i*(woodWidth/nPieces))
                 xPositionNext = leftWood+((i+1)*(woodWidth/nPieces))
@@ -80,40 +75,39 @@ class PasswordMGScene extends GenericMiniGame {
                 
                 pieceXPosition = xPosition+((distanceBetweenPositions/2)-(pieceWidth/29))
 
-                button[0] = this.add.image(
+                
+                piece[0] = this.add.image(
                     pieceXPosition, 
                     (height/2)+50, 
                     'simbol'+i
                 );
                 
-                button[1] = this.add.rectangle(
+                piece[1] = this.add.rectangle(
                     pieceXPosition, 
                     (height/2)+50, 
                     pieceWidth, 
                     pieceWidth
                 );
 
-                button[1].setStrokeStyle(2, 0xffffff);
-                button[1].setVisible(false);
+                piece[1].setStrokeStyle(2, 0xffffff);
+                piece[1].setVisible(false);
                 
-                this.puzzle_buttons[i] = button;
+                this.puzzle_buttons[i] = piece;
                 this.puzzle_buttons[i][0].setScale(0.5);
                 this.puzzle_buttons[i][1].setDepth(1);
             } 
             
+            // 
             for (let i = 0; i < this.puzzle_buttons.length; i++) {
                 this.puzzle_buttons[i].push(this.shuffleSymbols[i]);
             }
 
-            window.puzzle_buttons = this.puzzle_buttons
             
-            this.result_rectangles = [];
-
             // ****************************************************************************************
+            this.result_rectangles = [];
             var nCubes = 2+(2*difficulty)
             var rectangleXPosition
             var cubeWidth;
-            // ****************************************************************************************
 
             if (difficulty==1) {
                 cubeWidth=200
@@ -122,6 +116,7 @@ class PasswordMGScene extends GenericMiniGame {
             } else if (difficulty==3) {
                 cubeWidth=100
             }
+            // ****************************************************************************************
 
             for(let i = 0; i<nCubes; i++){
                 xPosition = leftWood+(i*(woodWidth/nCubes))
@@ -141,6 +136,7 @@ class PasswordMGScene extends GenericMiniGame {
                 this.result_rectangles[i].setStrokeStyle(4, 0xefc53f);
                 this.result_rectangles[i].setOrigin(0,0);
             }
+
             this.selectIcon(0);
             this.password = []
             window.pass = this.password
@@ -181,11 +177,10 @@ class PasswordMGScene extends GenericMiniGame {
                     that.win = true;
                 }
                 console.log(that.win);
-                console.log(that.password);
-                console.log(that.correctAnswer);
+                console.log("actual",that.password);
+                console.log("correct",that.correctAnswer);
                 console.log(that.arraysEqual(that.password,that.correctAnswer));
-                that.count++;
-                
+                that.count++;    
             });
             
         //=============opciones jugador con ventana helper=========================================
