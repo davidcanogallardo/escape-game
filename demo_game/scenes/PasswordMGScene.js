@@ -45,7 +45,8 @@ class PasswordMGScene extends GenericMiniGame {
             this.correctAnswer = this.correctPassword
             let { width, height } = this.sys.game.canvas;
             this.background = this.add.image(width/2, height/2, 'passwd_bg');
-            this.background.setScale(0.6);
+            this.background.setScale(1.6);
+            window.background = this.background
 
             this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -190,7 +191,8 @@ class PasswordMGScene extends GenericMiniGame {
         } else {
             let { width, height } = this.sys.game.canvas;
             this.background = this.add.image(width/2, height/2, 'passwd_bg');
-            this.background.setScale(0.6);
+            this.background.setScale(1.6);
+            
             
             // **************************************************************************
             var centerWoodX = this.background.displayWidth/2
