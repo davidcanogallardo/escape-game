@@ -15,4 +15,8 @@ class Ui extends Phaser.Scene {
     update() {
         
     }
+
+    getTime() {
+        return this.game.scene.keys["time"].getTime()
+    }
 }

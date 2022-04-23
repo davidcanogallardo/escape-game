@@ -1,31 +1,29 @@
-// import { app } from '../../src/vue/App.js'
-// import env from "../../env.js"
-
 class EndGameScene extends Phaser.Scene{
     constructor() {
         super("EndGameScene")
-        this.gameTime;
     }
 
     init (data) {
         this.data = data
         this.nChallanges = data.nChallenges;
+        this.player = data.players.player
+        this.partner = data.players.partner   
+        this.gameTime = data.time
+        this.mapId = data.map.id
     }
     
     create(){
-        console.log('ewe', this.data);
-        console.log('owo', app);
         let { width, height } = this.sys.game.canvas;
-        this.gameTime = this.game.scene.getScene('time').getTime();
-        // console.warn(this.game.scene.getScene('game'));
-        // console.log(this.gameTime);
-        // console.log(this.nChallanges);
+        
         this.getServerScore(this.gameTime, this.nChallanges);
-        this.end(this.data)
+
+        this.updatePlayersHistory()
+
+        // ****************************************************************************************
         let timeText = this.add.text(width / 2, height / 3, `Time: ${this.gameTime}`,{ fontSize: 24 });
         let scoreText = this.add.text(width / 2, height / 2, `Score: ${this.score}`,{ fontSize: 24 });
         let exitText = this.add.text(width / 2, height / 1.5, 'Press space to exit.', {fontSize: 24});
-
+        
         exitText.setOrigin(0.5,0.5);
         timeText.setOrigin(0.5, 0.5);
         scoreText.setOrigin(0.5, 0.5);
@@ -35,9 +33,11 @@ class EndGameScene extends Phaser.Scene{
             app.currentPage="home";
             game.scene.getScene('EndGameScene').scene.stop();
         });
+        // ****************************************************************************************
     }
 
-    // TODO
+    // TODO hacer la peticion en App.js
+    // si se hace en App.js tiene que devolver la score de alguna manera
     getServerScore(time, nChallanges){
         $.ajax({
             async: false,
@@ -51,26 +51,17 @@ class EndGameScene extends Phaser.Scene{
         })
     }
 
-    end(data) {
-        if (data.player.username != "guest") {
-            app.addGame(data.map.id, this.gameTime)
+    // TODO aqui se actualiza la partidas jugadas si el jugador no es guest (con addGame, para el ranking)
+    // y con updateHistory se actualiza el historial para ambos jugadores si ninguno es guest, el problema 
+    // es que no sé qué nombre ponerle a la función
+    updatePlayersHistory() {
+        if (this.player.username != "guest") {
+            app.addGame(this.mapId, this.gameTime)
         } 
+        console.log(this);
 
-        // obtener el nombre de usuario del compañero
-        if (data.players[0].username == data.player.username) {
-            this.partner = data.players[1]
-        } else {
-            this.partner = data.players[0]
-
-        }
-
-        if (data.players[0].username != "guest" && data.players[1].username != "guest" && data.player.initiator) {
-            console.log("soy initiator", "sí, lo soy");
-
-            console.log("yo",data.player.username);
-            console.log("compa", this.partner.username);
-            console.log("mapa",data.map);
-            app.updateHistory(this.partner.username, data.map.id, this.score)
+        if (this.player.username != "guest" && this.partner.username != "guest"  && this.player.initiator) {
+            app.updateHistory(this.partner.username, this.mapId, this.score)
         }
     }
 }

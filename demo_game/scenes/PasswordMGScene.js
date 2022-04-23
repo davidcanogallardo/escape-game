@@ -1,20 +1,23 @@
-
 class PasswordMGScene extends GenericMiniGame {
     constructor(room,type,difficulty,password) {
         super("PasswordMGScene"+room+"_"+type, type, difficulty);
         this.type = type;
         this.difficulty = difficulty;
-        
-        this.symbols = [0,1,2,3,4,5,6,7,8];
+       
         this.correctPassword = [];
         
-        this.shuffleSymbols = [0,1,2,3,4,5,6,7,8];
-        this.shuffleSymbols.sort(() => Math.random() - 0.5);
+        // Contraseña randomizada
+        this.randomPassword = [0,1,2,3,4,5,6,7,8];
+        this.randomPassword.sort(() => Math.random() - 0.5);
+        
+        // Orden de las piezas que introducirá el usuario
+        this.pieceId = [0,1,2,3,4,5,6,7,8];
+        this.pieceId.sort(() => Math.random() - 0.5);
+
         //Si al constructor no le llega ninguna contraseña este la genera automaticamente en el caso contrario la almacena
         if (password == null) {
-            let shuffled = this.symbols.sort(() => Math.random() - 0.5);
             for (let x = 0; x < 2+(2*this.getDiff(this.difficulty)); x++) {
-                this.correctPassword.push(shuffled[x]);
+                this.correctPassword.push(this.randomPassword[x]);
             }
         } else {
             this.correctPassword = password
@@ -47,6 +50,7 @@ class PasswordMGScene extends GenericMiniGame {
             this.cursors = this.input.keyboard.createCursorKeys();
 
             var difficulty = this.getDiff(this.difficulty);
+            var that = this;
 
             // ****************************************************************************************
             var centerWoodX = this.background.displayWidth/2
@@ -80,7 +84,7 @@ class PasswordMGScene extends GenericMiniGame {
                 piece[0] = this.add.image(
                     pieceXPosition, 
                     (height/2)+50, 
-                    'simbol'+this.shuffleSymbols[i]
+                    'simbol'+this.pieceId[i]
                 );
                 
                 piece[1] = this.add.rectangle(
@@ -96,13 +100,10 @@ class PasswordMGScene extends GenericMiniGame {
                 this.puzzle_buttons[i] = piece;
                 this.puzzle_buttons[i][0].setScale(0.5);
                 this.puzzle_buttons[i][1].setDepth(1);
-            } 
-            
-            // 
-            for (let i = 0; i < this.puzzle_buttons.length; i++) {
-                this.puzzle_buttons[i].push(this.shuffleSymbols[i]);
-            }
 
+                // Asigno a cada botón el id de la pieza
+                this.puzzle_buttons[i].push(this.pieceId[i]);
+            } 
             
             // ****************************************************************************************
             this.result_rectangles = [];
@@ -141,8 +142,9 @@ class PasswordMGScene extends GenericMiniGame {
             this.selectIcon(0);
             this.password = []
             window.pass = this.password
-            var that = this;
+            
             window.r = this.result_rectangles;
+            
             this.count = 0;
             this.win = false;
             
@@ -210,7 +212,7 @@ class PasswordMGScene extends GenericMiniGame {
             this.puzzle_image= [];
 
             for(let i=0; i<this.correctPassword.length; i++){
-                this.puzzle_image[i] = this.add.image((this.background.x/2.5)+(i*130), this.background.y/1.2, 'simbol'+this.correctPassword[i]);
+                this.puzzle_image[i] = this.add.image(0, this.background.y/1.2, 'simbol'+this.correctPassword[i]);
                 this.puzzle_image[i].setScale(0.5);
                 xPosition = leftWood+(i*(woodWidth/this.correctPassword.length))
                 xPositionNext = leftWood+((i+1)*(woodWidth/this.correctPassword.length))
