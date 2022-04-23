@@ -130,7 +130,7 @@ Vue.component("profile", {
       this.$root.closeSession(this.user.username);
     },
     history() {
-      this.$root.getUserHistory()
+      //this.$root.getUserHistory()
       this.$emit('change-page','trophies')
     },
   },

@@ -6,10 +6,11 @@ Vue.component('level', {
     <div class="nivel">
         <p class="texto">
             <profile-photo :photo="level.profile_photo" style="width: 4vw;height: 4vw;"/>
+            {{level.name}}
         </p>
-        <p class="texto">{{level.name}}</p>
-        <div class="trophys-container">
-        </div>
+        <p class="texto">{{ $t("difficulty") }}: {{level.difficulty}}</p>
+        <p class="texto">{{ $t("score") }}: {{level.score}}</p>
+        <div v-on:click="">Add friend<br/><i class="fas fa-user-plus" aria-hidden="true"></i></div>
     </div>
     `, 
     props: ["level"],

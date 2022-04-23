@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@fortawesome/free-regular-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "browserify-shim": "^3.8.14",
     "getusermedia": "^2.0.1",
     "i": "^0.3.7",
