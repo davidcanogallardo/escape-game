@@ -11,16 +11,26 @@ class Time extends Phaser.Scene {
     }
 
     create() {
-        this.title = this.add.text(5,0, 'Tiempo: ', {
+        this.title = this.add.text(30,30, 'Tiempo: ', {
             fontSize: 70,
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })
+        window.timee = this
+
 
         this.title.setDepth(10)
         //Evento que se ejecturá en bucle cada 1s y actualizará el tiempo
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.updateTime, callbackScope: this, loop: true });
 
         this.scene.get('game').events.on("end", this.end, this);
+
+        this.time = this.add.image(5, 0, 'time_frame');
+        this.time.setDepth(9)
+        this.time.setScale(1.5)
+        this.time.x = (5+(this.time.displayWidth/2))
+        this.time.y = (5+(this.time.displayHeight/2))
+
+        window.time = this.time
 
         if(navigator.userAgentData.mobile){
             this.virtualJoyStick = this.game.plugins.get('rexvirtualjoystickplugin').add(this, {

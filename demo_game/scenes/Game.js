@@ -17,6 +17,7 @@ class Game extends Phaser.Scene {
                 this.partnerInfo = player 
             }
         });
+        window.player =this.playersArray
         this.diff=data.diff;
 
         //lista de minijuegos disponibles
@@ -56,6 +57,7 @@ class Game extends Phaser.Scene {
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
         this.load.atlas('chest', path+'assets/objects/chest.png', path+'assets/objects/chest.json');
         this.load.image("password_background", path+"assets/password_paper.png");
+        this.load.image("time_frame", path+"assets/timeFrame.png");
         this.load.atlas('door', path+'assets/objects/door/door.png', path+'assets/objects/door/door.json');
         this.load.image('table', path+'assets/tilesets/TSMapa/PNG/table.png');
         this.load.image('passwd_bg', path+'assets/BGTable.png');
@@ -78,6 +80,10 @@ class Game extends Phaser.Scene {
     }
 
     create() {
+        let { width, height } = this.sys.game.canvas;
+        // this.time = this.add.image(width/2, height/2, 'time_frame');
+        // window.time = this.time
+
         // if(navigator.userAgentData.mobile){
         //     this.virtualJoyStick = this.game.plugins.get('rexvirtualjoystickplugin').add(this, {
         //         x: 50,

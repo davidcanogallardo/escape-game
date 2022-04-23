@@ -11,14 +11,13 @@ var config = {
     },
   },
   //scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, SeePass, Time, Ui, Prueba, PasswordMGScene]
-  scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, Time, Ui, EndGameScene]
+  scene: [Titlescreen, Game, Pause_scene, Time, Ui, EndGameScene]
 
 };
 
 class PhaserGame extends Phaser.Game {
   constructor(config) {
       super(config)
-
       socket.on("getSpawns", (spawns) => {
         //Comprobar que los cofres de la escena se han creado
         if (this.scene.getScene("game").chest=="") {
