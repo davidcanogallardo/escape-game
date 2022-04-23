@@ -9,6 +9,7 @@ class PasswordMGScene extends GenericMiniGame {
         this.correctPassword = [];
         
         this.shuffleSymbols = [0,1,2,3,4,5,6,7,8];
+        this.shuffleSymbols.sort(() => Math.random() - 0.5);
         //Si al constructor no le llega ninguna contraseña este la genera automaticamente en el caso contrario la almacena
         if (password == null) {
             let shuffled = this.symbols.sort(() => Math.random() - 0.5);
@@ -79,7 +80,7 @@ class PasswordMGScene extends GenericMiniGame {
                 piece[0] = this.add.image(
                     pieceXPosition, 
                     (height/2)+50, 
-                    'simbol'+i
+                    'simbol'+this.shuffleSymbols[i]
                 );
                 
                 piece[1] = this.add.rectangle(
