@@ -188,16 +188,35 @@ class PasswordMGScene extends GenericMiniGame {
             let { width, height } = this.sys.game.canvas;
             this.background = this.add.image(width/2, height/2, 'passwd_bg');
             this.background.setScale(0.6);
+            
+            // **************************************************************************
+            var centerWoodX = this.background.displayWidth/2
+            var centerWoodY = this.background.displayHeight/2
+            var woodWidth = this.background.displayWidth
+            var centerDisplayX = width/2
+            var centerDisplayY = height/2
+            var leftWood = centerDisplayX-centerWoodX
+            var topWood = centerDisplayY-centerWoodY
+            
+            var xPosition
+            var xPositionNext;
+            var distanceBetweenPositions
 
-            window.h = height;
-            window.w = width;
-            window.bgg = this.background;
+            var pieceXPosition
+            var pieceWidth = 100
+            // **************************************************************************
 
             this.puzzle_image= [];
 
             for(let i=0; i<this.correctPassword.length; i++){
                 this.puzzle_image[i] = this.add.image((this.background.x/2.5)+(i*130), this.background.y/1.2, 'simbol'+this.correctPassword[i]);
-                this.puzzle_image[i].setScale(0.6);
+                this.puzzle_image[i].setScale(0.5);
+                xPosition = leftWood+(i*(woodWidth/this.correctPassword.length))
+                xPositionNext = leftWood+((i+1)*(woodWidth/this.correctPassword.length))
+                distanceBetweenPositions = (xPositionNext-xPosition)
+                
+                pieceXPosition = xPosition+((distanceBetweenPositions/2)-(this.puzzle_image[i].displayWidth/2))
+                this.puzzle_image[i].x = pieceXPosition
                 this.puzzle_image[i].setOrigin(0,0);
             }  
         }
