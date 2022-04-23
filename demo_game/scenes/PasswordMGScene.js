@@ -99,7 +99,7 @@ class PasswordMGScene extends GenericMiniGame {
                 piece[1].setVisible(false);
                 
                 this.puzzle_buttons[i] = piece;
-                this.puzzle_buttons[i][0].setScale(0.5);
+                this.puzzle_buttons[i][0].setScale(1);
                 this.puzzle_buttons[i][1].setDepth(1);
 
                 // Asigno a cada botón el id de la pieza
@@ -215,7 +215,7 @@ class PasswordMGScene extends GenericMiniGame {
 
             for(let i=0; i<this.correctPassword.length; i++){
                 this.puzzle_image[i] = this.add.image(0, this.background.y/1.2, 'simbol'+this.correctPassword[i]);
-                this.puzzle_image[i].setScale(0.5);
+                this.puzzle_image[i].setScale(1.5)
                 xPosition = leftWood+(i*(woodWidth/this.correctPassword.length))
                 xPositionNext = leftWood+((i+1)*(woodWidth/this.correctPassword.length))
                 distanceBetweenPositions = (xPositionNext-xPosition)

@@ -18,14 +18,14 @@ class Time extends Phaser.Scene {
         window.timee = this
 
 
-        this.title.setDepth(10)
+        this.title.setDepth(100)
         //Evento que se ejecturá en bucle cada 1s y actualizará el tiempo
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.updateTime, callbackScope: this, loop: true });
 
         this.scene.get('game').events.on("end", this.end, this);
 
         this.time = this.add.image(5, 0, 'time_frame');
-        this.time.setDepth(9)
+        this.time.setDepth(99)
         this.time.setScale(1.5)
         this.time.x = (5+(this.time.displayWidth/2))
         this.time.y = (5+(this.time.displayHeight/2))
