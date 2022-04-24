@@ -11,7 +11,7 @@ var config = {
     },
   },
   //scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, SeePass, Time, Ui, Prueba, PasswordMGScene]
-  scene: [Titlescreen, Game, Pause_scene, Time, Ui, EndGameScene]
+  scene: [Titlescreen, Game, Pause_scene, Time, Ui, EndGameScene, HelpDialog]
 
 };
 
