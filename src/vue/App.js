@@ -11,7 +11,7 @@ let audioTag;
 
 socket.on("matchFound", function (data) {
 // No tiene micrófono, envía un stream null
-  if (true) {
+  if (app.mainMicId == null) {
     window.stream = null  
     startClientPeer(data)  
   // Si tiene micrófono coge el stream de audio
@@ -75,7 +75,7 @@ function startClientPeer(data) {
 // });
 
 socket.on("endGame", () => {
-  document.getElementById("mic").remove();
+  // document.getElementById("mic").remove();
 
   if(socket.id == guestPeerClient.name){
     guestPeerClient.peer.destroy();
@@ -581,5 +581,4 @@ var app = new Vue({
 
 var that = this;
 window.app = app;
-window.get = getSessionUser
 export { app };

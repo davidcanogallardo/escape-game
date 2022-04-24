@@ -12,7 +12,16 @@ Vue.component('waiting-room', {
             </div>
             </div>
         </div>
+        <div class="btn red block volver link" page="main" v-on:click="leaveRoom()">{{ $t("return") }}</div>
     </div>
-    `
+    `,
+    methods: {
+        leaveRoom(){
+            console.log("salgo socket");
+            // socket.emit('leaveRoom',"a");
+            this.$emit('change-page','home');
+        },
+    }
 })
+
 
