@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "@capacitor/android": "^3.5.0",
+    "@capacitor/cli": "^3.5.0",
+    "@capacitor/core": "^3.5.0",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "browserify-shim": "^3.8.14",
