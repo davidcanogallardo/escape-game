@@ -149,7 +149,7 @@ class Game extends Phaser.Scene {
         //**********************************GENERAR ESCENARIO*********************************************************************/
         var groundLayer = this.map.createStaticLayer('ground', this.tileset);
         let objectLayer = this.map.getObjectLayer('objects');
-        this.wallsLayer = new WallsLayer(this);
+        // this.wallsLayer = new WallsLayer(this);
 
         // ****************************final de partida*****************************************************
         // SE crea un objeto invisible que cuando los jugadores lo toquen se termine la partida
@@ -192,7 +192,7 @@ class Game extends Phaser.Scene {
         // *****************************************************
         // *********************************************************************************************************
         
-        //************************TIEMPO  */
+        //************************ui  */
         this.scene.launch('ui');
         /**************************************************************************************** */
         
@@ -297,12 +297,14 @@ class Game extends Phaser.Scene {
         // las mesas se guardan en this.table y los cofres en this.chest
         this.table = [];
         this.tableCollider = [];
+        this.chestCollider = [];
         var nChallenges = this.map.objects[2].objects[0].properties[0].value
         for (let i = 0; i < nChallenges; i++) {
             //************************ mesas*/
             this.table[i] = this.physics.add.sprite(0,0, 'table');
             this.physics.add.collider(this.table[i], this.playersGroup);
             this.table[i].body.immovable = true
+            this.table[i].challenge = (i+1)
 
             this.tableCollider[i] = this.physics.add.image(this.table[i].x, this.table[i].y);
             this.tableCollider[i].setSize(this.table[i].width, this.table[i].height)
@@ -310,12 +312,19 @@ class Game extends Phaser.Scene {
             this.physics.add.collider(this.tableCollider[i], this.playersGroup);
 
             //************************ cofres*/
-            this.chest[i] = this.add.sprite(0,0,'chest','chest_empty_open_anim_f0.png');
-            this.physics.add.existing(this.chest[i]);
+            this.chest[i] = this.physics.add.sprite(0,0,'chest','chest_empty_open_anim_f0.png');
+            // this.physics.add.existing(this.chest[i]);
             //collider para que el personaje con el cofre
             this.physics.add.collider(this.chest[i], this.playersGroup);
             this.chest[i].body.setSize(this.chest[i].width*0.5, this.chest[i].height*0.8);
             this.chest[i].body.immovable = true
+            this.chest[i].challenge = (i+1)
+
+            this.chestCollider[i] = this.physics.add.image(this.chest[i].x, this.chest[i].y);
+            this.chestCollider[i].setSize(this.chest[i].width*0.5, this.chest[i].height*0.8)
+            this.chestCollider[i].body.immovable = true
+            this.physics.add.collider(this.chestCollider[i], this.playersGroup);
+            console.log("111111-22--2-2-2-2-");
         }
 
         // colisión e interacciones con mesa y cofre
@@ -396,6 +405,23 @@ class Game extends Phaser.Scene {
                     that.canDoPuzzle = false
                 }
             });
+
+            for (let i = 0; i < this.chest.length; i++) {
+                if (this.chest[i].challenge == this.challenge) {
+                    this.chest[i].disableBody()
+                }
+                if (this.table[i].challenge == this.challenge) {
+                    this.table[i].disableBody()
+                }
+                // const element = this.chest[i];
+                // console.log("challenge", this.chest[i].challenge);
+                // console.log("challenge", this.table[i].challenge);
+                console.log(this.chest[i]);
+                console.log(this.table[i]);
+                window.ta = this.table
+                window.ch = this.chest
+                // this.chest[i].disableBody()
+            }
             // TODO hacer lo mismo para cofres y mesas
         });
         //************************************************* */
@@ -747,6 +773,9 @@ class Game extends Phaser.Scene {
             this.chest[i].x = spawns.objects.chest[i].x;
             this.chest[i].y = spawns.objects.chest[i].y;
             this.chest[i].challenge = spawns.objects.chest[i].challenge;
+
+            this.chestCollider[i].x = this.chest[i].x;
+            this.chestCollider[i].y = this.chest[i].y;
         }
 
         // asignar los spawns de las mesas

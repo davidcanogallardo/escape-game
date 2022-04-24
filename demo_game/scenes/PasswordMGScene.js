@@ -84,13 +84,13 @@ class PasswordMGScene extends GenericMiniGame {
                 
                 piece[0] = this.add.image(
                     pieceXPosition, 
-                    (height/2)+50, 
+                    (height/2)+70, 
                     'simbol'+this.pieceId[i]
                 );
                 
                 piece[1] = this.add.rectangle(
                     pieceXPosition, 
-                    (height/2)+50, 
+                    (height/2)+70, 
                     pieceWidth, 
                     pieceWidth
                 );
@@ -113,7 +113,7 @@ class PasswordMGScene extends GenericMiniGame {
             var cubeWidth;
 
             if (difficulty==1) {
-                cubeWidth=200
+                cubeWidth=180
             } else if (difficulty==2) {
                 cubeWidth=150
             } else if (difficulty==3) {
@@ -153,21 +153,34 @@ class PasswordMGScene extends GenericMiniGame {
                 let count = that.count;
                 // console.warn((that.result_rectangles[count].width/2));
                 console.warn((that.result_rectangles[count].x));
-                var w = (that.result_rectangles[count].width/2)*0.3
-                var h = (that.result_rectangles[count].height/2)*0.3
+                var w = (that.result_rectangles[count].width/2)
+                var h = (that.result_rectangles[count].height/2)
                 var x = that.result_rectangles[count].x
                 var y = that.result_rectangles[count].y
 
+                var cubeX = that.result_rectangles[count].x
+                var cubeY = that.result_rectangles[count].y
+
+                window.cube = that.result_rectangles[count]
+                console.log(that.result_rectangles[count].displayWidth);
+                console.log(that.result_rectangles[count].displayHeight);
+
                 that.password.push(that.puzzle_buttons[that.selectedButtonIndex][2])
 
-                that.result_rectangles[count] = that.add.image(x+w,y+h,that.puzzle_buttons[that.selectedButtonIndex][0].texture.key);
+                that.result_rectangles[count] = that.add.image(
+                    cubeX+(that.result_rectangles[count].displayWidth/2),
+                    cubeY+(that.result_rectangles[count].displayHeight/2),
+                    that.puzzle_buttons[that.selectedButtonIndex][0].texture.key
+                );
+                window.cube2 = that.result_rectangles[count]
+
                 
                 if (difficulty==1) {
-                    that.result_rectangles[count].setScale(0.3); //difficulty 1
+                    that.result_rectangles[count].setScale(1); //difficulty 1
                 } else if (difficulty==2) {
-                    that.result_rectangles[count].setScale(0.5); //difficulty 2
+                    that.result_rectangles[count].setScale(1); //difficulty 2
                 } else if (difficulty==3) {
-                    that.result_rectangles[count].setScale(0.15); //difficulty 3
+                    that.result_rectangles[count].setScale(1); //difficulty 3
                 }
 
                 console.error(that.puzzle_buttons[that.selectedButtonIndex][2]);
