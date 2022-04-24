@@ -149,7 +149,7 @@ class Game extends Phaser.Scene {
         //**********************************GENERAR ESCENARIO*********************************************************************/
         var groundLayer = this.map.createStaticLayer('ground', this.tileset);
         let objectLayer = this.map.getObjectLayer('objects');
-        this.wallsLayer = new WallsLayer(this);
+        // this.wallsLayer = new WallsLayer(this);
 
         // ****************************final de partida*****************************************************
         // SE crea un objeto invisible que cuando los jugadores lo toquen se termine la partida
