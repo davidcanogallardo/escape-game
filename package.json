@@ -8,5 +8,25 @@
     "save": "^2.4.0",
     "simple-peer": "^9.11.0",
     "simple-peer-light": "^9.10.0"
-  }
+  },
+  "devDependencies": {
+    "electron": "^18.1.0"
+  },
+  "scripts": {
+    "start": "electron ."
+  },
+  "name": "frontend",
+  "description": "[Repo backend](https://github.com/davidcanogallardo/escape-game-backend)  \r [Guía de estilo](https://docs.google.com/document/d/1r1NLxsEbXBEwKymeI8dt6CRX5RarcYR7oNKzLVRLGTY/edit)  \r [Wireframe](https://www.figma.com/file/COWluyLnAtcLJ1AZDhkoae/WireFrame?node-id=314%3A2)  \r [ideas juego](https://docs.google.com/document/d/1jedpuKpQmrEG-suskl6NpOlF0Yam-Xpqf5LG0kICt5A/edit)",
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidcanogallardo/escape-game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidcanogallardo/escape-game/issues"
+  },
+  "homepage": "https://github.com/davidcanogallardo/escape-game#readme"
 }
