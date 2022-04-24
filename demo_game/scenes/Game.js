@@ -435,6 +435,7 @@ class Game extends Phaser.Scene {
             //generador de spawns random para objetos
             this.spawnsObjects = [];
 
+            //bucle en base a la leyenda
             for (let i = 1; i <= this.map.objects[2].objects[0].properties[0].value; i++) {
                 this.spawnsObjects[i-1] = this.spawns.filter(this.challengeFilter,i);
                 
@@ -478,8 +479,6 @@ class Game extends Phaser.Scene {
                 this.chestsFilter = element.filter(this.objectFilterPlayer,2);
                 var randTable = Phaser.Math.Between(0, this.tablesFilter.length-1);
                 var randChest = Phaser.Math.Between(0, this.chestsFilter.length-1);
-                this.tablePosition = [this.tablesFilter[randTable].x,this.tablesFilter[randTable].y, this.tablesFilter[randTable].properties[0].value];
-                this.chestPosition = [this.chestsFilter[randChest].x,this.chestsFilter[randChest].y, this.chestsFilter[randChest].properties[0].value];
                 var table = {
                     x: this.tablesFilter[randTable].x,
                     y: this.tablesFilter[randTable].y,
@@ -734,9 +733,12 @@ class Game extends Phaser.Scene {
         console.log(spawns);
         //spawn jugadores
         this.gamesList = spawns.gamesList;
+
+        //jugador 1
         this.playersGroup.children.entries[0].x = spawns.players.p1.x
         this.playersGroup.children.entries[0].y = spawns.players.p1.y
 
+        //jugador 2
         this.playersGroup.children.entries[1].x = spawns.players.p2.x
         this.playersGroup.children.entries[1].y = spawns.players.p2.y
 
