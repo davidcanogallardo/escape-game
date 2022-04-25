@@ -3,28 +3,38 @@ class HelpDialog extends Phaser.Scene {
         super("help_dialog")
     }
 
+    init (data) {
+        this.helpMessage = data.message
+        this.sceneKey = data.scene
+    }
+
     preload() {
         
     }
 
     create() {
-        console.log("helppp22")
+        console.log(this);
+        this.scene.bringToTop();
+        console.log(this.helpMessage);
         let { width, height } = this.sys.game.canvas;
         this.dialog = this.add.image(width/2, height/2, 'passwd_bg');
-
+        this.dialog.setDepth(56)
+        
         var leftDialog = this.dialog.x - (this.dialog.displayWidth/2)
         var topDialog = this.dialog.y - (this.dialog.displayHeight/2)+80
         var bottomDialog = this.dialog.y + (this.dialog.displayHeight/2)-80
 
-        this.awsd = this.add.image(0, this.dialog.y-20, 'awsd').setScale(0.6);
-        this.blue = this.add.image(0, this.dialog.y-20, 'blue').setScale(0.6);
-        this.red = this.add.image(0, this.dialog.y-20, 'red').setScale(0.6);
+        this.awsd = this.add.image(0, this.dialog.y-20, 'awsd').setScale(0.6).setDepth(99);
+        this.blue = this.add.image(0, this.dialog.y-20, 'blue').setScale(0.6).setDepth(99);
+        this.red = this.add.image(0, this.dialog.y-20, 'red').setScale(0.6).setDepth(99);
+        this.green = this.add.image(0, this.dialog.y-20, 'green').setScale(0.6).setDepth(99);
 
         // Guardo los botones en un array de arrays con el 
         // boton y el texto que tendrá debajo
         var buttons = [
             [this.awsd,"Movimiento"],
             [this.blue,"Interactuar"],
+            [this.green,"Mutear micro"],
             [this.red,"Salir"]
         ]
 
@@ -41,15 +51,23 @@ class HelpDialog extends Phaser.Scene {
             var text = this.add.text(xPos,this.dialog.y+30, button[1], {
                 fontSize: 25,
                 fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
-            })
+            }).setDepth(99)
             text.x -= text.displayWidth/2
         }
+
+        var text = this.add.text(this.dialog.x,this.dialog.y+70, this.helpMessage, {
+            fontSize: 25,
+            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
+        }).setDepth(99)
+        text.x -= text.displayWidth/2
 
         window.help = this
 
         this.input.keyboard.on('keydown-X',()=>{
+            console.log(this.scene);
+            this.scene.resume(this.sceneKey);
             this.scene.stop();
-            this.scene.resume("game");
+
         })
         
     }

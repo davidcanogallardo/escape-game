@@ -4,6 +4,8 @@ export default {
         score: "Score",
         quit: "Press X to quit",
         help: "Press H for help",
+        gameHint: "Solve the puzzle to open the door",
+        puzzleHint: "Solve the puzzle with the help of your partner",
     },
     play : "PLAY",
     friend_list: "Friends list",

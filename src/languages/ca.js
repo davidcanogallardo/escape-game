@@ -4,6 +4,8 @@ export default {
         score: "Puntuació",
         quit: "Prémer X per sortir",
         help: "Prémer H per mostrar l'ajuda ",
+        gameHint: "Resol el puzzle per obrir la porta",
+        puzzleHint: "Resol el puzzle amb l'ajuda del teu company",
     },
     play : "JUGAR",
     friend_list: "Llista d'amics",

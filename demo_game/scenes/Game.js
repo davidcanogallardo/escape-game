@@ -247,7 +247,12 @@ class Game extends Phaser.Scene {
         })
         // *********************************************************************************************************
         
+        this.input.keyboard.on('keydown-H',()=>{
+            console.log("h apretada22");
+            this.scene.launch('help_dialog',{"message":window.i.t("game.gameHint"),"scene":this.scene.key})
 
+            // h.create()
+        })
 
         // ***************************************PUERTAS****************************************************************************
 

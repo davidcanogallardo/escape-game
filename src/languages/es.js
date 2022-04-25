@@ -4,6 +4,8 @@ export default {
         score: "Puntuación",
         quit: "Pulsa X para salir",
         help: "Pulsa H para mostra la ayuda",
+        gameHint: "Resuelve el puzzle para abrir la puerta",
+        puzzleHint: "Resuelve el puzzle con la ayuda de tu compañero",
 
     },
     play : "JUGAR",

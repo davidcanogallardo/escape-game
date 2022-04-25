@@ -21,11 +21,12 @@ class Ui extends Phaser.Scene {
         this.help.x += (this.help.displayWidth/2)+10
         this.help.y -= (this.help.displayHeight/2)+10
 
-        this.input.keyboard.on('keydown-H',()=>{
-            console.log("mensaje de ayuda22233");
-            console.log(this.scene);
-            this.scene.launch('help_dialog')
-        })
+        // this.input.keyboard.on('keydown-H',()=>{
+        //     console.log("h apretada22");
+        //     this.scene.launch('help_dialog',{"message":window.i.t("game.gameHint"),"scene":this.scene.key})
+
+        //     // h.create()
+        // })
 
         this.title = this.add.text(this.help.x,this.help.y, window.i.t("game.help"), {
             fontSize: 30,
