@@ -202,7 +202,7 @@ class Game extends Phaser.Scene {
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
                 console.error(navigator.userAgentData.mobile)
-                if(navigator.userAgentData.mobile){
+                if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
                     this.cameras.main.zoom = 3.5;
                 } else {
                     this.cameras.main.zoom = 5;

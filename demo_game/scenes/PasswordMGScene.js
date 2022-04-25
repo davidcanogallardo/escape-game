@@ -45,8 +45,14 @@ class PasswordMGScene extends GenericMiniGame {
             this.correctAnswer = this.correctPassword
             let { width, height } = this.sys.game.canvas;
             this.background = this.add.image(width/2, height/2, 'passwd_bg');
-            this.background.setScale(1.6);
+            //this.background.setScale(1.6);
             window.background = this.background
+
+            if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
+                this.background.setScale(0.9);
+            } else {
+                this.background.setScale(1.6);
+            }
 
             this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -99,9 +105,15 @@ class PasswordMGScene extends GenericMiniGame {
                 piece[1].setVisible(false);
                 
                 this.puzzle_buttons[i] = piece;
-                this.puzzle_buttons[i][0].setScale(1);
+                //this.puzzle_buttons[i][0].setScale(1);
                 this.puzzle_buttons[i][1].setDepth(1);
 
+                if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
+                    this.puzzle_buttons[i][0].setScale(0.7);
+                } else {
+                    this.puzzle_buttons[i][0].setScale(1);
+                }
+                    
                 // Asigno a cada botón el id de la pieza
                 this.puzzle_buttons[i].push(this.pieceId[i]);
             } 
@@ -111,14 +123,14 @@ class PasswordMGScene extends GenericMiniGame {
             var nCubes = 2+(2*difficulty)
             var rectangleXPosition
             var cubeWidth;
-
-            if (difficulty==1) {
-                cubeWidth=180
-            } else if (difficulty==2) {
-                cubeWidth=150
-            } else if (difficulty==3) {
-                cubeWidth=100
-            }
+            cubeWidth=40
+            // if (difficulty==1) {
+            //     cubeWidth=40
+            // } else if (difficulty==2) {
+            //     cubeWidth=40
+            // } else if (difficulty==3) {
+            //     cubeWidth=40
+            // }
             // ****************************************************************************************
 
             for(let i = 0; i<nCubes; i++){
@@ -205,8 +217,12 @@ class PasswordMGScene extends GenericMiniGame {
             let { width, height } = this.sys.game.canvas;
             this.background = this.add.image(width/2, height/2, 'passwd_bg');
             this.background.setScale(1.6);
-            
-            
+            if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
+                this.background.setScale(0.9);
+            } else {
+                this.background.setScale(1.6);
+            }
+            console.log(navigator.userAgentData.mobile);
             // **************************************************************************
             var centerWoodX = this.background.displayWidth/2
             var centerWoodY = this.background.displayHeight/2
@@ -228,7 +244,11 @@ class PasswordMGScene extends GenericMiniGame {
 
             for(let i=0; i<this.correctPassword.length; i++){
                 this.puzzle_image[i] = this.add.image(0, this.background.y/1.2, 'simbol'+this.correctPassword[i]);
-                this.puzzle_image[i].setScale(1.5)
+                if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
+                    this.puzzle_image[i].setScale(0.9)
+                } else {
+                    this.puzzle_image[i].setScale(1.5)
+                }
                 xPosition = leftWood+(i*(woodWidth/this.correctPassword.length))
                 xPositionNext = leftWood+((i+1)*(woodWidth/this.correctPassword.length))
                 distanceBetweenPositions = (xPositionNext-xPosition)
