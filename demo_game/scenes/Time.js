@@ -12,7 +12,7 @@ class Time extends Phaser.Scene {
 
     create() {
         this.title = this.add.text(25,30, 'Tiempo: ', {
-            fontSize: 70,
+            fontSize: 35,
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })
         window.timee = this
@@ -26,7 +26,7 @@ class Time extends Phaser.Scene {
 
         this.time = this.add.image(5, 0, 'time_frame');
         this.time.setDepth(99)
-        this.time.setScale(1.5)
+        this.time.setScale(1)
         this.time.x = (5+(this.time.displayWidth/2))
         this.time.y = (5+(this.time.displayHeight/2))
 
