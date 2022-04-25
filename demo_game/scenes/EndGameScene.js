@@ -12,7 +12,7 @@ class EndGameScene extends Phaser.Scene{
         this.mapId = data.map.id
     }
     
-    create(){
+    create() {
         let { width, height } = this.sys.game.canvas;
         
         this.getServerScore(this.gameTime, this.nChallanges);
@@ -20,15 +20,15 @@ class EndGameScene extends Phaser.Scene{
         this.updatePlayersHistory()
 
         // ****************************************************************************************
-        let timeText = this.add.text(width / 2, height / 3, `Time: ${this.gameTime}`,{ fontSize: 24 });
-        let scoreText = this.add.text(width / 2, height / 2, `Score: ${this.score}`,{ fontSize: 24 });
-        let exitText = this.add.text(width / 2, height / 1.5, 'Press space to exit.', {fontSize: 24});
+        let timeText = this.add.text(width / 2, height / 3, window.i.t("game.time")+`: ${this.gameTime}`,{ fontSize: 24 });
+        let scoreText = this.add.text(width / 2, height / 2, window.i.t("game.score")+`: ${this.score}`,{ fontSize: 24 });
+        let exitText = this.add.text(width / 2, height / 1.5, window.i.t("game.quit"), {fontSize: 24});
         
         exitText.setOrigin(0.5,0.5);
         timeText.setOrigin(0.5, 0.5);
         scoreText.setOrigin(0.5, 0.5);
         game.scene.getScene("time").scene.stop();
-        this.input.keyboard.on('keydown-SPACE',()=>{
+        this.input.keyboard.on('keydown-X',()=>{
             //console.log("Space pressed");
             app.currentPage="home";
             game.scene.getScene('EndGameScene').scene.stop();
@@ -59,9 +59,10 @@ class EndGameScene extends Phaser.Scene{
             app.addGame(this.mapId, this.gameTime)
         } 
         console.log(this);
-
+        
         if (this.player.username != "guest" && this.partner.username != "guest"  && this.player.initiator) {
             app.updateHistory(this.partner.username, this.mapId, this.score)
+            
         }
     }
 }

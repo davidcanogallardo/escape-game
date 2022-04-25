@@ -27,7 +27,7 @@ class Ui extends Phaser.Scene {
             this.scene.launch('help_dialog')
         })
 
-        this.title = this.add.text(this.help.x,this.help.y, 'Press H for help', {
+        this.title = this.add.text(this.help.x,this.help.y, window.i.t("game.help"), {
             fontSize: 30,
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })

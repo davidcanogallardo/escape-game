@@ -1,4 +1,11 @@
 export default {
+    game: {
+        time:"Tiempo",
+        score: "Puntuación",
+        quit: "Pulsa X para salir",
+        help: "Pulsa H para mostra la ayuda",
+
+    },
     play : "JUGAR",
     friend_list: "Lista de amigos",
     login: "Iniciar Sesión",

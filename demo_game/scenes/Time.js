@@ -11,7 +11,7 @@ class Time extends Phaser.Scene {
     }
 
     create() {
-        this.title = this.add.text(25,30, 'Tiempo: ', {
+        this.title = this.add.text(25,30, window.i.t("game.time")+": 0:00", {
             fontSize: 70,
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })
@@ -127,6 +127,6 @@ class Time extends Phaser.Scene {
     
     updateTime () {
         this.segundos += 1;
-        this.title.setText('Tiempo: ' + this.formatTime(this.segundos));
+        this.title.setText(window.i.t("game.time")+': ' + this.formatTime(this.segundos));
     }
 }

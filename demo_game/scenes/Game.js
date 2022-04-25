@@ -149,7 +149,7 @@ class Game extends Phaser.Scene {
         //**********************************GENERAR ESCENARIO*********************************************************************/
         var groundLayer = this.map.createStaticLayer('ground', this.tileset);
         let objectLayer = this.map.getObjectLayer('objects');
-        // this.wallsLayer = new WallsLayer(this);
+        this.wallsLayer = new WallsLayer(this);
 
         // ****************************final de partida*****************************************************
         // SE crea un objeto invisible que cuando los jugadores lo toquen se termine la partida
@@ -324,7 +324,6 @@ class Game extends Phaser.Scene {
             this.chestCollider[i].setSize(this.chest[i].width*0.5, this.chest[i].height*0.8)
             this.chestCollider[i].body.immovable = true
             this.physics.add.collider(this.chestCollider[i], this.playersGroup);
-            console.log("111111-22--2-2-2-2-");
         }
 
         // colisión e interacciones con mesa y cofre

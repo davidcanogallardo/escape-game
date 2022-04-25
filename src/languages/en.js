@@ -1,4 +1,10 @@
 export default {
+    game: {
+        time:"Time",
+        score: "Score",
+        quit: "Press X to quit",
+        help: "Press H for help",
+    },
     play : "PLAY",
     friend_list: "Friends list",
     login: "Log In",

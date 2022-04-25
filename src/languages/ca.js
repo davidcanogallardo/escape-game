@@ -1,4 +1,10 @@
 export default {
+    game: {
+        time:"Temps",
+        score: "Puntuació",
+        quit: "Prémer X per sortir",
+        help: "Prémer H per mostrar l'ajuda ",
+    },
     play : "JUGAR",
     friend_list: "Llista d'amics",
     login: "Inici de Sessió",
