@@ -52,7 +52,7 @@ class PasswordMGScene extends GenericMiniGame {
             this.correctAnswer = this.correctPassword
             let { width, height } = this.sys.game.canvas;
             this.background = this.add.image(width/2, height/2, 'passwd_bg');
-            this.background.setDepth(10)
+            //this.background.setDepth(10)
             //this.background.setScale(1.6);
             window.background = this.background
 
@@ -114,8 +114,8 @@ class PasswordMGScene extends GenericMiniGame {
                 
                 this.puzzle_buttons[i] = piece;
                 //this.puzzle_buttons[i][0].setScale(1);
-                this.puzzle_buttons[i][0].setDepth(11);
-                this.puzzle_buttons[i][1].setDepth(11);
+                this.puzzle_buttons[i][0].setDepth(0);
+                this.puzzle_buttons[i][1].setDepth(0);
 
                 if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
                     this.puzzle_buttons[i][0].setScale(0.7);
@@ -159,7 +159,7 @@ class PasswordMGScene extends GenericMiniGame {
              
                 this.result_rectangles[i].setStrokeStyle(4, 0xefc53f);
                 this.result_rectangles[i].setOrigin(0,0);
-                this.result_rectangles[i].setDepth(11);
+                this.result_rectangles[i].setDepth(0);
             }
 
             this.selectIcon(0);
