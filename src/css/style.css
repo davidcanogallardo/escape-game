@@ -1700,6 +1700,7 @@ label {
     color: #14448D;
     box-shadow: 9984px 0 0 0 #14448D, 9999px 0 0 0 #14448D, 10014px 0 0 0 #14448D;
     animation: dotTyping 1.5s infinite linear;
+    margin-bottom: 6vw;
 }
 
 @keyframes dotTyping {
@@ -2404,6 +2405,19 @@ label {
         margin: 1vw 0.1vw 0vw 0.1vw;
     }
 
+    /************************************select-solo-duo*************************************/
+    .selector {
+        height: 7vw;
+        width: 30vw;
+        padding-right: 2%;
+        border: none;
+        border-radius: 10px;
+        background-color: #FBF1E3;
+        font-size: 4vw;
+        align-items: center;
+    }
+    
+    /***************************************************************************************/
 
 
 

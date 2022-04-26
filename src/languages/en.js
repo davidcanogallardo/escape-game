@@ -7,6 +7,19 @@ export default {
         gameHint: "Solve the puzzle to open the door",
         puzzleHint: "Solve the puzzle with the help of your partner",
     },
+    waitingRoom: {
+        title: "Waiting room",
+        player: " players",
+    },
+    selectDifficulty: {
+        title: "How do you wanna play?",
+        subtitle: "Choose a difficulty",
+        easy: "Easy",
+        medium: "Medium",
+        hard: "Hard",
+        public: "Public room",
+        private: "Private room"
+    },
     play : "PLAY",
     friend_list: "Friends list",
     login: "Log In",

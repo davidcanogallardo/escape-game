@@ -7,6 +7,19 @@ export default {
         gameHint: "Resol el puzzle per obrir la porta",
         puzzleHint: "Resol el puzzle amb l'ajuda del teu company",
     },
+    waitingRoom: {
+        title: "Sala d'espera",
+        player: " jugadors",
+    },
+    selectDifficulty: {
+        title: "Com vols jugar?",
+        subtitle: "Selecciona una dificultat",
+        easy: "Fàcil",
+        medium: "Mitja",
+        hard: "Difícil",
+        public: "Sala pública",
+        private: "Sala privada"
+    },
     play : "JUGAR",
     friend_list: "Llista d'amics",
     login: "Inici de Sessió",

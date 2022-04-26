@@ -8,6 +8,19 @@ export default {
         puzzleHint: "Resuelve el puzzle con la ayuda de tu compañero",
 
     },
+    waitingRoom: {
+        title: "Sala de espera",
+        player: " jugadores",
+    },
+    selectDifficulty: {
+        title: "Cómo quieres jugar?",
+        subtitle: "Escoge una dificultad",
+        easy: "Fácil",
+        medium: "Medio",
+        hard: "Difícil",
+        public: "Sala pública",
+        private: "Sala privada"
+    },
     play : "JUGAR",
     friend_list: "Lista de amigos",
     login: "Iniciar Sesión",

@@ -4,19 +4,19 @@ Vue.component('select-solo-duo', {
     template: //html
     `
     <div class="select-solo-duo">
-        <h1>How you wanna play?</h1>
+        <h1>{{ $t("selectDifficulty.title") }}</h1>
         <br>
         <div class="gamemodes"> 
-            <div v-on:click="searchSolo" class="btn blue solo"> Public </div>
-            <div v-on:click="searchDuo" v-if="this.notLogged" class="btn blue duo"> Private </div>
+            <div v-on:click="searchSolo" class="btn blue solo"> {{ $t("selectDifficulty.public") }} </div>
+            <div v-on:click="searchDuo" v-if="this.notLogged" class="btn blue duo"> {{ $t("selectDifficulty.private") }} </div>
         </div>
         <div class="difficulty">
             <br>
-            <h2>Select Difficulty</h2>
+            <h2>{{ $t("selectDifficulty.subtitle") }}</h2>
             <select class="selector" name="difficulty" id="difficulty" @change="setDifficulty($event)">
-                <option value="easy">Easy</option>
-                <option value="medium" selected>Medium</option>
-                <option value="hard">Hard</option>
+                <option value="easy">{{ $t("selectDifficulty.easy") }}</option>
+                <option value="medium" selected>{{ $t("selectDifficulty.medium") }}</option>
+                <option value="hard">{{ $t("selectDifficulty.hard") }}</option>
             </select>
         </div>
         <br>
