@@ -79,8 +79,9 @@ function testMic(micID) {
 	startStream(startTestMic, constraintMic, false);
 }
 
-function startPeerStream(callback, data) {
-	var micID = window.mic[0].id;
+function startPeerStream(callback, data, mic) {
+	console.log(`cojo mic ${mic}`);
+	var micID = mic;
 	
 	var constraintMic = {
 		deviceId: { exact: micID },

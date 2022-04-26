@@ -11,16 +11,14 @@ let audioTag;
 
 socket.on("matchFound", function (data) {
 // No tiene micrófono, envía un stream null
-console.log(this.mainMicId);
-console.log(app.mainMicId);
   if (app.mainMicId == null) {
-    console.log("no hay mics");
+    console.error("no hay mics, stream null");
     window.stream = null  
     startClientPeer(data)  
   // Si tiene micrófono coge el stream de audio
   } else {
-    console.log("hay mic");
-    startPeerStream(startClientPeer, data);
+    console.error("microfono");
+    startPeerStream(startClientPeer, data, app.mainMicId);
   }
 });
 
@@ -145,15 +143,18 @@ var app = new Vue({
       if (newPage == "select-solo-duo") {
         // Si el usuario no ha seleccionado un micrófono
         if (this.mainMicId==null) {
-            console.log("mainmicid null");
+            console.error("mainmicid null");
             // Si el usuario tiene micrófonos
             if (window?.mic[0] != undefined) {
                 this.mainMicId = window.mic[0].id;
-                console.log(1111);
+                console.error("mic defualt"+this.mainMicId);
+
                 
+            } else {
+              console.error("no tiene microfonos");
             }
         } else {
-          console.log("no nulo");
+          console.error("el usuario ha elegido un mic");
         }
       }
       this.menuOpen = "none";
