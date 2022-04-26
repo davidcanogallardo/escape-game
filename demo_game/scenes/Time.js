@@ -12,7 +12,7 @@ class Time extends Phaser.Scene {
 
     create() {
         this.title = this.add.text(25,30, window.i.t("game.time")+": 0:00", {
-            fontSize: 70,
+            fontSize: 35,
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })
         window.timee = this
