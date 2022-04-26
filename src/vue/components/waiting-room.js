@@ -4,7 +4,7 @@ Vue.component('waiting-room', {
     <div class="waitingRoom">
         <h1>waiting Room</h1>
         <br>
-        <p style="font-size: 7vw;">1/2 Players</p>
+        <p style="font-size: 4vw;">1/2 Players</p>
         <div class="col-3">
             <div class="snippet" data-title=".dot-typing">
             <div class="stage">

@@ -32,10 +32,10 @@ class HelpDialog extends Phaser.Scene {
         // Guardo los botones en un array de arrays con el 
         // boton y el texto que tendrá debajo
         var buttons = [
-            [this.awsd,"Movimiento"],
-            [this.blue,"Interactuar"],
-            [this.green,"Mutear micro"],
-            [this.red,"Salir"]
+            [this.awsd, window.i.t("game.keyHints.movement")],
+            [this.blue, window.i.t("game.keyHints.action")],
+            [this.green, window.i.t("game.keyHints.muteMic")],
+            [this.red, window.i.t("game.keyHints.quit")]
         ]
 
         // Distancia en px entre imagen e imagen

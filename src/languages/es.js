@@ -6,7 +6,12 @@ export default {
         help: "Pulsa H para mostra la ayuda",
         gameHint: "Resuelve el puzzle para abrir la puerta",
         puzzleHint: "Resuelve el puzzle con la ayuda de tu compañero",
-
+        keyHints:  {
+            movement:"Botón de movimiento",
+            action:"Botón de acción",
+            muteMic:"Mutear micro",
+            quit:"Cerrar menú",
+        },
     },
     waitingRoom: {
         title: "Sala de espera",

@@ -6,6 +6,12 @@ export default {
         help: "Press H for help",
         gameHint: "Solve the puzzle to open the door",
         puzzleHint: "Solve the puzzle with the help of your partner",
+        keyHints:  {
+            movement:"Move buttons",
+            action:"Action button",
+            muteMic:"Mute mic",
+            quit:"Close menu",
+        },
     },
     waitingRoom: {
         title: "Waiting room",
