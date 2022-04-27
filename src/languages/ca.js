@@ -3,7 +3,7 @@ export default {
         time:"Temps",
         score: "Puntuació",
         quit: "Prémer X per sortir",
-        help: "Prémer H per mostrar l'ajuda ",
+        help: "Prémer H per ajuda ",
         gameHint: "Resol el puzzle per obrir la porta",
         puzzleHint: "Resol el puzzle amb l'ajuda del teu company",
         keyHints:  {

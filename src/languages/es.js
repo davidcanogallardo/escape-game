@@ -3,7 +3,7 @@ export default {
         time:"Tiempo",
         score: "Puntuación",
         quit: "Pulsa X para salir",
-        help: "Pulsa H para mostra la ayuda",
+        help: "Pulsa H para ayuda",
         gameHint: "Resuelve el puzzle para abrir la puerta",
         puzzleHint: "Resuelve el puzzle con la ayuda de tu compañero",
         keyHints:  {

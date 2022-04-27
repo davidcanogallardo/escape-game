@@ -29,7 +29,7 @@ class Ui extends Phaser.Scene {
         // })
 
         this.title = this.add.text(this.help.x,this.help.y, window.i.t("game.help"), {
-            fontSize: 30,
+            fontSize: 28,
             fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
         })
         this.title.x -= (this.title.displayWidth/2)
