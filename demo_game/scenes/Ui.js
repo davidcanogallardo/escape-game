@@ -7,10 +7,12 @@ class Ui extends Phaser.Scene {
         
     }
 
+
+
     create() {
         //Tiempo
         this.scene.launch('time');
-
+        window.jkk = this.scene
         console.log("222")
         let { width, height } = this.sys.game.canvas;
 
@@ -21,12 +23,31 @@ class Ui extends Phaser.Scene {
         this.help.x += (this.help.displayWidth/2)+10
         this.help.y -= (this.help.displayHeight/2)+10
 
-        // this.input.keyboard.on('keydown-H',()=>{
-        //     console.log("h apretada22");
-        //     this.scene.launch('help_dialog',{"message":window.i.t("game.gameHint"),"scene":this.scene.key})
+        this.blueBtn = this.add.image(width-100 , height-100, 'blue').setScale(0.7).setDepth(999);
+        this.redBtn = this.add.image(width-200, height-100, 'red').setScale(0.7).setDepth(999);
+        this.greenBtn = this.add.image(width-300, height-100, 'green').setScale(0.7).setDepth(999);
+        this.greenBtn2 = this.add.image(width-400, height-100, 'green').setScale(0.7).setDepth(999);
 
-        //     // h.create()
-        // })
+        // (this.blueBtn).setInteractive().on('pointerdown', function(pointer){
+        //     this.events.emit('interactuate');
+        // }, this);
+        (this.blueBtn).setInteractive().on('pointerup', function(pointer){
+            this.events.emit('interactuate');
+        }, this);
+
+        (this.redBtn).setInteractive().on('pointerup', function(pointer){
+            this.events.emit('quit');
+        }, this);
+
+        (this.greenBtn).setInteractive().on('pointerdown', function(pointer){
+            this.events.emit('mute');
+        }, this);
+
+        (this.greenBtn2).setInteractive().on('pointerdown', function(pointer){
+            this.events.emit('help');
+        }, this);
+
+
 
         this.title = this.add.text(this.help.x,this.help.y, window.i.t("game.help"), {
             fontSize: 28,
@@ -39,7 +60,7 @@ class Ui extends Phaser.Scene {
     }
 
     update() {
-        
+        this.scene.bringToTop();
     }
 
     getTime() {

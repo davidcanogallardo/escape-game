@@ -64,12 +64,17 @@ class HelpDialog extends Phaser.Scene {
         window.help = this
 
         this.input.keyboard.on('keydown-X',()=>{
-            console.log(this.scene);
-            this.scene.resume(this.sceneKey);
-            this.scene.stop();
+            this.quit()
 
         })
+        this.scene.get('ui').events.on('quit', this.quit, this);
         
+    }
+
+    quit() {
+        console.log(this.scene);
+        this.scene.resume(this.sceneKey);
+        this.scene.stop();
     }
 
     update() {

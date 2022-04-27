@@ -84,8 +84,43 @@ class Game extends Phaser.Scene {
         }
     }
 
+    help() {
+        console.log("help f");
+        this.scene.launch('help_dialog',{"message":window.i.t("game.gameHint"),"scene":this.scene.key})
+    }
+
+    mute() {
+        console.log("mute");
+        if (window.stream.getAudioTracks()[0].enabled == true) {
+            window.stream.getAudioTracks()[0].enabled = false;
+            console.log(window.stream.getAudioTracks()[0].enabled)
+        } else {
+            window.stream.getAudioTracks()[0].enabled = true;
+        }
+    }
+
+    openChallenge() {
+        var table = this.tableInRange
+        this.scene.pause();
+        this.scene.launch(this.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge");
+        this.activeScene = this.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge";
+    }
+
+    openHelper() {
+
+    }
+
     create() {
         let { width, height } = this.sys.game.canvas;
+        console.log("------------22");
+        this.scene.get('ui').events.on('help', this.help, this);
+        this.scene.get('ui').events.on('mute', this.mute, this);
+        // this.scene.get('ui').events.on('interactuate', this.openChallenge, this);
+        // window.help = this.help()
+        // this.blueBtn = this.add.image(0, height/2, 'blue').setScale(0.6).setDepth(99);
+        // window.blue = this.blueBtn
+        // // this.redBtn = this.add.image(width+100, height+(height/2), 'red').setScale(0.6).setDepth(99);
+        // // this.greenBtn = this.add.image(width+250, height+(height/2), 'green').setScale(0.6).setDepth(99);
         // this.time = this.add.image(width/2, height/2, 'time_frame');
         // window.time = this.time
 
@@ -249,7 +284,7 @@ class Game extends Phaser.Scene {
         
         this.input.keyboard.on('keydown-H',()=>{
             console.log("h apretada22");
-            this.scene.launch('help_dialog',{"message":window.i.t("game.gameHint"),"scene":this.scene.key})
+            this.help()
 
             // h.create()
         })
@@ -361,23 +396,26 @@ class Game extends Phaser.Scene {
 
                 //Mesa
                 this.physics.add.overlap(player.playerCollider, this.table, function (player,table) {
+                    that.tableInRange = table
                     if(table.y < player.y){
                         that.player.setDepth(10);
                     } else {
                         that.player.setDepth(0);
                     }
                     if (eKey.isDown && that.canDoPuzzle) {
-                        that.scene.pause();
-                        that.scene.launch(that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge");
-                        that.activeScene = that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge";
-                        
+                        that.openChallenge()
+                        // that.scene.pause();
+                        // that.scene.launch(that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge");
+                        // that.activeScene = that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge";
+                        // 
                     }
 
                     if(that.buttonActive && that.canDoPuzzle){
-                        that.scene.pause();
-                        that.scene.launch(that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge");
-                        that.activeScene = that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge";
-                        that.buttonActive = false;
+                        // that.openChallenge()
+                        // that.scene.pause();
+                        // that.scene.launch(that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge");
+                        // that.activeScene = that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge";
+                        // that.buttonActive = false;
                     }
                 });
             }
@@ -444,12 +482,7 @@ class Game extends Phaser.Scene {
 
         //************************MUTEAR MICROFONO********************************
         this.input.keyboard.on('keydown-M',()=>{
-            if (window.stream.getAudioTracks()[0].enabled == true) {
-                window.stream.getAudioTracks()[0].enabled = false;
-                console.log(window.stream.getAudioTracks()[0].enabled)
-            } else {
-                window.stream.getAudioTracks()[0].enabled = true;
-            }
+            this.mute()
         });
         //********************************************************************** */
 

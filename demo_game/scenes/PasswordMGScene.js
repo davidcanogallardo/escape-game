@@ -39,14 +39,85 @@ class PasswordMGScene extends GenericMiniGame {
     //=============opciones jugador con ventana helper=========================================
     }
 
+    help() {
+        this.scene.pause()
+        this.scene.launch('help_dialog',{"message":window.i.t("game.puzzleHint"),"scene":this.scene.key})
+
+    }
+
+    quit(){
+        console.log("quit password");
+        this.scene.get("game").activeScene = "game"
+        this.scene.stop();
+        this.scene.resume("game");
+    }
+
+    interactuate() {
+        console.log(this.scene.get("game").activeScene);
+        if (this.scene.get("game").activeScene != "game") {
+            
+            let count = this.count;
+            var difficulty = this.difficulty2
+            // console.warn((this.result_rectangles[count].width/2));
+            console.warn((this.result_rectangles[count].x));
+            var w = (this.result_rectangles[count].width/2)
+            var h = (this.result_rectangles[count].height/2)
+            var x = this.result_rectangles[count].x
+            var y = this.result_rectangles[count].y
+    
+            var cubeX = this.result_rectangles[count].x
+            var cubeY = this.result_rectangles[count].y
+    
+            window.cube = this.result_rectangles[count]
+            console.log(this.result_rectangles[count].displayWidth);
+            console.log(this.result_rectangles[count].displayHeight);
+    
+            this.password.push(this.puzzle_buttons[this.selectedButtonIndex][2])
+    
+            this.result_rectangles[count] = this.add.image(
+                cubeX+(this.result_rectangles[count].displayWidth/2),
+                cubeY+(this.result_rectangles[count].displayHeight/2),
+                this.puzzle_buttons[this.selectedButtonIndex][0].texture.key
+            );
+            window.cube2 = this.result_rectangles[count]
+    
+            
+            if (difficulty==1) {
+                this.result_rectangles[count].setScale(1); //difficulty 1
+            } else if (difficulty==2) {
+                this.result_rectangles[count].setScale(1); //difficulty 2
+            } else if (difficulty==3) {
+                this.result_rectangles[count].setScale(1); //difficulty 3
+            }
+    
+            console.error(this.puzzle_buttons[this.selectedButtonIndex][2]);
+    
+            if (this.password.length == 2+(2*difficulty) && !this.arraysEqual(this.password,this.correctAnswer)) {
+                console.log("ERROR")
+                this.scene.stop();
+                this.scene.resume("game");
+            }
+            if (this.arraysEqual(this.password,this.correctAnswer)) {
+                this.win = true;
+            }
+            console.log(this.win);
+            console.log("actual",this.password);
+            console.log("correct",this.correctAnswer);
+            console.log(this.arraysEqual(this.password,this.correctAnswer));
+            this.count++;    
+        }
+    }
+
     create(){
         this.input.keyboard.on('keydown-H',()=>{
             console.log("h apretada333");
-            this.scene.pause()
-            this.scene.launch('help_dialog',{"message":window.i.t("game.puzzleHint"),"scene":this.scene.key})
-
+            this.help()
             // h.create()
         })
+        console.log("entro pass");
+        this.scene.get('ui').events.on('help', this.help, this);
+        this.scene.get('ui').events.on('quit', this.quit, this);
+        this.scene.get('ui').events.on('interactuate', this.interactuate, this);
         //=============opciones jugador con ventana reto=========================================
         if (this.type=='challenge') {
             this.correctAnswer = this.correctPassword
@@ -64,7 +135,8 @@ class PasswordMGScene extends GenericMiniGame {
 
             this.cursors = this.input.keyboard.createCursorKeys();
 
-            var difficulty = this.getDiff(this.difficulty);
+            this.difficulty2 = this.scene.get('game').getDiff(this.difficulty);
+            var difficulty = this.difficulty2
             var that = this;
 
             // ****************************************************************************************
@@ -172,54 +244,7 @@ class PasswordMGScene extends GenericMiniGame {
             this.win = false;
             
             this.input.keyboard.on('keydown-E', function () {
-                let count = that.count;
-                // console.warn((that.result_rectangles[count].width/2));
-                console.warn((that.result_rectangles[count].x));
-                var w = (that.result_rectangles[count].width/2)
-                var h = (that.result_rectangles[count].height/2)
-                var x = that.result_rectangles[count].x
-                var y = that.result_rectangles[count].y
-
-                var cubeX = that.result_rectangles[count].x
-                var cubeY = that.result_rectangles[count].y
-
-                window.cube = that.result_rectangles[count]
-                console.log(that.result_rectangles[count].displayWidth);
-                console.log(that.result_rectangles[count].displayHeight);
-
-                that.password.push(that.puzzle_buttons[that.selectedButtonIndex][2])
-
-                that.result_rectangles[count] = that.add.image(
-                    cubeX+(that.result_rectangles[count].displayWidth/2),
-                    cubeY+(that.result_rectangles[count].displayHeight/2),
-                    that.puzzle_buttons[that.selectedButtonIndex][0].texture.key
-                );
-                window.cube2 = that.result_rectangles[count]
-
-                
-                if (difficulty==1) {
-                    that.result_rectangles[count].setScale(1); //difficulty 1
-                } else if (difficulty==2) {
-                    that.result_rectangles[count].setScale(1); //difficulty 2
-                } else if (difficulty==3) {
-                    that.result_rectangles[count].setScale(1); //difficulty 3
-                }
-
-                console.error(that.puzzle_buttons[that.selectedButtonIndex][2]);
-
-                if (that.password.length == 2+(2*difficulty) && !that.arraysEqual(that.password,that.correctAnswer)) {
-                    console.log("ERROR")
-                    that.scene.stop();
-                    that.scene.resume("game");
-                }
-                if (that.arraysEqual(that.password,that.correctAnswer)) {
-                    that.win = true;
-                }
-                console.log(that.win);
-                console.log("actual",that.password);
-                console.log("correct",that.correctAnswer);
-                console.log(that.arraysEqual(that.password,that.correctAnswer));
-                that.count++;    
+                that.interactuate()
             });
             
         //=============opciones jugador con ventana helper=========================================
@@ -275,8 +300,7 @@ class PasswordMGScene extends GenericMiniGame {
         var xKeyDown = xKey?.isDown;
 
         if(xKeyDown){
-            this.scene.stop();
-            this.scene.resume("game");
+            this.quit()
         }
 //=============opciones jugador con ventana reto=========================================
         if (this.type=='challenge') {
