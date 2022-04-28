@@ -41,7 +41,7 @@ class PasswordMGScene extends GenericMiniGame {
 
     help() {
         this.scene.pause()
-        this.scene.launch('help_dialog',{"message":window.i.t("game.puzzleHint"),"scene":this.scene.key})
+        this.scene.launch('help_dialog',{"message":window.i18n.t("game.puzzleHint"),"scene":this.scene.key})
 
     }
 
@@ -68,7 +68,6 @@ class PasswordMGScene extends GenericMiniGame {
             var cubeX = this.result_rectangles[count].x
             var cubeY = this.result_rectangles[count].y
     
-            window.cube = this.result_rectangles[count]
             console.log(this.result_rectangles[count].displayWidth);
             console.log(this.result_rectangles[count].displayHeight);
     
@@ -79,7 +78,6 @@ class PasswordMGScene extends GenericMiniGame {
                 cubeY+(this.result_rectangles[count].displayHeight/2),
                 this.puzzle_buttons[this.selectedButtonIndex][0].texture.key
             );
-            window.cube2 = this.result_rectangles[count]
     
             
             if (difficulty==1) {
@@ -125,7 +123,6 @@ class PasswordMGScene extends GenericMiniGame {
             this.background = this.add.image(width/2, height/2, 'passwd_bg');
             //this.background.setDepth(10)
             //this.background.setScale(1.6);
-            window.background = this.background
 
             if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
                 this.background.setScale(0.9);
@@ -236,9 +233,6 @@ class PasswordMGScene extends GenericMiniGame {
 
             this.selectIcon(0);
             this.password = []
-            window.pass = this.password
-            
-            window.r = this.result_rectangles;
             
             this.count = 0;
             this.win = false;

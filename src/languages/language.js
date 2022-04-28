@@ -32,5 +32,5 @@ if (localStorage.getItem("locale") == null) {
   i18n.locale = localStorage.getItem("locale")
 }
 
-window.i = i18n
+window.i18n = i18n
 export { i18n };

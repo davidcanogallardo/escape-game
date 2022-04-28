@@ -10,7 +10,7 @@ class Time extends Phaser.Scene {
     create() {
         this.title = this.add.text(5,0, 'Tiempo: ', {
             fontSize: 12,
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
+            fontFamily: 'sans'
         })
 
         this.title.setDepth(10)

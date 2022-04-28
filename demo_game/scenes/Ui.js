@@ -12,7 +12,6 @@ class Ui extends Phaser.Scene {
     create() {
         //Tiempo
         this.scene.launch('time');
-        window.jkk = this.scene
         console.log("222")
         let { width, height } = this.sys.game.canvas;
 
@@ -24,9 +23,9 @@ class Ui extends Phaser.Scene {
         this.help.y -= (this.help.displayHeight/2)+10
 
         this.blueBtn = this.add.image(width-100 , height-100, 'blue').setScale(0.7).setDepth(999);
-        this.redBtn = this.add.image(width-200, height-100, 'red').setScale(0.7).setDepth(999);
-        this.greenBtn = this.add.image(width-300, height-100, 'green').setScale(0.7).setDepth(999);
-        this.greenBtn2 = this.add.image(width-400, height-100, 'green').setScale(0.7).setDepth(999);
+        this.redBtn = this.add.image(width-300, height-100, 'red').setScale(0.7).setDepth(999);
+        this.greenBtn = this.add.image(width-500, height-100, 'green').setScale(0.7).setDepth(999);
+        this.greenBtn2 = this.add.image(width-700, height-100, 'green').setScale(0.7).setDepth(999);
 
         // (this.blueBtn).setInteractive().on('pointerdown', function(pointer){
         //     this.events.emit('interactuate');
@@ -49,14 +48,13 @@ class Ui extends Phaser.Scene {
 
 
 
-        this.title = this.add.text(this.help.x,this.help.y, window.i.t("game.help"), {
+        this.title = this.add.text(this.help.x,this.help.y, window.i18n.t("game.help"), {
             fontSize: 28,
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
+            fontFamily: 'sans'
         })
         this.title.x -= (this.title.displayWidth/2)
         this.title.y -= (this.title.displayHeight/2)
 
-        window.ui = this
     }
 
     update() {

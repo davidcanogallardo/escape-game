@@ -11,12 +11,12 @@ class Pause_scene extends Phaser.Scene {
         let { width, height } = this.sys.game.canvas;
         const title = this.add.text(width / 2, height / 2, 'PAUSE', {
             fontSize: 27,
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
+            fontFamily: 'sans'
         }).setDepth(10)
         title.setOrigin(0.5, 0.5)
 
         this.add.text(width / 2, height / 2+50, 'Presiona ESC para volver', {
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
+            fontFamily: 'sans'
         }).setDepth(10)
         .setOrigin(0.5)
 

@@ -32,10 +32,10 @@ class HelpDialog extends Phaser.Scene {
         // Guardo los botones en un array de arrays con el 
         // boton y el texto que tendrá debajo
         var buttons = [
-            [this.awsd, window.i.t("game.keyHints.movement")],
-            [this.blue, window.i.t("game.keyHints.action")],
-            [this.green, window.i.t("game.keyHints.muteMic")],
-            [this.red, window.i.t("game.keyHints.quit")]
+            [this.awsd, window.i18n.t("game.keyHints.movement")],
+            [this.blue, window.i18n.t("game.keyHints.action")],
+            [this.green, window.i18n.t("game.keyHints.muteMic")],
+            [this.red, window.i18n.t("game.keyHints.quit")]
         ]
 
         // Distancia en px entre imagen e imagen
@@ -50,18 +50,17 @@ class HelpDialog extends Phaser.Scene {
 
             var text = this.add.text(xPos,this.dialog.y+30, button[1], {
                 fontSize: 25,
-                fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
+                fontFamily: 'sans'
             }).setDepth(99)
             text.x -= text.displayWidth/2
         }
 
         var text = this.add.text(this.dialog.x,this.dialog.y+70, this.helpMessage, {
             fontSize: 25,
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
+            fontFamily: 'sans'
         }).setDepth(99)
         text.x -= text.displayWidth/2
 
-        window.help = this
 
         this.input.keyboard.on('keydown-X',()=>{
             this.quit()

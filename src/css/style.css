@@ -37,6 +37,10 @@
     font-family: "Bebas";
     src: url("./../fonts/BebasNeue-Regular.ttf");
 }
+@font-face {
+    font-family: "sans";
+    src: url("./../fonts/determinationsans.ttf");
+}
 
 /**************************************Clases generales**********************/
 h1 {

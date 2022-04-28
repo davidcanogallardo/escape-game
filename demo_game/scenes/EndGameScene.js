@@ -18,11 +18,13 @@ class EndGameScene extends Phaser.Scene{
         this.getServerScore(this.gameTime, this.nChallanges);
 
         this.updatePlayersHistory()
-
+        console.log(window);
+        console.log(window.i18n);
+        console.log(window.i18n.t("play"));
         // ****************************************************************************************
-        let timeText = this.add.text(width / 2, height / 3, window.i.t("game.time")+`: ${this.gameTime}`,{ fontSize: 24 });
-        let scoreText = this.add.text(width / 2, height / 2, window.i.t("game.score")+`: ${this.score}`,{ fontSize: 24 });
-        let exitText = this.add.text(width / 2, height / 1.5, window.i.t("game.quit"), {fontSize: 24});
+        let timeText = this.add.text(width / 2, height / 3, window.i18n.t("game.time")+`: ${this.gameTime}`,{ fontSize: 24, fontFamily: 'sans' });
+        let scoreText = this.add.text(width / 2, height / 2, window.i18n.t("game.score")+`: ${this.score}`,{ fontSize: 24, fontFamily: 'sans' });
+        let exitText = this.add.text(width / 2, height / 1.5, window.i18n.t("game.quit"), {fontSize: 24, fontFamily: 'sans'});
         
         exitText.setOrigin(0.5,0.5);
         timeText.setOrigin(0.5, 0.5);

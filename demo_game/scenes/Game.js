@@ -86,7 +86,7 @@ class Game extends Phaser.Scene {
 
     help() {
         console.log("help f");
-        this.scene.launch('help_dialog',{"message":window.i.t("game.gameHint"),"scene":this.scene.key})
+        this.scene.launch('help_dialog',{"message":window.i18n.t("game.gameHint"),"scene":this.scene.key})
     }
 
     mute() {
@@ -121,7 +121,6 @@ class Game extends Phaser.Scene {
     }
 
     create() {
-        window.ii = this
         this.keyPressed = false
         let { width, height } = this.sys.game.canvas;
         console.log("------------22");
@@ -132,13 +131,6 @@ class Game extends Phaser.Scene {
                 this.keyPressed = !this.keyPressed
             }
         }, this);
-        // window.help = this.help()
-        // this.blueBtn = this.add.image(0, height/2, 'blue').setScale(0.6).setDepth(99);
-        // window.blue = this.blueBtn
-        // // this.redBtn = this.add.image(width+100, height+(height/2), 'red').setScale(0.6).setDepth(99);
-        // // this.greenBtn = this.add.image(width+250, height+(height/2), 'green').setScale(0.6).setDepth(99);
-        // this.time = this.add.image(width/2, height/2, 'time_frame');
-        // window.time = this.time
 
         // if(navigator.userAgentData.mobile){
         //     this.virtualJoyStick = this.game.plugins.get('rexvirtualjoystickplugin').add(this, {
@@ -477,8 +469,6 @@ class Game extends Phaser.Scene {
                 // console.log("challenge", this.table[i].challenge);
                 console.log(this.chest[i]);
                 console.log(this.table[i]);
-                window.ta = this.table
-                window.ch = this.chest
                 // this.chest[i].disableBody()
             }
             // TODO hacer lo mismo para cofres y mesas
@@ -488,7 +478,7 @@ class Game extends Phaser.Scene {
         //HACK PARA TERMINAR PARTIDA XD
         this.input.keyboard.on('keydown-Z',()=>{
             console.log("HACK ACTIVAD TERMINAR PARTIDA");
-            for(i=0;i<2;i++){
+            for(let i=0;i<2;i++){
                 socket.emit("playerInEndZone");
             }
         })

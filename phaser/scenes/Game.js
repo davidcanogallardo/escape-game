@@ -33,12 +33,10 @@ class Game extends Phaser.Scene {
         this.map = this.make.tilemap({
             key: "map"
         });
-        window.map = this.map
         //valor leyenda: window.map.objects[1].objects[0].properties[0].value
         this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
         var groundLayer = this.map.createStaticLayer('ground', this.tileset);
         let objectLayer = this.map.getObjectLayer('objects');
-        window.object = objectLayer
         
         //*****************************************Players**************************************************/
         this.player = new Player(this);
@@ -62,7 +60,6 @@ class Game extends Phaser.Scene {
         for (let i = 0; i < 2+(2*difficulty); i++) {
             owo.push(Math.floor(Math.random()*9)) 
         }
-        window.pass = owo
 
         // input
         var input = [0,1,2,3,4,5,6,7,8]

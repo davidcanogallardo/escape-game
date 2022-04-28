@@ -11,11 +11,10 @@ class Time extends Phaser.Scene {
     }
 
     create() {
-        this.title = this.add.text(25,30, window.i.t("game.time")+": 0:00", {
+        this.title = this.add.text(25,30, window.i18n.t("game.time")+": 0:00", {
             fontSize: 35,
-            fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif'
+            fontFamily: 'sans'
         })
-        window.timee = this
 
 
         this.title.setDepth(100)
@@ -30,7 +29,6 @@ class Time extends Phaser.Scene {
         this.time.x = (5+(this.time.displayWidth/2))
         this.time.y = (5+(this.time.displayHeight/2))
 
-        window.time = this.time
 
         if(navigator.userAgentData.mobile){
             this.virtualJoyStick = this.game.plugins.get('rexvirtualjoystickplugin').add(this, {
@@ -127,6 +125,6 @@ class Time extends Phaser.Scene {
     
     updateTime () {
         this.segundos += 1;
-        this.title.setText(window.i.t("game.time")+': ' + this.formatTime(this.segundos));
+        this.title.setText(window.i18n.t("game.time")+': ' + this.formatTime(this.segundos));
     }
 }
