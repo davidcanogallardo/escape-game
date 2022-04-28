@@ -7,20 +7,16 @@ class Ui extends Phaser.Scene {
         
     }
 
-
-
     create() {
+        window.ui = this
         //Tiempo
         this.scene.launch('time');
-        console.log("222")
         let { width, height } = this.sys.game.canvas;
 
-        this.help = this.add.image(0, height, 'helpBtn');
+        this.helpFrame = this.add.image(0, height, 'helpBtn').setScale(1.3);
 
-        this.help.setScale(1.5)
-        
-        this.help.x += (this.help.displayWidth/2)+10
-        this.help.y -= (this.help.displayHeight/2)+10
+        this.helpFrame.x += (this.helpFrame.displayWidth/2)+10
+        this.helpFrame.y -= (this.helpFrame.displayHeight/2)+10
 
         this.blueBtn = this.add.image(width-100 , height-100, 'blue').setScale(0.7).setDepth(999);
         this.redBtn = this.add.image(width-300, height-100, 'red').setScale(0.7).setDepth(999);
@@ -48,12 +44,12 @@ class Ui extends Phaser.Scene {
 
 
 
-        this.title = this.add.text(this.help.x,this.help.y, window.i18n.t("game.help"), {
-            fontSize: 28,
+        this.helpTitle = this.add.text(this.helpFrame.x,this.helpFrame.y, window.i18n.t("game.help"), {
+            fontSize: 19,
             fontFamily: 'sans'
         })
-        this.title.x -= (this.title.displayWidth/2)
-        this.title.y -= (this.title.displayHeight/2)
+        this.helpTitle.x -= (this.helpTitle.displayWidth/2)
+        this.helpTitle.y -= (this.helpTitle.displayHeight/2)
 
     }
 

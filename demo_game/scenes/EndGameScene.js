@@ -34,6 +34,7 @@ class EndGameScene extends Phaser.Scene{
             //console.log("Space pressed");
             app.currentPage="home";
             game.scene.getScene('EndGameScene').scene.stop();
+            location.reload()
         });
         // ****************************************************************************************
     }

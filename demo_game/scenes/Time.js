@@ -11,7 +11,8 @@ class Time extends Phaser.Scene {
     }
 
     create() {
-        this.title = this.add.text(25,30, window.i18n.t("game.time")+": 0:00", {
+        window.time = this
+        this.title = this.add.text(0,0, window.i18n.t("game.time")+": 0:00", {
             fontSize: 35,
             fontFamily: 'sans'
         })
@@ -23,11 +24,14 @@ class Time extends Phaser.Scene {
 
         this.scene.get('game').events.on("end", this.end, this);
 
-        this.time = this.add.image(5, 0, 'time_frame');
-        this.time.setDepth(99)
-        this.time.setScale(1)
-        this.time.x = (5+(this.time.displayWidth/2))
-        this.time.y = (5+(this.time.displayHeight/2))
+        this.timeFrame = this.add.image(5, 0, 'time_frame').setScale(0.8);
+        this.timeFrame.setDepth(99)
+        this.timeFrame.x = (5+(this.timeFrame.displayWidth/2))
+        this.timeFrame.y = (5+(this.timeFrame.displayHeight/2))
+
+        this.title.x = this.timeFrame.x-(this.title.displayWidth/2)
+        this.title.y = this.timeFrame.y-(this.title.displayHeight/2)
+
 
 
         if(navigator.userAgentData.mobile){
