@@ -100,22 +100,38 @@ class Game extends Phaser.Scene {
     }
 
     openChallenge() {
-        var table = this.tableInRange
-        this.scene.pause();
-        this.scene.launch(this.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge");
-        this.activeScene = this.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge";
+        
+        if (this.scene.isActive()) {
+            var table = this.tableInRange
+            this.keyPressed = false
+            this.scene.pause();
+            this.scene.launch(this.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge");
+            this.activeScene = this.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge";
+        }
     }
-
     openHelper() {
-
+        if (this.scene.isActive()) {
+            var chest = this.chestInRange
+            this.keyPressed = false
+            this.scene.pause();
+            this.scene.launch(this.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper");
+            this.activeScene = this.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper";
+            this.buttonActive = false;
+        }
     }
 
     create() {
+        window.ii = this
+        this.keyPressed = false
         let { width, height } = this.sys.game.canvas;
         console.log("------------22");
         this.scene.get('ui').events.on('help', this.help, this);
         this.scene.get('ui').events.on('mute', this.mute, this);
-        // this.scene.get('ui').events.on('interactuate', this.openChallenge, this);
+        this.scene.get('ui').events.on('interactuate', function () {
+            if (this.scene.isActive()) {
+                this.keyPressed = !this.keyPressed
+            }
+        }, this);
         // window.help = this.help()
         // this.blueBtn = this.add.image(0, height/2, 'blue').setScale(0.6).setDepth(99);
         // window.blue = this.blueBtn
@@ -372,25 +388,26 @@ class Game extends Phaser.Scene {
             if(player.id == socket.id){
                 //Añadir colision al jugador con el mismo socket
                 //Cofre
+                that.keyPressed = false
+                
                 this.physics.add.overlap(player.playerCollider, this.chest, function (player, chest) {
+                    that.chestInRange = chest
+
                     if(chest.y < player.y){
                         that.player.setDepth(10);
                     } else {
                         that.player.setDepth(0);
                     }
-                    if(eKey.isDown && that.canDoPuzzle){
-                        that.scene.pause();
-                        that.scene.launch(that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper");
-                        that.activeScene = that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper";
-                        that.buttonActive = false;
+                    if(eKey.isDown && that.canDoPuzzle || that.keyPressed){
+                        that.openHelper()
                     }
 
-                    if(that.buttonActive && that.canDoPuzzle){
-                        that.scene.pause();
-                        that.scene.launch(that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper");
-                        that.activeScene = that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper";
-                        that.buttonActive = false;
-                    }
+                    // if(that.buttonActive && that.canDoPuzzle){
+                    //     that.scene.pause();
+                    //     that.scene.launch(that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper");
+                    //     that.activeScene = that.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper";
+                    //     that.buttonActive = false;
+                    // }
 
                 });
 
@@ -402,7 +419,7 @@ class Game extends Phaser.Scene {
                     } else {
                         that.player.setDepth(0);
                     }
-                    if (eKey.isDown && that.canDoPuzzle) {
+                    if (eKey.isDown && that.canDoPuzzle || that.keyPressed) {
                         that.openChallenge()
                         // that.scene.pause();
                         // that.scene.launch(that.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge");

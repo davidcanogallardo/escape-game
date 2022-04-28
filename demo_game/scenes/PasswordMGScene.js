@@ -53,8 +53,8 @@ class PasswordMGScene extends GenericMiniGame {
     }
 
     interactuate() {
-        console.log(this.scene.get("game").activeScene);
-        if (this.scene.get("game").activeScene != "game") {
+        // console.log(this.scene.get("game").activeScene);
+        if (this.scene.isActive()) {
             
             let count = this.count;
             var difficulty = this.difficulty2
