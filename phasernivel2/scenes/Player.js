@@ -1,13 +1,13 @@
 class Player extends Phaser.GameObjects.Sprite{
     constructor(scene) {
-        super(scene, 165, 640, 'player')
+        super(scene, 112.5, 620, 'player')
         scene.add.existing(this)
         this.setDepth(5)
         this.cursors = scene.input.keyboard.createCursorKeys();
         scene.physics.world.enableBody(this);
         this.body.setSize(this.width*0.5, this.height * 0.3).setOffset(8,18)
         this.playerCollider = scene.physics.add.image(200, 50);
-    
+        
 
         this.anims.create({
             key: 'player-idle-side',
@@ -45,6 +45,9 @@ class Player extends Phaser.GameObjects.Sprite{
     }
 
     update() {
+        // console.log(this.x);
+        // console.log(this.y);
+
         this.centerBodyonBody(this.playerCollider,this)
         let speed = 150;
         if ( this.anims.currentAnim==null) {

@@ -39,13 +39,21 @@ class LaberitnoMGScene extends Phaser.Scene {
         var that = this
         window.map = this.map
         
+        if (type == "challenge") {
+            //*****************************************Player**************************************************/
+            this.player = new Player(this,socket.id,112.5,620,"player",true,"challenge");
+            this.playerCollider = this.player.playerCollider;
+            this.cameras.main.startFollow(this.player);
+            this.player.setDepth(6);
+            window.player = this.player;
+        }else{
+            this.player = new Player(this,socket.id,112.5,620,"player",false,"helper");
+            this.playerCollider = this.player.playerCollider;
+            this.cameras.main.startFollow(this.player);
+            this.player.setDepth(6);
+            window.player = this.player;
+        }
         
-        //*****************************************Player**************************************************/
-        this.player = new Player(this);
-        this.playerCollider = this.player.playerCollider
-        this.cameras.main.startFollow(this.player);
-        this.player.setDepth(6)
-        window.player = this.player
 
             
         var end = this.physics.add.staticGroup();
@@ -81,7 +89,7 @@ class LaberitnoMGScene extends Phaser.Scene {
 
         //Crear grupo donde se almacenan las puertas
         this.doorsGroup = this.physics.add.staticGroup();
-
+        
         //iterar por todos los objetos de la capa de objetos
         objectLayer.objects.forEach(object => {
             //Popriedades de cada objeto

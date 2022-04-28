@@ -6,7 +6,6 @@ class Game extends Phaser.Scene {
         var path = "./"
         this.segundos = 0;
         this.challenge = 0;
-        this.cursors = this.input.keyboard.createCursorKeys();
         this.load.image("tiles", path+"assets/tilesets/TSMapa/PNG/tileset.png");
         this.load.tilemapTiledJSON("map", path+"assets/tilemaps/mapa2prueba.json");
         this.load.atlas('player', path+'assets/character/player.png', path+'assets/character/player.json');
@@ -16,7 +15,6 @@ class Game extends Phaser.Scene {
         this.load.image('table', path+'assets/tilesets/TSMapa/PNG/table.png');
         this.load.image('passwd_bg', path+'assets/BGTable.png');
         this.load.atlas('door', path+'assets/objects/door/door.png', path+'assets/objects/door/door.json');
-        this.cursors = this.input.keyboard.createCursorKeys();
         for(let i=0; i<9; i++){
             this.load.image('simbol'+i, path+'assets/passwd/simbol'+i+'.png');
         }
@@ -157,7 +155,6 @@ class Game extends Phaser.Scene {
             }
 
             if (eKey.isDown) {
-                that.scene.launch('seepass');
             }
         });
         this.chest.body.immovable = true

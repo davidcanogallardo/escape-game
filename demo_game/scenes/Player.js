@@ -12,11 +12,12 @@ class Player extends Phaser.GameObjects.Sprite{
         //console.log(this.body);
         this.playerCollider = scene.physics.add.image(200, 50);
         this.initiator = initiator;
-        this.direction = 'idle'
-        this.username = username
+        this.direction = 'idle';
+        this.username = username;
         this.x_speed = 150;
         this.y_speed = 150;
-        
+        // this.x = x;
+        // this.y = y;
 
         this.anims.create({
             key: 'player-idle-side',
