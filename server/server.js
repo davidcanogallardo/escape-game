@@ -14,4 +14,4 @@ io.use((socket, next) => {
 let serverCom = new ComunicacionServidor(io, axios);
 serverCom.listenConnection();
 
-httpServer.listen(3008);
+httpServer.listen(3000);
