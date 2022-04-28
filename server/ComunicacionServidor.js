@@ -35,16 +35,7 @@ class ComunicacionServidor {
                     this.sendChatMessage(data, callback);
                 });
                 socket.on("disconnect", () => {
-                    let queueKeys = Object.keys(this.queue);
-
-                    queueKeys.forEach((key) => {
-                        //console.log(key, queue[key])
-                        this.queue[key].forEach((element, index) => {
-                          if(element.id == socket.id){
-                            this.queue[key].splice(index, 1);
-                          }
-                        });
-                    });
+                    deletePlayerFromQueue(socket.id);
                 });
 
                 socket.on("playerMoved", (moveData) => {
@@ -86,6 +77,10 @@ class ComunicacionServidor {
                 socket.on("clientInitGame", () => {
                     this.io.in(socket.room.id).emit("serverInitGame");
                 })
+
+                socket.on('leaveRoom', (id) => {
+                    this.leaveQueue(id)
+                });
             });
         }
     
@@ -151,9 +146,38 @@ class ComunicacionServidor {
             }
             // console.log(this.queue);
             console.log(this.io.sockets.adapter.rooms);
+            console.log(this.queue);
             // console.log(socket.rooms);
         }
-    
+        
+        leaveQueue(id){
+            let socketRoomMap = this.io.sockets.adapter.rooms; 
+            this.deletePlayerFromQueue(id);
+            for(let [key, value] of socketRoomMap){
+                if(key.startsWith("Room_")){
+                    //let playersInRoom = await this.io.in(key).fetchSockets();
+                    console.log(value.has(id)); 
+                    if(value.has(id)){
+                        socketRoomMap.delete(key)
+                    }
+                }
+            } 
+            console.log(this.queue);
+        }
+
+        deletePlayerFromQueue(playerID){
+            let queueKeys = Object.keys(this.queue);
+
+            queueKeys.forEach((key) => {
+                //console.log(key, queue[key])
+                this.queue[key].forEach((element, index) => {
+                  if(element.id == playerID){
+                    this.queue[key].splice(index, 1);
+                  }
+                });
+            });
+        }
+
         connectUserToChat(username, socket){
             this.chatUsers[username] = socket.id
             console.log(`New user `+ username);

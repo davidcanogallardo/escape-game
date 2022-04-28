@@ -17,8 +17,7 @@ Vue.component('waiting-room', {
     `,
     methods: {
         leaveRoom(){
-            console.log("salgo socket");
-            // socket.emit('leaveRoom',"a");
+            socket.emit('leaveRoom', socket.id);
             this.$emit('change-page','home');
         },
     }
