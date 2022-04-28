@@ -35,7 +35,7 @@ class ComunicacionServidor {
                     this.sendChatMessage(data, callback);
                 });
                 socket.on("disconnect", () => {
-                    deletePlayerFromQueue(socket.id);
+                    this.deletePlayerFromQueue(socket.id);
                 });
 
                 socket.on("playerMoved", (moveData) => {
