@@ -58,10 +58,8 @@ class Player extends Phaser.GameObjects.Sprite{
         this.centerBodyonBody(this.playerCollider,this)
         //console.log(game.scene.getScene("game").stickActive);
         if ( this.anims.currentAnim==null) {
-            console.log("Current anim null");
             this.anims.play('player-idle-down');
         } else if(!game.scene.getScene("game").stickActive && !game.scene.getScene("game").virtualJoyStickIsActive) {
-            console.log("Muevo teclas");
             if (this.cursors.left?.isDown) {
                 this.move(-this.x_speed,0)
                 this.direction = 'left'
@@ -88,8 +86,6 @@ class Player extends Phaser.GameObjects.Sprite{
             }
             this.moveOtherPlayer(false)
         } else if(game.scene.getScene("game").virtualJoyStickIsActive){
-            console.log("Muevo con stick virtual");
-            console.log("Direction");
             if(this.direction.trim() == "left"){
                 this.move(-150,0);
             }else if(this.direction.trim() == "right"){
@@ -111,7 +107,6 @@ class Player extends Phaser.GameObjects.Sprite{
             }
             this.moveOtherPlayer("virtualJoyStickMoved")
         } else if(game.scene.getScene("game").stickActive){
-            console.log("Muevo joystick");
             //console.log(this.x_speed, this.y_speed);
             this.move(this.x_speed,this.y_speed)
             this.moveOtherPlayer("joyStickMoved")

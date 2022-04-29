@@ -268,7 +268,6 @@ class Game extends Phaser.Scene {
                         this.stickActive = false;
                         
                     } else if(moveData.virtualJoyStickMoved){
-                        console.log(moveData.direction);
                         if(moveData.direction.trim() == "left"){
                             player.move(-150,0);
                         }else if(moveData.direction.trim() == "right"){
@@ -656,7 +655,6 @@ class Game extends Phaser.Scene {
         player.x_speed = this.speeds['x'];
         player.y_speed = this.speeds['y'];
         player.direction = this.stickDirection;
-        this.stickActive =  true;
         this.virtualJoyStickIsActive = true;
     }
 
