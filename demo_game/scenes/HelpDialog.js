@@ -19,10 +19,12 @@ class HelpDialog extends Phaser.Scene {
             this.dialogFrameScale = 0.9
             this.textSize = 15
             this.bottomTextSize = 29
+            this.btnScale = 0.4
         } else {
             this.dialogFrameScale = 1.4
             this.textSize = 25
             this.bottomTextSize = 22
+            this.btnScale = 0.6
 
         }
         console.log(this.helpMessage);
@@ -31,16 +33,16 @@ class HelpDialog extends Phaser.Scene {
             width/2, 
             height/2, 
             'passwd_bg'
-        ).setScale(this.dialogFrameScale).setDepth(56);
+        ).setScale(this.dialogFrameScale).setDepth(1000);
         
         var leftDialog = this.helpDialogFrame.x - (this.helpDialogFrame.displayWidth/2)
         var topDialog = this.helpDialogFrame.y - (this.helpDialogFrame.displayHeight/2)+80
         var bottomDialog = this.helpDialogFrame.y + (this.helpDialogFrame.displayHeight/2)-80
 
-        this.awsd = this.add.image(0, this.helpDialogFrame.y-20, 'awsd').setScale(0.6).setDepth(99);
-        this.blue = this.add.image(0, this.helpDialogFrame.y-20, 'blue').setScale(0.6).setDepth(99);
-        this.red = this.add.image(0, this.helpDialogFrame.y-20, 'red').setScale(0.6).setDepth(99);
-        this.green = this.add.image(0, this.helpDialogFrame.y-20, 'green').setScale(0.6).setDepth(99);
+        this.awsd = this.add.image(0, this.helpDialogFrame.y-20, 'awsd').setScale(this.btnScale).setDepth(1001);
+        this.blue = this.add.image(0, this.helpDialogFrame.y-20, 'blue').setScale(this.btnScale).setDepth(1001);
+        this.red = this.add.image(0, this.helpDialogFrame.y-20, 'red').setScale(this.btnScale).setDepth(1001);
+        this.green = this.add.image(0, this.helpDialogFrame.y-20, 'green').setScale(this.btnScale).setDepth(1001);
 
         // Guardo los botones en un array de arrays con el 
         // boton y el texto que tendrá debajo
@@ -64,14 +66,14 @@ class HelpDialog extends Phaser.Scene {
             var text = this.add.text(xPos,this.helpDialogFrame.y+30, button[1], {
                 fontSize: this.textSize,
                 fontFamily: 'sans'
-            }).setDepth(99)
+            }).setDepth(1001)
             text.x -= text.displayWidth/2
         }
 
         var text = this.add.text(this.helpDialogFrame.x,this.helpDialogFrame.y+70, this.helpMessage, {
             fontSize: this.bottomTextSize,
             fontFamily: 'sans'
-        }).setDepth(99)
+        }).setDepth(1001)
         text.x -= text.displayWidth/2
 
         this.input.keyboard.on('keydown-X',()=>{

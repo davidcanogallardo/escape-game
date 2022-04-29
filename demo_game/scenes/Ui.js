@@ -27,10 +27,10 @@ class Ui extends Phaser.Scene {
             this.helpFrame.setScale(0.9)
             this.helpTitle.setFontSize(13)
             
-            this.blueBtn = this.add.image(width-100 , height-100, 'blue').setScale(0.7).setDepth(999);
-            this.redBtn = this.add.image(width-200, height-100, 'red').setScale(0.7).setDepth(999);
-            this.greenBtn = this.add.image(width-300, height-100, 'green').setScale(0.7).setDepth(999);
-            this.greenBtn2 = this.add.image(width-400, height-100, 'green').setScale(0.7).setDepth(999);
+            this.redBtn = this.add.image(width-100, height-100, 'red').setScale(0.7).setDepth(2000);
+            this.blueBtn = this.add.image(width-200 , height-100, 'blue').setScale(0.7).setDepth(2000);
+            this.greenBtn = this.add.image(width-300, height-100, 'green').setScale(0.7).setDepth(2000);
+            this.greenBtn2 = this.add.image(width-400, height-100, 'green').setScale(0.7).setDepth(2000);
     
             (this.blueBtn).setInteractive().on('pointerdown', function(pointer){
                 this.events.emit('interactuate');
@@ -68,7 +68,7 @@ class Ui extends Phaser.Scene {
         if(this.isMobile()){
             console.log("Mobile");
             this.virtualJoyStick = this.game.plugins.get('rexvirtualjoystickplugin').add(this, {
-                x: 100,
+                x: 50,
                 y: height/2,
                 radius: 60,
                 base: this.add.circle(0, 0, 60, 0x888888),
@@ -78,8 +78,8 @@ class Ui extends Phaser.Scene {
                 // fixed: true,
                 // enable: true
             });
-            this.virtualJoyStick.base.setDepth(1000);
-            this.virtualJoyStick.thumb.setDepth(1000);
+            this.virtualJoyStick.base.setDepth(999);
+            this.virtualJoyStick.thumb.setDepth(999);
 
             //Mover personaje con joystick
             // console.log(game.scene.getScene("game").moveVirtualJoyStick());
