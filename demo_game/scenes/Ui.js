@@ -32,7 +32,7 @@ class Ui extends Phaser.Scene {
             this.greenBtn = this.add.image(width-300, height-100, 'green').setScale(0.7).setDepth(2000);
             this.greenBtn2 = this.add.image(width-400, height-100, 'green').setScale(0.7).setDepth(2000);
     
-            (this.blueBtn).setInteractive().on('pointerdown', function(pointer){
+            (this.blueBtn).setInteractive().on('pointerup', function(pointer){
                 this.events.emit('interactuate');
             }, this);
     

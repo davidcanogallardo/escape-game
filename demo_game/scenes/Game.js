@@ -100,7 +100,6 @@ class Game extends Phaser.Scene {
     }
 
     openChallenge() {
-        
         if (this.scene.isActive()) {
             var table = this.tableInRange
             this.keyPressed = false
@@ -123,7 +122,6 @@ class Game extends Phaser.Scene {
     create() {
         this.keyPressed = false
         let { width, height } = this.sys.game.canvas;
-        console.log("------------22");
         this.scene.get('ui').events.on('help', this.help, this);
         this.scene.get('ui').events.on('mute', this.mute, this);
         this.scene.get('ui').events.on('interactuate', function () {

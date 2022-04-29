@@ -46,10 +46,12 @@ class PasswordMGScene extends GenericMiniGame {
     }
 
     quit(){
-        console.log("quit password");
-        this.scene.get("game").activeScene = "game"
-        this.scene.stop();
-        this.scene.resume("game");
+        if (this.scene.isActive()) {
+            console.log("quit password");
+            this.scene.get("game").activeScene = "game"
+            this.scene.stop();
+            this.scene.resume("game");
+        }
     }
 
     interactuate() {
