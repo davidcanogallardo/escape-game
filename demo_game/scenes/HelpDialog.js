@@ -15,25 +15,31 @@ class HelpDialog extends Phaser.Scene {
     create() {
         window.helpd = this
         this.scene.bringToTop();
+        let { width, height } = this.sys.game.canvas;
         if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
             this.dialogFrameScale = 0.8
             this.textSize = 15
             this.bottomTextSize = 20
             this.btnScale = 0.4
+            this.dialogFrameHeight = 10
         } else {
             this.dialogFrameScale = 1.4
             this.textSize = 25
             this.bottomTextSize = 29
             this.btnScale = 0.6
-
+            this.dialogFrameHeight = height/2
         }
         console.log(this.helpMessage);
-        let { width, height } = this.sys.game.canvas;
         this.helpDialogFrame = this.add.image(
             width/2, 
-            height/2, 
+            this.dialogFrameHeight, 
             'passwd_bg'
         ).setScale(this.dialogFrameScale).setDepth(1000);
+
+        if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
+            this.helpDialogFrame.y += this.helpDialogFrame.displayHeight/2
+        }
+
         
         var leftDialog = this.helpDialogFrame.x - (this.helpDialogFrame.displayWidth/2)
         var topDialog = this.helpDialogFrame.y - (this.helpDialogFrame.displayHeight/2)+80
