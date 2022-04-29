@@ -16,14 +16,14 @@ class HelpDialog extends Phaser.Scene {
         window.helpd = this
         this.scene.bringToTop();
         if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
-            this.dialogFrameScale = 0.9
+            this.dialogFrameScale = 0.8
             this.textSize = 15
-            this.bottomTextSize = 29
+            this.bottomTextSize = 20
             this.btnScale = 0.4
         } else {
             this.dialogFrameScale = 1.4
             this.textSize = 25
-            this.bottomTextSize = 22
+            this.bottomTextSize = 29
             this.btnScale = 0.6
 
         }
