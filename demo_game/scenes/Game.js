@@ -264,7 +264,31 @@ class Game extends Phaser.Scene {
                         //console.log("Joystick activado, Muevo otro jugador");
                         player.direction = moveData.direction;
                         player.move(moveData.speed_x, moveData.speed_y);
-                        //this.stickActive = false;
+                        moveData.joystickMoved = false;
+                        this.stickActive = false;
+                        
+                    } else if(moveData.virtualJoyStickMoved){
+                        console.log(moveData.direction);
+                        if(moveData.direction.trim() == "left"){
+                            player.move(-150,0);
+                        }else if(moveData.direction.trim() == "right"){
+                            player.move(150, 0);
+                        } else if (moveData.direction.trim() == "up"){
+                            player.move(0, -150);
+                        } else if(moveData.direction.trim() == "down") {
+                            player.move(0, 150)
+                        } else if (moveData.direction.trim() == "up left"){
+                            player.move(-150, -150);
+                        } else if (moveData.direction.trim() == "up right"){
+                            player.move(150, -150);
+                        } else if (moveData.direction.trim() == "down left"){
+                            player.move(-150, 150);
+                        } else if (moveData.direction.trim() == "down right"){
+                            player.move(150, 150);
+                        } else {
+                            player.move(0,0);
+                        }
+                        this.virtualJoyStickIsActive = false;
                     } else {
                         if (moveData.direction == 'left') {
                             player.move(-moveData.speed,0);
@@ -618,7 +642,7 @@ class Game extends Phaser.Scene {
     }
 
     moveVirtualJoyStickInGame(moveData){
-        this.virtualJoyStickIsActive = true;
+        // this.virtualJoyStickIsActive = true;
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
                 this.speeds['x'] = moveData.angle;
@@ -632,6 +656,8 @@ class Game extends Phaser.Scene {
         player.x_speed = this.speeds['x'];
         player.y_speed = this.speeds['y'];
         player.direction = this.stickDirection;
+        this.stickActive =  true;
+        this.virtualJoyStickIsActive = true;
     }
 
     moveStick(data){

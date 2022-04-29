@@ -58,8 +58,10 @@ class Player extends Phaser.GameObjects.Sprite{
         this.centerBodyonBody(this.playerCollider,this)
         //console.log(game.scene.getScene("game").stickActive);
         if ( this.anims.currentAnim==null) {
+            console.log("Current anim null");
             this.anims.play('player-idle-down');
         } else if(!game.scene.getScene("game").stickActive && !game.scene.getScene("game").virtualJoyStickIsActive) {
+            console.log("Muevo teclas");
             if (this.cursors.left?.isDown) {
                 this.move(-this.x_speed,0)
                 this.direction = 'left'
@@ -86,7 +88,8 @@ class Player extends Phaser.GameObjects.Sprite{
             }
             this.moveOtherPlayer(false)
         } else if(game.scene.getScene("game").virtualJoyStickIsActive){
-            //console.log(this.direction.trim());
+            console.log("Muevo con stick virtual");
+            console.log("Direction");
             if(this.direction.trim() == "left"){
                 this.move(-150,0);
             }else if(this.direction.trim() == "right"){
@@ -106,11 +109,12 @@ class Player extends Phaser.GameObjects.Sprite{
             } else {
                 this.move(0,0);
             }
-        } else {
-            //console.log("Muevo joystick");
+            this.moveOtherPlayer("virtualJoyStickMoved")
+        } else if(game.scene.getScene("game").stickActive){
+            console.log("Muevo joystick");
             //console.log(this.x_speed, this.y_speed);
             this.move(this.x_speed,this.y_speed)
-            this.moveOtherPlayer(true)
+            this.moveOtherPlayer("joyStickMoved")
         }
 
         if(this.inZone && !this.end){
@@ -119,7 +123,14 @@ class Player extends Phaser.GameObjects.Sprite{
             this.end = true;
         }
     }
-    moveOtherPlayer(_joystickMoved){
+    moveOtherPlayer(movedString){
+        let _virtualJoyStickMoved = false;
+        let _joyStickMoved = false;
+        if(movedString === "virtualJoyStickMoved"){
+            _virtualJoyStickMoved = true;
+        } else if (movedString === "joyStickMoved"){
+            _joyStickMoved = true;
+        }
         let moveData = {
             id: this.id,
             speed: this.speed,
@@ -128,7 +139,8 @@ class Player extends Phaser.GameObjects.Sprite{
             x: this.x,
             y: this.y,
             direction: this.direction,
-            joystickMoved: _joystickMoved
+            joystickMoved: _joyStickMoved,
+            virtualJoyStickMoved: _virtualJoyStickMoved
         }
         //console.log("Muevo otro Jugador");
 
