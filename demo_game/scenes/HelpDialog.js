@@ -21,11 +21,15 @@ class HelpDialog extends Phaser.Scene {
             this.textSize = 15
             this.bottomTextSize = 20
             this.btnScale = 0.4
+            this.dialogFrameHeight = 10
+
         } else {
             this.dialogFrameScale = 1.4
             this.textSize = 25
             this.bottomTextSize = 29
             this.btnScale = 0.6
+            this.dialogFrameHeight = height/2
+
 
         }
         console.log(this.helpMessage);
