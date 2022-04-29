@@ -18,6 +18,8 @@ class Time extends Phaser.Scene {
         })
 
 
+
+
         this.title.setDepth(100)
         //Evento que se ejecturá en bucle cada 1s y actualizará el tiempo
         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.updateTime, callbackScope: this, loop: true });
@@ -26,13 +28,18 @@ class Time extends Phaser.Scene {
 
         this.timeFrame = this.add.image(5, 0, 'time_frame').setScale(0.8);
         this.timeFrame.setDepth(99)
+
+
+        if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
+            this.title.setFontSize(22)
+            this.timeFrame.setScale(0.5)
+        }
+
         this.timeFrame.x = (5+(this.timeFrame.displayWidth/2))
         this.timeFrame.y = (5+(this.timeFrame.displayHeight/2))
 
         this.title.x = this.timeFrame.x-(this.title.displayWidth/2)
         this.title.y = this.timeFrame.y-(this.title.displayHeight/2)
-
-
 
         if(navigator.userAgentData.mobile){
             this.virtualJoyStick = this.game.plugins.get('rexvirtualjoystickplugin').add(this, {

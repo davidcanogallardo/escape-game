@@ -15,13 +15,23 @@ class HelpDialog extends Phaser.Scene {
     create() {
         window.helpd = this
         this.scene.bringToTop();
+        if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
+            this.dialogFrameScale = 0.9
+            this.textSize = 15
+            this.bottomTextSize = 29
+        } else {
+            this.dialogFrameScale = 1.4
+            this.textSize = 25
+            this.bottomTextSize = 22
+
+        }
         console.log(this.helpMessage);
         let { width, height } = this.sys.game.canvas;
         this.helpDialogFrame = this.add.image(
             width/2, 
             height/2, 
             'passwd_bg'
-        ).setScale(1.4).setDepth(56);
+        ).setScale(this.dialogFrameScale).setDepth(56);
         
         var leftDialog = this.helpDialogFrame.x - (this.helpDialogFrame.displayWidth/2)
         var topDialog = this.helpDialogFrame.y - (this.helpDialogFrame.displayHeight/2)+80
@@ -52,24 +62,24 @@ class HelpDialog extends Phaser.Scene {
             button[0].x = xPos
 
             var text = this.add.text(xPos,this.helpDialogFrame.y+30, button[1], {
-                fontSize: 25,
+                fontSize: this.textSize,
                 fontFamily: 'sans'
             }).setDepth(99)
             text.x -= text.displayWidth/2
         }
 
-        var text = this.add.text(this.helpDialogFrame.x,this.helpDialogFrame.y+90, this.helpMessage, {
-            fontSize: 29,
+        var text = this.add.text(this.helpDialogFrame.x,this.helpDialogFrame.y+70, this.helpMessage, {
+            fontSize: this.bottomTextSize,
             fontFamily: 'sans'
         }).setDepth(99)
         text.x -= text.displayWidth/2
 
-
         this.input.keyboard.on('keydown-X',()=>{
             this.quit()
-
         })
         this.scene.get('ui').events.on('quit', this.quit, this);
+
+
     }
 
     quit() {
