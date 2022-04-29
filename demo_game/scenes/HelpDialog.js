@@ -35,7 +35,7 @@ class HelpDialog extends Phaser.Scene {
         console.log(this.helpMessage);
         this.helpDialogFrame = this.add.image(
             width/2, 
-            height/2, 
+            this.dialogFrameHeight, 
             'passwd_bg'
         ).setScale(this.dialogFrameScale).setDepth(1000);
         
