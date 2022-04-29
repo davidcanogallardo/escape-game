@@ -52,6 +52,33 @@ class LaberitnoMGScene extends Phaser.Scene {
             this.cameras.main.startFollow(this.player);
             this.player.setDepth(6);
             window.player = this.player;
+
+            socket.on("playerMoveResponse", (moveData) => {
+                if(moveData.joystickMoved){
+                    player.direction = moveData.direction;
+                    player.move(moveData.speed_x, moveData.speed_y);
+                } else {
+                    if (moveData.direction == 'left') {
+                        player.move(-moveData.speed,0);
+                    }
+                    if (moveData.direction == 'right') {
+                        player.move(moveData.speed,0);
+                    }
+                    if (moveData.direction == 'up') {
+                        player.move(0,-moveData.speed);
+                    }
+                    if (moveData.direction == 'down') {
+                        player.move(0,moveData.speed);
+                    }
+                    if (moveData.direction == 'idle') {
+                        player.move(0,0);
+                    }
+                    if (moveData.direction == 'player-idle-down') {
+                        player.move(null,null);
+                    }
+                }
+                    
+            });
         }
         
 
@@ -89,7 +116,7 @@ class LaberitnoMGScene extends Phaser.Scene {
 
         //Crear grupo donde se almacenan las puertas
         this.doorsGroup = this.physics.add.staticGroup();
-        
+
         //iterar por todos los objetos de la capa de objetos
         objectLayer.objects.forEach(object => {
             //Popriedades de cada objeto

@@ -255,6 +255,8 @@ class Game extends Phaser.Scene {
             }
         });
 
+        //Se recibe el el movimiento del otro jugador para mover al personaje
+        // en el cliente.
         socket.on("playerMoveResponse", (moveData) => {
             this.playersGroup.getChildren().forEach(player => {
                 //console.log(moveData.direction);
@@ -617,31 +619,21 @@ class Game extends Phaser.Scene {
 
     }
 
-    moveVirtualJoyStick(){
+    moveVirtualJoyStickInGame(moveData){
+        this.virtualJoyStickIsActive = true;
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
-                var cursorKeys = this.virtualJoyStick.createCursorKeys();
-                var direction = '';
-                for (var name in cursorKeys) {
-                    if (cursorKeys[name].isDown) {
-                        direction += `${name} `;
-                    }
-                }
-                this.virtualJoyStickIsActive = true;
-                //console.log(this.virtualJoyStick.angle);
-                
-                this.speeds['x'] = this.virtualJoyStick.angle;
-                this.speeds['y'] = this.virtualJoyStick.angle;
-                this.stickDirection = direction;
+                this.speeds['x'] = moveData.angle;
+                this.speeds['y'] = moveData.angle;
+                this.stickDirection = moveData.direction;
                 //console.log(this.speeds);
                 //console.log(this.stickDirection);
             }
         });
-        //console.log("Se movio el joystick");
 
-        // player.x_speed = this.speeds['x'];
-        // player.y_speed = this.speeds['y'];
-        // player.direction = this.stickDirection;
+        player.x_speed = this.speeds['x'];
+        player.y_speed = this.speeds['y'];
+        player.direction = this.stickDirection;
     }
 
     moveStick(data){
