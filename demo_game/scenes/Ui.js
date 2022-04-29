@@ -4,7 +4,9 @@ class Ui extends Phaser.Scene {
     }
 
     preload() {
-        
+        if(this.isMobile()){
+            this.load.plugin('rexvirtualjoystickplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js', true);
+        }
     }
 
     create() {
@@ -51,6 +53,64 @@ class Ui extends Phaser.Scene {
         this.helpTitle.x -= (this.helpTitle.displayWidth/2)
         this.helpTitle.y -= (this.helpTitle.displayHeight/2)
 
+        if(this.isMobile()){
+            console.log("Mobile");
+            this.virtualJoyStick = this.game.plugins.get('rexvirtualjoystickplugin').add(this, {
+                x: 100,
+                y: height/2,
+                radius: 60,
+                base: this.add.circle(0, 0, 60, 0x888888),
+                thumb: this.add.circle(0, 0, 30, 0xcccccc),
+                // dir: '8dir',
+                // forceMin: 16,
+                // fixed: true,
+                // enable: true
+            });
+            this.virtualJoyStick.base.setDepth(1000);
+            this.virtualJoyStick.thumb.setDepth(1000);
+
+            //Mover personaje con joystick
+            // console.log(game.scene.getScene("game").moveVirtualJoyStick());
+            this.virtualJoyStick.on('update', this.moveVirtualJoyStick, this);
+            // if(navigator.userAgentData.mobile){
+                
+            // }
+            
+
+            // this.buttonA = this.add.group(this);
+            // this.buttonACirc = this.add.circle(40, 300, 20, 0x888888);
+            // this.buttonAText = this.add.text(40, 300, 'A');
+            // this.buttonA.add(this.buttonACirc);
+            // this.buttonA.add(this.buttonAText);
+            // this.buttonA.incX(40);
+            // this.buttonA.incY(300);
+
+            // this.buttonB = this.add.group(this);
+            // this.buttonBCirc = this.add.circle(55, 300, 20, 0x888888);
+            // this.buttonBText = this.add.text(55, 300, 'B');
+            // this.buttonB.add(this.buttonBCirc);
+            // this.buttonB.add(this.buttonBText);
+            // this.buttonB.incX(55);
+            // this.buttonB.incY(300);
+        }
+
+    }
+
+    moveVirtualJoyStick(){
+        var cursorKeys = this.virtualJoyStick.createCursorKeys();
+        var direction = '';
+        for (var name in cursorKeys) {
+            if (cursorKeys[name].isDown) {
+                direction += `${name} `;
+            }
+        }
+        
+        
+        let moveData = {
+            angle: this.virtualJoyStick.angle,
+            direction: direction
+        }
+        game.scene.getScene("game").moveVirtualJoyStickInGame(moveData);
     }
 
     update() {
@@ -59,5 +119,13 @@ class Ui extends Phaser.Scene {
 
     getTime() {
         return this.game.scene.keys["time"].getTime()
+    }
+
+    isMobile(){
+        if(navigator.userAgent.toLowerCase().match("android")!=null || navigator.userAgent.toLowerCase().match("iphone") !=null){
+            return true
+        } else {
+            return false;
+        }
     }
 }
