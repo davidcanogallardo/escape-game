@@ -15,6 +15,7 @@ class HelpDialog extends Phaser.Scene {
     create() {
         window.helpd = this
         this.scene.bringToTop();
+        let { width, height } = this.sys.game.canvas;
         if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
             this.dialogFrameScale = 0.8
             this.textSize = 15
@@ -28,7 +29,6 @@ class HelpDialog extends Phaser.Scene {
 
         }
         console.log(this.helpMessage);
-        let { width, height } = this.sys.game.canvas;
         this.helpDialogFrame = this.add.image(
             width/2, 
             height/2, 

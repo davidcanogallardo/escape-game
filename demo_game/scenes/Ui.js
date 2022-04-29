@@ -70,9 +70,9 @@ class Ui extends Phaser.Scene {
             this.virtualJoyStick = this.game.plugins.get('rexvirtualjoystickplugin').add(this, {
                 x: 50,
                 y: height/2,
-                radius: 60,
-                base: this.add.circle(0, 0, 60, 0x888888),
-                thumb: this.add.circle(0, 0, 30, 0xcccccc),
+                radius: 30,
+                base: this.add.circle(0, 0, 30, 0x888888),
+                thumb: this.add.circle(0, 0, 20, 0xcccccc),
                 // dir: '8dir',
                 // forceMin: 16,
                 // fixed: true,
