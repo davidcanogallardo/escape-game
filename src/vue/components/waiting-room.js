@@ -2,9 +2,9 @@ Vue.component('waiting-room', {
     template: //html
     `
     <div class="waitingRoom">
-        <h1>waiting Room</h1>
+        <h1>{{ $t("waitingRoom.title") }}</h1>
         <br>
-        <p style="font-size: 4vw;">1/2 Players</p>
+        <p style="font-size: 4vw;">1/2 {{ $t("waitingRoom.player") }}</p>
         <div class="col-3">
             <div class="snippet" data-title=".dot-typing">
             <div class="stage">

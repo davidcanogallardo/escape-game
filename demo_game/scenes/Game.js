@@ -100,7 +100,6 @@ class Game extends Phaser.Scene {
     }
 
     openChallenge() {
-        
         if (this.scene.isActive()) {
             var table = this.tableInRange
             this.keyPressed = false
@@ -123,7 +122,6 @@ class Game extends Phaser.Scene {
     create() {
         this.keyPressed = false
         let { width, height } = this.sys.game.canvas;
-        console.log("------------22");
         this.scene.get('ui').events.on('help', this.help, this);
         this.scene.get('ui').events.on('mute', this.mute, this);
         this.scene.get('ui').events.on('interactuate', function () {
@@ -255,6 +253,8 @@ class Game extends Phaser.Scene {
             }
         });
 
+        //Se recibe el el movimiento del otro jugador para mover al personaje
+        // en el cliente.
         socket.on("playerMoveResponse", (moveData) => {
             this.playersGroup.getChildren().forEach(player => {
                 //console.log(moveData.direction);
@@ -264,7 +264,30 @@ class Game extends Phaser.Scene {
                         //console.log("Joystick activado, Muevo otro jugador");
                         player.direction = moveData.direction;
                         player.move(moveData.speed_x, moveData.speed_y);
-                        //this.stickActive = false;
+                        moveData.joystickMoved = false;
+                        this.stickActive = false;
+                        
+                    } else if(moveData.virtualJoyStickMoved){
+                        if(moveData.direction.trim() == "left"){
+                            player.move(-150,0);
+                        }else if(moveData.direction.trim() == "right"){
+                            player.move(150, 0);
+                        } else if (moveData.direction.trim() == "up"){
+                            player.move(0, -150);
+                        } else if(moveData.direction.trim() == "down") {
+                            player.move(0, 150)
+                        } else if (moveData.direction.trim() == "up left"){
+                            player.move(-150, -150);
+                        } else if (moveData.direction.trim() == "up right"){
+                            player.move(150, -150);
+                        } else if (moveData.direction.trim() == "down left"){
+                            player.move(-150, 150);
+                        } else if (moveData.direction.trim() == "down right"){
+                            player.move(150, 150);
+                        } else {
+                            player.move(0,0);
+                        }
+                        this.virtualJoyStickIsActive = false;
                     } else {
                         if (moveData.direction == 'left') {
                             player.move(-moveData.speed,0);
@@ -617,31 +640,22 @@ class Game extends Phaser.Scene {
 
     }
 
-    moveVirtualJoyStick(){
+    moveVirtualJoyStickInGame(moveData){
+        // this.virtualJoyStickIsActive = true;
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
-                var cursorKeys = this.virtualJoyStick.createCursorKeys();
-                var direction = '';
-                for (var name in cursorKeys) {
-                    if (cursorKeys[name].isDown) {
-                        direction += `${name} `;
-                    }
-                }
-                this.virtualJoyStickIsActive = true;
-                //console.log(this.virtualJoyStick.angle);
-                
-                this.speeds['x'] = this.virtualJoyStick.angle;
-                this.speeds['y'] = this.virtualJoyStick.angle;
-                this.stickDirection = direction;
+                this.speeds['x'] = moveData.angle;
+                this.speeds['y'] = moveData.angle;
+                this.stickDirection = moveData.direction;
                 //console.log(this.speeds);
                 //console.log(this.stickDirection);
             }
         });
-        //console.log("Se movio el joystick");
 
-        // player.x_speed = this.speeds['x'];
-        // player.y_speed = this.speeds['y'];
-        // player.direction = this.stickDirection;
+        player.x_speed = this.speeds['x'];
+        player.y_speed = this.speeds['y'];
+        player.direction = this.stickDirection;
+        this.virtualJoyStickIsActive = true;
     }
 
     moveStick(data){

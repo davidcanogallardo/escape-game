@@ -86,7 +86,6 @@ class Player extends Phaser.GameObjects.Sprite{
             }
             this.moveOtherPlayer(false)
         } else if(game.scene.getScene("game").virtualJoyStickIsActive){
-            //console.log(this.direction.trim());
             if(this.direction.trim() == "left"){
                 this.move(-150,0);
             }else if(this.direction.trim() == "right"){
@@ -106,11 +105,11 @@ class Player extends Phaser.GameObjects.Sprite{
             } else {
                 this.move(0,0);
             }
-        } else {
-            //console.log("Muevo joystick");
+            this.moveOtherPlayer("virtualJoyStickMoved")
+        } else if(game.scene.getScene("game").stickActive){
             //console.log(this.x_speed, this.y_speed);
             this.move(this.x_speed,this.y_speed)
-            this.moveOtherPlayer(true)
+            this.moveOtherPlayer("joyStickMoved")
         }
 
         if(this.inZone && !this.end){
@@ -119,7 +118,14 @@ class Player extends Phaser.GameObjects.Sprite{
             this.end = true;
         }
     }
-    moveOtherPlayer(_joystickMoved){
+    moveOtherPlayer(movedString){
+        let _virtualJoyStickMoved = false;
+        let _joyStickMoved = false;
+        if(movedString === "virtualJoyStickMoved"){
+            _virtualJoyStickMoved = true;
+        } else if (movedString === "joyStickMoved"){
+            _joyStickMoved = true;
+        }
         let moveData = {
             id: this.id,
             speed: this.speed,
@@ -128,7 +134,8 @@ class Player extends Phaser.GameObjects.Sprite{
             x: this.x,
             y: this.y,
             direction: this.direction,
-            joystickMoved: _joystickMoved
+            joystickMoved: _joyStickMoved,
+            virtualJoyStickMoved: _virtualJoyStickMoved
         }
         //console.log("Muevo otro Jugador");
 

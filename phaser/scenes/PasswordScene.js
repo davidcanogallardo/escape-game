@@ -19,7 +19,8 @@ class PasswordScene extends Phaser.Scene {
         title.setOrigin(0.5, 0.5)
     
         this.add.text(width / 2, height / 2+50, 'Presiona "X" para volver', {
-            fontFamily: 'sans'
+            fontFamily: 
+            
         })
         .setOrigin(0.5)
     }
