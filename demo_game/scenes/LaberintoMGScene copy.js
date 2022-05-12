@@ -22,7 +22,7 @@ class LaberintoMGScene extends GenericMiniGame {
     }
 
     create() {
-        //Create map settingsw
+        //Create map settings
         //mapa del laberinto
         this.map = this.make.tilemap({key: "lab"});
 
@@ -30,8 +30,7 @@ class LaberintoMGScene extends GenericMiniGame {
         //texturas(Muros,suelo,etc)
         this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
         //suelo
-        let groundLayer = this.map.createStaticLayer('ground', this.tileset);
-        // let wallsLayer = this.map.createStaticLayer('walls', this.tileset);
+        this.groundLayer = this.map.createLayer('ground', this.tileset);
         //capa vacio del tilemap
         this.voidLayer = this.map.createLayer('void', this.tileset);
         //capa para quitar visibilidad a la capa vacio
@@ -93,15 +92,15 @@ class LaberintoMGScene extends GenericMiniGame {
             
         
         
-        // let wallsLayer = new WallsLayer(this);
-        // window.wallLayerLab = wallsLayer
+        this.wallsLayer = new WallsLayer(this);
+        window.wallLayerLab = this.wallsLayer
         
-        wallsLayer.setDepth(20)
-        console.log(wallsLayer)
-        // let rt = this.add.renderTexture(0, 0, 1000, 1000);
-        // rt.depth = 5
-        // window.rt = rt
-        // rt.fill(0x000000);
+        this.wallsLayer.setDepth(20)
+
+        let rt = this.add.renderTexture(0, 0, 1000, 1000);
+        rt.depth = 5
+        window.rt = rt
+        rt.fill(0x000000);
 
 
         var end = this.physics.add.staticGroup();
@@ -209,8 +208,6 @@ class LaberintoMGScene extends GenericMiniGame {
         }
 
         if(this.type=='challenge'){
-            this.spotlight.x = this.player.x;
-            this.spotlight.y = this.player.y;
 
         }else{
             this.spotlight.x = this.player.x;
