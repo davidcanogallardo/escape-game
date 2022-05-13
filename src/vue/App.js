@@ -35,6 +35,7 @@ function startClientPeer(data) {
       peerClient = new PeerClient(peer, true, socket);
       peerClient.connection();
       window.peer = peerClient;
+      // socket.emit("clientInitGame");
     } else {
       guestPeer = new Peer({
         initiator: false,
@@ -477,7 +478,7 @@ var app = new Vue({
           Authorization: "Bearer " + this.token,
         },
       })
-        .done(function (data) {
+        .done((data) => {
           if (data.success) {
             console.log(data.message, data);
             this.getUserHistory();
@@ -527,6 +528,7 @@ var app = new Vue({
       })
         .done((data) => {
           if (data.success) {
+            console.log(data);
             this.history = data.data.history
           } else {
             console.log(data);
@@ -534,6 +536,9 @@ var app = new Vue({
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR);
+          console.log(textStatus);
+          console.log(errorThrown);
           showNotification(i18n.t("serverError"), "red");
       });
     },

@@ -10,7 +10,7 @@ Vue.component('level', {
         </p>
         <p class="texto">{{ $t("difficulty") }}: {{level.difficulty}}</p>
         <p class="texto">{{ $t("score") }}: {{level.score}}</p>
-        <div class="icon-container" style="width: 6.5vw;height: 6.5vw;"  v-on:click="">
+        <div class="icon-container" style="width: 6.5vw;height: 6.5vw;" v-if="false" v-on:click="">
                 <i class="fas fa-user-plus"></i>
         </div>
         
