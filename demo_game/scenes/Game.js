@@ -21,7 +21,7 @@ class Game extends Phaser.Scene {
         this.diff=data.diff;
 
         //lista de minijuegos disponibles
-        this.gamesAvailable = ["LaberintoMGScene"]
+        this.gamesAvailable = ["PasswordMGScene","LaberintoMGScene"]
 
         //lista de minijuegos que tendra la escena
         this.games = []
@@ -852,8 +852,8 @@ class Game extends Phaser.Scene {
         //generar las escenas del segundo jugador con las contraseñas 
         for (let i = 0; i < spawns.gamesList.length; i++) {
             if (!this.isInitiator) {
-                this.game.scene.add(spawns.gamesList[i]+i+"_helper",eval("new "+spawns.gamesList[i]+"("+i+",'helper','easy',"+JSON.stringify(spawns.objects.chest[i].password)+")"))
-                this.game.scene.add(spawns.gamesList[i]+i+"_challenge",eval("new "+spawns.gamesList[i]+"("+i+",'challenge','easy',"+JSON.stringify(spawns.objects.table[i].password)+")"))
+                this.game.scene.add(spawns.gamesList[i]+i+"_helper",eval("new "+spawns.gamesList[i]+"("+i+",'helper','"+this.diff+"',"+JSON.stringify(spawns.objects.chest[i].password)+")"))
+                this.game.scene.add(spawns.gamesList[i]+i+"_challenge",eval("new "+spawns.gamesList[i]+"("+i+",'challenge','"+this.diff+"',"+JSON.stringify(spawns.objects.table[i].password)+")"))
                 this.loadedScenes.push(spawns.gamesList[i]+i+"_helper");
                 this.loadedScenes.push(spawns.gamesList[i]+i+"_challenge");
                 console.error(this.map);

@@ -109,6 +109,7 @@ class PasswordMGScene extends GenericMiniGame {
     }
 
     create(){
+        console.log(this);
         this.input.keyboard.on('keydown-H',()=>{
             console.log("h apretada333");
             this.help()
@@ -253,7 +254,6 @@ class PasswordMGScene extends GenericMiniGame {
             } else {
                 this.background.setScale(1.6);
             }
-            console.log(navigator.userAgentData.mobile);
             // **************************************************************************
             var centerWoodX = this.background.displayWidth/2
             var centerWoodY = this.background.displayHeight/2

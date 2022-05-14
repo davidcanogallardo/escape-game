@@ -39,6 +39,13 @@ class LaberintoMGScene extends GenericMiniGame {
         //FOR ALL USERS
         var that = this
         window.map = this.map
+
+        this.cam = this.cameras.main;
+        window.cam = this.cam
+        this.cam._zoomX = 3;
+        if (this.type == "helper" && this.difficulty != "easy") {
+            this.timedEvent = this.time.addEvent({ delay: 10000, callback: this.rotateCam, callbackScope: this, loop: true }); 
+        }
         
         if (this.type == "challenge") {
             //*****************************************Player**************************************************/
@@ -201,7 +208,8 @@ class LaberintoMGScene extends GenericMiniGame {
         //toca el suelo o puerta? 
         this.touch = false
     }
-    update(){
+    update(){   
+        
         //FOR ALL USERS
         var tile = this.voidLayer.getTileAtWorldXY(this.player.x, this.player.y);
 
@@ -247,6 +255,14 @@ class LaberintoMGScene extends GenericMiniGame {
             this.spotlight.y = this.player.y;
         } else if(!this.win){
             this.player.update()
+        }
+    }
+
+    rotateCam(){
+        var randNum = Math.floor(Math.random() * (4 - 1 + 1) + 1);
+        console.log(randNum);
+        if (randNum == 3) {
+            this.cam._rotation -= 11;
         }
     }
 }   
