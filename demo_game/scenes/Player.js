@@ -56,7 +56,7 @@ class Player extends Phaser.GameObjects.Sprite{
 
     update() {
         this.centerBodyonBody(this.playerCollider,this)
-        //console.log(game.scene.getScene("game").stickActive);
+        // console.log(game.scene);
         if ( this.anims.currentAnim==null) {
             this.anims.play('player-idle-down');
         } else if(!game.scene.getScene("game").stickActive && !game.scene.getScene("game").virtualJoyStickIsActive) {
@@ -135,12 +135,14 @@ class Player extends Phaser.GameObjects.Sprite{
             y: this.y,
             direction: this.direction,
             joystickMoved: _joyStickMoved,
-            virtualJoyStickMoved: _virtualJoyStickMoved
+            virtualJoyStickMoved: _virtualJoyStickMoved,
+            laberinth: true
         }
         //console.log("Muevo otro Jugador");
 
         socket.emit("playerMoved", moveData);
     }
+
     move(leftright, updown) {
         this.body.setVelocity(leftright, updown)
 

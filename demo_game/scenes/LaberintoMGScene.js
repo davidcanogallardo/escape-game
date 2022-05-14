@@ -15,10 +15,6 @@ class LaberintoMGScene extends GenericMiniGame {
         this.load.atlas('door', path+'assets/objects/door/door.png', path+'assets/objects/door/door.json');
         //mascara para oscurecer jugadores
         this.load.image('mask', path+'assets/mask1.png');
-        
-        
-
-        
     }
 
     create() {
@@ -31,7 +27,7 @@ class LaberintoMGScene extends GenericMiniGame {
         this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
         //suelo
         let groundLayer = this.map.createStaticLayer('ground', this.tileset);
-        // let wallsLayer = this.map.createStaticLayer('walls', this.tileset);
+        let wallsLayer = this.map.createStaticLayer('walls', this.tileset);
         //capa vacio del tilemap
         this.voidLayer = this.map.createLayer('void', this.tileset);
         //capa para quitar visibilidad a la capa vacio
@@ -52,7 +48,7 @@ class LaberintoMGScene extends GenericMiniGame {
             window.player = this.player;
 
             this.playersGroup = this.add.group(this.player);
-        }else{
+        } else {
             this.player = new Player(this,socket.id,112.5,620,"player",false,"helper");
             this.playerCollider = this.player.playerCollider;
             this.cameras.main.startFollow(this.player);
@@ -98,10 +94,10 @@ class LaberintoMGScene extends GenericMiniGame {
         
         wallsLayer.setDepth(20)
         console.log(wallsLayer)
-        // let rt = this.add.renderTexture(0, 0, 1000, 1000);
-        // rt.depth = 5
-        // window.rt = rt
-        // rt.fill(0x000000);
+        let rt = this.add.renderTexture(0, 0, 1000, 1000);
+        rt.depth = 5
+        window.rt = rt
+        rt.fill(0x000000);
 
 
         var end = this.physics.add.staticGroup();
@@ -109,25 +105,25 @@ class LaberintoMGScene extends GenericMiniGame {
         endTile.body.setSize(35,20);
         endTile.visible = false;
 
-        this.physics.add.overlap(endTile, this.playerCollider, function () {
-            console.log("fin de partida")
-            that.events.emit("end");
+        this.physics.add.overlap(endTile, this.playerCollider, () => {
+            // that.events.emit("end");
+            if (this.type=='challenge') {
+                console.log("fin de partida")
+                socket.emit('passwordPuzzleComplete');
+            }
+            this.scene.stop();
+            this.scene.resume("game");
         })
-        
 
-        if (this.type=='helper') {
-            //Esto debe estar para que se vean las lineas de las hitbox
-            this.spotlight = this.make.sprite({
-                x: 0,
-                y: 0,
-                key: "mask",
-                add: false
-            });
-
-            let mask = rt.createBitmapMask(this.spotlight)
-            mask.invertAlpha = true;
-            rt.setMask(mask);
-        }
+        this.spotlight = this.make.sprite({
+            x: 0,
+            y: 0,
+            key: "mask",
+            add: false
+        });
+        let mask = rt.createBitmapMask(this.spotlight)
+        mask.invertAlpha = true;
+        rt.setMask(mask);
 
         //Crear grupo donde se almacenan las puertas
         this.doorsGroup = this.physics.add.staticGroup();
@@ -166,7 +162,7 @@ class LaberintoMGScene extends GenericMiniGame {
         //toca el suelo o puerta? 
         this.touch = false
     }
-    udate(){
+    update(){
         //FOR ALL USERS
         var tile = this.voidLayer.getTileAtWorldXY(this.player.x, this.player.y);
 
@@ -205,18 +201,14 @@ class LaberintoMGScene extends GenericMiniGame {
                 loop: true
             })
         } else if (tile == null) {
+            // this.player.update()
+        }
+
+        if(this.type=='helper'){
+            this.spotlight.x = this.player.x;
+            this.spotlight.y = this.player.y;
+        } else {
             this.player.update()
         }
-
-        if(this.type=='challenge'){
-            this.spotlight.x = this.player.x;
-            this.spotlight.y = this.player.y;
-
-        }else{
-            this.spotlight.x = this.player.x;
-            this.spotlight.y = this.player.y;
-        }
-
-        
     }
 }   

@@ -243,7 +243,7 @@ class Game extends Phaser.Scene {
         } else if (tile == null) {
             this.player.update()
         }
-        this.spotlight.x = this.player.x;
-        this.spotlight.y = this.player.y;
+        // this.spotlight.x = this.player.x;
+        // this.spotlight.y = this.player.y;
     }
 }

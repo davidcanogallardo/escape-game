@@ -33,9 +33,9 @@ function startClientPeer(data) {
         config: { iceServers: [{urls: "turn:openrelay.metered.ca:80", username: "openrelayproject", credential: "openrelayproject",},{urls: "turn:openrelay.metered.ca:443",username: "openrelayproject",credential: "openrelayproject",}] },
       });
       peerClient = new PeerClient(peer, true, socket);
-      peerClient.connection();
+      // peerClient.connection();
       window.peer = peerClient;
-      // socket.emit("clientInitGame");
+      socket.emit("clientInitGame");
     } else {
       guestPeer = new Peer({
         initiator: false,
@@ -44,7 +44,7 @@ function startClientPeer(data) {
         config: { iceServers: [{urls: "turn:openrelay.metered.ca:80", username: "openrelayproject", credential: "openrelayproject",},{urls: "turn:openrelay.metered.ca:443",username: "openrelayproject",credential: "openrelayproject",}] },
       });
       guestPeerClient = new PeerClient(guestPeer, false, socket);
-      guestPeerClient.connection();
+      // guestPeerClient.connection();
       window.guest = guestPeerClient;
     }
   });

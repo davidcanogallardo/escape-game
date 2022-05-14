@@ -21,7 +21,7 @@ class Game extends Phaser.Scene {
         this.diff=data.diff;
 
         //lista de minijuegos disponibles
-        this.gamesAvailable = ["PasswordMGScene"]
+        this.gamesAvailable = ["LaberintoMGScene"]
 
         //lista de minijuegos que tendra la escena
         this.games = []
@@ -45,7 +45,7 @@ class Game extends Phaser.Scene {
     }   
 
     preload() {
-        if(navigator.userAgentData.mobile){
+        if(false){
             this.load.plugin('rexvirtualjoystickplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js', true);
         }
         var path = "./demo_game/"
@@ -242,7 +242,6 @@ class Game extends Phaser.Scene {
         // TODO deja de usar este bucle pls
         this.playersGroup.getChildren().forEach(player => {
             if(socket.id == player.id){
-                console.error(navigator.userAgentData.mobile)
                 if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
                     this.cameras.main.zoom = 3.5;
                 } else {
