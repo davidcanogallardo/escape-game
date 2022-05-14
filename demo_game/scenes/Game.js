@@ -21,7 +21,8 @@ class Game extends Phaser.Scene {
         this.diff=data.diff;
 
         //lista de minijuegos disponibles
-        this.gamesAvailable = ["PasswordMGScene","LaberintoMGScene"]
+        // this.gamesAvailable = ["PasswordMGScene","LaberintoMGScene"]
+        this.gamesAvailable = ["LaberintoMGScene"]
 
         //lista de minijuegos que tendra la escena
         this.games = []
@@ -506,12 +507,12 @@ class Game extends Phaser.Scene {
         //************************************************* */
 
         //HACK PARA TERMINAR PARTIDA XD
-        this.input.keyboard.on('keydown-Z',()=>{
-            console.log("HACK ACTIVAD TERMINAR PARTIDA");
-            for(let i=0;i<2;i++){
-                socket.emit("playerInEndZone");
-            }
-        })
+        // this.input.keyboard.on('keydown-Z',()=>{
+        //     console.log("HACK ACTIVAD TERMINAR PARTIDA");
+        //     for(let i=0;i<2;i++){
+        //         socket.emit("playerInEndZone");
+        //     }
+        // })
         // this.input.keyboard.on('keydown-Z',()=>{
         //     console.log("HACK ACTIVAD TERMINAR PARTIDA");
         //         socket.emit("passwordPuzzleComplete");
@@ -575,10 +576,20 @@ class Game extends Phaser.Scene {
 
             //crear spawns de cofres y mesas
             this.spawnsObjects.forEach(element => {
-                this.tablesFilter = element.filter(this.objectFilterPlayer,1);
-                this.chestsFilter = element.filter(this.objectFilterPlayer,2);
+                var chestPlayer = Phaser.Math.Between(1, 3-1) 
+                var tablePlayer 
+                
+                if (chestPlayer == 1) {
+                    tablePlayer = 2
+                } else {
+                    tablePlayer = 1
+                }
+                
+                this.tablesFilter = element.filter(this.objectFilterPlayer,tablePlayer);
+                this.chestsFilter = element.filter(this.objectFilterPlayer,chestPlayer);
                 var randTable = Phaser.Math.Between(0, this.tablesFilter.length-1);
                 var randChest = Phaser.Math.Between(0, this.chestsFilter.length-1);
+
                 var table = {
                     x: this.tablesFilter[randTable].x,
                     y: this.tablesFilter[randTable].y,
@@ -605,6 +616,7 @@ class Game extends Phaser.Scene {
                 
             }
             socket.emit("spawns", spawns);
+            console.log(spawns,spawns);
             this.placeItems(spawns);
         } else {
             if(this.objectsForGuest != null){

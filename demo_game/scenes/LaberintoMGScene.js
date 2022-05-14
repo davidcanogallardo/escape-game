@@ -98,28 +98,28 @@ class LaberintoMGScene extends GenericMiniGame {
             });
         }
         
-        this.wallGroup = this.physics.add.staticGroup();
-        wallsLayer.forEachTile(tile => {
-            if (tile.properties.wall == true) {
-                //Quito la propiedad de colisión del tile
-                tile.properties.colides = false
-                // console.log(tile);
-                const x = tile.getCenterX();
-                const y = tile.getCenterY();
+        // this.wallGroup = this.physics.add.staticGroup();
+        // wallsLayer.forEachTile(tile => {
+        //     if (tile.properties.wall == true) {
+        //         //Quito la propiedad de colisión del tile
+        //         tile.properties.colides = false
+        //         // console.log(tile);
+        //         const x = tile.getCenterX();
+        //         const y = tile.getCenterY();
 
-                //Creo el nuevo tile
-                const new_tile = this.wallGroup.create(x,y);
-                //Le pongo tamaño y lo posiciono (setOffset)
-                new_tile.body.setSize(tile.width, tile.height*0.1).setOffset(tile.width-7,tile.height+5)
-                //Añado la colisión al nuevo tile
-                this.physics.add.collider(this.player, new_tile)
+        //         //Creo el nuevo tile
+        //         const new_tile = this.wallGroup.create(x,y);
+        //         //Le pongo tamaño y lo posiciono (setOffset)
+        //         new_tile.body.setSize(tile.width, tile.height*0.1).setOffset(tile.width-7,tile.height+5)
+        //         //Añado la colisión al nuevo tile
+        //         this.physics.add.collider(this.player, new_tile)
 
-                //Lo hago invisible así solo se ve el muro, pero la colision es con el new_tile
-                new_tile.visible = false
-            }
-        })
-        this.physics.add.collider(this.player, wallsLayer)
-        this.physics.add.collider(this.player, this.wallGroup)
+        //         //Lo hago invisible así solo se ve el muro, pero la colision es con el new_tile
+        //         new_tile.visible = false
+        //     }
+        // })
+        // this.physics.add.collider(this.player, wallsLayer)
+        // this.physics.add.collider(this.player, this.wallGroup)
         // this.setCollisionByProperty({ colides: true })
         // wallsLayer.setCollisionByProperty({ colides: true })
 
@@ -143,7 +143,11 @@ class LaberintoMGScene extends GenericMiniGame {
         var end = this.physics.add.staticGroup();
         // var endSpawn = this.map.objects[0].objects.filter(this.endFilter);
         var endTile = end.create(this.map.objects[1].objects[1].x+18,this.map.objects[1].objects[1].y+20)
-        endTile.body.setSize(35,20)
+        if (this.type=='helper') {
+            endTile.body.setSize(70,80)
+        } else {
+            endTile.body.setSize(70,60)
+        }
         endTile.visible = false
 
 
@@ -155,7 +159,6 @@ class LaberintoMGScene extends GenericMiniGame {
             }
             this.player.stop()
             this.player.body.stop();
-            console.log(this.player.body);
             this.player.body.setVelocity(0, 0);
             this.win = true
             this.scene.stop();
