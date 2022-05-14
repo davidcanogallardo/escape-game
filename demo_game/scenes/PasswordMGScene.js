@@ -253,7 +253,6 @@ class PasswordMGScene extends GenericMiniGame {
             } else {
                 this.background.setScale(1.6);
             }
-            console.log(navigator.userAgentData.mobile);
             // **************************************************************************
             var centerWoodX = this.background.displayWidth/2
             var centerWoodY = this.background.displayHeight/2

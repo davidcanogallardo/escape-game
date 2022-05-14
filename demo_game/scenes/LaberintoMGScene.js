@@ -59,7 +59,7 @@ class LaberintoMGScene extends GenericMiniGame {
             this.playersGroup = this.add.group(this.player);
 
             socket.on("playerMoveResponse", (moveData) => {
-                if (moveData.laberinth) {
+                if (moveData.laberinth && !this.win) {
                     if(moveData.joystickMoved){
                         player.direction = moveData.direction;
                         player.move(moveData.speed_x, moveData.speed_y);
@@ -111,8 +111,10 @@ class LaberintoMGScene extends GenericMiniGame {
                 new_tile.visible = false
             }
         })
-        
-        wallsLayer.setCollisionByProperty({ colides: true })
+        this.physics.add.collider(this.player, wallsLayer)
+        this.physics.add.collider(this.player, this.wallGroup)
+        // this.setCollisionByProperty({ colides: true })
+        // wallsLayer.setCollisionByProperty({ colides: true })
 
         this.physics.add.overlap(this.playerCollider, this.wallGroup,function (player,walls) {
             if(walls.y < player.y){
@@ -144,6 +146,10 @@ class LaberintoMGScene extends GenericMiniGame {
             if (this.type=='challenge') {
                 socket.emit('passwordPuzzleComplete');
             }
+            this.player.stop()
+            this.player.body.stop();
+            console.log(this.player.body);
+            this.player.body.setVelocity(0, 0);
             this.win = true
             this.scene.stop();
             this.scene.resume("game");
@@ -202,8 +208,7 @@ class LaberintoMGScene extends GenericMiniGame {
     update(){
         //FOR ALL USERS
         var tile = this.voidLayer.getTileAtWorldXY(this.player.x, this.player.y);
-
-        if (tile?.index == 357 && !this.touch) {
+        if (tile?.index == 886 && !this.touch) {
             this.touch = true
             this.player.stop()
             this.player.scale = 1

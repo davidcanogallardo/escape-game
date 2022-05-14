@@ -46,7 +46,7 @@ class Game extends Phaser.Scene {
     }   
 
     preload() {
-        if(false){
+        if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
             this.load.plugin('rexvirtualjoystickplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js', true);
         }
         var path = "./demo_game/"
@@ -474,7 +474,7 @@ class Game extends Phaser.Scene {
             console.log("Puzzle complete");
             this.challenge++;
             window.activeScene = "game"
-            console.log(this.game.scene.keys[window.activeScene]);
+            // this.game.scene.keys[window.activeScene].stop();
        
 
             this.doorsGroup.children.entries.forEach(door => {
