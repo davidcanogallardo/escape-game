@@ -549,10 +549,14 @@ class Game extends Phaser.Scene {
             for (let i = 0; i < this.map.objects[2].objects[0].properties[0].value; i++) {
                 console.log("leyenda", this.map.objects[2].objects[0].properties);
                 this.gamesList.push(this.gamesAvailable[Math.floor(Math.random()*this.gamesAvailable.length)]);
-                this.game.scene.add(this.gamesList[i]+i+"_helper",eval("new "+this.gamesList[i]+"("+i+",'helper','"+this.diff+"')"))
+                
                 this.game.scene.add(this.gamesList[i]+i+"_challenge",eval("new "+this.gamesList[i]+"("+i+",'challenge','"+this.diff+"')"))
+                this.game.scene.add(this.gamesList[i]+i+"_helper",eval("new "+this.gamesList[i]+"("+i+",'helper','"+this.diff+"')"))
+                console.error(this.game.scene.keys[this.gamesList[i]+i+"_challenge"].correctPassword);
                 this.loadedScenes.push(this.gamesList[i]+i+"_helper")
                 this.loadedScenes.push(this.gamesList[i]+i+"_challenge")
+                var password = this.game.scene.keys[this.gamesList[i]+i+"_challenge"].correctPassword
+                this.game.scene.keys[this.gamesList[i]+i+"_helper"].correctPassword=password
             }
             
             var spawns = {
