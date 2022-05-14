@@ -64,6 +64,8 @@ class LaberintoMGScene extends GenericMiniGame {
                         player.direction = moveData.direction;
                         player.move(moveData.speed_x, moveData.speed_y);
                     } else {
+                        this.player.x = moveData.x
+                        this.player.y = moveData.y
                         if (moveData.direction == 'left') {
                             player.move(-moveData.speed,0);
                         }
@@ -122,15 +124,10 @@ class LaberintoMGScene extends GenericMiniGame {
         });
         
         wallsLayer.setDepth(20)
-        console.log(wallsLayer)
         let rt = this.add.renderTexture(0, 0, 5000, 5000);
-        // let rt2 = this.add.renderTexture(0, 0, 5000, 5000);
         rt.depth = 5
-        // rt2.depth = 5
         window.rt = rt
         rt.fill(0x000000);
-        // rt2.fill(0x000000);
-
 
         console.log(this.map.objects[1].objects[2].x);
         console.log(this.map.objects[0]);
@@ -147,7 +144,7 @@ class LaberintoMGScene extends GenericMiniGame {
             if (this.type=='challenge') {
                 socket.emit('passwordPuzzleComplete');
             }
-            this.win
+            this.win = true
             this.scene.stop();
             this.scene.resume("game");
         })
@@ -180,6 +177,7 @@ class LaberintoMGScene extends GenericMiniGame {
                     //Agregar puerta al grupo de puertas
                     this.doorsGroup.add(this.door);
                     window.door = this.doorsGroup;
+                    this.door.setDepth(25)
                     break;
             }
         });
@@ -215,12 +213,12 @@ class LaberintoMGScene extends GenericMiniGame {
                 callback: ()=>{
                     this.time.removeEvent(this.fallingAnimation)
                     // this.fallingAnimation.remove()
-                    this.touch = false
-                    this.player.update()
+                    // this.player.update()
                     this.player.x = this.map.objects[1].objects[2].x
                     this.player.y = this.map.objects[1].objects[2].y
                     this.player.rotation = 0
                     this.player.scale = 1
+                    this.touch = false
                     console.log("vuelve el personaje");
                 },
                 loop: false
@@ -229,23 +227,18 @@ class LaberintoMGScene extends GenericMiniGame {
             this.fallingAnimation = this.time.addEvent({
                 delay: 50,
                 callback: ()=>{
-                    console.log(this.player.scale)
                     if (this.player.scale > 0 && (this.player.scale-0.1) > 0) {
                         this.player.scale -= 0.05
-                        console.log(this.player.scale)
                     }
 
                     this.player.rotation+=0.3
                 },
                 loop: true
             })
-        } else if (tile == null) {
-            // this.player.update()
-        }
-        if(this.type=='helper'){
+        } else if(this.type=='helper'){
             this.spotlight.x = this.player.x;
             this.spotlight.y = this.player.y;
-        } else if(!this.win){
+        } else if(!this.win && !this.touch){
             this.player.update()
         }
     }
