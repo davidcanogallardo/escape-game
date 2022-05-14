@@ -7,7 +7,7 @@ var config = {
     default: 'arcade',
     arcade: {
         gravity: { y: 0 },
-        debug: false
+        debug: true
     },
   },
   //scene: [Titlescreen, Game, GameOver, PasswordScene, Pause_scene, EnterPasswordScene, SeePass, Time, Ui, Prueba, PasswordMGScene]

@@ -21,8 +21,8 @@ class Game extends Phaser.Scene {
         this.diff=data.diff;
 
         //lista de minijuegos disponibles
-        // this.gamesAvailable = ["PasswordMGScene","LaberintoMGScene"]
-        this.gamesAvailable = ["LaberintoMGScene"]
+        this.gamesAvailable = ["PasswordMGScene","LaberintoMGScene"]
+        // this.gamesAvailable = ["LaberintoMGScene"]
 
         //lista de minijuegos que tendra la escena
         this.games = []
