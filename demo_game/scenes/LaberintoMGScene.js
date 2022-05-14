@@ -3,7 +3,7 @@ class LaberintoMGScene extends GenericMiniGame {
         super("LaberintoMGScene"+room+"_"+type, type, difficulty);
         this.type = type;
         this.difficulty = difficulty;
-
+        this.win = false
     }
     preload() {
         //FOR ALL USERS
@@ -28,6 +28,7 @@ class LaberintoMGScene extends GenericMiniGame {
         //suelo
         let groundLayer = this.map.createStaticLayer('ground', this.tileset);
         let wallsLayer = this.map.createStaticLayer('walls', this.tileset);
+      
         //capa vacio del tilemap
         this.voidLayer = this.map.createLayer('void', this.tileset);
         //capa para quitar visibilidad a la capa vacio
@@ -41,7 +42,7 @@ class LaberintoMGScene extends GenericMiniGame {
         
         if (this.type == "challenge") {
             //*****************************************Player**************************************************/
-            this.player = new Player(this,socket.id,112.5,620,"player",true,"challenge");
+            this.player = new Player(this,socket.id,this.map.objects[1].objects[2].x,this.map.objects[1].objects[2].y,"player",true,"challenge");
             this.playerCollider = this.player.playerCollider;
             this.cameras.main.startFollow(this.player);
             this.player.setDepth(21);
@@ -49,7 +50,7 @@ class LaberintoMGScene extends GenericMiniGame {
 
             this.playersGroup = this.add.group(this.player);
         } else {
-            this.player = new Player(this,socket.id,112.5,620,"player",false,"helper");
+            this.player = new Player(this,socket.id,this.map.objects[1].objects[2].x,this.map.objects[1].objects[2].y,"player",false,"helper");
             this.playerCollider = this.player.playerCollider;
             this.cameras.main.startFollow(this.player);
             this.player.setDepth(21);
@@ -58,59 +59,95 @@ class LaberintoMGScene extends GenericMiniGame {
             this.playersGroup = this.add.group(this.player);
 
             socket.on("playerMoveResponse", (moveData) => {
-                if(moveData.joystickMoved){
-                    player.direction = moveData.direction;
-                    player.move(moveData.speed_x, moveData.speed_y);
-                } else {
-                    if (moveData.direction == 'left') {
-                        player.move(-moveData.speed,0);
+                if (moveData.laberinth) {
+                    if(moveData.joystickMoved){
+                        player.direction = moveData.direction;
+                        player.move(moveData.speed_x, moveData.speed_y);
+                    } else {
+                        if (moveData.direction == 'left') {
+                            player.move(-moveData.speed,0);
+                        }
+                        if (moveData.direction == 'right') {
+                            player.move(moveData.speed,0);
+                        }
+                        if (moveData.direction == 'up') {
+                            player.move(0,-moveData.speed);
+                        }
+                        if (moveData.direction == 'down') {
+                            player.move(0,moveData.speed);
+                        }
+                        if (moveData.direction == 'idle') {
+                            player.move(0,0);
+                        }
+                        if (moveData.direction == 'player-idle-down') {
+                            player.move(null,null);
+                        }
                     }
-                    if (moveData.direction == 'right') {
-                        player.move(moveData.speed,0);
-                    }
-                    if (moveData.direction == 'up') {
-                        player.move(0,-moveData.speed);
-                    }
-                    if (moveData.direction == 'down') {
-                        player.move(0,moveData.speed);
-                    }
-                    if (moveData.direction == 'idle') {
-                        player.move(0,0);
-                    }
-                    if (moveData.direction == 'player-idle-down') {
-                        player.move(null,null);
-                    }
+                    
                 }
                     
             });
         }
         
+        this.wallGroup = this.physics.add.staticGroup();
+        wallsLayer.forEachTile(tile => {
+            if (tile.properties.wall == true) {
+                //Quito la propiedad de colisión del tile
+                tile.properties.colides = false
+                // console.log(tile);
+                const x = tile.getCenterX();
+                const y = tile.getCenterY();
 
-            
+                //Creo el nuevo tile
+                const new_tile = this.wallGroup.create(x,y);
+                //Le pongo tamaño y lo posiciono (setOffset)
+                new_tile.body.setSize(tile.width, tile.height*0.1).setOffset(tile.width-7,tile.height+5)
+                //Añado la colisión al nuevo tile
+                this.physics.add.collider(this.player, new_tile)
+
+                //Lo hago invisible así solo se ve el muro, pero la colision es con el new_tile
+                new_tile.visible = false
+            }
+        })
         
-        
-        // let wallsLayer = new WallsLayer(this);
-        // window.wallLayerLab = wallsLayer
+        wallsLayer.setCollisionByProperty({ colides: true })
+
+        this.physics.add.overlap(this.playerCollider, this.wallGroup,function (player,walls) {
+            if(walls.y < player.y){
+                that.player.setDepth(21);
+            } else {
+                that.player.setDepth(19);
+            }
+
+        });
         
         wallsLayer.setDepth(20)
         console.log(wallsLayer)
-        let rt = this.add.renderTexture(0, 0, 1000, 1000);
+        let rt = this.add.renderTexture(0, 0, 5000, 5000);
+        // let rt2 = this.add.renderTexture(0, 0, 5000, 5000);
         rt.depth = 5
+        // rt2.depth = 5
         window.rt = rt
         rt.fill(0x000000);
+        // rt2.fill(0x000000);
 
 
+        console.log(this.map.objects[1].objects[2].x);
+        console.log(this.map.objects[0]);
         var end = this.physics.add.staticGroup();
-        var endTile = end.create(609,685);
-        endTile.body.setSize(35,20);
-        endTile.visible = false;
+        // var endSpawn = this.map.objects[0].objects.filter(this.endFilter);
+        var endTile = end.create(this.map.objects[1].objects[1].x+18,this.map.objects[1].objects[1].y+20)
+        endTile.body.setSize(35,20)
+        endTile.visible = false
+
 
         this.physics.add.overlap(endTile, this.playerCollider, () => {
             // that.events.emit("end");
+            console.log("fin de partida")
             if (this.type=='challenge') {
-                console.log("fin de partida")
                 socket.emit('passwordPuzzleComplete');
             }
+            this.win
             this.scene.stop();
             this.scene.resume("game");
         })
@@ -124,6 +161,8 @@ class LaberintoMGScene extends GenericMiniGame {
         let mask = rt.createBitmapMask(this.spotlight)
         mask.invertAlpha = true;
         rt.setMask(mask);
+        window.spotlight = this.spotlight
+        window.mask = mask
 
         //Crear grupo donde se almacenan las puertas
         this.doorsGroup = this.physics.add.staticGroup();
@@ -178,8 +217,8 @@ class LaberintoMGScene extends GenericMiniGame {
                     // this.fallingAnimation.remove()
                     this.touch = false
                     this.player.update()
-                    this.player.x = 165
-                    this.player.y = 640
+                    this.player.x = this.map.objects[1].objects[2].x
+                    this.player.y = this.map.objects[1].objects[2].y
                     this.player.rotation = 0
                     this.player.scale = 1
                     console.log("vuelve el personaje");
@@ -203,11 +242,10 @@ class LaberintoMGScene extends GenericMiniGame {
         } else if (tile == null) {
             // this.player.update()
         }
-
         if(this.type=='helper'){
             this.spotlight.x = this.player.x;
             this.spotlight.y = this.player.y;
-        } else {
+        } else if(!this.win){
             this.player.update()
         }
     }

@@ -32,6 +32,7 @@ class Game extends Phaser.Scene {
         
         this.playersGroup = this.add.group(this.playersArray);
         this.activeScene = "game";
+        window.activeScene = this.activeScene
         this.infoScene = "PasswordMGScene_helper"; 
         this.passwordminigame = "PasswordMGScene"; 
         this.playableScene = "PasswordMGScene_challenge";
@@ -106,6 +107,7 @@ class Game extends Phaser.Scene {
             this.scene.pause();
             this.scene.launch(this.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge");
             this.activeScene = this.gamesList[table.challenge-1]+(table.challenge-1)+"_challenge";
+            window.activeScene = this.activeScene
         }
     }
     openHelper() {
@@ -116,6 +118,8 @@ class Game extends Phaser.Scene {
             this.scene.launch(this.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper");
             this.activeScene = this.gamesList[chest.challenge-1]+(chest.challenge-1)+"_helper";
             this.buttonActive = false;
+            window.activeScene = this.activeScene
+
         }
     }
 
@@ -129,7 +133,7 @@ class Game extends Phaser.Scene {
                 this.keyPressed = !this.keyPressed
             }
         }, this);
-
+        window.this = this
         // if(navigator.userAgentData.mobile){
         //     this.virtualJoyStick = this.game.plugins.get('rexvirtualjoystickplugin').add(this, {
         //         x: 50,
@@ -466,6 +470,9 @@ class Game extends Phaser.Scene {
         socket.on("passwordPuzzleResolved", (data) => {
             console.log("Puzzle complete");
             this.challenge++;
+            window.activeScene = "game"
+            console.log(this.game.scene.keys[window.activeScene]);
+       
 
             this.doorsGroup.children.entries.forEach(door => {
                 if (door.challenge == this.challenge) {
@@ -489,8 +496,6 @@ class Game extends Phaser.Scene {
                 // const element = this.chest[i];
                 // console.log("challenge", this.chest[i].challenge);
                 // console.log("challenge", this.table[i].challenge);
-                console.log(this.chest[i]);
-                console.log(this.table[i]);
                 // this.chest[i].disableBody()
             }
             // TODO hacer lo mismo para cofres y mesas

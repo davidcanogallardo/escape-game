@@ -3,6 +3,7 @@ class Player extends Phaser.GameObjects.Sprite{
         super(scene, x, y, sprite);
         this.id = id;
         this.speed = 150;
+        console.log(scene);
         scene.add.existing(this);
         this.setDepth(5);
         this.cursors = scene.input.keyboard.createCursorKeys();
@@ -16,6 +17,7 @@ class Player extends Phaser.GameObjects.Sprite{
         this.username = username;
         this.x_speed = 150;
         this.y_speed = 150;
+        this.scene = scene
         // this.x = x;
         // this.y = y;
 
@@ -136,9 +138,8 @@ class Player extends Phaser.GameObjects.Sprite{
             direction: this.direction,
             joystickMoved: _joyStickMoved,
             virtualJoyStickMoved: _virtualJoyStickMoved,
-            laberinth: true
+            laberinth: window.activeScene.includes("Laberinto")
         }
-        //console.log("Muevo otro Jugador");
 
         socket.emit("playerMoved", moveData);
     }

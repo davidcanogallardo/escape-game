@@ -45,7 +45,7 @@ class PasswordMGScene extends GenericMiniGame {
 
     }
 
-    quit(){
+    quit() {
         if (this.scene.isActive()) {
             console.log("quit password");
             this.scene.get("game").activeScene = "game"
