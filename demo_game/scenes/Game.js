@@ -46,7 +46,7 @@ class Game extends Phaser.Scene {
     }   
 
     preload() {
-        if(false){
+        if(navigator.userAgent.toLowerCase().match('android') != null || navigator.userAgent.toLowerCase().match('iphone') != null){
             this.load.plugin('rexvirtualjoystickplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js', true);
         }
         var path = "./demo_game/"
@@ -261,54 +261,57 @@ class Game extends Phaser.Scene {
         socket.on("playerMoveResponse", (moveData) => {
             this.playersGroup.getChildren().forEach(player => {
                 //console.log(moveData.direction);
-                if(moveData.id == player.id){
-                    //console.log(this.stickActive);
-                    if(moveData.joystickMoved){
-                        //console.log("Joystick activado, Muevo otro jugador");
-                        player.direction = moveData.direction;
-                        player.move(moveData.speed_x, moveData.speed_y);
-                        moveData.joystickMoved = false;
-                        this.stickActive = false;
-                        
-                    } else if(moveData.virtualJoyStickMoved){
-                        if(moveData.direction.trim() == "left"){
-                            player.move(-150,0);
-                        }else if(moveData.direction.trim() == "right"){
-                            player.move(150, 0);
-                        } else if (moveData.direction.trim() == "up"){
-                            player.move(0, -150);
-                        } else if(moveData.direction.trim() == "down") {
-                            player.move(0, 150)
-                        } else if (moveData.direction.trim() == "up left"){
-                            player.move(-150, -150);
-                        } else if (moveData.direction.trim() == "up right"){
-                            player.move(150, -150);
-                        } else if (moveData.direction.trim() == "down left"){
-                            player.move(-150, 150);
-                        } else if (moveData.direction.trim() == "down right"){
-                            player.move(150, 150);
+                if (!moveData.laberinth) {
+                    
+                    if(moveData.id == player.id){
+                        //console.log(this.stickActive);
+                        if(moveData.joystickMoved){
+                            //console.log("Joystick activado, Muevo otro jugador");
+                            player.direction = moveData.direction;
+                            player.move(moveData.speed_x, moveData.speed_y);
+                            moveData.joystickMoved = false;
+                            this.stickActive = false;
+                            
+                        } else if(moveData.virtualJoyStickMoved){
+                            if(moveData.direction.trim() == "left"){
+                                player.move(-150,0);
+                            }else if(moveData.direction.trim() == "right"){
+                                player.move(150, 0);
+                            } else if (moveData.direction.trim() == "up"){
+                                player.move(0, -150);
+                            } else if(moveData.direction.trim() == "down") {
+                                player.move(0, 150)
+                            } else if (moveData.direction.trim() == "up left"){
+                                player.move(-150, -150);
+                            } else if (moveData.direction.trim() == "up right"){
+                                player.move(150, -150);
+                            } else if (moveData.direction.trim() == "down left"){
+                                player.move(-150, 150);
+                            } else if (moveData.direction.trim() == "down right"){
+                                player.move(150, 150);
+                            } else {
+                                player.move(0,0);
+                            }
+                            this.virtualJoyStickIsActive = false;
                         } else {
-                            player.move(0,0);
-                        }
-                        this.virtualJoyStickIsActive = false;
-                    } else {
-                        if (moveData.direction == 'left') {
-                            player.move(-moveData.speed,0);
-                        }
-                        if (moveData.direction == 'right') {
-                            player.move(moveData.speed,0);
-                        }
-                        if (moveData.direction == 'up') {
-                            player.move(0,-moveData.speed);
-                        }
-                        if (moveData.direction == 'down') {
-                            player.move(0,moveData.speed);
-                        }
-                        if (moveData.direction == 'idle') {
-                            player.move(0,0);
-                        }
-                        if (moveData.direction == 'player-idle-down') {
-                            player.move(null,null);
+                            if (moveData.direction == 'left') {
+                                player.move(-moveData.speed,0);
+                            }
+                            if (moveData.direction == 'right') {
+                                player.move(moveData.speed,0);
+                            }
+                            if (moveData.direction == 'up') {
+                                player.move(0,-moveData.speed);
+                            }
+                            if (moveData.direction == 'down') {
+                                player.move(0,moveData.speed);
+                            }
+                            if (moveData.direction == 'idle') {
+                                player.move(0,0);
+                            }
+                            if (moveData.direction == 'player-idle-down') {
+                                player.move(null,null);
+                            }
                         }
                     }
                 }
@@ -471,7 +474,7 @@ class Game extends Phaser.Scene {
             console.log("Puzzle complete");
             this.challenge++;
             window.activeScene = "game"
-            console.log(this.game.scene.keys[window.activeScene]);
+            // this.game.scene.keys[window.activeScene].stop();
        
 
             this.doorsGroup.children.entries.forEach(door => {
