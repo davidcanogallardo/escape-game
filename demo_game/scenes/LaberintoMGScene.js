@@ -50,7 +50,7 @@ class LaberintoMGScene extends GenericMiniGame {
         window.cam = this.cam
         this.cam._zoomX = 3;
         if (this.type == "helper" && this.difficulty != "easy") {
-            this.timedEvent = this.time.addEvent({ delay: 10000, callback: this.rotateCam, callbackScope: this, loop: true }); 
+            this.timedEvent = this.time.addEvent({ delay: 4000, callback: this.rotateCam, callbackScope: this, loop: true }); 
         }
         
         if (this.type == "challenge") {
