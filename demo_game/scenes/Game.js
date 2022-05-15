@@ -62,6 +62,12 @@ class Game extends Phaser.Scene {
         this.load.image("time_frame", path+"assets/timeFrame.png");
         this.load.image("awsd", path+"assets/helpDialog/awsd.png");
         this.load.image("blue", path+"assets/helpDialog/blue.png");
+        
+        this.load.image("xkey", path+"assets/helpDialog/xkey.png");
+        this.load.image("ekey", path+"assets/helpDialog/ekey.png");
+        this.load.image("hkey", path+"assets/helpDialog/hkey.png");
+        this.load.image("mkey", path+"assets/helpDialog/mkey.png");
+
         this.load.image("red", path+"assets/helpDialog/red.png");
         this.load.image("green", path+"assets/helpDialog/green.png");
         this.load.atlas('door', path+'assets/objects/door/door.png', path+'assets/objects/door/door.json');
