@@ -49,9 +49,13 @@ class LaberintoMGScene extends GenericMiniGame {
         this.cam = this.cameras.main;
         window.cam = this.cam
         this.cam._zoomX = 3;
-        if (this.type == "helper" && this.difficulty != "easy") {
-            this.timedEvent = this.time.addEvent({ delay: 4000, callback: this.rotateCam, callbackScope: this, loop: true }); 
+        // if (this.type == "helper" && this.difficulty != "easy") {
+        //     this.timedEvent = this.time.addEvent({ delay: 4000, callback: this.rotateCam, callbackScope: this, loop: true }); 
+        // }
+        if (this.type == "helper" && this.difficulty == "hard") {
+            this.timedEvent = this.time.addEvent({ delay: 5000, callback: this.rotateCam, callbackScope: this, loop: true }); 
         }
+        
         
         if (this.type == "challenge") {
             //*****************************************Player**************************************************/
@@ -222,7 +226,9 @@ class LaberintoMGScene extends GenericMiniGame {
         this.touch = false
     }
     update(){   
-        
+        if (this.type == "helper" && this.difficulty == "medium") {
+            this.cam._rotation += 0.01;
+        }
         //FOR ALL USERS
         var tile = this.voidLayer.getTileAtWorldXY(this.player.x, this.player.y);
         if (tile?.index == 886 && !this.touch) {
@@ -267,9 +273,8 @@ class LaberintoMGScene extends GenericMiniGame {
 
     rotateCam(){
         var randNum = Math.floor(Math.random() * (4 - 1 + 1) + 1);
+        var randRad = Math.floor(Math.random() * (22 - 11 + 11) + 11);
         console.log(randNum);
-        if (randNum == 3) {
-            this.cam._rotation -= 11;
-        }
+        this.cam._rotation = randRad;
     }
 }   
